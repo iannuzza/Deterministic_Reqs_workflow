@@ -1,0 +1,73 @@
+54 
+ 
+scan_enable output 
+ 
+scan enable 
+scan_clk output 
+ 
+scan clock 
+ext_cap_en input 
+ 
+extenal cap in debug mode 
+irq_fifo input 
+ 
+fifo irq from main controller - regmap 
+error_time_slot input 
+ 
+error timeslot from error time slot 
+gpio_in output 
+ 
+gpio0 in in functional mode from regmap 
+gpio_out input 
+ 
+gpio0 out in functional mode from 
+regmap 
+gpio_en input 
+ 
+gpio0 en in functional mode from 
+regmap 
+irq_SENSHUB_STS input 
+ 
+sensorhub status 
+irq_ISPU_MC_INTR_STS input 
+ 
+irq main controller data-valid 
+scan_mode output 
+ 
+stbio1 scan mode 
+bist_mode output 
+ 
+stbio1 bist mode 
+debug_mode output 
+ 
+stbio1 debug mode 
+memsafe output 
+ 
+memsafe for bist 
+test_clk_fast input 
+ 
+enable test clk 16MHz trimming 
+test_clk_slow input 
+ 
+enable test clk 64kHz trimming 
+if_sclk_tud_reg input 
+ 
+if sclk_tud from reg 
+if_sda_sdi_tud_reg input 
+ 
+if sda_sdi_tud from re 
+if_sh_sda_tud_reg input 
+ 
+if sh_sda_tud from reg 
+if_gpio0_tud_reg input 
+ 
+if gpio0_tud from reg 
+if_gpio1_tud_reg input 
+ 
+if gpio1_tud from reg 
+if_gpio2_tud_reg input 
+ 
+if gpio2_tud from reg 
+if_gpio3_tud_reg input 
+ 
+if gpio3_tud from reg

@@ -1,0 +1,39 @@
+36 
+ 
+5.2.2. Description of the Block 
+This block oversees the correct configuration of register useful to configure BIO -Channel or PPG 
+Measurement and avoids that run-time changes from the user during the measurement. 
+The description of each input signal is written in the linked document in the next paragraph. All 
+the registers are regmap shadow registers. 
+5.2.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7096] REQUIREMENT  
+When the device FSM is in OPERATIVE or SLEEP state and the ppg channel is activated, if the 
+user changes i_curr_sel_tx_frame_x, i_gain_start or i_idac_dc_ppg_frame, the signals 
+o_change_curr, o_change_gain_start or o_change_idac_dc_ppg (respectively) shall go high at the 
+start of the next time slot (when passing from Sleep to Operative State)  and shall stay high until 
+another one of these three value is changed. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7097] REQUIREMENT  
+If i_cfg_enable and i_first_cfg is set to 1, o_change_curr, o_change_gain_start or 
+o_change_idac_dc_ppg shall go to 0 in less than 5 clock cycles 
+[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7098] REQUIREMENT  
+If one or more signals between o_change_curr, o_change_gain_start or o_change_idac_dc_ppg 
+is set to 1, a data with the following format {21’hFFFFE,  o_change_curr, o_change_gain_start, 
+o_change_idac_dc_ppg} shall be written in FIFO before the next time slot Data. If the FIFO is in 
+Multiple FIFO, the Data shall be written in the Sub-FIFO selected for PPG by the user 
+[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_002]  REQUIREMENT :  
+The only registers that the user shall change after setting the mode_operation to 1 are the ones 
+described in requirement 7096. All the Other signals shall change only with mode_operation set 
+to 0 or when i_debug is set to 1.[END] 
+5.3. Main Controller FSMs 
+5.3.1. I/O List 
+5.3.1.1. Parameters 
+Generic name Type Value Description 
+ppg_frame_bit int 4

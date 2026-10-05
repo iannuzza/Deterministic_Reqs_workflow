@@ -1,0 +1,44 @@
+112 
+ 
+13.2.4.1. FIFO_CTRL Peculiar Requirements 
+[DDS_STBIO1_00000102] Requirement 
+The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 
+0xC4000. 
+[TO: IPOS_FIFO_CTRL_00000102]   
+[End] 
+[DDS_STBIO1_00000202] Requirement 
+The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 
+0xC5000. 
+[TO: IPOS_FIFO_CTRL_00000202]   
+[End] 
+[DDS_STBIO1_89456557] Requirement:  
+The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address.  
+[TO: IPOS_FIFO_CTRL_89456557]   
+[End] 
+[DDS_STBIO1_89459082] Requirement:  
+The FIFO Controller shall work at 16 MHz clock frequency.  
+[TO: IPOS_FIFO_CTRL_89459082]   
+[End]  
+[DDS_STBIO1_89455261] Requirement:  
+The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and 
+a Memory Master Interface connected to the Physical Memory.   
+[TO: IPOS_FIFO_CTRL_89455261]  
+[End] 
+[DDS_STBIO1_89455449] Requirement:  
+The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO. 
+These two modes are mutually exclusive.   
+[TO: IPOS_FIFO_CTRL_89455449] 
+[End] 
+[DDS_STBIO1_89455232] Requirement:  
+As default, the FIFO shall work in Unique FIFO Mode.  
+[TO: IPOS_FIFO_CTRL_89455232] 
+[End] 
+[DDS_STBIO1_89456975] Requirement:  
+The user shall select the Multiple FIFO mode setting to 1 the first bit into the 
+FIFO_CFG_MODE and 0 for the Unique FIFO mode. 
+[TO: IPOS_FIFO_CTRL_89456975]  
+[End]  
+[DDS_STBIO1_89457435] Requirement:  
+The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO 
+Mode to define the depth of each subFIFOs.   
+[TO: IPOS_FIFO_CTRL_89457435]

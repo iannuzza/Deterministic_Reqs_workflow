@@ -1,0 +1,44 @@
+63 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1034] REQUIREMENT :  
+Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go 
+back into the IDLE State. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_035]  REQUIREMENT :  
+When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), 
+the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if 
+no error occurred. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_036]  REQUIREMENT :  
+When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck 
+at 0)  occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are 
+selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital 
+Top signal) shall be set to 1, otherwise shall be left to 0.  [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 436] REQUIREMENT :  
+When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are 
+at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go 
+low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_037]  REQUIREMENT :  
+In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) 
+shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first 
+bio-channel to measure with the o_ADC_mux_reg. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_038]  REQUIREMENT :  
+When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, 
+o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions  
+(described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the 
+o_adc_mux_biochannel shall be set also to 011, 100, 101 and 110. In the ECG state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_039]  REQUIREMENT :  
+When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG 
+register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall 
+stay low.  [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_040]  REQUIREMENT :  
+When the ELAB_FSM is in BIA State (Check ELAB_STATUS_REG), the ADC_Mux 
+(o_adc_mux_biochannel on digital top) output shall be set equal to 011, 100, 101 or 110. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_041]  REQUIREMENT :

@@ -1,0 +1,33 @@
+52 
+ 
+Port name Direction Type Descr. 
+during ppg 
+calibration 
+o_rst_async_ecg_reg output  start rst async 
+reset ecg 
+o_rst_async_bia_reg output  start rst async 
+reset bia 
+o_write_data_cfg output  
+writa data 
+change ppg 
+configuration 
+o_write_cfg_change_ppg output  
+start write 
+configuration 
+change for 
+ppg 
+o_su_ecg_clk_en output  
+start up 
+phase ecg 
+clock enable 
+o_su_bia_clk_en output  
+start up 
+phase bia 
+clock enable 
+o_elab_fsm_clk_en output  elab fsm 
+clock enable 
+o_rx_ch_gain_calib output [rx_ch_gain_max_bit-1:0] 
+o rx channel 
+gain for ppg 
+ioff 
+calibration

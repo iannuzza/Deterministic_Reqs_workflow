@@ -1,0 +1,12 @@
+{
+  "attempted_snapshots": [
+    {
+      "accepted": true,
+      "reason": "complete approved canonical requirements and mappings",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    }
+  ],
+  "completeness_criteria": "approved status; project match; non-empty canonical and mapping sets; one approved mapping per requirement; resolver hash validation",
+  "selected_snapshot_id": "snap-b2e8101b00dc6909feaed885",
+  "selection_mode": "explicit"
+}

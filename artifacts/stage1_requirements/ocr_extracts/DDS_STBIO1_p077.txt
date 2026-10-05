@@ -1,0 +1,29 @@
+76 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+i_ppg_start_up_time input [ppg_start_up_decod_bit_top-1:0]  start up time for ppg from regmap 
+i_en_txi input [n_max_frame-1:0]  tx enabling for each frame from regmap 
+i_frame_repetition input [n_max_frame-1:0]  i frame repetition for each frame from regmap 
+i_T_preset input [1:0]  Preset time for digital ramp from regmap 
+i_m_ecg input [m_odr_max_bit_top-1:0]  m parameter for ecg from regmap 
+i_m_bia input [m_odr_max_bit_top-1:0]  m parameter for bia from regmap 
+i_m_gsr input [m_odr_max_bit_top-1:0]  m parameter for gsr from regmap 
+i_m_ppg input [m_odr_max_bit_top-1:0]  m parameter for ppg from regmap 
+i_debug_adc_error_cap8_0_bypass input   error cap bypass for adc from regmap 
+i_base_address_ecg0 input [base_address_bit_top-1:0]  base address for ecg0 in multiple fifo 
+i_base_address_bia input [base_address_bit_top-1:0]  base address for bia/ecg1-2 in multiple fifo 
+i_base_address_gsr input [base_address_bit_top-1:0]  base address for gsr in multiple fifo 
+i_base_address_ppg input [base_address_bit_top-1:0]  base address for ppg in multiple fifo 
+i_frame_ppg_debug input [ppg_frame_bit_top-1:0]  frame selection for ppg data debug 
+i_en_buf_gpio1 input   enable buffer on gpio1 
+i_en_buf_gpio2 input   enable buffer on gpio2 
+i_en_biobuf input   enable biobuffer 
+i_do_calibration input   enabling for adc calibration 
+i_mode_operation input [mode_operation_n_bit_top-1:0]  mode operation selection 
+i_T_rx_set input [T1_max_bit_from_decoder_top-
+1:0] 
+ rx channel time set 
+i_en_clkf input   en 16 MHz clock 
+i_quokka_boot_end input   from quokka 
+i_quokka_run input   from quokka

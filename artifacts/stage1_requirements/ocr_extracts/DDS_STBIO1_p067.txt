@@ -1,0 +1,102 @@
+66 
+ 
+{ 
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)  && 
+pad_mux__path.ext_cap_en} 
+1'b1 stbio1_top.if_g
+pio2_en 
+DDS_STB
+IO1_GPIO
+2_EN_EX
+T_CAP_3
+15 
+{ 
+!pad_mux__path.scan_mode 
+&& 
+((pad_mux__path.mission_m
+ode == 1)   || 
+pad_mux__path.debug_mod
+e  || 
+pad_mux__path.ispu_debug
+_mode) } 
+stbio1_top.if_cs_in stbio1_top.dig_
+wrapper_LV.u_
+i2c_spi_slave.i
+_if_cs 
+DDS_STB
+IO1_CS_3
+16 
+{ 
+!pad_mux__path.scan_mode 
+&& 
+((pad_mux__path.mission_m
+ode == 1)   || 
+pad_mux__path.debug_mod
+e  || 
+pad_mux__path.ispu_debug
+_mode) } 
+!stbio1_top.dig_wrapper_LV.u_i
+2c_spi_slave.o_if_cs_en_n 
+stbio1_top.if_c
+s_en 
+DDS_STB
+IO1_CS_
+EN_316 
+{ 
+!pad_mux__path.scan_mode 
+&& 
+((pad_mux__path.mission_m
+ode == 1)   || 
+pad_mux__path.debug_mod
+e  || 
+pad_mux__path.ispu_debug
+_mode) } 
+!stbio1_top.dig_wrapper_LV.u_i
+2c_spi_slave.o_if_cs_out_n 
+stbio1_top.if_c
+s_out 
+DDS_STB
+IO1_CS_
+OUT_316 
+{ 
+!pad_mux__path.scan_mode 
+&& 
+((pad_mux__path.mission_m
+ode == 1)   || 
+pad_mux__path.ispu_debug
+_mode) && 
+stbio1_top.dig_wrapper_LV.u
+_regmap_otp.SH_CKL_EN } 
+stbio1_top.dig_wrapper_LV.u_
+masterblaze_ahb.sda_master_o
+ut 
+stbio1_top.if_s
+h_sda_en 
+DDS_STB
+IO1_SH_
+SDA_EN_
+317 
+{ 
+!pad_mux__path.scan_mode 
+&& 
+!pad_mux__path.w_bist_mod
+e && 
+!pad_mux__path.debug_mod
+e} 
+1'b0 stbio1_top.if_s
+h_sda_out 
+DDS_STB
+IO1_SH_
+SDA_OU
+T_317 
+{ 
+!pad_mux__path.scan_mode 
+&& 
+stbio1_top.if_sh_sda_in stbio1_top.dig_
+wrapper_LV.u_
+masterblaze_a
+DDS_STB
+IO1_SH_

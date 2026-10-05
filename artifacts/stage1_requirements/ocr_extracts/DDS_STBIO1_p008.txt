@@ -1,0 +1,49 @@
+7 
+ 
+2. Version History 
+ 
+Current Version Previous 
+Version 
+Date Author Change description 
+0.1 N.A  Marco Leo Starting point from VSM01 project 
+STBIO1_v0.3 0.2 6/17/2025 Marco Leo Added page numbers, update timing 
+slot definition 
+STBIO1_v0.4 0.3 8/25/2025 Marco Leo Fix PMU Peculiar requirements. Added 
+Soft Reset Procedure 
+STBIO1_v2 1.6.2 9/1/2025 Ugo Garozzo Adde new OTP routines description, 
+Adde Soft Reset Procedures 
+STBIO1_v3 2 9/3/2025 Ugo Garozzo Add new output on TOP o_BDC_PPG, 
+added Power Domain, 
+Chanced ADSP IP 
+ADSP_v0.3.21.OTP640 
+ 
+STBIO1_v4 3 9/22/2025 Ugo Garozzo, 
+Marco Leo, 
+Aldo Torino, 
+Alessandro 
+Iannuzzi 
+1. Added reset value TOP; 
+2. Added Power DomainDescription; 
+3. Added resets of regmap; 
+4. Added new A2D input;  
+5. POR1V2_VDDIO; 
+6. new ADSP IP 
+7. new i2c/spi IP 
+8. Updated Top level Digital Scheme 
+STBIO1_v5 4 10/10/2025 Aldo Torino, 
+Ugo Garozzo 
+Added Approvers Data, Fix Tables 
+Size, Fix Clocks and Reset Schemes, 
+removed scan reports section 
+STBIO1_v6 5 11/5/2025 Ugo Garozzo Added DCCK, updated 
+DDS_STBIO1_4000 new i2c/spi IP tag 
+documentation, add pad_mux 
+requirements 
+STBIO1_v7_DOC 6 11/24/2025 Aldo Torino Added Requirement 00001199 for sub-
+fifo Offset 
+STBIO1_v8_DOC 7 11/25/2025 Ugo Garozzo Updated  
+STBIO1_v9_DOC 8 1/22/2026 Aldo Torino Fix set user mode description  
+STBIO1_v10_DOC 9 3/19/2026 Aldo Torino Add Functional Mode Chapter, 
+Reference Table and add Reference 
+Chapter  
+Table 1: Revision History

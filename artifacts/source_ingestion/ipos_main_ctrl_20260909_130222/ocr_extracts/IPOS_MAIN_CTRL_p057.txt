@@ -1,0 +1,46 @@
+56 
+ 
+When the MODE OPERATION is set to 0 (after that has been set to 1) to stop a measurement, 
+the USER shall check that the DEVICE_STATUS_REGISTER reaches the IDLE State Value and 
+wait at least 1ms before doing anything. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5015] Requirement:  
+[Covers: DDS_STBIO1_1114] 
+The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the 
+WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS 
+[DDS_STBIO1_1114] [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5016] REQUIREMENT:  
+When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for 
+these two channels shall be written in the following regmap registers 
+ECG0_AC 
+ECG0_DC 
+ECG1_BIA_P_AC 
+ECG1_BIA_P_DC 
+ECG2_BIA_Q_AC 
+ECG2_BIA_Q_DC 
+GSR_RESULT 
+ 
+[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5004] REQUIREMENT:  
+The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is 
+1024[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5005] REQUIREMENT:  
+If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value 
+shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main 
+controller fsm)[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1004] REQUIREMENT:  
+[Covers: DDS_STBIO1_0118] 
+[Covers: DDS_STBIO1_0125] 
+The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2] 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1005] REQUIREMENT:  
+The user shall configure which channel is selected and if work in Data Storage mode for the 
+measure writing the DEVICE_CONFIG_CHANNEL register [Covers] [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1006] REQUIREMENT:

@@ -1,0 +1,19 @@
+144 
+ 
+15.1. BOOT Phase 
+ 
+[DDS_STBIO1_0114] Requirement: 
+At the release of the POR signal from the analog domain, the PMU shall manage the turn-on of 
+the LDO1V8 and starts clocks Start-Up Sequence (reported in PMU IPOS) [TO: IPOS_PMU] 
+[END] 
+[DDS_STBIO1_0115] Requirement: 
+After At least 2 ms from the Release of the POR, the reset of the digital domain shall be de-
+asserted (an overlook on this part is described in the PMU IPOS) and the device shall start the 
+Boot Phase [TO: IPOS_PMU] [END] 
+[DDS_STBIO1_0116] Requirement: 
+To check the end of the BOOT phase, the user shall read the main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) and follow these steps: 
+• Read the DEVICE_STATUS_REG [2:0] 
+• Check if the Value is 1 (BOOT phase still in process) 
+• If the value is 2, then the BOOT phase is ended and the device is in IDLE. [TO: 
+IPOS_MAIN_CTRL] [END]

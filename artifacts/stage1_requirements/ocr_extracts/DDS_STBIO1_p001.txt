@@ -1,0 +1,53 @@
+ST Confidential 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+REV. DATE AUTHOR 
+Draft 1.10 19 March 
+2026 
+Ugo Garozzo, Marco Leo, Aldo Torino, Alessandro Lucio Iannuzzi 
+ 
+ APPROVED By  DATE 
+ Francesco Villa, Pasquale Biancolillo 19 March 2026 
+2026 
+DDS-Digital Design Specification 
+STBIO1 
+Marco Leo, Ugo Garozzo, Aldo Torino, Alessandro Lucio Iannuzzi

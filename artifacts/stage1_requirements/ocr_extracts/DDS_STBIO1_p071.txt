@@ -1,0 +1,105 @@
+70 
+ 
+13.1.2.3. DCCK Requirement 
+ 
+ 
+ 
+ 
+[DDS_STBIO1_390] Assumption 
+O_DCCK_P_i(A2D input) will be “1” in floating electrode P state else it will be “0”  
+[End] 
+ 
+DDS_STBIO1_391] Assumption 
+O_DCCK_N_i(A2D input) will be “1” in floating electrode N state else it will be “0”  
+[End] 
+ 
+ 
+ 
+[DDS_STBIO1_392] Requirement 
+If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', 
+then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1' 
+[End] 
+ 
+[DDS_STBIO1_393] Requirement 
+If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', 
+then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1' 
+[End] 
+ 
+[DDS_STBIO1_394] Requirement 
+If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', 
+then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1' 
+[End] 
+ 
+[DDS_STBIO1_395] Requirement 
+DCC  IP
+                         
+                                       
+                             
+                              
+             00 25nA
+01 50nA
+10 100nA
+11 200nA
+         
+         
+                        
+        
+        
+              000  C
+001 I  _ECG
+001 I P_ECG
+001 I  _IMP
+001 I P_IMP
+001 I  _GSR
+001 I P_GSR
+                000  C
+001 I  _ECG
+001 I P_ECG
+001 I  _IMP
+001 I P_IMP
+001 I  _GSR
+001 I P_GSR
+       
+       
+       
+       
+       
+       
+          
+                             
+                                  
+                       
+                       
+    
+     
+       
+       
+ 
+ 
+ 
+ 
+      
+      
+        
+        
+        
+        
+The DCC  feature consist in 2 different stages able to detect if one of 6 electrode inputs are in the range
+ 0 to 1.5V . The thresholds have a step of 100mV. A very small continuous current  from 25nA to 200nA 
+flows from the stage into the electrodes.
+0V
+1.8V
+1.5V
+0.3V
+D
+C
+C
+ 
+_
+ 
+D
+C
+C
+ 
+_
+P

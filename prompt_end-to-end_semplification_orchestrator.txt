@@ -1,0 +1,91 @@
+Run a project-agnostic end-to-end authority/partition consistency crosscheck now, from approved Stage 2 state through snapshot, S3, S4, S5, and IPOS generation readiness.
+
+Goal:
+Prove that req_ids, hierarchy levels, lineage, owning_target, allocation_class, source_origin_req_ids, hierarchy_parent_req_ids when required, owning_domain, and block-local context remain coherent all the way to SRS, ARS, DRS, and IPOS generation inputs.
+
+We want the flow to be correct by construction.
+If the path is clean, later .sysml generation should also become correct by construction.
+
+Required checks:
+1. trace approved authority flow from:
+   - approved Stage 2 mapping/profile
+   - frozen snapshot authority
+   through:
+   - S3 SRS
+   - S4 ARS
+   - S5 DRS
+   - IPOS generation inputs
+2. verify partition correctness:
+   - SRS only system-level
+   - DRS only top-digital-architecture
+   - ARS only top-analog-architecture
+   - IPOS only true block-local requirements
+3. verify no downstream stage:
+   - recomputes ownership from approved_block
+   - recomputes placement from source type
+   - duplicates normative requirements across levels improperly
+   - drops lineage/provenance/allocation data
+   - consumes live non-snapshot authority when snapshot authority should be used
+4. identify any stage where approved metadata becomes weaker, stale, implicit, or recomputed
+5. verify whether IPOS generation inputs are already correct by construction
+6. verify whether later .sysml generation should become correct by construction if this path is clean
+
+Also detect simplification opportunities:
+7. identify redundant scripts, duplicated intermediate validation steps, redundant reports, and unnecessary script hops
+8. identify checks that are duplicated across multiple stages
+9. recommend whether they should be:
+   - removed
+   - downgraded to report-only
+   - merged
+   - centralized
+
+Target architecture:
+Concentrate shared validation/coherence/routing logic as much as possible into one central project-agnostic validator-guideline execution orchestrator, instead of scattering similar checks across many scripts and intermediate steps.
+
+General Rules to add/update:
+- approved authority must be preserved end-to-end through snapshot, SRS, ARS, DRS, and IPOS generation
+- no downstream stage may recompute hierarchy placement or ownership from heuristics when approved authority already exists
+- redundant intermediate validation/report steps should be removed or downgraded when they do not add independent safety
+- shared workflow validation logic should be centralized where possible into a common project-agnostic validator/orchestrator
+- later model generation should consume preserved approved structure, not re-infer it
+
+Inspect these files first:
+1. scripts/snapshot_manager.py
+2. scripts/requirement_corpus.py
+3. scripts/allocation_ledger.py
+4. scripts/run_srs_crosscheck_agent.py
+5. scripts/generate_stage3_srs.py
+6. scripts/generate_stage4_ars.py
+7. scripts/generate_stage5_drs.py
+8. scripts/generate_stage2_specs.py
+9. scripts/run_stage2_micro_arch_and_crosscheck.py
+10. scripts/freeze_stage2b_snapshot.py
+11. scripts/pre_freeze_coherence_gate.py
+12. scripts/validate_source_to_stage2b_coherence.py
+13. scripts/validate_stage2_profile.py
+14. scripts/validate_stage2_mapping.py
+15. scripts/workflow_cli.py
+16. scripts/workflow_gui.py
+17. .github/copilot-instructions.md
+
+Constraints:
+- project-agnostic
+- deterministic
+- local-only
+- minimal and auditable
+- no merge
+- no new approval cycle
+- no snapshot creation in this step
+- no downstream generation execution unless only dry/read validation is possible
+- no authority mutation
+
+Return only:
+1. end-to-end authority flow summary from Stage 2 to SRS/ARS/DRS/IPOS
+2. any partition/coherence loss points
+3. any generator stage that weakens or recomputes approved metadata
+4. redundancies found in scripts or intermediate verification steps
+5. what should be removed, merged, downgraded, or centralized
+6. whether a central validator-guideline execution orchestrator is justified
+7. General Rules updates needed
+8. files to change
+9. exact next recommended step

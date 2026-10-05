@@ -1,0 +1,41 @@
+22 
+ 
+POR1V2_1V2 input 0 wire to u_pad_mux 
+clk_16m input 0 wire to u_pad_mux 
+clk_64k input 0 wire to u_pad_mux 
+START_CLK_16M input 0 wire to u_pad_mux 
+o_DIS_RC_VIREF output 0 wire from u_scan_out_mux 
+o_EN_LDO1V8 output 0 wire from u_scan_out_mux 
+o_PD_CLKF output 1 wire from u_scan_out_mux 
+ADC_CAL_CORR_DIS output 0 wire from u_scan_out_mux 
+ADC_ERROR_CAP9_DEBUG output 0 wire 
+[7:0] 
+from u_scan_out_mux 
+ADC_SR_ENHANCE_DIS output 0 wire from u_scan_out_mux 
+CCK_THRESHN_SEL output 0 wire 
+[3:0] 
+from u_scan_out_mux 
+CCK_THRESHP_SEL output 0 wire 
+[3:0] 
+from u_scan_out_mux 
+CURR_BG_TRIM output 8 wire 
+[3:0] 
+from u_scan_out_mux 
+CURR_PTAT_TRIM output 8 wire 
+[3:0] 
+from u_scan_out_mux 
+DCCK_CURRINJ output 0 wire 
+[1:0] 
+from u_scan_out_mux 
+DCCK_ISINK_IN output 0 wire 
+[2:0] 
+from u_scan_out_mux 
+DCCK_ISOURCE_IN output 0 wire 
+[2:0] 
+from u_scan_out_mux 
+ECG_PSDRES_DOWN output 0 wire 
+[2:0] 
+from u_scan_out_mux 
+ECG_PSDRES_UP output 0 wire 
+[2:0] 
+from u_scan_out_mux

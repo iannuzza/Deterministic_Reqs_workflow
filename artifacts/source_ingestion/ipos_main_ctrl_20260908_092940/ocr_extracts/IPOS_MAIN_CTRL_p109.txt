@@ -1,0 +1,42 @@
+108 
+ 
+BIA_AC_P  1110  0001  DATA 16 BIT  
+BIA_DC_P  1110  0011  DATA 16 BIT  
+Table 2: DATA TAG Table 
+ 
+ 
+ 
+ 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2146] REQUIREMENT : 
+In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 
+0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the 
+threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at 
+the start of the next frame or frame repetition. 
+[END] 
+5.11.4. PPG Frame Repetition 
+The frame repetition is a classic mean operation between two 20 bit PPG data. The result of the 
+frame is accumulated on a 24 bit accumulator that is divided by the number of repeated frame. 
+The number of repetition frames supported is 0 (no frame repetead), 2,4 and 8. 
+5.11.4.1. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2145] REQUIREMENT : 
+The Frame shall work as follows: 
+1. Select how many times a particular frame shall be repeated 
+2. The result of each repetition shall be obtained as explained in 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT  
+3. After the last repetition has been accumulated, the data output shall be obtained dividing 
+by the number of repeated frames the accumulated data to obtain a 20 bit data. 
+The final result shall be computed as follows: 
+ 
+Number of times the Frame has been repeated Result 
+2 (Res_F_R1 + Res_F_R2)/2 
+4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 
+8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 
+Table 20: Frame Repetitions Result Computation table 
+Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the 
+result of the second repetition of the frame. 
+[END] 
+6. AHB Write Transaction 
+6.1. Write Transaction 
+Main Controller only supports single write transaction at 8/32 bit.

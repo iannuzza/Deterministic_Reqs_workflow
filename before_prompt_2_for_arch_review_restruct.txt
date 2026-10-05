@@ -1,0 +1,111 @@
+Do not start Step 2 implementation yet.
+
+First treat the following as fixed defaults and design refinements unless a concrete repository blocker is found.
+
+1. Authoritative storage:
+- Canonical SQLite is the authoritative store for requirements, revisions, mappings, workflow state, approved taxonomy/profile data, snapshots, audit, and rollback.
+- Retrieval/index SQLite databases remain separate rebuildable non-authoritative stores.
+- CSV/JSON/Markdown remain derived exports, review artifacts, and compatibility outputs only.
+
+2. Step 2 implementation defaults:
+- Canonical SQLite path: data/canonical/canonical_store.sqlite
+- Use explicit SQLite schema migrations with a schema_migrations table
+- Prefer relational modeling for authoritative profile/mapping/approval/workflow data
+- Use JSON only for auxiliary payloads, evidence blobs, import snapshots, or flexible non-authoritative metadata
+- Define approval transitions centrally with explicit enumerated states and validation rules
+- Keep lifecycle states separate from semantic approval/category transitions
+- Do not silently default to latest-approved for authoritative downstream generation
+- Require explicit --snapshot-id or an explicit approved selector such as --use-latest-approved
+- Impacted snapshots may remain available for forensic viewing, but not for authoritative generation until re-approved or superseded
+- Audit events may also be exported to JSONL, but SQLite remains authoritative
+- GUI chat, if retained, must remain visibly non-authoritative and must not affect workflow-authoritative state
+- Semantic retrieval remains optional, local-only, version-pinned, auditable, and never required for the core deterministic workflow
+- Automatic semantic fallback remains limited to the current no-legacy-results condition
+
+3. Supplementary source workflow:
+- Supplementary source integration must support multiple supplementary source specs per project
+- It must be repeatable, multi-source, multi-instance, batch-aware, source-aware, and scope-aware
+- Supplementary specs may represent:
+  - additional specs for existing blocks
+  - additions to the general architecture
+  - new revisions of the system architecture
+  - new revisions of the digital architecture
+  - new revisions of the analog architecture
+
+4. Supplementary source metadata:
+Each supplementary source import must track at least:
+- source_spec_id
+- source_revision_id
+- source name
+- source revision number
+- source revision date
+- source kind
+- source scope
+- target scope
+- applies_to_blocks
+- applies_to_architecture_layer
+- ingestion_batch_id
+- staging_batch_id
+- review decision record
+- merge operation record
+- impact analysis record
+
+5. Supplementary GUI input:
+When the user adds a supplementary source spec in the GUI, also collect and store:
+- source revision number
+- source revision date
+These fields must remain separate from ingestion timestamp.
+
+6. Supplementary impact behavior:
+Merge impact analysis must determine:
+- whether canonical requirements change
+- impact scope
+- affected architecture layers
+- affected mappings
+- affected downstream generation targets
+- whether full or partial regeneration is required
+
+Not every supplementary source should force full regeneration.
+Partial downstream regeneration must be supported where valid.
+
+7. Conflict policy:
+If two source specs contain the same req_id but different requirement text:
+- classify the case as conflict
+- preserve both source versions and provenance
+- treat the latest source revision/date as the default proposed winner
+- do not silently overwrite canonical data
+- require explicit user revision approval before authoritative adoption
+- mark the case in the summary/report table as conflict with approval required
+This must be modeled as approval-gated conflict resolution, not auto-merge.
+
+8. Report generation:
+Add support for report generation at each hierarchical requirement level:
+- SRS report export to its own .xlsx file
+- DRS report export to its own .xlsx file
+- ARS report export to its own .xlsx file
+
+9. GUI reporting menu:
+Add a GUI report generation menu, for example:
+- Generate SRS Report
+- Generate DRS Report
+- Generate ARS Report
+- Generate All Reports
+
+10. Reporting constraints:
+Reports must be generated from approved snapshot-based data, not mutable live data.
+Report exports are derived artifacts only.
+
+Hard constraints:
+- project-agnostic
+- deterministic
+- no LLM calls in the authoritative workflow
+- no network calls in the authoritative workflow
+- no cloud dependencies
+- preserve auditability, provenance, and non-destructive history
+
+Now do not implement code yet.
+First provide only:
+1. confirmation that these defaults and refinements are accepted
+2. any concrete repository-specific blocker, if any
+3. which items belong primarily to Step 2, Step 2B, Step 3, Step 4, and Step 5
+4. any minimal adjustment strictly required before I send the actual Step 2 implementation prompt

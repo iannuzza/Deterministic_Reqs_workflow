@@ -1,0 +1,40 @@
+48 
+ 
+13.1.2. PAD Mux 
+In the following table are reported the Pad Configuration for each operative mode of the device. 
+The 
+BIST Mode, Scan Mode and Debug Mode are reserved for ST Testing Purpose 
+ 
+13.1.2.1. PAD MUX TOP I/O List 
+Port name Direction Type Description 
+i_write_protection_en input 
+ 
+write_protection_en OTP regmap enable 
+from regmap 
+o_write_protection_en output 
+ 
+write_protection_en OTP regmap enable 
+to regmap 
+i_tap_bist_mode input 
+ 
+bist_mode signal used retun in functional 
+mode 
+i_EN_0P05HP_ECG0 input 
+ 
+bit enable select PDRES 05 ECG0 channel 
+i_EN_0P05HP_ECG12 input 
+ 
+bit enable select PDRES 05 ECG12 
+channel 
+IMPQ_PSDRES_UP_02 input [2:0] OTP value for Analog block 
+IMPQ_PSDRES_DOWN_02 input [2:0] OTP value for Analog block 
+IMPP_PSDRES_UP_02 input [2:0] OTP value for Analog block 
+IMPP_PSDRES_DOWN_02 input [2:0] OTP value for Analog block 
+ECG_PSDRES_DOWN_02 input [2:0] OTP value for Analog block 
+ECG_PSDRES_UP_02 input [2:0] OTP value for Analog block 
+IMPQ_PSDRES_UP_05 input [2:0] OTP value for Analog block 
+IMPQ_PSDRES_DOWN_05 input [2:0] OTP value for Analog block 
+IMPP_PSDRES_UP_05 input [2:0] OTP value for Analog block 
+IMPP_PSDRES_DOWN_05 input [2:0] OTP value for Analog block 
+ECG_PSDRES_DOWN_05 input [2:0] OTP value for Analog block 
+ECG_PSDRES_UP_05 input [2:0] OTP value for Analog block

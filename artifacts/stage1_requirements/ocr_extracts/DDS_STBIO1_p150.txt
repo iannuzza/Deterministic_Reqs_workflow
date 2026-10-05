@@ -1,0 +1,47 @@
+149 
+ 
+Figure 22: ECG ONLY FLOWCHART 
+ 
+15.3.2. ECG and BIA 
+ 
+This configuration generates each time slot, two averaged ECG data, which are ECG AC and 
+ECG DC, respectively and four averaged BIA data which are BIA_AC_P, BIA_DC_P, BIA_AC_Q 
+and BIA_DC_Q. 
+ 
+1. TIME SLOT LENGTH:  
+[DDS_STBIO1_0125] Requirement: 
+• The user shall configure the time slot duration in DEVICE_CONFIG_OPERATION 
+register [4:2]. [TO: IPOS_MAIN_CTRL] [END] 
+2. SELECT CHANNEL: 
+[DDS_STBIO1_0126] Requirement: 
+• The user shall select active channel, in this case ECG0_SEL, BIA_SEL and DS_SEL 
+(Data Storage Mode) in DEVICE_CONFIG_CHANNEL writing 0x23. [TO: 
+IPOS_MAIN_CTRL] [END] 
+3. SELECT DIVISION INDEX FOR CONFIGURED CHANNELS: 
+[DDS_STBIO1_0127] Requirement: 
+• The user shall select a division index for ECG, configuring M_ECG_l and M_ECG_h 
+in SET_ECG_FREQ_l register and SET_ECG_FREQ_h register. [TO: 
+IPOS_MAIN_CTRL] [END] 
+      [DDS_STBIO1_0128] Requirement: 
+• The user shall select a division index for ECG, configuring M_BIA_l and M_BIA_h in  
+SET_BIA_FREQ_l register and SET_BIA_FREQ_h register. [TO: IPOS_MAIN_CTRL] [END] 
+4. CONFIGURE ADC SAMPLING PERIOD: 
+[DDS_STBIO1_0129] Requirement: 
+• The user shall set number of clocks for sampling ECG and BIA data from ADC in 
+ADC_CONFIG_ECG register. [TO: IPOS_MAIN_CTRL] [END] 
+5. GENERAL CONFIG: 
+[DDS_STBIO1_0130] Requirement: 
+• The user shall set at 1 HC_EN in ECG_CTRL register. [TO: IPOS_MAIN_CTRL] 
+[END] 
+      [DDS_STBIO1_0140] Requirement: 
+• The user shall set at 1 IMP_EN in IMP_CTRL register. [TO: IPOS_MAIN_CTRL] 
+[END] 
+6. SELECT OPERATIVE MODE: 
+[DDS_STBIO1_0141] Requirement: 
+• The user shall start measurement writing register DEVICE_CONFIG_OPERATION [0] at 
+1. [TO: IPOS_MAIN_CTRL] [END] 
+7. CHECK DATA: 
+[DDS_STBIO1_0142] Requirement: 
+• To check data in unique FIFO (default config) the user shall check the first MSB which will 
+have to be equal to the one described in the DATA TAG Table. [TO: IPOS_MAIN_CTRL] 
+[END]

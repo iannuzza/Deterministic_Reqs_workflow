@@ -1,0 +1,14 @@
+Interface,Direction,Type,Owner,Purpose
+SENSOR_ANALOG_INPUT,input,analog,Sensor-Hub,Raw sensor-domain analog input
+ADC_DATA,output,digital,ADC,Digitized samples
+FIFO_DATA,output,digital,Smart FIFO,Buffered output samples
+SERIAL_CLK,input,digital,SPI interface,Serial clock input
+SERIAL_SELECT,input,digital,SPI interface,Serial frame/select input
+SERIAL_DATA_IN,input,digital,SPI interface,Serial data input
+SERIAL_DATA_OUT,output,digital,SPI interface,Serial data output
+ALT_SERIAL_CLK,input,digital,I2C interface,Alternate serial clock input
+ALT_SERIAL_DATA,bidirectional,digital,I2C interface,Alternate serial bidirectional data line
+INT1,output,digital,IRQ logic,Primary interrupt output
+INT2,output,digital,IRQ logic,Secondary interrupt output
+VDD,input,power,PMU,Core supply
+VDD_IO,input,power,PMU,Digital IO supply

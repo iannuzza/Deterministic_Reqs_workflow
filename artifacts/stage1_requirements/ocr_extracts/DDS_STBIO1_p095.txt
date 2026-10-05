@@ -1,0 +1,42 @@
+94 
+ 
+ts_pdnf_selectwlbl 500 ns  
+th_pdnf_tread 150 ns 
+th_pdnf_fuse 150 ns  
+th_selectwlblf_prg 2*clk_period 
+clk_period 31ns 
+n_mirror_reg 6 
+Table 21 Chosen OTP Timings 
+[End] 
+ 
+[DDS_STBIO1_0030] Definition: 
+Timing parameter Value 
+t_state1_cycles ts_pdnr_tread_fuse_cycles + 
+th_pdnr_selectwlbl_cycles 
+t_s1_int1_cycles ts_pdnr_tread_fuse_cycles 
+t_s1_int2_cycles t_state1_cycles - 
+ts_selectwlblr_a_cycles 
+t_s1_int3_cycles t_state1_cycles - 
+ts_selectwlblr_prg_cycles 
+t_state2_write_cycles ts_fuser_selectwlbl_cycles + 
+tfuse_high_cycles + 
+th_fusef_selectwlbl_cycles 
+t_s2_int1_write_cycles ts_fuser_selectwlbl_cycles 
+t_s2_int2_write_cycles t_state2_write_cycles - 
+th_fusef_selectwlbl_cycles 
+t_state2_read_cycles t_selectwlbl_high_read_cycles 
+t_s2_int1_read_cycles td_selectwlblr_dout_cycles 
+t_state3_cycles tselectwbl_low_cycles 
+t_s3_int1_cycles th_selectwlblf_a_cycles 
+t_s3_int2_cycles tselectwbl_low_cycles - 
+ts_selectwlblr_a_cycles 
+t_state4_cycles ts_pdnf_selectwlbl_cycles + 
+th_pdnf_tread_fuse_cycles 
+t_s4_int1_cycles th_selectwlblf_a_cycles 
+t_s4_int2_cycles th_selectwlblf_prg_cycles 
+t_s4_int3_cycles ts_pdnf_selectwlbl_cycles 
+Table 22 Operation phases timings 
+[End] 
+ 
+ 
+[DDS_STBIO1_0031] Definition:

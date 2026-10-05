@@ -1,0 +1,21 @@
+84 
+ 
+Generic name Type Value Description 
+BTIA_ALC_register_bit int 10  
+ppg_start_up_decod_bit int 5  
+ppg_start_up_bit int 9  
+5.8.4. Ports 
+Port name Directi
+on Type Description 
+i_clk_16MHz input  Clk 16 MHz 
+i_rstn input  Reset 
+i_gain_start_set input [rx_ch_gain_max_bit-1:0] gain max value 
+i_T_rx_set input [T1_max_bit_from_decoder-
+1:0] RX set Time 
+i_idac_dc_ppg_frame input [idac_dc_ppg_frame_bit-1:0] IDAC DC PPG Value From Regmap 
+i_wave_velocity_mode input  wave velocity mode selection 
+i_n_ppg_frame input [ppg_frame_bit-1:0] number of ppg frame 
+i_const_value_ioff input [data_size_bit-1:0] constant value for 
+i_adc_ready input  adc ready from adc phases 
+i_start_ppg_fsm input  start ppg fsm 
+i_reset_alc input  reset alc compensation

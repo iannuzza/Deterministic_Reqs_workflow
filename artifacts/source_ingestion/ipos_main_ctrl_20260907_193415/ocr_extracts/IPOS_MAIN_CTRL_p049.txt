@@ -1,0 +1,32 @@
+48 
+ 
+Port name Direction Type Descr. 
+o_tx3_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel 
+o_tx4_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel 
+o_n_average output [n_average_ecg_bia_gsr_max_bit-
+1:0] 
+average for 
+channel on 
+measuring 
+o_adc_mux_bio_channel output [2:0] 
+adc mux to 
+analog 
+domain 
+o_adc_mux_sel output  
+adc mux 
+selection to 
+analog 
+domain 
+o_N_clk output [N_clk_max_bit-1:0] 
+clock cycles 
+for adc 
+sampling 
+o_data_valid_ecg_bia_adc output  data valid for 
+ecg and bia 
+o_average_ppg output [n_average_ppg_max_bit-1:0] average for 
+ppg channel 
+o_error_time_slot output  error irq 
+o_ahb_address output [31:0] 
+address for 
+ahb write 
+operation

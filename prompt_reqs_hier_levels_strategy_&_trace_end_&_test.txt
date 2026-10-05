@@ -1,0 +1,101 @@
+Good progress. Proceed with the remaining work only, and keep the strategy centralized, deterministic, project-agnostic, and local-only.
+
+Current state is acceptable as an intermediate milestone, but do not stop at partial policy introduction. Complete the end-to-end migration so generators, reports, validators, GUI, exported artifacts, and final validation all consume the same authoritative allocation/lineage model.
+
+Finish the remaining work in this order:
+
+1. **Migrate all generators to the allocation ledger**
+- Update SRS, DRS, ARS, Digital IPOS, and Analog IPOS generation to consume the centralized allocation/policy/ledger model instead of local joins, local heuristics, or generator-specific hierarchy decisions.
+- Ensure every rendered requirement is allocated by class, owner, abstraction level, topic family, and lineage mode from the shared model.
+- Remove or bypass any generator-specific fallback logic that can reintroduce inconsistent hierarchy placement.
+
+2. **Implement true direct source-to-IPOS and supplementary-source-to-IPOS generation**
+- Use the new gating rules end-to-end during generation, not only validation.
+- Support valid direct block-local paths from approved primary or supplementary source requirements into the owning IPOS when no meaningful DRS/ARS parent is required.
+- Preserve nearest-parent rendered `Covers:` plus full lineage in the authoritative model and reports.
+
+3. **Implement mixed-requirement splitting in generation**
+- If one source requirement mixes architecture-level and block-local content, split it before rendering.
+- The source item remains provenance only.
+- Each descendant must have its own class, level, owner, immediate parent, and shared source-origin linkage.
+- Do not duplicate mixed source text verbatim across multiple levels.
+
+4. **Update hierarchy reports, coverage reports, and XLSX matrices**
+- Replace legacy exact-ID or per-generator accounting with class-based accounting from the shared ledger.
+- Distinguish coverage status from lineage mode.
+- Correctly represent direct IPOS paths, split lineage, justified exclusions, under-coverage, over-propagation, misallocation, and orphaning.
+
+5. **Update GUI views**
+- Show provenance, lineage mode, nearest parent, full lineage, requirement class, topic family, abstraction level, owning block/domain, valid versus actual targets, allocation rationale/policy basis, and coverage status.
+- Make direct source-to-IPOS, supplementary-source-to-IPOS, and split-lineage cases clearly reviewable.
+
+6. **Wire all validators to shared policy**
+- Ensure SRS/DRS/ARS/IPOS validators all use the same centralized class, target, placement, gating, and duplication rules.
+- Eliminate validator-local hierarchy interpretations where still present.
+
+7. **Add a final crosscheck validation test suite**
+- Add an end-to-end crosscheck test suite that validates downward cross-coverage completeness from:
+  - top primary source specs
+  - applicable supplementary source specs
+  across:
+  - SRS
+  - DRS
+  - ARS
+  - Digital IPOS
+  - Analog IPOS
+- Verify that every approved in-scope primary/supplementary requirement is:
+  - correctly classified
+  - correctly allocated
+  - mapped to the correct downstream target set by class/policy
+  - counted with the correct coverage status
+  - treated as valid when direct source-to-IPOS or supplementary-source-to-IPOS is justified
+- Validate:
+  - normal hierarchical paths
+  - direct IPOS paths
+  - split-lineage cases
+  - nearest-parent rendered `Covers:` logic
+  - full lineage reconstruction
+- Report in test outputs and test reports:
+  - total approved primary requirements
+  - total approved supplementary requirements
+  - totals by requirement class
+  - totals by topic family
+  - totals by scope, owner, block, domain
+  - totals by coverage status
+  - totals by lineage mode
+  - required vs actual downstream target counts
+  - normal hierarchical vs direct IPOS path counts
+  - split-lineage counts
+  - misallocation counts
+  - duplicate propagation findings
+  - unjustified skipped-hierarchy findings
+  - coverage percentages by source spec and downstream spec
+  - per-spec and global statistics
+- Include association reporting for:
+  - source requirement -> rendered descendants
+  - immediate parent associations
+  - source-origin lineage associations
+  - downstream target associations
+  - owning block/domain associations
+- Make this crosscheck deterministic, reusable, machine-readable, human-readable, and project-agnostic.
+- Use it as a final end-to-end validation gate after regeneration.
+
+8. **Regenerate and validate downstream artifacts**
+- Rebuild specs, reports, matrices, GUI-consumed artifacts, and any other derived outputs from the updated centralized flow.
+- Re-run focused tests, validators, and the final crosscheck suite after regeneration.
+
+Additional requirements while finishing:
+- Do not reintroduce “optional upward presence” for the same block-local obligation.
+- Do not allow DRS/ARS to regain detailed port tables, detailed I/O tables, or exact block-local requirement bodies.
+- Do not treat direct IPOS as a coverage status; keep it as lineage mode only.
+- Do not mark same-source multi-level descendants as duplicates unless the obligation is materially unchanged without abstraction change.
+- Ensure the final crosscheck reports include clear numbers, associations, and statistics suitable for review.
+
+Before editing, briefly confirm:
+- which remaining generators still bypass the allocation ledger
+- which reports, matrices, GUI paths, and exported artifacts still use legacy accounting
+- which validators still have local hierarchy logic
+- which new or updated crosscheck test modules and report artifacts you will add
+- the exact regeneration and validation sequence you will run after completion
+
+After that, complete the migration end-to-end.

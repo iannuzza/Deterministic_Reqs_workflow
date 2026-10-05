@@ -1,0 +1,51 @@
+19 
+ 
+BT_IDAC_P output 0 wire 
+[9:0] 
+from u_scan_out_mux 
+o_b_cap_idac output 0 wire 
+[1:0] 
+from u_scan_out_mux, Description: 
+IDAC Filter Cap 
+o_rx_ch_frame output 0 wire 
+[2:0] 
+from u_scan_out_mux, Description: 
+BMUX_Selection 
+DIS_LOOP_TIA output 0 wire from u_scan_out_mux, Description: 
+Disable TIA loop 
+T_RX_GPIO1 output 0 wire 
+[1:0] 
+from u_scan_out_mux, Description: TEST 
+RX signal on 
+T_RX_GPIO2 output 0 wire 
+[1:0] 
+from u_scan_out_mux, Description: TEST 
+RX signal on 
+TM_SEL_1V8 output 0 wire from u_scan_out_mux, Description: 
+Force PGA input 
+o_en_tx_1V2 output 0 wire 
+[3:0] 
+from u_scan_out_mux 
+o_tx1_outlab_sel_frame_x_
+1V2 
+output 0 wire from u_scan_out_mux 
+o_tx2_outlab_sel_frame_x_
+1V2 
+output 0 wire from u_scan_out_mux 
+o_tx3_outlab_sel_frame_x_
+1V2 
+output 0 wire from u_scan_out_mux 
+o_tx4_outlab_sel_frame_x_
+1V2 
+output 0 wire from u_scan_out_mux 
+o_tx_preset_1V2 output 0 wire from u_scan_out_mux 
+BtrimIREF_TX_1V2 output 0 wire 
+[3:0] 
+from u_scan_out_mux, Description: TX 
+Ramp Current 
+DFT_SEL_1V2 output 0 wire from u_scan_out_mux, Description: 
+VFEED_1V2 Monitor 
+o_curr_sel_tx_frame_x_1V2 output 0 wire 
+[7:0] 
+from u_scan_out_mux, Description: 
+Selezione corrente

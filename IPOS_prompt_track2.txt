@@ -1,0 +1,50 @@
+Proceed with Track 2 only: stop raw source text reuse in IPOS descriptive sections and enforce a central project-agnostic rule for descriptive synthesis.
+
+Important:
+- use the existing central downstream validator-orchestrator as the only shared authority for downstream contract decisions
+- update and use the General Rules accordingly
+- keep one central logic and decision model for all IPOS outputs
+- do not create local ad hoc synthesis rules or a parallel validator
+
+Use the agreed Track 2 plan:
+- keep raw requirement text unchanged only in the authoritative Block requirements section
+- stop passing raw requirement statements directly into descriptive overview output
+- add a narrow descriptive-rendering path that uses approved block function, approved interface evidence, and mapped requirement topics to produce concise functional summaries
+- omit a descriptive entry when supported synthesis cannot be produced
+- preserve evidence linkage/audit for every retained descriptive summary
+- enforce output-quality invariants through the existing validator/gate path, not through isolated local logic
+
+Implement only:
+- generate_ipos_specs.py
+- workflow_routing.py for shared descriptive assembly behavior
+- validate_ipos_gate.py only as a stage-local output check aligned with the central contract
+- update the General Rules where needed so descriptive IPOS text follows the same central downstream governance
+
+Must remain unchanged:
+- raw requirement text in the authoritative requirement section
+- requirement IDs
+- source IDs and provenance
+- snapshot IDs
+- allocation
+- ownership
+- traceability matrices
+- central contract behavior
+
+Validation required:
+- ensure descriptive overview text does not contain raw [TO: ...] tags or source requirement IDs
+- detect exact copies of requirement statements in overview sections
+- verify each retained summary has approved provenance in descriptive_summary_audit.csv
+- verify the authoritative requirement section still contains the original traceable requirement text
+- regenerate Digital and Analog IPOS from the same explicit approved snapshot
+- confirm traceability matrices remain unchanged where inputs are unchanged
+- keep the result coherent with the central downstream validator-orchestrator
+
+Do not work on Tracks 1, 3, or 4 now.
+Do not touch TOC/page-placement or repeated-requirement handling here.
+
+Return:
+- files changed
+- exact central rule applied for IPOS descriptive synthesis
+- General Rules updated
+- tests/checks run
+- result

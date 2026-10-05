@@ -1,0 +1,44 @@
+59 
+ 
+(DEVICE_CONFIG_CHANNEL register [0]) is set to 1, ECG0-ECG1 and ECG2 shall be active so 
+the O_PD_HC2 shall go low, O_PD_IMP shall go low and the Device_FSM shall go to the 
+WAIT_SU State so main_controller_status_register (DEVICE_STATUS_REG register [ 2:0]) shall 
+be equal to 0x03. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_015]  REQUIREMENT :  
+When the user selects the ECG, BIA, the wave velocity mode or the ppg ioff calibration, the device 
+Shall go to WAIT_SU state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_0115]  REQUIREMENT :  
+When the user selects an operative mode that includes the BIA channel, The DEVICE_FSM FSM 
+moves from IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) is equal to 0x02) to WAIT_SU STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x03). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_016]  REQUIREMENT :  
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL 
+(DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low  within 5 clock cycle at 
+32kHz. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_017]  REQUIREMENT :  
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL 
+(DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ 
+register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if 
+IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain 
+high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_018]  REQUIREMENT :  
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and 
+BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of 
+imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, 
+O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at 
+FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall 
+be chosen from 20kHz, 50kHz, 100kHz, 200kHz .  
+On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and 
+ck_q shall stay low. After this, the clock shall always run. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_019]  REQUIREMENT :  
+When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase 
+delay of 90 degrees (opposite) with respect O_CK_P. [END]

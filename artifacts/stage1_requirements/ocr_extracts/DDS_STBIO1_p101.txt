@@ -1,0 +1,22 @@
+100 
+ 
+o_gt_ck_off output  
+Pulse on AHB clock to 
+inform system that AHB 
+clock can be switched off 
+o_ahb_error output  
+Error on AHB side. Active 
+if bit 1 or  of register at 
+address 0x4f are active. 
+o_rd_byte_nr_err output  Active when  
+o_req_error output  
+Active when number of 
+byte is missing for read or 
+timeout between double 
+yte write and read is 
+expired 
+scan_mode input  Scan mode 
+scan_enable input  Scan enable 
+scan_clk input  Scan clk 
+scan_rst input      Scan reset 
+Table 24: I2C/SPI AHB I/O List

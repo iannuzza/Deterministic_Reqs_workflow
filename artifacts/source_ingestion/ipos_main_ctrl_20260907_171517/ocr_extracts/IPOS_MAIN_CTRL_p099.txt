@@ -1,0 +1,8 @@
+98 
+ 
+5.10. ALC Compensation 
+ 
+Table 11: ALC Algorithm Flow Diagram 
+5.10.1. IP Description 
+This block Is in charge to overseas the Ambient Light Compensation algorithm for the PPG 
+Analog Channel

@@ -1,0 +1,20 @@
+29 
+ 
+Generic name Type Value Description 
+max_frame_repetition int 2  
+curr_sel_bit int 9  
+bit_outab_sel int 1  
+n_tx_channel int 4  
+n_channel_adc_bit int 4  
+ecg_channel_bit int 2  
+time_buffer_const_bit int 10  
+Nmax_bit int 4  
+delta_bit int 2  
+gain_max_bit int 3  
+T1_max_bit_from_decoder int 4  
+T2_max_bit_from_decoder int 2  
+T1_max_bit int 8  
+T2_max_bit int 5  
+BTIA_ALC_register_bit int 10  
+T1_add_T2_max_bit int 13  
+ppg_start_up_decod_bit int 4

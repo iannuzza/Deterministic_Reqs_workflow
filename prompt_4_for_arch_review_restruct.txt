@@ -1,0 +1,202 @@
+Based on the accepted Step 1 constraints and the completed Step 2 + Step 2B + Step 3 foundation, now implement Step 4: audit logging, rollback support, immutable approved snapshots, mandatory approved resolver usage, conflict review/report foundations, and snapshot-only downstream generation.
+
+Important boundary:
+Do not redesign the canonical schema, vocabulary architecture, or core merge/state logic established in previous steps unless a concrete compatibility fix is strictly required.
+In this step, focus on runtime guarantees, snapshot authority, approved resolver enforcement, downstream generator migration, SysML generation/update rules, and report-generation foundations.
+
+Before editing code, first provide:
+1. target files to modify
+2. new files/modules to add
+3. intended changes per file
+4. any compatibility concern with previous steps
+5. how backward compatibility will be preserved where practical
+
+Current constraints that must remain true:
+- project-agnostic
+- deterministic
+- no LLM calls
+- no network calls
+- no cloud dependencies
+- Canonical SQLite remains authoritative
+- Retrieval/index SQLite remains separate and non-authoritative
+- CSV/JSON/Markdown/XLSX/SysML outputs remain derived artifacts only
+- semantic retrieval remains optional, local-only, version-pinned, auditable
+- automatic semantic fallback remains limited to the current no-legacy-results condition
+
+Please implement:
+
+1. Event-level audit logging
+Track events such as:
+- source_imported
+- parsed
+- req_id_validated
+- classified
+- classification_changed
+- review_requested
+- review_approved
+- review_rejected
+- impact_analysis_generated
+- merge_approved
+- merged
+- mapping_changed
+- mapping_reviewed
+- mapping_approved
+- snapshot_created
+- rollback_executed
+- vocabulary_candidates_extracted
+- vocabulary_candidate_approved
+- vocabulary_candidate_rejected
+- taxonomy_updated
+- rag_index_built
+- rag_crosscheck_executed
+- semantic_fallback_triggered
+- sysml_generated
+- report_generated
+- conflict_review_generated
+
+Each event should include:
+- timestamp
+- event type
+- relevant object IDs
+- actor/source if available
+- short reason/message
+
+2. Rollback support
+Support rollback for:
+- requirement revision rollback
+- mapping rollback
+- snapshot rollback or snapshot supersession
+- classification approval rollback where practical
+- vocabulary candidate approval rollback where practical
+
+Rollback must:
+- never delete history
+- create a new tracked revision/state/event
+- preserve auditability
+- indicate whether a new approved snapshot is required
+
+3. Immutable approved snapshot manager / resolver
+Add or refactor a central service that freezes:
+- canonical requirement revision set
+- approved mappings
+- approved taxonomy/profile revisions
+- traceability basis for SRS / DRS / ARS / Digital IPOS / Analog IPOS
+- vocabulary profile/version/hash metadata
+- taxonomy profile/version/hash metadata
+- retrieval/index configuration metadata
+- whether semantic mode and semantic fallback were enabled
+
+Snapshot rules:
+- snapshot IDs must be deterministic and content/configuration-derived
+- impacted snapshots may remain available for forensic viewing/audit/comparison, but not for authoritative generation until re-approved or superseded
+
+4. Mandatory approved resolver dependency
+Make approved vocabulary/taxonomy/profile resolution a mandatory dependency wherever authoritative classification, generation, review, snapshot-based output, or context-sensitive workflow actions depend on profile context.
+
+Requirements:
+- authoritative consumers must not bypass approved resolver context
+- no authoritative workflow path should silently use ad hoc profile data, mutable live data, or unapproved vocabulary/taxonomy context
+- add validation or service boundaries to make such bypasses visible and rejectable where practical
+
+5. Snapshot-only downstream generation
+Refactor downstream generators so they read only from the approved immutable snapshot resolver and do not bypass it by reading live mutable data or ad hoc CSV/JSON compatibility artifacts directly.
+
+This includes:
+- SRS generation
+- DRS generation
+- ARS generation
+- Digital IPOS generation
+- Analog IPOS generation
+
+Rules:
+- require explicit --snapshot-id or explicit approved selector such as --use-latest-approved
+- do not allow silent fallback to mutable live data
+- keep CSV/JSON exports as derived outputs only
+
+6. SysML generation/update rules
+Introduce snapshot-based SysML generation/update rules:
+- SysML generation/update must happen only from approved immutable snapshots
+- SysML must not be updated directly during architecture mapping review
+- architecture mapping review may affect future SysML generation, but does not directly mutate authoritative generated SysML outputs
+- generated SysML files are derived artifacts, not the source of truth
+
+Prepare or refactor services so SysML generation/update can consume:
+- approved snapshot data
+- approved mappings
+- approved profile/taxonomy context
+- traceability context
+
+7. Conflict review/report service foundations
+Add a dedicated review/report service layer for same-req_id-different-text conflicts.
+
+Requirements:
+- allow the latest revision/date to be shown as the default proposed winner
+- preserve approval-gated behavior
+- expose summary/report data for:
+  - req_id
+  - competing source versions
+  - competing texts
+  - source revision numbers/dates
+  - default proposed winner
+  - approval status
+  - provenance/evidence linkage
+- keep this as a derived review/report capability, not an automatic merge decision
+
+8. Report generation foundations
+Prepare snapshot-based report generation services for:
+- SRS report
+- DRS report
+- ARS report
+- conflict review/summary report data where applicable
+
+Rules:
+- reports must be generated from approved snapshot-based data only
+- XLSX outputs are derived artifacts only
+- report metadata should record snapshot ID and generation context
+- no report generation from mutable live state
+
+9. Validation checks
+Add pre/post checks for:
+- missing provenance
+- req-id collisions
+- orphan mappings
+- snapshot completeness
+- downstream input completeness
+- vocabulary profile completeness
+- taxonomy profile completeness
+- retrieval/index metadata completeness
+- authoritative consumer dependency on approved resolver context
+- SysML/report generation prerequisites where applicable
+
+Suggested modules/services where appropriate:
+- audit_log.py
+- rollback_service.py
+- snapshot_manager.py
+- approved_snapshot_resolver.py
+- approved_profile_resolver.py
+- downstream_generation_resolver.py
+- sysml_generation_service.py
+- report_generation_service.py
+- conflict_review_service.py
+
+Implementation guidance:
+- keep canonical SQLite and retrieval/index SQLite clearly separated
+- use compatibility layers where practical while migrating generators away from legacy CSV/JSON inputs
+- do not rewrite unrelated modules
+- keep all snapshot authority rules explicit and auditable
+- preserve backward compatibility where practical, but stop treating compatibility artifacts as authoritative inputs
+
+At the end of this Step 4 implementation, provide a checkpoint summary with:
+1. what was implemented
+2. which files were modified or added
+3. how audit logging is integrated
+4. how rollback works
+5. how immutable snapshots are created and resolved
+6. how mandatory approved resolver dependency is enforced
+7. which downstream generators were migrated to snapshot-only consumption
+8. how SysML generation/update is constrained to approved snapshots
+9. how conflict review/report foundations were added
+10. how report-generation foundations were added
+11. any remaining bypasses, risks, or incomplete items before Step 5
+
+If anything is ambiguous, ask for clarification before making broad refactors.

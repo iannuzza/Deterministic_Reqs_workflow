@@ -1,0 +1,21 @@
+{
+  "affected_canonical_requirement_ids": [],
+  "affected_downstream_targets": [
+    "ARS",
+    "DRS",
+    "SRS"
+  ],
+  "affected_mapping_ids": [],
+  "affected_profile_revision_ids": [],
+  "affected_snapshot_ids": [],
+  "approval_required": false,
+  "identity_ambiguities": [],
+  "impact_analysis_id": "impact-f05ddbdf6e370dd0042a84d3",
+  "reason": "scope and dependency analysis complete",
+  "regeneration_scope": "partial",
+  "risk": "safe",
+  "scopes": [
+    "unknown"
+  ],
+  "staging_batch_id": "stage-ipos-main-ctrl-20260909-141927"
+}

@@ -1,0 +1,19 @@
+33 
+ 
+Port name Direction Type Description 
+i_T1 input [T1_max_bit_from_decoder-1:0]  
+i_T2 input [T2_max_bit_from_decoder-1:0]  
+i_T_TIAON input [T1_max_bit_from_decoder-1:0] TIA Time 
+o_pd_cm_buf output   
+o_pd_rld output   
+o_pd_avg1 output   
+o_pd_avg2 output   
+o_hc_en output   
+o_idac_dc_ppg_frame_cfg output [n_max_frame-1:0]  
+o_imp_en output   
+o_imp_curinj_en output   
+o_ppg_quokka_elab_sel output   
+o_n_ppg_frame_cfg output [ppg_frame_bit-1:0]  
+o_rx_ch_frame_cfg output [n_max_frame-1:0]  
+o_T_tx_led_set_cfg output [n_max_frame-1:0]  
+o_T_tx_led_off_cfg output [n_max_frame-1:0]

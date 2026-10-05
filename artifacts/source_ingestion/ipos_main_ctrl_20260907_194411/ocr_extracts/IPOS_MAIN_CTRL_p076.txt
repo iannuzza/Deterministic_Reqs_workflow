@@ -1,0 +1,20 @@
+75 
+ 
+ 
+ 
+ 
+ 
+durante lo start-up, ma in modo asincrono attraverso un bit dedicato (reg_rst_ecg_asinc). 
+ 
+ 
+ 
+ 
+  
+Figure 6: ECG start up phase with chopper clock 
+Figure 8:ECG Start Up phase with no Chopper Clock 
+Figure 7:ECG Start-UP phase with asynch reset 
+205ms 
+reg_rst_ecg_async 
+5ms 
+205ms 
+205ms 30ms

@@ -1,0 +1,121 @@
+45 
+ 
+ 
+ 
+ 
+ 
+Reset scheme is shown in the below figure 
+ 
+DDS_STBIO1_
+1027 stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_32k stbio1_top.dig_wrapper_LV.u_main_c
+ontroller_top.i_clk_32kHz 
+ No 
+No 
+32 kHz 
+DDS_STBIO1_
+1022 
+stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_df
+t 
+stbio1_top.dig_wrapper_LV.u_ADSP.s
+tmc_clk 1 
+stbio1_top.dig_wrapper_LV.u_pm
+u.adsp_run | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.all_test_mode | 
+~stbio1_top.dig_wrapper_LV.u_p
+ad_mux.scan_enable 
+No 
+16 MHz 
+DDS_STBIO1_
+1023 stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk stbio1_top.dig_wrapper_LV.u_master
+blaze_ahb.sys_clk 1 
+stbio1_top.dig_wrapper_LV.u_pm
+u.i_en_sh_clk | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.all_test_mode | 
+~stbio1_top.dig_wrapper_LV.u_p
+ad_mux.scan_enable 
+No 
+16 MHz 
+DDS_STBIO1_
+1024 
+stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_df
+t 
+ 
+stbio1_top.dig_wrapper_LV.u_xbar_af
+e.hclk 
+1 
+stbio1_top.dig_wrapper_LV.u_pm
+u.clk_xbar_en | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.all_test_mode | 
+~stbio1_top.dig_wrapper_LV.u_p
+ad_mux.scan_enable 
+No 
+16 MHz 
+DDS_STBIO1_
+2024 
+stbio1_top.dig_wrapper_LV.u_pmuclk_xbar 
+ 
+stbio1_top.dig_wrapper_LV.u.fifo.HCL
+K 
+1 
+stbio1_top.dig_wrapper_LV.u_pm
+u.clk_en_m2 | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.all_test_mode | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.clk_en_m2_reg | 
+~stbio1_top.dig_wrapper_LV.u_p
+ad_mux.scan_enable 
+No 
+16 MHz 
+DDS_STBIO1_
+2025 
+stbio1_top.dig_wrapper_LV.u_pmu.clk_stredl stbio1_top.dig_wrapper_LV.u_ispu.clk 
+ No 
+Pwr_down 
+controlled by pmu 
+16 MHz 
+DDS_STBIO1_
+2026 
+stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar 
+stbio1_top.dig_wrapper_LV.u_regmap
+_otp.hclk 
+1 
+stbio1_top.dig_wrapper_LV.u_pm
+u.clk_en_m3 | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.all_test_mode | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.clk_en_m3_reg | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.clk_en_s3 | 
+~stbio1_top.dig_wrapper_LV.u_p
+ad_mux.scan_enable  
+No 
+16 MHz 
+DDS_STBIO1_
+1025 
+u_stbio1_top.u_pmu.u_device_startup.tst_clk_
+32k 
+stbio1_top.dig_wrapper_LV.tst_clk_32
+k 
+ No 
+No 
+32 kHz 
+DDS_STBIO1_
+1026 
+stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16
+m 
+stbio1_top.dig_wrapper_LV.u_main_c
+ontroller_top.i_clk_16MHz 1 
+stbio1_top.dig_wrapper_LV.u_pm
+u.i_en_clk_16MHz_sleep | 
+stbio1_top.dig_wrapper_LV.u_pm
+u.scan_mode | 
+~stbio1_top.dig_wrapper_LV.u_p
+ad_mux.scan_enable 
+No 
+16 MHz 
+Table 11: Clock Recap Table

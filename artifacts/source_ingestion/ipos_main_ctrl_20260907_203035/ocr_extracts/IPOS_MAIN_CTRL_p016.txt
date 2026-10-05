@@ -1,0 +1,25 @@
+15 
+ 
+Port name Directi
+on Type Description 
+i_adc_mux_bio_channel_debug input [2:0] enabling debug adc 
+mux bio channel 
+i_adc_mux_sel_debug input  enabling adc mux 
+i_ispu_core_sw_rstn input  ispu core enabling 
+i_T_TIAON input [T1_max_bit_from_decoder_top-1:0] TIA Time 
+i_scan_mode input  scan mode enabling 
+i_reset_debug_adc_data input  reset adc data 
+debug 
+i_start_adc_debug input  pilot adc start om 
+debug 
+i_en_ADC_debug input  enabling adc debug 
+i_debug_adc_readout_bypass input  enabling adc 
+readout bypass 
+i_su_hlt_dly input  enabling start up 
+delay for ecg 
+i_multiple_fifo_sel input  enabling multiple 
+fifo 
+i_debug_calibration input  enabling debug 
+calibraiton 
+i_en_gsr_dc_cds input [1:0] enabling gsr cds 
+mode

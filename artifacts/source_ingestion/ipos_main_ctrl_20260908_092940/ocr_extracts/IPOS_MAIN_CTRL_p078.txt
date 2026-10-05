@@ -1,0 +1,39 @@
+77 
+ 
+Port name Direction Type Description 
+o_sug_imp output  sug for analog domain 
+o_reset_reg_rst_imp_async output  end of reset async phase 
+ 
+Table 9: BIA Start-Up Phase I/O List 
+5.6.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_080]  REQUIREMENT : 
+When the user selects an operative mode that includes the BIA channel, a start-up shall be done. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_081]  REQUIREMENT : 
+When i_imp_en signal is equal to 1, the o_pd_imp_from_bia shall be go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_082]  REQUIREMENT : 
+When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if 
+i_imp_curinj is equal to 0, the o_imp_curinj_pd shall stay high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_083]  REQUIREMENT : 
+At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal 
+to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock 
+generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low.  
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_084]  REQUIREMENT : 
+At least 15ms after the falling of o_pd_imp_from_bia, the o_rst_imp shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_085]  REQUIREMENT : 
+20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high 
+and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is 
+set to 0, the o_en_ck_chop_imp shall stay low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_086]  REQUIREMENT : 
+30ms after the falling of o_rst_imp, o_rsti_imp shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_087]  REQUIREMENT : 
+If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. 
+Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low.  
+[END]

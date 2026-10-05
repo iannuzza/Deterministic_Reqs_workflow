@@ -1,0 +1,13 @@
+74 
+ 
+If i_su_hlt_dly is set to 1, at least after 755ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go 
+low .[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4079] REQUIREMENT : 
+If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4080] REQUIREMENT : 
+If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5080] REQUIREMENT : 
+i_rst_async_ecg Shall be used only when the Device FSM is in SLEEP or Operative State. [END]

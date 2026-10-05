@@ -1,0 +1,161 @@
+Based on the accepted Step 1 architecture constraints and the accepted pre-Step 2 refinements, now implement Step 2: strengthened workflow model and data/schema/model refactor.
+
+Treat all previously fixed constraints as non-negotiable unless a concrete repository blocker is found.
+
+Before editing code, first provide:
+1. target files to modify
+2. new files/modules to add
+3. intended changes per file
+4. whether any schema migration is needed
+5. how backward compatibility will be preserved where practical
+
+Target strengthened workflow stages:
+- S0: Primary Source Baseline
+- S1: Source Spec Ingestion / OCR / Parsing / Req-ID Extraction
+- S2: Deterministic Classification into Staging Objects
+- S2A: Staging Review
+- S2B: Merge Impact Analysis
+- S2C: Merge Approval
+- S2D: Non-Destructive Merge into Integrated Canonical Corpus
+- S2E: Ontology / Vocabulary / Retrieval Index Refresh
+- S2F: Architecture Map Review
+- S2G: Architecture Mapping Approval
+- S2H: Immutable Approved Mapping Snapshot
+- Stage 3: Generate SRS from Approved Snapshot
+- Stage 4: Generate DRS
+- Stage 5: Generate ARS
+- Stage 6: Generate Digital IPOS
+- Stage 7: Generate Analog IPOS
+
+Align the strengthened workflow with the current operational pipeline:
+- OCR -> taxonomy update -> RAG index build -> requirement generation -> RAG cross-check
+
+Authoritative storage rules:
+- Canonical SQLite is the authoritative store for requirements, revisions, mappings, workflow state, approved taxonomy/profile data, snapshots, audit, and rollback
+- Retrieval/index SQLite databases remain separate rebuildable non-authoritative stores
+- CSV/JSON/Markdown remain derived exports, review artifacts, and compatibility outputs only
+
+Implementation defaults:
+- Canonical SQLite path: data/canonical/canonical_store.sqlite
+- Use explicit SQLite schema migrations with a schema_migrations table
+- Prefer relational modeling for authoritative profile/mapping/approval/workflow data
+- Use JSON only for auxiliary payloads, evidence blobs, import snapshots, or flexible non-authoritative metadata
+- Define approval transitions centrally with explicit enumerated states and validation rules
+- Keep lifecycle states separate from semantic approval/category transitions
+- Do not silently default to latest-approved for authoritative downstream generation
+- Require explicit --snapshot-id or an explicit approved selector such as --use-latest-approved
+- Impacted snapshots may remain available for forensic viewing, but not for authoritative generation until re-approved or superseded
+- Audit events may also be exported to JSONL, but SQLite remains authoritative
+- GUI chat, if retained, must remain visibly non-authoritative and must not affect workflow-authoritative state
+- Semantic retrieval remains optional, local-only, version-pinned, auditable, and never required for the core deterministic workflow
+- Automatic semantic fallback remains limited to the current no-legacy-results condition
+
+Supplementary source workflow requirements:
+- Supplementary source integration must support multiple supplementary source specs per project
+- It must be repeatable, multi-source, multi-instance, batch-aware, source-aware, and scope-aware
+- Supplementary specs may represent:
+  - additional specs for existing blocks
+  - additions to the general architecture
+  - new revisions of the system architecture
+  - new revisions of the digital architecture
+  - new revisions of the analog architecture
+
+For Step 2, implement the strengthened model and schema so that supplementary sources can track at least:
+- source_spec_id
+- source_revision_id
+- source name
+- source revision number
+- source revision date
+- source kind
+- source scope
+- target scope
+- applies_to_blocks
+- applies_to_architecture_layer
+- ingestion_batch_id
+- staging_batch_id
+- review decision record reference
+- merge operation record reference
+- impact analysis record reference
+
+Supplementary GUI-related input requirements that must be supported at model/schema level:
+- source revision number
+- source revision date
+These remain separate from ingestion timestamp.
+
+Conflict policy support that must be enabled at model/schema level:
+If two source specs contain the same req_id but different requirement text:
+- the case must be representable as conflict
+- both source versions and provenance must be preservable
+- the latest source revision/date must be representable as the default proposed winner
+- the case must remain approval-gated
+- it must be possible to mark it in summary/report tables as conflict with approval required
+Do not implement merge resolution logic yet unless it is necessary for model compatibility; focus on model support.
+
+Please implement in Step 2:
+
+1. Explicit separation between staging objects and canonical objects
+
+2. Revision-based canonical storage
+
+3. Provenance preservation for requirements and source specs, including support for supplementary source traceability
+
+4. Distinct fields for:
+- proposed_classification
+- approved_classification
+- classification_reason
+- classification_method
+- classification_confidence
+- review_comment
+
+5. Workflow state/status fields and central support for later transition validation
+
+6. Snapshot metadata support, including future support for:
+- vocabulary profile/version/hash
+- taxonomy profile/version/hash
+- retrieval/index configuration/version metadata
+- semantic-enabled flags where applicable
+
+7. Schema/model support for:
+- approved taxonomy/profile revisions versus candidate revisions
+- mappings and mapping-related approvals
+- merge operations
+- impact analysis records
+- rollback records
+- audit event storage
+
+8. Foundation hooks for centralized vocabulary resolution so later workflow services can depend on a shared vocabulary resolver rather than hardcoded lists
+
+9. Stage 2 profile / architecture profile support as a revisioned authoritative artifact in SQLite, with CSV/JSON exports allowed only as derived artifacts
+
+10. Support for report generation metadata so later steps can generate SRS/DRS/ARS snapshot-based .xlsx reports cleanly, without using live mutable data
+
+Hard constraints:
+- project-agnostic
+- deterministic
+- no LLM calls
+- no network calls
+- no cloud dependencies
+- preserve auditability, provenance, non-destructive history, and snapshot-driven downstream generation
+- preserve current retrieval architecture behind stable interfaces
+- do not make semantic retrieval mandatory for any core authoritative workflow
+
+Implementation guidance:
+- Keep canonical SQLite and retrieval/index SQLite clearly separated
+- Do not silently revoke approvals
+- Distinguish candidate vs approved taxonomy/profile revisions
+- Snapshot IDs must later be deterministic and content/configuration-derived
+- Preserve backward compatibility where practical
+- If a full refactor is risky, add compatibility adapters first
+- Do not rewrite unrelated modules
+
+At the end of this Step 2 implementation, provide a checkpoint summary with:
+1. what was implemented
+2. which files were modified or added
+3. any schema migration introduced
+4. how staging vs canonical separation is represented
+5. how supplementary source metadata is represented
+6. how taxonomy/profile candidate vs approved revisions are represented
+7. what remains for Step 2B, Step 3, Step 4, and Step 5
+8. any risks or blockers discovered during implementation
+
+If anything is ambiguous, ask for clarification before making broad refactors.

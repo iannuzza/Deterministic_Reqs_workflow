@@ -1,0 +1,27 @@
+23 
+ 
+Port name Directi
+on Type Description 
+o_tx3_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x 
+o_tx4_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x 
+o_tx_preset output  tx prese to analog 
+domain 
+o_en_tx output [n_tx_channel-1:0] tx enable to analog 
+domain 
+o_PD_TIA output  enabling tia to 
+analog domain 
+o_PD_PGA output  enabling buffer to 
+analog domain 
+o_PD_IDAC output  enabling idac to 
+analog domain 
+o_gsr_curr_on output  gsr curr on pilot to 
+analog domain 
+o_gsr_on output  grs on on pilot to 
+analog domain 
+o_ADC_en output  ADC enabling 
+o_half_charge_ldo output   
+o_ADC_start output  ADC Start sampling 
+o_N_step2_to_reg output [rx_ch_gain_limit-1:0] N_Step2 calibration 
+value

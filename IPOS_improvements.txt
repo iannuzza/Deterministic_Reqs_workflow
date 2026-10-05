@@ -1,0 +1,24 @@
+IPOS improvements
+
+- add at beginning of each block doc a general description of its functionalities, aim/scope, internal structure, intenal blocks or functions
+Formatting:
+- title and metadata occupy page 1
+- TOC starts first on page 2, followed by Document Navigation
+- Version History must show the document version number, not "Current workspace revision"
+- start document version at 0.1
+- every paragraph, sub-paragraph, and internal sub-section starts on a new line
+- block lists and similar lists must use bullet format
+- every paragraph and sub-paragraph title must be bold
+- all tables must show full grid borders
+
+Content quality:
+- write only an elaborated functional summary, do not repeat casual description taken in source specs
+- do not repeat requirments
+- do not invent
+
+Keep changes minimal, deterministic, project-agnostic, and preserve existing correct snapshot, allocation, and traceability behavior.
+
+Return:
+- files changed
+- rules updated
+- whether shared formatting rules were applied to other generated specs

@@ -1,0 +1,20 @@
+83 
+ 
+5.8.2. I/O List 
+5.8.3. Parameters 
+Generic name Type Value Description 
+T_tx_startup_bit int 5  
+idac_dc_ppg_frame_bit int 7  
+rx_ch_frame_n_bit int 6  
+id_frame_max_bit int 4  
+rx_ch_gain_max_bit int 4  
+T_tx_led_set_bit int 5  
+T_tx_led_off_max_bit int 7  
+Nmax_bit int 4  
+ppg_ioff_offset_bit int 10  
+max_frame_repetition int 2  
+n_max_frame int 12  
+data_size_bit int 16  
+ppg_frame_bit int 4  
+T1_max_bit int 9  
+T1_max_bit_from_decoder int 4

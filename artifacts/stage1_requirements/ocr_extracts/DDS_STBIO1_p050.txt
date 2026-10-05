@@ -1,0 +1,46 @@
+49 
+ 
+IMPQ_PSDRES_UP output [2:0] OTP value for Analog block 
+IMPQ_PSDRES_DOWN output [2:0] OTP value for Analog block 
+IMPP_PSDRES_UP output [2:0] OTP value for Analog block 
+IMPP_PSDRES_DOWN output [2:0] OTP value for Analog block 
+ECG_PSDRES_DOWN output [2:0] OTP value for Analog block 
+ECG_PSDRES_UP output [2:0] OTP value for Analog block 
+i_TS_IRQ_ST input 
+ 
+time slot irq 
+i_DCCK_IRQ_ST input 
+ 
+DCCK irq change status 
+o_en_tx_1V2 input 
+ 
+input to LED pilot 
+o_tx_preset_1V2 input 
+ 
+input to LED pilot 
+o_tx1_outlab_sel_frame_x_1V2 input 
+ 
+input to LED pilot 
+sel_irq_gpio1 input [3:0] sel irq gpi1 {000:NC, 001:i_fifo_irq, 
+010:i_LED_Pilot, 011:i_DCCK_irq, 
+100:i_error_time_slot, 101:i_time_slot_irq} 
+sel_irq_gpio2 input [3:0] sel irq gpi2 {000:NC, 001:i_fifo_irq, 
+010:i_LED_Pilot, 011:i_DCCK_irq, 
+100:i_error_time_slot, 101:i_time_slot_irq} 
+sel_irq_gpio3 input [3:0] sel irq gpi3 {000:NC, 001:i_fifo_irq, 
+010:i_LED_Pilot, 011:i_DCCK_irq, 
+100:i_error_time_slot, 101:i_time_slot_irq} 
+sel_irq_gpio4 input [3:0] sel irq gpi4 {000:NC, 001:i_fifo_irq, 
+010:i_LED_Pilot, 011:i_DCCK_irq, 
+100:i_error_time_slot, 101:i_time_slot_irq} 
+DCCK_P_en input 
+ 
+Manages lead off mode DCCK_P, Source: 
+Regmap 
+DCCK_N_en input 
+ 
+Manages lead off mode DCCK_P, Source: 
+Regmap 
+MODE_OPERATION input 
+ 
+Start Divice operations status

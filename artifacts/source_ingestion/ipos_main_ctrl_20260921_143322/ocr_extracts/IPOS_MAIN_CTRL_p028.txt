@@ -1,0 +1,36 @@
+27 
+ 
+Port name Directi
+on Type Description 
+o_saturation_flag output [n_max_frame-1:0] ppg saturation flag 
+o_en_ck_hc2_10k output  clock chipper ecg 
+o_en_clk_16MHz_sleep output  sleep signal for 
+pmu 
+ 
+ 
+ 
+Table 4: I/O LIst Main Controller Top 
+ 
+ 
+ 
+ 
+ 
+5.1.1.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3003] ASSUMPTION :  
+The following channels combination are the only ones supported by STBIO1: 
+1. 1 ECG channel (ECG0) 
+2. 2 ECG channels (ECG1 + ECG2) 
+3. 3 ECG channels (ECG0 + ECG1 + ECG3) 
+4. BIA channel 
+5. GSR channel 
+6. PPG channel 
+7. ECG0 and BIA channels 
+8. ECG0 and GSR channels 
+9. ECG0 and PPG channels 
+10. ECG1 and ECG2 and PPG channels 
+11. BIA and PPG channels 
+12. GSR and PPG channels 
+13. ECG0 and ECG1 and ECG2 and PPG channels 
+14. ECG0 and BIA and PPG channels 
+15. ECG0 and GSR and PPG channels 
+[END]

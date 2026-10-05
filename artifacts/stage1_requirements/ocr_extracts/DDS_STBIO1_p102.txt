@@ -1,0 +1,48 @@
+101 
+ 
+13.2.2.1. I2C_SPI_AHB Peculiar Requirements 
+ 
+[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities 
+(Standard, FM, FM+) and, if configured, HS is also supported. 
+[End] 
+ 
+[DDS_STBIO1_8001] Requirement: Clock frequency ratio between system (AHB) and I2C/SPI 
+interfaces domains shall be at least 2 times. 
+[TO: IPOS_I2C_SPI_AHB_0006] 
+[Vpriority High] 
+[End] 
+ 
+[DDS_STBIO1_8002] Requirement: The IP has a serial interface (I2C or SPI) and a parallel bus 
+interface AHB. 
+[TO: IPOS_I2C_SPI_AHB_0007] 
+[End] 
+ 
+[DDS_STBIO1_8003] Requirement: An I2C/SPI write access to the address 0x60-0x67 shall be 
+translated in an AHB write access to the configured AHB address (contained in registers 
+SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). 
+[TO: IPOS_I2C_SPI_AHB_0009] 
+[Vpriority High] 
+[End] 
+ 
+[DDS_STBIO1_8004] Requirement: A double byte write access to the address 0x68-0x6f (with 
+data that is the number of bytes that the master wants to read) shall start the data preload from 
+AHB in order to have the internal fifo not empty when the read request will be done by the 
+master. 
+[TO: IPOS_I2C_SPI_AHB_0010] 
+[Vpriority High] 
+[End] 
+ 
+[DDS_STBIO1_8005] Requirement: An I2C/SPI read access to the address 0x70-0x7f shall be 
+translated in an AHB read access to the configured AHB address (contained in registers 
+SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). 
+[TO: IPOS_I2C_SPI_AHB_0011] 
+[Vpriority High] 
+[End] 
+ 
+[DDS_STBIO1_8006] Requirement: On AHB interface, data size shall be limited to BYTE and 
+WORD. 
+[TO: IPOS_I2C_SPI_AHB_0361] 
+[End] 
+ 
+[DDS_STBIO1_8007] Requirement: On AHB interface, BURST shall not be supported as well as 
+LOCKED transfers.

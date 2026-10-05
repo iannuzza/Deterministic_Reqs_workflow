@@ -1,0 +1,91 @@
+Now perform a focused final polish pass, without broad redesign, for:
+- richer snapshot-based XLSX reporting
+- GUI testability and review/status visibility
+- updated workflow diagram visibility in the GUI
+- visibility/containment of remaining legacy/source-specific adapters
+- snapshot-based SysML completeness
+
+Known remaining items:
+- XLSX export is functional but still basic
+- Tkinter GUI runtime interaction is not fully automated
+- the authority consistency scanner exists and produces diagnostic findings
+- some remaining source-specific/legacy-isolated adapters still exist in SysML naming, Stage 1 tagged-source rules, Stage 2 source-derived adapters, and legacy architecture aliases/evidence rules
+
+Constraints:
+- keep the workflow project-agnostic
+- deterministic
+- no LLM/network/cloud dependency in the authoritative workflow
+- do not broadly redesign the canonical workflow foundation
+- all XLSX/SysML outputs remain derived snapshot-based artifacts
+- GUI remains non-authoritative except for approved workflow actions
+
+Primary source bootstrap rule:
+Once the primary source spec is selected and approved, it must be the deterministic bootstrap context for applicable OCR, RAG, vocabulary, and taxonomy processing.
+Candidate vocabulary/taxonomy updates remain approval-gated.
+Approved primary source metadata must not be silently mutated.
+
+Please implement only the minimum safe changes needed to:
+
+1. Improve SRS/DRS/ARS XLSX usability:
+- clearer hierarchy presentation
+- worksheets/sheets structure where useful
+- filters, freeze panes, header/style clarity
+- snapshot/provenance metadata visibility
+
+2. Improve GUI testability:
+- isolate action handlers from Tk widgets where practical
+- enable more deterministic unit/smoke testing
+- document remaining display-session limitations clearly
+
+3. Improve GUI review/status visibility:
+- revision info
+- snapshot ID
+- impact status
+- vocabulary/taxonomy context
+- primary vs supplementary source context
+- primary source tagged/untagged result
+- approved req_id prefix where available
+
+4. Add the updated workflow diagram to the GUI:
+- show the strengthened end-to-end workflow
+- include S0 primary source bootstrap
+- include supplementary source handling
+- include review/approval gates
+- include immutable snapshot stage
+- include downstream generation, reports, and SysML paths
+- keep it aligned with the current workflow model
+- make it easy to refresh/update if the workflow evolves
+
+5. Surface scanner findings usefully:
+- make artifacts/validation/authority_consistency_scan.json easy to find/use
+- optionally expose a lightweight summary in logs, status views, or developer diagnostics
+- keep the scanner diagnostic, not authoritative
+
+6. Softly contain remaining source-specific adapters:
+- no broad refactor
+- make residual source-specific logic more explicit and auditable
+- where practical, push residual naming/alias/evidence behavior further behind configuration/adapters
+- otherwise clearly document/flag it so it is not mistaken for reusable core logic
+
+7. Enforce SysML completeness from approved snapshots:
+- generated SysML must include full approved requirement coverage for the relevant blocks/layers in scope
+- include all approved requirements relevant to each represented block by default
+- do not generate only a minimal delta subset unless an explicit partial-export mode is requested
+- keep traceability aligned with the approved snapshot
+- do not silently omit approved block requirements in scope
+
+Before editing code, first provide:
+1. target files/modules
+2. intended changes per file
+3. test strategy for Tkinter-related logic
+4. whether each change is best handled as code, docs, diagnostics, or tests
+5. how backward compatibility will be preserved
+
+At the end, provide:
+1. what XLSX/report polish was added
+2. what GUI testability improvement was added
+3. what UX/status/workflow-diagram polish was added
+4. how scanner visibility was improved
+5. what remaining source-specific adapters were better isolated, flagged, or documented
+6. how SysML completeness for block requirements was enforced
+7. what still remains as optional future polish

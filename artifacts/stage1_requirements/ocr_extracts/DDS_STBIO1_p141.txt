@@ -1,0 +1,43 @@
+140 
+ 
+Register Name Address Offset Reset 
+Value 
+Access Bits Field name 
+PAGE_SEL 0x40 0x00 RW 7:2 Unused 
+1:0 In case of external 4 
+pages registers 
+expansion these bits 
+are used to choose 
+the page 
+ERROR_BYTE 0x41 0x00 RW 7:0 Byte send to the 
+I2C/SPI master in 
+case of error 
+FLUSH_FIFO 0x4B 0x00 RW 7:2 Unused 
+1 Force flush of write 
+fifo. Write 0 and then 
+1 to activate the 
+function 
+0 Force flush of read 
+fifo. Write 0 and then 
+1 to activate the 
+function 
+FIFO_STATUS 0x4C 0x00 RO 7:4 Unused 
+3 Read fifo full 
+2 Read fifo not empty 
+1 Write fifo full 
+0 Write fifo not empty 
+ERR_ITF 0x4E 0x00 RC 7:6 Unused 
+5 Unexpected read fifo 
+empty 
+4 Unexpected write fifo 
+full 
+3 Number of bytes write 
+operation already 
+done, read operation 
+is expected 
+2 Read operation done 
+without writing nr 
+bytes before 
+1 Write fifo flushed 
+since not empty 
+before write operation

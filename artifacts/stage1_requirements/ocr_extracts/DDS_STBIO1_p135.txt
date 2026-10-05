@@ -1,0 +1,51 @@
+134 
+ 
+• Run an I2C/SPI transaction with the data that you want to read, at address loaded into 
+the previous step, at the address 0x70 (one of I2C/SPI Internal Configuration Registers). 
+ 
+It’s possible remap the whole AFE register map with AHB addresses  column “AHB Start 
+Address” of Table 34), included the AFE_BLOCK block: in this case each registers is accessible 
+with own AHB address (AHB start address + offset) and the I2C/SPI access to these registers 
+must follow the previous procedure. To do that: 
+• Set the user_mode at 1 (set first bit-field of CTRL_REG_7 (0x5E), one of I2C/SPI 
+Internal Configuration Registers).  
+This procedure is useful when you are thinking of configuring the STBIO1 by ISPU (with a code 
+previously charged in code memory), leaving to host interface (I2C/SPI) the rule to collect the 
+data from FIFO after AFE sampling and processing phases. 
+The same procedure can be used also to consider the Regmap only for AHB, allowing the host 
+interface to convert the I2C/SPI Transaction into AHB Transaction. 
+ 
+Pay Attention: is strictly recommended to change the user_mode only when the Device is in 
+IDLE STATE (check DEVICE_STATUS_REGISTER in REGMAP). 
+ 
+ 
+13.4.2. STBIO1 Register Map Peculiar Requirements 
+[DDS_STBIO1_4000] Requirement: 
+Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of  OTP_PRG10 is 
+set 1. 
+[Vpriority High] [End] 
+ 
+13.4.2.1. AFE_BLOCK Register Summary 
+Offset Register Name Register Title Direct 
+Access 
+PAGE 
+SEL 
+0x0000 DEVICE_CONFIG_OPERATION DEVICE_CONFIG_OPERATION 
+register 
+0x00 
+0x00 
+0x0001 DEVICE_CONFIG_CHANNEL DEVICE_CONFIG_CHANNEL 
+register 
+0x01 
+0x0002 SET_ECG_FREQ_l SET_ ECG_FREQ_l register 0x02 
+0x0003 SET_ECG_FREQ_h SET_ ECG_FREQ_h register 0x03 
+0x0004 SET_BIA_FREQ_l SET_BIA_FREQ_l register 0x04 
+0x0005 SET_BIA_FREQ_h SET_BIA_FREQ_h register 0x05 
+0x0006 SET_GSR_FREQ_l SET_GSR_FREQ_l register 0x06 
+0x0007 SET_GSR_FREQ_h SET_GSR_FREQ_h register 0x07 
+0x0008 SET_PPG_FREQ_l SET_PPG_FREQ_l register 0x08 
+0x0009 SET_PPG_FREQ_h SET_PPG_FREQ_h register 0x09 
+0x000A ADC_GENERAL_CONFIG ADC_GENERAL_CONFIG register 0x0A 
+0x000B ADC_CAL_CONFIG ADC_CAL_CONFIG register 0x0B 
+0x000C ADC_CONFIG_ECG ADC_CONFIG_ECG register 0x0C 
+0x000D ADC_CONFIG_PPG ADC_CONFIG_PPG register 0x0D

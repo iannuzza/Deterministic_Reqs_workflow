@@ -1,0 +1,38 @@
+71 
+ 
+If O_DCCK_P_i changes its value from '1’ to '0' and DCCK_IRQ_MASK is set to '1', 
+then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1' 
+[End] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+13.1.3. Main Controller TOP 
+ 
+Instantiations 
+• inst_main_controller_fsm: main_controller_fsm 
+• inst_configuration_register_update: configuration_register_update 
+• inst_ECG_S_U: ECG_S_U 
+• inst_BIA_S_U: BIA_S_U 
+• inst_ppg_fsm: ppg_fsm 
+• inst_Digital_ramp_case: Digital_ramp_case 
+• inst_ALC_compensation: ALC_compensation 
+• inst_ADC_phases: ADC_phases 
+• inst_average_block: average_block 
+• inst_mainctrl_ahb_master: mainctrl_ahb_master 
+• inst_main_controller_clock_gatin_unit: main_controller_clock_gatin_unit

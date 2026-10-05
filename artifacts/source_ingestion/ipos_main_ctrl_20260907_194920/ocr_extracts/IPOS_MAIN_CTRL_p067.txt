@@ -1,0 +1,21 @@
+66 
+ 
+Port name Direction Type Description 
+i_adc_error_cap7_debug input [6:0] cap debug value 
+i_adc_error_cap6_debug input [6:0] cap debug value 
+i_adc_error_cap5_debug input [6:0] cap debug value 
+i_adc_error_cap4_debug input [6:0] cap debug value 
+i_adc_error_cap3_debug input [6:0] cap debug value 
+i_adc_error_cap2_debug input [6:0] cap debug value 
+i_adc_error_cap1_debug input [6:0] cap debug value 
+i_adc_error_cap0_debug input [6:0] cap debug value 
+i_reset_debug_adc_data input  reset data sampled 
+during debug 
+i_start_adc_debug input  start adc in debug mode 
+i_debug_adc_readout_bypass input  enabling for adc redout 
+bypass 
+i_debug_calibration input  enabling debug 
+calibration 
+i_data_ADC_out input [data_in_size_bit-1:0] data from adc 
+i_reset_end_calibration input  reset calibration phase 
+i_n_average input [clog2(n_average_max_cal):0] number of acquisition

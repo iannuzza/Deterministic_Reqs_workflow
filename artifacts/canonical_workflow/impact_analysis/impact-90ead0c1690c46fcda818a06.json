@@ -1,0 +1,31 @@
+{
+  "affected_canonical_requirement_ids": [],
+  "affected_downstream_targets": [
+    "ARS",
+    "Analog IPOS",
+    "DRS",
+    "Digital IPOS",
+    "SRS"
+  ],
+  "affected_mapping_ids": [],
+  "affected_profile_revision_ids": [
+    "profile-architecture-0235b580dc3e83863b518b2f",
+    "profile-architecture-ba24a97b25c92e2ff042ae09",
+    "profile-architecture-cf3340baa3f1146737da0359",
+    "profile-architecture-da2f04a1aab8bdca87bfaa82",
+    "profile-taxonomy-c9f97ce13e1c8344a529d502",
+    "profile-taxonomy-fe2816d6cc3fb52c730b138a",
+    "profile-vocabulary-332549f47d23d1a6c07219e9"
+  ],
+  "affected_snapshot_ids": [],
+  "approval_required": false,
+  "identity_ambiguities": [],
+  "impact_analysis_id": "impact-90ead0c1690c46fcda818a06",
+  "reason": "scope and dependency analysis complete",
+  "regeneration_scope": "full",
+  "risk": "safe",
+  "scopes": [
+    "system"
+  ],
+  "staging_batch_id": "stage-primary-654078d5d79284621c7bd337"
+}

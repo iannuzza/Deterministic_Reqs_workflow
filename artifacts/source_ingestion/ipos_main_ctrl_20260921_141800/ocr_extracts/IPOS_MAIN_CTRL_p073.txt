@@ -1,0 +1,27 @@
+72 
+ 
+BIA AC P/ ECG1 AC 3 0 
+BIA DC P/ ECG1 DC 4 0 
+BIA AC Q/ ECG2 AC 5 0 
+BIA DC Q/ ECG2 DC 6 0 
+GSR 7 0 
+PPG 0 1 
+No Channel selection 0 0 
+Table 15: ADC Channel Table 
+ 
+[END] 
+5.5. ECG Start-Up Phase 
+5.5.1. IP Description 
+This block oversees the generation of the signal useful for the ECG start-up Analog Circuit 
+5.5.2. I/O List 
+5.5.2.1. Ports 
+Port name Direction Type Description 
+i_clk input  Clock general 
+i_rstn input  reset general 
+i_hc_en input  set health channel 
+i_clk_hlt_en input  set clock for health channel 
+i_su_hlt_dly input  start up phase delay 
+i_reg_rst_sync input  reset async phase signal 
+o_pd_hc2 output  powerd down hc2 to analog domain 
+o_rst_hc2 output  rst hc2 to analog domain 
+o_rsti_hc2 output  rsti hc2 to analog domain

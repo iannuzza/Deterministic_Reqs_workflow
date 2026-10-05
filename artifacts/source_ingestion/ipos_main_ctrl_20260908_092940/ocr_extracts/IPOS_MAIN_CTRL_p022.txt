@@ -1,0 +1,28 @@
+21 
+ 
+Port name Directi
+on Type Description 
+o_rsti_imp output  bia start up rsti 
+signal 
+o_sug_imp output  bia start up sug 
+channel 
+o_pd_imp output  bia start up pd 
+channel 
+o_start_operative_16MHz output  start operative 
+16MHz 
+o_su_hc2 output  ecg start up hc2 
+signal 
+o_rst_hc2 output  ecg start up rst 
+signal 
+o_rsti_hc2 output  ecg start up rsti 
+signal 
+o_pd_hc2 output  ecg start up pd 
+signal 
+o_reset_reg_rst output  end of reset async 
+phase 
+o_reset_reg_rst_imp_async output  end of reset async 
+phase 
+o_imp_curinj_pd output  bia current injection 
+output 
+o_Txi_IDAC_Vref output [Nmax_bit_top-1:0] TX IDAC VREF TO 
+analog domain

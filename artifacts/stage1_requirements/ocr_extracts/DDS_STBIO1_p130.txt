@@ -1,0 +1,20 @@
+129 
+ 
+13.3.1. Requirements 
+[DDS_STBIO1_0500] Requirement: ] Requirement: 
+Interrupt lines list: 
+Interrupt bit Description 
+irq_FIFO_U_M_IRQ_STsATUS 29 FIFO status [DDS_STBIO1_0501] 
+irq_SENSHUB_STS 28 SENSOR HUB status [DDS_STBIO1_0502] 
+irq_ISPU_MC_INTR_STS 27 ECG, BIA or PPG samples ready for 
+elaboration[DDS_STBIO1_0503] 
+sw_interrupt 26:11 16 sw interrupt used by ADSP or external 
+user [DDS_STBIO1_0504] 
+irq_timer 1 Internal timer [DDS_STBIO1_0505] 
+[END] 
+ 
+[DDS_STBIO1_0506] Description: 
+The ISPU is a dedicated IP for implementing complex processing algorithms. By default, it is 
+turned off. This is located inside a power island  
+[End] 
+Figure 17: ISPU turn on phases

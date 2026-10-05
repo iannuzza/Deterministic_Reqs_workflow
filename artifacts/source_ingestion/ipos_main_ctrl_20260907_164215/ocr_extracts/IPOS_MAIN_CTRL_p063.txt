@@ -1,0 +1,44 @@
+62 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_029]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 
+and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, 
+the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register 
+[3:0]  shall be equal to 0x05) and O_PD_TIA and O_PD_IDAC shall go low. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_030]  REQUIREMENT :  
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in 
+ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number 
+of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check 
+the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each 
+frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or 
+at the end of the last frame. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_031]  REQUIREMENT :  
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in 
+ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number 
+of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES 
+(FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except 
+when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times.  
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_032]  REQUIREMENT :  
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in 
+ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF 
+shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, 
+o_Txi_idac_VREF shall be increase its value of N_START  for next step o_Txi_idac_VREF shall 
+be increase its value by 1 [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_033]  REQUIREMENT :  
+When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) is equal to 0x02) , Device_FSM  shall go back in IDLE only if the user turns off the 
+MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0]) is set to 0). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_034]  REQUIREMENT :  
+When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is 
+equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state 
+(DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top.  
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4034] REQUIREMENT :  
+Every Time a new measurement cycle starts (DEVICE FSM goes in OPERATIVE from another 
+state), the o_irq_start_measurement shall be set to 1 for at least 1 clock cycle [END]

@@ -1,0 +1,29 @@
+79 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+i_Nmax_to_reg input [Nmax_bit_top-1:0]  Max value for digital ramp 
+i_nstart_case input [Nmax_bit_top-1:0]  n_start value for frist sterp 
+i_debug_rx_ch input [rx_ch_frame_n_bit_top-1:0]  enabling debug for rx channel 
+i_T_delta1_to_reg input [delta_bit_top-1:0]  delta 1 time for digital ramp 
+i_gain_max_set input [gain_max_bit_top-1:0]  gain max for alc 
+i_BTIA_ALC_debug input [BTIA_ALC_register_bit_top-1:0]  BTIA ALC Debug enable 
+i_comp_rx_out input   input from analog comparator 
+i_adc_error_cap8_debug input [6:0]  adc cap error debug 
+i_adc_error_cap7_debug input [6:0]  adc cap error debug 
+i_adc_error_cap6_debug input [6:0]  adc cap error debug 
+i_adc_error_cap5_debug input [6:0]  adc cap error debug 
+i_adc_error_cap4_debug input [6:0]  adc cap error debug 
+i_adc_error_cap3_debug input [6:0]  adc cap error debug 
+i_adc_error_cap2_debug input [6:0]  adc cap error debug 
+i_adc_error_cap1_debug input [6:0]  adc cap error debug 
+i_adc_error_cap0_debug input [6:0]  adc cap error debug 
+i_BIDAC_debug_register input [IDAC_offset-1:0]   
+i_sleep_master input    
+i_lpm input [1:0]  low power mode for ldo 
+i_mpm input [1:0]  medium power mode for ldo 
+i_hpm input [1:0]  high power mode for ldo 
+i_dis_rc_viref input   dis rc viref 
+i_T1 input [T1_max_bit_from_decoder_top-
+1:0] 
+ 4 to 10 us=160nclk

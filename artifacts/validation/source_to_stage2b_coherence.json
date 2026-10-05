@@ -1,0 +1,557 @@
+{
+  "active_batch": {
+    "batch_path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143819",
+    "candidate_count": 43,
+    "counts": {
+      "conflict": 0,
+      "duplication": 1,
+      "new": 162,
+      "refines": 1,
+      "removed": 0
+    },
+    "ingestion_id": "ipos_main_ctrl_20260921_143819",
+    "source_revision": "1",
+    "source_revision_date": "2026-09-21",
+    "source_spec": "IPOS_MAIN_CTRL.pdf",
+    "staged_at": "2026-09-21T12:38:22+00:00",
+    "tag_pattern": "IPOS_STBIO1_MAIN_CONTROLLER_\\d+"
+  },
+  "authority_fingerprint": "98fdcd4d78e660a9a9aa30a852e859c6a4913695f5de31482ed0888f00fdc8e4",
+  "blockers": [],
+  "checked_paths": [
+    "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143819",
+    "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\stage1_specs\\architecture_mapping_preview.csv",
+    "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\stage1_specs\\architecture_mapping_preview.xlsx",
+    "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\config\\stage2_mirco_arc_profile.json",
+    "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\data\\canonical\\canonical_store.sqlite"
+  ],
+  "checker": "validate_source_to_stage2b_coherence",
+  "counts": {
+    "ERROR": 0,
+    "INFO": 42,
+    "WARNING": 0
+  },
+  "discovery_assumptions": [
+    "The newest deterministically ordered supplementary source-review batch is active.",
+    "When source_kind is absent, supplementary status is determined by comparison with config/project_context.json source_spec_path.",
+    "Canonical SQLite is opened through a read-only URI and is authoritative when present.",
+    "The workbook is inspected read-only and the synchronized mapping CSV is compared as the machine-readable handoff.",
+    "Unresolved hierarchy-parent rows are categorized from synchronized mapping CSV authority before user escalation."
+  ],
+  "findings": [
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163118",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163118",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163215",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163215",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163337",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163337",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163557",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163557",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_164215",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_164215",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165141",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165141",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165431",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165431",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171517",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171517",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171858",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171858",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_185543",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_185543",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191849",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191849",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191935",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191935",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192039",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192039",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192824",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192824",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192850",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192850",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193415",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193415",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193647",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193647",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193909",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193909",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193955",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193955",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194231",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194231",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194411",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194411",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194920",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194920",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_195429",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_195429",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200017",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200017",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200040",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200040",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_201310",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_201310",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_203035",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_203035",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_092940",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_092940",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100308",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100308",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100408",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100408",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101321",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101321",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101600",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101600",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_173306",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_173306",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_130222",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_130222",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_141927",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_141927",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_142550",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_142550",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134117",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134117",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134724",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134724",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_141800",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_141800",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142149",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142149",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142625",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142625",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_143322",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322",
+      "severity": "INFO"
+    }
+  ],
+  "hierarchical_placement_findings": [],
+  "id_chain_findings": [],
+  "mode": "read_only_local_deterministic",
+  "next_recommended_step": "Obtain approval before any state-changing Phase 2 work.",
+  "phase": "Phase 1",
+  "result": "PASS",
+  "stage2a_findings": [],
+  "stage2b_findings": [],
+  "stale_state_findings": [
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163118",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163118",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163215",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163215",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163337",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163337",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163557",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163557",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_164215",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_164215",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165141",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165141",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165431",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165431",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171517",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171517",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171858",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171858",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_185543",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_185543",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191849",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191849",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191935",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191935",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192039",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192039",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192824",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192824",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192850",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192850",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193415",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193415",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193647",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193647",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193909",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193909",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193955",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193955",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194231",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194231",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194411",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194411",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194920",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194920",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_195429",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_195429",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200017",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200017",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200040",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200040",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_201310",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_201310",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_203035",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_203035",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_092940",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_092940",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100308",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100308",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100408",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100408",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101321",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101321",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101600",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101600",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_173306",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_173306",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_130222",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_130222",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_141927",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_141927",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_142550",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_142550",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134117",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134117",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134724",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134724",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_141800",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_141800",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142149",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142149",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142625",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142625",
+      "severity": "INFO"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_143322",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322",
+      "severity": "INFO"
+    }
+  ]
+}

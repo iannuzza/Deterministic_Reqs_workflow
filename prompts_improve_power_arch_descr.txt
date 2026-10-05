@@ -1,0 +1,76 @@
+Please improve descriptive extraction and assembly for the full **power and low-power architecture/strategy** in a **project-agnostic** way across:
+- SRS
+- DRS
+- ARS
+
+Also update the shared policy/documentation so this behavior is explicitly governed in:
+- General Rules
+- `.github/skills/.../SKILL.md`
+- `.github/copilot-instructions.md`
+
+Each document must render the topic according to its own **hierarchical scope** and **competence domain**, while sharing one deterministic descriptive contract and one reusable retrieval/assembly approach.
+
+Target content includes, where supported by approved evidence:
+- power domains
+- power islands
+- supply-domain partitioning
+- always-on / switched / retained areas
+- domain behavior and control
+- low-power coordination and management
+- how low-power states are entered, coordinated, maintained, and exited
+- wake-up / restore / retention / isolation behavior
+- sequencing, enable/disable, power-state transitions
+- hardware/software/firmware responsibility for low-power control
+
+Constraints:
+- keep the solution project-agnostic
+- deterministic
+- local-only
+- no LLM calls
+- no network/cloud dependencies
+- descriptive-only, non-authoritative
+- same approved snapshot + same config => same output and same audit/debug evidence
+
+Retrieval/candidate-discovery policy:
+- primary basis = existing lexical + normalized + RRF retrieval
+- optional widening = local semantic retrieval only as a gated/fallback candidate-discovery aid when lexical/normalized/RRF coverage is weak
+- semantic similarity alone must never be a sufficient inclusion criterion
+
+Assembly policy:
+- do not hardcode long lists of lexical variants directly in generator logic
+- reuse approved vocabulary / normalization / taxonomy / profile signals through the existing retrieval path
+- after retrieval, apply deterministic topic-specific filtering and grouping
+- exclude changelog/revision text
+- exclude generic marketing/product prose
+- exclude unrelated generic “power” mentions
+- prefer structured architectural evidence, grouped descriptions, tables, bullets, state/sequence descriptions, and contextually relevant paragraphs
+- preserve provenance and source wording as much as possible
+- no new requirements
+- no new shall-statements
+- no invented filler
+- no visible `Approved evidence` prefix in the final rendered spec text
+
+Scope rule:
+- SRS must render system-level power / low-power architecture and system coordination
+- DRS must render digital/top-digital / digital-architecture / digital-domain low-power behavior and coordination
+- ARS must render analog / mixed-signal / analog-power-domain low-power behavior and coordination
+- all three must use the same shared descriptive contract and differ mainly by domain/scope filtering and allowed evidence selection
+
+Please also update the shared policy wording so it explicitly states that:
+- this descriptive strategy is project-agnostic
+- it applies to approved generated specs according to hierarchical scope and competence domain
+- the retrieval path may use lexical + normalized + RRF as default candidate discovery
+- optional local semantic widening may exist only as non-authoritative gated support
+- descriptive outputs remain derived, non-authoritative, provenance-preserving, and reproducible
+- no generator may rely primarily on rigid project-specific lexical patterns for this content class
+
+Before editing, tell me clearly:
+1. how power-domain / low-power / state-entry-exit content is handled today in SRS, DRS, and ARS generation
+2. where the current implementation is still too lexically rigid
+3. which General Rules / SKILL / copilot-instructions files you will update and what policy sections you will add or revise
+4. how you will reuse lexical + normalized + RRF for candidate discovery
+5. whether optional semantic widening can be integrated behind explicit config without changing the authoritative default behavior
+6. what deterministic post-retrieval filtering and topic-grouping rules you will apply
+7. which shared helper files and which SRS / DRS / ARS generator/template files you want to modify
+8. how each document will differ only by hierarchical scope and competence domain
+9. what tests/fixtures you will add to prove it works with varied source wording and structure

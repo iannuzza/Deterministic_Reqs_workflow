@@ -1,0 +1,42 @@
+110 
+ 
+When Quokka MasterBlaze µP runs (sleep_master signal = 0), any dvalid triggered (HW or SW) 
+shall be ignored. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9034] Requirement 
+The NACK_REGISTER register is reset every time a new I2C operation starts. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9260] Requirement 
+Each data stored in FIFO shall be composed by 4 words (16bytes). 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9261] Requirement 
+3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9262] Requirement 
+24-bits of the data stored in FIFO shall be reserved at ‘0’. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9263] Requirement 
+The last 8-bits of the data stored in FIFO shall contain the TAG field. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9300] Requirement 
+The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation 
+on-going); the registers value shall not be updated. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9500] Requirement 
+In case also other sources that writes into FIFO are active, then sensor hub shall work always in 
+multi-fifo mode  fifo_mode input of sensor hub set to ‘1’ . 
+[End]

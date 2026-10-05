@@ -1,0 +1,27 @@
+19 
+ 
+Port name Directi
+on Type Description 
+i_N_clk_cal input [N_clk_max_bit_top-1:0] Sample time for adc 
+calibration 
+scan_enable input  scan enable for 
+scan mode 
+i_timer_buffer_config input [1:0] timer buffer 
+configuration 
+i_ppg_alc_frame_save input [ppg_frame_bit_top-1:0] alc data frame to 
+save 
+i_reset_ppg_ioff_calib input   
+HRDATA input [31:0] AHB Protocol 
+signals 
+HREADY input  AHB Protocol 
+signals 
+HRESP input [1:0] AHB Protocol 
+signals 
+HGRANT input  AHB Protocol 
+signals 
+SCANENABLE input  Scan Test Mode 
+Enbl 
+SCANINHCLK input  Scan Chain Input 
+SCANOUTHCLK output  Scan Chain Output 
+HSEL output  AHB Protocol 
+signals

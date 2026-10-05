@@ -1,0 +1,30 @@
+102 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_133]  REQUIREMENT : 
+Once is set to 1, o_comp_rx_ck shall be set to 0 after a T2+1 clock cycle. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 9116] REQUIREMENT : 
+GAIN_START shall be lesser or equal than GAIN_MAX. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_134]  REQUIREMENT : 
+According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first 
+frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME 
+(PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock 
+cycle after i_start_ppg is set to 1 [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7135] REQUIREMENT : 
+If the ALC_COARSE (o_w_BTIA_ALC) result is equal to zero, it shall be brought to 1[END] 
+ 
+ 
+Table 13: ALC Time Diagram 
+ 
+5.11. Average Block 
+5.11.1. IP Description 
+This block oversees the “cleaning” of the samples doing simple average math operation and 
+change representation. The output will be 16 bit for ECG, BIA and GSR, 20 bit for PPG instead. 
+For ECG, BIA and GSR the number of acquisitions is fixed, while for PPG is configurable. 
+5.11.2. I/O List 
+5.11.2.1. Parameters 
+Generic name Type Value Description 
+data_size_bit int 16

@@ -1,0 +1,32 @@
+20 
+ 
+o_Txi_RAMP_1V2 output 0 wire 
+[3:0] 
+from u_scan_out_mux, Description: 
+B_RAMP_1V2<3:0> 
+o_ck_chop_imp output 0 wire from u_scan_out_mux 
+o_ck_hc2_10k output 0 wire from u_scan_out_mux 
+o_ck_m output 0 wire from u_scan_out_mux, Description: 
+inserito new bit 
+o_ck_p output 0 wire from u_scan_out_mux, Description: 
+inserito new bit 
+o_ck_q output 0 wire from u_scan_out_mux, Description: 
+inserito new bit 
+o_short_on output 0 wire from u_scan_out_mux, Description: 
+(codex 1417523 
+o_resh_on output 0 wire from u_scan_out_mux, Description: 
+(codex 1417523 
+o_resl_on output 0 wire from u_scan_out_mux, Description: 
+(codex 1417523 
+o_pd_hc2 output 1 wire from u_scan_out_mux 
+o_pd_imp output 1 wire from u_scan_out_mux 
+o_rst_hc2 output 0 wire from u_scan_out_mux 
+o_rst_imp output 0 wire from u_scan_out_mux 
+o_rsti_hc2 output 0 wire from u_scan_out_mux 
+o_rsti_imp output 0 wire from u_scan_out_mux 
+o_su_hc2 output 0 wire from u_scan_out_mux 
+o_sug_imp output 0 wire from u_scan_out_mux 
+i_ADC_EOC input 0 wire to u_main_controller_top/u_pad_mux 
+i_data_ADC_out input 0 wire 
+[15:0] 
+to u_main_controller_top/u_pad_mux

@@ -1,0 +1,67 @@
+118 
+ 
+DBG_HSIZE output 
+AHB HSIZE 
+Debug 
+Master Port 
+u_ispu_DBG_HSIZE_sig 
+ 
+DBG_HWRITE output 
+AHB 
+HWRITE 
+Debug 
+Master Port 
+u_ispu_DBG_HWRITE_sig 
+ 
+DBG_HBURST output 
+AHB 
+DHBURST 
+ebug Master 
+Port 
+NO CONN 
+DBG_HWDATA output 
+AHB 
+HWDATA 
+Debug 
+Master Port 
+u_ispu_DBG_HWDATA_sig 
+ 
+DBG_HRDATA input 
+AHB 
+HRDATA 
+Debug 
+Master Port 
+u_xbar_afe_hrdata_S4_sig 
+ 
+DBG_HRESP input 
+AHB 
+HRESP 
+Debug 
+Master Port 
+u_xbar_afe_hresp_S4_sig 
+ 
+trst_n input JTAG Test 
+Reset 
+u_pad_mux_ispu_trst_n_sig 
+ 
+tck input JTAG Test 
+Clock 
+u_pad_mux_ispu_tck_sig 
+ 
+tms input JTAG Test 
+Mode Select 
+u_pad_mux_ispu_tms_sig 
+ 
+tdi input JTAG Test 
+Data In 
+u_pad_mux_ispu_tdi_sig 
+ 
+tdo output JTAG Test 
+Data Out 
+u_ispu_tdo_sig 
+ 
+tdo_en output 
+JTAG Test 
+Data Out 
+Enable 
+u_ispu_tdo_en_sig

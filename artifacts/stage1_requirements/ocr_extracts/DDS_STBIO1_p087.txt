@@ -1,0 +1,39 @@
+86 
+ 
+HBURSTM output wire [ 2:0]  
+HPROTM output wire [ 3:0]  
+HWDATAM output wire [ 31:0]  
+HBUSREQM output wire  
+HLOCKM output wire  
+stmc_data_CSN output wire  
+stmc_data_WEN output wire  
+stmc_data_A output wire [ 8:0]  
+stmc_data_D output wire [ 63:0]  
+stmc_data_M output wire [ 63:0]  
+stmc_data_Q input wire [ 63:0]  
+stmc_rom_CLK output wire  
+stmc_rom_CSN output wire  
+stmc_rom_A output wire [ 10:0]  
+stmc_rom_Q input wire [ 22:0]  
+quokka_run output wire 
+u_pmu.adsp_run 
+main_controller_top.i_quokka_r
+un 
+quokka_boot_end output wire main_controller_top.i_quokka_b
+oot_end 
+ahb_master_clk_en output wire U_pmu.clk_en_s1 
+scan_mode input wire  
+scan_en input wire  
+scan_clk input wire  
+scan_rst_n input wire  
+Table 19: ADSP I/O List 
+13.2.1.1. ADSP Peculiar Requirements 
+ 
+[DDS_STBIO1_0010] Definition: 
+ADSP is responsible for managing signals for the OTP 
+memory H9A_FU_OTPHV_85AL05_23A_MIM5_6ML_ALUCU/2.6.b-00, which are required for 
+its reading, programming and testing procedures. 
+The selected OTP memory has a data bit cut size of 640 bits with an 8-bit word size. 
+Each data bit is physically redundant to optimize memory yield. Consequently, the OTP memory 
+is organized into 2 banks, each containing 80 addresses of 8-bit size. 
+[End]

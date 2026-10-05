@@ -1,0 +1,202 @@
+Based on the accepted Step 1 constraints and the completed Step 2 + Step 2B foundation, now implement Step 3: core workflow enforcement logic.
+
+Important boundary:
+Do not redesign the canonical schema, authoritative storage model, or centralized vocabulary architecture established in Step 2 and Step 2B unless a concrete compatibility fix is strictly required.
+In this step, focus on workflow state enforcement, merge impact analysis, approval-gated non-destructive merge logic, conflict handling, supplementary-source wiring into canonical SQLite, and architecture mapping review boundaries.
+
+Before editing code, first provide:
+1. target files to modify
+2. new files/modules to add
+3. intended changes per file
+4. any compatibility concern with the Step 2 / Step 2B foundation
+5. how backward compatibility will be preserved where practical
+
+Current constraints that must remain true:
+- project-agnostic
+- deterministic
+- update general rules, skill, copilot-instructions
+- no LLM calls
+- no network calls
+- no cloud dependencies
+- Canonical SQLite remains authoritative
+- Retrieval/index SQLite remains separate and non-authoritative
+- CSV/JSON/Markdown remain derived artifacts only
+- semantic retrieval remains optional, local-only, version-pinned, auditable, and never required for the core deterministic workflow
+- automatic semantic fallback remains limited to the current no-legacy-results condition
+- lexical, normalized, and hybrid retrieval behavior must remain preserved behind stable interfaces unless an explicit compatibility fix is required
+
+Current pipeline alignment that must remain true:
+- OCR -> taxonomy update -> RAG index build -> requirement generation -> RAG cross-check
+
+Please implement:
+
+1. Explicit workflow state machine and transition validation
+Support states such as:
+- ingested
+- parsed
+- classified
+- under_review
+- impact_analyzed
+- approved_for_merge
+- merged
+- mapping_under_review
+- mapping_approved
+- snapshotted
+- rejected
+- needs_rework
+
+Requirements:
+- persist workflow states
+- validate allowed transitions centrally
+- keep lifecycle state transitions separate from semantic approval/category transitions
+- support loopbacks without losing history
+- keep workflow behavior deterministic and auditable
+
+2. Deterministic merge impact analysis
+Before canonical merge approval, generate a structured impact artifact that determines:
+- affected canonical requirements
+- category/classification changes
+- affected mappings
+- affected approved taxonomy/profile revisions where relevant
+- affected snapshots
+- affected downstream generation targets
+- whether full regeneration or partial regeneration is required
+- req-id collisions or identity ambiguities
+- whether the merge is safe, risky, blocked, or requires review
+
+Impact analysis must also be supplementary-scope aware:
+- block-only impact
+- digital branch impact
+- analog branch impact
+- system/general architecture impact
+- cross-layer mapping impact
+
+3. Non-destructive revision-based merge engine
+Requirements:
+- staged objects must never overwrite canonical objects in place
+- canonical updates must create new revisions
+- preserve prior canonical revisions and provenance
+- support merge decisions such as:
+  - new
+  - duplication
+  - refines
+  - conflict
+  - removed
+- block unsafe transitions such as:
+  - conflict auto-merge
+  - duplication silently replacing approved mapping
+  - removed deleting lineage/history
+- do not silently revoke approvals
+- if approved mappings/profiles/snapshots are impacted, mark them as impacted / requires re-review rather than deleting history
+
+4. Category transition guardrails
+Add centralized deterministic validation rules for transitions involving:
+- new
+- duplication
+- refines
+- conflict
+- removed
+
+Requirements:
+- any semantic/category-changing transition must remain approval-gated
+- only non-semantic lifecycle progression may occur without approval
+- conflict must never auto-merge
+- removed must preserve rationale and lineage
+
+5. Conflict policy for same req_id with different text
+Implement explicit support for:
+- classify as conflict
+- preserve both source versions and provenance
+- treat latest source revision/date as the default proposed winner
+- do not silently overwrite canonical data
+- require explicit user revision approval before authoritative adoption
+- allow summary/report representation as conflict with approval required
+
+6. Supplementary multi-source and multi-scope enforcement
+The workflow must support repeated supplementary source imports per project.
+Each supplementary source remains:
+- source-aware
+- batch-aware
+- scope-aware
+- traceable
+
+Requirements:
+- do not collapse multiple supplementary imports into one generic untracked batch
+- preserve source-specific merge decisions and impact records
+- support supplementary source types such as:
+  - existing block spec additions
+  - general architecture additions
+  - system architecture revisions
+  - digital architecture revisions
+  - analog architecture revisions
+- ensure impact analysis can drive partial downstream regeneration where valid
+
+7. Wire legacy supplementary ingestion/merge into the canonical workflow
+Existing supplementary ingestion and merge logic may still be operational in legacy paths.
+In Step 3:
+- wire supplementary staging, review, conflict handling, impact analysis, and approved merge flow into the new canonical SQLite-backed workflow
+- preserve backward compatibility where practical
+- stop treating legacy CSV/JSON paths as authoritative
+- make the canonical workflow the authoritative merge/approval path
+
+8. Architecture map review constraints
+Architecture Map Review may:
+- review mappings
+- propose mapping changes
+- validate coverage/allocation consistency
+
+Architecture Map Review must not silently modify:
+- canonical requirement text
+- provenance
+- approved classification
+- merge category
+
+If architecture review detects identity/classification problems, it must trigger a tracked loopback to the appropriate earlier stage.
+
+9. Vocabulary/taxonomy integration
+Ensure classification, identity resolution, merge impact analysis, taxonomy-aligned review support, and mapping support use the centralized approved vocabulary/taxonomy resources established in Step 2B.
+Do not consume unapproved learned vocabulary in authoritative workflow decisions.
+
+10. Retrieval architecture preservation and controlled integration
+Preserve and align with the current retrieval modes:
+- lexical: BM25 over original-text FTS5
+- normalized: rule-based normalization, lemmatization, acronym/synonym/phrase expansion, then normalized-term FTS5
+- hybrid: Reciprocal Rank Fusion of lexical and normalized
+- semantic: optional local embedding index with cosine search
+- hybrid-semantic: lexical + normalized + semantic fusion
+- automatic semantic fallback when legacy retrieval returns no results
+
+Requirements:
+- normalized mode must consume centralized approved vocabulary resources
+- semantic mode remains optional and local-only
+- automatic semantic fallback remains deterministic and only triggers under the configured no-legacy-results condition
+- retrieval behavior must not silently mutate canonical workflow state
+
+Suggested modules/services where appropriate:
+- workflow_states.py
+- transition_rules.py
+- impact_analysis.py
+- merge_engine.py
+- category_transition_rules.py
+- canonical_resolver.py
+
+Implementation guidance:
+- use the Step 2 model/schema and Step 2B vocabulary foundation rather than introducing parallel logic
+- preserve backward compatibility where practical
+- if a full rewrite is risky, add adapters or compatibility wrappers first
+- do not rewrite unrelated modules
+- keep all decisions traceable and deterministic
+
+At the end of this Step 3 implementation, provide a checkpoint summary with:
+1. what was implemented
+2. which files were modified or added
+3. how workflow states and transition validation are enforced
+4. how merge impact analysis is stored/exposed
+5. how non-destructive merge is guaranteed
+6. how same-req_id-different-text conflicts are represented and approval-gated
+7. how supplementary multi-source/multi-scope impact is handled
+8. how legacy supplementary flow was wired into canonical SQLite
+9. how architecture map review boundaries are enforced
+10. any remaining risks or incomplete items before Step 4
+
+If anything is ambiguous, ask for clarification before making broad refactors.

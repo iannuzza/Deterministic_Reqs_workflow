@@ -1,0 +1,61 @@
+126 
+ 
+test_se (one 
+test_se per 
+collar) is 
+provided at 
+the top level 
+ca_stredl_bist_c_tst_gated
+clock input 
+BIST Clock 
+Gating 
+Signal for 
+the entire 
+BIST. Used 
+to force 
+clock gating 
+cell 
+transparenc
+y in ATPG 
+mode . 
+u_pad_mux_scan_enable_sig 
+ 
+ca_stredl_bist_c_tst_reset_
+mux input 
+BIST 
+Bypass for 
+reset 
+synchronize
+r. allows to 
+force reset 
+synchronizin
+g circuit 
+transparenc
+y in ATPG 
+mode. 
+u_pad_mux_scan_mode_sig 
+ 
+ca_stredl_bist_c_oen_1 input 
+BIST 
+Memory 
+Output 
+Enable 1 
+u_ca_fifo_bist_c_oen_1 
+ 
+ca_stredl_bist_c_oen_2 input 
+BIST 
+Memory 
+Output 
+Enable 2 
+u_ca_fifo_bist_c_oen_1 
+ 
+ca_stredl_bist_c_oen_3 input 
+BIST 
+Memory 
+Output 
+Enable 3 
+u_ca_fifo_bist_c_oen_1 
+ 
+ca_stredl_bist_c_oen_4 input BIST 
+Memory 
+u_ca_fifo_bist_c_oen_1

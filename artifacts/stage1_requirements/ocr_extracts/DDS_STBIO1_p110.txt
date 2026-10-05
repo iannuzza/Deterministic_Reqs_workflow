@@ -1,0 +1,54 @@
+109 
+ 
+Input sys_clk of sensor hub shall be connected to 8MHz clock to generate I2C communications 
+compliant with FM+ I2C standard. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9018] Requirement 
+The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal 
+or SW using DVALID_REGISTER. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9024] Requirement 
+Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an 
+I2C Write Operation. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9027] Requirement 
+The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be 
+ignored: ONLY read operations towards I2C target  1, 2 and 3 shall be performed. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9029] Requirement 
+AUX_SENS_ON possible values shall be 0,1,2,3. All the values shall be tested since 
+MasterBlaze supports up-to 4 I2C targets connected to I2C network. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9030] Requirement 
+SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave 
+are read as per effect of an I2C operation (x from 1 to 12). 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9031] Requirement 
+All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG 
+registers. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9032] Requirement 
+SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9033] Requirement 
+All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. 
+[TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9035] Requirement

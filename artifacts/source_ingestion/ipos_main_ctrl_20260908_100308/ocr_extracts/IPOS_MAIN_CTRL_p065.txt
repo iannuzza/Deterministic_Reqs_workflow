@@ -1,0 +1,32 @@
+64 
+ 
+When the ELAB_FSM is in GSR State (Check ELAB_STATUS_REG), the ADC_Mux 
+(o_adc_mux_biochannel on digital top) output shall be set equal to 111. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3128] REQUIREMENT :  
+When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration 
+FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3129] REQUIREMENT :  
+When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be 
+performed first.[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3130] REQUIREMENT :  
+When the wave velocity mode and the ppg ioff calibration are selected, the wave velocity mode 
+shall be performed first. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3131] REQUIREMENT :  
+When the ppg ioff calibration is selected and device fsm is in WAIT_SU State, the Elab FSM 
+shall go into the Timer Buffer state and then PPG IOFF CALIB state. [END] 
+5.4. ADC PHGEN 
+5.4.1. IP Description 
+This block is in charge of generating and checking the signal useful for ADC calibration and Data 
+conversion. This block  has also three Debug Mode: debug_calibration, 
+debug_adc_error_cap_bypass and debug_adc_readout. 
+5.4.2. I/O List 
+5.4.2.1. Parameters 
+Generic name Type Value Description 
+N_clk_max_bit int 6  
+data_in_size_bit int 16  
+n_average_max int 128  
+n_average_max_cal int 128  
+n_average_debug int 2

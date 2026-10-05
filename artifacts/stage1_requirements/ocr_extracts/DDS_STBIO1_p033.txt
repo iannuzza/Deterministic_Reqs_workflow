@@ -1,0 +1,24 @@
+32 
+ 
+10.4. Power Domain Descriptions 
+10.4.1. PD_TOP1V2 
+• Function: Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub 
+acquisition, FIFO read and write data, Elaboration Mode with ADSP only). 
+• Characteristics: Never powered down. 
+• Control: Managed by hardware. 
+10.4.2. PD_STREDL  
+• Function: Powers the STREDL core and associated cache. 
+• Characteristics: Can be powered down when STREDL is not in use. 
+• Control: Managed via software (power management driver)(see 12.3.1) 
+10.4.3. PD_TOP3V3 
+• Function: power supply to the OTP memory block. 
+• Characteristics: Never powered down. It provides 4.7V of power supply to the 
+OTP memory block during programming (write) operations 
+• Control: Managed by hardware. 
+10.4.4. PD_TOPIO 
+• Function: Powers communication PAD 
+• Characteristics: Never powered down. 
+• Control: Managed by hardware. 
+ 
+ 
+11. Interconnect

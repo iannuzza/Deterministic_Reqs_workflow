@@ -1,0 +1,32 @@
+26 
+ 
+if_gpio0_tud output 1 wire from 
+u_level_shifter_sel.if_gpio0_tud_ls_out 
+if_gpio1_en output   wire from 
+u_level_shifter_sel.if_gpio1_en_ls_out 
+if_gpio1_in input   wire to u_pad_mux 
+if_gpio1_out output   wire from 
+u_level_shifter_sel.if_gpio1_out_ls_out 
+if_gpio1_tud output 1 wire from 
+u_level_shifter_sel.if_gpio1_tud_ls_out 
+if_gpio2_in input   wire to u_pad_mux 
+if_gpio2_en output   wire from 
+u_level_shifter_sel.if_gpio2_en_ls_out 
+if_gpio2_out output  1 wire from 
+u_level_shifter_sel.if_gpio2_out_ls_out 
+if_gpio2_tud output 1 wire from 
+u_level_shifter_sel.if_gpio2_tud_ls_out 
+if_gpio3_en output   wire from 
+u_level_shifter_sel.if_gpio3_en_ls_out 
+if_gpio3_in input   wire to u_pad_mux, Description: decidere se 
+mantenere l'IN 
+if_gpio3_out output  1 wire from 
+u_level_shifter_sel.if_gpio3_out_ls_out 
+if_gpio3_tud output 1 wire from 
+u_level_shifter_sel.if_gpio3_tud_ls_out 
+if_gpio4_en output   wire from 
+u_level_shifter_sel.if_gpio4_en_ls_out 
+if_gpio4_in input   wire to u_pad_mux, Description: decidere se 
+mantenere l'IN 
+if_gpio4_out output  1 wire from 
+u_level_shifter_sel.if_gpio4_out_ls_out

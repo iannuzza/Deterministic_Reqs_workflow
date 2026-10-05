@@ -1,0 +1,75 @@
+53 
+ 
+ispu_tms output 
+ 
+jtag state in port ispu in ispu debug mode 
+ispu_trst_n output 
+ 
+jtag reset in port ispu in ispu debug 
+mode 
+i_if_ck output 
+ 
+i2c/spi clk 
+i_if_cs output 
+ 
+i2c/spi cs 
+i_if_sda_sdi_in output 
+ 
+i2c/spi data 
+o_if_cs_en_n input 
+ 
+i2c/spi cs en from i2c/spi ip 
+o_if_cs_out_n input 
+ 
+i2c/spi cs out from i2c/spi ip 
+o_if_cs_tud input 
+ 
+i2c/spi cs tud from i2c/spi ip 
+o_if_sda_sdi_en_n input 
+ 
+i2c/spi data en from i2c/spi ip 
+o_if_sda_sdi_out input 
+ 
+i2c/spi data out from i2c/spi ip 
+scl_master_in output 
+ 
+from sensorhub 
+scl_master_out input 
+ 
+from sensorhub 
+sda_master_in output 
+ 
+to sensorhub 
+sda_master_out input 
+ 
+from sensorhub 
+afe_bist_ctrl_tdi output 
+ 
+bist jtag port 
+afe_bist_ctrl_trstn output 
+ 
+bist jtag port 
+afe_bist_ctrl_tms output 
+ 
+bist jtag port 
+afe_bist_ctrl_tdo input 
+ 
+bist jtag port 
+afe_bist_ctrl_tdo_en_n input 
+ 
+bist jtag port 
+afe_bist_ctrl_tck output 
+ 
+bist jtag port 
+ck_16m input 
+ 
+clk16MHz trimming in debug mode 
+ck_2m input 
+ 
+clk2MHz trimming in debug mode 
+ck_64k input 
+ 
+clk64MHz trimming in debug mode 
+scan_rstn output 
+ 
+scan reset

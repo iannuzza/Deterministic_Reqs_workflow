@@ -1,0 +1,26 @@
+40 
+ 
+resetn_stredl output wire reset mngmt inside stredl_afe_top 
+resetn_xbar output wire xbar reset 
+resetn_intf output wire reset interface 
+resetn_main_ctrl output wire reset main controller 
+resetn_32k_main_ctrl output wire reset 32kHz domain main controller 
+resetn_stmc output wire reset adsp 
+resetn_fifo output wire reset FIFO 
+resetn_masterblaze output wire reset sensor hub 
+resetn_regmap output wire reset regmap 
+o_trimming_clk_fast output wire trimming output clock fast 
+iso_o output wire left open . to be connected in synthesis 
+vdden_o output wire to be connected to psw_ctrl.VDDIEN 
+o_ck_bg output wire bg clock to analog domain 
+o_sh_clk output wire sensor hub clock 
+o_ck_chop_imp output wire chopper bia clock to analog domain 
+o_ck_m output wire modulation clock to analog domain 
+o_ck_hc2_10k output wire healt channel 10kHz clock to analog domain 
+o_ck_p output wire phase clock to analog domain 
+o_ck_q output wire quadrature clock to analog domain 
+o_clk_16M_mc output wire 16MHz clock for Main Controller 
+o_clk_dft_adc output wire 16MHz clock for ADC DFT 
+o_clk_gsr_16M output wire gsr clock to digital domain 
+o_ADC_clk_serial_dft output wire adc serial clock in dft 
+o_sh_clk_gate output wire status clk reg clk sh 16Mhz

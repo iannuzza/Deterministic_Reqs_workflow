@@ -1,0 +1,141 @@
+Execute Phase 1 only of the project-agnostic Source-to-Stage-2B Coherence plan.
+
+Create and run a new read-only checker:
+scripts/validate_source_to_stage2b_coherence.py
+
+Authorization and boundaries:
+- This step is approved only for creating and executing this checker.
+- The checker and this step must be strictly read-only with respect to workflow state.
+- No canonical SQLite mutation.
+- No merge execution.
+- No source/body normalization rewrite.
+- No Architecture Map CSV/XLSX rewrite.
+- No workbook sync-back mutation.
+- No approval-state change.
+- No profile hash update.
+- No snapshot creation/update/freezing.
+- No downstream regeneration.
+- No file delete/rename.
+- Reporting only.
+
+Primary goal:
+Validate, in a deterministic, local-only, project-agnostic way, end-to-end coherence from source review through Stage 2B prerequisites, and explicitly verify that the selected and approved hierarchical placement of each requirement is preserved without drift across workflow boundaries.
+
+Validation scope:
+1. Source review / supplementary staging
+2. Active ingestion batch and revision identity
+3. Merge artifacts and canonical handoff readiness
+4. Architecture Map identifiers and canonical/source traceability
+5. Approved allocation / hierarchical placement persistence
+6. Stage 2A mapping artifacts, workbook/CSV/profile/hash coherence
+7. Stage 2B freeze prerequisites and snapshot-input coherence
+
+The checker must validate at least the following:
+
+A. Active batch / revision coherence
+- identify the active supplementary/source-review batch using current repo/project conventions
+- verify the active batch is uniquely identifiable
+- verify revision identity is present where required
+- detect coexistence of active batch data with historical/superseded staged data
+- detect mixed-batch or mixed-revision lineage in downstream artifacts
+
+B. Merge-manifest and canonical handoff readiness
+- verify merge_manifest.json exists for the active batch if required by the workflow
+- verify it is minimally complete and internally coherent
+- report missing required fields, unresolved references, or incomplete merge-readiness state
+- report whether canonical handoff prerequisites are satisfied or blocked
+
+C. ID-chain coherence across the workflow
+Where artifacts exist, validate coherent traceability across:
+source review ID -> canonical/source_req_id -> architecture mapping row -> Stage 2A artifacts -> Stage 2B prerequisites
+- detect missing IDs
+- detect duplicate IDs
+- detect mismatched IDs
+- detect superseded/historical IDs still referenced as current
+- detect stale staged IDs surviving after newer active-source lineage exists
+- detect broken or ambiguous one-to-one / one-to-many mappings where the workflow expects coherence
+
+D. Preservation of approved hierarchical placement
+Explicitly validate that the selected and approved hierarchy/allocation decision is preserved across steps and not recomputed incorrectly downstream.
+Check, where applicable:
+- allocation_class
+- owning_target
+- hierarchy placement / nearest meaningful parent logic
+- lineage_mode
+- source_origin_req_ids
+- hierarchy_parent_req_ids
+- owning_domain
+- approved_classification
+- approved_block as context only, never as an implicit ownership substitute
+
+Detect and report:
+- missing approved allocation metadata
+- inconsistent allocation metadata across artifacts
+- drift between approved mapping review data and downstream persisted/derived data
+- fallback/defaulted/inferred ownership replacing approved ownership
+- use of source type as a placement proxy
+- use of approved_block as a placement proxy
+- contradictions such as block-local/IPOS ownership inferred solely because a block is named
+- contradictions between allocation_class and owning_target
+- stale artifacts still reflecting obsolete placement
+- downstream prerequisites that cannot prove preserved approved placement
+
+E. Stage 2A artifact coherence
+- detect stale Stage 2A artifacts relative to current mapping CSV/workbook/profile/hash inputs
+- detect workbook/CSV/profile inconsistencies relevant to approval and mapping authority
+- detect cases where approved profile state does not describe the currently effective artifacts
+- detect approval/hash stale state or incoherence without mutating anything
+
+F. Stage 2B prerequisite coherence
+- verify whether Stage 2B inputs/prerequisites point to current authoritative artifacts
+- detect stale/incomplete/inconsistent snapshot prerequisites
+- detect whether downstream freeze prerequisites reference authority that is incomplete, obsolete, or hierarchically incoherent
+
+Severity and pass/fail rules:
+- classify findings as ERROR, WARNING, or INFO
+- ERROR = Phase 1 blocking coherence failure
+- exit code 0 only if no blocking ERROR exists
+- non-zero exit code if any blocking ERROR exists
+- final result must clearly state Phase 1 PASS or FAIL
+
+Output contract:
+- print a compact terminal summary
+- also write a deterministic report file
+- use an existing repo validation/report location if one already exists; otherwise create a minimal, consistent validation-report location
+- the report must include:
+  1. artifacts and paths checked
+  2. discovery assumptions used
+  3. active batch/revision identified
+  4. blockers found
+  5. stale-state findings
+  6. ID-chain coherence findings
+  7. hierarchical-placement coherence findings
+  8. Stage 2A coherence findings
+  9. Stage 2B prerequisite findings
+  10. explicit Phase 1 PASS/FAIL
+  11. exact next recommended step
+
+Engineering constraints:
+- deterministic only
+- local-only only
+- project-agnostic only
+- minimal and auditable implementation
+- prefer existing helpers/validators when available
+- do not add speculative redesign
+- do not hardcode project-specific policy logic except for artifact discovery if unavoidable
+- if tests fit existing repo patterns, add focused tests for the checker logic only
+
+Execution constraints:
+- after implementation, run only this checker
+- do not remediate findings
+- do not begin Phase 2
+- stop after reporting results
+
+Return format:
+1. files created/modified
+2. concise summary of implemented checks
+3. checker execution summary
+4. Phase 1 PASS or FAIL
+5. exact next recommended step
+
+No merge, mapping, approval, snapshot, or downstream artifact changes are authorized in this step.s

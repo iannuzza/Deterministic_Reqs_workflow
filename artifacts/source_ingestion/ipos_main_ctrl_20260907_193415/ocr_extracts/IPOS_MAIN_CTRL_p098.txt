@@ -1,0 +1,26 @@
+97 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5120] TX_PRESET_TIME shall be configurable 
+between 0.5us, 1us, 1.5us and 2us (8,16,24,32 clock cycles) [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_120]  REQUIREMENT : 
+When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value 
+(DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock 
+cycle.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_121]  REQUIREMENT : 
+Nmax shall be a value between 1 and 15 configurable by user. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_122]  REQUIREMENT : 
+When o_ TX_Vref is equal to i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 
+register [3:0])), o_rising_ramp_end shall go high. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_123]  REQUIREMENT : 
+When o_Tx_Vref is equal to 0 during the falling and the rising ramp is ended (o_rising_ramp_end 
+==0), o_falling_ramp_end shall go high. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_124]  REQUIREMENT : 
+When the rising ramp reaches half its value, o_half_rising_ramp shall go high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_125]  REQUIREMENT : 
+When i_reset_ramp is high all output shall be down. [END]

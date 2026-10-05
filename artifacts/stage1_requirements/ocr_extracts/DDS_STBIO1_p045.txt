@@ -1,0 +1,25 @@
+44 
+ 
+ 
+13.1.1.4. Clocks and Reset 
+ 
+Clocks scheme is shown in the below figure 
+ 
+Figure 9: Clocks Scheme 
+Clocks scheme is shown in the above figure 
+Req_ID Source Target Path Delay Clock Gating 
+Analog Control 
+and Description F Max 
+Requirements 
+Definition 
+DDS_STBIO1_
+1020 stbio1_top.clk_16m stbio1_top.dig_wrapper_LV.u_pmu.clk
+_16m 
+ No 
+Pwr_down 
+controlled by pmu 16 MHz 
+DDS_STBIO1_
+1021 stbio1_top.clk_64k stbio1_top.dig_wrapper_LV.u_pmu.clk
+_64k  No 
+No 
+64 kHz

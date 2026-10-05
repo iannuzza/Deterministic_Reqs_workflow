@@ -1,0 +1,89 @@
+Analyze this repository and identify the exact files, modules, classes, and functions responsible for:
+- OCR ingestion/parsing/extraction
+- taxonomy update
+- RAG index build
+- requirement generation
+- RAG cross-check
+- req-id extraction and validation
+- requirement classification
+- canonical/integrated requirement storage
+- merge/update logic
+- architecture mapping review or mapping persistence
+- downstream generation of SRS / DRS / ARS / Digital IPOS / Analog IPOS
+- workflow orchestration / stage runner / CLI pipeline
+- GUI workflow visualization, if present
+- persistence layer (SQLite / CSV / JSON / in-memory models)
+
+Also identify:
+- current retrieval query modes and their implementation points:
+  - lexical: BM25 over original-text FTS5
+  - normalized: rule-based normalization, lemmatization, acronym/synonym/phrase expansion, then normalized-term FTS5
+  - hybrid: Reciprocal Rank Fusion of lexical and normalized
+  - semantic: optional local embedding index with cosine search
+  - hybrid-semantic: lexical + normalized + semantic fusion
+  - automatic semantic fallback when legacy retrieval returns no results
+- embedded vocabulary lists
+- synonym maps
+- stopwords
+- block aliases
+- req-id patterns
+- lexical/domain constants duplicated across modules
+- hardcoded project-specific naming rules
+- current vocabulary/taxonomy consumers in parser, taxonomy update, classifier, retriever, mapper, generator, and cross-check stages
+
+Then propose a concrete incremental refactor plan to strengthen the workflow with:
+- staging vs canonical separation
+- non-destructive revision-based merge
+- provenance preservation
+- explicit workflow states
+- merge impact analysis
+- audit logging
+- rollback
+- immutable approved snapshots
+- snapshot-only downstream generation
+- category transition validation
+- centralized deterministic vocabulary management
+- alignment with the current OCR -> taxonomy update -> RAG index build -> requirement generation -> RAG cross-check pipeline
+
+Hard constraints:
+- keep the solution project-agnostic
+- keep the workflow deterministic
+- update general rules, skill, copilot-instructions
+- no LLM calls
+- no network calls
+- no cloud dependencies
+- preserve the existing retrieval architecture unless explicitly refactoring behind stable interfaces
+- lexical/normalized/hybrid remain valid baseline retrieval modes
+- semantic remains optional, local-only, config-driven, and non-mandatory for the core workflow
+- no probabilistic or non-reproducible decision logic in the core workflow
+- no hardcoded project-specific assumptions unless already isolated in config
+- same input must produce same output and same audit trail, given the same configuration
+
+Before proposing the plan, first list:
+- target files and modules
+- current responsibility of each one
+- likely integration points
+- any code that appears project-specific and should be generalized
+- any current direct overwrite/update paths that may be risky
+- where vocabulary is currently embedded and how widespread it is
+- where taxonomy and retrieval configuration are currently defined and consumed
+
+Then provide:
+1. a file-by-file refactor plan
+2. what should change in each file and why
+3. dependencies between changes
+4. safest implementation order
+5. major risks and compatibility concerns
+
+Do not implement code yet.
+
+At the end, provide a checkpoint summary with:
+1. identified target files
+2. identified project-specific assumptions
+3. identified embedded vocabulary locations
+4. identified taxonomy/retrieval integration points
+5. proposed implementation order
+6. main risks
+7. open questions that should be resolved before implementation
+
+If anything is ambiguous, ask for clarification before making broad refactors.

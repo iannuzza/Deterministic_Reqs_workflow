@@ -1,0 +1,47 @@
+106 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_137]  REQUIREMENT : 
+The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA 
+AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the 
+correct number of times) [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_138]  REQUIREMENT : 
+The average block shall perform the average on 16 sample acquisition for GSR. When the CDS 
+mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR 
+ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between 
+the two results. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1139] REQUIREMENT : 
+The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in 
+FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the 
+SECOND_ALC_SAMPLES [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_139]  REQUIREMENT : 
+When a PPG  Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise 
+(i_data_valid_noise_ppg_adc set to 1) data is sampled (i_end_of_conversion set to 1) the data 
+shall be accumulated until i_n_average_ppg is not reached. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT : 
+Once the PPG  Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the 
+ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed 
+as follow: 
+ 
+I_N_Average_PPG Samples Result with ALC 
+MASK=0 
+Result with ALC 
+Mask=1 
+0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 
+2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 
+4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 
+8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 
+16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 
+32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 
+64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 
+128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 
+Table 18: PPG Result Table 
+Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P 
+is the accumulated PPG data and Acc_N is the accumulated noise[END]

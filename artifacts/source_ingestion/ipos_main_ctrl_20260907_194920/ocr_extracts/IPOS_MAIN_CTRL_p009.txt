@@ -1,0 +1,19 @@
+8 
+ 
+Generic name Type Value 
+n_channel_adc_bit  4 
+quokka_routine_bit_top  16 
+vcm_bit_top  14 
+gnc_cmm_top  15 
+frame_ppg_debug_alc_top  8 
+frame_ppg_debug_ppg_raw_top  16 
+id_frame_max_bit_top  4 
+data_in_size_bit_top  16 
+ppg_start_up_bit_top  9 
+ppg_start_up_decod_bit_top  5 
+data_out_size_bit_top  20 
+n_average_ecg_bia_gsr_max_bit_top  8 
+rx_ch_frame_n_bit_top  3 
+curr_sel_bit_top  8 
+bit_outab_sel_top  1 
+n_average_ppg_max_value  128

@@ -1,0 +1,86 @@
+59 
+ 
+ 
+[DDS_STBIO1_311] Requirement 
+In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and 
+ext_cap_en is “0” 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_312] Requirement 
+In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 
+and ext_cap_en is “0” 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_313] Requirement 
+In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and 
+ext_cap_en is “0” 
+[Vpriority High] [End] 
+ 
+Table 15 functional mode Static Connectivity Checks  
+ENABLE  SOURCE  
+DESTINATION 
+ NAME 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio1_irq_sel 
+== 1) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)  && 
+!pad_mux__path.ext_cap_en
+} 
+stbio1_top.dig_wrapper_LV.u_fi
+fo.irq_FIFO_U_M_IRQ_STATU
+S 
+stbio1_top.if_g
+pio1_out 
+DDS_STB
+IO1_GPIO
+1_309 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio2_irq_sel 
+== 1) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)  && 
+!pad_mux__path.ext_cap_en
+} 
+stbio1_top.dig_wrapper_LV.u_fi
+fo.irq_FIFO_U_M_IRQ_STATU
+S 
+stbio1_top.if_g
+pio2_out 
+DDS_STB
+IO1_GPIO
+2_309 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio3_irq_sel 
+== 1) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1) } 
+stbio1_top.dig_wrapper_LV.u_fi
+fo.irq_FIFO_U_M_IRQ_STATU
+S 
+stbio1_top.if_g
+pio3_out 
+DDS_STB
+IO1_GPIO
+3_309 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio4_irq_sel 
+== 1) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)} 
+stbio1_top.dig_wrapper_LV.u_fi
+fo.irq_FIFO_U_M_IRQ_STATU
+S 
+stbio1_top.if_g
+pio4_out 
+DDS_STB
+IO1_GPIO
+4_309

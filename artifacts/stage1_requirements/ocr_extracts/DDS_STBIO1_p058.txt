@@ -1,0 +1,131 @@
+57 
+ 
+13.1.2.2. Requirements 
+[DDS_STBIO1_300] Definition: 
+The operative mode is selected by a i2c/spi write on register 
+MODE_CONFIG MODE_CONFIG_0 register 
+7 6 5 4 3 2 1 0 
+RESERVED 
+bypass 
+memsafe 
+ispu_debug_mode 
+debug_mode 
+bist_mode 
+SCAN_COMPR_EN 
+scan_mode 
+ rw rw rw rw w w w 
+ 
+Address:      0xFE 
+Type:      RW 
+Reset:      0x00 
+[6]    bypass:    SPIRIT parameter _resetPort_:reset_no_scan 
+SPIRIT parameter _clockPort_:clk_no_scan 
+[5]    memsafe:    SPIRIT parameter _resetPort_:reset_no_scan 
+SPIRIT parameter _clockPort_:clk_no_scan 
+[4]    ispu_debug_mode:   
+ 
+[3]    debug_mode:   
+ 
+[2]    bist_mode:   
+ 
+[1]    SCAN_COMPR_EN:    SPIRIT parameter _resetPort_:reset_no_scan 
+SPIRIT parameter _customType_:W1S 
+SPIRIT parameter _clockPort_:clk_no_scan 
+[0]    scan_mode:    SPIRIT parameter _customType_:W1S 
+SPIRIT parameter _resetPort_:reset_no_scan 
+SPIRIT parameter _clockPort_:clk_no_scan 
+ 
+[Vpriority High] [End] 
+ 
+ 
+ 
+Table 1414: PAD Configuration Table 
+ 
+ 
+PAD Type SCAN Mode
+(MODE_CONFIG_0=0x01)
+BIST Mode
+(MODE_CONFIG_0=0x02)
+ISPU Debug Mode
+(MODE_CONFIG_0=0x08)
+ext_cap_en test_clk_fast test_clk_slow
+SCLK Analog scan_in2 Bfail SCLK
+SDA_SDI Analog scan_out2 Bend I2C_SDA
+CS Analog scan_rst Bbad SPI Chip Select
+GPIO0 Analog irq_fifo | error_time_slot scan_en afe_bist_ctrl_tms ck_16m ckOut tck
+GPIO1 Analog General-Purpose
+irq_fifo
+(IRQ_SEL1.gpio1_irq_sel=
+1)
+Start Time slot irq
+(IRQ_SEL1.gpio1_irq_sel=5)
+LED_Pilot
+(IRQ_SEL1.gpio1_irq_sel=2)
+DCCK_irq
+(IRQ_SEL1.gpio1_irq_sel=3)
+error_time_slot
+(IRQ_SEL1.gpio1_irq_sel=4) input sense internal V1V2 (en=1) sense internal V1V2 (en=1) ck_16m/8 ADC in + tdi
+GPIO2 Analog General-Purpose
+irq_fifo
+(IRQ_SEL1.gpio2_irq_sel=
+1)
+Start Time slot irq
+(IRQ_SEL1.gpio2_irq_sel=5)
+LED_Pilot
+(IRQ_SEL1.gpio2_irq_sel=2)
+DCCK_irq
+(IRQ_SEL1.gpio2_irq_sel=3)
+error_time_slot
+(IRQ_SEL1.gpio2_irq_sel=4) input force = V1V2 SUPPLY (en=1) force = V1V2 SUPPLY (en=1) ck_64k ADC in - tdo
+GPIO3/PMBF Analog General-Purpose
+irq_fifo
+(IRQ_SEL1.gpio3_irq_sel=
+1)
+Start Time slot irq
+(IRQ_SEL1.gpio3_irq_sel=5)
+LED_Pilot
+(IRQ_SEL1.gpio3_irq_sel=2)
+DCCK_irq
+(IRQ_SEL1.gpio3_irq_sel=3)
+error_time_slot
+(IRQ_SEL1.gpio3_irq_sel=4)
+scan_out afe_bist_ctrl_tdi
+Start
+tms
+GPIO4/PMBS Analog General-Purpose
+irq_fifo
+(IRQ_SEL1.gpio4_irq_sel=
+1)
+Start Time slot irq
+(IRQ_SEL1.gpio4_irq_sel=5)
+LED_Pilot
+(IRQ_SEL1.gpio4_irq_sel=2)
+DCCK_irq
+(IRQ_SEL1.gpio4_irq_sel=3)
+error_time_slot
+(IRQ_SEL1.gpio4_irq_sel=4) scan_in afe_bist_ctrl_tdo
+EOC General-Purpose
+SH_CK Analog scan_clk afe_bist_ctrl_tck Out_l Sensor HUB Clock
+SH_SDA Analog
+T_force_v1v2
+en = 1
+tud = 1
+afe_bist_ctrl_trstn 
+Out_h
+Sensor HUB Data
+Functional Mode
+(MODE_CONFIG_0=0x00)
+O_DCCK_P_i
+O_DCCK_N_i
+Debug Mode
+(MODE_CONFIG_0=0x04)
+Sensor HUB Clock
+Sensor HUB Data
+operative_mode
+SPI/I2C Clock
+SPI Slave Inout / I2C SDA
+SPI Chip Select
+General-Purpose
+SCLK
+I2C_SDA
+SPI Chip Select

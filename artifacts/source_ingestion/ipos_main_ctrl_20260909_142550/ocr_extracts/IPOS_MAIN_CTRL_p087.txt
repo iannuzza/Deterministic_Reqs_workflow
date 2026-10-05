@@ -1,0 +1,21 @@
+86 
+ 
+Port name Directi
+on Type Description 
+i_done_frame input  end of the frame 
+i_w_BTIA_ALC input [BTIA_ALC_register_bit-1:0] ALC Coarse value 
+i_frame_repetition input [n_max_frame-1:0] number of frame repetition 
+i_ppg_ioff_calib_mode input   
+o_data_valid_ppg_adc output  data valid for ppg raw 
+o_data_valid_noise_ppg_a
+dc output  data valid for noise ppg 
+o_start_alc_comp output  start alc comp 
+o_start_average_clk output  enable average clock 
+o_start_digital_ramp output  start rise digital ramp 
+o_falling_digital_ramp output  start falling ramp 
+o_end_ppg_fsm output  end of ppg fsm 
+o_en_tia output  enable tia 
+o_en_buffer output  enable buffer 
+o_en_idac output  en idac 
+o_idac_dc_ppg_frame output [idac_dc_ppg_frame_bit-1:0] idac dc ppg for current frame 
+o_RESET_PPG_average output  reset ppg average

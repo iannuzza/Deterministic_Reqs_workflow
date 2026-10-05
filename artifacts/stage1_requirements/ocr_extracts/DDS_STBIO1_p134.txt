@@ -1,0 +1,47 @@
+133 
+ 
+The only registers that are accessible also by an I2C/SPI direct access, are the ones of the AFE 
+BLOCK section. 
+To reach a very Low-Power consumption, the AHB interface is disabled as default. 
+The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address 
+of the AFE_BLOCK registers are arranged in 4 pages of 64 registers (Table 24). 
+In the following table are the base address and the size of each one page. 
+ 
+BASE ADDRESS SIZE PAGE 
+0x00 0x3F 0 
+0x40 0x3F 1 
+0x80 0x3F 2 
+0xC0 0x3F 3 
+Table 34: Location AFE_BLOCK Registers on the I2C/SPI pages. 
+For direct access operation two I2C/SPI operations need for reading/writing an AFE_BLOCK 
+register:  
+1. Page Selection -> I2C write operation for writing the 2 bits of the PAGE_SEL (address 
+0x40 of I2C/SPI AHB Bridge) 
+2. AFE_BLOCK register R/W -> Read/Write the AFE_BLOCK register with the address 
+reported in one of 4 pages.  
+a. e.g.: for reading the DEVICE_STATUS_REG (Register Map address 0x0096) the 
+PAGE_SEL=0x02, I2C/SPI direct access address=0x16  
+  
+To enable AHB Access, it needs using I2C/SPI direct access mode, for: 
+• First turn-on the LDO1V8 and the Fast-Ring Oscillator (set EN_LDO1V8 and EN_CLKF of 
+VIREF_LDO1V8_CLK16M, see address in the Table 34). 
+• Check the Fast Clock(16MHz),  is stable  (when the Fast-Ring Oscillator is stable, the 
+CLK_READY bit in DEVICE_CONFIG_OPERATION (0x0000) register is set to 1). 
+ 
+ ow it’s possible to configure the registers that are mapped on AHB_Interface as explained in 
+the following example: 
+• Run an I2C/SPI transaction, with the type of AHB access word/byte, at the address 0x59 
+(one of I2C/SPI Internal Configuration Registers). 
+• Run an I2C/SPI transaction, with the register address that you want to configure, at the 
+address 0x50 (one of I2C/SPI Internal Configuration Registers), starting from the LSB. In 
+other word, if you need to access at register VIREF_LDO1V8_CLK16M at AHB address 
+0x000C_00CF, you have to perform four I2C/SPI accesses to write: 
+o At address 0x50  0xCF 
+o At address 0x51  0x00 
+o At address 0x52  0x0C 
+o At address 0x53 → 0x00 
+• Run an I2C/SPI write, of the new data, at address 0x60 (one of I2C/SPI Internal 
+Configuration Registers). 
+ 
+• Run an I2C/SPI read transition, with the number of byte that you read, at address 0x68 
+(one of I2C/SPI Internal Configuration Registers).

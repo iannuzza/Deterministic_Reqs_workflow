@@ -1,0 +1,14 @@
+161 
+ 
+• Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x02) 
+• Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x12) 
+• Enable the power island [DDS_STBIO1_0507] 
+• Enable bist mode by writing to regmap (ADDRESS=0x3E, DATA=0x04) 
+ 
+[End] 
+ 
+ 
+ 
+Figure 28 bist mode activation timing

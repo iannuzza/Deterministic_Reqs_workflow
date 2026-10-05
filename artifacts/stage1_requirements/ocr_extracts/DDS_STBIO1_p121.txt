@@ -1,0 +1,65 @@
+120 
+ 
+ca_stredl_bist_c_memsafe input 
+BIST Pin to 
+globally 
+deactivate 
+the selected 
+memories 
+by making 
+CSN high 
+internally 
+u_ta_afe_bist_crtl_memsafe_ctlr_si
+g 
+ 
+ca_stredl_bist_c_sif_reg_e
+n input 
+BIST Enable 
+for various 
+types of 
+data transfer 
+(Bitmap, 
+memory 
+selection, 
+programma
+ble 
+algorithms) 
+through 
+serial 
+interface. 
+u_ta_afe_bist_crtl_sif_reg_en_ctlr_s
+ig 
+ 
+ca_stredl_bist_c_sif_load_
+en input 
+BIST Allows 
+to control 
+the data 
+loading from 
+collar 
+registers to 
+serial 
+interface 
+registers of 
+the collar 
+u_ta_afe_bist_crtl_sif_load_en_ctlr_
+sig 
+ 
+ca_stredl_bist_c_shift_en input 
+BIST Enable 
+for Serial 
+Input Data 
+from 
+Tester/Exter
+nal World 
+u_ta_afe_bist_crtl_shift_en_ctlr_sig 
+ 
+ca_stredl_bist_c_sif_updat
+e_en input 
+BIST Allows 
+to control 
+the data 
+loading from 
+collar 
+u_ta_afe_bist_crtl_sif_update_en_ct
+lr_sig

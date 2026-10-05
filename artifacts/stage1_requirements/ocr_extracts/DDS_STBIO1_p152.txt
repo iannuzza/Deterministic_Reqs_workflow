@@ -1,0 +1,52 @@
+151 
+ 
+ 
+15.3.3. PPG Only 
+ 
+This configuration generates each time slot, a number of PPG DATA according to user 
+configuration.  
+ 
+1. TIME SLOT LENGTH: 
+[DDS_STBIO1_0143] Requirement: 
+• The User shall configure time slot duration in DEVICE_CONFIG_OPERATION 
+register [4:2]. 
+2. SELECT CHANNEL: 
+[DDS_STBIO1_0144] Requirement: 
+• The user shall select active channel, in this case only PPG_SEL and DS_SEL 
+(data Storage) in DEVICE_CONFIG_CHANNEL register shall be set to 0x30. 
+3. SELECT DIVISION INDEX FOR CONFIGURED CHANNELS: 
+[DDS_STBIO1_0145] Requirement: 
+• The user shall configure a division index PPG, writing M_PPG_l and M_PPG_h in 
+SET_PPG_FREQ_l register and SET_PPG_FREQ_h register. 
+4. CONFIGURE ADC SAMPLING PERIOD: 
+[DDS_STBIO1_0146] Requirement: 
+• The user shall configure the number of clocks for sampling PPG data from ADC in 
+ADC_CONFIG_PPG register. 
+5. PPG FRAMES CONFIG:  
+[DDS_STBIO1_0147] Requirement: 
+The user shall configure each frame following these steps: 
+5.1 ALC PARAMETERS: 
+• T1 in PPG_ALC_CONFIG_PARAM_1 register. 
+• T2, GAIN_START_SET, GAIN_MAX_SET in PPG_ALC_CONFIG_PARAM_2 
+register. 
+5.2 DIGITAL RAMP PARAMETERS: 
+• N_MAX, T_DELTA in DIGITAL_RAMP_CONFIG_PARAM_1 register. 
+• DELTA, T_DELTA1 in DIGITAL_RAMP_CONFIG_PARAM_2 register. 
+• DELTA1 in DIGITAL_RAMP_CONFIG_PARAM_3 register. 
+5.3 GENERAL PPG PARAMETERS: 
+• N_PPG_FRAME, WAVE_VELOCITY_MODE, SEL_PPG_ELAB in 
+GENERAL_PPG_PARAMETERS_1 register. 
+• T_TX_STARTUP in GENERAL_PPG_PARAMETERS_2 register. 
+• T_RX_SET, PPG_START_UP_TIME_l in GENERAL_PPG_PARAMETERS_3 
+register. 
+• PPG_START_UP_TIME_h in GENERAL_PPG_PARAMETERS_4 register. 
+5.4 PARAMETERS FOR EACH FRAME CONFIGURED BY USER: 
+• RX_CH_FRAME_{n}, FRAME_{n}_SAMPLES, FRAME_{n}_REPETITION in 
+FRAME_n_PARAMETERS_1 register. 
+• BTIA_GAIN_FRAME_{n}, TX_LEDSET_FRAME_l_{n} in 
+FRAME_n_PARAMETERS_2 register. 
+• TX_LEDSET_FRAME_h_{n}, TX_LEDOFF_FRAME_l_{n} in 
+FRAME_n_PARAMETERS_3 register. 
+• TX_LEDOFF_FRAME_h_{n} in FRAME_n_PARAMETERS_4 register. 
+• IDAC_DC_PPG_FRAME_{n} in FRAME_n_PARAMETERS_5 register. 
+• EN_TX_i in FRAME_n_PARAMETERS_6 register.

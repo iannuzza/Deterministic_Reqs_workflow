@@ -1,0 +1,19 @@
+7 
+ 
+Generic name Type Value 
+time_slot_sel_bit_top  3 
+T_tx_startup_bit_top  8 
+T_rx_set_bit_top  9 
+ppg_ioff_offset_bit_top  10 
+Nmax_bit_top  4 
+base_address_bit_top  12 
+delta_bit_top  2 
+gain_max_bit_top  4 
+T1_max_bit_top  9 
+T2_max_bit_top  5 
+N_clk_max_bit_top  6 
+n_average_ppg_max_bit_top  3 
+rx_ch_gain_max_bit_top  4 
+BTIA_ALC_register_bit_top  9 
+IDAC_offset  11 
+n_channel_bit_top  4

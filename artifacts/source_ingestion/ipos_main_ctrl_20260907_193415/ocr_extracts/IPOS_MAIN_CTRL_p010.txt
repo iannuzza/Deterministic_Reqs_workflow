@@ -1,0 +1,24 @@
+9 
+ 
+Generic name Type Value 
+n_average_ecg_bia_gsr_max_value  16 
+max_frame_repetition_top  2 
+n_tx_channel  4 
+5.1.1.2. Ports 
+Port name Directi
+on Type Description 
+i_clk_32kHz input  clk 32kHz from pmu 
+i_clk_16MHz input  clk 16MHz from 
+pmu 
+i_clk_gsr_16M input  clk for gsr signal 
+i_clk_ahb_master input  clock for ahb 
+master 
+i_rstn input  reset in 16MHz 
+domain 
+i_rstn_sync_32 input  reset in 32kz 
+domain 
+i_wave_velocity_mode input  enable of the wave 
+velocity mode 
+i_ispu_end_elab input   
+i_n_ppg_frame input [ppg_frame_bit_top-1:0] number of frame 
+selected

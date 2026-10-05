@@ -1,0 +1,29 @@
+80 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+i_T2 input [T2_max_bit_from_decoder_top-
+1:0] 
+ 0.5 to 2 us=~32 
+i_N_clk_ppg input [N_clk_max_bit_top-1:0]  Sample time for ppg 
+i_N_clk_ecg input [N_clk_max_bit_top-1:0]  Sample time for ecg 
+i_N_clk_cal input [N_clk_max_bit_top-1:0]  Sample time for adc calibration 
+scan_enable input   scan enable for scan mode 
+i_timer_buffer_config input [1:0]  timer buffer configuration 
+i_ppg_alc_frame_save input [ppg_frame_bit_top-1:0]  alc data frame to save 
+i_reset_ppg_ioff_calib input    
+HRDATA input [31:0]  AHB Protocol signals 
+HREADY input   AHB Protocol signals 
+HRESP input [1:0]  AHB Protocol signals 
+HGRANT input   AHB Protocol signals 
+SCANENABLE input   Scan Test Mode Enbl 
+SCANINHCLK input   Scan Chain Input 
+SCANOUTHCLK output   Scan Chain Output 
+HSEL output  0 AHB Protocol signals 
+HADDR output [31:0] 0 AHB Protocol signals 
+HTRANS output [1:0] 0 AHB Protocol signals 
+HWRITE output  0 AHB Protocol signals 
+HSIZE output [2:0] 0 AHB Protocol signals 
+HBURST output [2:0] 0 AHB Protocol signals 
+HPROT output [3:0] 0 AHB Protocol signals 
+HWDATA output [31:0] 0 AHB Protocol signals

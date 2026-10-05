@@ -1,0 +1,28 @@
+82 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+o_adc_mux_bio_channel output [2:0] 0 adc mux bio channel 
+o_adc_mux_sel output  0 adc mux sel output 
+o_error_time_slot output  0 error time slot irq 
+o_curr_sel_tx_frame_x output [curr_sel_bit_top-1:0] 0 current selection for tx channel output 
+o_tx1_outlab_sel_frame_x output [bit_outab_sel_top-1:0] 0 tx outlab sel frame x 
+o_tx2_outlab_sel_frame_x output [bit_outab_sel_top-1:0] 0 tx outlab sel frame x 
+o_tx3_outlab_sel_frame_x output [bit_outab_sel_top-1:0] 0 tx outlab sel frame x 
+o_tx4_outlab_sel_frame_x output [bit_outab_sel_top-1:0] 0 tx outlab sel frame x 
+o_tx_preset output  0 tx prese to analog domain 
+o_en_tx output [n_tx_channel-1:0] 0 tx enable to analog domain 
+o_PD_TIA output  1 enabling tia to analog domain 
+o_PD_PGA output  1 enabling buffer to analog domain 
+o_PD_IDAC output  1 enabling idac to analog domain 
+o_gsr_curr_on output  0 gsr curr on pilot to analog domain 
+o_gsr_on output  0 grs on on pilot to analog domain 
+o_ADC_en output  0 ADC enabling 
+o_half_charge_ldo output  0  
+o_ADC_start output  0 ADC Start sampling 
+o_N_step2_to_reg output [rx_ch_gain_limit-1:0] 0 N_Step2 calibration value 
+o_adc_test_cap output [9:0] 0 adc test cap 
+o_adc_error_cap9 output [7:0] 0 adc calibration result 
+o_adc_error_cap8 output [6:0] 0 adc calibration result 
+o_adc_error_cap7 output [6:0] 0 adc calibration result 
+o_adc_error_cap6 output [6:0] 0 adc calibration result

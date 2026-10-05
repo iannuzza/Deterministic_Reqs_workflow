@@ -1,0 +1,61 @@
+9 
+ 
+ 
+IP external Description  Author 
+ISPU STRED-LP2-SVN_VERSION 9739 SRA 
+BIST 
+BLOCK 
+ 
+ GenericMBIST 
+STMicroelectronics 
+TRnD 
+ 
+ADSP ROM H9A_M4_ST_ROM STMicroelectronics 
+TRnD 
+ 
+ADSP RAM ST_SPSMALL_512x64m2_bM6_C
+Umr 
+STMicroelectronics 
+TRnD 
+FIFO RAM ST_SPSMALL_512x64m2_bM6_C
+Umr 
+STMicroelectronics 
+TRnD 
+ISPU CODE ST_SPUHD_2048x128m4_bM6_C
+Umr 
+STMicroelectronics 
+TRnD 
+ISPU DATA ST_SPUHD_2048x32m4_bM6_C
+Umr 
+STMicroelectronics 
+TRnD 
+H9A_FU_OT
+PHV_85AL0
+5_23A 
+ 
+H9A_FU_OTPHV_85AL05_23A_
+MIM5_6ML_ALUCU 
+revision 2.6.b 640-bit 
+ 
+XBAR CoreLink SIE-200 System IP for 
+Embedded - Global Bundle r3p2-
+00rel0 
+ 
+Table 1:external IPs 
+4. Conventions 
+ 
+[DDS_STBIO1_0003] Definition 
+ 
+If not otherwise noted, specification values are valid … 
+ 
+ 
+4.1. Abbreviations 
+ 
+[DDS_STBIO1_00304] Comment  
+The following abbreviations are used throughout this document: 
+ 
+[DDS_STBIO1_0006] Definition  
+  
+A     
+AGC  Automatic Gain Control  
+ASIL Automotive Safety Integrity Level

@@ -1,0 +1,47 @@
+89 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 6070] REQUIREMENT : 
+When i_wave_velocity mode is enabled together with the DISABLE_ALC, the 
+PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the 
+values are not summed (visible) to the o_BIDAC. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_098]  REQUIREMENT : 
+When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC 
+Compensation block to start the ALC Compensation algorithm. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_099]  REQUIREMENT : 
+When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from 
+the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE. 
+[END] 
+ 
+IPOS_STBIO1_MAIN_CONTROLLER_ 6099] REQUIREMENT : 
+When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from 
+the ALC Compensation block to go into the RESET_PPG state if i_wave_velocity_mode is set to 
+1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_100]  REQUIREMENT : 
+When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1,  the 
+o_BIDAC shall maintain the value reached during the ALC Compensation  summed up, if 
+i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration 
+Procedure. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_101]  REQUIREMENT : 
+When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time 
+(GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES 
+state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_102]  REQUIREMENT : 
+When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until 
+i_end_average is low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_103]  REQUIREMENT : 
+When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle 
+after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM 
+shall bring itself into the Rising_Ramp state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1102] REQUIREMENT : 
+Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital 
+Ramp rising phase[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1103] REQUIREMENT :

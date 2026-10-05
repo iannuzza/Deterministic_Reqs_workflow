@@ -1,0 +1,43 @@
+Now perform a focused project-agnostic cleanup pass, without broad redesign.
+
+Priority goals:
+1. audit remaining project-specific vocabulary/constants in legacy generation and helper modules
+2. ensure reusable logic consumes the centralized approved vocabulary/resolver context
+3. add consistency scanners/validators for authority bypasses and hardcoded project assumptions
+
+Known remaining issues:
+- project-specific vocabulary/constants still remain in some legacy generation modules
+- hidden authority bypasses or hardcoded assumptions may still exist in older scripts/helpers
+
+Constraints:
+- keep the workflow project-agnostic
+- deterministic
+- no LLM/network/cloud dependency in the authoritative workflow
+- do not redesign the canonical workflow foundation
+- preserve backward compatibility where practical
+- authoritative and reusable logic must prefer centralized approved vocabulary/resolver context over local embedded constants
+
+Please implement only the minimum safe changes needed to:
+1. identify and isolate reusable project-specific constants behind config/adapters where practical
+2. ensure that wherever reusable workflow logic depends on vocabulary, aliases, stopwords, prefixes, normalization hints, phrase expansion, req-id patterns, or related lexical resources, it consumes the centralized approved vocabulary/resolver context rather than local embedded constants
+3. flag or migrate remaining hardcoded project identifiers, aliases, stopwords, prefixes, or generation constants that should not stay in core reusable logic
+4. add consistency scanners or validation helpers that can detect:
+   - direct mutable CSV/JSON authoritative reads
+   - legacy resolver calls in authoritative paths
+   - hardcoded project identifiers in reusable workflow code
+   - unapproved profile usage where approved resolver context is expected
+   - embedded local vocabulary/constants where centralized approved vocabulary should be used
+5. keep any needed project-specific behavior explicit rather than hidden in legacy code
+
+Before editing code, first provide:
+1. target files/modules
+2. intended changes per file
+3. whether scanners should be scripts, validators, or tests
+4. how backward compatibility will be preserved
+
+At the end, provide:
+1. what project-specific assumptions were cleaned up
+2. what was migrated to centralized approved vocabulary/resolver usage
+3. what still remains and why
+4. what scanners/validators were added
+5. any residual project-specific or vocabulary-related risk before the final polish pass

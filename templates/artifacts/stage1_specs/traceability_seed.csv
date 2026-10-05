@@ -1,0 +1,3 @@
+req_id,requirement_title,acceptance_test_id,assertion_id,priority,status,notes
+REQ-001,<title>,AT-REQ-001,ASSERT_REQ-001_01,high,draft,
+REQ-002,<title>,AT-REQ-002,ASSERT_REQ-002_01,medium,draft,

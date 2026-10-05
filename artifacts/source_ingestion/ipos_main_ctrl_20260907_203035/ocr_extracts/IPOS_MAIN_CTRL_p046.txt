@@ -1,0 +1,31 @@
+45 
+ 
+Port name Direction Type Descr. 
+i_end_of_conversion input  end of 
+converison 
+i_end_of_ppg input  end of ppg 
+i_clk_16MHz_ready input  
+ready from 16 
+MHz ring 
+oscillator 
+i_hc_su input  
+health 
+channel start 
+up end 
+i_end_calibration input  end adc 
+calibration 
+i_imp_su input  bia start up 
+phase end 
+i_write_done input  write done 
+from ahb 
+i_time_slot_selection input [time_slot_sel_bit-1:0] time slot 
+selection 
+i_N_clk_ppg input [N_clk_max_bit-1:0] 
+ppg sampling 
+phase clock 
+cycles 
+i_N_clk_ecg input [N_clk_max_bit-1:0] 
+ecg sampling 
+phase clock 
+cycles 
+i_adc_ready input  adc ready

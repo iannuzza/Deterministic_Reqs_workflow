@@ -1,0 +1,74 @@
+119 
+ 
+ca_stredl_bist_c_rst_bistctl
+r_n input 
+BIST 
+Asynchrono
+us Reset 
+Pin for collar 
+Serial 
+Interface 
+and 
+Controller 
+u_pmu_tst_rst_bistctlr_n_sig 
+ 
+ca_stredl_bist_c_clk_bistctl
+r input 
+BIST Low 
+Frequency 
+Serial Shift 
+Clock for the 
+controller 
+u_pmu_tst_clk_bistctlr_sig 
+ 
+ca_stredl_bist_c_bist_mod
+e input 
+BIST Global 
+BIST Mode 
+Selection 
+Bus 
+u_ta_afe_bist_crtl_bist_mode_ctlr_s
+ig 
+ 
+ca_stredl_bist_c_march_sh
+ift input 
+BIST March 
+element 
+serial data 
+out enable 
+to 
+SP/ROM/RF
+/DP collars 
+u_ta_afe_bist_crtl_march_shiftSP_s
+ig 
+ 
+ca_stredl_bist_c_collar_co
+nfig input 
+BIST Mode 
+selection 
+pins for 
+SP/ROM/RF
+/DP memory 
+collars 
+(modefunc, 
+modestab, 
+modecoll) 
+u_ta_afe_bist_crtl_collar_configSP_
+sig 
+ 
+ca_stredl_bist_c_march_in input 
+BIST March 
+element 
+serial data 
+in 
+u_ta_afe_bist_crtl_march_outSP_si
+g 
+ 
+ca_stredl_bist_c_march_ru
+n input 
+BIST March 
+run to 
+SP/ROM/RF
+/DP collars 
+u_ta_afe_bist_crtl_march_runSP_si
+g

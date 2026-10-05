@@ -1,0 +1,26 @@
+22 
+ 
+Port name Directi
+on Type Description 
+o_comp_rx_ck output  output for 
+comparator debug 
+o_BTIA_gain output [gain_max_bit_top-1:0] BTIA gain output to 
+analog domain 
+o_data_out_debug_adc output [15:0] o data output for 
+adc debug 
+o_en_mask_ldo_pdclkf_reg output  mask for en_ldo 
+and pdf 
+o_pd_clkf output  pd_clkf 
+o_trim_ldo_d output [1:0] trim ldo value 
+o_BDC_PPG output [idac_dc_ppg_frame_bit_top-1:0] idac dc ppg frame 
+output 
+o_adc_mux_bio_channel output [2:0] adc mux bio 
+channel 
+o_adc_mux_sel output  adc mux sel output 
+o_error_time_slot output  error time slot irq 
+o_curr_sel_tx_frame_x output [curr_sel_bit_top-1:0] current selection for 
+tx channel output 
+o_tx1_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x 
+o_tx2_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x

@@ -1,0 +1,109 @@
+63 
+ 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio4_irq_sel 
+== 4) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)} 
+1'b0 stbio1_top.if_g
+pio4_en 
+DDS_STB
+IO1_GPIO
+4_EN_31
+2 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio1_irq_sel 
+== 2) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)  && 
+!pad_mux__path.ext_cap_en
+} 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_en_tx & 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_tx_preset 
+& 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_tx1_outla
+b_sel_frame_x 
+stbio1_top.if_g
+pio1_out 
+DDS_STB
+IO1_GPIO
+1_310 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio1_irq_sel 
+== 2) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)  && 
+!pad_mux__path.ext_cap_en
+} 
+1'b0 stbio1_top.if_g
+pio1_en 
+DDS_STB
+IO1_GPIO
+1_EN_31
+0 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio2_irq_sel 
+== 2) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)  && 
+!pad_mux__path.ext_cap_en
+} 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_en_tx & 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_tx_preset 
+& 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_tx1_outla
+b_sel_frame_x 
+stbio1_top.if_g
+pio2_out 
+DDS_STB
+IO1_GPIO
+2_310 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio2_irq_sel 
+== 2) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1)  && 
+!pad_mux__path.ext_cap_en
+} 
+1'b0 stbio1_top.if_g
+pio2_en 
+DDS_STB
+IO1_GPIO
+2_EN_31
+0 
+{(stbio1_top.dig_wrapper_LV
+.u_regmap_otp.gpio3_irq_sel 
+== 2) &&  
+!pad_mux__path.scan_mode 
+&& 
+(pad_mux__path.mission_mo
+de == 1) } 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_en_tx & 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_tx_preset 
+& 
+stbio1_top.dig_wrapper_LV.u_
+main_controller_top.o_tx1_outla
+b_sel_frame_x 
+stbio1_top.if_g
+pio3_out 
+DDS_STB
+IO1_GPIO
+3_310

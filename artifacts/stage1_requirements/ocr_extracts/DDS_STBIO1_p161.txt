@@ -1,0 +1,32 @@
+160 
+ 
+• Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x08) 
+ 
+ 
+[End] 
+ 
+ 
+18.4. ADC TEST FAST  
+[DDS_STBIO1_1507] Requirement: 
+To turn on the ADC TEST LOW NOISE mode shall be: 
+• Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) 
+• Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0xF, DATA=0x02) 
+• Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x12) 
+• Enable ADC in debug mode (ADDRESS=0x09, DATA=0x06) 
+• Select page 2 of the regmap (ADDRESS=0x40, DATA=0x02) 
+• Enable ADC TEST LOW NOISE and input of ADC from GPIO (ADDRESS=0x0A, 
+DATA=0x0C) 
+• Select page 3 of the regmap (ADDRESS=0x40, DATA=0x02) 
+• Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x08) 
+ 
+ 
+ 
+ 
+[End] 
+ 
+18.5. BIST MODE  
+[DDS_STBIO1_2507] Requirement: 
+After the initial boot phase, to turn on the Debug mode shall be: 
+• Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03)

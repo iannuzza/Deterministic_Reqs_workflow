@@ -1,0 +1,28 @@
+51 
+ 
+Port name Direction Type Descr. 
+o_mc_busy output  
+main 
+controller is 
+working 
+o_half_charge_ldo output  half charge 
+ldo to pmu 
+o_start_su_ecg output  start ecg start 
+up 
+o_start_su_bia output  start bia start 
+up 
+o_alc_mask output  alc mask 
+o_start_cfg_update_clk_en output  start shadow 
+registers IPs 
+o_save_alc output  
+save alc data 
+for current 
+frame 
+o_irq_start_measurement output  irq for start 
+measurement 
+o_reset_su output  reset start up 
+phase 
+o_operative_state output  operative 
+state flag 
+o_ioff_rx_ch_reg output  ioff rx ch 
+selection

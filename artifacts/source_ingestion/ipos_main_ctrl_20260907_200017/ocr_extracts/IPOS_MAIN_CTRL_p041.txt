@@ -1,0 +1,42 @@
+40 
+ 
+Port name Direction Type Descr. 
+i_T_tx_led_off input [n_max_frame-
+1:0][T_tx_led_off_max_bit-1:0] 
+time led off 
+for each 
+frame 
+i_curr_sel_tx_frame_x input [n_max_frame-1:0][curr_sel_bit-
+1:0] 
+curr sel tx for 
+each frame 
+i_tx1_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_tx2_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_tx3_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_tx4_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_idac_dc_ppg_frame input [n_max_frame-
+1:0][idac_dc_ppg_frame_bit-1:0] 
+idac dc ppg 
+frame for 
+each frame 
+i_en_ldo_1v8_ext input  enable ldo ext 
+i_debug input  enable debug 
+mode 
+i_debug_gsr_on input  enable debug 
+for gsr

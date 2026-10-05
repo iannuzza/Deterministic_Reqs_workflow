@@ -1,0 +1,41 @@
+21 
+ 
+o_adc_mux_bio_channel output 0 wire 
+[2:0] 
+from u_scan_out_mux 
+o_adc_mux_sel output 0 wire from u_scan_out_mux 
+o_gsr_curr_on output 0 wire from u_scan_out_mux 
+o_gsr_on output 0 wire from u_scan_out_mux 
+o_ADC_en output 0 wire from u_scan_out_mux 
+o_ADC_start output 0 wire from u_scan_out_mux 
+o_adc_error_cap8_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap7_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap6_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap5_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap4_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap3_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap2_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap1_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_adc_error_cap0_1V2 output 0 wire 
+[6:0] 
+from u_scan_out_mux 
+o_pd_cm_buf output 1 wire from u_scan_out_mux 
+o_pd_rld output 1 wire from u_scan_out_mux 
+o_pd_avg1 output 1 wire from u_scan_out_mux 
+o_pd_avg2 output 1 wire from u_scan_out_mux

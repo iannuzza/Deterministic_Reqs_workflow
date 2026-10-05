@@ -1,0 +1,19 @@
+37 
+ 
+Generic name Type Value Description 
+m_odr_max_bit int 11  
+time_slot_sel_bit int 3  
+N_clk_max_bit int 7  
+quokka_routine_bit int 3  
+ppg_rx_channel_bit int 3  
+T_tx_led_set_bit int 5  
+T_tx_led_off_max_bit int 8  
+idac_dc_ppg_frame_bit int 7  
+n_average_ecg_bia_gsr_max_bit int 4  
+n_channel_bit int 4  
+n_average_ppg_max_bit int 4  
+n_max_frame int 5  
+rx_ch_gain_max_bit int 4  
+curr_sel_bit int 9  
+bit_outab_sel int 1  
+n_tx_channel int 4

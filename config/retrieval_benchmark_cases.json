@@ -1,0 +1,55 @@
+{
+  "project_name": "STBIO",
+  "source_spec_path": "specs/DDS_STBIO1.pdf",
+  "source_artifacts": [
+    "artifacts/stage1_requirements/requirements_summary.csv",
+    "artifacts/rag_DDS_STBIO1/rag_index.sqlite"
+  ],
+  "top_k": 10,
+  "benchmark": {
+    "max_mean_latency_ms": 100.0,
+    "max_p95_latency_ms": 250.0
+  },
+  "cases": [
+    {
+      "case_id": "exact-requirement-id-0104",
+      "query": "DDS_STBIO1_0104",
+      "expected_entity_ids": ["151"],
+      "category": "exact_requirement_id",
+      "source_requirement_ids": ["DDS_STBIO1_0104"],
+      "rationale": "Exact source requirement identifiers must preserve lexical evidence."
+    },
+    {
+      "case_id": "protocol-interface",
+      "query": "I2C SPI AHB interface",
+      "expected_entity_ids": ["139", "266", "267"],
+      "category": "acronym_protocol",
+      "source_requirement_ids": ["DDS_STBIO1_8000"],
+      "rationale": "Protocol and interface terminology should retrieve the relevant source evidence."
+    },
+    {
+      "case_id": "startup-power-sequencing",
+      "query": "startup power sequencing",
+      "expected_entity_ids": ["59", "67", "243"],
+      "category": "synonym_paraphrase",
+      "source_requirement_ids": ["DDS_STBIO1_0017"],
+      "rationale": "Paraphrased startup and power-sequencing language tests semantic recovery."
+    },
+    {
+      "case_id": "fifo-depth",
+      "query": "FIFO depth",
+      "expected_entity_ids": ["260", "286", "290"],
+      "category": "sparse_description",
+      "source_requirement_ids": ["DDS_STBIO1_8100", "DDS_STBIO1_89455232", "DDS_STBIO1_00001199"],
+      "rationale": "Short technical descriptions should retrieve parameter and FIFO evidence."
+    },
+    {
+      "case_id": "clock-gating",
+      "query": "clock gating",
+      "expected_entity_ids": ["140", "154"],
+      "category": "mixed_engineering",
+      "source_requirement_ids": ["DDS_STBIO1_0104"],
+      "rationale": "Mixed clock-control terminology should preserve the strongest technical evidence."
+    }
+  ]
+}

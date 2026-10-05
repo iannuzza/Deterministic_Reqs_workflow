@@ -1,0 +1,70 @@
+55 
+ 
+if_gpio4_tud_reg input 
+ 
+if gpio4_tud from reg 
+if_sh_ck_tud_reg input 
+ 
+if sh_ck_tud from reg 
+clk_dft_adc input 
+ 
+16MHz adc dft clk 
+i_ADC_clk_serial_dft input 
+ 
+serial clk for adc dft 16Mhz:Fast mode, 
+if_sh_ck_in:Low noise mode 
+EN_ADC_TEST_FAST input 
+ 
+enable adc test fast 
+EN_ADC_TEST_LOW_NOISE input 
+ 
+enable adc test low noise 
+i_ADC_EOC input 
+ 
+adc eoc input 
+i_ADC_start input 
+ 
+adc star from main controller 
+i_data_ADC_out input [15:0] adc data input 
+o_ADC_start output 
+ 
+adc star output 
+i_N_clk input [6-
+1:0] 
+n clk start time high 
+i_saturation_irq input 
+ 
+interrupt saturation from main controller 
+i_end_boot input 
+ 
+end boot signal from adsp 
+quokka_run input 
+ 
+status quokka elaboration 1:run 0:not 
+elaboration 
+sensor_hub_status input 
+ 
+status sensor_hob from regmap 
+SH_CKL_EN input 
+ 
+sensorhub clk enable from regmap 
+(master_end_op_clr or sleep_master_clr or 
+ahb_master_on_clr) 
+i_t_force_1v2 input 
+ 
+input force signal to IDDQ test 
+o_t_force_1v2 output 
+ 
+force signal to IDDQ test 
+i_bfail_fifo input 
+ 
+bist fail fifo ram 
+i_bfail_qk input 
+ 
+bist fail adsp ram 
+i_bfail_ispu1 input 
+ 
+bist fail ispu ram instruction mem 
+i_bfail_ispu2 input 
+ 
+bist fail ispu ram data mem 1

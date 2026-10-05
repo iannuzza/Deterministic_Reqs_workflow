@@ -1,0 +1,63 @@
+4 
+ 
+ 
+1. Introduction 
+This document is the specification of the Main Controller for STBIO1.  
+ 
+2. Version History  
+[IPOS_STBIO1_MAIN_CONTROLLER_001]  DEFINITION  
+Current Version Previous Version Date Author Change description 
+1.0 0.21 10/05/25 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Fix generic typos 
+0.21 0.20 9/22/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Fix Reqs 7096, 034 and 
+4034 
+0.20 0.19 9/18/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Fix Reqs 1131 and 436 
+0.19 0.18 9/15/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Reference to 
+o_error_time_slot_irq 
+added in req 034. 
+Added Requirement 
+4034 
+0.18 0.17 9/04/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Removed Requirement 
+1106, changed 
+Requirement 5016, 
+change ALC 
+Requirements and Main 
+Controller Top. Fixed 
+Ports and Parameters 
+table. Added 
+Requirement 1034. 
+Change table in 
+Appendix 
+Table 1: Version History Table 
+3. Reference Document 
+Current Version Previous Version Document Author Change description 
+1.11 1.10 AFE_IPOS Aldo Torino 
+Savino Bellopede 
+ 
+Table 2: Reference Document Table 
+4. Terms and Abbreviations 
+Abbreviation Meaning

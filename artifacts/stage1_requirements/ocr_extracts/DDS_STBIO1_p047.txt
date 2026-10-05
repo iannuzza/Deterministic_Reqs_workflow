@@ -1,0 +1,38 @@
+46 
+ 
+ 
+Figure 10: STBIO1 Reset Scheme 
+Req_ID Source Target 
+DDS_STBIO1_1050 u_stbio1_top.dig_wrapper_LV.u_p
+mu.resetn_stmc 
+u_stbio1_top.dig_wra
+pper_LV.u_ADSP.HR
+ESETn 
+DDS_STBIO1_1051 u_stbio1_top.dig_wrapper_LV.u_p
+mu.resetn_masterblaze 
+u_stbio1_top.dig_wra
+pper_LV.u_masterbla
+ze_ahb.HRESETn 
+DDS_STBIO1_1052 u_stbio1_top.dig_wrapper_LV.u_p
+mu.resetn_regmap 
+u_stbio1_top.dig_wra
+pper_LV.u_regmap_ot
+p.hresetn 
+DDS_STBIO1_2052 
+stbio1_top.dig_wrapper_LV.u_pmu
+.u_device_startup.u_por_main_res
+etn.RST_N_FF[0] 
+u_stbio1_top.dig_wra
+pper_LV.u_xbar_afe.h
+resetn 
+DDS_STBIO1_2053 u_stbio1_top.dig_wrapper_LV.u_p
+mu.resetn_regmap 
+u_stbio1_top.dig_wra
+pper_LV.u_ispu.main_
+rst_n 
+DDS_STBIO1_1053 u_stbio1_top.dig_wrapper_LV.u_p
+mu.resetn_fifo 
+u_stbio1_top.dig_wra
+pper_LV.u_multi_chan
+nel_fifo_top.HRESET
+n

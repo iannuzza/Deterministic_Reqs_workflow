@@ -1,0 +1,34 @@
+50 
+ 
+Port name Direction Type Descr. 
+o_write_data_tag_ahb_en output [1:0] write data tag 
+ahb 
+o_gsr_curr_on output  
+gsr curr on 
+signal to 
+analog 
+domain 
+o_gsr_on output  
+gsr on signal 
+to analog 
+domain 
+o_gsr_result output  
+gsr result 
+computation 
+to average ip 
+o_data_valid_gsr_adc output  data valid gsr 
+adc 
+o_reset_calibration_phase output  
+reset adc 
+calibration 
+phase 
+o_en_clk_16MHz_sleep output  close clock in 
+sleep state 
+o_mc_ahb_clk_en output  master ahb 
+clock enable 
+o_reset_ppg_start_up output  reset ppg 
+start up 
+o_ioff_calibration_av output  
+ioff 
+calibration 
+data valid

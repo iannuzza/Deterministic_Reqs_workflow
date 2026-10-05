@@ -1,0 +1,28 @@
+26 
+ 
+Port name Directi
+on Type Description 
+o_irq_start_measurement output  
+irq start 
+measurement to 
+GPIO 
+o_end_calibration output  end calibration to 
+analog domain 
+o_alc_data output [data_out_size_bit_top+2:0] alc data to regmap 
+o_ppg_data_raw output [data_out_size_bit_top+2:0] ppg raw data to 
+regmap 
+o_pd_buf_gpio1 output  power down for 
+buffer gpio1 
+o_pd_buf_gpio2 output  power down for 
+buffer gpio2 
+o_adc_data_debug_alc_1 output [frame_ppg_debug_alc_top-1:0] alc 1 registers data 
+debug 
+o_adc_data_debug_alc_2 output [frame_ppg_debug_alc_top-1:0] alc 2 registers data 
+debug 
+o_adc_data_debug_ppg_raw output [frame_ppg_debug_ppg_raw_top-1:0] ppg raw registers 
+data debug 
+o_en_lead_off output  mask lead off 
+o_mc_busy output  main controller is 
+working 
+o_en_ck_m_p_q output  clock m and q bia 
+o_en_ck_chop_imp output  clock chopper bia

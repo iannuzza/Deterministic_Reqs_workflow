@@ -1,0 +1,80 @@
+Please investigate and fix the remaining SRS low-power / power-domain descriptive-generation issues. This is an incremental refinement of the shared descriptive retrieval/assembly work.
+
+Important constraints:
+- project-agnostic
+- deterministic
+- local-only
+- no LLM calls
+- no network/cloud dependencies
+- descriptive-only, non-authoritative
+- preserve approved source wording and provenance as much as possible
+- no invented filler
+- if concrete sequencing/control behavior is not clearly supported by approved evidence, render it as **needed clarification from user** rather than fabricating prose
+
+Please address the following issues:
+
+1. Source exclusion
+Do not use the source spec **Version History** table as evidence for power-domain / low-power descriptive sections.
+
+2. Duplicate section
+Investigate why `Power Domain Architecture {#power-domain-architecture}` is duplicated in the generated `system_requirements_spec.md` and remove the duplication deterministically.
+
+3. Domain extraction quality
+For the SRS power-domain section(s), extract and render all real power-domain naming and details from approved evidence, including:
+- original domain names exactly as in source, such as `PD_TOP1V2`, `PD_STREDL`, etc.
+- descriptions / functions
+- characteristics
+- control / management responsibility
+- voltage information
+- always-on / switchable / retained / other relevant attributes
+Do not collapse these into vague generic prose.
+
+4. Preserve critical source terms
+Preserve important original source characteristics when supported by evidence, e.g. terms like `Switchable`, `Never powered down`, retained behavior, control mode, and similar source-specific architectural attributes. Investigate why such details are being lost today and fix it.
+
+5. Bad signal-level leakage
+In SRS section(s) such as sequencing and domain control, investigate why irrelevant signal-level details such as `ca_stredl_bist_c_sif_reg_e` appear. Determine whether they come from retrieval noise, weak filtering, block-local leakage, or poor topic assignment, and prevent them from entering top-level SRS descriptive text unless they are clearly required at system scope.
+
+6. Real sequence content only
+For sequencing / domain control / low-power entry-exit paragraphs, render real and concrete control/management sequences only when they are clearly supported by approved evidence.
+If the source does not clearly describe the on/off sequencing, low-power entry, wake-up, restore, isolation, or control ownership behavior, do not invent. Instead render that paragraph/topic as:
+- `needed clarification from user`
+or omit it, depending on the existing document contract. Tell me which option you will use and why.
+
+7. Retrieval path visibility
+Tell me explicitly whether semantic RAG query has already been adopted in this path or not.
+If yes:
+- where it is enabled
+- under which trigger/conditions it runs
+- how its candidates are filtered before rendering
+If no:
+- confirm whether the current path is lexical + normalized + RRF only
+- explain whether the current issues are caused before retrieval, during retrieval, or in post-retrieval filtering/assembly
+
+8. Explain current failure causes
+Before editing, explain for these issues whether the root cause is mainly:
+- source exclusion not applied
+- duplicate assembly/rendering
+- lexical rigidity
+- weak candidate discovery
+- wrong scope/domain filtering
+- weak post-retrieval filtering
+- structured evidence not being preserved
+- loss during paragraph rendering/compaction
+
+Before editing, tell me clearly:
+1. whether semantic RAG query is currently used in this SRS power-domain / low-power path
+2. where Version History evidence is being admitted today
+3. why the power-domain section is duplicated
+4. why original domain naming/details are being lost
+5. why irrelevant signal-level details leak into SRS
+6. which files/helpers/templates you will modify
+7. how you will preserve original power-domain structure and wording better
+8. whether missing sequencing evidence will be rendered as `needed clarification from user` or omitted
+9. what tests/fixtures you will add for:
+- version-history exclusion
+- duplicate-section prevention
+- preservation of original power-domain names/details
+- preservation of attributes like `Switchable`
+- rejection of irrelevant signal-level leakage
+- missing-sequence handling without fabrication

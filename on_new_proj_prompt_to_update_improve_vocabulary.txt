@@ -1,0 +1,6 @@
+Update and integrate vocabularies so the tool’s knowledge improves from approved project authority over time.
+Start from the block identification inventory and extend deterministically with approved mappings, approved snapshot ownership, and approved traceable labels.
+Keep general normalization rules separate from project-derived vocabulary knowledge.
+Allow only deterministic updates and explicit reviewed manual exceptions.
+No AI, no cloud, no fuzzy guessing, no opaque manual alias sprawl.
+Use this centrally through the existing validator-orchestrator and update the General Rules accordingly.

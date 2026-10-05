@@ -1,0 +1,21 @@
+32 
+ 
+Port name Direction Type Description 
+i_curr_sel_tx_frame_x input [n_max_frame-1:0][curr_sel_bit-1:0]  
+i_tx1_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_tx2_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_tx3_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_tx4_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_average_ppg input [n_max_frame-1:0][n_average_ppg_max_bit-
+1:0]  
+i_gain_start input [n_max_frame-1:0][gain_max_bit-1:0]  
+i_en_txi input [n_max_frame-1:0][3:0]  
+i_gain_alc_start input [gain_max_bit-1:0]  
+i_en_ldo_1v8_ext input   
+i_frame_repetition input [n_max_frame-1:0][max_frame_repetition-
+1:0]  
+i_T_rx_set input [T1_max_bit_from_decoder-1:0]  
+i_nstart_case input [Nmax_bit-1:0]  
+i_T_delta1_to_reg input [delta_bit-1:0]  
+i_wave_velocity_mode input   
+i_b_cap_idac input [1:0]

@@ -1,0 +1,25 @@
+# Allocation Crosscheck Report
+
+## Summary
+
+- approved_primary_requirements: 314
+- approved_supplementary_requirements: 0
+- by_class: {"block_local_analog": 1, "block_local_digital": 313}
+- by_topic_family: {"": 109, "exact_io_port_definition": 6, "local_clock_reset": 41, "local_fifo_buffering": 30, "local_interrupt_event_status": 12, "local_register_access": 113, "local_timing_protocol": 1, "system_power_wakeup": 2}
+- by_scope: {"Analog": 1, "Digital": 277, "System": 36}
+- by_block: {"ADSP": 20, "Digital": 27, "I2C_SPI_AHB": 15, "ISPU": 10, "Main Controller": 148, "OTP": 2, "PAD MUX": 17, "PMU": 31, "Regmap": 8, "Sensor-Hub": 23, "Smart FIFO": 13}
+- by_domain: {"Analog": 1, "Digital": 277, "System": 36}
+- by_coverage_status: {"orphaned": 314}
+- by_lineage_mode: {"normal_hierarchical": 314}
+- required_target_counts: {"Analog IPOS": 1, "Digital IPOS": 313}
+- actual_target_counts: {"": 314}
+- row_count: 314
+- materialization: {"corpus_hash": "b311b5f2b5be074c201368a113b9073b74ef3b2bb2aae2b824ba5fb260198366", "materialized": true, "row_count": 314, "selection": {"attempted_snapshots": [{"accepted": true, "reason": "complete approved canonical requirements and mappings", "snapshot_id": "snap-b311b5f2b5be074c201368a1"}], "completeness_criteria": "approved status; project match; non-empty canonical and mapping sets; one approved mapping per requirement; resolver hash validation", "selected_snapshot_id": "snap-b311b5f2b5be074c201368a1", "selection_mode": "explicit"}, "snapshot_hash": "b311b5f2b5be074c201368a113b9073b74ef3b2bb2aae2b824ba5fb260198366", "snapshot_id": "snap-b311b5f2b5be074c201368a1", "source_path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\data\\canonical\\canonical_store.sqlite", "source_type": "primary", "source_type_counts": {"primary": 314}, "spec_level_counts": {"Analog IPOS": 1, "Digital IPOS": 313}}
+
+## Findings
+
+- None
+
+## Associations
+
+- Source requirement -> rendered descendants, immediate parents, source origins, target sets, and owners are available in `requirement_allocation_ledger.csv`.

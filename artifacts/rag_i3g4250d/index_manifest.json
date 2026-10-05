@@ -1,0 +1,13 @@
+{
+  "built_at": "2026-08-10 17:32:46",
+  "source_index": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/MEMS_3axis_gyro/artifacts/stage1_requirements/ocr_extracts/index.csv",
+  "db_path": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/MEMS_3axis_gyro/artifacts/rag_i3g4250d/rag_index.sqlite",
+  "chunk_size": 1200,
+  "chunk_overlap": 180,
+  "pages_indexed": 41,
+  "chunks_indexed": 71,
+  "source_files": [
+    "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/MEMS_3axis_gyro/specs/i3g4250d.pdf"
+  ],
+  "html_clean_mode": true
+}

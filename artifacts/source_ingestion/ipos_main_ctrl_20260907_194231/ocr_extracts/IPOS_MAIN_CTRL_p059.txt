@@ -1,0 +1,41 @@
+58 
+ 
+example, time_slot_data shall be 0 if it’s the first time slot, 4 if it’s the fifth time_slot). If no operation 
+is done during a time_slot, no time_slot_data shall be written, but the value of time_slot_data shall 
+be increased. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_009] REQUIREMENT:  
+[Covers: DDS_STBIO1_0123] 
+[Covers: DDS_STBIO1_0141] 
+ 
+When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL 
+(DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL 
+(DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL 
+(DEVICE_CONFIG_CHANNEL register [3])  is set high, or ADC_DO_CALIBRATION ( 
+ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE 
+(GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL 
+(DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION 
+(DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go 
+to 0, the w_en_ldo1v8 shall be set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_010]  REQUIREMENT :  
+[Covers: DDS_STBIO1_0119] 
+When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, 
+HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN  (IMP_CTRL register [0])  is set to 0, 
+ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register 
+[1:0] ) is set  different from 0, the O_PD_HC2 shall go low and the Device_FSM  FSM shall go to 
+the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) shall be equal to 0x03. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_011]  REQUIREMENT :  
+ 
+When the HC_EN (ECG_CTRL register [0])  is set to 0 and IMP_EN  (IMP_CTRL register [0])  is 
+set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and 
+ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register 
+[1:0] ) is set different from 0,  the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the 
+Device_FSM shall go to the WAIT_SU State, so main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_012]  REQUIREMENT :  
+When the HC_EN (ECG_CTRL register [0])  is set to 1 and IMP_EN  (IMP_CTRL register [0])is set 
+to 1, ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1 and ECG0_SEL

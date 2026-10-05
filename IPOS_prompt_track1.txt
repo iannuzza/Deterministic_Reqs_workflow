@@ -1,0 +1,47 @@
+Proceed with Track 1 only: IPOS internal links and cross-references.
+
+Important:
+- use the existing central downstream validator-orchestrator as the only shared authority for downstream contract decisions
+- update and use the General Rules accordingly
+- keep one central logic and decision model for all IPOS outputs
+- do not create local ad hoc validation logic or a parallel validator
+
+Use the agreed Track 1 plan:
+- generate stable deterministic anchors for every emitted IPOS section and subsection
+- generate links only to anchors emitted in the same document
+- reuse a shared anchor-normalization helper only if truly needed
+- enforce the output rule through the existing validator/gate path, not through isolated local logic
+
+Implement only:
+- generate_ipos_specs.py
+- workflow_routing.py only if needed for shared anchor normalization
+- validate_ipos_gate.py only as a stage-local output check aligned with the central contract
+- update the General Rules where needed so IPOS link integrity follows the same central downstream governance
+
+Must remain unchanged:
+- filename/block naming
+- requirement IDs
+- Covers fields
+- snapshot IDs
+- allocation
+- ownership
+- traceability
+- central contract behavior
+
+Validation required:
+- parse every Markdown link and verify the target anchor exists
+- verify every generated navigation entry resolves
+- verify requirement cross-references resolve
+- convert one Digital and one Analog IPOS document to DOCX and verify internal targets
+- fail the IPOS gate on unresolved internal links
+- keep the result coherent with the central downstream validator-orchestrator
+
+Do not work on Tracks 2, 3, or 4 yet.
+Do not touch TOC/page-placement or repeated-requirement handling yet.
+
+Return:
+- files changed
+- exact central rule applied for IPOS link integrity
+- General Rules updated
+- tests/checks run
+- result

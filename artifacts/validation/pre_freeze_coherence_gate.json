@@ -1,0 +1,3171 @@
+{
+  "authority_fingerprint": "98fdcd4d78e660a9a9aa30a852e859c6a4913695f5de31482ed0888f00fdc8e4",
+  "authority_fingerprint_matches": true,
+  "auto_resolved_hierarchy_parent_count": 0,
+  "classified_warnings": [
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163118",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163118",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163215",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163215",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163337",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163337",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163557",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163557",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_164215",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_164215",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165141",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165141",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165431",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165431",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171517",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171517",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171858",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171858",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_185543",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_185543",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191849",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191849",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191935",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191935",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192039",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192039",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192824",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192824",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192850",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192850",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193415",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193415",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193647",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193647",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193909",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193909",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193955",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193955",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194231",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194231",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194411",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194411",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194920",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194920",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_195429",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_195429",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200017",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200017",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200040",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200040",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_201310",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_201310",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_203035",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_203035",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_092940",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_092940",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100308",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100308",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100408",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100408",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101321",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101321",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101600",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101600",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_173306",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_173306",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_130222",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_130222",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_141927",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_141927",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_142550",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_142550",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134117",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134117",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134724",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134724",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_141800",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_141800",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142149",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142149",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142625",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142625",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    },
+    {
+      "automatic_action": "no_automatic_change",
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_143322",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322",
+      "root_cause": "requires deterministic review",
+      "severity": "INFO",
+      "triage_class": "INFO_ONLY"
+    }
+  ],
+  "csv_authority_crosscheck": {
+    "counts": {
+      "HUMAN_REVIEW_REQUIRED": 0,
+      "LOWER_LEVEL_BUT_NO_PARENT_EVIDENCE": 0,
+      "MULTI_COVERS_AMBIGUOUS": 0,
+      "POSSIBLE_LINEAGE_OR_ALLOCATION_INCONSISTENCY": 0,
+      "SELF_ORIGIN_ONLY_NOT_PARENT_EVIDENCE": 0,
+      "SINGLE_COVERS_CANDIDATE": 0,
+      "SINGLE_SOURCE_ORIGIN_CANDIDATE": 0,
+      "SOURCE_DERIVED_PROVENANCE_EXEMPT": 259,
+      "TOP_LEVEL_OR_NON_PARENT_CASE_MISFLAGGED": 0,
+      "TOP_LEVEL_PARENT_WARNING_SUPPRESSED": 55
+    },
+    "rows": {
+      "DDS_STBIO1_00000008": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_00000008"
+        ]
+      },
+      "DDS_STBIO1_00000102": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_00000102"
+        ]
+      },
+      "DDS_STBIO1_00000199": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_00000199"
+        ]
+      },
+      "DDS_STBIO1_00000202": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_00000202"
+        ]
+      },
+      "DDS_STBIO1_00001199": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_00001199"
+        ]
+      },
+      "DDS_STBIO1_0013": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0013"
+        ]
+      },
+      "DDS_STBIO1_0014": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0014"
+        ]
+      },
+      "DDS_STBIO1_0015": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0015"
+        ]
+      },
+      "DDS_STBIO1_0016": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0016"
+        ]
+      },
+      "DDS_STBIO1_0017": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0017"
+        ]
+      },
+      "DDS_STBIO1_0018": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0018"
+        ]
+      },
+      "DDS_STBIO1_0019": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0019"
+        ]
+      },
+      "DDS_STBIO1_0020": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0020"
+        ]
+      },
+      "DDS_STBIO1_0021": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0021"
+        ]
+      },
+      "DDS_STBIO1_0022": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0022"
+        ]
+      },
+      "DDS_STBIO1_0023": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0023"
+        ]
+      },
+      "DDS_STBIO1_0024": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0024"
+        ]
+      },
+      "DDS_STBIO1_0025": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0025"
+        ]
+      },
+      "DDS_STBIO1_0026": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0026"
+        ]
+      },
+      "DDS_STBIO1_0027": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0027"
+        ]
+      },
+      "DDS_STBIO1_0028": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0028"
+        ]
+      },
+      "DDS_STBIO1_0032": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0033": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0033"
+        ]
+      },
+      "DDS_STBIO1_0034": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0034"
+        ]
+      },
+      "DDS_STBIO1_0035": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0035"
+        ]
+      },
+      "DDS_STBIO1_0036": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0104": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0104"
+        ]
+      },
+      "DDS_STBIO1_0105": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0105"
+        ]
+      },
+      "DDS_STBIO1_0106": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0106"
+        ]
+      },
+      "DDS_STBIO1_0107": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0107"
+        ]
+      },
+      "DDS_STBIO1_0108": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0108"
+        ]
+      },
+      "DDS_STBIO1_0109": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0109"
+        ]
+      },
+      "DDS_STBIO1_0110": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0110"
+        ]
+      },
+      "DDS_STBIO1_0111": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0111"
+        ]
+      },
+      "DDS_STBIO1_0112": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0112"
+        ]
+      },
+      "DDS_STBIO1_0113": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0113"
+        ]
+      },
+      "DDS_STBIO1_0114": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0114"
+        ]
+      },
+      "DDS_STBIO1_0115": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0115"
+        ]
+      },
+      "DDS_STBIO1_0116": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0117": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0117"
+        ]
+      },
+      "DDS_STBIO1_0118": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0118"
+        ]
+      },
+      "DDS_STBIO1_0119": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0119"
+        ]
+      },
+      "DDS_STBIO1_0120": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0120"
+        ]
+      },
+      "DDS_STBIO1_0121": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0121"
+        ]
+      },
+      "DDS_STBIO1_0122": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0122"
+        ]
+      },
+      "DDS_STBIO1_0123": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0123"
+        ]
+      },
+      "DDS_STBIO1_0124": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0124"
+        ]
+      },
+      "DDS_STBIO1_0125": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0125"
+        ]
+      },
+      "DDS_STBIO1_0126": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0126"
+        ]
+      },
+      "DDS_STBIO1_0127": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0127"
+        ]
+      },
+      "DDS_STBIO1_0128": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0128"
+        ]
+      },
+      "DDS_STBIO1_0129": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0129"
+        ]
+      },
+      "DDS_STBIO1_0130": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0130"
+        ]
+      },
+      "DDS_STBIO1_0140": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_0140"
+        ]
+      },
+      "DDS_STBIO1_0141": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0142": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0143": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0144": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0145": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0146": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0147": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0148": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0149": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0201": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0202": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0203": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0204": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0206": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0207": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0208": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0209": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0210": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0211": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0212": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0213": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0215": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0216": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0217": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0218": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0219": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0220": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0221": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0222": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0223": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0501": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_05010": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_05011": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0502": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0503": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0504": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0505": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0507": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0508": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0509": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0699": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0700": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0701": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_0702": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_1020": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1020"
+        ]
+      },
+      "DDS_STBIO1_1021": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1021"
+        ]
+      },
+      "DDS_STBIO1_1022": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1022"
+        ]
+      },
+      "DDS_STBIO1_1023": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1023"
+        ]
+      },
+      "DDS_STBIO1_1024": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1024"
+        ]
+      },
+      "DDS_STBIO1_1025": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1025"
+        ]
+      },
+      "DDS_STBIO1_1026": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1026"
+        ]
+      },
+      "DDS_STBIO1_1027": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1027"
+        ]
+      },
+      "DDS_STBIO1_1050": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1050"
+        ]
+      },
+      "DDS_STBIO1_1051": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1051"
+        ]
+      },
+      "DDS_STBIO1_1052": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1052"
+        ]
+      },
+      "DDS_STBIO1_1053": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1053"
+        ]
+      },
+      "DDS_STBIO1_1054": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_1054"
+        ]
+      },
+      "DDS_STBIO1_1114": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_1507": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_2024": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_2024"
+        ]
+      },
+      "DDS_STBIO1_2025": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_2025"
+        ]
+      },
+      "DDS_STBIO1_2026": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_2026"
+        ]
+      },
+      "DDS_STBIO1_2052": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_2052"
+        ]
+      },
+      "DDS_STBIO1_2053": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_2053"
+        ]
+      },
+      "DDS_STBIO1_2054": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_2054"
+        ]
+      },
+      "DDS_STBIO1_2507": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_3000": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_3000"
+        ]
+      },
+      "DDS_STBIO1_3001": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_3001"
+        ]
+      },
+      "DDS_STBIO1_3002": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_3002"
+        ]
+      },
+      "DDS_STBIO1_3003": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_3003"
+        ]
+      },
+      "DDS_STBIO1_3004": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_3004"
+        ]
+      },
+      "DDS_STBIO1_3005": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_3005"
+        ]
+      },
+      "DDS_STBIO1_3006": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_3006"
+        ]
+      },
+      "DDS_STBIO1_302": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_302"
+        ]
+      },
+      "DDS_STBIO1_303": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_303"
+        ]
+      },
+      "DDS_STBIO1_304": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_304"
+        ]
+      },
+      "DDS_STBIO1_305": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_305"
+        ]
+      },
+      "DDS_STBIO1_306": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_306"
+        ]
+      },
+      "DDS_STBIO1_307": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_307"
+        ]
+      },
+      "DDS_STBIO1_308": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_308"
+        ]
+      },
+      "DDS_STBIO1_309": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_309"
+        ]
+      },
+      "DDS_STBIO1_310": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_310"
+        ]
+      },
+      "DDS_STBIO1_311": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_311"
+        ]
+      },
+      "DDS_STBIO1_312": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_312"
+        ]
+      },
+      "DDS_STBIO1_313": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_313"
+        ]
+      },
+      "DDS_STBIO1_314": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_314"
+        ]
+      },
+      "DDS_STBIO1_392": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_392"
+        ]
+      },
+      "DDS_STBIO1_393": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_393"
+        ]
+      },
+      "DDS_STBIO1_394": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_394"
+        ]
+      },
+      "DDS_STBIO1_395": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_395"
+        ]
+      },
+      "DDS_STBIO1_4000": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_4000"
+        ]
+      },
+      "DDS_STBIO1_8000": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8000"
+        ]
+      },
+      "DDS_STBIO1_8001": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8001"
+        ]
+      },
+      "DDS_STBIO1_8002": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8002"
+        ]
+      },
+      "DDS_STBIO1_8003": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8003"
+        ]
+      },
+      "DDS_STBIO1_8004": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8004"
+        ]
+      },
+      "DDS_STBIO1_8005": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8005"
+        ]
+      },
+      "DDS_STBIO1_8006": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8006"
+        ]
+      },
+      "DDS_STBIO1_8007": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8007"
+        ]
+      },
+      "DDS_STBIO1_8100": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8100"
+        ]
+      },
+      "DDS_STBIO1_8101": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8101"
+        ]
+      },
+      "DDS_STBIO1_8102": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8102"
+        ]
+      },
+      "DDS_STBIO1_8103": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8103"
+        ]
+      },
+      "DDS_STBIO1_8104": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8104"
+        ]
+      },
+      "DDS_STBIO1_8105": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8105"
+        ]
+      },
+      "DDS_STBIO1_8106": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_8106"
+        ]
+      },
+      "DDS_STBIO1_89455232": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89455232"
+        ]
+      },
+      "DDS_STBIO1_89455261": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89455261"
+        ]
+      },
+      "DDS_STBIO1_89455449": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89455449"
+        ]
+      },
+      "DDS_STBIO1_89456557": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89456557"
+        ]
+      },
+      "DDS_STBIO1_89456975": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89456975"
+        ]
+      },
+      "DDS_STBIO1_89457435": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89457435"
+        ]
+      },
+      "DDS_STBIO1_89457790": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89457790"
+        ]
+      },
+      "DDS_STBIO1_89459082": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_89459082"
+        ]
+      },
+      "DDS_STBIO1_9004": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_9011": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_9012": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_9013": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_9014": {
+        "allocation_class": "top_digital_architecture",
+        "category": "TOP_LEVEL_PARENT_WARNING_SUPPRESSED",
+        "lineage_mode": "normal_hierarchical",
+        "owning_target": "DRS"
+      },
+      "DDS_STBIO1_9017": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9017"
+        ]
+      },
+      "DDS_STBIO1_9018": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9018"
+        ]
+      },
+      "DDS_STBIO1_9024": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9024"
+        ]
+      },
+      "DDS_STBIO1_9027": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9027"
+        ]
+      },
+      "DDS_STBIO1_9029": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9029"
+        ]
+      },
+      "DDS_STBIO1_9030": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9030"
+        ]
+      },
+      "DDS_STBIO1_9031": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9031"
+        ]
+      },
+      "DDS_STBIO1_9032": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9032"
+        ]
+      },
+      "DDS_STBIO1_9033": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9033"
+        ]
+      },
+      "DDS_STBIO1_9034": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9034"
+        ]
+      },
+      "DDS_STBIO1_9035": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9035"
+        ]
+      },
+      "DDS_STBIO1_9260": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9260"
+        ]
+      },
+      "DDS_STBIO1_9261": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9261"
+        ]
+      },
+      "DDS_STBIO1_9262": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9262"
+        ]
+      },
+      "DDS_STBIO1_9263": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9263"
+        ]
+      },
+      "DDS_STBIO1_9300": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9300"
+        ]
+      },
+      "DDS_STBIO1_9317": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9317"
+        ]
+      },
+      "DDS_STBIO1_9500": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "DDS_STBIO1_9500"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_002": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_002"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_004": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0116"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_004"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_008": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_008"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_009": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0123",
+          "DDS_STBIO1_0141"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_009"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_010": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0119"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_010"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_011": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_011"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_0152": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_0152"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_016": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_016"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_017": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_017"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_018": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_018"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_019": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_019"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_021": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_021"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_023": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_023"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_024": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_024"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_026": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_026"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_028": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_028"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_029": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_029"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_030": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_030"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_031": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_031"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_032": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_032"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_033": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_033"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_034": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_034"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_035": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_035"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_036": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_036"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_037": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_037"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_038": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_038"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_039": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_039"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_044": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_044"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_045": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_045"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_047": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_047"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_049": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_049"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_051": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0121",
+          "DDS_STBIO1_0129"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_051"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_052": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_052"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_053": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_053"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_054": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_054"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_055": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_055"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_058": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_058"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_059": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_059"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_060": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_060"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_061": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_061"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_062": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_062"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_063": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_063"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_064": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_064"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_073": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_073"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_074": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_074"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_077": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_077"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_078": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_078"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_080": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_080"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_082": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_082"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_083": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_083"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_085": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_085"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_087": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_087"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_088": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_088"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_089": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_089"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_092": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_092"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_093": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_093"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_094": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_094"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_095": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_095"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_096": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_096"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_098": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_098"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_099": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_099"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_100": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_100"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1004": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0118",
+          "DDS_STBIO1_0125"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1004"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1005": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1005"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1007": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0120",
+          "DDS_STBIO1_0122",
+          "DDS_STBIO1_0127",
+          "DDS_STBIO1_0130"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1007"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1008": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0128",
+          "DDS_STBIO1_0140"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1008"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1009": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1009"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_101": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_101"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1010": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1010"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1011": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1011"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_102": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_102"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_103": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_103"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1034": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1034"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_104": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_104"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_105": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_105"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_106": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_106"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_108": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_108"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_109": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_109"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1095": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1095"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_110": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_110"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1102": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1102"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1104": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1104"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_111": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_111"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1116": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1116"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_112": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_112"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_113": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_113"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1139": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1139"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_1143": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_1143"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_115": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_115"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_118": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_118"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_120": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_120"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_126": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_126"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_128": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_128"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_134": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_134"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_137": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_137"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_138": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_138"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_140": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_140"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_2143": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_2143"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_2144": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_0124",
+          "DDS_STBIO1_0142"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_2144"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_2145": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_2145"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_2146": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_2146"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_3124": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_3124"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_3125": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_3125"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_3126": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_3126"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_3127": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_3127"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_3128": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_3128"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_3129": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_3129"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_4079": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_4079"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_4080": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_4080"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_4090": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_4090"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_4091": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_4091"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_436": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_436"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_5004": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_5004"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_5005": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_5005"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_5015": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [
+          "DDS_STBIO1_1114"
+        ],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_5015"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_5016": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_5016"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_5092": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_5092"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_6070": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_6070"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_6098": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_6098"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_6129": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_6129"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_7095": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_7095"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_728": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_728"
+        ]
+      },
+      "IPOS_STBIO1_MAIN_CONTROLLER_8106": {
+        "allocation_class": "block_local_digital",
+        "category": "SOURCE_DERIVED_PROVENANCE_EXEMPT",
+        "covers_req_ids": [],
+        "lineage_mode": "normal_hierarchical",
+        "source_origin_req_ids": [
+          "IPOS_STBIO1_MAIN_CONTROLLER_8106"
+        ]
+      }
+    },
+    "unresolved_count": 314
+  },
+  "decision": "GO_ON",
+  "downstream_allowed": true,
+  "freeze_allowed": true,
+  "gate": "pre_freeze_coherence_gate",
+  "historical_warning_cleanup": {
+    "active_batch_path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143819",
+    "authority_content_changed": false,
+    "cleared_count": 42,
+    "complete": true,
+    "groups": [
+      {
+        "action": "mark_historical_non_authoritative",
+        "count": 42,
+        "current_authority_effect": "none; active batch is selected separately",
+        "future_validation_effect": "can add stale-state noise or affect selection if timestamps become ambiguous",
+        "paths": [
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163118",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163215",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163337",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163557",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_164215",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165141",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165431",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171517",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171858",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_185543",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191849",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191935",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192039",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192824",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192850",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193415",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193647",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193909",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193955",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194231",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194411",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194920",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_195429",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200017",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200040",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_201310",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_203035",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_092940",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100308",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100408",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101321",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101600",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_173306",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_130222",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_141927",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_142550",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134117",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134724",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_141800",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142149",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142625",
+          "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322"
+        ],
+        "root_cause": "historical/superseded ingestion batch coexists with the active batch",
+        "severity": "LOW",
+        "source_kind": "unknown",
+        "source_spec": "IPOS_MAIN_CTRL.pdf"
+      }
+    ],
+    "preserved_for_audit": true
+  },
+  "mode": "read_only_local_deterministic",
+  "next_step": "Proceed only through the separately approved freeze boundary.",
+  "phase1_pass": true,
+  "phase1_report": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\validation\\source_to_stage2b_coherence.json",
+  "recorded_authority_fingerprint": "98fdcd4d78e660a9a9aa30a852e859c6a4913695f5de31482ed0888f00fdc8e4",
+  "remediation_exhausted": true,
+  "repeatable_after_authority_change": true,
+  "suppressed_top_level_parent_warning_count": 55,
+  "warning_counts": {
+    "BLOCK_BEFORE_DOWNSTREAM": 0,
+    "BLOCK_BEFORE_PHASE2": 0,
+    "BLOCK_BEFORE_STAGE2B_FREEZE": 0,
+    "HARDEN_LATER": 0,
+    "INFO_ONLY": 42
+  }
+}

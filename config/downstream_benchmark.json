@@ -1,0 +1,29 @@
+{
+  "project_name": "STBIO",
+  "cases_path": "config/retrieval_mapping_benchmark_cases.json",
+  "retrieval": {
+    "db_path": "artifacts/rag_DDS_STBIO1/rag_index.sqlite",
+    "semantic_evaluation_enabled": false
+  },
+  "mapping": {
+    "preview_path": "artifacts/stage1_specs/architecture_mapping_preview.csv",
+    "final_path": "artifacts/stage2_mirco_arc/requirement_to_block_traceability.csv",
+    "inventory_path": "artifacts/stage2_mirco_arc/block_inventory.csv",
+    "inventory_block_column": "Block",
+    "columns": {
+      "requirement_id": "requirement_id",
+      "approved_block": "approved_block",
+      "approved_classification": "approved_classification",
+      "candidate_block": "candidate_block",
+      "candidate_classification": "candidate_classification",
+      "final_requirement_id": "Requirement ID",
+      "final_blocks": "Block(s)"
+    }
+  },
+  "outputs": {
+    "report_path": "artifacts/validation/downstream_benchmark.md",
+    "json_path": "artifacts/validation/downstream_benchmark.json",
+    "case_metrics_path": "artifacts/validation/downstream_benchmark_cases.csv",
+    "approval_request_path": "artifacts/validation/downstream_benchmark_approval_request.md"
+  }
+}

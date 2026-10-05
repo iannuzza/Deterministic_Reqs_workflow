@@ -1,0 +1,3257 @@
+source_spec,page,text
+IPOS_MAIN_CTRL.pdf,1,"ST Confidential 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+REV. DATE AUTHOR 
+Draft 1.0 5 October 
+2025 
+Aldo Torino, Sonia Andronaco, Giuliana De Milato 
+ APPROVED By  DATE 
+ Francesco Villa, Pasquale Biancolillo 10 October 2025 
+2025 
+Main_Controller IP Objective Specification 
+STBIO1 
+Aldo Torino, Sonia Andronaco, Giuliana De Milato"
+IPOS_MAIN_CTRL.pdf,2,"1 
+ 
+Table of Contents 
+1. Introduction ................................ ................................ ................................ ........................... 4 
+2. Version History ................................ ................................ ................................ ..................... 4 
+3. Reference Document ................................ ................................ ................................ ............ 4 
+4. Terms and Abbreviations ................................ ................................ ................................ ...... 4 
+5. Main Controller Top ................................ ................................ ................................ .............. 5 
+5.1. Description of Main Controller ................................ ................................ ........................ 5 
+5.1.1. Main controller Top I/O List ................................ ................................ ..................... 6 
+5.1.1.1. Parameters................................ ................................ ................................ .......... 6 
+5.1.1.2. Ports................................ ................................ ................................ .................... 9 
+5.1.1.3. Requirements ................................ ................................ ................................ .... 27 
+5.2. Configuration Register Update ................................ ................................ ..................... 28 
+5.2.1. I/O List ................................ ................................ ................................ .................. 28 
+5.2.1.1. Parameters................................ ................................ ................................ ........ 28 
+5.2.1.2. Ports................................ ................................ ................................ .................. 30 
+5.2.2. Description of the Block ................................ ................................ ........................ 36 
+5.2.3. Requirements ................................ ................................ ................................ ....... 36 
+5.3. Main Controller FSMs ................................ ................................ ................................ .. 36 
+5.3.1. I/O List ................................ ................................ ................................ .................. 36 
+5.3.1.1. Parameters................................ ................................ ................................ ........ 36 
+5.3.1.2. Ports................................ ................................ ................................ .................. 38 
+5.3.2. Description of the Block ................................ ................................ ........................ 55 
+5.3.3. Requirements ................................ ................................ ................................ ....... 55 
+5.4. ADC PHGEN ................................ ................................ ................................ ............... 64 
+5.4.1. IP Description ................................ ................................ ................................ ....... 64 
+5.4.2. I/O List ................................ ................................ ................................ .................. 64 
+5.4.2.1. Parameters................................ ................................ ................................ ........ 64 
+5.4.2.2. Ports................................ ................................ ................................ .................. 65 
+5.4.3. Requirements ................................ ................................ ................................ ....... 68 
+5.5. ECG Start-Up Phase ................................ ................................ ................................ .... 72 
+5.5.1. IP Description ................................ ................................ ................................ ....... 72 
+5.5.2. I/O List ................................ ................................ ................................ .................. 72 
+5.5.2.1. Ports................................ ................................ ................................ .................. 72 
+5.5.3. Requirements ................................ ................................ ................................ ....... 73"
+IPOS_MAIN_CTRL.pdf,3,"2 
+ 
+5.6. BIA Start-Up Phase ................................ ................................ ................................ ...... 76 
+5.6.1. IP Description ................................ ................................ ................................ ....... 76 
+5.6.2. I/O List ................................ ................................ ................................ .................. 76 
+5.6.2.1. Ports................................ ................................ ................................ .................. 76 
+5.6.3. Requirements ................................ ................................ ................................ ....... 77 
+5.7. GSR ................................ ................................ ................................ ............................. 80 
+5.7.1. IP Description ................................ ................................ ................................ ....... 80 
+5.7.2. Requirements ................................ ................................ ................................ ....... 80 
+5.8. PPG FSM ................................ ................................ ................................ .................... 81 
+5.8.1. IP Description ................................ ................................ ................................ ....... 81 
+5.8.2. I/O List ................................ ................................ ................................ .................. 83 
+5.8.3. Parameters ................................ ................................ ................................ ........... 83 
+5.8.4. Ports ................................ ................................ ................................ ..................... 84 
+5.8.5. Requirements ................................ ................................ ................................ ....... 88 
+5.9. Digital Ramp ................................ ................................ ................................ ................ 94 
+5.9.1. IP Description ................................ ................................ ................................ ....... 94 
+5.9.2. I/O List ................................ ................................ ................................ .................. 94 
+5.9.2.1. Parameters................................ ................................ ................................ ........ 94 
+5.9.2.2. Ports................................ ................................ ................................ .................. 94 
+5.9.3. Requirements ................................ ................................ ................................ ....... 95 
+5.10. ALC Compensation ................................ ................................ ................................ .. 98 
+5.10.1. IP Description ................................ ................................ ................................ .... 98 
+5.10.2. I/O List ................................ ................................ ................................ ............... 99 
+5.10.2.1. Parameters................................ ................................ ................................ ........ 99 
+5.10.2.2. Ports................................ ................................ ................................ .................. 99 
+5.10.3. Requirements ................................ ................................ ................................ .. 101 
+5.11. Average Block ................................ ................................ ................................ ........ 102 
+5.11.1. IP Description ................................ ................................ ................................ .. 102 
+5.11.2. I/O List ................................ ................................ ................................ ............. 102 
+5.11.2.1. Parameters................................ ................................ ................................ ...... 102 
+5.11.2.2. Ports................................ ................................ ................................ ................ 103 
+5.11.3. Requirements ................................ ................................ ................................ .. 105 
+5.11.4. PPG Frame Repetition ................................ ................................ .................... 108 
+5.11.4.1. Requirements ................................ ................................ ................................ .. 108"
+IPOS_MAIN_CTRL.pdf,4,"3 
+ 
+6. Appendix ................................ ................................ ................................ ........................... 110 
+ 
+Tables: 
+Table 1: Version History Table ................................ ................................ ................................ ..... 4 
+Table 2: Reference Document Table ................................ ................................ ............................ 4 
+Table 3: Terms and Abbreviations Table ................................ ................................ ...................... 5 
+Table 4: I/O LIst Main Controller Top ................................ ................................ ......................... 27 
+Table 5:Configuration Register Update ................................ ................................ ...................... 30 
+Table 6: Main Controller FSMs I/O List ................................ ................................ ...................... 55 
+Table 7: ADC Phgen I/O List ................................ ................................ ................................ ...... 68 
+Table 8: ECG SU I/O List ................................ ................................ ................................ ........... 72 
+Table 9 : BIA Start-Up Phase I/O List ................................ ................................ ......................... 76 
+Table 10: Nstep1 values ................................ ................................ ................................ ............ 92 
+Table 12: ALC Algorithm Flow Diagram ................................ ................................ ..................... 98 
+Table 13: ALC Compensation I/O List ................................ ................................ ...................... 101 
+Table 14: ALC Time Diagram ................................ ................................ ................................ ... 102 
+Table 15: Average Block I/O List ................................ ................................ ..............................  105 
+ 
+ 
+Figures: 
+Figure 1: Main Controller Ip Block Diagram ................................ ................................ .................. 5 
+Figure 2: Main Controller FSM Diagram ................................ ................................ ..................... 55 
+Figure 3: ADC PHGen Time Diagram: ................................ ................................ ....................... 71 
+Figure 4: ADC Calibration Phase Time Diagram ................................ ................................ ........ 71 
+Figure 5: ADC Calibration Algorithm ................................ ................................ .......................... 71 
+Figure 6: ECG start up phase with chopper clock ................................ ................................ ....... 75 
+Figure 7:ECG Start-UP phase with asynch reset ................................ ................................ ........ 75 
+Figure 8:ECG Start Up phase with no Chopper Clock ................................ ................................  75 
+Figure 9: BIA Start-UP Phase Time Diagram ................................ ................................ ............. 78 
+Figure 10: GSR with CDS Disabled and m_GSR set to 1 ................................ ........................... 81 
+Figure 11:GSR with CDS Enabled with m_gsr set to 1 ................................ ...............................  81 
+Figure 12: PPG FSM State Diagram ................................ ................................ .......................... 82 
+Figure 13: PPG Time Diagram ................................ ................................ ................................ ... 82 
+Figure 14: Ioff Calibration phase ................................ ................................ ................................  91 
+Figure 15: Digital Ramp Time Diagram ................................ ................................ ...................... 94 
+Figure 16: PPG IOFF Calibration example Results ................................ ................................ .. 110"
+IPOS_MAIN_CTRL.pdf,5,"4 
+ 
+ 
+1. Introduction 
+This document is the specification of the Main Controller for STBIO1.  
+ 
+2. Version History  
+[IPOS_STBIO1_MAIN_CONTROLLER_001]  DEFINITION  
+Current Version Previous Version Date Author Change description 
+1.0 0.21 10/05/25 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Fix generic typos 
+0.21 0.20 9/22/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Fix Reqs 7096, 034 and 
+4034 
+0.20 0.19 9/18/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Fix Reqs 1131 and 436 
+0.19 0.18 9/15/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Reference to 
+o_error_time_slot_irq 
+added in req 034. 
+Added Requirement 
+4034 
+0.18 0.17 9/04/2025 Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+Removed Requirement 
+1106, changed 
+Requirement 5016, 
+change ALC 
+Requirements and Main 
+Controller Top. Fixed 
+Ports and Parameters 
+table. Added 
+Requirement 1034. 
+Change table in 
+Appendix 
+Table 1: Version History Table 
+3. Reference Document 
+Current Version Previous Version Document Author Change description 
+1.11 1.10 AFE_IPOS Aldo Torino 
+Savino Bellopede 
+ 
+Table 2: Reference Document Table 
+4. Terms and Abbreviations 
+Abbreviation Meaning"
+IPOS_MAIN_CTRL.pdf,6,"5 
+ 
+DUT Device Under Test 
+HDL Hardware Description Language 
+ADC Analog Digital Converter 
+FSM Finite State Machine 
+ECG ElectroCardioGraphy 
+BIA Bio Impedance 
+GSR Galvanic Skin Resistance 
+PPG PhotoPlethysmoGram 
+Bio-Channel ECG, BIA, GSR 
+ADSP Advanced Digital Signal Processing Processor 
+PMU Power Management Unit 
+ISPU Intelligent Sensor Processor Unit 
+REGMAP Register Map 
+Table 3: Terms and Abbreviations Table 
+ 
+5. Main Controller Top 
+5.1. Description of Main Controller 
+The Main Controller is in charge of generating and receiving all the control signals for the Analog 
+Domain, furthermore, performs DSP elaboration on ADC Output and writes it in different 
+Address. This block IP is divided into different sub-blocks, all at the same hierarchy level and 
+described in the next chapter. Together with the Analog Domain, this block is interfaced with the 
+FIFO Controller, the ADSP and the PMU, these last two will not be described in this document. 
+The block IP is divided into different sub-blocks, all at the same hierarchy level and described in 
+the next chapter. 
+ 
+Figure 1: Main Controller Ip Block Diagram"
+IPOS_MAIN_CTRL.pdf,7,"6 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5.1.1. Main controller Top I/O List 
+5.1.1.1. Parameters 
+Generic name Type Value 
+ppg_frame_bit_top  4 
+n_max_frame  12 
+ppg_rx_channel_bit_top  3 
+Generic name Type Value 
+ppg_frame_bit_top  4 
+n_max_frame  12 
+ppg_rx_channel_bit_top  3 
+T_tx_led_set_bit_top  5 
+T_tx_led_off_max_bit_top  7 
+m_odr_max_bit_top  12 
+mode_operation_n_bit_top  2 
+idac_dc_ppg_frame_bit_top  8"
+IPOS_MAIN_CTRL.pdf,8,"7 
+ 
+Generic name Type Value 
+time_slot_sel_bit_top  3 
+T_tx_startup_bit_top  8 
+T_rx_set_bit_top  9 
+ppg_ioff_offset_bit_top  10 
+Nmax_bit_top  4 
+base_address_bit_top  12 
+delta_bit_top  2 
+gain_max_bit_top  4 
+T1_max_bit_top  9 
+T2_max_bit_top  5 
+N_clk_max_bit_top  6 
+n_average_ppg_max_bit_top  3 
+rx_ch_gain_max_bit_top  4 
+BTIA_ALC_register_bit_top  9 
+IDAC_offset  11 
+n_channel_bit_top  4"
+IPOS_MAIN_CTRL.pdf,9,"8 
+ 
+Generic name Type Value 
+n_channel_adc_bit  4 
+quokka_routine_bit_top  16 
+vcm_bit_top  14 
+gnc_cmm_top  15 
+frame_ppg_debug_alc_top  8 
+frame_ppg_debug_ppg_raw_top  16 
+id_frame_max_bit_top  4 
+data_in_size_bit_top  16 
+ppg_start_up_bit_top  9 
+ppg_start_up_decod_bit_top  5 
+data_out_size_bit_top  20 
+n_average_ecg_bia_gsr_max_bit_top  8 
+rx_ch_frame_n_bit_top  3 
+curr_sel_bit_top  8 
+bit_outab_sel_top  1 
+n_average_ppg_max_value  128"
+IPOS_MAIN_CTRL.pdf,10,"9 
+ 
+Generic name Type Value 
+n_average_ecg_bia_gsr_max_value  16 
+max_frame_repetition_top  2 
+n_tx_channel  4 
+5.1.1.2. Ports 
+Port name Directi
+on Type Description 
+i_clk_32kHz input  clk 32kHz from pmu 
+i_clk_16MHz input  clk 16MHz from 
+pmu 
+i_clk_gsr_16M input  clk for gsr signal 
+i_clk_ahb_master input  clock for ahb 
+master 
+i_rstn input  reset in 16MHz 
+domain 
+i_rstn_sync_32 input  reset in 32kz 
+domain 
+i_wave_velocity_mode input  enable of the wave 
+velocity mode 
+i_ispu_end_elab input   
+i_n_ppg_frame input [ppg_frame_bit_top-1:0] number of frame 
+selected"
+IPOS_MAIN_CTRL.pdf,11,"10 
+ 
+Port name Directi
+on Type Description 
+i_const_value_ioff input [data_in_size_bit_top-1:0] 
+constant value from 
+regmap used for 
+ppg ioff calibraton 
+i_rx_ch_frame input [n_max_frame-1:0] ppg rx channel 
+frame from regamp 
+i_T_tx_led_set input [n_max_frame-1:0] tx led set time from 
+regmap 
+i_T_tx_led_off input [n_max_frame-1:0] tx led off time from 
+regmap 
+i_curr_sel_tx_frame_x input [n_max_frame-1:0] current injection 
+i_tx1_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_tx2_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_tx3_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_tx4_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_idac_dc_ppg_frame input [n_max_frame-1:0] 
+idac value for each 
+frame selected from 
+regmap"
+IPOS_MAIN_CTRL.pdf,12,"11 
+ 
+Port name Directi
+on Type Description 
+i_average_ppg input [n_max_frame-1:0] 
+average ppg for 
+each frame selected 
+from regmap 
+i_gain_alc_start input [gain_max_bit_top-1:0] btia gain for alc 
+from regmap 
+i_gain_start input [n_max_frame-1:0] 
+btia gain start for 
+compensation from 
+regmap 
+i_Tx_idac_Vref_debug input [Nmax_bit_top-1:0] 
+Idac value for 
+debug from 
+regmap 
+i_ppg_start_up_time input [ppg_start_up_decod_bit_top-1:0] start up time for 
+ppg from regmap 
+i_en_txi input [n_max_frame-1:0] tx enabling for each 
+frame from regmap 
+i_frame_repetition input [n_max_frame-1:0] 
+i frame repetition 
+for each frame from 
+regmap 
+i_T_preset input [1:0] 
+Preset time for 
+digital ramp from 
+regmap 
+i_m_ecg input [m_odr_max_bit_top-1:0] m parameter for 
+ecg from regmap 
+i_m_bia input [m_odr_max_bit_top-1:0] m parameter for bia 
+from regmap"
+IPOS_MAIN_CTRL.pdf,13,"12 
+ 
+Port name Directi
+on Type Description 
+i_m_gsr input [m_odr_max_bit_top-1:0] m parameter for gsr 
+from regmap 
+i_m_ppg input [m_odr_max_bit_top-1:0] m parameter for 
+ppg from regmap 
+i_debug_adc_error_cap8_0_bypass input  error cap bypass for 
+adc from regmap 
+i_base_address_ecg0 input [base_address_bit_top-1:0] base address for 
+ecg0 in multiple fifo 
+i_base_address_bia input [base_address_bit_top-1:0] 
+base address for 
+bia/ecg1-2 in 
+multiple fifo 
+i_base_address_gsr input [base_address_bit_top-1:0] base address for gsr 
+in multiple fifo 
+i_base_address_ppg input [base_address_bit_top-1:0] base address for 
+ppg in multiple fifo 
+i_frame_ppg_debug input [ppg_frame_bit_top-1:0] frame selection for 
+ppg data debug 
+i_en_buf_gpio1 input  enable buffer on 
+gpio1 
+i_en_buf_gpio2 input  enable buffer on 
+gpio2 
+i_en_biobuf input  enable biobuffer 
+i_do_calibration input  enabling for adc 
+calibration"
+IPOS_MAIN_CTRL.pdf,14,"13 
+ 
+Port name Directi
+on Type Description 
+i_mode_operation input [mode_operation_n_bit_top-1:0] mode operation 
+selection 
+i_T_rx_set input [T1_max_bit_from_decoder_top-1:0] rx channel time set 
+i_en_clkf input  en 16 MHz clock 
+i_quokka_boot_end input  from quokka 
+i_quokka_run input  from quokka 
+i_clk_16MHz_ready input  (from analog 
+circuit) 
+i_imp_curinj_en input  enabling current 
+injection for bia 
+i_en_ldo_1v8 input  enabling ldo 1v8 
+i_debug_comp_rx_ck input  enabling debug for 
+comp rx ck 
+i_debug_gsr_on input  gsr on debug mode 
+i_debug_gsr_curr_on input  gsr curr on debug 
+mode 
+i_alc_disabled input [n_max_frame-1:0] disabling alc bit for 
+each frame 
+i_en_cm_buf input  enabling common 
+buffer 
+i_en_rld input  enabling rld"
+IPOS_MAIN_CTRL.pdf,15,"14 
+ 
+Port name Directi
+on Type Description 
+i_en_avg1 input  enabling avg1 
+i_en_avg2 input  enabling avg1 
+i_hc_en input  enabling health 
+channel 
+i_debug input  enabling debug 
+mode 
+i_imp_en input  enabling bia 
+channel 
+i_debug_en_tia input  enabling debug tia 
+i_debug_en_buffer input  enabling debug for 
+buffer 
+i_debug_en_idac input  enabling debug for 
+IDAC 
+i_en_clk_chop10k input  enabling chopper 
+clock 
+i_debug_tx_preset input  enabling tx preset 
+i_en_ldo_1v8_ext input  enabling external 
+ldo 1v8 
+i_clk_imp_10k_en input  enabling clock 
+chopper for bia 
+i_b_cap_idac input [1:0] enabling cap for 
+idac"
+IPOS_MAIN_CTRL.pdf,16,"15 
+ 
+Port name Directi
+on Type Description 
+i_adc_mux_bio_channel_debug input [2:0] enabling debug adc 
+mux bio channel 
+i_adc_mux_sel_debug input  enabling adc mux 
+i_ispu_core_sw_rstn input  ispu core enabling 
+i_T_TIAON input [T1_max_bit_from_decoder_top-1:0] TIA Time 
+i_scan_mode input  scan mode enabling 
+i_reset_debug_adc_data input  reset adc data 
+debug 
+i_start_adc_debug input  pilot adc start om 
+debug 
+i_en_ADC_debug input  enabling adc debug 
+i_debug_adc_readout_bypass input  enabling adc 
+readout bypass 
+i_su_hlt_dly input  enabling start up 
+delay for ecg 
+i_multiple_fifo_sel input  enabling multiple 
+fifo 
+i_debug_calibration input  enabling debug 
+calibraiton 
+i_en_gsr_dc_cds input [1:0] enabling gsr cds 
+mode"
+IPOS_MAIN_CTRL.pdf,17,"16 
+ 
+Port name Directi
+on Type Description 
+i_ADC_EOC input  end of conversion 
+from adc 
+i_ecg0_sel input  select ecg0 channel 
+i_bia_sel input  select bia channel 
+i_gsr_sel input  select gsr channel 
+i_ppg_sel input  select ppg channel 
+i_ppg_ioff_calibration input  enabling ppg ioff 
+calibration 
+i_ecg1_ecg2_sel input  enabling ecg1 and 
+ecg2 channel 
+i_rst_async_ecg input  reset async for ecg 
+i_rst_async_bia input  reset async for bia 
+i_ppg_quokka_elab_sel input  enabling adsp elab 
+for ppg 
+i_data_ADC_out input [data_in_size_bit_top-1:0] (from analog 
+circuit) 
+i_time_slot_selection input [time_slot_sel_bit_top-1:0] odr selection from 
+regmap 
+i_Nmax_to_reg input [Nmax_bit_top-1:0] Max value for 
+digital ramp"
+IPOS_MAIN_CTRL.pdf,18,"17 
+ 
+Port name Directi
+on Type Description 
+i_nstart_case input [Nmax_bit_top-1:0] n_start value for 
+frist sterp 
+i_debug_rx_ch input [rx_ch_frame_n_bit_top-1:0] enabling debug for 
+rx channel 
+i_T_delta1_to_reg input [delta_bit_top-1:0] delta 1 time for 
+digital ramp 
+i_gain_max_set input [gain_max_bit_top-1:0] gain max for alc 
+i_BTIA_ALC_debug input [BTIA_ALC_register_bit_top-1:0] BTIA ALC Debug 
+enable 
+i_comp_rx_out input  input from analog 
+comparator 
+i_adc_error_cap8_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap7_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap6_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap5_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap4_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap3_debug input [6:0] adc cap error 
+debug"
+IPOS_MAIN_CTRL.pdf,19,"18 
+ 
+Port name Directi
+on Type Description 
+i_adc_error_cap2_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap1_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap0_debug input [6:0] adc cap error 
+debug 
+i_BIDAC_debug_register input [IDAC_offset-1:0]  
+i_sleep_master input   
+i_lpm input [1:0] low power mode 
+for ldo 
+i_mpm input [1:0] medium power 
+mode for ldo 
+i_hpm input [1:0] high power mode 
+for ldo 
+i_dis_rc_viref input  dis rc viref 
+i_T1 input [T1_max_bit_from_decoder_top-1:0] 4 to 10 us=160nclk 
+i_T2 input [T2_max_bit_from_decoder_top-1:0] 0.5 to 2 us=~32 
+i_N_clk_ppg input [N_clk_max_bit_top-1:0] Sample time for 
+ppg 
+i_N_clk_ecg input [N_clk_max_bit_top-1:0] Sample time for ecg"
+IPOS_MAIN_CTRL.pdf,20,"19 
+ 
+Port name Directi
+on Type Description 
+i_N_clk_cal input [N_clk_max_bit_top-1:0] Sample time for adc 
+calibration 
+scan_enable input  scan enable for 
+scan mode 
+i_timer_buffer_config input [1:0] timer buffer 
+configuration 
+i_ppg_alc_frame_save input [ppg_frame_bit_top-1:0] alc data frame to 
+save 
+i_reset_ppg_ioff_calib input   
+HRDATA input [31:0] AHB Protocol 
+signals 
+HREADY input  AHB Protocol 
+signals 
+HRESP input [1:0] AHB Protocol 
+signals 
+HGRANT input  AHB Protocol 
+signals 
+SCANENABLE input  Scan Test Mode 
+Enbl 
+SCANINHCLK input  Scan Chain Input 
+SCANOUTHCLK output  Scan Chain Output 
+HSEL output  AHB Protocol 
+signals"
+IPOS_MAIN_CTRL.pdf,21,"20 
+ 
+Port name Directi
+on Type Description 
+HADDR output [31:0] AHB Protocol 
+signals 
+HTRANS output [1:0] AHB Protocol 
+signals 
+HWRITE output  AHB Protocol 
+signals 
+HSIZE output [2:0] AHB Protocol 
+signals 
+HBURST output [2:0] AHB Protocol 
+signals 
+HPROT output [3:0] AHB Protocol 
+signals 
+HWDATA output [31:0] AHB Protocol 
+signals 
+HBUSREQ output  AHB Protocol 
+signals 
+HLOCK output  AHB Protocol 
+signals 
+o_bio_clock_div output  output for clock 
+chopper 
+o_BIDAC output [IDAC_offset-1:0] IDAC for top 
+o_rst_imp output  bia start up rst 
+signal"
+IPOS_MAIN_CTRL.pdf,22,"21 
+ 
+Port name Directi
+on Type Description 
+o_rsti_imp output  bia start up rsti 
+signal 
+o_sug_imp output  bia start up sug 
+channel 
+o_pd_imp output  bia start up pd 
+channel 
+o_start_operative_16MHz output  start operative 
+16MHz 
+o_su_hc2 output  ecg start up hc2 
+signal 
+o_rst_hc2 output  ecg start up rst 
+signal 
+o_rsti_hc2 output  ecg start up rsti 
+signal 
+o_pd_hc2 output  ecg start up pd 
+signal 
+o_reset_reg_rst output  end of reset async 
+phase 
+o_reset_reg_rst_imp_async output  end of reset async 
+phase 
+o_imp_curinj_pd output  bia current injection 
+output 
+o_Txi_IDAC_Vref output [Nmax_bit_top-1:0] TX IDAC VREF TO 
+analog domain"
+IPOS_MAIN_CTRL.pdf,23,"22 
+ 
+Port name Directi
+on Type Description 
+o_comp_rx_ck output  output for 
+comparator debug 
+o_BTIA_gain output [gain_max_bit_top-1:0] BTIA gain output to 
+analog domain 
+o_data_out_debug_adc output [15:0] o data output for 
+adc debug 
+o_en_mask_ldo_pdclkf_reg output  mask for en_ldo 
+and pdf 
+o_pd_clkf output  pd_clkf 
+o_trim_ldo_d output [1:0] trim ldo value 
+o_BDC_PPG output [idac_dc_ppg_frame_bit_top-1:0] idac dc ppg frame 
+output 
+o_adc_mux_bio_channel output [2:0] adc mux bio 
+channel 
+o_adc_mux_sel output  adc mux sel output 
+o_error_time_slot output  error time slot irq 
+o_curr_sel_tx_frame_x output [curr_sel_bit_top-1:0] current selection for 
+tx channel output 
+o_tx1_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x 
+o_tx2_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x"
+IPOS_MAIN_CTRL.pdf,24,"23 
+ 
+Port name Directi
+on Type Description 
+o_tx3_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x 
+o_tx4_outlab_sel_frame_x output [bit_outab_sel_top-1:0] tx outlab sel frame 
+x 
+o_tx_preset output  tx prese to analog 
+domain 
+o_en_tx output [n_tx_channel-1:0] tx enable to analog 
+domain 
+o_PD_TIA output  enabling tia to 
+analog domain 
+o_PD_PGA output  enabling buffer to 
+analog domain 
+o_PD_IDAC output  enabling idac to 
+analog domain 
+o_gsr_curr_on output  gsr curr on pilot to 
+analog domain 
+o_gsr_on output  grs on on pilot to 
+analog domain 
+o_ADC_en output  ADC enabling 
+o_half_charge_ldo output   
+o_ADC_start output  ADC Start sampling 
+o_N_step2_to_reg output [rx_ch_gain_limit-1:0] N_Step2 calibration 
+value"
+IPOS_MAIN_CTRL.pdf,25,"24 
+ 
+Port name Directi
+on Type Description 
+o_adc_test_cap output [9:0] adc test cap 
+o_adc_error_cap9 output [7:0] adc calibration 
+result 
+o_adc_error_cap8 output [6:0] adc calibration 
+result 
+o_adc_error_cap7 output [6:0] adc calibration 
+result 
+o_adc_error_cap6 output [6:0] adc calibration 
+result 
+o_adc_error_cap5 output [6:0] adc calibration 
+result 
+o_adc_error_cap4 output [6:0] adc calibration 
+result 
+o_adc_error_cap3 output [6:0] adc calibration 
+result 
+o_adc_error_cap2 output [6:0] adc calibration 
+result 
+o_adc_error_cap1 output [6:0] adc calibration 
+result 
+o_adc_error_cap0 output [6:0] adc calibration 
+result 
+o_pd_cm_buf output  power down 
+common buffer"
+IPOS_MAIN_CTRL.pdf,26,"25 
+ 
+Port name Directi
+on Type Description 
+o_pd_rld output  power down rld 
+o_pd_avg1 output  power down avg1 
+o_pd_avg2 output  power down avg2 
+o_mc_ahb_clk_en output  enable for master 
+ahb clock 
+o_main_controller_device_status_regis
+ter output [2:0] device status 
+register 
+o_main_controller_elab_status_registe
+r output [3:0] device status 
+register 
+o_en_ldo_1v8 output  enable ldo 
+o_en_bufxbio output  enable biobuffer to 
+analog domain 
+o_rx_ch_frame output [ppg_rx_channel_bit_top-1:0] selected rx ch frame 
+to analog domain 
+o_ldo_ext output  enable external ldo 
+o_ppg_status_register output [n_state_bit-1:0] ppg state status 
+register 
+o_b_cap_idac output [1:0] b cap idac to 
+analog domain 
+o_ispu_irq_ctrl output [3:0] ispu irq"
+IPOS_MAIN_CTRL.pdf,27,"26 
+ 
+Port name Directi
+on Type Description 
+o_irq_start_measurement output  
+irq start 
+measurement to 
+GPIO 
+o_end_calibration output  end calibration to 
+analog domain 
+o_alc_data output [data_out_size_bit_top+2:0] alc data to regmap 
+o_ppg_data_raw output [data_out_size_bit_top+2:0] ppg raw data to 
+regmap 
+o_pd_buf_gpio1 output  power down for 
+buffer gpio1 
+o_pd_buf_gpio2 output  power down for 
+buffer gpio2 
+o_adc_data_debug_alc_1 output [frame_ppg_debug_alc_top-1:0] alc 1 registers data 
+debug 
+o_adc_data_debug_alc_2 output [frame_ppg_debug_alc_top-1:0] alc 2 registers data 
+debug 
+o_adc_data_debug_ppg_raw output [frame_ppg_debug_ppg_raw_top-1:0] ppg raw registers 
+data debug 
+o_en_lead_off output  mask lead off 
+o_mc_busy output  main controller is 
+working 
+o_en_ck_m_p_q output  clock m and q bia 
+o_en_ck_chop_imp output  clock chopper bia"
+IPOS_MAIN_CTRL.pdf,28,"27 
+ 
+Port name Directi
+on Type Description 
+o_saturation_flag output [n_max_frame-1:0] ppg saturation flag 
+o_en_ck_hc2_10k output  clock chipper ecg 
+o_en_clk_16MHz_sleep output  sleep signal for 
+pmu 
+ 
+ 
+ 
+Table 4: I/O LIst Main Controller Top 
+ 
+ 
+ 
+ 
+ 
+5.1.1.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3003] ASSUMPTION :  
+The following channels combination are the only ones supported by STBIO1: 
+1. 1 ECG channel (ECG0) 
+2. 2 ECG channels (ECG1 + ECG2) 
+3. 3 ECG channels (ECG0 + ECG1 + ECG3) 
+4. BIA channel 
+5. GSR channel 
+6. PPG channel 
+7. ECG0 and BIA channels 
+8. ECG0 and GSR channels 
+9. ECG0 and PPG channels 
+10. ECG1 and ECG2 and PPG channels 
+11. BIA and PPG channels 
+12. GSR and PPG channels 
+13. ECG0 and ECG1 and ECG2 and PPG channels 
+14. ECG0 and BIA and PPG channels 
+15. ECG0 and GSR and PPG channels 
+[END]"
+IPOS_MAIN_CTRL.pdf,29,"28 
+ 
+5.2. Configuration Register Update 
+5.2.1. I/O List 
+5.2.1.1. Parameters 
+Generic name Type Value Description 
+m_odr_max_bit int 11  
+mode_operation_n_bit int 2  
+time_slot_sel_bit int 3  
+N_clk_max_bit int 7  
+quokka_routine_bit int 3  
+T_tx_startup_bit int 5  
+T_rx_set_bit int 5  
+ppg_rx_channel_bit int 3  
+T_tx_led_set_bit int 5  
+T_tx_led_off_max_bit int 8  
+idac_dc_ppg_frame_bit int 7  
+n_average_ecg_bia_gsr_max_
+bit int 4  
+n_channel_bit int 4  
+n_average_ppg_max_bit int 4"
+IPOS_MAIN_CTRL.pdf,30,"29 
+ 
+Generic name Type Value Description 
+max_frame_repetition int 2  
+curr_sel_bit int 9  
+bit_outab_sel int 1  
+n_tx_channel int 4  
+n_channel_adc_bit int 4  
+ecg_channel_bit int 2  
+time_buffer_const_bit int 10  
+Nmax_bit int 4  
+delta_bit int 2  
+gain_max_bit int 3  
+T1_max_bit_from_decoder int 4  
+T2_max_bit_from_decoder int 2  
+T1_max_bit int 8  
+T2_max_bit int 5  
+BTIA_ALC_register_bit int 10  
+T1_add_T2_max_bit int 13  
+ppg_start_up_decod_bit int 4"
+IPOS_MAIN_CTRL.pdf,31,"30 
+ 
+Generic name Type Value Description 
+ppg_frame_bit int 4  
+ppg_frame_bit_ALC_BTIA int 12  
+n_max_frame int 5  
+5.2.1.2. Ports 
+Port name Direction Type Description 
+i_clk input   
+i_rst_n input   
+i_en_cm_buf input   
+i_en_rld input   
+i_en_avg1 input   
+i_en_avg2 input   
+i_en_gsr_dc_cds input [1:0]  
+i_hc_en input   
+i_start_su_ecg_mc input   
+i_start_su_bia_mc input   
+i_debug input"
+IPOS_MAIN_CTRL.pdf,32,"31 
+ 
+Port name Direction Type Description 
+i_imp_en input   
+i_imp_curinj_en input   
+i_ppg_quokka_elab_sel input   
+i_idac_dc_ppg_frame input [n_max_frame-1:0][idac_dc_ppg_frame_bit-
+1:0]  
+i_check_update input   
+i_reset_su input   
+i_cfg_enable input   
+i_Nmax_to_reg input [Nmax_bit-1:0]  
+i_time_slot_selection input [time_slot_sel_bit-1:0]  
+i_ppg_start_up_time input [ppg_start_up_decod_bit-1:0]  
+i_first_cfg input   
+i_gain_max input [gain_max_bit-1:0]  
+i_n_ppg_frame input [ppg_frame_bit-1:0]  
+i_rx_ch_frame input [n_max_frame-1:0][ppg_rx_channel_bit-1:0]  
+i_T_tx_led_set input [n_max_frame-1:0][T_tx_led_set_bit-1:0]  
+i_T_tx_led_off input [n_max_frame-1:0] [T_tx_led_off_max_bit-1:0]"
+IPOS_MAIN_CTRL.pdf,33,"32 
+ 
+Port name Direction Type Description 
+i_curr_sel_tx_frame_x input [n_max_frame-1:0][curr_sel_bit-1:0]  
+i_tx1_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_tx2_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_tx3_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_tx4_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-1:0]  
+i_average_ppg input [n_max_frame-1:0][n_average_ppg_max_bit-
+1:0]  
+i_gain_start input [n_max_frame-1:0][gain_max_bit-1:0]  
+i_en_txi input [n_max_frame-1:0][3:0]  
+i_gain_alc_start input [gain_max_bit-1:0]  
+i_en_ldo_1v8_ext input   
+i_frame_repetition input [n_max_frame-1:0][max_frame_repetition-
+1:0]  
+i_T_rx_set input [T1_max_bit_from_decoder-1:0]  
+i_nstart_case input [Nmax_bit-1:0]  
+i_T_delta1_to_reg input [delta_bit-1:0]  
+i_wave_velocity_mode input   
+i_b_cap_idac input [1:0]"
+IPOS_MAIN_CTRL.pdf,34,"33 
+ 
+Port name Direction Type Description 
+i_T1 input [T1_max_bit_from_decoder-1:0]  
+i_T2 input [T2_max_bit_from_decoder-1:0]  
+i_T_TIAON input [T1_max_bit_from_decoder-1:0] TIA Time 
+o_pd_cm_buf output   
+o_pd_rld output   
+o_pd_avg1 output   
+o_pd_avg2 output   
+o_hc_en output   
+o_idac_dc_ppg_frame_cfg output [n_max_frame-1:0]  
+o_imp_en output   
+o_imp_curinj_en output   
+o_ppg_quokka_elab_sel output   
+o_n_ppg_frame_cfg output [ppg_frame_bit-1:0]  
+o_rx_ch_frame_cfg output [n_max_frame-1:0]  
+o_T_tx_led_set_cfg output [n_max_frame-1:0]  
+o_T_tx_led_off_cfg output [n_max_frame-1:0]"
+IPOS_MAIN_CTRL.pdf,35,"34 
+ 
+Port name Direction Type Description 
+o_curr_sel_tx_frame_x_cfg output [n_max_frame-1:0]  
+o_tx1_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_tx2_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_tx3_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_tx4_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_average_ppg_cfg output [n_max_frame-1:0]  
+o_gain_start_cfg output [n_max_frame-1:0]  
+o_gain_max_cfg output [gain_max_bit-1:0]  
+o_en_txi_cfg output [n_max_frame-1:0]  
+o_frame_repetition_cfg output [n_max_frame-1:0]  
+o_T_rx_set_cfg output [T1_max_bit_from_decoder-1:0]  
+o_nstart_case_cfg output [Nmax_bit-1:0]  
+o_T_delta1_to_reg_cfg output [delta_bit-1:0]  
+o_Nmax_to_reg_cfg output [Nmax_bit-1:0]  
+o_T1_cfg output [T1_max_bit_from_decoder-1:0]  
+o_T2_cfg output [T2_max_bit_from_decoder-1:0]"
+IPOS_MAIN_CTRL.pdf,36,"35 
+ 
+Port name Direction Type Description 
+o_ppg_start_up_time output [ppg_start_up_decod_bit-1:0]  
+o_wave_velocity_mode_cfg output   
+o_time_slot_selection_cfg output [time_slot_sel_bit-1:0]  
+o_en_gsr_cds output   
+o_gsr_dc_mode output   
+o_T_TIAON_cfg output [T1_max_bit_from_decoder-1:0] TIA Time 
+o_gain_alc_start output [gain_max_bit-1:0]  
+o_en_ldo_1v8_ext output   
+o_reset_time_slot_cfg output   
+o_done_cfg output   
+o_change_curr output   
+o_change_gain_start output   
+o_change_idac_dc_ppg output   
+o_b_cap_idac output [1:0]  
+ 
+Table 5:Configuration Register Update"
+IPOS_MAIN_CTRL.pdf,37,"36 
+ 
+5.2.2. Description of the Block 
+This block oversees the correct configuration of register useful to configure BIO -Channel or PPG 
+Measurement and avoids that run-time changes from the user during the measurement. 
+The description of each input signal is written in the linked document in the next paragraph. All 
+the registers are regmap shadow registers. 
+5.2.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7096] REQUIREMENT  
+When the device FSM is in OPERATIVE or SLEEP state and the ppg channel is activated, if the 
+user changes i_curr_sel_tx_frame_x, i_gain_start or i_idac_dc_ppg_frame, the signals 
+o_change_curr, o_change_gain_start or o_change_idac_dc_ppg (respectively) shall go high at the 
+start of the next time slot (when passing from Sleep to Operative State)  and shall stay high until 
+another one of these three value is changed. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7097] REQUIREMENT  
+If i_cfg_enable and i_first_cfg is set to 1, o_change_curr, o_change_gain_start or 
+o_change_idac_dc_ppg shall go to 0 in less than 5 clock cycles 
+[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7098] REQUIREMENT  
+If one or more signals between o_change_curr, o_change_gain_start or o_change_idac_dc_ppg 
+is set to 1, a data with the following format {21’hFFFFE,  o_change_curr, o_change_gain_start, 
+o_change_idac_dc_ppg} shall be written in FIFO before the next time slot Data. If the FIFO is in 
+Multiple FIFO, the Data shall be written in the Sub-FIFO selected for PPG by the user 
+[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_002]  REQUIREMENT :  
+The only registers that the user shall change after setting the mode_operation to 1 are the ones 
+described in requirement 7096. All the Other signals shall change only with mode_operation set 
+to 0 or when i_debug is set to 1.[END] 
+5.3. Main Controller FSMs 
+5.3.1. I/O List 
+5.3.1.1. Parameters 
+Generic name Type Value Description 
+ppg_frame_bit int 4"
+IPOS_MAIN_CTRL.pdf,38,"37 
+ 
+Generic name Type Value Description 
+m_odr_max_bit int 11  
+time_slot_sel_bit int 3  
+N_clk_max_bit int 7  
+quokka_routine_bit int 3  
+ppg_rx_channel_bit int 3  
+T_tx_led_set_bit int 5  
+T_tx_led_off_max_bit int 8  
+idac_dc_ppg_frame_bit int 7  
+n_average_ecg_bia_gsr_max_bit int 4  
+n_channel_bit int 4  
+n_average_ppg_max_bit int 4  
+n_max_frame int 5  
+rx_ch_gain_max_bit int 4  
+curr_sel_bit int 9  
+bit_outab_sel int 1  
+n_tx_channel int 4"
+IPOS_MAIN_CTRL.pdf,39,"38 
+ 
+Generic name Type Value Description 
+base_address_bit int 12  
+n_channel_adc_bit int 4  
+ahb_base_address logic [31:0] 32'h000C_4000  
+ecg_channel_bit int 2  
+time_buffer_const_bit int 10  
+5.3.1.2. Ports 
+Port name Direction Type Descr. 
+i_clk_32Khz input  clock 32kHz 
+i_clk_16MHz input  clock 16MHz 
+i_clk_16MHz_write input  ahb clock 
+i_clk_elab_fsm input  elab fsm 
+clock 
+i_clk_boot_32k input  32k clock 
+boot 
+i_clk_gsr_16M input  clock for gsr 
+i_clk_change_address input  
+clock for 
+change 
+address"
+IPOS_MAIN_CTRL.pdf,40,"39 
+ 
+Port name Direction Type Descr. 
+i_time_slot_count_clk input  time slot 
+count clock 
+i_rstn input  reset 16MHz 
+i_rstn_sync_32 input  reset 32 kHz 
+i_n_ppg_frame input [ppg_frame_bit-1:0] number of 
+frame for ppg 
+i_rx_ch_frame input [n_max_frame-
+1:0][ppg_rx_channel_bit-1:0] 
+rx channel for 
+each ppg 
+frame 
+i_average_ppg input [n_max_frame-
+1:0][n_average_ppg_max_bit-1:0] 
+average for 
+each ppg 
+frame 
+i_T_tx_led_set input [n_max_frame-
+1:0][T_tx_led_set_bit-1:0] 
+time tx led set 
+for each 
+frame 
+i_ppg_ioff_calibration input  
+ioff 
+calibration 
+mode for ppg 
+i_end_ioff_calibration input  
+end ioff 
+calibration 
+mode for ppg 
+i_ppg_alc_frame_save input [ppg_frame_bit-1:0] ppg alc frame 
+save"
+IPOS_MAIN_CTRL.pdf,41,"40 
+ 
+Port name Direction Type Descr. 
+i_T_tx_led_off input [n_max_frame-
+1:0][T_tx_led_off_max_bit-1:0] 
+time led off 
+for each 
+frame 
+i_curr_sel_tx_frame_x input [n_max_frame-1:0][curr_sel_bit-
+1:0] 
+curr sel tx for 
+each frame 
+i_tx1_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_tx2_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_tx3_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_tx4_outlab_sel_frame_x input [n_max_frame-1:0][bit_outab_sel-
+1:0] 
+tx outlab sel 
+for each 
+frame and tx 
+i_idac_dc_ppg_frame input [n_max_frame-
+1:0][idac_dc_ppg_frame_bit-1:0] 
+idac dc ppg 
+frame for 
+each frame 
+i_en_ldo_1v8_ext input  enable ldo ext 
+i_debug input  enable debug 
+mode 
+i_debug_gsr_on input  enable debug 
+for gsr"
+IPOS_MAIN_CTRL.pdf,42,"41 
+ 
+Port name Direction Type Descr. 
+i_ispu_end_elab input  end ispu 
+elaboration 
+i_gsr_dc_mode input  gsr dc mode 
+i_en_tx_ch input [n_tx_channel-1:0] 
+ppg tx 
+channel 
+enable 
+i_debug_gsr_curr_on input  debug gsr 
+curr on value 
+i_multiple_fifo_sel input  
+multiple fifo 
+channel 
+mode 
+i_n_ecg_channel input [ecg_channel_bit-1:0] ecg active 
+channel 
+i_N_clk_cal input [N_clk_max_bit-1:0] 
+sample clock 
+cycles for 
+calibration 
+i_ispu_core_sw_rstn input  
+enable for 
+ispu power 
+island 
+i_timer_buffer_config input [1:0] time buffer 
+value 
+i_ppg_quokka_elab_sel input  adsp data 
+elab mode"
+IPOS_MAIN_CTRL.pdf,43,"42 
+ 
+Port name Direction Type Descr. 
+i_lpm input [1:0] low power 
+mode for ldo 
+i_mpm input [1:0] 
+medium 
+power mode 
+for ldo 
+i_hpm input [1:0] high power 
+mode for ldo 
+i_rst_async_ecg input  rst async for 
+ecg 
+i_alc_disabled input [n_max_frame-1:0] alc disabled 
+for ppg 
+i_rst_async_bia input  rst async for 
+bia 
+i_done_cfg input  end of 
+configuration 
+i_scan_mode input  scan mode 
+enable 
+i_m_ecg input [m_odr_max_bit-1:0] division factor 
+for ecg 
+i_m_bia input [m_odr_max_bit-1:0] division factor 
+for bia 
+i_m_gsr input [m_odr_max_bit-1:0] division factor 
+for gsr"
+IPOS_MAIN_CTRL.pdf,44,"43 
+ 
+Port name Direction Type Descr. 
+i_m_ppg input [m_odr_max_bit-1:0] division factor 
+for ppg 
+i_start_operation input  start 
+operation 
+i_base_address_ecg0 input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for ecg0 
+i_base_address_bia input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for 
+bia/ecg1&2 
+i_base_address_gsr input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for gsr 
+i_base_address_ppg input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for ppg 
+i_bia_sel input  bia channel 
+selection 
+i_gsr_sel input  gsr channel 
+selection 
+i_ppg_sel input  ppg channel 
+selection 
+i_dis_rc_viref input  dis rc viref 
+from pmu"
+IPOS_MAIN_CTRL.pdf,45,"44 
+ 
+Port name Direction Type Descr. 
+i_change_cfg_ppg input  
+change 
+configuration 
+signal for ppg 
+i_change_curr input  change curr 
+for ppg 
+i_change_gain_start input  change gain 
+start for ppg 
+i_change_idac_dc_ppg input  change idac 
+value for ppg 
+i_sleep_master input  
+sleep master 
+from sensor 
+hub 
+i_adc_mux_bio_channel_debug input [2:0] adc mux bio 
+channel 
+i_adc_mux_sel_debug input  adc mux 
+debug 
+i_quokka_boot_end input  adsp boot 
+end signal 
+i_data_storage_mode input  data storage 
+mode 
+i_quokka_run input  
+adsp 
+elaboration 
+running"
+IPOS_MAIN_CTRL.pdf,46,"45 
+ 
+Port name Direction Type Descr. 
+i_end_of_conversion input  end of 
+converison 
+i_end_of_ppg input  end of ppg 
+i_clk_16MHz_ready input  
+ready from 16 
+MHz ring 
+oscillator 
+i_hc_su input  
+health 
+channel start 
+up end 
+i_end_calibration input  end adc 
+calibration 
+i_imp_su input  bia start up 
+phase end 
+i_write_done input  write done 
+from ahb 
+i_time_slot_selection input [time_slot_sel_bit-1:0] time slot 
+selection 
+i_N_clk_ppg input [N_clk_max_bit-1:0] 
+ppg sampling 
+phase clock 
+cycles 
+i_N_clk_ecg input [N_clk_max_bit-1:0] 
+ecg sampling 
+phase clock 
+cycles 
+i_adc_ready input  adc ready"
+IPOS_MAIN_CTRL.pdf,47,"46 
+ 
+Port name Direction Type Descr. 
+i_busy_ppg input  ppg running 
+i_en_gsr_cds input  en gsr cds 
+mode 
+i_do_calibration input  do calibration 
+for adc 
+i_reset_curr_frame input  reset current 
+ppg frame 
+i_wave_velocity_mode input  enable wave 
+velocity mode 
+i_start_up_time_ppg_done input  start up ppg 
+done 
+i_reset_async_reg_ecg input  reset async 
+ecg done 
+i_reset_async_reg_bia input  reset async 
+bia done 
+o_ADC_en_mc output  
+adc enable 
+main 
+controller 
+o_start_adc output  start for 
+analog adc 
+o_start_ppg output  start ppg fsm"
+IPOS_MAIN_CTRL.pdf,48,"47 
+ 
+Port name Direction Type Descr. 
+o_pwr_dwn_16MHz output  
+enable for 
+16MHz ring 
+oscillator 
+o_reset_average output  reset average 
+o_quokka_data_valid output [quokka_routine_bit-1:0] start ADSP 
+o_n_ppg_frame output [ppg_frame_bit-1:0] number for 
+ppg frame 
+o_rx_ch_frame output [ppg_rx_channel_bit-1:0] rx channel 
+output 
+o_en_ldo_1v8 output  enable ldo 
+1v8 
+o_T_tx_led_set output [T_tx_led_set_bit-1:0] time led set 
+for ppg fsm 
+o_T_tx_led_off output [T_tx_led_off_max_bit-1:0] time led off 
+for ppg fsm 
+o_idac_dc_ppg_frame output [idac_dc_ppg_frame_bit-1:0] idac dc ppg 
+for ppg fsm 
+o_curr_sel_tx_frame_x output [curr_sel_bit-1:0] 
+curr sel tx for 
+frame 
+running 
+o_tx1_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel 
+o_tx2_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel"
+IPOS_MAIN_CTRL.pdf,49,"48 
+ 
+Port name Direction Type Descr. 
+o_tx3_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel 
+o_tx4_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel 
+o_n_average output [n_average_ecg_bia_gsr_max_bit-
+1:0] 
+average for 
+channel on 
+measuring 
+o_adc_mux_bio_channel output [2:0] 
+adc mux to 
+analog 
+domain 
+o_adc_mux_sel output  
+adc mux 
+selection to 
+analog 
+domain 
+o_N_clk output [N_clk_max_bit-1:0] 
+clock cycles 
+for adc 
+sampling 
+o_data_valid_ecg_bia_adc output  data valid for 
+ecg and bia 
+o_average_ppg output [n_average_ppg_max_bit-1:0] average for 
+ppg channel 
+o_error_time_slot output  error irq 
+o_ahb_address output [31:0] 
+address for 
+ahb write 
+operation"
+IPOS_MAIN_CTRL.pdf,50,"49 
+ 
+Port name Direction Type Descr. 
+o_change_address_clk_en output  
+change 
+address clock 
+gating enable 
+o_reset_write output  reset write 
+operation 
+o_done_frame output  end frame 
+ppg 
+o_average_clk_en output  
+average ip 
+clock gating 
+enable 
+o_ppg_fsm_clk_en output  
+ppg fsm ip 
+clock gating 
+enable 
+o_quokka_start_en output  adsp start 
+enable 
+o_trim_ldo_d output [1:0] trim ldo 
+output 
+o_calibration_phase output  
+end of 
+calibration 
+phase 
+o_quokka_write output  write ahb for 
+adsp 
+o_tag_data output [7:0] data tag"
+IPOS_MAIN_CTRL.pdf,51,"50 
+ 
+Port name Direction Type Descr. 
+o_write_data_tag_ahb_en output [1:0] write data tag 
+ahb 
+o_gsr_curr_on output  
+gsr curr on 
+signal to 
+analog 
+domain 
+o_gsr_on output  
+gsr on signal 
+to analog 
+domain 
+o_gsr_result output  
+gsr result 
+computation 
+to average ip 
+o_data_valid_gsr_adc output  data valid gsr 
+adc 
+o_reset_calibration_phase output  
+reset adc 
+calibration 
+phase 
+o_en_clk_16MHz_sleep output  close clock in 
+sleep state 
+o_mc_ahb_clk_en output  master ahb 
+clock enable 
+o_reset_ppg_start_up output  reset ppg 
+start up 
+o_ioff_calibration_av output  
+ioff 
+calibration 
+data valid"
+IPOS_MAIN_CTRL.pdf,52,"51 
+ 
+Port name Direction Type Descr. 
+o_mc_busy output  
+main 
+controller is 
+working 
+o_half_charge_ldo output  half charge 
+ldo to pmu 
+o_start_su_ecg output  start ecg start 
+up 
+o_start_su_bia output  start bia start 
+up 
+o_alc_mask output  alc mask 
+o_start_cfg_update_clk_en output  start shadow 
+registers IPs 
+o_save_alc output  
+save alc data 
+for current 
+frame 
+o_irq_start_measurement output  irq for start 
+measurement 
+o_reset_su output  reset start up 
+phase 
+o_operative_state output  operative 
+state flag 
+o_ioff_rx_ch_reg output  ioff rx ch 
+selection"
+IPOS_MAIN_CTRL.pdf,53,"52 
+ 
+Port name Direction Type Descr. 
+during ppg 
+calibration 
+o_rst_async_ecg_reg output  start rst async 
+reset ecg 
+o_rst_async_bia_reg output  start rst async 
+reset bia 
+o_write_data_cfg output  
+writa data 
+change ppg 
+configuration 
+o_write_cfg_change_ppg output  
+start write 
+configuration 
+change for 
+ppg 
+o_su_ecg_clk_en output  
+start up 
+phase ecg 
+clock enable 
+o_su_bia_clk_en output  
+start up 
+phase bia 
+clock enable 
+o_elab_fsm_clk_en output  elab fsm 
+clock enable 
+o_rx_ch_gain_calib output [rx_ch_gain_max_bit-1:0] 
+o rx channel 
+gain for ppg 
+ioff 
+calibration"
+IPOS_MAIN_CTRL.pdf,54,"53 
+ 
+Port name Direction Type Descr. 
+o_en_mask_ldo_pdclkf_reg output  
+mask ldo 
+control 
+during boot 
+o_boot_state_sync output  
+boot_state 
+sync on 
+16MHz 
+o_ispu_irq_ctrl output [3:0] ispu irqs 
+o_cfg_enable output  
+enabling 
+shadow 
+register 
+o_check_update output  check update 
+configuration 
+o_first_cfg output  first 
+configuration 
+o_start_operative_16MHz output  
+start 
+operative 
+mask for Lead 
+Off detection 
+o_main_controller_device_status_register output [2:0] device fsm 
+status register 
+o_main_controller_elab_status_register output [3:0] elab fsm 
+status register 
+o_en_bufxbio output  
+en biobuffer 
+to analog 
+domain"
+IPOS_MAIN_CTRL.pdf,55,"54 
+ 
+Port name Direction Type Descr. 
+o_write_time_slot_reg output  
+write time 
+slot data start 
+operation 
+o_time_slot_data output [23:0] time slot data 
+o_cfg_change_ppg_data output [23:0] change ppg 
+data 
+o_en_lead_off output  enable lead 
+off 
+o_start_ahb_time_slot_write output  start ahb time 
+slot ahb write 
+o_gsr_clk_en_16M output  
+gsr clock 
+enable 16 
+MHz 
+o_start_operation_for_ppg output  
+start 
+operation for 
+ppg 
+o_ppg_ioff_calib_start output  start ioff ppg 
+calib 
+o_ppg_adc_control_en output  ppg adc 
+control 
+o_clock_en_boot_sync_32 output  clock enable 
+boot sync 
+o_reset_alc output  reset alc"
+IPOS_MAIN_CTRL.pdf,56,"55 
+ 
+Table 6: Main Controller FSMs I/O List 
+5.3.2. Description of the Block 
+This block is divided into two FSMs. The first FSM called Device_FSM, is in charge of identify the 
+working state of the device. The second FSM called Elab_FSM, is in charge of identify what signal 
+is in elaboration and to check and generate signal from and for the Analog Domain. The Elab_FSM 
+is also in charge to start writing to the AHB Crossbar and to talk with Hardware DSPs block like 
+the Avarage Circuit and ADSP, or to start PPG operation talking with the PPG_FSM. This Block is 
+also in charge to turn of the Fast Ring Oscillator (16 MHz) and to enable the User Read Operation. 
+ 
+ 
+Figure 2: Main Controller FSM Diagram 
+5.3.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_003]  ASSUMPTION :  
+When in BOOT State (when main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) is equal to 0x01), the Device_FSM shall raise the w_quokka_boot signal let the ADSP starts 
+the BOOT operation. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5014] REQUIREMENT:"
+IPOS_MAIN_CTRL.pdf,57,"56 
+ 
+When the MODE OPERATION is set to 0 (after that has been set to 1) to stop a measurement, 
+the USER shall check that the DEVICE_STATUS_REGISTER reaches the IDLE State Value and 
+wait at least 1ms before doing anything. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5015] Requirement:  
+[Covers: DDS_STBIO1_1114] 
+The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the 
+WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS 
+[DDS_STBIO1_1114] [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5016] REQUIREMENT:  
+When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for 
+these two channels shall be written in the following regmap registers 
+ECG0_AC 
+ECG0_DC 
+ECG1_BIA_P_AC 
+ECG1_BIA_P_DC 
+ECG2_BIA_Q_AC 
+ECG2_BIA_Q_DC 
+GSR_RESULT 
+ 
+[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5004] REQUIREMENT:  
+The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is 
+1024[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5005] REQUIREMENT:  
+If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value 
+shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main 
+controller fsm)[END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1004] REQUIREMENT:  
+[Covers: DDS_STBIO1_0118] 
+[Covers: DDS_STBIO1_0125] 
+The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2] 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1005] REQUIREMENT:  
+The user shall configure which channel is selected and if work in Data Storage mode for the 
+measure writing the DEVICE_CONFIG_CHANNEL register [Covers] [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1006] REQUIREMENT:"
+IPOS_MAIN_CTRL.pdf,58,"57 
+ 
+The user shall select a division index for ECG, BIA, GSR and PPG configuring M_ECG_l, 
+M_ECG_h, M_BIA_l, M_BIA_h, M_GSR_l, M_GSR_h, M_PPG_l and M_PPG_h writing in the 
+dedicated registers. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1007] REQUIREMENT:  
+[Covers: DDS_STBIO1_0120] 
+[Covers: DDS_STBIO1_0122] 
+[Covers: DDS_STBIO1_0127] 
+[Covers: DDS_STBIO1_0130] 
+In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel 
+(DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and set to HC_EN. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1008] REQUIREMENT:  
+[Covers: DDS_STBIO1_0128] 
+[Covers: DDS_STBIO1_0140] 
+In Order to enable a BIA Channel Operation, the user shall always select the BIA channel 
+(DEVICE_CONFIG_CHANNEL), set the i_M_BIA greater than zero and set to IMP_EN. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1009] REQUIREMENT:  
+In Order to enable a GSR Channel Operation, the user shall always select the GSR channel 
+(DEVICE_CONFIG_CHANNEL) and set the i_M_GSR greater than zero. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1010] REQUIREMENT:  
+In Order to enable a PPG Channel Operation, the user shall always select the PPG channel 
+(DEVICE_CONFIG_CHANNEL) and set the i_M_PPG greater than zero. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1011] REQUIREMENT:  
+In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the 
+ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and 
+IMP_EN set to 1. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_004] REQUIREMENT:  
+[Covers: DDS_STBIO1_0116] 
+When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 
+0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, 
+checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the 
+Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 
+0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and  that  
+the O_PD_CLKF signal is set to high. [End] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_008]  REQUIREMENT :  
+When in unique_fifo_mode (i_multiple_fifo set to 0), if during a time slot an operation is done, the 
+Main_Controller_FSM shall write the time_slot_data inside the FIFO with a dedicated tag. The 
+value of the time_slot_data shall be referred to the start of the entire measurement cycle (for"
+IPOS_MAIN_CTRL.pdf,59,"58 
+ 
+example, time_slot_data shall be 0 if it’s the first time slot, 4 if it’s the fifth time_slot). If no operation 
+is done during a time_slot, no time_slot_data shall be written, but the value of time_slot_data shall 
+be increased. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_009] REQUIREMENT:  
+[Covers: DDS_STBIO1_0123] 
+[Covers: DDS_STBIO1_0141] 
+ 
+When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL 
+(DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL 
+(DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL 
+(DEVICE_CONFIG_CHANNEL register [3])  is set high, or ADC_DO_CALIBRATION ( 
+ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE 
+(GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL 
+(DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION 
+(DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go 
+to 0, the w_en_ldo1v8 shall be set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_010]  REQUIREMENT :  
+[Covers: DDS_STBIO1_0119] 
+When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, 
+HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN  (IMP_CTRL register [0])  is set to 0, 
+ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register 
+[1:0] ) is set  different from 0, the O_PD_HC2 shall go low and the Device_FSM  FSM shall go to 
+the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) shall be equal to 0x03. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_011]  REQUIREMENT :  
+ 
+When the HC_EN (ECG_CTRL register [0])  is set to 0 and IMP_EN  (IMP_CTRL register [0])  is 
+set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and 
+ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register 
+[1:0] ) is set different from 0,  the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the 
+Device_FSM shall go to the WAIT_SU State, so main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_012]  REQUIREMENT :  
+When the HC_EN (ECG_CTRL register [0])  is set to 1 and IMP_EN  (IMP_CTRL register [0])is set 
+to 1, ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1 and ECG0_SEL"
+IPOS_MAIN_CTRL.pdf,60,"59 
+ 
+(DEVICE_CONFIG_CHANNEL register [0]) is set to 1, ECG0-ECG1 and ECG2 shall be active so 
+the O_PD_HC2 shall go low, O_PD_IMP shall go low and the Device_FSM shall go to the 
+WAIT_SU State so main_controller_status_register (DEVICE_STATUS_REG register [ 2:0]) shall 
+be equal to 0x03. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_015]  REQUIREMENT :  
+When the user selects the ECG, BIA, the wave velocity mode or the ppg ioff calibration, the device 
+Shall go to WAIT_SU state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_0115]  REQUIREMENT :  
+When the user selects an operative mode that includes the BIA channel, The DEVICE_FSM FSM 
+moves from IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) is equal to 0x02) to WAIT_SU STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x03). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_016]  REQUIREMENT :  
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL 
+(DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low  within 5 clock cycle at 
+32kHz. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_017]  REQUIREMENT :  
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL 
+(DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ 
+register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if 
+IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain 
+high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_018]  REQUIREMENT :  
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and 
+BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of 
+imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, 
+O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at 
+FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall 
+be chosen from 20kHz, 50kHz, 100kHz, 200kHz .  
+On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and 
+ck_q shall stay low. After this, the clock shall always run. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_019]  REQUIREMENT :  
+When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase 
+delay of 90 degrees (opposite) with respect O_CK_P. [END]"
+IPOS_MAIN_CTRL.pdf,61,"60 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_020]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 
+and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 15ms after the falling of 
+O_PD_IMP, the O_RST_IMP shall go low. [END] 
+ 
+  
+[IPOS_STBIO1_MAIN_CONTROLLER_021]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 
+and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of 
+O_RST_IMP, if EN_CHOP_CLK_IMP  (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, 
+O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be 
+run at 10kHz frequency.  
+On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set 
+to 0, then O_CK_CHOP_IMP shall stay low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_022]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 
+and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 30ms after the falling of 
+O_RST_IMP, O_RSTI_IMP shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_023]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal 
+to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set 
+to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low.  
+Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the 
+falling of O_RSTI_IMP, O_SUG_IMP shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_024]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set 
+to 1  and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and 
+MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after 
+WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal 
+to 0x04)[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3124] REQUIREMENT :  
+ 
+When the ELAB_FSM is in ECG State and only ECG0 is selected, the  o_ADC_EN shall go high, 
+5 acquisitions are required (acquisitions described in section 5.4 ADC PHASE). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_025]  REQUIREMENT :"
+IPOS_MAIN_CTRL.pdf,62,"61 
+ 
+When DEVICE_FSM FSM is in WAIT_SU STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set 
+to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU  the 
+device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3125] REQUIREMENT :  
+When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high 
+and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE). 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_026]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set 
+to 1  and IMP_EN (IMP_CTRL register [0]) is set to 1  and ECG0_SEL 
+(DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL 
+(DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in 
+OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3126] REQUIREMENT : 
+When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go 
+high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device 
+shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_027]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set 
+to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU  the device_fsm 
+shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3127] REQUIREMENT :  
+When ELAB_FSM is in BIA state , o_ADC_EN shall go high and  16 acquisitions are required 
+(acquisitions described in  section 5.4 ADC PHASE ) and then device shall go in 
+SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_028]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set 
+to 1  and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN  (IMP_CTRL 
+register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, 
+the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 128] REQUIREMENT :  
+When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in 
+section 5.4 ADC PHASE) and then device shall go in SLEEP  (DEVICE_STATUS_REG register 
+[2:0] is equal to 101). [END]"
+IPOS_MAIN_CTRL.pdf,63,"62 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_029]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 
+and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, 
+the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register 
+[3:0]  shall be equal to 0x05) and O_PD_TIA and O_PD_IDAC shall go low. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_030]  REQUIREMENT :  
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in 
+ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number 
+of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check 
+the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each 
+frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or 
+at the end of the last frame. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_031]  REQUIREMENT :  
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in 
+ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number 
+of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES 
+(FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except 
+when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times.  
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_032]  REQUIREMENT :  
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in 
+ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF 
+shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, 
+o_Txi_idac_VREF shall be increase its value of N_START  for next step o_Txi_idac_VREF shall 
+be increase its value by 1 [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_033]  REQUIREMENT :  
+When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) is equal to 0x02) , Device_FSM  shall go back in IDLE only if the user turns off the 
+MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0]) is set to 0). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_034]  REQUIREMENT :  
+When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is 
+equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state 
+(DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top.  
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4034] REQUIREMENT :  
+Every Time a new measurement cycle starts (DEVICE FSM goes in OPERATIVE from another 
+state), the o_irq_start_measurement shall be set to 1 for at least 1 clock cycle [END]"
+IPOS_MAIN_CTRL.pdf,64,"63 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1034] REQUIREMENT :  
+Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go 
+back into the IDLE State. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_035]  REQUIREMENT :  
+When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), 
+the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if 
+no error occurred. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_036]  REQUIREMENT :  
+When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck 
+at 0)  occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are 
+selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital 
+Top signal) shall be set to 1, otherwise shall be left to 0.  [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 436] REQUIREMENT :  
+When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are 
+at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go 
+low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_037]  REQUIREMENT :  
+In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) 
+shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first 
+bio-channel to measure with the o_ADC_mux_reg. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_038]  REQUIREMENT :  
+When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, 
+o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions  
+(described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the 
+o_adc_mux_biochannel shall be set also to 011, 100, 101 and 110. In the ECG state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_039]  REQUIREMENT :  
+When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG 
+register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall 
+stay low.  [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_040]  REQUIREMENT :  
+When the ELAB_FSM is in BIA State (Check ELAB_STATUS_REG), the ADC_Mux 
+(o_adc_mux_biochannel on digital top) output shall be set equal to 011, 100, 101 or 110. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_041]  REQUIREMENT :"
+IPOS_MAIN_CTRL.pdf,65,"64 
+ 
+When the ELAB_FSM is in GSR State (Check ELAB_STATUS_REG), the ADC_Mux 
+(o_adc_mux_biochannel on digital top) output shall be set equal to 111. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3128] REQUIREMENT :  
+When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration 
+FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3129] REQUIREMENT :  
+When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be 
+performed first.[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3130] REQUIREMENT :  
+When the wave velocity mode and the ppg ioff calibration are selected, the wave velocity mode 
+shall be performed first. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3131] REQUIREMENT :  
+When the ppg ioff calibration is selected and device fsm is in WAIT_SU State, the Elab FSM 
+shall go into the Timer Buffer state and then PPG IOFF CALIB state. [END] 
+5.4. ADC PHGEN 
+5.4.1. IP Description 
+This block is in charge of generating and checking the signal useful for ADC calibration and Data 
+conversion. This block  has also three Debug Mode: debug_calibration, 
+debug_adc_error_cap_bypass and debug_adc_readout. 
+5.4.2. I/O List 
+5.4.2.1. Parameters 
+Generic name Type Value Description 
+N_clk_max_bit int 6  
+data_in_size_bit int 16  
+n_average_max int 128  
+n_average_max_cal int 128  
+n_average_debug int 2"
+IPOS_MAIN_CTRL.pdf,66,"65 
+ 
+5.4.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  16 MHz Clock 
+i_rstn input  Reset 
+i_N_clk input [N_clk_max_bit-1:0] Clock cycles for sampling 
+phase 
+i_ADC_en_mc input  adc enable from main 
+controller 
+i_start_ADC_mc input  Start adc from main 
+controller 
+i_start_ADC_ppg input  start adc from PPG 
+i_ADC_EOC input  End Of Conversion from 
+Analog ADC 
+i_en_ADC_debug input  enable for adc debug 
+phase 
+i_do_calibration input  calibration enable 
+i_adc_en_mask input  mask for adc enable 
+i_ppg_adc_control_en input  adc enable from ppg 
+i_debug_adc_error_cap8_0_bypass input  debug enable for debug 
+capacitance 
+i_adc_error_cap8_debug input [6:0] cap debug value"
+IPOS_MAIN_CTRL.pdf,67,"66 
+ 
+Port name Direction Type Description 
+i_adc_error_cap7_debug input [6:0] cap debug value 
+i_adc_error_cap6_debug input [6:0] cap debug value 
+i_adc_error_cap5_debug input [6:0] cap debug value 
+i_adc_error_cap4_debug input [6:0] cap debug value 
+i_adc_error_cap3_debug input [6:0] cap debug value 
+i_adc_error_cap2_debug input [6:0] cap debug value 
+i_adc_error_cap1_debug input [6:0] cap debug value 
+i_adc_error_cap0_debug input [6:0] cap debug value 
+i_reset_debug_adc_data input  reset data sampled 
+during debug 
+i_start_adc_debug input  start adc in debug mode 
+i_debug_adc_readout_bypass input  enabling for adc redout 
+bypass 
+i_debug_calibration input  enabling debug 
+calibration 
+i_data_ADC_out input [data_in_size_bit-1:0] data from adc 
+i_reset_end_calibration input  reset calibration phase 
+i_n_average input [clog2(n_average_max_cal):0] number of acquisition"
+IPOS_MAIN_CTRL.pdf,68,"67 
+ 
+Port name Direction Type Description 
+i_calibration_phase input  start calibration phase 
+i_noise input  number of acquisition for 
+noise 
+o_adc_test_cap output [9:0] value of adc test cap 
+o_adc_error_cap9 output [7:0] calibration result 
+o_adc_error_cap8 output [6:0] calibration result 
+o_adc_error_cap7 output [6:0] calibration result 
+o_adc_error_cap6 output [6:0] calibration result 
+o_adc_error_cap5 output [6:0] calibration result 
+o_adc_error_cap4 output [6:0] calibration result 
+o_adc_error_cap3 output [6:0] calibration result 
+o_adc_error_cap2 output [6:0] calibration result 
+o_adc_error_cap1 output [6:0] calibration result 
+o_adc_error_cap0 output [6:0] calibration result 
+o_ADC_clk_en output  adc phase clock enable 
+o_ADC_en output  adc enable to analog 
+domain"
+IPOS_MAIN_CTRL.pdf,69,"68 
+ 
+Port name Direction Type Description 
+o_ADC_start output  adc start to analog 
+domain 
+o_EOC output  end of conversion to 
+average block 
+o_data_out output [data_in_size_bit-1:0] sampled data 
+o_do_average output  start average operation 
+o_data_out_debug_adc output [15:0] data out in debug mode 
+o_end_cal_phase output  end of calibration phase 
+o_adc_ready output  adc ready signal 
+ 
+Table 7: ADC Phgen I/O List 
+5.4.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_042]  ASSUMPTION :  
+The representation of the sampled signal is 16 bit in Two Complements. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_043]  REQUIREMENT :  
+The ADC_PHGEN shall work at 16 MHz clock frequency. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_044]  REQUIREMENT :  
+When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set 
+to 9 and o_end_cal_phase that shall be set to high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_045]  REQUIREMENT :  
+The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not  
+160 clock cycles are passed), or i_calibration_phase is set to 1 or i_adc_start is set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_046]  ASSUMPTION :  
+The capacitor under calibration shall be read by the o_adc_test_cap[9:0] signal, which shall be use 
+the one hot encoding. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1047] REQUIREMENT :"
+IPOS_MAIN_CTRL.pdf,70,"69 
+ 
+When the elab_fsm is in PPG State, the I_PPG_ADC_CONTROL _EN Shall be 0, otherwise can be 
+0 or 1. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_047]  REQUIREMENT :  
+When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high 
+until the reset is not asserted or the i_reset_end_calibration is set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_048]  REQUIREMENT :  
+When the i_reset_end_calibration , i_do_calibration and i_mode_operation  are set to 1, the 
+o_end_cal_phase shall be set to 0. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_049]  REQUIREMENT :  
+When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_051]  REQUIREMENT :  
+[Covers: DDS_STBIO1_0121] 
+[Covers: DDS_STBIO1_0129] 
+The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This 
+signal indicates the number of clock that o_ADC_start shall stay high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_052]  REQUIREMENT :  
+When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except 
+for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if 
+i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end 
+of the calibration phase. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_0 152] REQUIREMENT :  
+If the calibration has been done, the ADC_error_caps values computed shall reset only if the 
+POR signal is asserted or shall be overwritten if another calibration is performed. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_053]  REQUIREMENT :  
+When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before 
+the ADC is ready to work. The first i_ADC_EOC shall be ignored. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_054]  REQUIREMENT :  
+When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay 
+High for i_N_clk+1 cycles. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_055]  REQUIREMENT :  
+After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new 
+data on the falling edge of the clock. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_057]  REQUIREMENT :"
+IPOS_MAIN_CTRL.pdf,71,"70 
+ 
+When i_calibration_phase is set to 1 and ADC is ready, the calibration phase shall start. In this 
+case, the o_end_cal_phase shall be asserted when the calibration phase is ended. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_058]  REQUIREMENT :  
+The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration 
+algorithm. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_059]  REQUIREMENT :  
+If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall 
+be divided by 2. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 6059] REQUIREMENT :  
+I_noise shall be set to 0 during the ADC calibration. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_060]  REQUIREMENT :  
+When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall 
+set to high the o_do_avarage signal for 1 clock cycle. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_061]  REQUIREMENT :  
+When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to 
+convert the input in Two Complement. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_062]  REQUIREMENT :  
+When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples 
+used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to 
+speed-up the AM-S simulation). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_063]  REQUIREMENT :  
+When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 
+en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result 
+shall be bypassed in favor of the value written inside the registers 
+ADC_ERROR_CAP_x_DEBUG [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_064]  REQUIREMENT :  
+When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , 
+the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the 
+Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in 
+ADC_GENERAL_DEBUG_0 and the sampled data shall be written in 
+ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and  In this mode, 
+before start a new sampling operation, the RESET_DEBUG_ADC DATA in 
+ADC_GENERAL_DEBUG_0 shall be set to 1 and then to 0. [END]"
+IPOS_MAIN_CTRL.pdf,72,"71 
+ 
+ 
+Figure 3: ADC PHGen Time Diagram: 
+ 
+Figure 4: ADC Calibration Phase Time Diagram 
+ 
+Figure 5: ADC Calibration Algorithm 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1064] ASSUMPTION :  
+ADC_CHANNEL TABLE: 
+ 
+Channel o_adc_mux_bio_channel o_adc_mux_sel 
+ECG0 AC 1 0 
+ECG0 DC 2 0 
+160 clk cycle"
+IPOS_MAIN_CTRL.pdf,73,"72 
+ 
+BIA AC P/ ECG1 AC 3 0 
+BIA DC P/ ECG1 DC 4 0 
+BIA AC Q/ ECG2 AC 5 0 
+BIA DC Q/ ECG2 DC 6 0 
+GSR 7 0 
+PPG 0 1 
+No Channel selection 0 0 
+Table 15: ADC Channel Table 
+ 
+[END] 
+5.5. ECG Start-Up Phase 
+5.5.1. IP Description 
+This block oversees the generation of the signal useful for the ECG start-up Analog Circuit 
+5.5.2. I/O List 
+5.5.2.1. Ports 
+Port name Direction Type Description 
+i_clk input  Clock general 
+i_rstn input  reset general 
+i_hc_en input  set health channel 
+i_clk_hlt_en input  set clock for health channel 
+i_su_hlt_dly input  start up phase delay 
+i_reg_rst_sync input  reset async phase signal 
+o_pd_hc2 output  powerd down hc2 to analog domain 
+o_rst_hc2 output  rst hc2 to analog domain 
+o_rsti_hc2 output  rsti hc2 to analog domain"
+IPOS_MAIN_CTRL.pdf,74,"73 
+ 
+Port name Direction Type Description 
+o_su_hc2 output  hc2 to analog domain 
+o_en_ck_hc2_10k output  output clk chopper 
+o_reset_reg_rst output  end of reset async phase 
+ 
+Table 88: ECG SU I/O List 
+5.5.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_072]  REQUIREMENT : 
+When the i_hc_en is set to 1 and i_imp_en is set to 0 and i_n_ecg_channel is equal to 1, ECG0 
+shall be active so the o_pd_hc2 shall go low and counter shall be work. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_073]  REQUIREMENT : 
+When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 
+and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low 
+and counter shall be work. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_074]  REQUIREMENT : 
+When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0-
+ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and 
+counter shall be work. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_075]  REQUIREMENT : 
+The counter that defines the timing during the start-up phase shall work at 32KHz. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_076]  REQUIREMENT : 
+15ms after that the o_pd_hc2 is gone low, the o_rst_hc2 shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_077]  REQUIREMENT : 
+20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be 
+generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0, 
+then o_rsti_hc2 shall go low after 30ms since the falling of o_rst_hc2. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_078]  REQUIREMENT : 
+If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go 
+low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_079]  REQUIREMENT :"
+IPOS_MAIN_CTRL.pdf,75,"74 
+ 
+If i_su_hlt_dly is set to 1, at least after 755ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go 
+low .[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4079] REQUIREMENT : 
+If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4080] REQUIREMENT : 
+If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5080] REQUIREMENT : 
+i_rst_async_ecg Shall be used only when the Device FSM is in SLEEP or Operative State. [END]"
+IPOS_MAIN_CTRL.pdf,76,"75 
+ 
+ 
+ 
+ 
+ 
+durante lo start-up, ma in modo asincrono attraverso un bit dedicato (reg_rst_ecg_asinc). 
+ 
+ 
+ 
+ 
+  
+Figure 6: ECG start up phase with chopper clock 
+Figure 8:ECG Start Up phase with no Chopper Clock 
+Figure 7:ECG Start-UP phase with asynch reset 
+205ms 
+reg_rst_ecg_async 
+5ms 
+205ms 
+205ms 30ms"
+IPOS_MAIN_CTRL.pdf,77,"76 
+ 
+5.6. BIA Start-Up Phase 
+5.6.1. IP Description 
+This block oversees the generation of the signal useful for the BIA start-up Analog Circuit 
+5.6.2. I/O List 
+5.6.2.1. Ports 
+Port name Direction Type Description 
+i_clk input  Clock general 
+i_rstn input  reset general 
+i_imp_en input  BIA En channel 
+i_imp_curinj input  current injection for BIA 
+i_su_hlt_dly input  delay for start up phase 
+i_clk_imp_en input  clock BIA filter enable 
+i_reg_rst_imp_sync input  reset sync from main controller fsm 
+o_pd_imp_from_bia output  power down for analog domain 
+o_en_ck_m_p_q output  clock for modulation 
+o_imp_curinj_pd output  current injection into analog domain 
+o_rst_imp output  reset bia for analog domain 
+o_en_ck_chop_imp output  enable clock chopper for bia 
+o_rsti_imp output  rsti for analog domain"
+IPOS_MAIN_CTRL.pdf,78,"77 
+ 
+Port name Direction Type Description 
+o_sug_imp output  sug for analog domain 
+o_reset_reg_rst_imp_async output  end of reset async phase 
+ 
+Table 9: BIA Start-Up Phase I/O List 
+5.6.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_080]  REQUIREMENT : 
+When the user selects an operative mode that includes the BIA channel, a start-up shall be done. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_081]  REQUIREMENT : 
+When i_imp_en signal is equal to 1, the o_pd_imp_from_bia shall be go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_082]  REQUIREMENT : 
+When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if 
+i_imp_curinj is equal to 0, the o_imp_curinj_pd shall stay high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_083]  REQUIREMENT : 
+At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal 
+to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock 
+generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low.  
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_084]  REQUIREMENT : 
+At least 15ms after the falling of o_pd_imp_from_bia, the o_rst_imp shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_085]  REQUIREMENT : 
+20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high 
+and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is 
+set to 0, the o_en_ck_chop_imp shall stay low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_086]  REQUIREMENT : 
+30ms after the falling of o_rst_imp, o_rsti_imp shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_087]  REQUIREMENT : 
+If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. 
+Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low.  
+[END]"
+IPOS_MAIN_CTRL.pdf,79,"78 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+Figure 9: BIA Start-UP Phase Time Diagram 
+205ms"
+IPOS_MAIN_CTRL.pdf,80,"79 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4090] REQUIREMENT : 
+If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if 
+enabled.[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4091] REQUIREMENT : 
+If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0 
+as in the next figure.[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5091] REQUIREMENT : 
+i_rst_async_bia shall be used only when Device FSM is in OPERATIVE or SLEEP state.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5092] REQUIREMENT : 
+i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and 
+2.[END] 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+205ms 
+reg_rst_imp_async 
+5ms 
+205ms"
+IPOS_MAIN_CTRL.pdf,81,"80 
+ 
+5.7. GSR 
+5.7.1. IP Description 
+This is not an hardware block, but just a description of the GSR signal Behavior. 
+5.7.2. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_088]  REQUIREMENT : 
+The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass 
+between two GSR acquisitions following this formula: 
+GSRdata = time_slot
+2 ∗ m_gsr 
+ 
+.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_089]  REQUIREMENT : 
+If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot 
+after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set 
+to 0) shall be performed. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_090]  REQUIREMENT : 
+The gsr_on shall set high at least 300us before the start of the sampling. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_092]  REQUIREMENT : 
+If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot 
+where the GSR_SNS signal is acquired and shall set low at end of the same time slot. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_093]  REQUIREMENT : 
+If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set 
+to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then 
+mediated to get one single value for each of them, and then the final result shall be the 
+subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no 
+acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of 
+GSR_SNS. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_094]  REQUIREMENT : 
+When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h 
+and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE 
+State and shall go back in Operative State only when the measurement shall be run or, in case of 
+cds disabled, when the o_gsr_curr shall change its polarity. [END]"
+IPOS_MAIN_CTRL.pdf,82,"81 
+ 
+ 
+Figure 10: GSR with CDS Disabled and m_GSR set to 1 
+ 
+Figure 11:GSR with CDS Enabled with m_gsr set to 1 
+5.8. PPG FSM 
+5.8.1. IP Description 
+This IP is in charge to control the PPG TX/RX Enabling and signal acquisitions, and managing 
+the start of Digital Ramp, ALC Compensation and PPG IOFF Calibration. Example of PPG IOFF 
+Calibration Results can be found in the Appendix."
+IPOS_MAIN_CTRL.pdf,83,"82 
+ 
+ 
+Figure 12: PPG FSM State Diagram 
+ 
+ 
+Figure 13: PPG Time Diagram"
+IPOS_MAIN_CTRL.pdf,84,"83 
+ 
+5.8.2. I/O List 
+5.8.3. Parameters 
+Generic name Type Value Description 
+T_tx_startup_bit int 5  
+idac_dc_ppg_frame_bit int 7  
+rx_ch_frame_n_bit int 6  
+id_frame_max_bit int 4  
+rx_ch_gain_max_bit int 4  
+T_tx_led_set_bit int 5  
+T_tx_led_off_max_bit int 7  
+Nmax_bit int 4  
+ppg_ioff_offset_bit int 10  
+max_frame_repetition int 2  
+n_max_frame int 12  
+data_size_bit int 16  
+ppg_frame_bit int 4  
+T1_max_bit int 9  
+T1_max_bit_from_decoder int 4"
+IPOS_MAIN_CTRL.pdf,85,"84 
+ 
+Generic name Type Value Description 
+BTIA_ALC_register_bit int 10  
+ppg_start_up_decod_bit int 5  
+ppg_start_up_bit int 9  
+5.8.4. Ports 
+Port name Directi
+on Type Description 
+i_clk_16MHz input  Clk 16 MHz 
+i_rstn input  Reset 
+i_gain_start_set input [rx_ch_gain_max_bit-1:0] gain max value 
+i_T_rx_set input [T1_max_bit_from_decoder-
+1:0] RX set Time 
+i_idac_dc_ppg_frame input [idac_dc_ppg_frame_bit-1:0] IDAC DC PPG Value From Regmap 
+i_wave_velocity_mode input  wave velocity mode selection 
+i_n_ppg_frame input [ppg_frame_bit-1:0] number of ppg frame 
+i_const_value_ioff input [data_size_bit-1:0] constant value for 
+i_adc_ready input  adc ready from adc phases 
+i_start_ppg_fsm input  start ppg fsm 
+i_reset_alc input  reset alc compensation"
+IPOS_MAIN_CTRL.pdf,86,"85 
+ 
+Port name Directi
+on Type Description 
+i_start_operation_for_ppg input  start operation for ppg 
+i_ppg_start_up_time input [ppg_start_up_decod_bit-
+1:0] ppg start up time 
+i_rx_ch_frame input [rx_ch_frame_n_bit-1:0] rx channel selection 
+i_id_frame input [id_frame_max_bit-1:0] frame identification 
+i_T_tx_led_set input [T_tx_led_set_bit-1:0] tx led set time 
+i_T_tx_led_off input [T_tx_led_off_max_bit-1:0] tx led off time 
+i_reset_ppg_ioff_calib input  reset ppg ioff calibration 
+i_reset_ppg_start_up input  reset ppg start up phase 
+i_n_m0 input [data_size_bit-1:0] nm0 value 
+i_n_m1 input [data_size_bit-1:0] nm1 value 
+i_ppg_ioff_calibration input  ppg ioff calibration mode 
+i_end_average input  end average 
+i_rising_ramp_end input  end of rising ramp 
+i_falling_ramp_end input  end of falling ramp 
+i_half_rising_ramp input  half value of the max digital ramp reached 
+i_end_compensation input  end alc"
+IPOS_MAIN_CTRL.pdf,87,"86 
+ 
+Port name Directi
+on Type Description 
+i_done_frame input  end of the frame 
+i_w_BTIA_ALC input [BTIA_ALC_register_bit-1:0] ALC Coarse value 
+i_frame_repetition input [n_max_frame-1:0] number of frame repetition 
+i_ppg_ioff_calib_mode input   
+o_data_valid_ppg_adc output  data valid for ppg raw 
+o_data_valid_noise_ppg_a
+dc output  data valid for noise ppg 
+o_start_alc_comp output  start alc comp 
+o_start_average_clk output  enable average clock 
+o_start_digital_ramp output  start rise digital ramp 
+o_falling_digital_ramp output  start falling ramp 
+o_end_ppg_fsm output  end of ppg fsm 
+o_en_tia output  enable tia 
+o_en_buffer output  enable buffer 
+o_en_idac output  en idac 
+o_idac_dc_ppg_frame output [idac_dc_ppg_frame_bit-1:0] idac dc ppg for current frame 
+o_RESET_PPG_average output  reset ppg average"
+IPOS_MAIN_CTRL.pdf,88,"87 
+ 
+Port name Directi
+on Type Description 
+o_start_ADC output  start ADC 
+o_reset_ramp output  reset ramp value 
+o_busy_ppg output  busy ppg signal 
+o_ppg_calib_data_n_m1 output  ppg calib data valid for nm1 
+o_alc_clk_en output  alc compensation clock enable 
+o_tx_preset output  set tx preset 
+o_en_txi output  enable tx channel 
+o_average_repetion output [max_frame_repetition-1:0] average repetition value 
+o_ppg_status_register output [n_state_bit-1:0] ppg state status register 
+o_noise output  ppg noise data valid 
+o_BTIA_ALC output [BTIA_ALC_register_bit-1:0] btia alc value 
+o_reset_curr_frame output  reset current frame 
+o_start_up_time_ppg_don
+e output  end of start up ppg 
+o_N_step2_reg output [ppg_ioff_offset_bit-1:0] value stored for n_step2 
+o_mask_ADC_en output  mask adc enable 
+o_en_rx_ch output  enable rx channel"
+IPOS_MAIN_CTRL.pdf,89,"88 
+ 
+Port name Directi
+on Type Description 
+o_end_ioff_calibration output  end ppg ioff calibration 
+o_ioff_offset output [ppg_ioff_offset_bit-1:0] ioff offset value 
+o_ppg_calib_data_n_m0 output  ppg galibration data valid 
+o_reset_avg_calib_0 output  reset avg calib 0 
+o_reset_avg_calib_1 output  reset avg calib 1 
+ 
+Table 10: PPG FSM I/O List 
+5.8.5. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7095] REQUIREMENT : 
+All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the 
+states values are described in the register’s comment). [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_095]  REQUIREMENT : 
+The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high  when the PPG_FSM is 
+RX_START UP state. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_300]  REQUIREMENT : 
+When the rstn_i is asserted low, the PPG FSM shall return in Reset state immediately.  [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_096]  REQUIREMENT : 
+When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and 
+PPG_SEL in DEVICE_CONFIG_CHANNEL register  is set to 1, when the ELAB_FSM is in PPG 
+STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set 
+to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_097]  REQUIREMENT : 
+When in Reset state, if the rstn_i is de-asserted , i_wave_velocity_mode is and the i_start_ppg_fsm 
+is high, if i_ID_Frame is equal to 0 or two successively frame have two different i_rx_ch_frame , 
+then the PPG FSM shall go to ALC Compensation state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 6098] REQUIREMENT : 
+When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the 
+ELAB FSM is into the PPG_ALC_STORAGE and then never repeated. [END]"
+IPOS_MAIN_CTRL.pdf,90,"89 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 6070] REQUIREMENT : 
+When i_wave_velocity mode is enabled together with the DISABLE_ALC, the 
+PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the 
+values are not summed (visible) to the o_BIDAC. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_098]  REQUIREMENT : 
+When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC 
+Compensation block to start the ALC Compensation algorithm. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_099]  REQUIREMENT : 
+When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from 
+the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE. 
+[END] 
+ 
+IPOS_STBIO1_MAIN_CONTROLLER_ 6099] REQUIREMENT : 
+When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from 
+the ALC Compensation block to go into the RESET_PPG state if i_wave_velocity_mode is set to 
+1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_100]  REQUIREMENT : 
+When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1,  the 
+o_BIDAC shall maintain the value reached during the ALC Compensation  summed up, if 
+i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration 
+Procedure. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_101]  REQUIREMENT : 
+When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time 
+(GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES 
+state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_102]  REQUIREMENT : 
+When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until 
+i_end_average is low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_103]  REQUIREMENT : 
+When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle 
+after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM 
+shall bring itself into the Rising_Ramp state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1102] REQUIREMENT : 
+Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital 
+Ramp rising phase[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1103] REQUIREMENT :"
+IPOS_MAIN_CTRL.pdf,91,"90 
+ 
+Tx Preset shall be set to 0 0.5us after the Digital Ramp reach the 0 value during the falling phase 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1104] REQUIREMENT : 
+Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase 
+(i_start_falling_ramp) of the digital ramp [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1105] REQUIREMENT : 
+If no multiple frame is selected (i_frame_repetition in ppg_fsm set to 0), when Tx Preset falls 
+from 1 to 0, also the en_tx shall pass from 1 to 0.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 8106] REQUIREMENT : 
+If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls 
+from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when 
+o_end_ppg_fsm is set, en_tx is 0).[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_104]  REQUIREMENT : 
+When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp 
+signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_105]  REQUIREMENT : 
+When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to 
+the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the 
+frame that is being executed. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_106]  REQUIREMENT : 
+When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time 
+and then go into the Measurement state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_107]  REQUIREMENT : 
+When in Measurement state, after the wait at least of the TX_ledset time related to the frame that 
+is being executed. (TX_LEDSET_FRAME {n}]), the o_start_adc signal shall be set high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_108]  REQUIREMENT : 
+When in Measurement state, the PPG_FSM shall stay in this state until the rising of the 
+i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling 
+Ramp state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_109]  REQUIREMENT : 
+When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the 
+FALLING_RAMP State and shall stay 1 until i_falling_ramp_end is different from 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_110]  REQUIREMENT : 
+When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be 
+set to 0. [END]"
+IPOS_MAIN_CTRL.pdf,92,"91 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_111]  REQUIREMENT : 
+When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time 
+(depends on the user's configuration of Digital Ramp parameters) and bring itself into the 
+SECOND_ALC_SAMPLES state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_112]  REQUIREMENT : 
+When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of 
+the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_113]  REQUIREMENT : 
+When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of 
+the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, 
+the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel 
+rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there 
+are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG 
+state and the into the ALC_Compensation  state. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1095] REQUIREMENT : 
+The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac 
+and o_en_buffer of respectively. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_115]  REQUIREMENT : 
+At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. 
+Once the Average is computed, if no averages_between_equal_frames option is selected, the data 
+shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there 
+is avareges_between_equal_frames option selected from regmap, after the computations of this 
+average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB 
+Master interface. [END] 
+ 
+ 
+ 
+Figure 14: Ioff Calibration phase 
+𝑁𝑠𝑡𝑒𝑝2 = ⌊𝑁𝑠𝑡𝑒𝑝1 ∗  (𝑁𝑚0 − 2731)
+(𝑁𝑚0 − 𝑁𝑚1) ⌋ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1115] REQUIREMENT  
+Switch ON RX TIA, PGA, ADC
+RX_GAIN(0:3) Set Gain N
+PD_CH_SEL(0:2) PD channels OFF 0
+OFFSET(0:9) Chose value 0
+ADC SAR S M S M S M S M S M S M S M S M S M
+Tstartup Tset_IDAC Tset_IDAC
+Nstep1 Nstep2
+Nm0 Nm1 opt. check"
+IPOS_MAIN_CTRL.pdf,93,"92 
+ 
+The Ioff Calibration algorithm shall be enabled or disabled by a dedicated field in regmap. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1116] REQUIREMENT : 
+When the Ioff Calibration algorithm is enabled, it shall be performed every time a new 
+measurements cycle starts. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 118] REQUIREMENT : 
+Nm0 shall be the result of average on 8 acquired samples. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 119] REQUIREMENT : 
+Nm1 shall be the result of average on 8 acquired samples. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 120] ASSUMPTION   
+Nstep1 shall change as the following table: 
+ 
+RX Gain [ohm] Ideal OFFSET  [uA] MAX OFFSET [uA] Typical Nstep2 Max Nstep2 Nstep1 
+8000 1.38E-04 1.65E-04 275 330 55 
+16000 6.88E-05 8.25E-05 137 165 27 
+32000 3.44E-05 4.13E-05 68 82 13 
+64000 1.72E-05 2.06E-05 34 41 7 
+128000 8.59E-06 1.03E-05 17 20 3 
+256000 4.30E-06 5.16E-06 8 10 1 
+512000 2.15E-06 2.58E-06 4 5 1 
+1024000 1.07E-06 1.29E-06 2 2 1 
+2048000 5.37E-07 6.45E-07 1 1 1 
+Table 10: Nstep1 values 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 121] REQUIREMENT  
+During the Ioff calibration algorithm EN_TIA, EN_PGA and ADC_EN shall be set to 1. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 122] REQUIREMENT  
+During the Ioff calibration algorithm the RX_GAIN (o_BTIA_gain on top) shall change from 0 to 8. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 322] ASSUMPTION  
+Nstep2 is the result of the ioff calibration[END]"
+IPOS_MAIN_CTRL.pdf,94,"93 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 123] REQUIREMENT  
+During the Ioff calibration algorithm the PD_CH_SEL (o_rx_ch_frame on top) Shall be set to 0. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 124] REQUIREMENT  
+During the Ioff calibration algorithm the OFFSET (o_ioff_offset on ppg_fsm) shall change to 0 
+during the Nm0 computation and to Nstep1 during the Nm1 computation. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 125] REQUIREMENT  
+The Ioff Calibration algorithm shall be repeated 9 times, one for each RX gain value. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 126] REQUIREMENT  
+All the OFFSET Value shall be stored (See Ioff calibration Read Only registers in regmap) and 
+used during the PPG acquisition based on the RX_GAIN configuration chosen by the user. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 127] ASSUMPTION  
+During the Ioff Calibration algorithm, all the PPG data (Nmo, Nm1, Nstep1 and final offset result) 
+shall be considered unsigned. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 128] ASSUMPTION  
+Outside the Ioff Calibration algorithm, all the PPG data shall be considered signed in two’s 
+complement. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 129] REQUIREMENT  
+When o_reset_state is set to 1, the o_BIDAC, o_BTIA_gain and o_rx_ch_frame (all checked 
+from main_controller_top) shall be set to 0. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 130] ASSUMPTION  
+When o_reset_state falls from 1 to 0, the o_BIDAC, o_BTIA_gain and o_rx_ch_frame shall be 
+considered stable. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2130] ASSUMPTION  
+The result of the IOFF CALIBRATION Nstep2 for rx gain equal to 2048000 shall be always 1. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 131] REQUIREMENT  
+To reset the IOFF_CALIBRATION PROCEDURE and relaunch it after that the mode Operation 
+has been set to 0 and then again to 1, the user shall perform the following steps: 
+• Set the RESET_IOFF_CALIBRATION TO 1 (GENERAL_PARAMETERS1) to 1 
+• WAIT that the DEVICE_STATUS_REGISTER is equal to the OPERATIVE value 
+and the ELAB_STATUS_REGISTER is equal to the PPG value 
+• Reset the RESET_IOFF_CALIBRATION FROM 1 (GENERAL_PARAMETERS1) 
+to 0 
+• Set the MODE_OPERATION to 0 
+• Wait at least 1ms and the SET MODE_OPERATION to 1 
+[END]"
+IPOS_MAIN_CTRL.pdf,95,"94 
+ 
+5.9. Digital Ramp 
+5.9.1. IP Description 
+This block Is in charge to generate a user-configurable ramp for the PPG Analog Circuit 
+ 
+Figure 15: Digital Ramp Time Diagram 
+ 
+5.9.2. I/O List 
+5.9.2.1. Parameters 
+Generic name Type Value Description 
+Nmax_bit int 4  
+delta_bit int 2  
+5.9.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  Clock 
+i_rstn input  Asynchronous reset active low 
+i_start_digital_ramp input  start rising digital ramp 
+i_falling_digital_ramp input  start falling digital ramp 
+i_Nmax_to_reg input [ Nmax_bit-1:0]"
+IPOS_MAIN_CTRL.pdf,96,"95 
+ 
+Port name Direction Type Description 
+i_T_preset input [1:0] Preset time 
+i_n_start_case input [Nmax_bit-1:0] first step value for ramp 
+i_T_step1_to_reg input [delta_bit-1:0] time for first step value for ramp 
+i_reset_ramp input  reset ramp 
+o_rising_ramp_end output  end of rising phase 
+o_falling_ramp_end output  end of falling phase 
+o_Tx_ramp output [ Nmax_bit-1:0] value of the ramp 
+o_half_rising_ramp output  half value of TX ramp 
+ 
+Table 11: Digital Ramp I/O List 
+5.9.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_116]  ASSUMPTION : 
+The Digital Ramp shall read the i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 
+register [3:0]), i_delta_case, i_n_start_case, i_T_delta_to_reg, i_T_preset,  and i_T_step1_to_reg 
+from a register set by the user. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 8116] REQUIREMENT : 
+i_n_start_case shall be lesser or equal than i_Nmax_to_reg. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2117] REQUIREMENT : 
+When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_118]  REQUIREMENT : 
+When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value 
+i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset 
+(DIGITAL_RAMP_CONFIG_PARAM_1 register [5:4]). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_119]  REQUIREMENT :"
+IPOS_MAIN_CTRL.pdf,97,"96 
+ 
+After the first step, the other step shall increase by 1 one every 2-clock cycle. [END]"
+IPOS_MAIN_CTRL.pdf,98,"97 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5120] TX_PRESET_TIME shall be configurable 
+between 0.5us, 1us, 1.5us and 2us (8,16,24,32 clock cycles) [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_120]  REQUIREMENT : 
+When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value 
+(DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock 
+cycle.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_121]  REQUIREMENT : 
+Nmax shall be a value between 1 and 15 configurable by user. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_122]  REQUIREMENT : 
+When o_ TX_Vref is equal to i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 
+register [3:0])), o_rising_ramp_end shall go high. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_123]  REQUIREMENT : 
+When o_Tx_Vref is equal to 0 during the falling and the rising ramp is ended (o_rising_ramp_end 
+==0), o_falling_ramp_end shall go high. [END]  
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_124]  REQUIREMENT : 
+When the rising ramp reaches half its value, o_half_rising_ramp shall go high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_125]  REQUIREMENT : 
+When i_reset_ramp is high all output shall be down. [END]"
+IPOS_MAIN_CTRL.pdf,99,"98 
+ 
+5.10. ALC Compensation 
+ 
+Table 11: ALC Algorithm Flow Diagram 
+5.10.1. IP Description 
+This block Is in charge to overseas the Ambient Light Compensation algorithm for the PPG 
+Analog Channel"
+IPOS_MAIN_CTRL.pdf,100,"99 
+ 
+5.10.2. I/O List 
+5.10.2.1. Parameters 
+Generic name Type Value Description 
+gain_max_bit int 4  
+T1_max_bit_from_decoder int 4  
+T2_max_bit_from_decoder int 2  
+T1_max_bit int 8  
+T2_max_bit int 5  
+BTIA_ALC_register_bit int 9  
+T1_add_T2_max_bit int 13  
+n_iteration_bit int 4  
+ppg_frame_bit int 4  
+ppg_frame_bit_ALC_BTIA int 12  
+n_max_frame int 5  
+5.10.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  16 MHz clock 
+i_rstn input  reset signal"
+IPOS_MAIN_CTRL.pdf,101,"100 
+ 
+Port name Direction Type Description 
+i_EN_TIA input  enable tia from ppg fsm 
+i_EN_BUFF input  enable buffer from ppg fsm 
+i_EN_IDAC input  enable Idac from ppg 
+i_reset_alc input  reset alc phase 
+i_gain_start input [gain_max_bit-1:0] gain start value 
+i_gain_max_set input [gain_max_bit-1:0] gain max value 
+i_reset_ppg_start_up input  reset for start up phase 
+i_ALC_comp_start input  start of alc phase 
+i_comp_rx_out input  comparator value from analog 
+domain 
+i_T_TIAON input [T1_max_bit_from_decoder-
+1:0] TIA Time 
+i_T1 input [T1_max_bit_from_decoder-
+1:0] T1 value for alc phase 
+i_T2 input [T2_max_bit_from_decoder-
+1:0] T2 value for alc phase 
+o_comp_rx_ck output  comp rx ck for analog domain 
+o_ALC_comp_end output  end of alc compensation 
+o_rx_ch_gain output [gain_max_bit-1:0] rx channel gain"
+IPOS_MAIN_CTRL.pdf,102,"101 
+ 
+Port name Direction Type Description 
+o_w_BTIA_ALC output [BTIA_ALC_register_bit-1:0] ALC Corse Result 
+ 
+Table 123: ALC Compensation I/O List 
+ 
+5.10.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_126]  REQUIREMENT : 
+When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start 
+(PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at 
+100000000. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_127]  REQUIREMENT : 
+ALC cycle algorithm shall be done until the set of the last o_w_BTIA_ALC bit. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 728] REQUIREMENT : 
+At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running 
+frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If 
+it’s masked, its contribution shall be 0 [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 6129] REQUIREMENT : 
+When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after 
+a T1+T_TIA_On time, both configurable by regmap. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_129]  REQUIREMENT : 
+When i_ALC_comp_start is set to 1 and the o_BTIA_ALC (ALC Compensation) change is value, 
+after a configurable time T1 (PPG_ALC_CONFIG_PARAM_1 register [3:0]), o_comp_rx_ck 
+shall be high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLL  ER_130]  ASSUMPTION : 
+After T1+T2, if i_comp_rx_out is equal to 1, o_w_BTIA_ALC [cycle] shall be set to 
+COMP_RX_OUT. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_131]  ASSUMPTION : 
+After T1+T2 o_w_BTIA_ALC [cycle - 1] shall be set to 1, until cycle is greater than zero. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_132]  REQUIREMENT : 
+After T1+T2 (PPG_ALC_CONFIG_PARAM_2 register [1:0]), if o_BTIA_gain (2:0) < 
+i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), during ALC_COMPENSATION 
+state of PPG fsm with o_end_compensation set to 0, o_BTIA_gain increase its value of 1. 
+Instead, if o_BTIA_gain 2:0) >= i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), 
+o_BTIA_gain shall remain at its old value. [END]"
+IPOS_MAIN_CTRL.pdf,103,"102 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_133]  REQUIREMENT : 
+Once is set to 1, o_comp_rx_ck shall be set to 0 after a T2+1 clock cycle. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 9116] REQUIREMENT : 
+GAIN_START shall be lesser or equal than GAIN_MAX. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_134]  REQUIREMENT : 
+According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first 
+frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME 
+(PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock 
+cycle after i_start_ppg is set to 1 [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7135] REQUIREMENT : 
+If the ALC_COARSE (o_w_BTIA_ALC) result is equal to zero, it shall be brought to 1[END] 
+ 
+ 
+Table 13: ALC Time Diagram 
+ 
+5.11. Average Block 
+5.11.1. IP Description 
+This block oversees the “cleaning” of the samples doing simple average math operation and 
+change representation. The output will be 16 bit for ECG, BIA and GSR, 20 bit for PPG instead. 
+For ECG, BIA and GSR the number of acquisitions is fixed, while for PPG is configurable. 
+5.11.2. I/O List 
+5.11.2.1. Parameters 
+Generic name Type Value Description 
+data_size_bit int 16"
+IPOS_MAIN_CTRL.pdf,104,"103 
+ 
+Generic name Type Value Description 
+n_average_ecg_bia_gsr_max_bit int 5  
+n_average_ppg_max_bit int 7  
+n_average_ecg_bia_gsr_max int 17  
+n_average_ppg_max int 128  
+max_frame_repetition int 2  
+n_ppg_frame int 12  
+frame_ppg_debug_alc int 8  
+5.11.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  16 MHz Clock 
+i_rstn input  Reset 
+i_data_in input [ data_size_bit-1:0] data from adc phases 
+i_reset_average input  reset average 
+i_n_average_ecg_bia_gsr input [n_average_ecg_bia_gsr_max_bit-
+1:0] 
+number of acquisition for 
+ECG/BIA/GSR 
+i_reset_average_ppg input  reset average 
+i_frame_ppg_debug input [ n_ppg_frame_bit-1:0] frame selection for ppg data 
+debug"
+IPOS_MAIN_CTRL.pdf,105,"104 
+ 
+Port name Direction Type Description 
+i_force_reset input  force reset avg 
+i_save_alc input  save alc value in regmap 
+i_ppg_ioff_calib input  ppg ioff calibration phase 
+i_alc_mask input  mask alc average result 
+i_ppg_ioff_data_calib_n_m0 input  nm0 computation 
+i_ppg_ioff_data_calib_n_m1 input  nm1 computation 
+i_reset_avg_calib_0 input  reset average for nm0 
+i_reset_avg_calib_1 input  reset average for nm1 
+i_id_frame input [ n_ppg_frame_bit-1:0]  
+i_gsr_result input  start computation for gsr result 
+i_en_gsr_cds input  enabling gsr cds mode 
+i_n_average_ppg input [ n_average_ppg_max_bit-1:0] number of acquisition for ppg 
+i_data_valid_ecg_bia_adc input  data valid for ecg and bia data 
+i_data_valid_ppg_adc input  data valid for ppg data 
+i_data_valid_gsr_adc input  data valid for gsr 
+i_data_valid_noise_ppg_adc input  data valid for noise ppg 
+i_end_of_conversion input  end of conversion from adc 
+phases"
+IPOS_MAIN_CTRL.pdf,106,"105 
+ 
+Port name Direction Type Description 
+i_average_repetion input [ max_frame_repetition-1:0] number of ppg frame repetition 
+o_data_out output [ data_size_out_bit-1:0] output data after average 
+o_end_average output  end average operation 
+o_alc_data output [ data_size_out_bit+2:0] alc data output 
+o_ppg_data_raw output [ data_size_out_bit+2:0] ppg data raw output 
+o_n_m0 output [ data_size_bit-1:0] nm0 data output 
+o_n_m1 output [ data_size_bit-1:0] nm1 data output 
+o_saturation_flag output [ n_ppg_frame-1:0] saturation flag for ppg 
+o_adc_data_debug_alc_1 output [ frame_ppg_debug_alc-1:0] alc 1 registers data debug 
+o_adc_data_debug_alc_2 output [ frame_ppg_debug_alc-1:0] alc 2 registers data debug 
+o_adc_data_debug_ppg_raw output [ frame_ppg_debug_ppg_raw-1:0] ppg raw registers data debug 
+o_write_enable output  start ahb operation 
+ 
+Table 145: Average Block I/O List 
+5.11.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_136]  ASSUMPTION : 
+The Average block shall accumulate data every time the i_end_of_conversion signal is asserted . 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1136] REQUIREMENT : 
+After the assertion of i_end_of_conversion a number of times equals to i_n_average_ecg_bia_gsr 
+(in case of ECG,  BIA and GSR) or i_n_average_ppg (in case of PPG without frame repetitions) , 
+after at least one clock cycle o_data_result shall be computed and o_write_enable shall rise [END]"
+IPOS_MAIN_CTRL.pdf,107,"106 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_137]  REQUIREMENT : 
+The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA 
+AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the 
+correct number of times) [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_138]  REQUIREMENT : 
+The average block shall perform the average on 16 sample acquisition for GSR. When the CDS 
+mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR 
+ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between 
+the two results. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1139] REQUIREMENT : 
+The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in 
+FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the 
+SECOND_ALC_SAMPLES [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_139]  REQUIREMENT : 
+When a PPG  Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise 
+(i_data_valid_noise_ppg_adc set to 1) data is sampled (i_end_of_conversion set to 1) the data 
+shall be accumulated until i_n_average_ppg is not reached. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT : 
+Once the PPG  Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the 
+ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed 
+as follow: 
+ 
+I_N_Average_PPG Samples Result with ALC 
+MASK=0 
+Result with ALC 
+Mask=1 
+0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 
+2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 
+4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 
+8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 
+16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 
+32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 
+64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 
+128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 
+Table 18: PPG Result Table 
+Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P 
+is the accumulated PPG data and Acc_N is the accumulated noise[END]"
+IPOS_MAIN_CTRL.pdf,108,"107 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 9139] REQUIREMENT : 
+If during the PPG Frame computation, the i_alc_mask (ALC Disabled) is enabled, the final result 
+shall be only the ppg acquisition and the subtraction of the alc data shall not be performed. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_143]  REQUIREMENT : 
+When i_end_of_conversion is set to 1 and i_n_average_ecg_bia_gsr (average ecg,bia and gsr) 
+or i_n_average_ppg (Frame_X_Parameter_1) is equal to their limit values, an average operation 
+shall be done and o_write_enable shall be set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1143] REQUIREMENT : 
+For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, 
+otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and 
+i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with 
+o_gsr_curr_on set to 0 and o_gsr_on set to 1[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2143] REQUIREMENT : 
+When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value 
+between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) 
+and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2, 
+o_adc_data_debug_alc_1 and o_adc_data_debug_ppg_raw. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2144] REQUIREMENT : 
+[Covers: DDS_STBIO1_0124] 
+[Covers: DDS_STBIO1_0142] 
+The data written in FIFO shall have the following tag: 
+ 
+DATA TYPE  BIT: 23 - 20  BIT: 19 - 16  BIT: 15 - 0  
+PPG FRAME 0  0000  DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+PPG FRAME 1  0001  
+PPG FRAME 2  0010  
+PPG FRAME 3  0011  
+PPG FRAME 4  0100  
+PPG FRAME 5  0101  
+PPG FRAME 6  0110  
+PPG FRAME 7  0111  
+PPG FRAME 8  1000  
+PPG FRAME 9  1001  
+PPG FRAME 10  1010  
+PPG FRAME 11  1011  
+TIME SLOT DATA  1111  0000  DATA 16 BIT  
+ECG0_AC  1100  0000  DATA 16 BIT  
+ECG0_DC  1101  0000  DATA 16 BIT  
+ECG1_AC  1100  0001  DATA 16 BIT  
+ECG1_DC  1101  0001  DATA 16 BIT  
+ECG2_AC  1100  0010  DATA 16 BIT  
+ECG2_DC  1101  0010  DATA 16 BIT"
+IPOS_MAIN_CTRL.pdf,109,"108 
+ 
+BIA_AC_P  1110  0001  DATA 16 BIT  
+BIA_DC_P  1110  0011  DATA 16 BIT  
+Table 2: DATA TAG Table 
+ 
+ 
+ 
+ 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2146] REQUIREMENT : 
+In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 
+0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the 
+threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at 
+the start of the next frame or frame repetition. 
+[END] 
+5.11.4. PPG Frame Repetition 
+The frame repetition is a classic mean operation between two 20 bit PPG data. The result of the 
+frame is accumulated on a 24 bit accumulator that is divided by the number of repeated frame. 
+The number of repetition frames supported is 0 (no frame repetead), 2,4 and 8. 
+5.11.4.1. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2145] REQUIREMENT : 
+The Frame shall work as follows: 
+1. Select how many times a particular frame shall be repeated 
+2. The result of each repetition shall be obtained as explained in 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT  
+3. After the last repetition has been accumulated, the data output shall be obtained dividing 
+by the number of repeated frames the accumulated data to obtain a 20 bit data. 
+The final result shall be computed as follows: 
+ 
+Number of times the Frame has been repeated Result 
+2 (Res_F_R1 + Res_F_R2)/2 
+4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 
+8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 
+Table 20: Frame Repetitions Result Computation table 
+Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the 
+result of the second repetition of the frame. 
+[END] 
+6. AHB Write Transaction 
+6.1. Write Transaction 
+Main Controller only supports single write transaction at 8/32 bit."
+IPOS_MAIN_CTRL.pdf,110,109
+IPOS_MAIN_CTRL.pdf,111,"110 
+ 
+7. Appendix 
+7.1. Example of Results for PPG IOFF Calibration 
+ 
+Figure 16: PPG IOFF Calibration example Results 
+ 
+ 
+7.2. AHB Protocol Reference 
+https://developer.arm.com/documentation/ihi0033/latest/"

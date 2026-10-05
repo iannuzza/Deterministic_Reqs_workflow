@@ -1,0 +1,8 @@
+{
+  "backend": "exact_cosine",
+  "dimension": 256,
+  "entity_count": 610,
+  "format_version": 1,
+  "model_fingerprint": "bdd7b229c1abc2cdc3672cff9bc6283c8851e73774b81bf083335a1173d95d66",
+  "model_id": "local-hash-v1"
+}

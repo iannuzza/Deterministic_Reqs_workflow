@@ -1,0 +1,25 @@
+13 
+ 
+Port name Directi
+on Type Description 
+i_mode_operation input [mode_operation_n_bit_top-1:0] mode operation 
+selection 
+i_T_rx_set input [T1_max_bit_from_decoder_top-1:0] rx channel time set 
+i_en_clkf input  en 16 MHz clock 
+i_quokka_boot_end input  from quokka 
+i_quokka_run input  from quokka 
+i_clk_16MHz_ready input  (from analog 
+circuit) 
+i_imp_curinj_en input  enabling current 
+injection for bia 
+i_en_ldo_1v8 input  enabling ldo 1v8 
+i_debug_comp_rx_ck input  enabling debug for 
+comp rx ck 
+i_debug_gsr_on input  gsr on debug mode 
+i_debug_gsr_curr_on input  gsr curr on debug 
+mode 
+i_alc_disabled input [n_max_frame-1:0] disabling alc bit for 
+each frame 
+i_en_cm_buf input  enabling common 
+buffer 
+i_en_rld input  enabling rld

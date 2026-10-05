@@ -1,0 +1,186 @@
+{
+  "project_name": "STBIO",
+  "selection": {
+    "project_name": "STBIO",
+    "final_method_decision": "hybrid",
+    "selected_mode": "hybrid",
+    "fallback_mode": "hybrid",
+    "selection_reason": "fallback_to_legacy_hybrid",
+    "decision_reason": "no non-fallback method passed all selection gates; fallback=hybrid; exact_id_baseline_recall_at_1=1.0; label_errors=0",
+    "decision_evidence": {
+      "benchmark_case_count": 5,
+      "benchmark_labels_valid": true,
+      "exact_id_baseline_mode": "hybrid",
+      "exact_id_baseline_recall_at_1": 1.0,
+      "candidate_modes_passing_all_gates": [],
+      "per_mode": [
+        {
+          "mode": "lexical",
+          "status": "measured",
+          "recall_at_1": 0.8,
+          "recall_at_5": 0.8,
+          "recall_at_10": 0.8,
+          "mrr": 0.8,
+          "mean_latency_ms": 700.1668800134212,
+          "p95_latency_ms": 733.6544999852777,
+          "passes_labels": true,
+          "passes_latency": false,
+          "passes_exact_id": false,
+          "passes_benchmark": false,
+          "failure_reasons": [
+            "latency threshold failed",
+            "exact-ID recall regressed"
+          ]
+        },
+        {
+          "mode": "normalized",
+          "status": "measured",
+          "recall_at_1": 1.0,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "mean_latency_ms": 628.8072599912994,
+          "p95_latency_ms": 633.3127999678254,
+          "passes_labels": true,
+          "passes_latency": false,
+          "passes_exact_id": true,
+          "passes_benchmark": false,
+          "failure_reasons": [
+            "latency threshold failed"
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "status": "measured",
+          "recall_at_1": 1.0,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 1.0,
+          "mean_latency_ms": 639.7095999796875,
+          "p95_latency_ms": 637.8462999709882,
+          "passes_labels": true,
+          "passes_latency": false,
+          "passes_exact_id": true,
+          "passes_benchmark": false,
+          "failure_reasons": [
+            "latency threshold failed"
+          ]
+        },
+        {
+          "mode": "semantic",
+          "status": "measured",
+          "recall_at_1": 0.4,
+          "recall_at_5": 0.4,
+          "recall_at_10": 0.4,
+          "mrr": 0.4,
+          "mean_latency_ms": 726.9779199850745,
+          "p95_latency_ms": 735.0406000041403,
+          "passes_labels": true,
+          "passes_latency": false,
+          "passes_exact_id": false,
+          "passes_benchmark": false,
+          "failure_reasons": [
+            "latency threshold failed",
+            "exact-ID recall regressed"
+          ]
+        },
+        {
+          "mode": "hybrid-semantic",
+          "status": "measured",
+          "recall_at_1": 0.6,
+          "recall_at_5": 1.0,
+          "recall_at_10": 1.0,
+          "mrr": 0.7666666666666666,
+          "mean_latency_ms": 699.0385600132868,
+          "p95_latency_ms": 702.0192000200041,
+          "passes_labels": true,
+          "passes_latency": false,
+          "passes_exact_id": false,
+          "passes_benchmark": false,
+          "failure_reasons": [
+            "latency threshold failed",
+            "exact-ID recall regressed"
+          ]
+        }
+      ]
+    },
+    "label_errors": [],
+    "thresholds": {
+      "max_mean_latency_ms": 100.0,
+      "max_p95_latency_ms": 250.0
+    },
+    "generated_at": "2026-09-15 16:55:36"
+  },
+  "results": [
+    {
+      "mode": "lexical",
+      "case_count": 5,
+      "recall_at_1": 0.8,
+      "recall_at_5": 0.8,
+      "recall_at_10": 0.8,
+      "mrr": 0.8,
+      "mean_latency_ms": 700.1668800134212,
+      "p95_latency_ms": 733.6544999852777,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": false,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "normalized",
+      "case_count": 5,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "mean_latency_ms": 628.8072599912994,
+      "p95_latency_ms": 633.3127999678254,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": true,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "hybrid",
+      "case_count": 5,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "mean_latency_ms": 639.7095999796875,
+      "p95_latency_ms": 637.8462999709882,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": true,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "semantic",
+      "case_count": 5,
+      "recall_at_1": 0.4,
+      "recall_at_5": 0.4,
+      "recall_at_10": 0.4,
+      "mrr": 0.4,
+      "mean_latency_ms": 726.9779199850745,
+      "p95_latency_ms": 735.0406000041403,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": false,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "hybrid-semantic",
+      "case_count": 5,
+      "recall_at_1": 0.6,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 0.7666666666666666,
+      "mean_latency_ms": 699.0385600132868,
+      "p95_latency_ms": 702.0192000200041,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": false,
+      "passes_benchmark": false
+    }
+  ]
+}

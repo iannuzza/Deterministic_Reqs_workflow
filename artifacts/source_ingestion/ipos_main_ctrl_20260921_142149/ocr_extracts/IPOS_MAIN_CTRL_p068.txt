@@ -1,0 +1,20 @@
+67 
+ 
+Port name Direction Type Description 
+i_calibration_phase input  start calibration phase 
+i_noise input  number of acquisition for 
+noise 
+o_adc_test_cap output [9:0] value of adc test cap 
+o_adc_error_cap9 output [7:0] calibration result 
+o_adc_error_cap8 output [6:0] calibration result 
+o_adc_error_cap7 output [6:0] calibration result 
+o_adc_error_cap6 output [6:0] calibration result 
+o_adc_error_cap5 output [6:0] calibration result 
+o_adc_error_cap4 output [6:0] calibration result 
+o_adc_error_cap3 output [6:0] calibration result 
+o_adc_error_cap2 output [6:0] calibration result 
+o_adc_error_cap1 output [6:0] calibration result 
+o_adc_error_cap0 output [6:0] calibration result 
+o_ADC_clk_en output  adc phase clock enable 
+o_ADC_en output  adc enable to analog 
+domain

@@ -1,0 +1,32 @@
+43 
+ 
+Port name Direction Type Descr. 
+i_m_ppg input [m_odr_max_bit-1:0] division factor 
+for ppg 
+i_start_operation input  start 
+operation 
+i_base_address_ecg0 input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for ecg0 
+i_base_address_bia input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for 
+bia/ecg1&2 
+i_base_address_gsr input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for gsr 
+i_base_address_ppg input [base_address_bit-1:0] 
+base address 
+multiple fifo 
+for ppg 
+i_bia_sel input  bia channel 
+selection 
+i_gsr_sel input  gsr channel 
+selection 
+i_ppg_sel input  ppg channel 
+selection 
+i_dis_rc_viref input  dis rc viref 
+from pmu

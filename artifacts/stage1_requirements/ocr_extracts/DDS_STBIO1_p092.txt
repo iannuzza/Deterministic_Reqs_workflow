@@ -1,0 +1,25 @@
+91 
+ 
+During WRITE routine ADSP shall copy the content of the OTP regmap into the OTP memory, 
+following the procedure to burn the fuses as expressed in the OTP datasheet 
+[Vpriority High] [End] 
+ 
+ 
+[DDS_STBIO1_0020] Requirement: 
+During WRITE routine, ADSP shall allow copying all OTP Registers into the OTP Memory only if 
+the location 0x24 of OTP Memory (OTP[24] in the following diagram) is not set to 0xFF.  
+ 
+ 
+ 
+Figure 13: Write Routine Start 
+[Vpriority High] [End] 
+ 
+ 
+ 
+ 
+ 
+[DDS_STBIO1_0021] Requirement: 
+During the WRITE routine and after copying all OTP Registers into the OTP Memory, ADSP shall 
+compare each value inside the OTP memory with the corresponding value in OTP Registers to 
+check if the WRITE routine has been succesfull. In that case ADSP shall write 0xFF into the last 
+location of the OTP memory.

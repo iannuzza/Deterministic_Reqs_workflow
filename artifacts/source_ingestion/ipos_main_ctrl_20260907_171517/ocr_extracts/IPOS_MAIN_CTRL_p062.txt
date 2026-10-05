@@ -1,0 +1,47 @@
+61 
+ 
+When DEVICE_FSM FSM is in WAIT_SU STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set 
+to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU  the 
+device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3125] REQUIREMENT :  
+When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high 
+and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE). 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_026]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set 
+to 1  and IMP_EN (IMP_CTRL register [0]) is set to 1  and ECG0_SEL 
+(DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL 
+(DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in 
+OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3126] REQUIREMENT : 
+When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go 
+high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device 
+shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_027]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set 
+to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU  the device_fsm 
+shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3127] REQUIREMENT :  
+When ELAB_FSM is in BIA state , o_ADC_EN shall go high and  16 acquisitions are required 
+(acquisitions described in  section 5.4 ADC PHASE ) and then device shall go in 
+SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_028]  REQUIREMENT :  
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set 
+to 1  and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN  (IMP_CTRL 
+register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, 
+the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 128] REQUIREMENT :  
+When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in 
+section 5.4 ADC PHASE) and then device shall go in SLEEP  (DEVICE_STATUS_REG register 
+[2:0] is equal to 101). [END]

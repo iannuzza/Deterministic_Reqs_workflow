@@ -1,0 +1,21 @@
+142 
+ 
+CTRL_REG_3 0x5A 0x00 RW 7:0 Unused. Available for 
+future expansion 
+CTRL_REG_4 0x5A 0x00 RW 7:0 Unused. Available for 
+future expansion 
+CTRL_REG_5 0x5A 0x00 RW 7:0 Unused. Available for 
+future expansion 
+CTRL_REG_6 0x5A 0x00 RW 7:0 Unused. Available for 
+future expansion 
+CTRL_REG_7 0x5A 0x00 RW 7:0 Connected to 8 bit 
+output o_ctrl_reg_7. 
+They can be used 
+during integration 
+IP_VERSION 0x5F 0x00 RO 7:0 Byte to specify IP 
+version. To be used at 
+integration time by 
+means of IP 
+parameter 
+"ip_version" 
+Table 36: I2C/SPI internal registers.

@@ -1,0 +1,77 @@
+# Requirements RAG Cross-Check
+
+- Timestamp: 2026-09-15 16:56:00
+- Checked requirements: 271
+- Corrected statements: 11
+- RAG exact: 235
+- RAG warn: 36
+- RAG fail: 0
+- Rule-check warn: 4
+- Rule-check fail: 0
+
+## Ontology and Extraction Rule Checks
+- source format rule: PASS (invalid_sources=0/271)
+- evidence type rule: PASS (invalid_evidence=0/271)
+- content class vocabulary: PASS (invalid_content_class=0/271)
+- requirement type vocabulary: PASS (invalid_requirement_type=0/271)
+- ID prefix vs content class: PASS (mismatch=0/271)
+- tagged preserve id rule: PASS (mismatch=0/271)
+- generated id format rule: PASS (mismatch=0/271)
+- strict tagged mode no-generated rule: PASS (generated_standard_rows=0/271)
+- strict tagged mode source_req_id presence: PASS (missing_source_req_id_rows=0/271)
+- test trace required rule: PASS (mismatch=0/271)
+- ontology table-row extraction: WARN (table_candidates=0)
+- ontology image extraction: WARN (image_candidates=0, sub_block_candidates=0)
+- image block inventory coverage: WARN (missing_blocks=Image 1:ambient sensor, Image 1:remote sensor, Image 1:actuator/heating interface, Image 1:power supply, Image 1:external host / host pc, Image 1:microcontroller, Image 1:adc interface, Image 1:gpio interface, Image 1:led interface, Image 1:push button, Image 1:relay output driver)
+- atomic image candidates only: PASS (generic_image_summary_rows=0)
+- functional description all-sentence rule: WARN (functional_description_rows=0)
+- category coverage: PASS (categories=['Analog', 'Digital', 'System'], missing=[])
+
+## Details
+- REQ_SYS-RQ-005: status=ok reason=exact_match changed=True
+- REQ_SYS-RQ-007: status=ok reason=exact_match changed=True
+- REQ_SYS-RQ-009: status=ok reason=exact_match changed=True
+- REQ_SYS-RQ-010: status=ok reason=exact_match changed=True
+- REQ_SYS-RQ-019: status=warn reason=high_overlap=0.89 changed=False
+- REQ_SYS-RQ-021: status=ok reason=exact_match changed=True
+- REQ_DIG-RQ-001: status=warn reason=high_overlap=0.92 changed=False
+- REQ_SYS-RQ-033: status=ok reason=exact_match changed=True
+- CONF_SYS-RQ-052: status=ok reason=exact_match changed=True
+- CONF_SYS-RQ-057: status=ok reason=exact_match changed=True
+- REQ_SYS-RQ-071: status=ok reason=exact_match changed=True
+- REQ_SYS-RQ-075: status=ok reason=exact_match changed=True
+- CONF_SYS-RQ-077: status=ok reason=exact_match changed=True
+- DDS_STBIO1_1020: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1021: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1027: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1022: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1023: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1024: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_2024: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_2025: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_2026: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1025: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1026: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1050: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1051: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1052: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_2052: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_2053: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1053: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_1054: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_2054: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_0036: status=warn reason=high_overlap=0.97 changed=False
+- DDS_STBIO1_8007: status=warn reason=high_overlap=0.93 changed=False
+- DDS_STBIO1_9004: status=warn reason=partial_overlap=0.74 changed=False
+- DDS_STBIO1_89457790: status=warn reason=high_overlap=0.90 changed=False
+- DDS_STBIO1_00001199: status=warn reason=high_overlap=0.97 changed=False
+- DDS_STBIO1_0501: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_0502: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_0503: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_0504: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_0505: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_0147: status=warn reason=partial_overlap=0.76 changed=False
+- DDS_STBIO1_0699: status=warn reason=high_overlap=0.90 changed=False
+- DDS_STBIO1_2507: status=warn reason=high_overlap=0.89 changed=False
+- DDS_STBIO1_0013: status=warn reason=high_overlap=1.00 changed=False
+- DDS_STBIO1_395: status=warn reason=partial_overlap=0.79 changed=False

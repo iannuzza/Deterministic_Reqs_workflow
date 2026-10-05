@@ -1,0 +1,42 @@
+Please review the current top-digital SoC spec generation logic and update both the **DRS generation logic** and the **DRS template agent** so the generated top-digital specification covers the main requirement categories expected for a digital top-level SoC block.
+
+At minimum, assess and report coverage for these categories:
+- functional behavior
+- clocking and reset
+- power management, power states, retention, wake-up
+- bus/interconnect/protocol behavior
+- memory map, register access, protection
+- interrupts, events, status reporting
+- boot, initialization, configuration
+- security, access control, isolation
+- DMA, data movement, buffering, FIFO behavior
+- arbitration, priority, QoS
+- error handling, fault reporting, recovery
+- performance, latency, throughput constraints
+- CDC/RDC/synchronization behavior
+- debug, trace, test, DFT visibility
+- interface requirements to analog, pads, and external systems
+- low-power domain coordination
+- firmware-visible behavior
+- mode transitions and operational states
+- safety, monitoring, watchdog, timeout behavior
+- block interaction and integration rules
+
+Important scope rule:
+- keep the DRS focused on **top-digital / integration-level / architecture-level** requirements
+- do **not** move detailed requirements of individual digital sub-blocks into the DRS
+- detailed sub-block requirements must remain in the corresponding **Digital IPOS** specs for each block
+- the DRS may reference, summarize, or constrain sub-block interactions at top level, but not duplicate full block-local detailed requirement content
+
+Constraints:
+- do not invent new requirements
+- use approved snapshot evidence only
+- keep the workflow deterministic and authoritative
+- preserve provenance and current review/approval rules
+
+Before editing, tell me:
+1. which of these categories are already covered in the current DRS generation
+2. which are partially covered or missing
+3. which DRS generator files and DRS template-agent files must be updated
+4. how you will keep DRS top-level while leaving detailed digital sub-block requirements in block IPOS
+5. how you will extend both generation logic and template structure without breaking the authoritative workflow

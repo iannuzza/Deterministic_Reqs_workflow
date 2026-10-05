@@ -1,0 +1,14 @@
+152 
+ 
+• CURR_SEL_TX_FRAME{n} in FRAME_n_PARAMETERS_7 register. 
+• TX1_OUTAB_SEL_FRAME_{n}, TX2_OUTAB_SEL_FRAME_{n}, 
+TX3_OUTAB_SEL_FRAME_{n}, TX4_OUTAB_SEL_FRAME_{n} in 
+FRAME_n_PARAMETERS_10 register.   
+6. SELECT OPERATIVE MODE: 
+[DDS_STBIO1_0148] Requirement: 
+• The user shall write DEVICE_CONFIG_OPERATION register [0] at 1. 
+7. CHECK DATA: 
+[DDS_STBIO1_0149] Requirement: 
+• To check data in unique FIFO (default config) the user shall check the first MSB. 
+PPG DATA has 20 bits of data and 4 of TAG. The 4 bits, from 0 to 11, are used to 
+identify the frame (as described in the table in DATA TAG table).

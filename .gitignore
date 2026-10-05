@@ -1,0 +1,31 @@
+﻿# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Generated workflow outputs
+artifacts/archive/
+artifacts/orchestrator/*.md
+artifacts/stage0_ontology/*.md
+artifacts/stage0_ontology/*.csv
+artifacts/stage1_requirements/*.md
+artifacts/stage1_requirements/*.csv
+artifacts/stage1_requirements/ocr_extracts/*.txt
+artifacts/stage1_requirements/ocr_extracts/*.csv
+artifacts/stage2_mirco_arc/*.md
+artifacts/stage2_mirco_arc/*.csv
+artifacts/rag_smart_thermostat_plus/*.sqlite
+artifacts/rag_smart_thermostat_plus/*.json
+artifacts/rag_smart_thermostat_plus/*.md
+artifacts/rag_i3g4250d/*.sqlite
+artifacts/rag_i3g4250d/*.json
+artifacts/rag_i3g4250d/*.md
+
+# Local editor/runtime files
+logs/
+local_history/
+.vscode/*.log
+*.tmp
+*.tmp.*
+

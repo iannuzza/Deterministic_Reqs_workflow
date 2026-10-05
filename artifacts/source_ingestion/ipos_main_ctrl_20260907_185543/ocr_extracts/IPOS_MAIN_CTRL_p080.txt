@@ -1,0 +1,34 @@
+79 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4090] REQUIREMENT : 
+If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if 
+enabled.[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 4091] REQUIREMENT : 
+If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0 
+as in the next figure.[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5091] REQUIREMENT : 
+i_rst_async_bia shall be used only when Device FSM is in OPERATIVE or SLEEP state.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 5092] REQUIREMENT : 
+i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and 
+2.[END] 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+205ms 
+reg_rst_imp_async 
+5ms 
+205ms

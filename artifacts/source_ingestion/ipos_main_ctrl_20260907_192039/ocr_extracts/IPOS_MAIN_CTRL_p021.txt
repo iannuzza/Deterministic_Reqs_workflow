@@ -1,0 +1,27 @@
+20 
+ 
+Port name Directi
+on Type Description 
+HADDR output [31:0] AHB Protocol 
+signals 
+HTRANS output [1:0] AHB Protocol 
+signals 
+HWRITE output  AHB Protocol 
+signals 
+HSIZE output [2:0] AHB Protocol 
+signals 
+HBURST output [2:0] AHB Protocol 
+signals 
+HPROT output [3:0] AHB Protocol 
+signals 
+HWDATA output [31:0] AHB Protocol 
+signals 
+HBUSREQ output  AHB Protocol 
+signals 
+HLOCK output  AHB Protocol 
+signals 
+o_bio_clock_div output  output for clock 
+chopper 
+o_BIDAC output [IDAC_offset-1:0] IDAC for top 
+o_rst_imp output  bia start up rst 
+signal

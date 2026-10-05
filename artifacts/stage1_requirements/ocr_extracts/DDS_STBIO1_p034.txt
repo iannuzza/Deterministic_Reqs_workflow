@@ -1,0 +1,28 @@
+33 
+ 
+ 
+Figure 6: STBIO1 Digital Scheme 
+ 
+11.1. XBAR Connection Matrix 
+Destination 
+ 
+ 
+Source 
+Regmap SENSOR HUB ISPU FIFO 
+ 
+ 
+ADSP 
+Main 
+Controller 
+[DDS_STBIO1_0201]   [DDS_STBIO1_0202] [DDS_STBIO1_0219] 
+ADSP [DDS_STBIO1_0203] [DDS_STBIO1_0204]  [DDS_STBIO1_0206]  
+I2C_SPI_AHB [DDS_STBIO1_0207] [DDS_STBIO1_0208] [DDS_STBIO1_0209] [DDS_STBIO1_0210] [DDS_STBIO1_0221] 
+SENSOR HUB    [DDS_STBIO1_0211]  
+ISPU [DDS_STBIO1_0212] [DDS_STBIO1_0213]  [DDS_STBIO1_0215] [DDS_STBIO1_0222] 
+ISPU debug [DDS_STBIO1_0216] [DDS_STBIO1_0217] [DDS_STBIO1_0218] [DDS_STBIO1_0220] [DDS_STBIO1_0223] 
+Table 7: XBAR Connection Matrix 
+ 
+ 
+[DDS_STBIO1_XBAR_01] Assumption 
+ Every master and slave supports AHBLite and none supports burst communication 
+[End]

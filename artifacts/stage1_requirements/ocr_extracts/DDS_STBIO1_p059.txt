@@ -1,0 +1,54 @@
+58 
+ 
+ 
+ 
+[DDS_STBIO1_301] Assumption 
+It will be enabled by two consecutive writes, pag. 3 to address 0x40 to set the page and 0x00 to 
+address 0x3E 
+[End] 
+ 
+[DDS_STBIO1_302] Requirement 
+If MODE_CONFIG register is 0x00 the operative mode shall be functional. 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_303] Requirement 
+If MODE_CONFIG register is 0x01 the operative mode shall be SCAN.  
+ [End] 
+ 
+[DDS_STBIO1_304] Requirement 
+If MODE_CONFIG register is 0x04 the operative mode shall be BIST.  
+ [End] 
+ 
+[DDS_STBIO1_305] Requirement 
+If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG.  
+ [End] 
+ 
+[DDS_STBIO1_306] Requirement 
+If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG.  
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_307] Requirement 
+If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode.  
+ [Vpriority High] [End] 
+ 
+[DDS_STBIO1_308] Requirement 
+If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode.  
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_314] Requirement 
+In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and 
+ext_cap_en is “0” 
+[Vpriority High][End] 
+ 
+[DDS_STBIO1_309] Requirement 
+In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and 
+ext_cap_en is “0” 
+[Vpriority High] [End] 
+ 
+ 
+ 
+ 
+[DDS_STBIO1_310] Requirement 
+In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 
+and ext_cap_en is “0” 
+[Vpriority High] [End]

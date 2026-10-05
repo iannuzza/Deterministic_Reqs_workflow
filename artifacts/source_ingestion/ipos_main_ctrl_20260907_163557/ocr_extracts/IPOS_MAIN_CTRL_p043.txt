@@ -1,0 +1,27 @@
+42 
+ 
+Port name Direction Type Descr. 
+i_lpm input [1:0] low power 
+mode for ldo 
+i_mpm input [1:0] 
+medium 
+power mode 
+for ldo 
+i_hpm input [1:0] high power 
+mode for ldo 
+i_rst_async_ecg input  rst async for 
+ecg 
+i_alc_disabled input [n_max_frame-1:0] alc disabled 
+for ppg 
+i_rst_async_bia input  rst async for 
+bia 
+i_done_cfg input  end of 
+configuration 
+i_scan_mode input  scan mode 
+enable 
+i_m_ecg input [m_odr_max_bit-1:0] division factor 
+for ecg 
+i_m_bia input [m_odr_max_bit-1:0] division factor 
+for bia 
+i_m_gsr input [m_odr_max_bit-1:0] division factor 
+for gsr

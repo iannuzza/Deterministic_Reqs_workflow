@@ -1,0 +1,36 @@
+Execute only the approval-boundary support step.
+
+Do not perform any technical fix beyond workflow-supported approval operations.
+Do not merge.
+Do not create snapshots.
+Do not run Stage 3+.
+Do not change requirement text, mappings, hierarchy placement, allocation metadata, or technical decisions.
+
+Goal:
+Prepare and, if this repo/workflow supports it, execute only the minimal approved workflow steps needed to review and approve the current architecture profile and mapping artifacts, so that approval state and approval hashes become coherent with the current effective artifacts.
+
+Constraints:
+- preserve all current approved technical content exactly as-is
+- no reinterpretation or recomputation of hierarchy placement
+- no source-type or approved_block ownership inference
+- no regeneration beyond what the approval workflow strictly requires
+- deterministic, local-only, auditable
+- if human confirmation is required by the workflow, stop and report exactly where confirmation is needed
+
+Required work:
+1. identify the exact current architecture profile and mapping artifacts that must be reviewed/approved
+2. identify the workflow-supported commands/files/actions required to approve them properly
+3. if approval can be recorded without changing technical content, perform only that workflow step
+4. update approval hashes/state only through the intended approval mechanism
+5. rerun only scripts/validate_source_to_stage2b_coherence.py
+6. stop immediately after reporting the result
+
+Return only:
+1. files modified
+2. approval actions performed
+3. whether human confirmation was required
+4. Phase 1 checker rerun summary
+5. PASS or FAIL
+6. exact next recommended step
+
+Do not perform merge approval, canonical merge, snapshot approval, Stage 2B freeze, or downstream generation.

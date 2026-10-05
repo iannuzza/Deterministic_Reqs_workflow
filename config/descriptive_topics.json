@@ -1,0 +1,64 @@
+{
+  "description": "Project-agnostic descriptive low-power topic seeds. Seeds are retrieval aids, never source evidence.",
+  "exclude_phrases": [
+    "changelog",
+    "version history",
+    "revision history",
+    "starting point from",
+    "ultra-low-power hardware circuitry",
+    "state-of-the-art feature",
+    "in the last case",
+    "party tools/ide",
+    "ispu has 32 kbyte program ram",
+    "use the shared project-agnostic low-power descriptive contract",
+    "render descriptive source wording only",
+    "write `descriptive_low_power_audit.csv`"
+  ],
+  "structured_extractors": {
+    "power_domain": {
+      "architecture_markers": ["power domain architecture", "power domains architecture"],
+      "description_markers": ["power domain descriptions", "power-domain descriptions"],
+      "domain_identifier_pattern": "\\b[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)+\\b",
+      "domain_type_terms": ["always-on", "switchable", "retention", "switched", "power-gated"],
+      "control_terms": ["HW", "SW", "hardware", "software"],
+      "non_architecture_block_prefixes": ["ca_", "ta_", "u_"],
+      "non_architecture_block_patterns": ["\\b(?:ca|ta|u)_[A-Za-z0-9_]+\\b"]
+    }
+  },
+  "topics": [
+    {
+      "name": "Power-domain architecture",
+      "seeds": ["power domain", "power island", "domain partition", "supply domain", "always-on domain", "retention domain", "switched domain"]
+    },
+    {
+      "name": "Low-power state behavior",
+      "seeds": ["low-power mode", "sleep mode", "standby", "retention mode", "powered down", "power state"]
+    },
+    {
+      "name": "Entry, exit, wake-up, and restore",
+      "seeds": ["wake up", "wakeup", "restore", "power-up", "power-up sequence", "exit sleep", "enter sleep"]
+    },
+    {
+      "name": "Sequencing and domain control",
+      "seeds": ["power sequencing", "enable", "disable", "power mode transition", "domain control", "isolation"]
+    },
+    {
+      "name": "Low-power responsibility",
+      "seeds": ["firmware", "software", "hardware control", "power management unit", "PMU"]
+    }
+  ],
+  "scope_profiles": {
+    "srs": {
+      "allowed_scopes": ["system", "top_digital", "integration", "architecture", "lifted_integration"],
+      "allowed_domains": ["system", "digital", "analog", "mixed-signal", "power"]
+    },
+    "drs": {
+      "allowed_scopes": ["top_digital", "integration", "architecture", "lifted_integration", "shared_domain"],
+      "allowed_domains": ["digital", "digital_or_system", "system", "power"]
+    },
+    "ars": {
+      "allowed_scopes": ["analog", "mixed_signal", "power", "architecture", "block_local", "lifted_integration"],
+      "allowed_domains": ["analog", "analog_or_mixed", "mixed-signal", "power"]
+    }
+  }
+}

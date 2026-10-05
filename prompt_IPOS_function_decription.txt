@@ -1,0 +1,223 @@
+Implement the IPOS-only descriptive-text correction for sections 1.1 Functionality and 1.2 Supported functions and scope under the following strict contract.
+
+Scope
+Apply changes only to IPOS generation, validation, audit, and tests.
+Do not modify SRS/DRS generators, generated SRS/DRS artifacts, allocation ledger, approved snapshot content, or block_inventory.csv data.
+
+Target files may include only what is necessary among:
+
+scripts/workflow_routing.py
+scripts/generate_ipos_specs.py
+scripts/validate_ipos_gate.py
+scripts/validate_downstream_coherence.py
+relevant IPOS descriptive/audit helpers
+relevant tests
+rule/docs files only if needed to document the IPOS-only contract
+Functional authority contract
+For this phase, the common functional authority for IPOS descriptive text is:
+
+Primary authority
+approved snapshot
+artifacts/stage2_mirco_arc/block_inventory.csv
+approved block-local fields:
+Function
+Inputs
+Outputs
+Local supporting evidence
+approved linked/local IPOS requirement rows for the same block, used only as local refinement evidence
+Hard rules
+Do not use generated DRS text as input authority.
+Do not derive capability from isolated keywords.
+Do not derive capability from tables alone.
+Do not derive capability from signal lists alone.
+Do not import capability, ownership, or responsibility from another block.
+Do not let lower-level evidence redefine or expand the approved block Function.
+Descending in hierarchy may increase detail only, never change semantics, ownership, or responsibility.
+Derived artifacts must not outrun authority.
+Keep the workflow deterministic, local-only, and project-agnostic.
+Materialization rule
+Apply this contract only to materialized IPOS documents.
+If a partition is valid-empty and no IPOS document is produced, do not force section presence.
+
+Section contract
+For each materialized IPOS document, always generate both sections:
+
+1.1 Functionality
+Must contain a concise macro-purpose summary for the block, derived primarily from the approved Function field, optionally clarified by approved local evidence, without becoming normative requirement text.
+
+1.2 Supported functions and scope
+Must always be present and must contain a bounded descriptive scope for the same block:
+
+what the block locally covers
+how approved Inputs and Outputs delimit that local scope
+any approved local functional detail supported by block-local requirement evidence
+optional explicit out-of-scope boundary if useful
+This section must not become an automatically expanded capability list.
+If there are no additional approved local capabilities, still emit a bounded narrative derived from:
+
+approved Function
+approved Inputs
+approved Outputs
+Do not invent content.
+
+Internal structure
+Keep any internal-structure descriptive content strictly optional and only from attested local evidence. Do not force it.
+
+Central normalized input record
+In the shared IPOS descriptive composer path, build a deterministic normalized functional input record per block, derived only from approved artifacts.
+This is a derived input structure, not a new authority source.
+
+Include enough fields to support deterministic composition, such as:
+
+block identifier / name
+domain if available
+approved function
+approved inputs
+approved outputs
+approved linked local requirement ids / evidence
+materialization status
+provenance references
+Do not read generated DRS Markdown/text into this record.
+
+Composer behavior
+Centralize the descriptive composition logic in shared workflow code so both Digital IPOS and Analog IPOS use the same contract.
+
+Composition order:
+
+approved Function
+approved Inputs / Outputs
+approved local linked requirement evidence for the same block only
+Behavior:
+
+Functionality = macro-purpose summary
+Supported functions and scope = bounded local scope and supported local behavior
+local requirement evidence may refine wording or add local detail only if consistent with approved block function/scope
+if local evidence conflicts with approved function/scope, suppress the conflicting detail and record the reason in audit
+never inject another block’s capability
+never summarize raw tables or I/O lists as if they were capabilities
+Generator changes
+In scripts/generate_ipos_specs.py:
+
+pass the normalized functional input record into the IPOS composer
+keep block data isolated per document
+keep requirement rows usable only as local detail evidence
+generate both 1.1 Functionality and 1.2 Supported functions and scope for every materialized IPOS
+preserve all current authority boundaries for:
+requirement ids
+requirement text
+Covers:
+[End]
+allocation/ownership semantics
+snapshot semantics
+do not add block-specific exceptions or policies
+Local IPOS validator
+In scripts/validate_ipos_gate.py, add/adjust checks for each materialized IPOS:
+
+1.1 Functionality present
+1.2 Supported functions and scope present
+both sections are non-empty
+content is block-coherent
+content does not copy normative requirement text verbatim or near-verbatim
+content is not requirement-form language
+no cross-block responsibility/capability leakage
+scope is not empty
+provenance/audit exists for generated descriptive content
+Use precise finding categories rather than vague failures.
+
+Cross-IPOS coherence validator
+In scripts/validate_downstream_coherence.py, for IPOS only in this phase, verify:
+
+each IPOS is checked against the same functional authority contract
+block ownership/scope coherence
+consistency with approved Function / Inputs / Outputs
+no cross-block capability leakage
+no inter-IPOS text reuse without distinct local evidence
+shared capability wording is allowed only when independently supported by distinct local evidence
+no contamination of evidence between blocks
+Prefer specific finding categories such as:
+
+cross_block_capability_leak
+scope_mismatch_with_block_authority
+description_reuses_requirement_text
+cross_block_text_reuse_without_distinct_evidence
+insufficient_local_evidence_for_supported_scope
+Audit extension
+Extend the descriptive audit CSV used for IPOS composition so each generated or suppressed descriptive item records provenance and decisioning. Include at least:
+
+source authority tier
+block
+source function
+inputs used
+outputs used
+generated/suppressed descriptive statement or capability
+supporting requirement evidence ids
+hierarchy level
+target section
+derivation mode
+decision
+exclusion/suppression reason
+duplicate/cross-document note if applicable
+Recommended derivation mode values:
+
+direct_function
+function_plus_io_scope
+local_requirement_refinement
+suppressed_due_to_conflict
+suppressed_due_to_cross_block_risk
+suppressed_due_to_insufficient_evidence
+Tests
+Add or update focused tests only as needed. Cover at least:
+
+every materialized IPOS has Functionality and Supported functions and scope
+valid-empty partitions do not force document generation
+Supported functions and scope is non-empty even when only bounded function/I-O scope is available
+one block does not receive capability from a different block
+tables do not become capabilities
+I-O lists delimit scope but do not invent capability
+requirement text is not copied as descriptive prose
+duplicate/shared capability text without distinct evidence is rejected
+similar capability text with distinct local evidence is allowed
+Digital and Analog IPOS use the same composition contract
+no DRS generated prose is used as descriptive authority
+Use existing test files where they already fit, including:
+
+test_descriptive_summary.py
+test_ipos_source_port_coverage.py
+test_end_to_end_authority.py
+and add narrowly scoped tests only if necessary.
+
+Rules/documentation update
+Update only the minimum necessary rule/docs files to reflect this IPOS-only current-phase contract.
+State clearly:
+
+the common functional authority for IPOS descriptive text is approved snapshot plus approved block inventory function/input/output, with local approved IPOS requirement evidence only as refinement
+IPOS composition is top-down and may add detail only, not alter semantics/ownership/responsibility
+SRS/DRS are not changed in this task and may be aligned later to the same authority model
+Do not add project-specific block names or project-specific examples to general rules.
+
+Non-regression requirements
+Do not change:
+
+allocation authority model
+ownership semantics
+approved snapshot semantics
+generated requirement semantics
+SysML role split
+downstream orchestrator-validator authority model
+existing DOCX template authority boundaries
+non-IPOS document behavior
+Implementation style
+Prefer the smallest practical change set
+Reuse existing helpers where possible
+Keep naming explicit and deterministic
+Preserve backward-compatible behavior outside the new IPOS descriptive-text contract
+Add concise code comments only where the authority boundary or suppression logic is non-obvious
+Deliverable
+Implement the code and tests, then report:
+
+files changed
+exact contract enforced
+validations executed
+pass/fail results
+any residual risk or follow-up needed
+Do not regenerate unrelated artifacts.

@@ -1,0 +1,76 @@
+Descriptive sections may deterministically re-elaborate approved evidence into functional summaries; authoritative requirement sections must preserve original requirement wording exactly.
+
+Proceed with Track 4 only: IPOS descriptive quality and scope.
+
+Use the existing central downstream validator-orchestrator and General Rules as the only governing contract.
+Keep one central logic for all IPOS outputs.
+Do not create local ad hoc overview logic or a parallel validator.
+Preserve the shared DOCX layout rules:
+- page 1 contains the title and metadata
+- the TOC starts first on page 2, followed by Document Navigation
+- if both are present, TOC comes first
+- page numbers in the footer bottom-right
+
+Rules:
+- IPOS descriptive sections must remain block-local and must not import DRS-level topics unless explicitly supported as true local block functionality
+- deterministically re-elaborate approved evidence into concise engineering summaries of block purpose, scope, internal structure, internal functions, local interfaces, and local architecture when possible without LLM
+- do not copy/paste raw text from original specs or upstream documents into descriptive sections
+- do not reuse raw requirement wording as descriptive prose
+- do not emit internal markers such as [TO: ...], [DDS_...], [Vpriority ...] in descriptive sections
+- do not invent content
+- omit unsupported, weak, off-topic, or low-value descriptive text instead of adding filler
+
+Section rules:
+- Functionality must start by stating the main purpose or primary function of the block
+- Supported functions and scope must summarize supported functions/scope, not dump raw requirements or source snippets
+- Internal structure must describe internal organization/functions/partitions/local subcomponents, never only port/I.O./boundary counts
+- Internal blocks or functions must report only explicitly supported local internal functions or subcomponents
+- General architecture must describe the block’s local architecture and must not contain isolated parameters, register fields, timer values, version fields, or low-level field/value fragments
+- apply the same coherence rule to all descriptive paragraphs: content must match the title and section intent
+
+Authoritative text:
+- requirement and traceability sections remain exact
+- preserve original approved/source requirement wording exactly
+- do not paraphrase authoritative requirement text
+
+IPOS requirement format:
+- every IPOS authored requirement must use exactly:
+
+IPOS-<block_name>-xxx
+requirement text description
+Covers: <upstream req_id>
+[End]
+
+- apply this only to IPOS
+- <block_name> uses the concrete approved block name
+- xxx remains deterministic and stable
+- Covers references the approved upstream requirement ID exactly
+
+Implement only:
+- generate_ipos_specs.py
+- workflow_routing.py only if narrowly needed
+- validate_ipos_gate.py only as a stage-local output check aligned with the central contract
+- update the General Rules accordingly
+
+Do not change requirement IDs, source IDs, provenance, snapshot IDs, allocation, ownership, traceability, central contract behavior, or shared DOCX layout behavior.
+
+Validate:
+- descriptive sections use only supported block-local evidence
+- no DRS-level topics appear unless explicitly justified as local
+- no copied raw source/upstream text in descriptive sections
+- no exact requirement text reused in descriptive sections
+- no internal markers in descriptive sections
+- each descriptive paragraph is coherent with its title
+- authoritative requirement text remains exact
+- every IPOS authored requirement follows the required structure exactly
+- regenerate Digital and Analog IPOS on the same approved snapshot
+- run IPOS gates and keep coherence with the central downstream validator-orchestrator
+
+Return:
+- files changed
+- exact strengthened descriptive-scope and functional-summary rules
+- exact rule preserving authoritative requirement text unchanged
+- exact IPOS requirement-format rule enforced
+- General Rules updated
+- checks run
+- result

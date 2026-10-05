@@ -1,0 +1,24 @@
+18 
+ 
+Port name Directi
+on Type Description 
+i_adc_error_cap2_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap1_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap0_debug input [6:0] adc cap error 
+debug 
+i_BIDAC_debug_register input [IDAC_offset-1:0]  
+i_sleep_master input   
+i_lpm input [1:0] low power mode 
+for ldo 
+i_mpm input [1:0] medium power 
+mode for ldo 
+i_hpm input [1:0] high power mode 
+for ldo 
+i_dis_rc_viref input  dis rc viref 
+i_T1 input [T1_max_bit_from_decoder_top-1:0] 4 to 10 us=160nclk 
+i_T2 input [T2_max_bit_from_decoder_top-1:0] 0.5 to 2 us=~32 
+i_N_clk_ppg input [N_clk_max_bit_top-1:0] Sample time for 
+ppg 
+i_N_clk_ecg input [N_clk_max_bit_top-1:0] Sample time for ecg

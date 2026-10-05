@@ -1,0 +1,47 @@
+From Block,To Block,Interaction Type,Project A,Project B,Comments
+ADC,Main Controller,data/control,yes,no,project-specific
+ADCInterface,DigitalControlCore,data/control,no,yes,project-specific
+ADSP,FIFO,data/control,yes,no,project-specific
+ADSP,Regmap,data/control,yes,no,project-specific
+ADSP,SENSOR HUB,data/control,yes,no,project-specific
+AnalogFrontEnd,ADCInterface,data/control,no,yes,project-specific
+BIST Controller,Regmap,data/control,yes,no,project-specific
+ClockPowerManager,DigitalControlCore,data/control,no,yes,project-specific
+DigitalControlCore,FIFOController,data/control,no,yes,project-specific
+FIFOController,InterruptController,data/control,no,yes,project-specific
+HostInterface,SerialI2C,data/control,no,yes,project-specific
+HostInterface,SerialSPI,data/control,no,yes,project-specific
+I2C interface,Regmap,data/control,yes,no,project-specific
+I2C_SPI_AHB,ADSP,data/control,yes,no,project-specific
+I2C_SPI_AHB,FIFO,data/control,yes,no,project-specific
+I2C_SPI_AHB,I2C interface,data/control,yes,no,project-specific
+I2C_SPI_AHB,ISPU,data/control,yes,no,project-specific
+I2C_SPI_AHB,Regmap,data/control,yes,no,project-specific
+I2C_SPI_AHB,SENSOR HUB,data/control,yes,no,project-specific
+I2C_SPI_AHB,SPI interface,data/control,yes,no,project-specific
+ISPU,ADSP,data/control,yes,no,project-specific
+ISPU,FIFO,data/control,yes,no,project-specific
+ISPU,Regmap,data/control,yes,no,project-specific
+ISPU,SENSOR HUB,data/control,yes,no,project-specific
+ISPU debug,FIFO,data/control,yes,no,project-specific
+ISPU debug,ISPU,data/control,yes,no,project-specific
+ISPU debug,Regmap,data/control,yes,no,project-specific
+ISPU debug,SENSOR HUB,data/control,yes,no,project-specific
+Main Controller,ADSP,data/control,yes,no,project-specific
+Main Controller,FIFO,data/control,yes,no,project-specific
+Main Controller,Regmap,data/control,yes,no,project-specific
+Main Controller,Smart FIFO,data/control,yes,no,project-specific
+MEMSSensingElement,AnalogFrontEnd,data/control,no,yes,project-specific
+PMU,Main Controller,data/control,yes,no,project-specific
+RegisterControl,DigitalControlCore,data/control,no,yes,project-specific
+RegisterControl,SerialI2C,data/control,no,yes,project-specific
+RegisterControl,SerialSPI,data/control,no,yes,project-specific
+Regmap,I2C interface,data/control,yes,no,project-specific
+Regmap,Main Controller,data/control,yes,no,project-specific
+Regmap,SPI interface,data/control,yes,no,project-specific
+SelfTestCalibration,RegisterControl,data/control,no,yes,project-specific
+SENSOR HUB,ISPU,data/control,yes,no,project-specific
+SerialI2C,RegisterControl,data/control,no,yes,project-specific
+SerialSPI,RegisterControl,data/control,no,yes,project-specific
+Smart FIFO,IRQ logic,data/control,yes,no,project-specific
+SPI interface,Regmap,data/control,yes,no,project-specific

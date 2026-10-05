@@ -1,0 +1,26 @@
+14 
+ 
+Port name Directi
+on Type Description 
+i_en_avg1 input  enabling avg1 
+i_en_avg2 input  enabling avg1 
+i_hc_en input  enabling health 
+channel 
+i_debug input  enabling debug 
+mode 
+i_imp_en input  enabling bia 
+channel 
+i_debug_en_tia input  enabling debug tia 
+i_debug_en_buffer input  enabling debug for 
+buffer 
+i_debug_en_idac input  enabling debug for 
+IDAC 
+i_en_clk_chop10k input  enabling chopper 
+clock 
+i_debug_tx_preset input  enabling tx preset 
+i_en_ldo_1v8_ext input  enabling external 
+ldo 1v8 
+i_clk_imp_10k_en input  enabling clock 
+chopper for bia 
+i_b_cap_idac input [1:0] enabling cap for 
+idac

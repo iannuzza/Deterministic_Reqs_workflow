@@ -1,0 +1,22 @@
+38 
+ 
+Generic name Type Value Description 
+base_address_bit int 12  
+n_channel_adc_bit int 4  
+ahb_base_address logic [31:0] 32'h000C_4000  
+ecg_channel_bit int 2  
+time_buffer_const_bit int 10  
+5.3.1.2. Ports 
+Port name Direction Type Descr. 
+i_clk_32Khz input  clock 32kHz 
+i_clk_16MHz input  clock 16MHz 
+i_clk_16MHz_write input  ahb clock 
+i_clk_elab_fsm input  elab fsm 
+clock 
+i_clk_boot_32k input  32k clock 
+boot 
+i_clk_gsr_16M input  clock for gsr 
+i_clk_change_address input  
+clock for 
+change 
+address

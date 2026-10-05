@@ -1,0 +1,24 @@
+74 
+ 
+quokka_routine_bit_top  16  
+vcm_bit_top  14  
+gnc_cmm_top  15  
+id_frame_max_bit_top  4  
+data_in_size_bit_top  16  
+ppg_start_up_bit_top  9  
+data_out_size_bit_top  20  
+n_average_ecg_bia_gsr_max_bit_top  8  
+rx_ch_frame_n_bit_top  3  
+curr_sel_bit_top  8  
+bit_outab_sel_top  1  
+n_average_ppg_max_value  128  
+n_average_ecg_bia_gsr_max_value  16  
+max_frame_repetition_top  2  
+n_tx_channel  4  
+ahb_base_address [31:0] 32'h000C4000  
+time_buffer_const_bit_top  10  
+T1_max_bit_from_decoder_top  4  
+T2_max_bit_from_decoder_top  2  
+ppg_frame_bit_ALC_BTIA_top  12  
+ecg_channel_bit  2  
+Table 16: Main Controller Parameter

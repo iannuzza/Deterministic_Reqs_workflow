@@ -1,0 +1,30 @@
+41 
+ 
+Port name Direction Type Descr. 
+i_ispu_end_elab input  end ispu 
+elaboration 
+i_gsr_dc_mode input  gsr dc mode 
+i_en_tx_ch input [n_tx_channel-1:0] 
+ppg tx 
+channel 
+enable 
+i_debug_gsr_curr_on input  debug gsr 
+curr on value 
+i_multiple_fifo_sel input  
+multiple fifo 
+channel 
+mode 
+i_n_ecg_channel input [ecg_channel_bit-1:0] ecg active 
+channel 
+i_N_clk_cal input [N_clk_max_bit-1:0] 
+sample clock 
+cycles for 
+calibration 
+i_ispu_core_sw_rstn input  
+enable for 
+ispu power 
+island 
+i_timer_buffer_config input [1:0] time buffer 
+value 
+i_ppg_quokka_elab_sel input  adsp data 
+elab mode

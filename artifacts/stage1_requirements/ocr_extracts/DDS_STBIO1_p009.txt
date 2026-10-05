@@ -1,0 +1,64 @@
+8 
+ 
+3. Reference documents and Ip Repository 
+ 
+This is a list of reference documents. 
+[DDS_STBIO1_0002] Definition 
+Current 
+Version 
+Document Author Change 
+Description 
+1.0 Main Controller IPOS 
+(stbio1/FE/main_controller_top/Documentation/Specification/) 
+Aldo Torino, 
+Sonia 
+Andronaco, 
+Giuliana De 
+Milato 
+ 
+3.0 IPOS_I2C_SensorHub_Quokka_uP Marco Leo  
+ Documentation_Specification_FIFO_CTRL_dos Roberta Priolo  
+3.6 Documentation_Specification_IP_Objective_Specification Stefano Barbieri  
+ ADSP IPOS Alessandro 
+Alaimo, Luca 
+Gandolfi 
+ 
+ H9A_MEM_OTP_ PUMP_85AL05_2 3A User Manual 2.0- 02   
+ https://developer.arm.com/documentation/ihi0033/latest/ ARM  
+0.2 STRED-LP2 Architecture Reference Manual 
+https://codex.cro.st.com/plugins/document/stbio1/folder/933984 
+ASMS  
+1.0 ADSP micro Firmware Alessandro 
+Alaimo, Ugo 
+Garozzo, Luca 
+Gandolfi 
+ 
+Table 2: Revision History 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+IP Git address Git branch Git tag 
+ADSP git clone 
+ssh://gitolite@codex.cro.st.com/ip-
+development/ADSP.git 
+adsp_vecma ADSP_v0.3.22.OTP640 
+ 
+i2c_spi_slave git clone 
+ssh://gitolite@codex.cro.st.com/ip-
+development/i2c_spi_slave.git 
+  
+vecma I2C_SPI_AHB_v3.1_061025
+_DOC  
+senshub_mst_i2c ssh://gitolite@codex.cro.st.com/ip-
+development/senshub_mst_i2c.git 
+  
+ahb_platf_ip STBIO1_RTL100_v4.1 
+ 
+Table 3: Git Repository Table

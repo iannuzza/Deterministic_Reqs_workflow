@@ -1,0 +1,34 @@
+{
+  "description": "Project-agnostic role vocabulary to search for in mixed-signal source specifications. Catalog entries are search candidates, not asserted source facts.",
+  "role_groups": {
+    "top_level_system": ["System", "Subsystem", "Block", "Module", "Cluster", "Path", "Pipeline", "Domain", "Mode", "State", "Function", "Capability", "Constraint", "Requirement", "Configuration", "Instance"],
+    "control_orchestration": ["Controller", "Sequencer", "Supervisor", "Manager", "Scheduler", "Arbiter", "State Machine", "Mode Controller", "Calibration Controller", "Power Manager", "Reset Controller", "Clock Controller", "Interrupt Controller", "Debug Controller", "Test Controller"],
+    "data_path": ["Source", "Destination", "Producer", "Consumer", "Sink", "Forwarder", "Router", "Translator", "Converter", "Buffer", "FIFO", "Accumulator", "Aggregator", "Filter", "Formatter", "Serializer", "Deserializer", "Encoder", "Decoder", "Sampler", "Sampler Holder", "Sampler Clocked Block"],
+    "sensor_analog_front_end": ["Sensor", "Transducer", "Analog Front End", "Amplifier", "PGA", "Comparator", "ADC", "DAC", "Reference Generator", "Bias Generator", "Oscillator", "PLL", "Filter", "Modulator", "Demodulator", "Chopper", "Multiplexer", "Demultiplexer", "Signal Conditioner", "Offset Compensation Block", "Gain Trim Block"],
+    "digital_processing": ["Processor", "DSP", "ISPU", "Microcontroller", "Core", "Algorithm Engine", "Math Engine", "Feature Extractor", "Classifier", "Threshold Detector", "Packetizer", "Command Decoder", "Data Compressor", "Data Logger"],
+    "memory_storage": ["Memory", "Register File", "Regmap", "FIFO", "Buffer", "Cache", "Scratchpad", "Mailbox", "Queue", "Latch", "Retention Register", "Shadow Register", "Status Register", "Control Register", "Configuration Register"],
+    "interface_communication": ["Interface", "Bus", "Bridge", "Adapter", "Protocol Converter", "Bus Master", "Bus Slave", "Channel", "Port", "Link", "Endpoint", "Packet Interface", "Serial Interface", "Parallel Interface", "Handshake Controller", "DMA Interface", "Register Access Interface"],
+    "power_clock": ["Power Domain", "Power Switch", "Always-On Block", "Retention Block", "Isolation Block", "Clock Domain", "Clock Gater", "Clock Divider", "Clock Mux", "PLL", "Oscillator", "Wake-up Controller", "Low-Power Manager"],
+    "test_debug_validation": ["Test Block", "Debug Block", "Scan Chain", "Loopback Block", "Self-Test Block", "BIST Engine", "Monitor", "Probe Point", "Comparator/Checker", "Tracer", "Logger", "Qualification Controller"],
+    "support_auxiliary": ["Reference", "Trim Element", "Calibration Element", "Protection Block", "Guard Band Element", "Limiter", "Clamp", "Reset Source", "Event Generator", "Interrupt Source", "Status Reporter"]
+  },
+  "architecture_analysis": {
+    "power_concepts": [
+      "power domain", "power island", "power mode", "power gating",
+      "retention domain", "isolation domain", "low-power", "low power",
+      "power-aware", "power aware", "power state", "power sequence",
+      "power sequencing"
+    ],
+    "architecture_subject_terms": [
+      "architecture", "block", "subsystem", "domain", "island", "controller",
+      "unit", "manager", "interface", "path", "sequence", "mode", "function",
+      "capability", "system"
+    ],
+    "capability_verbs": [
+      "is", "are", "provide", "provides", "support", "supports", "include",
+      "includes", "consists of", "comprise", "comprises", "responsible for",
+      "used to", "enable", "enables", "implement", "implements", "control",
+      "controls", "manage", "manages", "handle", "handles"
+    ]
+  }
+}

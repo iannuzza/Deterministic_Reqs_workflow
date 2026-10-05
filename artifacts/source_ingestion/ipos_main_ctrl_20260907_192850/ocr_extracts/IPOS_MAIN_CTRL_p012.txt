@@ -1,0 +1,34 @@
+11 
+ 
+Port name Directi
+on Type Description 
+i_average_ppg input [n_max_frame-1:0] 
+average ppg for 
+each frame selected 
+from regmap 
+i_gain_alc_start input [gain_max_bit_top-1:0] btia gain for alc 
+from regmap 
+i_gain_start input [n_max_frame-1:0] 
+btia gain start for 
+compensation from 
+regmap 
+i_Tx_idac_Vref_debug input [Nmax_bit_top-1:0] 
+Idac value for 
+debug from 
+regmap 
+i_ppg_start_up_time input [ppg_start_up_decod_bit_top-1:0] start up time for 
+ppg from regmap 
+i_en_txi input [n_max_frame-1:0] tx enabling for each 
+frame from regmap 
+i_frame_repetition input [n_max_frame-1:0] 
+i frame repetition 
+for each frame from 
+regmap 
+i_T_preset input [1:0] 
+Preset time for 
+digital ramp from 
+regmap 
+i_m_ecg input [m_odr_max_bit_top-1:0] m parameter for 
+ecg from regmap 
+i_m_bia input [m_odr_max_bit_top-1:0] m parameter for bia 
+from regmap

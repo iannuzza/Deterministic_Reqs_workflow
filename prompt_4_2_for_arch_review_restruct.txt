@@ -1,0 +1,52 @@
+Add this as a small incremental, non-destructive extension without derailing current Step 4 work.
+
+Feature:
+Treat primary source spec selection and req_id prefix cross-check as an S0 bootstrap capability.
+
+Needed behavior:
+- user selects the primary source spec
+- tool runs a deterministic local check to detect whether the source appears tagged, untagged, or ambiguous/partially tagged
+- tool inspects req_id patterns and proposes a base req_id tag prefix
+- tool shows detected status + proposed prefix for user approval/edit/reject
+- no silent auto-approval
+
+Important:
+Also check req_id tags inside tables, especially under columns like:
+- Req-ID
+- Req_ID
+- Req Id
+- Requirement ID
+- similar variants
+
+First verify whether this table-based req_id detection rule already exists in the repo.
+- If yes, reuse/align with it
+- If no, add it in the minimal deterministic parsing/detection layer
+- Avoid duplicating conflicting req_id extraction logic
+
+Constraints:
+- deterministic only
+- no LLM calls
+- no network calls
+- local-only
+- preserve evidence for tagged/untagged decision and prefix proposal
+- do not break Step 4 priorities
+
+Do not do a broad refactor.
+Only:
+1. identify minimal metadata/service hooks needed now
+2. identify what should be deferred to Step 5 GUI work
+3. identify whether Step 2/3 needs a minimal extension
+4. confirm how to store:
+   - proposed/approved tagged status
+   - proposed/approved req_id prefix
+   - evidence/reason
+   - approval metadata
+
+If a small safe Step 4 hook is useful, implement only that.
+Otherwise defer the feature cleanly to Step 5.
+
+At the end, report:
+1. what changed now, if anything
+2. what was deferred
+3. whether table-based req_id detection already existed
+4. what Step 5 must implement

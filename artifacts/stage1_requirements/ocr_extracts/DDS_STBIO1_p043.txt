@@ -1,0 +1,36 @@
+42 
+ 
+ 
+Figure 8: Mask Cell for LDO and Fast Ring Oscillator 
+ 
+w_EN_LDO_sync32 and w_PDClockF_sync32 are the relative 32kHz synchronized versions. [TO: 
+IPOS_PMU] [END] 
+ 
+[DDS_STBIO1_0103] Definition: 
+clk_64k_divided (32kHz) is i_clk_64k (64kHz) divided by two. [TO: IPOS_PMU] [END] 
+ 
+ 
+[DDS_STBIO1_0104] Requirement:  
+When the device is turned on, i_POR1V2_1V2 shall be high. [TO: IPOS_PMU] [END] 
+ 
+ 
+[DDS_STBIO1_0105] Requirement: 
+When i_POR1V2_1V2 is low, o_ EN_LDO1V8 shall be low. [TO: IPOS_PMU] [END] 
+ 
+ 
+[DDS_STBIO1_0106] Requirement: 
+When i_POR1V2_1V2 is low, o_PD_CLKF shall be high. [TO: IPOS_PMU] [END] 
+ 
+[DDS_STBIO1_0107] Requirement: 
+When i_POR1V2_1V2 is low, o_CLK_16M_READY shall be low. [TO: IPOS_PMU] [END] 
+ 
+[DDS_STBIO1_0108] Requirement: 
+When i_POR1V2_1V2 is low, o_DIS_RC_VIREF shall be high. [TO: IPOS_PMU] [END] 
+ 
+[DDS_STBIO1_0109] Requirement: 
+When i_POR1V2_1V2 rises, after at least 10 cycles of i_clk_64k (64kHz), o_ EN_LDO1V8 shall 
+be high and the clk_64k_divided is considered stable. [TO: IPOS_PMU] [END] 
+ 
+[DDS_STBIO1_0110] Requirement:  
+When clk_64k_divided is stable, after at least 352 cycles of clk_64k_divided (32kHz), 
+o_DIS_RC_VIREF shall be low. [TO: IPOS_PMU] [END]

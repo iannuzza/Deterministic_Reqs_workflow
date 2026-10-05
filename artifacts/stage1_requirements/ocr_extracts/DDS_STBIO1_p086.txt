@@ -1,0 +1,35 @@
+85 
+ 
+13.2. IPs 
+ 
+13.2.1. ADSP integration 
+  
+Generic name Type Value TOP CONNECTION 
+ADDRWIDTH  12  
+Table 18: ADSP Parameter Table 
+ 
+  
+Port name Directio
+n Type TOP CONNECTION 
+stmc_clk input wire u_pmu.tst_clk_16m 
+HCLK input wire u_pmu.clk_stmc 
+HRESETn input wire u_pmu.resetn_stmc 
+HSELS input wire u_xbar_afe. 
+HADDRS input wire [ADDRWIDTH-1:0] u_xbar_afe.haddr_M1 
+HTRANSS input wire [ 1:0] u_xbar_afe.htrans_M1  
+HSIZES input wire [ 2:0] u_xbar_afe. 
+HWRITES input wire u_xbar_afe. 
+HREADYS input wire u_xbar_afe. 
+HWDATAS input wire [ 31:0] u_xbar_afe. 
+HREADYOUTS output wire u_xbar_afe. 
+HRESPS output wire u_xbar_afe. 
+HRDATAS output wire [ 31:0] u_xbar_afe. 
+HRDATAM input wire [ 31:0]  
+HREADYM input wire  
+HRESPM input wire [ 1:0]  
+HGRANTM input wire  
+HSELM output wire  
+HADDRM output wire [ 31:0]  
+HTRANSM output wire [ 1:0]  
+HWRITEM output wire  
+HSIZEM output wire [ 2:0]

@@ -1,0 +1,29 @@
+54 
+ 
+Port name Direction Type Descr. 
+o_write_time_slot_reg output  
+write time 
+slot data start 
+operation 
+o_time_slot_data output [23:0] time slot data 
+o_cfg_change_ppg_data output [23:0] change ppg 
+data 
+o_en_lead_off output  enable lead 
+off 
+o_start_ahb_time_slot_write output  start ahb time 
+slot ahb write 
+o_gsr_clk_en_16M output  
+gsr clock 
+enable 16 
+MHz 
+o_start_operation_for_ppg output  
+start 
+operation for 
+ppg 
+o_ppg_ioff_calib_start output  start ioff ppg 
+calib 
+o_ppg_adc_control_en output  ppg adc 
+control 
+o_clock_en_boot_sync_32 output  clock enable 
+boot sync 
+o_reset_alc output  reset alc

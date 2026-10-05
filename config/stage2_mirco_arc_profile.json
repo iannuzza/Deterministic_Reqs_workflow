@@ -1,0 +1,987 @@
+{
+  "approval": {
+    "status": "approved",
+    "approved_by": "a",
+    "approved_at": "2026-09-22T10:33:11",
+    "reviewer_notes": "Prior approval invalidated because the effective mapping CSV hash changed; re-review required.",
+    "reviewed_draft_profile_sha256": "4a92bbb6e593a4ed3a040ff74ae4fa673c8879b20cad2d9ede3f781c3b66535c",
+    "reviewed_mapping_preview_csv_sha256": "58665c249807d32f8e971174482ed02d0556d2e5f446053eedab2833e20732f0",
+    "evidence_hashes": {
+      "requirements_summary_csv": {
+        "path": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/artifacts/stage1_requirements/integrated_requirements.csv",
+        "sha256": "19be065b5a11ef44aaed38641d93827249480615504756c7336c42f9aa00916c"
+      },
+      "ontology_requirement_links_csv": {
+        "path": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/artifacts/stage0_ontology/ontology_requirement_links.csv",
+        "sha256": "28dfcc98be8ceaa3b70308a6b822a98bded7d035b78c163609d2f109a32b98c1"
+      },
+      "semantic_issues_md": {
+        "path": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/artifacts/stage0_ontology/semantic_issues.md",
+        "sha256": "9161122fba5a620d263acc48c4bbec3556aa1c31a0e92724ed7f3f2abb7659a9"
+      }
+    }
+  },
+  "block_defs": {
+    "Sensor-Hub": {
+      "function": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.",
+      "inputs": "Primary sensing input",
+      "outputs": "Analog input signal"
+    },
+    "ADC": {
+      "entity_kind": "interface",
+      "function": "Convert configured bio/optical channel inputs to samples, with register-controlled sampling periods and ADC test/debug modes.",
+      "inputs": "Conditioned analog signal",
+      "outputs": "Digital samples"
+    },
+    "ADSP": {
+      "function": "Execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.",
+      "inputs": "Acquired samples and configuration data",
+      "outputs": "Elaborated signal data and metadata"
+    },
+    "Main Controller": {
+      "classification": "Digital",
+      "function": "Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.",
+      "inputs": "Configuration register settings, sampled data",
+      "outputs": "Control state and data routing"
+    },
+    "Smart FIFO": {
+      "function": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.",
+      "inputs": "Digital samples, FIFO mode configuration",
+      "outputs": "Buffered samples and FIFO status flags"
+    },
+    "Regmap": {
+      "function": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.",
+      "inputs": "Host read/write transactions",
+      "outputs": "Register data and status fields"
+    },
+    "SPI interface": {
+      "entity_kind": "interface",
+      "function": "Provide the SPI serial access path into the I2C/SPI-to-AHB interface and register map, subject to the specified clock-domain constraint.",
+      "inputs": "SPC, CS, SDI",
+      "outputs": "SDO, register transaction responses"
+    },
+    "I2C interface": {
+      "entity_kind": "interface",
+      "function": "Provide the host I2C serial access path, supporting Standard, FM, FM+, and optionally HS operation with the configured device address.",
+      "inputs": "SCL, SDA",
+      "outputs": "I2C register transaction responses"
+    },
+    "IRQ logic": {
+      "function": "Aggregate and route FIFO, Sensor Hub, ISPU sample-ready, software, and timer interrupt status to configured GPIO/interrupt outputs.",
+      "inputs": "FIFO status, DRDY events, threshold/events",
+      "outputs": "INT1, INT2"
+    },
+    "PMU": {
+      "function": "Sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.",
+      "inputs": "VDD/VDD_IO, power-on reset, clock references, clock-start requests, power-mode configuration",
+      "outputs": "LDO and power-domain controls, clock enable/gating and ready status, reset-release signals, power-state status"
+    },
+    "BIST Controller": {
+      "entity_kind": "concrete_block",
+      "function": "Control BIST operating modes and coordinate ADC/OTP test operations and their register-visible results.",
+      "inputs": "Self-test commands and calibration settings",
+      "outputs": "Calibration/self-test status"
+    },
+    "I2C_SPI_AHB": {
+      "function": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.",
+      "inputs": "Host bus transactions",
+      "outputs": "Protocol-compliant responses"
+    },
+    "OTP": {
+      "function": "Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines.",
+      "inputs": "OTP control, address, bank selection, programming, trim, voltage, and current-reference signals",
+      "outputs": "OTP read data and status"
+    },
+    "PAD MUX": {
+      "function": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.",
+      "inputs": "Mode selection, register-map controls, test controls, and internal block outputs",
+      "outputs": "Pad controls, test observations, and routed internal signals"
+    },
+    "Unassigned": {
+      "entity_kind": "unassigned",
+      "function": "Placeholder for requirements requiring manual architectural assignment.",
+      "inputs": "N/A",
+      "outputs": "N/A"
+    }
+  },
+  "source_section_aliases": {
+    "Regmap": [
+      "Register Map",
+      "STBIO1 Register Map"
+    ],
+    "OTP": [
+      "OTP I/O List"
+    ],
+    "PAD MUX": [
+      "PAD Mux",
+      "PAD MUX TOP I/O List"
+    ],
+    "Smart FIFO": [
+      "FIFO_CTRL",
+      "FIFO Controller"
+    ],
+    "Main Controller": [
+      "IPOS_MAIN_CTRL"
+    ]
+  },
+  "mapping_rules": {
+    "Sensor-Hub": [
+      "sensing element",
+      "element",
+      "signal",
+      "sensor",
+      "structure",
+      "channel",
+      "measurement",
+      "analog",
+      "sense",
+      "channels",
+      "block",
+      "i2c",
+      "master",
+      "external",
+      "targets",
+      "including",
+      "trigger",
+      "enable",
+      "collection",
+      "fifo"
+    ],
+    "ADC": [
+      "adc",
+      "analog-to-digital",
+      "digitized",
+      "conversion",
+      "convert",
+      "adc calibration",
+      "adc_config",
+      "adc_data",
+      "adc test",
+      "analog",
+      "signals",
+      "digital",
+      "samples",
+      "configured",
+      "optical",
+      "channel",
+      "inputs",
+      "sampling",
+      "test",
+      "debug",
+      "modes"
+    ],
+    "ADSP": [
+      "adsp",
+      "dsp",
+      "custom dsp",
+      "adsp ram",
+      "adsp registers",
+      "adsp integration",
+      "elaboration",
+      "execute",
+      "ultra-low-power",
+      "custom",
+      "functions",
+      "samples",
+      "configuration",
+      "elaborated",
+      "boot",
+      "write",
+      "test",
+      "mapped",
+      "program",
+      "register",
+      "memory",
+      "firmware"
+    ],
+    "Main Controller": [
+      "sample rate",
+      "full scale",
+      "mode",
+      "control register",
+      "state",
+      "data update",
+      "configuration",
+      "digital",
+      "modes",
+      "register",
+      "settings",
+      "core",
+      "manage",
+      "routing",
+      "sampled",
+      "boot",
+      "phase",
+      "debug",
+      "timer",
+      "irq",
+      "ip version",
+      "ip_version",
+      "dcc",
+      "processing",
+      "block",
+      "operating",
+      "operating modes",
+      "main",
+      "controller",
+      "device",
+      "idle",
+      "measurement",
+      "channel",
+      "sampling",
+      "start",
+      "soft",
+      "reset",
+      "generate",
+      "receive",
+      "analog",
+      "domain",
+      "signals",
+      "perform",
+      "elaboration",
+      "adc",
+      "outputs",
+      "write",
+      "elaborated",
+      "results",
+      "defined",
+      "addresses"
+    ],
+    "Smart FIFO": [
+      "fifo",
+      "watermark",
+      "overrun",
+      "empty",
+      "bypass mode",
+      "stream mode",
+      "modes",
+      "full",
+      "digital",
+      "signal",
+      "samples",
+      "configuration",
+      "manage",
+      "buffering",
+      "flags",
+      "block",
+      "smart",
+      "provide",
+      "storage",
+      "memory",
+      "access",
+      "mutually",
+      "exclusive",
+      "unique",
+      "multiple",
+      "including",
+      "sub-fifo",
+      "depth",
+      "sensor"
+    ],
+    "Regmap": [
+      "register",
+      "who_am_i",
+      "ctrl_reg",
+      "status_reg",
+      "read/write",
+      "read",
+      "write",
+      "configuration",
+      "host",
+      "access",
+      "transactions",
+      "fields",
+      "address",
+      "memory",
+      "reserved",
+      "not used",
+      "suggested val",
+      "suggested value",
+      "word",
+      "definition",
+      "requirement",
+      "description",
+      "optionally",
+      "vpriority",
+      "priority",
+      "end",
+      "block",
+      "regmap",
+      "implement",
+      "mapped",
+      "system",
+      "registers",
+      "while",
+      "reset"
+    ],
+    "SPI interface": [
+      "spi",
+      "spc",
+      "cs",
+      "sdi",
+      "sdo",
+      "3-wire",
+      "4-wire",
+      "multi-spi",
+      "serial",
+      "provide",
+      "slave",
+      "communication",
+      "register",
+      "transaction",
+      "transfers",
+      "block",
+      "access",
+      "path",
+      "i2c",
+      "specified",
+      "constraint"
+    ],
+    "I2C interface": [
+      "i2c",
+      "scl",
+      "sda",
+      "slave address",
+      "acknowledge",
+      "auto-increment",
+      "serial",
+      "provide",
+      "slave",
+      "communication",
+      "protocol",
+      "register",
+      "transaction",
+      "clock",
+      "data",
+      "ck_en",
+      "block",
+      "host",
+      "access",
+      "path",
+      "supporting",
+      "standard",
+      "optionally",
+      "operation",
+      "configured",
+      "device",
+      "address"
+    ],
+    "IRQ logic": [
+      "int1",
+      "int2",
+      "drdy",
+      "interrupt",
+      "i2_wtm",
+      "i2_orun",
+      "drive",
+      "based",
+      "fifo",
+      "watermark",
+      "overrun",
+      "events",
+      "threshold",
+      "fifo watermark",
+      "controller",
+      "data-ready",
+      "outputs",
+      "event",
+      "block",
+      "logic",
+      "sensor",
+      "ispu",
+      "software",
+      "timer",
+      "configured",
+      "gpio"
+    ],
+    "PMU": [
+      "power",
+      "supply",
+      "vdd",
+      "vdd_io",
+      "sleep",
+      "power-down",
+      "current consumption",
+      "clock",
+      "low-power",
+      "sensor",
+      "operation",
+      "configuration",
+      "state",
+      "manage",
+      "clock",
+      "clk",
+      "reset",
+      "resetn",
+      "startup",
+      "sleep",
+      "tst_clk",
+      "16 mhz",
+      "32 khz",
+      "64k",
+      "por1v2",
+      "ldo",
+      "ldo1v8",
+      "pmu",
+      "block",
+      "sequence",
+      "enable",
+      "clocks",
+      "release",
+      "boot",
+      "modes",
+      "controls",
+      "gating",
+      "ready",
+      "signals",
+      "power modes",
+      "references"
+    ],
+    "BIST Controller": [
+      "self-test",
+      "sensitivity",
+      "offset",
+      "zero-rate",
+      "noise",
+      "calibration",
+      "self",
+      "test",
+      "commands",
+      "settings",
+      "handle",
+      "block",
+      "bist",
+      "controller",
+      "operating",
+      "modes",
+      "adc",
+      "operations",
+      "their",
+      "results"
+    ],
+    "I2C_SPI_AHB": [
+      "host",
+      "external host",
+      "bus access",
+      "transaction",
+      "interface",
+      "serial interface",
+      "represent",
+      "external",
+      "spi",
+      "i2c",
+      "scl",
+      "sda",
+      "access",
+      "transactions",
+      "digital",
+      "register",
+      "table",
+      "row",
+      "requirement",
+      "definition",
+      "abbreviations",
+      "reserved",
+      "frame",
+      "parameter",
+      "interface",
+      "wrapper",
+      "u_",
+      "xbar",
+      "ahb",
+      "dds",
+      "block",
+      "bridge",
+      "serial",
+      "reads",
+      "writes",
+      "including",
+      "configured",
+      "address",
+      "processor",
+      "cpu",
+      "microprocessor",
+      "core",
+      "protocol",
+      "bus",
+      "preload",
+      "byte",
+      "burst",
+      "locked",
+      "transfers",
+      "locked transfers",
+      "accept",
+      "accesses",
+      "translate",
+      "needed",
+      "device",
+      "configuration",
+      "readback",
+      "ispu"
+    ],
+    "OTP": [
+      "provide",
+      "memory",
+      "used",
+      "adsp",
+      "boot",
+      "programming",
+      "test",
+      "routines",
+      "address",
+      "bank",
+      "selection",
+      "trim",
+      "voltage",
+      "signals",
+      "read",
+      "bank selection"
+    ],
+    "PAD MUX": [
+      "functional",
+      "scan",
+      "bist",
+      "debug",
+      "signals",
+      "device",
+      "pads",
+      "selection",
+      "controls",
+      "test",
+      "internal",
+      "block",
+      "outputs"
+    ]
+  },
+  "interface_rows": [
+    {
+      "Interface": "SENSOR_ANALOG_INPUT",
+      "Direction": "input",
+      "Type": "analog",
+      "Owner": "Sensor-Hub",
+      "Purpose": "Raw sensor-domain analog input"
+    },
+    {
+      "Interface": "ADC_DATA",
+      "Direction": "output",
+      "Type": "digital",
+      "Owner": "ADC",
+      "Purpose": "Digitized samples"
+    },
+    {
+      "Interface": "FIFO_DATA",
+      "Direction": "output",
+      "Type": "digital",
+      "Owner": "Smart FIFO",
+      "Purpose": "Buffered output samples"
+    },
+    {
+      "Interface": "SERIAL_CLK",
+      "Direction": "input",
+      "Type": "digital",
+      "Owner": "SPI interface",
+      "Purpose": "Serial clock input"
+    },
+    {
+      "Interface": "SERIAL_SELECT",
+      "Direction": "input",
+      "Type": "digital",
+      "Owner": "SPI interface",
+      "Purpose": "Serial frame/select input"
+    },
+    {
+      "Interface": "SERIAL_DATA_IN",
+      "Direction": "input",
+      "Type": "digital",
+      "Owner": "SPI interface",
+      "Purpose": "Serial data input"
+    },
+    {
+      "Interface": "SERIAL_DATA_OUT",
+      "Direction": "output",
+      "Type": "digital",
+      "Owner": "SPI interface",
+      "Purpose": "Serial data output"
+    },
+    {
+      "Interface": "ALT_SERIAL_CLK",
+      "Direction": "input",
+      "Type": "digital",
+      "Owner": "I2C interface",
+      "Purpose": "Alternate serial clock input"
+    },
+    {
+      "Interface": "ALT_SERIAL_DATA",
+      "Direction": "bidirectional",
+      "Type": "digital",
+      "Owner": "I2C interface",
+      "Purpose": "Alternate serial bidirectional data line"
+    },
+    {
+      "Interface": "INT1",
+      "Direction": "output",
+      "Type": "digital",
+      "Owner": "IRQ logic",
+      "Purpose": "Primary interrupt output"
+    },
+    {
+      "Interface": "INT2",
+      "Direction": "output",
+      "Type": "digital",
+      "Owner": "IRQ logic",
+      "Purpose": "Secondary interrupt output"
+    },
+    {
+      "Interface": "VDD",
+      "Direction": "input",
+      "Type": "power",
+      "Owner": "PMU",
+      "Purpose": "Core supply"
+    },
+    {
+      "Interface": "VDD_IO",
+      "Direction": "input",
+      "Type": "power",
+      "Owner": "PMU",
+      "Purpose": "Digital IO supply"
+    }
+  ],
+  "interaction_rows": [
+    {
+      "From block": "ADC",
+      "To block": "Main Controller",
+      "Signal/control": "digital samples",
+      "Trigger": "sample cycle",
+      "Notes": "digital pipeline input"
+    },
+    {
+      "From block": "Main Controller",
+      "To block": "Smart FIFO",
+      "Signal/control": "sample stream and FIFO mode control",
+      "Trigger": "FIFO enabled",
+      "Notes": "stream/bypass/fifo mode routing"
+    },
+    {
+      "From block": "Smart FIFO",
+      "To block": "IRQ logic",
+      "Signal/control": "watermark/overrun/empty flags",
+      "Trigger": "FIFO status change",
+      "Notes": "interrupt condition generation"
+    },
+    {
+      "From block": "Regmap",
+      "To block": "Main Controller",
+      "Signal/control": "configuration writes",
+      "Trigger": "register update",
+      "Notes": "sample-rate/filter/mode setup"
+    },
+    {
+      "From block": "SPI interface",
+      "To block": "Regmap",
+      "Signal/control": "SPI register transactions",
+      "Trigger": "host SPI access",
+      "Notes": "SPI path to register map"
+    },
+    {
+      "From block": "I2C interface",
+      "To block": "Regmap",
+      "Signal/control": "I2C register transactions",
+      "Trigger": "host I2C access",
+      "Notes": "I2C path to register map"
+    },
+    {
+      "From block": "Regmap",
+      "To block": "SPI interface",
+      "Signal/control": "register read response",
+      "Trigger": "SPI read",
+      "Notes": "response serialization on SPI"
+    },
+    {
+      "From block": "Regmap",
+      "To block": "I2C interface",
+      "Signal/control": "register read response",
+      "Trigger": "I2C read",
+      "Notes": "response serialization on I2C"
+    },
+    {
+      "From block": "PMU",
+      "To block": "Main Controller",
+      "Signal/control": "power/clock status",
+      "Trigger": "power mode transition",
+      "Notes": "power-aware digital control"
+    },
+    {
+      "From block": "BIST Controller",
+      "To block": "Regmap",
+      "Signal/control": "self-test/calibration status",
+      "Trigger": "self-test command",
+      "Notes": "status publication through registers"
+    },
+    {
+      "From block": "I2C_SPI_AHB",
+      "To block": "SPI interface",
+      "Signal/control": "SPI host transactions",
+      "Trigger": "SPI bus session",
+      "Notes": "host boundary ingress"
+    },
+    {
+      "From block": "I2C_SPI_AHB",
+      "To block": "I2C interface",
+      "Signal/control": "I2C host transactions",
+      "Trigger": "I2C bus session",
+      "Notes": "host boundary ingress"
+    },
+    {
+      "From block": "Main Controller",
+      "To block": "Regmap",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0201"
+    },
+    {
+      "From block": "Main Controller",
+      "To block": "FIFO",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0202"
+    },
+    {
+      "From block": "Main Controller",
+      "To block": "ADSP",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0219"
+    },
+    {
+      "From block": "ADSP",
+      "To block": "Regmap",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0203"
+    },
+    {
+      "From block": "ADSP",
+      "To block": "SENSOR HUB",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0204"
+    },
+    {
+      "From block": "ADSP",
+      "To block": "FIFO",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0206"
+    },
+    {
+      "From block": "I2C_SPI_AHB",
+      "To block": "Regmap",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0207"
+    },
+    {
+      "From block": "I2C_SPI_AHB",
+      "To block": "SENSOR HUB",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0208"
+    },
+    {
+      "From block": "I2C_SPI_AHB",
+      "To block": "ISPU",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0209"
+    },
+    {
+      "From block": "I2C_SPI_AHB",
+      "To block": "FIFO",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0210"
+    },
+    {
+      "From block": "I2C_SPI_AHB",
+      "To block": "ADSP",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0221"
+    },
+    {
+      "From block": "SENSOR HUB",
+      "To block": "FIFO",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0211"
+    },
+    {
+      "From block": "ISPU",
+      "To block": "Regmap",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0212"
+    },
+    {
+      "From block": "ISPU",
+      "To block": "SENSOR HUB",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0213"
+    },
+    {
+      "From block": "ISPU",
+      "To block": "FIFO",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0215"
+    },
+    {
+      "From block": "ISPU",
+      "To block": "ADSP",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0222"
+    },
+    {
+      "From block": "ISPU debug",
+      "To block": "Regmap",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0216"
+    },
+    {
+      "From block": "ISPU debug",
+      "To block": "SENSOR HUB",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0217"
+    },
+    {
+      "From block": "ISPU debug",
+      "To block": "ISPU",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0218"
+    },
+    {
+      "From block": "ISPU debug",
+      "To block": "FIFO",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0220"
+    },
+    {
+      "From block": "ISPU debug",
+      "To block": "ADSP",
+      "Signal/control": "XBAR connection",
+      "Trigger": "XBAR matrix cell",
+      "Notes": "XBAR Connection Matrix; source-derived cell",
+      "Requirement IDs": "DDS_STBIO1_0223"
+    }
+  ],
+  "function_decomposition_rows": [
+    {
+      "top_function": "Signal acquisition",
+      "subfunctions": "sensor-path sensing; ADC conversion",
+      "blocks_involved": "Sensor-Hub; ADC"
+    },
+    {
+      "top_function": "Digital sample control",
+      "subfunctions": "sample-rate control; data update policy; digital status handling",
+      "blocks_involved": "Main Controller; Regmap"
+    },
+    {
+      "top_function": "FIFO and interrupt signaling",
+      "subfunctions": "FIFO buffering modes; watermark/overrun detection; INT1/INT2 signaling",
+      "blocks_involved": "Smart FIFO; IRQ logic"
+    },
+    {
+      "top_function": "SPI host register access path",
+      "subfunctions": "SPI timing-compliant transfer; register read/write",
+      "blocks_involved": "SPI interface; Regmap; I2C_SPI_AHB"
+    },
+    {
+      "top_function": "I2C host register access path",
+      "subfunctions": "I2C slave acknowledge protocol; register read/write; auto-increment",
+      "blocks_involved": "I2C interface; Regmap; I2C_SPI_AHB"
+    },
+    {
+      "top_function": "Power, clock, and startup behavior",
+      "subfunctions": "power-domain supervision; low-power transitions; readiness control",
+      "blocks_involved": "PMU; Main Controller"
+    },
+    {
+      "top_function": "Self-test and calibration",
+      "subfunctions": "self-test enable; sensitivity/offset handling; status reporting",
+      "blocks_involved": "BIST Controller; Regmap"
+    }
+  ],
+  "ambiguity_dispositions": [
+    {
+      "issue_id": "SEM-001",
+      "severity": "minor",
+      "requirement_id": "DDS_STBIO1_0201",
+      "description": "very short statement may be semantically incomplete",
+      "required_for_approval": "no",
+      "disposition": "informational",
+      "rationale": ""
+    },
+    {
+      "issue_id": "SEM-002",
+      "severity": "minor",
+      "requirement_id": "DDS_STBIO1_0202",
+      "description": "very short statement may be semantically incomplete",
+      "required_for_approval": "no",
+      "disposition": "informational",
+      "rationale": ""
+    },
+    {
+      "issue_id": "SEM-003",
+      "severity": "minor",
+      "requirement_id": "DDS_STBIO1_0219",
+      "description": "very short statement may be semantically incomplete",
+      "required_for_approval": "no",
+      "disposition": "informational",
+      "rationale": ""
+    },
+    {
+      "issue_id": "SEM-004",
+      "severity": "minor",
+      "requirement_id": "DDS_STBIO1_1021",
+      "description": "very short statement may be semantically incomplete",
+      "required_for_approval": "no",
+      "disposition": "informational",
+      "rationale": ""
+    },
+    {
+      "issue_id": "SEM-005",
+      "severity": "minor",
+      "requirement_id": "DDS_STBIO1_8100",
+      "description": "very short statement may be semantically incomplete",
+      "required_for_approval": "no",
+      "disposition": "informational",
+      "rationale": ""
+    }
+  ]
+}

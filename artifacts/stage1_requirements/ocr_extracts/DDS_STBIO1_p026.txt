@@ -1,0 +1,33 @@
+25 
+ 
+IGSR_X10 output 0 wire from u_scan_out_mux 
+IMP_CURRINJ_CUR output 2 wire 
+[1:0] 
+from u_scan_out_mux 
+IMP_CURRINJ_x10 output 0 wire from u_scan_out_mux 
+SEL_GSR_CURR output 3 wire 
+[1:0] 
+from u_scan_out_mux 
+o_ck_bg output 0 wire from u_scan_out_mux 
+o_imp_curinj_pd output 1 wire from u_scan_out_mux 
+o_pd_p output 1 wire from u_scan_out_mux 
+o_pd_n output 1 wire from u_scan_out_mux 
+o_adc_error_cap9 output 0 wire 
+[7:0] 
+from u_scan_out_mux 
+o_en_bufxbio output 0 wire from u_scan_out_mux 
+o_ldo_ext output 0 wire from u_scan_out_mux 
+o_clk_ext_div output 0 wire from u_scan_out_mux 
+o_adc_test_cap output 0 wire 
+[9:0] 
+from u_scan_out_mux 
+if_cs_en output   wire from u_level_shifter_sel.if_cs_en_ls_out 
+if_cs_in input   wire to u_pad_mux 
+if_cs_out output   wire from u_level_shifter_sel.if_cs_out_ls_out 
+if_cs_tud output 1 wire from u_level_shifter_sel.if_cs_tud_ls_out, 
+Description: 
+if_gpio0_en output   wire from 
+u_level_shifter_sel.if_gpio0_en_ls_out 
+if_gpio0_in input   wire to u_pad_mux/u_pmu.if_sh_ck_in 
+if_gpio0_out output   wire from 
+u_level_shifter_sel.if_gpio0_out_ls_out

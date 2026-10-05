@@ -1,0 +1,74 @@
+Use the following decisions as fixed answers to the remaining Step 1 open questions, then update the implementation plan accordingly.
+
+1. Canonical revisions / canonical store:
+Use SQLite as the authoritative canonical store for canonical requirements, revisions, mappings, audit events, and snapshot metadata.
+File-based artifacts may remain only as derived exports, caches, reports, or compatibility outputs.
+Do not keep file-based storage as the source of truth.
+
+2. Existing CSV paths:
+Keep existing CSV paths as compatibility exports for now, but not as permanent authoritative inputs to the core workflow.
+Core services and downstream generators must progressively move to the SQLite-backed approved snapshot resolver.
+CSV/JSON may remain available for interoperability and review.
+
+3. Category transitions requiring mandatory review:
+Only non-semantic lifecycle transitions may occur without review, such as ingestion/parsing/classification workflow progress.
+Any transition that changes approved meaning, merge interpretation, or category among:
+- new
+- duplication
+- refines
+- conflict
+- removed
+must require explicit review/approval.
+Conflict must never auto-merge.
+Removed must always preserve lineage and require explicit rationale/approval.
+
+4. Rollback scope:
+Rollback must support explicit scope:
+- requirement revision rollback
+- mapping rollback
+- snapshot rollback or snapshot supersession
+Rollback must not silently rewrite history.
+If approved mapping or snapshot content is affected, the rollback must create a new tracked state and indicate that a new approved snapshot may be required.
+
+5. Timestamps and reproducibility:
+Keep timestamps in audit metadata and generated reports where operationally useful.
+Do not require byte-identical artifacts across runs.
+Determinism means same inputs + same config => same decisions, same effective workflow state, same approved snapshot content, and same retrieval behavior.
+Use stable hashes/fingerprints for semantic reproducibility rather than removing timestamps everywhere.
+
+6. GUI LLM/network chat:
+Disable it from workflow-critical paths or isolate it completely as a separate non-authoritative feature.
+It must not participate in canonical workflow decisions, retrieval core behavior, merge/category logic, snapshot generation, or audit-authoritative processing.
+The deterministic workflow itself must remain free of LLM/network dependencies.
+
+7. Snapshot ID for downstream CLI:
+Yes, downstream CLI commands should support and preferably require an explicit snapshot ID.
+If a default resolution is allowed, it must be clearly defined, auditable, and limited to an approved snapshot selector such as latest-approved.
+Do not allow silent fallback to mutable live data.
+
+8. Current Stage 2 profile format:
+Promote the current Stage 2 profile into a revisioned authoritative artifact, preferably stored in the SQLite canonical system or linked authoritative metadata store.
+CSV/JSON exports may still be generated for review and interoperability, but they should not remain the sole authoritative representation.
+
+9. Semantic retrieval model policy:
+Semantic retrieval may remain optional and local-only.
+Sentence-transformer models may continue to be supported if they are fixed, local, version-pinned, and fully reproducible in configuration.
+Do not require switching to deterministic hash embedding only.
+However, semantic retrieval must remain optional, must not become required for the core workflow, and must be fully traceable by model/version/config metadata.
+No network inference is allowed.
+
+10. Automatic semantic fallback policy:
+Keep automatic semantic fallback restricted to the current “no legacy results” condition for now.
+Do not expand it yet to margin/overlap triggers until the strengthened workflow, snapshot traceability, and retrieval auditability are fully in place.
+If expanded later, it must remain deterministic, config-driven, benchmarked, and auditable.
+
+Now update the Step 1 analysis and plan so these decisions are treated as fixed architecture constraints.
+
+Please provide:
+1. updated implementation order
+2. any changes to the target files/modules list
+3. any changes to the schema/model plan
+4. any migration or compatibility implications
+5. any truly unresolved questions, if any, before moving to Step 2
+
+Do not implement code yet.

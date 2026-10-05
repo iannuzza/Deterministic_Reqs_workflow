@@ -1,0 +1,23 @@
+6 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+5.1.1. Main controller Top I/O List 
+5.1.1.1. Parameters 
+Generic name Type Value 
+ppg_frame_bit_top  4 
+n_max_frame  12 
+ppg_rx_channel_bit_top  3 
+Generic name Type Value 
+ppg_frame_bit_top  4 
+n_max_frame  12 
+ppg_rx_channel_bit_top  3 
+T_tx_led_set_bit_top  5 
+T_tx_led_off_max_bit_top  7 
+m_odr_max_bit_top  12 
+mode_operation_n_bit_top  2 
+idac_dc_ppg_frame_bit_top  8

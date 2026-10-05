@@ -1,0 +1,476 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "stage0-init-artifacts",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/init_stage0_artifacts.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage0-validate-gate",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/validate_stage0_gate.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-ocr-extract",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/extract_requirements_ocr.py",
+				"--spec-folder",
+				"specs"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-validate-gate",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/validate_stage1_gate.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-taxonomy-crosscheck-update",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/run_taxonomy_crosscheck_update.py",
+				"--index-csv",
+				"artifacts/stage1_requirements/ocr_extracts/index.csv"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-generate-requirements",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/generate_stage1_requirements.py",
+				"--index",
+				"artifacts/stage1_requirements/ocr_extracts/index.csv",
+				"--raw",
+				"artifacts/stage1_requirements/requirements_raw.md",
+				"--summary-csv",
+				"artifacts/stage1_requirements/requirements_summary.csv",
+				"--summary-md",
+				"artifacts/stage1_requirements/requirements_summary.md",
+				"--stage-report",
+				"artifacts/orchestrator/stage_01_report.md",
+				"--min-target",
+				"100"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-crosscheck-requirements-rag",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/crosscheck_stage1_requirements_rag.py",
+				"--summary-csv",
+				"artifacts/stage1_requirements/requirements_summary.csv",
+				"--index-csv",
+				"artifacts/stage1_requirements/ocr_extracts/index.csv",
+				"--summary-md",
+				"artifacts/stage1_requirements/requirements_summary.md",
+				"--raw-md",
+				"artifacts/stage1_requirements/requirements_raw.md",
+				"--stage-report",
+				"artifacts/orchestrator/stage_01_report.md",
+				"--crosscheck-report",
+				"artifacts/stage1_requirements/requirements_rag_crosscheck.md"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage2-validate-gate",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/validate_stage2_gate.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage2-generate-specs",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/generate_stage2_specs.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-full-flow-gate1",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/run_stage1_requirements_gate1.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-specs-full-flow-gate2",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/run_stage1_specs_gate2.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage2-micro-arc-full-flow",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/run_stage2_micro_arc_gate.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage3-srs-full-flow",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/run_stage3_srs_gate.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage4-ars-full-flow",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/run_stage4_ars_gate.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage5-drs-full-flow",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/run_stage5_drs_gate.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "preflight-read-experience",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/preflight_experience.py",
+				"--experience-file",
+				"docs/execution-experience-log.md",
+				"--keywords",
+				"stage1,rag,pypdf,pandoc,ssl,path",
+				"--summary-out",
+				"artifacts/orchestrator/preflight_experience_summary.md"
+			],
+			"group": "build"
+		},
+		{
+			"label": "rag-build-index",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/build_rag_index.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "rag-query-smoke",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/query_rag_index.py",
+				"--query",
+				"shall OR must OR requirement",
+				"--top-k",
+				"8"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/sync_repo_memory_local.py"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-preflight",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage1-ocr-extract",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage1-taxonomy-update",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-rag-build-index",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage1-generate",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage1-crosscheck",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage0-init",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage0-validate",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage1-validate",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage2-validate",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-stage2-generate",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "sync-memories-after-rag-query-smoke",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"sync-memories"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-ocr-refresh-rag",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"stage1-ocr-extract",
+				"sync-memories-after-stage1-ocr-extract",
+				"stage1-taxonomy-crosscheck-update",
+				"sync-memories-after-stage1-taxonomy-update",
+				"rag-build-index",
+				"sync-memories-after-rag-build-index",
+				"stage1-generate-requirements",
+				"sync-memories-after-stage1-generate",
+				"stage1-crosscheck-requirements-rag",
+				"sync-memories-after-stage1-crosscheck"
+			],
+			"group": "build"
+		},
+		{
+			"label": "pipeline-early-up-to-requirements",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"preflight-read-experience",
+				"sync-memories-after-preflight",
+				"stage1-ocr-refresh-rag",
+				"stage0-init-artifacts",
+				"sync-memories-after-stage0-init",
+				"stage0-validate-gate",
+				"sync-memories-after-stage0-validate",
+				"stage1-validate-gate",
+				"sync-memories-after-stage1-validate"
+			],
+			"group": "build"
+		},
+		{
+			"label": "pipeline-first-3-gates",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"preflight-read-experience",
+				"sync-memories-after-preflight",
+				"stage1-ocr-refresh-rag",
+				"stage0-init-artifacts",
+				"sync-memories-after-stage0-init",
+				"stage0-validate-gate",
+				"sync-memories-after-stage0-validate",
+				"stage1-validate-gate",
+				"sync-memories-after-stage1-validate",
+				"stage2-generate-specs",
+				"sync-memories-after-stage2-generate",
+				"stage2-validate-gate",
+				"sync-memories-after-stage2-validate"
+			],
+			"group": "build"
+		},
+		{
+			"label": "pipeline-rag-bootstrap",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"preflight-read-experience",
+				"sync-memories-after-preflight",
+				"stage1-ocr-extract",
+				"sync-memories-after-stage1-ocr-extract",
+				"stage1-taxonomy-crosscheck-update",
+				"sync-memories-after-stage1-taxonomy-update",
+				"rag-build-index",
+				"sync-memories-after-rag-build-index",
+				"rag-query-smoke",
+				"sync-memories-after-rag-query-smoke"
+			],
+			"group": "build"
+		},
+		{
+			"label": "pipeline-from-specs-onward",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"stage2-generate-specs",
+				"sync-memories-after-stage2-generate",
+				"stage2-validate-gate",
+				"sync-memories-after-stage2-validate"
+			],
+			"group": "build"
+		},
+		{
+			"label": "pipeline-full-through-stage4-ars",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"preflight-read-experience",
+				"sync-memories-after-preflight",
+				"stage0-init-artifacts",
+				"sync-memories-after-stage0-init",
+				"stage0-validate-gate",
+				"sync-memories-after-stage0-validate",
+				"stage1-full-flow-gate1",
+				"stage1-specs-full-flow-gate2",
+				"stage2-micro-arc-full-flow",
+				"stage3-srs-full-flow",
+				"stage4-ars-full-flow"
+			],
+			"group": "build"
+		},
+		{
+			"label": "pipeline-full-through-stage5-drs",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"preflight-read-experience",
+				"sync-memories-after-preflight",
+				"stage0-init-artifacts",
+				"sync-memories-after-stage0-init",
+				"stage0-validate-gate",
+				"sync-memories-after-stage0-validate",
+				"stage1-full-flow-gate1",
+				"stage1-specs-full-flow-gate2",
+				"stage2-micro-arc-full-flow",
+				"stage3-srs-full-flow",
+				"stage4-ars-full-flow",
+				"stage5-drs-full-flow"
+			],
+			"group": "build"
+		},
+		{
+			"label": "stage1-validate-dualid",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts/validate_stage1_gate.py"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Validate ARS ID contract",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"scripts\\run_stage4_ars_gate.py"
+			],
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Python: Interactive Console",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"-i"
+			],
+			"presentation": {
+				"reveal": "always",
+				"focus": true,
+				"panel": "dedicated",
+				"close": false
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Python: Run Current File",
+			"type": "shell",
+			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"args": [
+				"${file}"
+			],
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"close": false
+			},
+			"problemMatcher": []
+		}
+	]
+}

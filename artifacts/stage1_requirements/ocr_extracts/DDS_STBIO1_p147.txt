@@ -1,0 +1,11 @@
+146 
+ 
+ 
+Figure 21: Configuration Phase Diagram 
+The start and the end of a Measurement Cycle is selected by the writing of the dedicated register 
+as described in following examples. 
+ 
+15.3. Measurement Cycle 
+In this paragraph, different examples of Measurement Cycle will be analyzed to give the 
+Application User an overview of the Device Workflow. All measurements will be performed in 
+Data Storage Mode

@@ -1,0 +1,62 @@
+156 
+ 
+17. BIST 
+17.1. Reference documents 
+Current 
+Version 
+Document Author Change 
+Description 
+1.0-
+17.00 
+/prj/ams_DELIVERIES/H9A_STBIO1/memorycuts/H9A_STBIO1-
+-GenericMBIST_CONFIG--BIST_STBIO1/1.0-17.00/ 
+/doc/ref_manual/generic_mbist_um.pdf 
+STMicroelectronics 
+TRnD 
+ 
+User manual, 
+release notes 
+and KPS for 
+the 
+GenericMBIST 
+ 
+1.0-
+17.00 
+/prj/ams_DELIVERIES/H9A_STBIO1/memorycuts/H9A_STBIO1-
+-GenericMBIST_CONFIG--BIST_STBIO1/1.0-17.00/ 
+/doc/user_manual/generic_mbist_rm.pdf 
+STMicroelectronics 
+TRnD 
+ 
+Reference 
+manual for the 
+GenericMBIST 
+ 
+ 
+17.2. Memory BIST Architecture  
+The BIST solution consists of memory-wrapper “collar” and common master “controller” and an 
+IEEE 1149.1 compliant Test Access Port (TAP).  
+17.2.1. MBIST Collar  
+The BIST collar is a wrapper which is placed closest to memory. It executes the instructions 
+received from controller in the form of march elements to test the memory. It runs at the speed of 
+the memory under test.  
+After testing it reports the execution status to the controller and manages all the BIST status, 
+diagnosis, repair information and debug data. The collar also provides support for testing multiple 
+memories in parallel or in sequential order.  
+17.2.2. MBIST Controller  
+The controller acts as an interface between the collars and the user. All user BIST control is done 
+through the controller. The controller controls various testing and reporting activities of the 
+memory test. It allows various mode selections and programs the pre-stored synthesized 
+algorithms instructions into collars attached to it.  
+ 
+Main functionalities of controller are:  
+• Mode management (RunBIST mode, Retention mode etc.)  
+• Program the configurable collar with default algorithms, march element by march element 
+and initiate the activities on memory through collars by launching the march run.  
+• Compute the Global status based on the individual status from the collar.  
+ 
+TAP  
+• It includes a TAP controller, a 7-bit instruction register, three test data registers, and the 
+bypass register.  
+• This responds to the control sequences supplied through the test access port (TAP) and 
+generates the control signals required for BIST operation

@@ -1,0 +1,10 @@
+DRS improvements
+
+- title and metadata on page 1; start the TOC first on page 2, followed by Document Navigation (same for all generated specs)
+- Version history table: instead of 'Current workspace revision' put the versiojn number. Start from 0.1
+- ogni paragrafo e sub or internal paragraph must start on a new line
+- write block lists ot any other list in a bullet format
+- each paragraph or sub-paragraph name must be in bold
+- highlight all tables with all grid borders
+- in DRS do not repeat "Buffering: evaluate when the source-defined buffer condition, apply the response defined by the source evidence" for each condition. Just report the evidence result
+

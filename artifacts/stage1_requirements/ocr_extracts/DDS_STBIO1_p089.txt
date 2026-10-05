@@ -1,0 +1,127 @@
+88 
+ 
+ 
+AHB 
+ADDRES
+S 
+AHB 
+REGISTER 
+7 6 5 4 3 2 1 0 
+C1E02 CONTROL_
+A 
+/
+/ 
+/
+/ 
+/
+/ 
+/
+/ 
+OTP_TES
+T 
+OTP_WRIT
+E 
+OTP_BOO
+T 
+SOFT_RESE
+T 
+ 
+ 
+• OTP BOOT Bit used to trigger Boot Routine. 
+• OTP WRITE Bit used to trigger Write routine. 
+• OTP TEST  Bit used to trigger Test routine. 
+ 
+The same register also contain a SOFT_RESET bit used to trigger the corresponding soft reset 
+routine. 
+[End] 
+ 
+ 
+[DDS_STBIO1_0013] Requirement: 
+To move OTP signal, ADSP shall writes new value in a regbank by AHB protocol. 
+Register Name Register Title Addre
+ss 
+Offset 
+Reset 
+value 
+Bit
+s 
+Field name Acces
+s 
+OTP_PDN OTP_PDN register 0xc900
+0 
+0x000
+0 
+0 OTP_PDN RW 
+OTP_A OTP_A register 0x 
+c9004 
+0x000
+0 
+6:0 OTP_A RW 
+OTP_BANKEN OTP_BANKEN 
+register 
+0x 
+c9008 
+0x000
+0 
+1:0 OTP_BANKEN RW 
+OTP_BITSEL OTP_BITSEL 
+register 
+0x 
+c900C 
+0x000
+0 
+2:0 OTP_BITSEL RW 
+OTP_SELECTWL
+BL 
+OTP_SELECTWL
+BL register 
+0x 
+c9010 
+0x000
+0 
+0 OTP_SELECTWL
+BL 
+RW 
+OTP_PRG OTP_PRG 
+register 
+0x 
+c9014 
+0x000
+0 
+0 OTP_PRG RW 
+OTP_FUSE OTP_FUSE 
+register 
+0x 
+c9018 
+0x000
+0 
+0 OTP_FUSE RW 
+OTP_TREAD OTP_TREAD 
+register 
+0x 
+c9020 
+0x08 3:0 OTP_TREAD RW 
+OTP_D OTP_D register 0x 
+c9024 
+0x000
+0 
+7:0 OTP_D R 
+OTP_IREF_WAK
+EUP 
+OTP_IREF_WAK
+EUP register 
+0x 
+c9028 
+0x000
+0 
+0 OTP_IREF_WAK
+EUP 
+RW 
+OTP_D_TEST OTP_D_TEST 
+register 
+0x 
+c902C 
+0x000
+0 
+7:0 OTP_D_TEST RW 
+[Vpriority High] [End]

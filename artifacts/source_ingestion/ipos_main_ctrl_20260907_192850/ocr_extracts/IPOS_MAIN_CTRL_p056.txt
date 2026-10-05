@@ -1,0 +1,20 @@
+55 
+ 
+Table 6: Main Controller FSMs I/O List 
+5.3.2. Description of the Block 
+This block is divided into two FSMs. The first FSM called Device_FSM, is in charge of identify the 
+working state of the device. The second FSM called Elab_FSM, is in charge of identify what signal 
+is in elaboration and to check and generate signal from and for the Analog Domain. The Elab_FSM 
+is also in charge to start writing to the AHB Crossbar and to talk with Hardware DSPs block like 
+the Avarage Circuit and ADSP, or to start PPG operation talking with the PPG_FSM. This Block is 
+also in charge to turn of the Fast Ring Oscillator (16 MHz) and to enable the User Read Operation. 
+ 
+ 
+Figure 2: Main Controller FSM Diagram 
+5.3.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_003]  ASSUMPTION :  
+When in BOOT State (when main_controller_status_register (DEVICE_STATUS_REG register 
+[2:0]) is equal to 0x01), the Device_FSM shall raise the w_quokka_boot signal let the ADSP starts 
+the BOOT operation. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_5014] REQUIREMENT:

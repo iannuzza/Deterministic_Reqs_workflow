@@ -1,0 +1,17 @@
+131 
+ 
+**Test-Logic-Reset** Run-Test/Idle Test-Logic-Reset 
+**Run-Test/Idle** Run-Test/Idle Select-DR-Scan 
+**Select-DR-Scan** Capture-DR Select-IR-Scan 
+**Capture-DR** Shift-DR Exit1-DR 
+**Shift-DR** Shift-DR Exit1-DR 
+**Exit1-DR** Pause-DR Update-DR 
+**Pause-DR** Pause-DR Exit2-DR 
+**Exit2-DR** Shift-DR Update-DR 
+**Update-DR** Run-Test/Idle Select-DR-Scan 
+**Select-IR-Scan** Capture-IR Test-Logic-Reset 
+**Capture-IR** Shift-IR Exit1-IR 
+**Shift-IR** Shift-IR Exit1-IR 
+**Exit1-IR** Pause-IR Update-IR 
+**Pause-IR** Pause-IR Exit2-IR 
+**Exit2-IR** Shift-IR Update-IR

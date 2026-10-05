@@ -1,0 +1,10 @@
+{
+  "approved_by": "stage1-approved",
+  "ingestion_id": "primary_654078d5d79284621c7bd337",
+  "project_id": "STBIO",
+  "source_kind": "primary",
+  "source_revision": "stage1-approved",
+  "source_scope": "system",
+  "source_spec": "DDS_STBIO1.pdf",
+  "target_scope": "system"
+}

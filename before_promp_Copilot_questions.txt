@@ -1,0 +1,11 @@
+7. Open questions before implementation
+Should canonical revisions use SQLite, or must canonical storage remain file-based?
+Should existing CSV paths remain permanent compatibility exports?
+Which category transitions require mandatory review?
+Should rollback restore only requirements, or also mapping and downstream snapshots?
+Must generated reports exclude timestamps to achieve byte-identical reproducibility?
+Should GUI LLM/network chat be disabled or isolated from the deterministic workflow?
+Should downstream CLI commands require an explicit snapshot ID?
+Should the current Stage 2 profile remain editable JSON, or become a revisioned artifact with CSV/JSON exports?
+Should semantic retrieval continue using sentence-transformer models, or should only the deterministic hash embedding option be permitted for reproducibility?
+Should the current automatic semantic fallback remain “no results only,” or be expanded to the policy’s margin/overlap triggers?

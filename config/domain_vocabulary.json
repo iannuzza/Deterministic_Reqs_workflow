@@ -1,0 +1,82 @@
+{
+  "description": "Project-agnostic controlled domain vocabulary for deterministic RAG term normalization and synonym expansion. Terms are search aids, not source facts.",
+  "stopwords": [
+    "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "in", "into",
+    "is", "it", "of", "on", "or", "shall", "should", "that", "the", "this", "to", "with"
+  ],
+  "protected_terms": [
+    "ADC",
+    "DAC",
+    "PLL",
+    "LDO",
+    "ESD",
+    "I2C",
+    "SPI",
+    "AHB",
+    "AXI",
+    "APB",
+    "UART",
+    "JTAG",
+    "FIFO",
+    "PMU",
+    "POR",
+    "OTP",
+    "IRQ",
+    "BIST",
+    "DFT"
+  ],
+  "acronyms": {
+    "ADC": "analog to digital converter",
+    "DAC": "digital to analog converter",
+    "PMU": "power management unit",
+    "POR": "power on reset",
+    "PLL": "phase locked loop",
+    "LDO": "low dropout regulator",
+    "FIFO": "first in first out",
+    "IRQ": "interrupt request",
+    "BIST": "built in self test",
+    "DFT": "design for test"
+  },
+  "synonym_groups": {
+    "clock_reset": ["clock", "clk", "clocking", "reset", "rst", "rst_n", "resetn", "por"],
+    "configuration": ["configure", "configured", "configuring", "configuration", "config"],
+    "connection": ["connect", "connected", "connecting", "connection", "connectivity", "link", "linked"],
+    "power_startup": ["power up", "power-up", "startup", "start up", "boot", "initialization", "wake up", "wake-up"],
+    "storage_buffer": ["store", "stored", "storage", "buffer", "buffered", "fifo", "queue"],
+    "sampling": ["sample", "samples", "sampled", "sampling", "acquire", "acquired", "acquisition"],
+    "interrupt": ["interrupt", "irq", "event", "flag", "status"],
+    "test_debug": ["test", "debug", "scan", "bist", "dft", "self test", "self-test"]
+  },
+  "phrase_mappings": {
+    "clock gating": ["clk gate", "clock-gate", "gated clock", "clock gate"],
+    "power on reset": ["power-on reset", "por", "reset on power"],
+    "power up": ["power-up", "startup", "start up", "boot"],
+    "analog to digital": ["analog-to-digital", "a to d", "adc"],
+    "digital to analog": ["digital-to-analog", "d to a", "dac"]
+  },
+  "exceptions": {
+    "connector": {
+      "do_not_merge_with": ["connect", "connected", "connection"]
+    },
+    "cell": {
+      "do_not_merge_with": ["memory cell", "mask cell", "sensor cell"]
+    }
+  },
+  "units": [
+    "V",
+    "mV",
+    "A",
+    "mA",
+    "Hz",
+    "kHz",
+    "MHz",
+    "GHz",
+    "s",
+    "ms",
+    "us",
+    "ns",
+    "C",
+    "ohm",
+    "kohm"
+  ]
+}

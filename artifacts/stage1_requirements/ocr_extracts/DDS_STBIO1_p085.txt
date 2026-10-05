@@ -1,0 +1,24 @@
+84 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+o_pd_buf_gpio1 output  1 power down for buffer gpio1 
+o_pd_buf_gpio2 output  1 power down for buffer gpio2 
+o_adc_data_debug_alc_1 output [frame_ppg_debug_alc_top-1:0] 0 alc 1 registers data debug 
+o_adc_data_debug_alc_2 output [frame_ppg_debug_alc_top-1:0] 0 alc 2 registers data debug 
+o_adc_data_debug_ppg_raw output [frame_ppg_debug_ppg_raw_top-
+1:0] 
+0 ppg raw registers data debug 
+o_en_lead_off output  0 mask lead off 
+o_mc_busy output  0 main controller is working 
+o_en_ck_m_p_q output  0 clock m and q bia 
+o_en_ck_chop_imp output  0 clock chopper bia 
+o_saturation_flag output [n_max_frame-1:0] 0 ppg saturation flag 
+o_en_ck_hc2_10k output  0 clock chipper ecg 
+o_en_clk_16MHz_sleep output  1 sleep signal for pmu 
+o_gsr_clk_en_16M output  0 enable clock for gsr channel 
+Table 17: Main Controller I/O List 
+13.1.3.3. Main Controller Peculiar Requirements 
+Main Controller manage all the Analog domain, so all its requirements shall be considered as 
+High Priority. To check correctly the requirements, it’s important to cover all the different phase 
+described, partially, in chapter 12 and its IPOS.

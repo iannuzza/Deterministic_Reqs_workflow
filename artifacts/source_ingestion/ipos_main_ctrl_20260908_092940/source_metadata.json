@@ -1,0 +1,14 @@
+{
+  "ingestion_id": "ipos_main_ctrl_20260908_092940",
+  "source_spec": "IPOS_MAIN_CTRL.pdf",
+  "source_revision": "2026-09-08",
+  "tag_pattern": "IPOS_STBIO1_MAIN_CONTROLLER_\\d+",
+  "staged_at": "2026-09-08T07:29:42+00:00",
+  "counts": {
+    "new": 122,
+    "duplication": 1,
+    "refines": 0,
+    "conflict": 0,
+    "removed": 0
+  }
+}

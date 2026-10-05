@@ -1,0 +1,40 @@
+24 
+ 
+TRIM_LDOD_I output 0 wire 
+[3:0] 
+from u_scan_out_mux 
+TRIM_LDOD_V output 0 wire 
+[3:0] 
+from u_scan_out_mux 
+TRIM_OSC_FAST output 18 wire 
+[4:0] 
+from u_scan_out_mux 
+TRIM_OSC_SLOW output 0 wire 
+[3:0] 
+from u_scan_out_mux 
+TRIM_V1V8 output 7 wire 
+[2:0] 
+from u_scan_out_mux 
+VREF_TRIM output 10 wire 
+[4:0] 
+from u_scan_out_mux 
+CAPF_IMP_EN output 1 wire from u_scan_out_mux, Description: 
+Enable filtro per 
+ECG0_GAIN_HC_0 output 1 wire from u_scan_out_mux 
+ECG0_GAIN_HC_1 output 1 wire from u_scan_out_mux 
+EN_EXT_CAP output 0 wire from u_scan_out_mux, Description: 
+Mantenuta opzione 
+EN_ECG0_0P05HP output 0 wire from u_scan_out_mux, Description: 
+aggiunto bit per 
+EN_ECG12_0P05HP output 0 wire from u_scan_out_mux, Description: 
+aggiunto bit per 
+GAIN_IMP output 1 wire 
+[1:0] 
+from u_scan_out_mux 
+GIMP_DC output 1 wire from u_scan_out_mux 
+o_gsr_switchon output 0 wire from u_scan_out_mux, Description: 
+spostato il bit 
+GSR_GAIN_SEL output 0 wire 
+[1:0] 
+from u_scan_out_mux 
+GSR_GAIN_X1 output 0 wire from u_scan_out_mux

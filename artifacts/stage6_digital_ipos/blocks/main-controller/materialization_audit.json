@@ -1,0 +1,4327 @@
+{
+  "contract_version": "1.0",
+  "document_contract": {
+    "abstraction_level": "block-local purpose, capability, interface, and requirement detail",
+    "authority_sources": [
+      "approved block inventory function and I/O",
+      "approved same-block snapshot requirements"
+    ],
+    "discovery_sources": [
+      "complete snapshot-scoped candidate requirement set"
+    ],
+    "key": "IPOS",
+    "ownership_scope": "one approved concrete block",
+    "promotion_rule": "retain supported same-block content within the approved block function and I/O boundary",
+    "required_sections": [
+      "functionality",
+      "supported_functions_and_scope",
+      "source_io",
+      "requirements"
+    ],
+    "suppression_rule": "suppress cross-scope, conflicting, unsupported, table-only, signal-only, and non-projectable normative candidates"
+  },
+  "document_type": "IPOS",
+  "docx": {
+    "path": "digital_ipos_main-controller.docx",
+    "sha256": "a9167176cd89f6c38944cda970346f30babd25abb3dd56d255b4441f30c0f3b1"
+  },
+  "markdown": {
+    "path": "digital_ipos_main-controller.md",
+    "sha256": "0c9690516dbd7abeb92187fdaf7bea085f112a04d9d188678bfbd8d57095b067"
+  },
+  "normalized_input_sha256": "55f1878b55f39dd4c77532ddc100d12a3350743a1a77e34b26daec26a0da9dee",
+  "normalized_records": [
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv"
+      ],
+      "rationale": "approved block function authority",
+      "record_id": "inventory:function",
+      "text": "Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv"
+      ],
+      "rationale": "approved block input boundary",
+      "record_id": "inventory:inputs",
+      "text": "Configuration register settings, sampled data"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv"
+      ],
+      "rationale": "approved block output boundary",
+      "record_id": "inventory:outputs",
+      "text": "Control state and data routing"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_2146"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2146",
+      "text": "Enables saturation flag output when the ppg sample data are equal (once converted in two\u2019s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold is greater or equal to 64); clears at the start of the next frame or frame repetition."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_118"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_118",
+      "text": "Increments o Tx Vref first step to i N start at i T preset timing."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_3004"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_3004",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_051"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_051",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8003"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1104"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1104",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0115"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0115",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1095"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1095",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_100"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_100",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0113"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0113",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_5092"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5092",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_4091"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_4091",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_102"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_102",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_094"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_094",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0206"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0206",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9317"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_3128"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3128",
+      "text": "Sequences TIMER BUFFER then PPG ALC STORAGE states."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0022"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0022",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0508"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_0508",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_6098"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_6098",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0507"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_0507",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_2054"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_2054",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0208"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0208",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9263"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_052"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_052",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_011"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_011",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0505"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0505",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9500"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1024"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1024",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0142"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0142",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1023"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1023",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0106"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0106",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_302"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9012"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9012",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0123"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0123",
+      "text": "Starts measurement."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0222"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0222",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0024"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0024",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0143"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0143",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8104"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0020"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0020",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_394"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0207"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0207",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1009"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1009",
+      "text": "Accepts user selection of GSR channel."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_393"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9027"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8102"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_313"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0023"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0023",
+      "text": "Starts only."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_092"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_092",
+      "text": "Enables gsr curr on output when en_gsr_cds is set low [bit 3 of GSR_CTRL] in every time slot."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0126"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0126",
+      "text": "Accepts user selection of ECG0 and BIA channels and Data Storage Mode."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0701"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0701",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_5016"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5016",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_049"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_049",
+      "text": "Enables ADC clk en output when ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0026"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0026",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8007"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_080"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_080",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1102"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1102",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_140"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_140",
+      "text": "Subtracts accumulated PPG raw data and PPG noise according to the ALC Mask."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0034"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0034",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_026"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_026",
+      "text": "IDLE"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0700"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0700",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0110"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0110",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0015"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0015",
+      "text": "Copies content OTP memory into OTP registers."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1034"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1034",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_096"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_096",
+      "text": "PPG"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0201"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0201",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0217"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0217",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0147"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0147",
+      "text": "Accepts user configuration of each frame following these steps."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_2026"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_2026",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1005"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1005",
+      "text": "Accepts user configuration of channel selection and Data Storage mode."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_103"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_103",
+      "text": "Maintains PPG_FSM in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1507"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_1507",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_108"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_108",
+      "text": "Maintains PPG_FSM in this state until the rising of the i_end_average signal from the ADC block"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0141"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0141",
+      "text": "Starts measurement."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89456975"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0122"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0122",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_395"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9030"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0108"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0108",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0209"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0209",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0149"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0149",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_002"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_002",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_5005"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5005",
+      "text": "Clamps m channel values above 1024 to 1024."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_3006"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_3006",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_082"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_082",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_8106"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_8106",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_039"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_039",
+      "text": "PPG"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1025"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1025",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_032"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_032",
+      "text": "PPG"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_3127"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3127",
+      "text": "BIA"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_7095"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_7095",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_028"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_028",
+      "text": "IDLE"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_306"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_106"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_106",
+      "text": "Maintains PPG_FSM in this state until the end of the Rising Time"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9017"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_105"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_105",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0032"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0032",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_4090"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_4090",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0215"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0215",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9024"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1143"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1143",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_2052"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_2052",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0121"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0121",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1053"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1053",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0210"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0210",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89457435"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0127"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0127",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_109"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_109",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1139"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1139",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89455232"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9004"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9004",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0220"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0220",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_3129"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3129",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_138"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_138",
+      "text": "Averages 16 samples for GSR."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_3002"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_3002",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_00000102"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_00000008"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+      "text": "Enters Memory mode."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0117"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0117",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0128"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0128",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_3001"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_3001",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_111"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_111",
+      "text": "Maintains PPG_FSM in this state until the end of the Falling Time (depends on the user's configuration of Digital Ram"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1052"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1052",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0014"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0014",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0124"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0124",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0107"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0107",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_047"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_047",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_2145"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2145",
+      "text": "Divides accumulated frame data by the number of repetitions to produce a 20 bit result."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0021"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0021",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_3005"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_3005",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_3003"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_3003",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_115"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_115",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_017"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_017",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_009"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_009",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_044"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_044",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_0152"
+      ],
+      "rationale": "local behavior has no functional or I/O support in approved inventory fields",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_0152",
+      "text": "Resets only when the calibration has been done."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1022"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1022",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0221"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0221",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1050"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1050",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_2024"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_2024",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8004"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
+      "text": "Starts data preload from AHB in order to have internal fifo not empty."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_128"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_128",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8005"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_312"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_059"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_059",
+      "text": "PPG"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_078"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_078",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0016"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0016",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0111"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0111",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0501"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0501",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0212"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0212",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_089"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_089",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_104"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_104",
+      "text": "Starts the rising of the digital ramp and enters the RISING RAMP state when end average is set to 1 in FIRST ALC SAMPLES state."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0145"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0145",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1008"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1008",
+      "text": "Accepts user selection of BIA channel."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_055"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_055",
+      "text": "Waits for for i_ADC_EOC sampling new"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1114"
+      ],
+      "rationale": "accepted evidence is an atomic helper operation without an autonomous summary",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_1114",
+      "text": "Performs SOFT Reset procedure."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9029"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_310"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_018"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_018",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9260"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_063"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_063",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1051"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1051",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_036"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_036",
+      "text": "Enters Operative state when in Sleep Mode if no error occurs and all the operations are ended."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_034"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_034",
+      "text": "the error"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_134"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_134",
+      "text": "Waits for configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_3124"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3124",
+      "text": "ECG"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_308"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8103"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_037"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_037",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_024"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_024",
+      "text": "WAIT_SU"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_110"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_110",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_126"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_126",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0018"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0018",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_045"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_045",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_004"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_004",
+      "text": "Waits for that ADSP ends BOOT Phase, checking"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8000"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0019"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0019",
+      "text": "Copies content OTP regmap into OTP memory."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0216"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0216",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_054"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_054",
+      "text": "Maintains o_ADC_start"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0035"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0035",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0114"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0114",
+      "text": "Manages turn-on LDO1V8 starts."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0025"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0025",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0504"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0504",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_2025"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_2025",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0509"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0509",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_053"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_053",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0013"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0013",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1021"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1021",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0219"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0219",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9033"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+      "text": "Resets All SENSOR HUB x registers every."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_2143"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2143",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_016"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_016",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0112"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0112",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0699"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0699",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_029"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_029",
+      "text": "PPG"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "OTP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0116"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:OTP:DDS_STBIO1_0116",
+      "text": "Reads main controller status register (DEVICE STATUS REG."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0105"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0105",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_2507"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_2507",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_4079"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_4079",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_00001199"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8100"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9261"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_021"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_021",
+      "text": "Generates from Clock generator block, so O_CK_CHOP_IMP"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0027"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0027",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_083"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_083",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_436"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_436",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_099"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_099",
+      "text": "Waits for end compensation from ALC Compensation block before entering RX Start UP."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0204"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0204",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89455261"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0146"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0146",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89455449"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_074"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_074",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_098"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_098",
+      "text": "Raises o_start_alc_comp signal to ALC"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_038"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_038",
+      "text": "Sets equal to 001"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_087"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_087",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_314"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_5004"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5004",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_093"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_093",
+      "text": "Averages 16 acquisitions of GSR SNS and GSR CDS separately when the mode is enabled, then subtracts their averaged values."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0202"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0202",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_019"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_019",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0125"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0125",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_113"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_113",
+      "text": "Maintains PPG_FSM in this state until the rise of the end_of_conversion signal from the ADC block"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0130"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0130",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1054"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1054",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_309"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9014"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9014",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_3126"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3126",
+      "text": "ECG"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_4000"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1007"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1007",
+      "text": "Accepts user selection of ECG0 channel."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0211"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0211",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_023"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_023",
+      "text": "WAIT_SU"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0203"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0203",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89456557"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456557",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_00000199"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+      "text": "Enters Memory mode."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_008"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_008",
+      "text": "Writes time_slot_data inside FIFO with dedicated tag"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0033"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0033",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0148"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0148",
+      "text": "Writes DEVICE CONFIG OPERATION."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9011"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9011",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0028"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0028",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_2053"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_2053",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8105"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Regmap",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_3000"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_728"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_728",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1026"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1026",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_307"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0502"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0502",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8001"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "ADSP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0017"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:ADSP:DDS_STBIO1_0017",
+      "text": "Writes To perform BOOT routine."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8101"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8106"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_088"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_088",
+      "text": "Configures number of time slots between two GSR acquisitions; the cited expression relates acquisition data to time slots and the configured input without resolving its arithmetic."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_035"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_035",
+      "text": "Operative"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_6070"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_6070",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0120"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0120",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_05010"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_05010",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0129"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0129",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1010"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1010",
+      "text": "Accepts user selection of PPG channel."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9013"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9013",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_060"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_060",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_303"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_05011"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_05011",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0109"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0109",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "OTP",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0036"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:OTP:DDS_STBIO1_0036",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_064"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_064",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1011"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1011",
+      "text": "Accepts user selection of ECG1 ECG2 channel."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_010"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_010",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0218"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0218",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0144"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0144",
+      "text": "Accepts user selection of PPG and data Storage channels."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0503"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0503",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9262"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0119"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0119",
+      "text": "Accepts user selection of ECG0 channel and Data Storage Mode."
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_00000202"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_033"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_033",
+      "text": "IDLE"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9035"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_073"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_073",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0702"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0702",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_2144"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2144",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9018"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_305"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_077"
+      ],
+      "rationale": "accepted evidence is an atomic helper operation without an autonomous summary",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_077",
+      "text": "Generates chopper clock."
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_5015"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5015",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_3125"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3125",
+      "text": "ECG"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8002"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89459082"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_058"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_058",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Smart FIFO",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_89457790"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_031"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_031",
+      "text": "PPG"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_6129"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_6129",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_112"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_112",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0140"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0140",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_101"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_101",
+      "text": "Rx_Start_Up"
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "retained",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_030"
+      ],
+      "rationale": "supported same-scope local refinement",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_030",
+      "text": "PPG"
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9032"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0213"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0213",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_095"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_095",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_4080"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_4080",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_085"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_085",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9031"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_137"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_137",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Digital",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0223"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Digital:DDS_STBIO1_0223",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1027"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1027",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_1020"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_1020",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_061"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_061",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0118"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:DDS_STBIO1_0118",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1004"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1004",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_392"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_304"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_1116"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1116",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PMU",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_0104"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PMU:DDS_STBIO1_0104",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9300"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "I2C_SPI_AHB",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_8006"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "Sensor-Hub",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_9034"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_120"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_120",
+      "text": ""
+    },
+    {
+      "authority_tier": "discovery_only",
+      "decision": "suppressed",
+      "ownership_scope": "PAD MUX",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:DDS_STBIO1_311"
+      ],
+      "rationale": "candidate evidence is allocated to a different block",
+      "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+      "text": ""
+    },
+    {
+      "authority_tier": "authoritative",
+      "decision": "suppressed",
+      "ownership_scope": "Main Controller",
+      "provenance": [
+        "approved snapshot",
+        "artifacts/stage2_mirco_arc/block_inventory.csv",
+        "approved requirement:IPOS_STBIO1_MAIN_CONTROLLER_062"
+      ],
+      "rationale": "normative evidence has no supported functional action for non-normative projection",
+      "record_id": "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_062",
+      "text": ""
+    }
+  ],
+  "semantic_units": [
+    {
+      "output_order": 1,
+      "section": "1.1 Functionality",
+      "source_record_ids": [
+        "inventory:function"
+      ],
+      "text": "The Main Controller block is designed to generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.",
+      "unit_id": "functionality:1"
+    },
+    {
+      "output_order": 2,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "inventory:function",
+        "inventory:inputs",
+        "inventory:outputs"
+      ],
+      "text": "The Main Controller accepts configuration settings, sampled data and produces control state and data routing.",
+      "unit_id": "supported-scope:1"
+    },
+    {
+      "output_order": 3,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2146"
+      ],
+      "text": "**PPG saturation flag control.** Flags PPG saturation when at least half of the selected samples equal 0x8000 or 0x7FFF after signed conversion; clears at the start of the next frame or frame repetition.",
+      "unit_id": "supported-scope:2"
+    },
+    {
+      "output_order": 4,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_118",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_104"
+      ],
+      "text": "**Digital ramp control.** Advances the digital ramp first step (o_Tx_Vref) to the configured start value (i_N_start) at preset time (i_T_preset), then enters Rising Ramp when averaging completes in First ALC Samples.\n  Interacts with ADC averaging completion.",
+      "unit_id": "supported-scope:3"
+    },
+    {
+      "output_order": 5,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3128",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_096",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_039",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3127",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_134",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3124",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_038",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3126",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3125"
+      ],
+      "text": "**ELAB FSM.** Coordinates elaboration across TIMER BUFFER, PPG, BIA, ECG, and start-up paths, with PPG start-up timing.\n  Sequences TIMER BUFFER then PPG ALC STORAGE states.\n  Interacts with PPG frame sequencing, PPG operation control, ADC phase acquisition, and ADC mux, acquisition-enable, and buffer outputs.",
+      "unit_id": "supported-scope:4"
+    },
+    {
+      "output_order": 6,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:DDS_STBIO1_0123",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1009",
+        "requirement:Main Controller:DDS_STBIO1_0126",
+        "requirement:Main Controller:DDS_STBIO1_0141",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1008",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1007",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1010",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1011",
+        "requirement:Main Controller:DDS_STBIO1_0119"
+      ],
+      "text": "**Measurement setup and initiation.** Selects GSR, ECG0, BIA, PPG, and ECG1/ECG2 channels and Data Storage Mode, then starts measurement.",
+      "unit_id": "supported-scope:5"
+    },
+    {
+      "output_order": 7,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_092",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_138",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_093"
+      ],
+      "text": "**GSR acquisition and processing.** Enables GSR current (GSR curr on) in every time slot when CDS is disabled (GSR_CTRL bit 3), averages 16 samples for GSR, and subtracts the separately averaged GSR SNS and GSR CDS values from 16 acquisitions each when CDS is enabled.",
+      "unit_id": "supported-scope:6"
+    },
+    {
+      "output_order": 8,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_049",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_055",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_054"
+      ],
+      "text": "**ADC phases.** Maintains ADC sampling until conversion completes.\n  Enables the ADC clock for ECG, BIA, or GSR sampling when ADC acquisition is enabled.",
+      "unit_id": "supported-scope:7"
+    },
+    {
+      "output_order": 9,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_140"
+      ],
+      "text": "**PPG result computation.** Subtracts accumulated PPG raw data and PPG noise according to ALC Mask.",
+      "unit_id": "supported-scope:8"
+    },
+    {
+      "output_order": 10,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_026",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_032",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_028",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_059",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_036",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_034",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_024",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_004",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_029",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_021",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_023",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_035",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_033",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_031",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_030"
+      ],
+      "text": "**Device FSM.** Controls the device lifecycle across Idle, PPG, Error, Start-Up, Boot, Operative, and Sleep states.\n  Waits for ADSP boot completion.\n  Enters Operative state when in Sleep Mode if no error occurs and all the operations are ended.\n  Interacts with Clock Generator block, ADSP boot completion, start-up delay control, PPG frame sequencing, PPG noise averaging, ALC compensation sequencing, ADC mux, acquisition-enable, and buffer outputs, Digital Top error interrupt, and device busy and status outputs.",
+      "unit_id": "supported-scope:9"
+    },
+    {
+      "output_order": 11,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1005",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5005",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_088"
+      ],
+      "text": "**Local configuration.** Selects channels and Data Storage Mode, limits configured channel values to 1024, and sets the GSR acquisition interval in time slots; the cited expression is retained without interpreting its arithmetic.",
+      "unit_id": "supported-scope:10"
+    },
+    {
+      "output_order": 12,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_103",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_108",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_106",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_111",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_099",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_098",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_113",
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_101"
+      ],
+      "text": "**PPG FSM.** Coordinates PPG averaging, ramp timing, and ALC compensation start.\n  Waits for ADC conversion completion across FIRST ALC SAMPLES, Measurement, Rising Ramp, Falling Ramp, and SECOND ALC SAMPLES paths.\n  Waits for ALC compensation completion before PPG start-up.\n  Interacts with ADC block, ALC Compensation block, and ADC averaging completion.",
+      "unit_id": "supported-scope:11"
+    },
+    {
+      "output_order": 13,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2145"
+      ],
+      "text": "**Frame repetition result computation.** Divides accumulated frame data by number of repetitions to produce a 20-bit result.",
+      "unit_id": "supported-scope:12"
+    },
+    {
+      "output_order": 14,
+      "section": "1.2 Supported functions and scope",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_008"
+      ],
+      "text": "**Main Controller FSM.** Stores time-slot results in the FIFO with a dedicated tag.",
+      "unit_id": "supported-scope:13"
+    }
+  ]
+}

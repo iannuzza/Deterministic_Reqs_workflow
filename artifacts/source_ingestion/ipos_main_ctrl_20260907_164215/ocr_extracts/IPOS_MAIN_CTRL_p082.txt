@@ -1,0 +1,11 @@
+81 
+ 
+ 
+Figure 10: GSR with CDS Disabled and m_GSR set to 1 
+ 
+Figure 11:GSR with CDS Enabled with m_gsr set to 1 
+5.8. PPG FSM 
+5.8.1. IP Description 
+This IP is in charge to control the PPG TX/RX Enabling and signal acquisitions, and managing 
+the start of Digital Ramp, ALC Compensation and PPG IOFF Calibration. Example of PPG IOFF 
+Calibration Results can be found in the Appendix.

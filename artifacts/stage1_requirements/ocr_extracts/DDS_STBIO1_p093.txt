@@ -1,0 +1,20 @@
+92 
+ 
+ 
+Figure 14: WRITE routine and TEST regmap 
+[Vpriority High] [End] 
+ 
+ 
+ 
+ 
+ 
+[DDS_STBIO1_0022] Requirement: 
+OTP_WRITE, OTP_BOOT and OTP_TEST bits shall be cleared by ADSP at the end of their 
+respective operation 
+[Vpriority High] [End] 
+ 
+ 
+[DDS_STBIO1_0023] Requirement: 
+A new operation shall start only when quokka_run is low, and one between OTP_TEST bit, 
+OTP_WRITE bit or OTP_BOOT bit is written to 1 
+[Vpriority High] [End]

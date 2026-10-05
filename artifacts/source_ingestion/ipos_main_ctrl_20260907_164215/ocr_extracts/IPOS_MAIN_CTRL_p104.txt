@@ -1,0 +1,23 @@
+103 
+ 
+Generic name Type Value Description 
+n_average_ecg_bia_gsr_max_bit int 5  
+n_average_ppg_max_bit int 7  
+n_average_ecg_bia_gsr_max int 17  
+n_average_ppg_max int 128  
+max_frame_repetition int 2  
+n_ppg_frame int 12  
+frame_ppg_debug_alc int 8  
+5.11.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  16 MHz Clock 
+i_rstn input  Reset 
+i_data_in input [ data_size_bit-1:0] data from adc phases 
+i_reset_average input  reset average 
+i_n_average_ecg_bia_gsr input [n_average_ecg_bia_gsr_max_bit-
+1:0] 
+number of acquisition for 
+ECG/BIA/GSR 
+i_reset_average_ppg input  reset average 
+i_frame_ppg_debug input [ n_ppg_frame_bit-1:0] frame selection for ppg data 
+debug

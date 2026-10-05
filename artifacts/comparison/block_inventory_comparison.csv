@@ -1,0 +1,27 @@
+Project A Block Name,Project A Role,Project B Block Name,Project B Role,Notes
+ADC,Interface/Boundary,uncertain,uncertain,inferred
+ADSP,Processing/Bridging,uncertain,uncertain,inferred
+BIST Controller,Source/Controller,uncertain,uncertain,inferred
+I2C interface,Processing/Bridging,uncertain,uncertain,inferred
+I2C_SPI_AHB,Source/Controller,uncertain,uncertain,inferred
+IRQ logic,Sink/Endpoint,uncertain,uncertain,inferred
+ISPU,Processing/Bridging,uncertain,uncertain,inferred
+ISPU debug,Source/Controller,uncertain,uncertain,inferred
+Main Controller,Processing/Bridging,uncertain,uncertain,inferred
+PMU,Source/Controller,uncertain,uncertain,inferred
+Regmap,Processing/Bridging,uncertain,uncertain,inferred
+SPI interface,Processing/Bridging,uncertain,uncertain,inferred
+Sensor-Hub,Processing/Bridging,uncertain,uncertain,inferred
+Smart FIFO,Processing/Bridging,uncertain,uncertain,inferred
+,,ADCInterface,Processing/Bridging,unmapped_in_a
+,,AnalogFrontEnd,Processing/Bridging,unmapped_in_a
+,,ClockPowerManager,Source/Controller,unmapped_in_a
+,,DigitalControlCore,Processing/Bridging,unmapped_in_a
+,,FIFOController,Processing/Bridging,unmapped_in_a
+,,HostInterface,Source/Controller,unmapped_in_a
+,,InterruptController,Sink/Endpoint,unmapped_in_a
+,,MEMSSensingElement,Source/Controller,unmapped_in_a
+,,RegisterControl,Processing/Bridging,unmapped_in_a
+,,SelfTestCalibration,Source/Controller,unmapped_in_a
+,,SerialI2C,Processing/Bridging,unmapped_in_a
+,,SerialSPI,Processing/Bridging,unmapped_in_a

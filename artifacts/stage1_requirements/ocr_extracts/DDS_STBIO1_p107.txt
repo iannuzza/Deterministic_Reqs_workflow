@@ -1,0 +1,8 @@
+106 
+ 
+3. External I2C sensors are read by sensor hub 
+ 
+ 
+ 
+ 
+4. Data read is sent to FIFO

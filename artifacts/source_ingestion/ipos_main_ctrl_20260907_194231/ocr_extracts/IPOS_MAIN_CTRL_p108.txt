@@ -1,0 +1,61 @@
+107 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 9139] REQUIREMENT : 
+If during the PPG Frame computation, the i_alc_mask (ALC Disabled) is enabled, the final result 
+shall be only the ppg acquisition and the subtraction of the alc data shall not be performed. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_143]  REQUIREMENT : 
+When i_end_of_conversion is set to 1 and i_n_average_ecg_bia_gsr (average ecg,bia and gsr) 
+or i_n_average_ppg (Frame_X_Parameter_1) is equal to their limit values, an average operation 
+shall be done and o_write_enable shall be set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1143] REQUIREMENT : 
+For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, 
+otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and 
+i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with 
+o_gsr_curr_on set to 0 and o_gsr_on set to 1[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2143] REQUIREMENT : 
+When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value 
+between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) 
+and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2, 
+o_adc_data_debug_alc_1 and o_adc_data_debug_ppg_raw. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2144] REQUIREMENT : 
+[Covers: DDS_STBIO1_0124] 
+[Covers: DDS_STBIO1_0142] 
+The data written in FIFO shall have the following tag: 
+ 
+DATA TYPE  BIT: 23 - 20  BIT: 19 - 16  BIT: 15 - 0  
+PPG FRAME 0  0000  DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+DATA 20 BIT 
+PPG FRAME 1  0001  
+PPG FRAME 2  0010  
+PPG FRAME 3  0011  
+PPG FRAME 4  0100  
+PPG FRAME 5  0101  
+PPG FRAME 6  0110  
+PPG FRAME 7  0111  
+PPG FRAME 8  1000  
+PPG FRAME 9  1001  
+PPG FRAME 10  1010  
+PPG FRAME 11  1011  
+TIME SLOT DATA  1111  0000  DATA 16 BIT  
+ECG0_AC  1100  0000  DATA 16 BIT  
+ECG0_DC  1101  0000  DATA 16 BIT  
+ECG1_AC  1100  0001  DATA 16 BIT  
+ECG1_DC  1101  0001  DATA 16 BIT  
+ECG2_AC  1100  0010  DATA 16 BIT  
+ECG2_DC  1101  0010  DATA 16 BIT

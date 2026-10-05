@@ -1,0 +1,200 @@
+Use this prompt exactly:
+
+---
+
+Design and implement a **project-agnostic, end-to-end generation and validation framework** for all generated specification documents, reusable across **IPOS, DRS, SRS, and ARS**.
+
+## Goal
+I need a **single clear, repeatable workflow model** that governs how generated documents are built and validated **from approved input collection all the way to the final `.docx` artifact**.
+
+This framework must apply generally to:
+- **IPOS**
+- **DRS**
+- **SRS**
+- **ARS**
+
+while preserving each document type’s own:
+- authority boundary
+- abstraction level
+- scope
+- section contract
+- role in the overall workflow
+
+The framework must be deterministic, auditable, project-agnostic, and aligned with the **central orchestrator-validator** and the **General Rules**.
+
+## What the framework must define
+For every generated document type, define and implement the full end-to-end pipeline:
+
+1. **authoritative source collection**
+2. **support/discovery source collection**
+3. **source classification and source priority**
+4. **normalized input record construction**
+5. **deterministic composition**
+6. **passive rendering**
+7. **final Markdown and DOCX materialization**
+8. **local validator**
+9. **central orchestrator-validator**
+10. **audit / provenance recording**
+11. **General Rules / workflow guidance alignment**
+12. **tests and execution order**
+
+## Core workflow contract
+The framework must enforce these general principles for all generated documents:
+
+- approved authoritative sources define what may be projected
+- support/discovery sources may assist discovery only, never override authority
+- the normalized input record must preserve enough provenance to explain every retained or suppressed content unit
+- the composer is the **single deterministic semantic projection** from approved inputs within the document-type contract
+- the renderer is **passive** and must not invent, recompose, or drop semantics
+- validation must be **end-to-end**, not just composer consistency
+- the final `.docx` artifact must be validated as part of the contract, not treated as an unverified byproduct
+- the central orchestrator-validator remains the shared downstream source of truth
+- all shared rules and tests must remain project-agnostic
+
+## End-to-end validation contract
+The framework must validate the full chain, including:
+- source collection correctness
+- source classification correctness
+- same-scope / cross-scope boundary correctness
+- normalized input record correctness
+- composer projection correctness
+- Markdown rendering correctness
+- DOCX conversion and post-processing correctness
+- final document content correctness
+- audit/provenance coherence
+- central/shared validation alignment
+
+It must detect:
+- silent loss of approved supported content
+- wrong source promotion
+- provenance misalignment
+- cross-block or cross-scope contamination
+- rendering/post-processing loss
+- internal consistency that still violates the approved-input-to-final-document contract
+
+Do **not** rely only on rerunning the same composer and comparing output.
+
+## Shared vs document-type-specific design
+Define clearly what is shared across all document types and what is document-type-specific.
+
+### Shared/common responsibilities
+Must include at least:
+- source classification model
+- normalized input record pattern
+- audit/provenance model
+- composer/renderer/validator separation
+- end-to-end validation model
+- orchestrator/stage-gate/General Rules alignment
+- deterministic behavior requirements
+
+### Document-type-specific responsibilities
+Must include at least:
+- authority sources and priority
+- abstraction level
+- allowed detail level
+- section contract
+- local vs integration scope
+- special suppression/promotion rules
+
+## File-level implementation plan
+Provide and implement a file-level plan that distinguishes:
+- shared workflow/orchestration files
+- shared validation/audit files
+- document-type-specific generators/composers/validators
+- central orchestrator-validator files
+- General Rules / stage-gate / orchestrator guidance
+- tests
+
+Be concrete about which files are modified and why, while keeping the design project-agnostic.
+
+## Required contracts
+
+### 1. Source and authority contract
+For each document type, define:
+- authoritative sources
+- support/discovery-only sources
+- what may be promoted
+- what must remain suppressed
+- how conflicts are resolved
+
+### 2. Normalized input record contract
+For each document type, define a deterministic normalized input record that:
+- preserves provenance
+- preserves source authority tier
+- preserves ownership/scope context
+- preserves retained and suppressed candidate rationale where relevant
+
+### 3. Composer contract
+For each document type:
+- composer must be the single deterministic semantic projection
+- it may consume only authorized normalized inputs for that document type
+- it must not infer unsupported semantics
+- it must preserve document-type abstraction boundaries
+- it must record enough provenance/audit detail to explain output decisions
+
+### 4. Renderer contract
+Rendering must be passive:
+- no semantic invention
+- no semantic rewriting beyond safe formatting/rendering transformations
+- no fallback text that changes meaning
+- final Markdown and DOCX must remain faithful to the composer output and document contract
+
+### 5. Validator contract
+Validators must not merely re-run the same composer and compare outputs.  
+They must independently verify the generated document against:
+- approved-input contract
+- document-type contract
+- rendering/materialization contract
+- audit/provenance contract
+
+### 6. Central orchestrator-validator contract
+Update and align the central orchestrator-validator so it:
+- enforces the shared end-to-end contract
+- remains the shared downstream source of truth
+- remains project-agnostic
+- checks consistency between local generation/validation and shared downstream expectations
+
+### 7. General Rules contract
+Update and align General Rules / workflow guidance / orchestrator guidance so they:
+- describe this end-to-end framework
+- preserve document-type authority boundaries
+- preserve deterministic generation and validation behavior
+- forbid project-specific names/examples in shared rules
+- require project-agnostic reusable tests and shared logic
+
+## Implementation sequencing
+Implement the framework in a staged way:
+1. define shared workflow model and shared contracts
+2. update shared audit/provenance and validation patterns
+3. instantiate the framework for the currently targeted document path
+4. align central orchestrator-validator
+5. align General Rules / stage-gate / orchestrator guidance
+6. add focused tests
+7. run validation end to end
+
+## Current first application
+Apply the framework first to the currently targeted document path without breaking its current authority model, and structure the code so the same framework can later be instantiated for the other document types without redesign.
+
+## Constraints
+- Keep everything project-agnostic
+- Do not hardcode project-specific block names, capability lists, or example outputs in shared logic, shared rules, or reusable tests
+- Do not use derived/generated prose as authority unless the document-type contract explicitly allows it and the source is approved
+- Do not propose a broad rewrite if a smaller staged refactor achieves the same end-to-end contract
+- Preserve deterministic behavior and traceable provenance
+- Preserve the central orchestrator-validator as the downstream shared source of truth
+
+## Output format
+Respond with exactly these sections:
+
+### A. Reusable end-to-end framework model
+### B. Shared vs document-type-specific contracts
+### C. File-level implementation plan
+### D. Source, normalized-record, composer, renderer, validator, and final-DOCX contract
+### E. Central orchestrator-validator and General Rules alignment
+### F. Test and audit/provenance model
+### G. Staged implementation order
+### H. Validation execution plan
+
+Be concrete, implementation-oriented, and complete.
+
+---

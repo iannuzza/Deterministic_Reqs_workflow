@@ -1,0 +1,21 @@
+85 
+ 
+Port name Directi
+on Type Description 
+i_start_operation_for_ppg input  start operation for ppg 
+i_ppg_start_up_time input [ppg_start_up_decod_bit-
+1:0] ppg start up time 
+i_rx_ch_frame input [rx_ch_frame_n_bit-1:0] rx channel selection 
+i_id_frame input [id_frame_max_bit-1:0] frame identification 
+i_T_tx_led_set input [T_tx_led_set_bit-1:0] tx led set time 
+i_T_tx_led_off input [T_tx_led_off_max_bit-1:0] tx led off time 
+i_reset_ppg_ioff_calib input  reset ppg ioff calibration 
+i_reset_ppg_start_up input  reset ppg start up phase 
+i_n_m0 input [data_size_bit-1:0] nm0 value 
+i_n_m1 input [data_size_bit-1:0] nm1 value 
+i_ppg_ioff_calibration input  ppg ioff calibration mode 
+i_end_average input  end average 
+i_rising_ramp_end input  end of rising ramp 
+i_falling_ramp_end input  end of falling ramp 
+i_half_rising_ramp input  half value of the max digital ramp reached 
+i_end_compensation input  end alc

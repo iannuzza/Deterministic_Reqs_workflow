@@ -1,0 +1,16 @@
+47 
+ 
+DDS_STBIO1_1054 u_stbio1_top.dig_wrapper_LV.u_p
+mu.resetn_main_ctrl 
+u_stbio1_top.dig_wra
+pper_LV.u_main_cont
+roller_top.i_rstn 
+DDS_STBIO1_2054 u_stbio1_top.dig_wrapper_LV.u_p
+mu.resetn_32k_main_ctrl 
+u_stbio1_top.dig_wra
+pper_LV.u_main_cont
+roller_top.i_rstn_sync
+_32 
+ 
+ 
+Table 12: STBIO1 Functional reset Summary table

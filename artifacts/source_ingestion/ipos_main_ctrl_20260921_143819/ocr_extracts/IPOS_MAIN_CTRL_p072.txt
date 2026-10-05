@@ -1,0 +1,18 @@
+71 
+ 
+ 
+Figure 3: ADC PHGen Time Diagram: 
+ 
+Figure 4: ADC Calibration Phase Time Diagram 
+ 
+Figure 5: ADC Calibration Algorithm 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1064] ASSUMPTION :  
+ADC_CHANNEL TABLE: 
+ 
+Channel o_adc_mux_bio_channel o_adc_mux_sel 
+ECG0 AC 1 0 
+ECG0 DC 2 0 
+160 clk cycle

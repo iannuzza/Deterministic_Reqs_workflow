@@ -1,0 +1,75 @@
+52 
+ 
+if_gpio2_out output 
+ 
+A 
+if_gpio2_en output 
+ 
+EN 
+if_gpio2_tud output 
+ 
+TUD 
+if_gpio3_in input 
+ 
+ZI GPIO3 
+if_gpio3_out output 
+ 
+A 
+if_gpio3_en output 
+ 
+EN 
+if_gpio3_tud output 
+ 
+TUD 
+if_gpio4_in input 
+ 
+ZI GPIO4 
+if_gpio4_out output 
+ 
+A 
+if_gpio4_en output 
+ 
+EN 
+if_gpio4_tud output 
+ 
+TUD 
+if_sh_ck_in input 
+ 
+ZI sensor hub ck 
+if_sh_ck_out output 
+ 
+A 
+if_sh_ck_en output 
+ 
+EN 
+if_sh_ck_tud output 
+ 
+TUD 
+if_sh_sda_in input 
+ 
+ZI sensor hub SDA 
+if_sh_sda_out output 
+ 
+A 
+if_sh_sda_en output 
+ 
+EN 
+if_sh_sda_tud output 
+ 
+TUD 
+POR1V2_1V2 input 
+ 
+POR 
+ispu_tck output 
+ 
+jtag clk port ispu in ispu debug mode 
+ispu_tdi output 
+ 
+jtag data in port ispu in ispu debug mode 
+ispu_tdo input 
+ 
+jtag data out port ispu in ispu debug 
+mode 
+ispu_tdo_en input 
+ 
+jtag en port ispu in ispu debug mode

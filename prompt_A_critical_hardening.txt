@@ -1,0 +1,38 @@
+Treat the current workflow state as accepted and now perform a focused critical hardening pass, without broad redesign.
+
+Priority goals:
+1. enforce approved-profile / approved-resolver context in remaining Stage 1 classification paths
+2. isolate remaining legacy compatibility paths from all default and user-facing authoritative flows
+
+Known remaining issues:
+- some older Stage 1 classification code still consumes staged classification fields directly instead of fully enforcing approved profile / approved resolver context
+- compatibility paths still exist:
+  - load_approved_input
+  - freeze_legacy_export
+  - direct callable use of generate_ipos_specs.generate()
+
+Constraints:
+- keep the workflow project-agnostic
+- deterministic
+- no LLM/network/cloud dependency in the authoritative workflow
+- do not broadly redesign schema unless strictly required
+- compatibility paths may remain, but must be clearly non-authoritative
+
+Please implement only the minimum safe changes needed to:
+1. migrate remaining Stage 1 authoritative classification behavior so it uses approved profile / approved resolver context wherever required
+2. prevent default GUI/CLI/user-facing authoritative flows from routing through compatibility paths
+3. add explicit warnings/deprecation handling where compatibility paths are still callable
+4. hide compatibility paths from default flows unless an explicit legacy/migration flag is used
+5. ensure compatibility paths do not write or imply authoritative state
+
+Before editing code, first provide:
+1. target files/modules
+2. intended changes per file
+3. whether any schema change is needed
+4. how backward compatibility will be preserved
+
+At the end, provide:
+1. what was hardened
+2. which legacy paths remain and under what restrictions
+3. whether any Stage 1 direct staged-field usage still remains
+4. any residual risk before the next cleanup pass

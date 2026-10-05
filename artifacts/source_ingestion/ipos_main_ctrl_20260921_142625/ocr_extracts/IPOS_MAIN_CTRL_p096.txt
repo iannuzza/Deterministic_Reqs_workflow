@@ -1,0 +1,32 @@
+95 
+ 
+Port name Direction Type Description 
+i_T_preset input [1:0] Preset time 
+i_n_start_case input [Nmax_bit-1:0] first step value for ramp 
+i_T_step1_to_reg input [delta_bit-1:0] time for first step value for ramp 
+i_reset_ramp input  reset ramp 
+o_rising_ramp_end output  end of rising phase 
+o_falling_ramp_end output  end of falling phase 
+o_Tx_ramp output [ Nmax_bit-1:0] value of the ramp 
+o_half_rising_ramp output  half value of TX ramp 
+ 
+Table 11: Digital Ramp I/O List 
+5.9.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_116]  ASSUMPTION : 
+The Digital Ramp shall read the i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 
+register [3:0]), i_delta_case, i_n_start_case, i_T_delta_to_reg, i_T_preset,  and i_T_step1_to_reg 
+from a register set by the user. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 8116] REQUIREMENT : 
+i_n_start_case shall be lesser or equal than i_Nmax_to_reg. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2117] REQUIREMENT : 
+When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_118]  REQUIREMENT : 
+When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value 
+i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset 
+(DIGITAL_RAMP_CONFIG_PARAM_1 register [5:4]). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_119]  REQUIREMENT :

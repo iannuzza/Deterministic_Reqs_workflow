@@ -1,0 +1,1 @@
+# Stage ARS Crosscheck Report\n\nDate: 2026-10-01\n\nStatus: pass\n\n## Summary\n- Traceability rows: 0\n- Source structural coverage: artifacts/orchestrator/stage_ars_source_structural_coverage_report.md\n- Unmapped to included analog blocks: 0\n\n## Findings\n- None\n

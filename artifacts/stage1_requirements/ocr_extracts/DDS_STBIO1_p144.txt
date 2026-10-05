@@ -1,0 +1,22 @@
+143 
+ 
+14. Soft Reset Procedures 
+ 
+14.1. Main Controller Soft Reset 
+This procedure reset all the Main Controller FSMs and related IPs, reperforming the BOOT 
+Phase without reset the Regmap. 
+ 
+[DDS_STBIO1_1114] Requirement: 
+To perform a SOFT Reset procedure, the user shall perform the following steps: 
+1. If Mode Operation has been set to 1, shall be reset to 0 
+2. Set the Soft Reset Main Controller Bit (SW_RESETN_REG[0]) to 0 for at least 1 
+ms 
+3. Set the Soft Reset Main Controller Bit (SW_RESETN_REG[0]) to 1 
+4. Wait for the DEVICE_STATUS_REGISTER to reach the IDLE Value 
+[END] 
+15. Measurement Cycle Examples 
+ 
+The Device Activity can be summarized by the following Flowchart: 
+ 
+Figure 19: Device Activity Flowchart 
+In the next paragraphs, each phase will be explicated.

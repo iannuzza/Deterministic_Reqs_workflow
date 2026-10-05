@@ -1,0 +1,58 @@
+{
+  "geometry": "944x672+168+0",
+  "layout_scale": 0.8,
+  "verbose_trace": true,
+  "layout_saved_by_user": true,
+  "sashes": {
+    "main_vertical_pane": [
+      305,
+      459
+    ],
+    "top_horizontal_pane": [
+      662
+    ],
+    "work_pane": [
+      228
+    ],
+    "visual_pane": [
+      852
+    ],
+    "chat_vertical_pane": [
+      0
+    ],
+    "sysml_vertical_pane": [
+      0
+    ],
+    "sysml_horizontal_pane": [
+      0
+    ]
+  },
+  "last_user_layout": {
+    "geometry": "1193x759+52+-1099",
+    "layout_scale": 0.8,
+    "sashes": {
+      "main_vertical_pane": [
+        305,
+        459
+      ],
+      "top_horizontal_pane": [
+        662
+      ],
+      "work_pane": [
+        477
+      ],
+      "visual_pane": [
+        852
+      ],
+      "chat_vertical_pane": [
+        0
+      ],
+      "sysml_vertical_pane": [
+        0
+      ],
+      "sysml_horizontal_pane": [
+        0
+      ]
+    }
+  }
+}

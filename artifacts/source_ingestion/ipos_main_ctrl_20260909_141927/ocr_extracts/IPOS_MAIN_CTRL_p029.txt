@@ -1,0 +1,21 @@
+28 
+ 
+5.2. Configuration Register Update 
+5.2.1. I/O List 
+5.2.1.1. Parameters 
+Generic name Type Value Description 
+m_odr_max_bit int 11  
+mode_operation_n_bit int 2  
+time_slot_sel_bit int 3  
+N_clk_max_bit int 7  
+quokka_routine_bit int 3  
+T_tx_startup_bit int 5  
+T_rx_set_bit int 5  
+ppg_rx_channel_bit int 3  
+T_tx_led_set_bit int 5  
+T_tx_led_off_max_bit int 8  
+idac_dc_ppg_frame_bit int 7  
+n_average_ecg_bia_gsr_max_
+bit int 4  
+n_channel_bit int 4  
+n_average_ppg_max_bit int 4

@@ -1,0 +1,27 @@
+104 
+ 
+Port name Direction Type TOP CONNECTION 
+HTRANSS input [1:0]  
+HSIZES input [2:0]  
+HWRITES input   
+HREADYS input   
+HWDATAS input [31:0]  
+HREADYOUTS output   
+HRESPS output   
+HRDATAS output [31:0]  
+ahb_master_on output   
+HRDATAM input [31:0]  
+HREADYM input   
+HRESPM input [1:0]  
+HGRANTM input   
+HSELM output   
+HADDRM output [31:0]  
+HTRANSM output [1:0]  
+HWRITEM output   
+HSIZEM output [2:0]  
+HBURSTM output [2:0]  
+HPROTM output [3:0]  
+HWDATAM output [31:0]  
+HBUSREQM output   
+HLOCKM output   
+Table 26: Sensor Hub I/O List

@@ -1,0 +1,51 @@
+Proceed with Track 3 only: IPOS topic/content coherence.
+
+Important:
+- use the existing central downstream validator-orchestrator as the only shared authority for downstream contract decisions
+- update and use the General Rules accordingly
+- keep one central logic and decision model for all IPOS outputs
+- do not create local ad hoc topic-selection logic or a parallel validator
+- preserve the already implemented shared DOCX layout rules, including page numbers in the footer bottom-right
+
+Use the agreed Track 3 plan:
+- keep deterministic topic vocabulary
+- require topic assignment to be based on functional evidence, not merely provenance or source metadata keywords
+- do not let first-match keyword hits silently assign unrelated topics
+- if multiple topics remain plausible, keep only the strongest deterministic match or omit the entry
+- record selected topic, matched evidence, and rejection reason in the audit
+- enforce output-quality invariants through the existing validator/gate path, not through isolated local logic
+
+Implement only:
+- workflow_routing.py for shared topic eligibility/assignment logic
+- generate_ipos_specs.py for IPOS topic rendering aligned with that shared logic
+- validate_ipos_gate.py only as a stage-local output check aligned with the central contract
+- update the General Rules where needed so IPOS topic coherence follows the same central downstream governance
+
+Must remain unchanged:
+- requirement text in the authoritative requirement section
+- requirement IDs
+- source IDs and provenance
+- snapshot IDs
+- allocation
+- ownership
+- traceability matrices
+- central contract behavior
+- shared DOCX layout behavior
+
+Validation required:
+- verify topic headings such as Power and clock islands contain only matching functional evidence
+- verify unrelated local behavior is not assigned because of metadata/provenance-only matches
+- test ambiguous records and confirm deterministic omission or stable selection
+- require every selected topic entry to have matching functional evidence
+- regenerate Digital and Analog IPOS from the same explicit approved snapshot
+- run the IPOS gates and keep the result coherent with the central downstream validator-orchestrator
+
+Do not work on Track 4 here.
+Do not touch TOC/page-placement, page numbering, or repeated-requirement handling here.
+
+Return:
+- files changed
+- exact central rule applied for IPOS topic coherence
+- General Rules updated
+- checks run
+- result

@@ -1,0 +1,34 @@
+From block,To block,Signal/control,Trigger,Notes,Requirement IDs
+ADC,Main Controller,digital samples,sample cycle,digital pipeline input,
+Main Controller,Smart FIFO,sample stream and FIFO mode control,FIFO enabled,stream/bypass/fifo mode routing,
+Smart FIFO,IRQ logic,watermark/overrun/empty flags,FIFO status change,interrupt condition generation,
+Regmap,Main Controller,configuration writes,register update,sample-rate/filter/mode setup,
+SPI interface,Regmap,SPI register transactions,host SPI access,SPI path to register map,
+I2C interface,Regmap,I2C register transactions,host I2C access,I2C path to register map,
+Regmap,SPI interface,register read response,SPI read,response serialization on SPI,
+Regmap,I2C interface,register read response,I2C read,response serialization on I2C,
+PMU,Main Controller,power/clock status,power mode transition,power-aware digital control,
+BIST Controller,Regmap,self-test/calibration status,self-test command,status publication through registers,
+I2C_SPI_AHB,SPI interface,SPI host transactions,SPI bus session,host boundary ingress,
+I2C_SPI_AHB,I2C interface,I2C host transactions,I2C bus session,host boundary ingress,
+Main Controller,Regmap,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0201
+Main Controller,FIFO,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0202
+Main Controller,ADSP,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0219
+ADSP,Regmap,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0203
+ADSP,SENSOR HUB,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0204
+ADSP,FIFO,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0206
+I2C_SPI_AHB,Regmap,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0207
+I2C_SPI_AHB,SENSOR HUB,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0208
+I2C_SPI_AHB,ISPU,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0209
+I2C_SPI_AHB,FIFO,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0210
+I2C_SPI_AHB,ADSP,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0221
+SENSOR HUB,FIFO,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0211
+ISPU,Regmap,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0212
+ISPU,SENSOR HUB,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0213
+ISPU,FIFO,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0215
+ISPU,ADSP,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0222
+ISPU debug,Regmap,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0216
+ISPU debug,SENSOR HUB,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0217
+ISPU debug,ISPU,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0218
+ISPU debug,FIFO,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0220
+ISPU debug,ADSP,XBAR connection,XBAR matrix cell,XBAR Connection Matrix; source-derived cell,DDS_STBIO1_0223

@@ -1,0 +1,192 @@
+Implement **only** the next **central IPOS descriptive-quality remediation pass**, combining **Track 3 topic/content coherence** and **Track 4 descriptive quality/scope**. Keep it **deterministic, local-only, project-agnostic**, and fully aligned with the existing **central validator-orchestrator** and **General Rules** model. Use the **central orchestrator/validator as the single shared decision authority** for IPOS descriptive policy and **update the General Rules** to reflect the new central descriptive constraints. Use **only** these files unless a strictly necessary central rule reference must be updated:
+- `scripts/workflow_routing.py`
+- `scripts/generate_ipos_specs.py`
+- `scripts/validate_ipos_gate.py`
+- `.github/copilot-instructions.md`
+- `.github/skills/workflow-stage-gate/SKILL.md`
+
+## Hard scope boundary
+Do **not** change:
+- approved snapshot / allocation / ownership / partition logic
+- authoritative requirement text
+- requirement IDs
+- traceability semantics
+- central downstream contract semantics
+- stage structure
+- shared DOCX layout behavior already fixed:
+- page 1 contains the title and metadata; the TOC starts first on page 2, followed by Document Navigation
+  - TOC first on page 2
+  - Document Navigation after TOC
+  - page number bottom-right footer
+
+Do **not** add:
+- a new validator
+- a parallel policy layer
+- per-block ad hoc special cases in emitted documents
+- a new stage/pass
+
+## Goal
+Fix **all IPOS descriptive sections only** so they become:
+- **topic-correct**
+- **block-local**
+- **high-level**
+- **engineering-synthesized**
+- **deterministic**
+- **non-redundant**
+- **free of requirement-dump content**
+
+If clean synthesis is not possible from approved local evidence, **omit the paragraph**. Do **not** fill with boilerplate, weak prose, metadata fragments, or lightly rewritten requirements.
+
+## Central rule to implement
+All IPOS descriptive sections must come only from the **shared central deterministic descriptive assembly path** governed by the **central orchestrator-validator** and must contain only **concise block-local engineering summaries** derived from approved local evidence.
+
+The **central orchestrator-validator must remain the single source of truth** for:
+- descriptive evidence admissibility
+- topic assignment constraints
+- descriptive content scope
+- omission rules for unsupported paragraphs
+- gate enforcement expectations for all IPOS documents
+
+Reflect this rule explicitly in the **General Rules** so the same central policy applies consistently to all current and future IPOS generation/gating paths.
+
+Descriptive sections must **never** contain or be driven by:
+- raw or near-raw requirement wording
+- `[TO: ...]`
+- source IDs like `DDS_...`, `IPOS_...`
+- verification tags like `[Vpriority ...]`
+- address windows
+- register names/addresses
+- parameter/value dumps
+- timer/version/field fragments
+- OCR residue
+- topic labels restated as filler
+- isolated keyword-triggered classification
+- DRS-level/system-level themes unless genuinely supported as local block functionality
+
+Authoritative requirement/traceability sections must remain unchanged and preserve exact approved/source wording.
+
+## Track 3: topic/content coherence
+Strengthen the **shared central topic assignment** so topic selection requires **topic-specific functional evidence**, not isolated token hits such as:
+- `reset`
+- `signal`
+- `memory`
+- `parameter`
+- `dsp` as a substring inside `ADSP`
+- generic metadata fragments
+
+### Mandatory corrections
+1. **ADSP**
+   - Stop assigning generic “control-signal coordination and digital signal processing” from substring/weak keyword hits.
+   - Treat `ADSP` purpose explicitly before generic DSP/signal branches.
+   - Require a real standalone DSP/control-signal condition.
+
+2. **Regmap**
+   - Prioritize register/configuration/status semantics before power/clock/reset semantics.
+   - Do not assign “power, clock, and reset sequencing” from mere reset mentions in register/configuration context.
+   - Power/clock/reset summaries require truly power/clock/reset functional evidence.
+
+3. **Main Controller**
+   - Do not classify requirement-level evidence into power/clock/reset sequencing from isolated `reset`.
+   - Reject evidence like ADC-error-cap reset behavior unless it contains a valid supported functional combination for that topic.
+
+4. **Smart FIFO**
+   - Extend parameter-fragment exclusion to article-prefixed forms such as:
+     - `The parameter ...`
+     - equivalent article/value/address-definition forms
+   - Do not promote such fragments into functional topics.
+
+## Track 4: descriptive quality and abstraction
+Apply these rules to all IPOS descriptive sections, especially:
+- `Functionality`
+- `Supported functions and scope`
+- `Internal structure`
+- `Internal blocks or functions`
+- `General architecture`
+
+### Required behavior
+- Write **high-level block-local engineering summaries**
+- Focus on:
+  - main purpose
+  - local scope
+  - supported local capabilities
+  - real local internal structure/functions only if evidenced
+- Keep implementation/normative detail in requirement sections only
+
+### Mandatory output rules
+1. **Functionality**
+   - Open from the block’s main local purpose in substance like:
+     - “The main purpose of this block is ...”
+   - No bare-verb openings or low-level fragments when a meaningful high-level purpose can be formed.
+
+2. **Supported functions and scope**
+   - Describe **what the block locally enables**, not requirement details.
+   - Do **not** dump:
+     - exact clock-ratio constraints
+     - exact address ranges
+     - exact register names/addresses
+     - preload trigger details
+     - protocol-mode lists copied from requirements
+   - Example: for **I2C-SPI-AHB**, summarize as local protocol bridging / transaction translation / local read-write handling / local buffering support if supported, but do **not** emit the detailed requirement body here.
+
+3. **Internal structure**
+   - Do not emit this section from:
+     - port counts
+     - interface counts
+     - endpoint counts
+     - boundary counts
+     - generic structural filler
+   - Emit only if there is real evidence of internal composition/organization.
+
+4. **Internal blocks or functions**
+   - Emit only when explicit local internal functions are evidenced.
+   - Do not promote parameter statements, register-field fragments, low-level values, or topic leftovers.
+
+5. **General architecture**
+   - Do not emit isolated low-level fragments such as:
+     - `rd_to_max_val`
+     - `ip_version`
+     - timer values
+     - register field/value snippets
+     - OCR residue
+     - broken phrases
+   - If no coherent local architectural summary exists, omit the section.
+
+6. **Block-local scope**
+   - Do not import DRS/system themes such as:
+     - power and clock islands
+     - arbitration and control
+     - shared digital resources
+   - unless clearly supported as real local block functionality.
+
+7. **Omit unsupported content**
+   - If the evidence cannot support a clean, deterministic, high-level, block-local synthesis, omit the paragraph.
+
+## Validation changes
+Keep validation **central and shared** through the existing IPOS gate path and aligned with the **central orchestrator-validator**. Do **not** create a second validator.
+
+Update `scripts/validate_ipos_gate.py` so descriptive sections fail if they contain:
+- `[TO: ...]`
+- `DDS_...` / `IPOS_...`
+- `[Vpriority ...]`
+- exact or near-exact requirement-copy text
+- address/register/value/parameter dump patterns
+- topic-content mismatch from isolated-keyword classification
+- DRS/system-level themes not supported as local functionality
+- weak filler prose with no real functional summary
+
+Validation must use the same shared deterministic descriptive assembly assumptions for **all** IPOS blocks, and the **General Rules** must explicitly state that IPOS descriptive-section policy is governed centrally, not by local renderer heuristics.
+
+## Implementation constraints
+- minimal blast radius
+- central reusable logic
+- no requirement-section rewriting
+- no replacement of authoritative content
+- no snapshot/authority changes
+- no behavior changes outside IPOS descriptive quality logic
+
+## Deliver only
+1. code changes
+2. short note on the central orchestrator-governed rule implemented
+3. focused validation run
+4. General Rules update summary
+5. any descriptive sections intentionally omitted because evidence was insufficient

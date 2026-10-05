@@ -1,0 +1,81 @@
+{
+  "project_name": "STBIO",
+  "selection": {
+    "project_name": "STBIO",
+    "selected_mode": "hybrid",
+    "fallback_mode": "hybrid",
+    "selection_reason": "fallback_to_legacy_hybrid",
+    "label_errors": [],
+    "thresholds": {
+      "max_mean_latency_ms": 100.0,
+      "max_p95_latency_ms": 250.0
+    },
+    "generated_at": "2026-09-04 15:07:58"
+  },
+  "results": [
+    {
+      "mode": "lexical",
+      "case_count": 5,
+      "recall_at_1": 0.8,
+      "recall_at_5": 0.8,
+      "recall_at_10": 0.8,
+      "mrr": 0.8,
+      "mean_latency_ms": 656.39656,
+      "p95_latency_ms": 635.5862000000001,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": false,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "normalized",
+      "case_count": 5,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "mean_latency_ms": 520.6998400000001,
+      "p95_latency_ms": 485.7844,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": true,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "hybrid",
+      "case_count": 5,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "mean_latency_ms": 408.97253999999987,
+      "p95_latency_ms": 420.49240000000054,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": true,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "semantic",
+      "status": "unavailable",
+      "error": "RAG query: FAIL (semantic unavailable: invalid semantic index at C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\rag_DDS_STBIO1\\semantic_index)",
+      "passes_latency": false,
+      "passes_exact_id": false,
+      "passes_benchmark": false
+    },
+    {
+      "mode": "hybrid-semantic",
+      "case_count": 5,
+      "recall_at_1": 1.0,
+      "recall_at_5": 1.0,
+      "recall_at_10": 1.0,
+      "mrr": 1.0,
+      "mean_latency_ms": 477.09115999999983,
+      "p95_latency_ms": 525.7071,
+      "status": "measured",
+      "passes_latency": false,
+      "passes_exact_id": true,
+      "passes_benchmark": false
+    }
+  ]
+}

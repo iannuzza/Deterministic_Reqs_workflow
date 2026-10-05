@@ -1,0 +1,854 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{hyperref}
+\geometry{margin=1in}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{0pt}
+
+\title{Stage 2 SRS Combined Document}
+\author{Alessandro Lucio IANNUZZI}
+\date{2026-10-01}
+
+\begin{document}
+\thispagestyle{empty}
+\null
+\newpage
+\tableofcontents
+\newpage
+
+\section*{Source: artifacts/stage3\_srs/system\_requirements\_specification.md}
+\addcontentsline{toc}{section}{Source: artifacts/stage3\_srs/system\_requirements\_specification.md}
+
+\section{System Requirements Specification \{\#system-requirements-specification\}}
+
+
+\subsection{STBIO \{\#project-name\}}
+
+
+Author: Alessandro Lucio IANNUZZI
+
+<p>\&nbsp;</p>
+
+Date: 2026-10-01
+
+<p>\&nbsp;</p>
+
+Snapshot ID: snap-b2e8101b00dc6909feaed885
+
+<p>\&nbsp;</p>
+
+Downstream contract fingerprint: 5424834735474f3f97ba3357e63e8703bd7f341f5995c19ba9e75bcba49d8157
+
+<p>\&nbsp;</p>
+
+Source specification: C:/Users/iannuzza/LOCAL\_PROJ/Github\_copilot\_proj/STBIO\_AI/specs/DDS\_STBIO1.pdf
+
+<p>\&nbsp;</p>
+
+\subsection{0. Document Navigation \{\#0-document-navigation\}}
+
+
+\subsubsection{0.1 Table of contents \{\#01-table-of-contents\}}
+
+
+\begin{itemize}
+\item [STBIO](\#project-name)
+\item [0. Document Navigation](\#0-document-navigation)
+\item [1. Introduction](\#1-introduction)
+\item [1.1 Purpose](\#11-purpose)
+\item [1.2 Scope](\#12-scope)
+\item [1.3 Intended audience](\#13-intended-audience)
+\item [1.4 References](\#14-references)
+\item [2. Definitions and terminology](\#2-definitions-and-terminology)
+\item [2.1 System terminology](\#21-system-terminology)
+\item [2.2 Analog terminology](\#22-analog-terminology)
+\item [2.3 Digital terminology](\#23-digital-terminology)
+\item [2.4 Measurement and acceptance terms](\#24-measurement-and-acceptance-terms)
+\item [2.5 Category Convention](\#25-category-convention)
+\item [2.5.1 Comment](\#251-comment)
+\item [2.5.2 Definition](\#252-definition)
+\item [2.5.3 Assumption](\#253-assumption)
+\item [2.5.4 Requirement](\#254-requirement)
+\item [3. System Overview](\#3-system-overview)
+\item [3.1 General System Description](\#31-general-system-description)
+\item [3.2 Main System Capabilities](\#32-main-system-capabilities)
+\item [3.3 Main Architectural Domains and Subsystems](\#33-main-architectural-domains-and-subsystems)
+\item [3.4 External Interfaces and System Boundaries](\#34-external-interfaces-and-system-boundaries)
+\item [3.5 Operating Concept](\#35-operating-concept)
+\item [3.6 Power, Clock, and Reset Overview](\#36-power-clock-and-reset-overview)
+\item [3.7 Assumptions, Scope Limits, and Allocation Boundaries](\#37-assumptions-scope-limits-and-allocation-boundaries)
+\item [4. Analog sub-system](\#4-analog-sub-system)
+\item [4.1 Analog block list](\#41-analog-block-list)
+\item [4.2 Analog I/O characteristics](\#42-analog-io-characteristics)
+\item [4.3 Sampling and conversion](\#43-sampling-and-conversion)
+\item [4.4 Analog operating modes](\#44-analog-operating-modes)
+\item [4.5 Analog calibration](\#45-analog-calibration)
+\item [4.6 Analog performance](\#46-analog-performance)
+\item [5. Digital sub-system](\#5-digital-sub-system)
+\item [5.1 Digital block list](\#51-digital-block-list)
+\item [5.2 Control and register requirements](\#52-control-and-register-requirements)
+\item [5.3 Mode control requirements](\#53-mode-control-requirements)
+\item [5.4 Communication requirements](\#54-communication-requirements)
+\item [5.5 Digital timing requirements](\#55-digital-timing-requirements)
+\item [5.6 Digital data-path requirements](\#56-digital-data-path-requirements)
+\item [6. Cross-domain mixed-signal requirements](\#6-cross-domain-mixed-signal-requirements)
+\item [6.1 Analog-digital interactions](\#61-analog-digital-interactions)
+\item [6.2 Transition behavior across domains](\#62-transition-behavior-across-domains)
+\item [6.3 Clock and synchronization across domains](\#63-clock-and-synchronization-across-domains)
+\item [6.4 Power sequencing across domains](\#64-power-sequencing-across-domains)
+\item [7. Validation and qualification requirements](\#7-validation-and-qualification-requirements)
+\item [7.1 Verification scope](\#71-verification-scope)
+\item [7.2 Pass/fail criteria](\#72-passfail-criteria)
+\item [7.3 GR\&R and guard band](\#73-grr-and-guard-band)
+\item [7.4 Validation configurations](\#74-validation-configurations)
+\item [8. Requirement identification and traceability](\#8-requirement-identification-and-traceability)
+\item [8.1 Numbering convention](\#81-numbering-convention)
+\item [8.2 Traceability contract](\#82-traceability-contract)
+\item [8.3 Residual requirement catalog by domain](\#83-residual-requirement-catalog-by-domain)
+\item [9. Project-specific block sections](\#9-project-specific-block-sections)
+\item [10. Missing Inputs](\#10-missing-inputs)
+\item [Assumptions and TBD](\#assumptions-and-tbd)
+\end{itemize}
+
+\subsubsection{0.2 Internal index for paragraphs and pages \{\#02-internal-index-for-paragraphs-and-pages\}}
+
+
+\paragraph{Table 3. Section navigation index \{\#table-3-section-navigation-index\}}
+
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Section & Paragraph anchor & Internal link & Page (rendered PDF) \\
+\hline
+\endfirsthead
+\hline
+Section & Paragraph anchor & Internal link & Page (rendered PDF) \\
+\hline
+\endhead
+0. Document Navigation & 0 & [Jump](\#0-document-navigation) & Auto \\
+\hline
+1. Introduction & 1 & [Jump](\#1-introduction) & Auto \\
+\hline
+1.1 Purpose & 1.1 & [Jump](\#11-purpose) & Auto \\
+\hline
+1.2 Scope & 1.2 & [Jump](\#12-scope) & Auto \\
+\hline
+1.3 Intended audience & 1.3 & [Jump](\#13-intended-audience) & Auto \\
+\hline
+1.4 References & 1.4 & [Jump](\#14-references) & Auto \\
+\hline
+2. Definitions and terminology & 2 & [Jump](\#2-definitions-and-terminology) & Auto \\
+\hline
+2.1 System terminology & 2.1 & [Jump](\#21-system-terminology) & Auto \\
+\hline
+2.2 Analog terminology & 2.2 & [Jump](\#22-analog-terminology) & Auto \\
+\hline
+2.3 Digital terminology & 2.3 & [Jump](\#23-digital-terminology) & Auto \\
+\hline
+2.4 Measurement and acceptance terms & 2.4 & [Jump](\#24-measurement-and-acceptance-terms) & Auto \\
+\hline
+2.5 Category Convention & 2.5 & [Jump](\#25-category-convention) & Auto \\
+\hline
+2.5.1 Comment & 2.5.1 & [Jump](\#251-comment) & Auto \\
+\hline
+2.5.2 Definition & 2.5.2 & [Jump](\#252-definition) & Auto \\
+\hline
+2.5.3 Assumption & 2.5.3 & [Jump](\#253-assumption) & Auto \\
+\hline
+2.5.4 Requirement & 2.5.4 & [Jump](\#254-requirement) & Auto \\
+\hline
+3. System Overview & 3 & [Jump](\#3-system-overview) & Auto \\
+\hline
+3.1 General System Description & 3.1 & [Jump](\#31-general-system-description) & Auto \\
+\hline
+3.2 Main System Capabilities & 3.2 & [Jump](\#32-main-system-capabilities) & Auto \\
+\hline
+3.3 Main Architectural Domains and Subsystems & 3.3 & [Jump](\#33-main-architectural-domains-and-subsystems) & Auto \\
+\hline
+3.4 External Interfaces and System Boundaries & 3.4 & [Jump](\#34-external-interfaces-and-system-boundaries) & Auto \\
+\hline
+3.5 Operating Concept & 3.5 & [Jump](\#35-operating-concept) & Auto \\
+\hline
+3.6 Power, Clock, and Reset Overview & 3.6 & [Jump](\#36-power-clock-and-reset-overview) & Auto \\
+\hline
+3.7 Assumptions, Scope Limits, and Allocation Boundaries & 3.7 & [Jump](\#37-assumptions-scope-limits-and-allocation-boundaries) & Auto \\
+\hline
+4. Analog sub-system & 4 & [Jump](\#4-analog-sub-system) & Auto \\
+\hline
+4.1 Analog block list & 4.1 & [Jump](\#41-analog-block-list) & Auto \\
+\hline
+4.2 Analog I/O characteristics & 4.2 & [Jump](\#42-analog-io-characteristics) & Auto \\
+\hline
+4.3 Sampling and conversion & 4.3 & [Jump](\#43-sampling-and-conversion) & Auto \\
+\hline
+4.4 Analog operating modes & 4.4 & [Jump](\#44-analog-operating-modes) & Auto \\
+\hline
+4.5 Analog calibration & 4.5 & [Jump](\#45-analog-calibration) & Auto \\
+\hline
+4.6 Analog performance & 4.6 & [Jump](\#46-analog-performance) & Auto \\
+\hline
+5. Digital sub-system & 5 & [Jump](\#5-digital-sub-system) & Auto \\
+\hline
+5.1 Digital block list & 5.1 & [Jump](\#51-digital-block-list) & Auto \\
+\hline
+5.2 Control and register requirements & 5.2 & [Jump](\#52-control-and-register-requirements) & Auto \\
+\hline
+5.3 Mode control requirements & 5.3 & [Jump](\#53-mode-control-requirements) & Auto \\
+\hline
+5.4 Communication requirements & 5.4 & [Jump](\#54-communication-requirements) & Auto \\
+\hline
+5.5 Digital timing requirements & 5.5 & [Jump](\#55-digital-timing-requirements) & Auto \\
+\hline
+5.6 Digital data-path requirements & 5.6 & [Jump](\#56-digital-data-path-requirements) & Auto \\
+\hline
+6. Cross-domain mixed-signal requirements & 6 & [Jump](\#6-cross-domain-mixed-signal-requirements) & Auto \\
+\hline
+6.1 Analog-digital interactions & 6.1 & [Jump](\#61-analog-digital-interactions) & Auto \\
+\hline
+6.2 Transition behavior across domains & 6.2 & [Jump](\#62-transition-behavior-across-domains) & Auto \\
+\hline
+6.3 Clock and synchronization across domains & 6.3 & [Jump](\#63-clock-and-synchronization-across-domains) & Auto \\
+\hline
+6.4 Power sequencing across domains & 6.4 & [Jump](\#64-power-sequencing-across-domains) & Auto \\
+\hline
+7. Validation and qualification requirements & 7 & [Jump](\#7-validation-and-qualification-requirements) & Auto \\
+\hline
+7.1 Verification scope & 7.1 & [Jump](\#71-verification-scope) & Auto \\
+\hline
+7.2 Pass/fail criteria & 7.2 & [Jump](\#72-passfail-criteria) & Auto \\
+\hline
+7.3 GR\&R and guard band & 7.3 & [Jump](\#73-grr-and-guard-band) & Auto \\
+\hline
+7.4 Validation configurations & 7.4 & [Jump](\#74-validation-configurations) & Auto \\
+\hline
+8. Requirement identification and traceability & 8 & [Jump](\#8-requirement-identification-and-traceability) & Auto \\
+\hline
+8.1 Numbering convention & 8.1 & [Jump](\#81-numbering-convention) & Auto \\
+\hline
+8.2 Traceability contract & 8.2 & [Jump](\#82-traceability-contract) & Auto \\
+\hline
+8.3 Residual requirement catalog by domain & 8.3 & [Jump](\#83-residual-requirement-catalog-by-domain) & Auto \\
+\hline
+9. Project-specific block sections & 9 & [Jump](\#9-project-specific-block-sections) & Auto \\
+\hline
+10. Missing Inputs & 10 & [Jump](\#10-missing-inputs) & Auto \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\paragraph{Table 4. Block navigation index \{\#table-4-block-navigation-index\}}
+
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Block & Paragraph anchor & Internal link & Requirement IDs \\
+\hline
+\endfirsthead
+\hline
+Block & Paragraph anchor & Internal link & Requirement IDs \\
+\hline
+\endhead
+N/A & N/A & N/A & N/A \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\paragraph{Table 5. Requirement paragraph index by block \{\#table-5-requirement-paragraph-index-by-block\}}
+
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Requirement group & Paragraph anchor & Internal link & Page (rendered PDF) \\
+\hline
+\endfirsthead
+\hline
+Requirement group & Paragraph anchor & Internal link & Page (rendered PDF) \\
+\hline
+\endhead
+N/A & N/A & N/A & N/A \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\subsubsection{0.3 Document control \{\#03-document-control\}}
+
+
+\paragraph{Table 1. Version history \{\#table-1-version-history\}}
+
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Version & Date & Description & Author \\
+\hline
+\endfirsthead
+\hline
+Version & Date & Description & Author \\
+\hline
+\endhead
+1.1 & 2026-10-01 & Snapshot snap-b2e8101b00dc6909feaed885 SRS baseline generated from Stage 1 and Stage 2 artifacts & Alessandro Lucio IANNUZZI \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\paragraph{Table 2. Reference documents \{\#table-2-reference-documents\}}
+
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Doc name & Version & Author \\
+\hline
+\endfirsthead
+\hline
+Doc name & Version & Author \\
+\hline
+\endhead
+artifacts/stage1\_requirements/requirements\_summary.csv & 0.1 & Requirements Extraction Agent \\
+\hline
+artifacts/stage2\_mirco\_arc/micro\_architecture\_report.md & 0.1 & Micro-Architectural Analysis Agent \\
+\hline
+artifacts/stage2\_mirco\_arc/requirement\_to\_block\_traceability.csv & 0.1 & Micro-Architectural Analysis Agent \\
+\hline
+artifacts/stage2\_mirco\_arc/block\_inventory.csv & 0.1 & Micro-Architectural Analysis Agent \\
+\hline
+artifacts/stage2\_mirco\_arc/interface\_catalog.csv & 0.1 & Micro-Architectural Analysis Agent \\
+\hline
+artifacts/stage2\_mirco\_arc/interaction\_matrix.csv & 0.1 & Micro-Architectural Analysis Agent \\
+\hline
+templates/SRS\_gen\_AI\_template\_prompt.md & 0.1 & Project template maintainers \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\paragraph{Table 6. Category convention \{\#table-6-category-convention\}}
+
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Category & Naming rule / prefix & Scope & Notes / example \\
+\hline
+\endfirsthead
+\hline
+Category & Naming rule / prefix & Scope & Notes / example \\
+\hline
+\endhead
+System authored requirement & SRS-REQ-xxx & Project-specific SRS atomic entries & Covers one upstream requirement per row \\
+\hline
+Source system requirement & SYS-RQ-xxx or source\_req\_id & Upstream Stage 1 requirement catalog & Referenced through Covers linkage \\
+\hline
+Source analog requirement & ANA-RQ-xxx or source\_req\_id & Upstream Stage 1 requirement catalog & Referenced through Covers linkage \\
+\hline
+Source digital requirement & DIG-RQ-xxx or source\_req\_id & Upstream Stage 1 requirement catalog & Referenced through Covers linkage \\
+\hline
+Cross-domain requirement & XDN-RQ-xxx or source\_req\_id & Upstream Stage 1 requirement catalog & Referenced through Covers linkage \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\subsubsection{0.4 Table of tables \{\#04-table-of-tables\}}
+
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Table & Title & Link \\
+\hline
+\endfirsthead
+\hline
+Table & Title & Link \\
+\hline
+\endhead
+Table 1 & Section navigation index & [Go to Table 1](\#table-3-section-navigation-index) \\
+\hline
+Table 2 & Block navigation index & [Go to Table 2](\#table-4-block-navigation-index) \\
+\hline
+Table 3 & Requirement paragraph index by block & [Go to Table 3](\#table-5-requirement-paragraph-index-by-block) \\
+\hline
+Table 4 & Version history & [Go to Table 4](\#table-1-version-history) \\
+\hline
+Table 5 & Reference documents & [Go to Table 5](\#table-2-reference-documents) \\
+\hline
+Table 6 & Category convention & [Go to Table 6](\#table-6-category-convention) \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\subsection{1. Introduction \{\#1-introduction\}}
+
+
+\subsubsection{1.1 Purpose \{\#11-purpose\}}
+
+
+\subsubsection{1.2 Scope \{\#12-scope\}}
+
+
+\subsubsection{1.3 Intended audience \{\#13-intended-audience\}}
+
+
+\subsubsection{1.4 References \{\#14-references\}}
+
+
+\subsection{2. Definitions and terminology \{\#2-definitions-and-terminology\}}
+
+
+\subsubsection{2.1 System terminology \{\#21-system-terminology\}}
+
+
+\subsubsection{2.2 Analog terminology \{\#22-analog-terminology\}}
+
+
+\subsubsection{2.3 Digital terminology \{\#23-digital-terminology\}}
+
+
+\subsubsection{2.4 Measurement and acceptance terms \{\#24-measurement-and-acceptance-terms\}}
+
+
+\subsubsection{2.5 Category Convention \{\#25-category-convention\}}
+
+
+<p>\&nbsp;</p>
+
+\paragraph{2.5.1 Comment \{\#251-comment\}}
+
+
+This category denotes that the content of the object text is a general comment. For example, this may be an explanation why the requirement demands certain items when there would also be other possibilities. A comment should not be necessary to understand the related requirements
+
+<p>\&nbsp;</p>
+
+\paragraph{2.5.2 Definition \{\#252-definition\}}
+
+
+This category is used for the definition of terms, wordings, technical expressions etc. It is a documentation of design decisions and general instructions that belong to the document itself, e.g. owner of the document, structure of the document. It is needed to understand a related requirement. It is not linked to any test case.
+
+<p>\&nbsp;</p>
+
+\paragraph{2.5.3 Assumption \{\#253-assumption\}}
+
+
+This category is used for requirements this document provide upstream to another document, indicating what this IP/block/system needs to work properly.
+
+<p>\&nbsp;</p>
+
+\paragraph{2.5.4 Requirement \{\#254-requirement\}}
+
+
+This category denotes a requirement that has to be implemented and verified. Accordingly, it is necessary to establish traces from the different requirement levels to the test cases for this category.
+
+<p>\&nbsp;</p>
+
+\subsection{3. System Overview \{\#3-system-overview\}}
+
+
+\subsubsection{3.1 General System Description \{\#31-general-system-description\}}
+
+
+The system is an analog front end with embedded processing capabilities.
+
+<p>\&nbsp;</p>
+
+\subsubsection{3.2 Main System Capabilities \{\#32-main-system-capabilities\}}
+
+
+The system supports external sensor acquisition through an I2C master protocol, enabling data collection in FIFO and embedded elaboration also on external data domain.
+
+
+<p>\&nbsp;</p>
+
+The ECG signal chain has several complementary features supporting ECG measurement, such as driven reference for common-mode rejection and lead off detection to identify a fallen electrode.
+
+
+<p>\&nbsp;</p>
+
+The system supports body impedance and human breathing measurements with a configurable excitation path and measurement path. BIA channel delivers both the real and the imaginary parts of the body and the breathing impedance.
+
+
+<p>\&nbsp;</p>
+
+This configuration generates each time slot, two averaged ECG data, which are ECG AC and ECG DC, respectively.
+
+
+<p>\&nbsp;</p>
+
+This configuration generates each time slot, two averaged ECG data, which are ECG AC and ECG DC, respectively and four averaged BIA data which are BIA\_AC\_P, BIA\_DC\_P, BIA\_AC\_Q and BIA\_DC\_Q.
+
+
+<p>\&nbsp;</p>
+
+This configuration generates each time slot, a number of PPG DATA according to user configuration.
+
+\subsubsection{3.3 Main Architectural Domains and Subsystems \{\#33-main-architectural-domains-and-subsystems\}}
+
+
+The approved architecture includes a digital processing and control domain.
+
+\subsubsection{3.4 External Interfaces and System Boundaries \{\#34-external-interfaces-and-system-boundaries\}}
+
+
+The approved system boundary includes analog, digital, power interface roles for sensing, communication, control, and supply exchange.
+
+<p>\&nbsp;</p>
+
+Approved system-boundary evidence identifies the following interfaces:
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Interface & Direction & Type & Owner \\
+\hline
+\endfirsthead
+\hline
+Interface & Direction & Type & Owner \\
+\hline
+\endhead
+SENSOR\_ANALOG\_INPUT & input & analog & Sensor-Hub \\
+\hline
+ADC\_DATA & output & digital & ADC \\
+\hline
+FIFO\_DATA & output & digital & Smart FIFO \\
+\hline
+SERIAL\_CLK & input & digital & SPI interface \\
+\hline
+SERIAL\_SELECT & input & digital & SPI interface \\
+\hline
+SERIAL\_DATA\_IN & input & digital & SPI interface \\
+\hline
+SERIAL\_DATA\_OUT & output & digital & SPI interface \\
+\hline
+ALT\_SERIAL\_CLK & input & digital & I2C interface \\
+\hline
+ALT\_SERIAL\_DATA & bidirectional & digital & I2C interface \\
+\hline
+INT1 & output & digital & IRQ logic \\
+\hline
+INT2 & output & digital & IRQ logic \\
+\hline
+VDD & input & power & PMU \\
+\hline
+VDD\_IO & input & power & PMU \\
+\hline
+\end{longtable}
+
+
+<p>\&nbsp;</p>
+
+\subsubsection{3.5 Operating Concept \{\#35-operating-concept\}}
+
+
+The approved operating concept includes the following system modes: Data Storage Mode, Normal Mode.
+
+<p>\&nbsp;</p>
+
+\subsubsection{3.6 Power, Clock, and Reset Overview \{\#36-power-clock-and-reset-overview\}}
+
+
+Approved evidence identifies always-on power domains that remain active for system continuity.
+
+
+<p>\&nbsp;</p>
+
+Approved evidence also identifies switchable power domains that may be powered down when their associated activity is idle.
+
+
+<p>\&nbsp;</p>
+
+Retention behavior is defined for preserving state across an applicable low-power transition.
+
+\subsubsection{3.7 Assumptions, Scope Limits, and Allocation Boundaries \{\#37-assumptions-scope-limits-and-allocation-boundaries\}}
+
+
+The system scope covers approved sensing, processing, data exchange, operating-mode, and power-domain behavior. Detailed implementation remains outside this overview and follows the approved allocation boundaries.
+
+<p>\&nbsp;</p>
+
+\subsection{4. Analog sub-system \{\#4-analog-sub-system\}}
+
+
+\subsubsection{4.1 Analog block list \{\#41-analog-block-list\}}
+
+
+Analog behavior is summarized at system level here. Detailed analog block ownership, requirements, and I/O are maintained in ARS and the corresponding analog IPOS specifications.
+
+<p>\&nbsp;</p>
+
+\subsubsection{4.2 Analog I/O characteristics \{\#42-analog-io-characteristics\}}
+
+
+\subsubsection{4.3 Sampling and conversion \{\#43-sampling-and-conversion\}}
+
+
+\subsubsection{4.4 Analog operating modes \{\#44-analog-operating-modes\}}
+
+
+\subsubsection{4.5 Analog calibration \{\#45-analog-calibration\}}
+
+
+\subsubsection{4.6 Analog performance \{\#46-analog-performance\}}
+
+
+\subsection{5. Digital sub-system \{\#5-digital-sub-system\}}
+
+
+\subsubsection{5.1 Digital block list \{\#51-digital-block-list\}}
+
+
+Digital behavior is summarized at system level here. Detailed digital block ownership, requirements, and I/O are maintained in DRS and the corresponding digital IPOS specifications.
+
+<p>\&nbsp;</p>
+
+Digital blocks in the approved architecture: Sensor-Hub, ADSP, Main Controller, Smart FIFO, Regmap, IRQ logic, PMU, BIST Controller, I2C\_SPI\_AHB, OTP, PAD MUX, ISPU.
+
+\begin{itemize}
+\item Sensor-Hub: Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
+\item ADSP: Execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.
+\item Main Controller: Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.
+\item Smart FIFO: Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
+\item Regmap: Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.
+\item IRQ logic: Aggregate and route FIFO, Sensor Hub, ISPU sample-ready, software, and timer interrupt status to configured GPIO/interrupt outputs.
+\item PMU: Sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.
+\item BIST Controller: Control BIST operating modes and coordinate ADC/OTP test operations and their register-visible results.
+\item I2C\_SPI\_AHB: Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.
+\item OTP: Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines.
+\item PAD MUX: Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.
+\item ISPU: Represent the ISPU digital architecture block and its source/destination responsibilities described by Stage 2 interaction evidence.
+\end{itemize}
+
+\subsubsection{5.2 Control and register requirements \{\#52-control-and-register-requirements\}}
+
+
+\subsubsection{5.3 Mode control requirements \{\#53-mode-control-requirements\}}
+
+
+\subsubsection{5.4 Communication requirements \{\#54-communication-requirements\}}
+
+
+\subsubsection{5.5 Digital timing requirements \{\#55-digital-timing-requirements\}}
+
+
+\subsubsection{5.6 Digital data-path requirements \{\#56-digital-data-path-requirements\}}
+
+
+Digital data-path requirements shall state the conditions for full, empty, overflow, underflow, throughput limits, and backpressure, including the involved blocks and required response.
+
+<p>\&nbsp;</p>
+
+Data-path conditions and involved blocks:
+
+\begin{itemize}
+\item Sensor-Hub: Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
+\item Smart FIFO: Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
+\item IRQ logic: Aggregate and route FIFO, Sensor Hub, ISPU sample-ready, software, and timer interrupt status to configured GPIO/interrupt outputs.
+\item Main Controller -> Smart FIFO via sample stream and FIFO mode control (trigger: FIFO enabled)
+\item Smart FIFO -> IRQ logic via watermark/overrun/empty flags (trigger: FIFO status change)
+\item Main Controller -> FIFO via XBAR connection (trigger: XBAR matrix cell)
+\item ADSP -> FIFO via XBAR connection (trigger: XBAR matrix cell)
+\item I2C\_SPI\_AHB -> FIFO via XBAR connection (trigger: XBAR matrix cell)
+\item Overflow: when a write arrives while storage is full, the producing and buffering blocks shall define whether the write is blocked, flagged, or otherwise handled without silent data loss.
+\item Underflow: when a read is requested while storage is empty, the consuming and buffering blocks shall define the returned status/data and recovery behavior.
+\item Throughput and backpressure: when the offered data rate exceeds the available transfer capacity, the producer, buffer, and consumer shall define flow control and recovery behavior.
+\end{itemize}
+
+\subsection{6. Cross-domain mixed-signal requirements \{\#6-cross-domain-mixed-signal-requirements\}}
+
+
+\subsubsection{6.1 Analog-digital interactions \{\#61-analog-digital-interactions\}}
+
+
+Cross-domain orchestration shall be implemented through interaction paths:
+
+\begin{itemize}
+\item ADC -> Main Controller via digital samples (trigger: sample cycle)
+\item Main Controller -> Smart FIFO via sample stream and FIFO mode control (trigger: FIFO enabled)
+\item Smart FIFO -> IRQ logic via watermark/overrun/empty flags (trigger: FIFO status change)
+\item Regmap -> Main Controller via configuration writes (trigger: register update)
+\item SPI interface -> Regmap via SPI register transactions (trigger: host SPI access)
+\item I2C interface -> Regmap via I2C register transactions (trigger: host I2C access)
+\item Regmap -> SPI interface via register read response (trigger: SPI read)
+\item Regmap -> I2C interface via register read response (trigger: I2C read)
+\end{itemize}
+
+\subsubsection{6.2 Transition behavior across domains \{\#62-transition-behavior-across-domains\}}
+
+
+\subsubsection{6.3 Clock and synchronization across domains \{\#63-clock-and-synchronization-across-domains\}}
+
+
+\subsubsection{6.4 Power sequencing across domains \{\#64-power-sequencing-across-domains\}}
+
+
+\paragraph{Power-domain architecture \{\#power-domain-architecture\}}
+
+
+\begin{itemize}
+\item Domain: PD\_TOP1V2
+\item Included blocks: ADSP,  multi\_channel\_fifo, i2c\_spi\_slave, main\_controller\_top, senshub\_mst\_i2c, pad\_mux, pmu, stbio1\_regmap, scan\_out\_mux, xbar\_afe.
+\item Domain type: Always-On.
+\item Control mode: HW.
+\item Notes: Always active. -.
+\item Functions: Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub acquisition, FIFO read and write data, Elaboration Mode with ADSP only). -.
+\item Characteristics: Never powered down. -.
+\item Domain: PD\_STREDL
+\item Included blocks: STREDL.
+\item Domain type: Switchable.
+\item Control mode: SW.
+\item Notes: Can be powered down in idle. -.
+\item Functions: Powers the STREDL core and associated cache. -.
+\item Characteristics: Can be powered down when STREDL is not in use. -.
+\item Domain: PD\_TOP3V3
+\item Included blocks: H9A\_MEM\_OTP\_ PUMP\_85AL05\_2.
+\item Domain type: Always-On.
+\item Voltage: 3A.
+\item Control mode: HW.
+\item Notes: Always active. -.
+\item Functions: power supply to the OTP memory block. -.
+\item Characteristics: Never powered down. It provides 4.7V of power supply to the OTP memory block during programming (write) operations -.
+\item Domain: PD\_TOPIO
+\item Included blocks: level\_shifter\_sel.
+\item Domain type: Always-On.
+\item Control mode: HW.
+\item Functions: Powers communication PAD -.
+\item Characteristics: Never powered down. -.
+\end{itemize}
+
+\subsection{7. Validation and qualification requirements \{\#7-validation-and-qualification-requirements\}}
+
+
+\subsubsection{7.1 Verification scope \{\#71-verification-scope\}}
+
+
+\subsubsection{7.2 Pass/fail criteria \{\#72-passfail-criteria\}}
+
+
+\subsubsection{7.3 GR\&R and guard band \{\#73-grr-and-guard-band\}}
+
+
+\subsubsection{7.4 Validation configurations \{\#74-validation-configurations\}}
+
+
+\subsection{8. Requirement identification and traceability \{\#8-requirement-identification-and-traceability\}}
+
+
+\subsubsection{8.1 Numbering convention \{\#81-numbering-convention\}}
+
+
+\subsubsection{8.2 Traceability contract \{\#82-traceability-contract\}}
+
+
+\subsubsection{8.3 Residual requirement catalog by domain \{\#83-residual-requirement-catalog-by-domain\}}
+
+
+\paragraph{System requirements \{\#system-requirements\}}
+
+
+\begin{itemize}
+\item No residual unmapped requirements for this domain (mapped items are captured in project-specific sub-block requirement paragraphs).
+\end{itemize}
+
+\paragraph{Analog requirements \{\#analog-requirements\}}
+
+
+\begin{itemize}
+\item No residual unmapped requirements for this domain (mapped items are captured in project-specific sub-block requirement paragraphs).
+\end{itemize}
+
+\paragraph{Digital requirements \{\#digital-requirements\}}
+
+
+\begin{itemize}
+\item No residual unmapped requirements for this domain (mapped items are captured in project-specific sub-block requirement paragraphs).
+\end{itemize}
+
+\paragraph{Cross-domain requirements \{\#cross-domain-requirements\}}
+
+
+\begin{itemize}
+\item No residual unmapped requirements for this domain (mapped items are captured in project-specific sub-block requirement paragraphs).
+\end{itemize}
+
+\paragraph{Use case, user specific \{\#use-case-user-specific\}}
+
+
+\begin{itemize}
+\item None
+\end{itemize}
+
+\subsection{9. Project-specific block sections \{\#9-project-specific-block-sections\}}
+
+
+This section summarizes system-level functions and digital/analog interactions. Block-specific requirements, source I/O tables, ports, pins, clocks, and resets are owned by DRS or ARS and the corresponding IPOS specifications.
+
+<p>\&nbsp;</p>
+
+\subsection{Assumptions and TBD \{\#assumptions-and-tbd\}}
+
+
+\begin{itemize}
+\item ASSUME-001: Verification environments include controllable stimulus for all listed operating modes.
+\item TBD-001: Unassigned requirements in traceability matrix need architectural owner review.
+\end{itemize}
+
+\subsection{10. Missing Inputs \{\#10-missing-inputs\}}
+
+
+\begin{itemize}
+\item None
+\end{itemize}
+
+
+\section*{Source: artifacts/stage2\_mirco\_arc/micro\_architecture\_block\_diagram.md}
+\addcontentsline{toc}{section}{Source: artifacts/stage2\_mirco\_arc/micro\_architecture\_block\_diagram.md}
+
+\section{Micro-Architecture Block Diagram}
+
+
+This diagram uses the current project-specific block names from `block\_inventory.csv` and the connections from `interaction\_matrix.csv`.
+
+\begin{verbatim}
+flowchart LR
+    subgraph Conversion["Conversion Path"]
+        ADC["ADC"]
+    end
+    subgraph Digital["Digital Engine"]
+        MC["Main Controller"]
+        FIFO["Smart FIFO"]
+        IRQ["IRQ logic"]
+        REG["Regmap"]
+        PMU["PMU"]
+        BIST["BIST Controller"]
+    end
+    subgraph Host["Host Access"]
+        HOST["I2C_SPI_AHB"]
+        SPI["SPI interface"]
+        I2C["I2C interface"]
+    end
+    ADC -->|digital samples| MC
+    MC -->|sample stream and FIFO mode control| FIFO
+    FIFO -->|watermark/overrun/empty flags| IRQ
+    REG -->|configuration writes| MC
+    SPI -->|SPI register transactions| REG
+    I2C -->|I2C register transactions| REG
+    REG -->|register read response| SPI
+    REG -->|register read response| I2C
+    PMU -->|power/clock status| MC
+    BIST -->|self-test/calibration status| REG
+    HOST -->|SPI host transactions| SPI
+    HOST -->|I2C host transactions| I2C
+\end{verbatim}
+
+
+
+\end{document}

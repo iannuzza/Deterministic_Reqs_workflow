@@ -1,0 +1,7 @@
+82 
+ 
+ 
+Figure 12: PPG FSM State Diagram 
+ 
+ 
+Figure 13: PPG Time Diagram

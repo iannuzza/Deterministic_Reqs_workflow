@@ -1,0 +1,20 @@
+31 
+ 
+Port name Direction Type Description 
+i_imp_en input   
+i_imp_curinj_en input   
+i_ppg_quokka_elab_sel input   
+i_idac_dc_ppg_frame input [n_max_frame-1:0][idac_dc_ppg_frame_bit-
+1:0]  
+i_check_update input   
+i_reset_su input   
+i_cfg_enable input   
+i_Nmax_to_reg input [Nmax_bit-1:0]  
+i_time_slot_selection input [time_slot_sel_bit-1:0]  
+i_ppg_start_up_time input [ppg_start_up_decod_bit-1:0]  
+i_first_cfg input   
+i_gain_max input [gain_max_bit-1:0]  
+i_n_ppg_frame input [ppg_frame_bit-1:0]  
+i_rx_ch_frame input [n_max_frame-1:0][ppg_rx_channel_bit-1:0]  
+i_T_tx_led_set input [n_max_frame-1:0][T_tx_led_set_bit-1:0]  
+i_T_tx_led_off input [n_max_frame-1:0] [T_tx_led_off_max_bit-1:0]

@@ -1,0 +1,35 @@
+10 
+ 
+Port name Directi
+on Type Description 
+i_const_value_ioff input [data_in_size_bit_top-1:0] 
+constant value from 
+regmap used for 
+ppg ioff calibraton 
+i_rx_ch_frame input [n_max_frame-1:0] ppg rx channel 
+frame from regamp 
+i_T_tx_led_set input [n_max_frame-1:0] tx led set time from 
+regmap 
+i_T_tx_led_off input [n_max_frame-1:0] tx led off time from 
+regmap 
+i_curr_sel_tx_frame_x input [n_max_frame-1:0] current injection 
+i_tx1_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_tx2_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_tx3_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_tx4_outlab_sel_frame_x input [n_max_frame-1:0] 
+led output selected 
+from regmap for 
+each frame 
+i_idac_dc_ppg_frame input [n_max_frame-1:0] 
+idac value for each 
+frame selected from 
+regmap

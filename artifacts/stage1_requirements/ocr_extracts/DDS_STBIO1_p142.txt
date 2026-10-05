@@ -1,0 +1,49 @@
+141 
+ 
+0 Read fifo flushed 
+since not empty 
+before read operation 
+ERR_AHB 0x4F 0x00 RC 7:5 Unused 
+4 Time out reached 
+from single write for 
+BYTE_NR to following 
+read 
+3 Unused 
+2 AHB error on read 
+1 AHB error on write 
+0 Unused 
+SAM_ADDRESS_BYTE
+0 
+0x50 0x00 RW 7:0 First (LSB) byte of the 
+AHB address 
+SAM_ADDRESS_BYTE
+1 
+0x51 0x00 RW 7:0 Second byte of the 
+AHB address 
+SAM_ADDRESS_BYTE
+2 
+0x52 0x00 RW 7:0 Third byte of the AHB 
+address 
+SAM_ADDRESS_BYTE
+3 
+0x53 0x00 RW 7:0 Fourth (MSB) byte of 
+the AHB address 
+CTRL_REG_0 0x57 0x00 RW 7:1 Unused 
+0 Increment address 
+flag. If ‘1’ the AHB 
+address is 
+incremented after 
+each access. If ‘0’ the 
+address is not 
+incremented (fifo 
+access) 
+CTRL_REG_1 0x58 0x00 RW 7:1 Unused 
+0 I2C disable. If ‘1’ the 
+i2c slave is switched 
+off. Every request 
+from master gets all 
+‘0’ 
+CTRL_REG_2 0x59 0x00 RW 7:1 Unused 
+0 AHB access. If ‘1’ the 
+access is by word, by 
+byte otherwise

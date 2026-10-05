@@ -1,0 +1,39 @@
+80 
+ 
+5.7. GSR 
+5.7.1. IP Description 
+This is not an hardware block, but just a description of the GSR signal Behavior. 
+5.7.2. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_088]  REQUIREMENT : 
+The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass 
+between two GSR acquisitions following this formula: 
+GSRdata = time_slot
+2 ∗ m_gsr 
+ 
+.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_089]  REQUIREMENT : 
+If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot 
+after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set 
+to 0) shall be performed. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_090]  REQUIREMENT : 
+The gsr_on shall set high at least 300us before the start of the sampling. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_092]  REQUIREMENT : 
+If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot 
+where the GSR_SNS signal is acquired and shall set low at end of the same time slot. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_093]  REQUIREMENT : 
+If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set 
+to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then 
+mediated to get one single value for each of them, and then the final result shall be the 
+subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no 
+acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of 
+GSR_SNS. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_094]  REQUIREMENT : 
+When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h 
+and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE 
+State and shall go back in Operative State only when the measurement shall be run or, in case of 
+cds disabled, when the o_gsr_curr shall change its polarity. [END]

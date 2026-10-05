@@ -1,0 +1,10 @@
+105 
+ 
+[DDS_STBIO1_XXXX] Description 
+Sensor hub related data flow is composed by the following phases :  
+ 
+1. Initial configuration of STBIO1 registers through I2C/SPI interface 
+ 
+ 
+ 
+2. I2C master trigger generation through I2C/SPI interface

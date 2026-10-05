@@ -1,0 +1,48 @@
+11 
+ 
+5. STBIO1 toplevel overview 
+Aim of this document is to explain main features of the ASIC STBIO1, electronic interface of 
+ECG, Bio-impedance, EDA and PPG (Photoplethysmography) embedded in a single die.  
+ 
+STBIO1 is an Analog Front End Device with embedded process capabilities. 
+STBIO1 collects and processes different types of Vital Signals: 
+• ECG 
+• PPG 
+• BIA and GSR 
+The optical channel (PPG) is designed as an optical transceiver, stimulating up to eight LEDs 
+and measuring the return signal on up to six separate cent inputs. The signal chain rejects signal 
+offsets and corruption from asynchronous modulated interference, typically from ambient light, 
+eliminating the need for optical filters or externally controlled dc cancellation circuitry. 
+The ECG signal acquisition is designed to support low noise, diagnostic level measurement in 
+the presence of a variety of interferers. The ECG signal chain has several complementary 
+features supporting ECG measurement, such as driven reference for common-mode rejection 
+and lead off detection to identify a fallen electrode. 
+The BIA signal chain is designed for body impedance and human breathing measurements with 
+a configurable excitation path and measurement path. BIA channel delivers both the real and the 
+imaginary parts of the body and the breathing impedance. 
+Finally, the last Electro-Dermal Activity (EDA), also called Galvanic Skin Response (GSR) refers 
+to changes in sweat gland activity that are reflective of the intensity of our emotional state, 
+otherwise known as emotional arousal. 
+STBIO1 is optimized ultra-low-power hardware circuitry for real-time execution of the algorithms 
+is a state-of-the-art feature for any personal electronics, from wearable accessories to high-end 
+applications. 
+The STBIO1 features an advanced digital engine, composed of multiple IPs able to reduce 
+external host processing workload, reducing bus congestion, providing meta-data useful for final 
+application, both in time and frequency domain.  
+The main IPs actors in digital domain are:  
+• ADSP  
+• Sensor-Hub 
+• ISPU 32-bit processor  
+• Smart FIFO data collector 
+ 
+ADSP is an embedded IP able to elaborate ultra-low-power custom DSP functions. The main 
+purpose of ADSP is to reduce the computation workload on both ISPU and host processor, while 
+saving power through the optimization of both hardware and algorithm. 
+ 
+Sensor hub IP can read external sensors by means of an I2C master protocol, enabling data 
+collection in FIFO and embedded elaboration also on external data domain. The data collected 
+by sensor hub is accessible from the Advanced DSP and ISPU, for sensor fusion algorithm 
+elaboration.  
+ 
+The advanced ISPU (32bit proprietary core) is an ultra-low-power, high-performance 
+programmable core which can execute signal processing and AI algorithms in the edge. The

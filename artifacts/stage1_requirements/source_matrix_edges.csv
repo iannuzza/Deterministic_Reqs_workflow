@@ -1,0 +1,22 @@
+source_req_id,from_block,to_block,source_page,source_table
+DDS_STBIO1_0201,Main Controller,Regmap,34,XBAR Connection Matrix
+DDS_STBIO1_0202,Main Controller,FIFO,34,XBAR Connection Matrix
+DDS_STBIO1_0219,Main Controller,ADSP,34,XBAR Connection Matrix
+DDS_STBIO1_0203,ADSP,Regmap,34,XBAR Connection Matrix
+DDS_STBIO1_0204,ADSP,SENSOR HUB,34,XBAR Connection Matrix
+DDS_STBIO1_0206,ADSP,FIFO,34,XBAR Connection Matrix
+DDS_STBIO1_0207,I2C_SPI_AHB,Regmap,34,XBAR Connection Matrix
+DDS_STBIO1_0208,I2C_SPI_AHB,SENSOR HUB,34,XBAR Connection Matrix
+DDS_STBIO1_0209,I2C_SPI_AHB,ISPU,34,XBAR Connection Matrix
+DDS_STBIO1_0210,I2C_SPI_AHB,FIFO,34,XBAR Connection Matrix
+DDS_STBIO1_0221,I2C_SPI_AHB,ADSP,34,XBAR Connection Matrix
+DDS_STBIO1_0211,SENSOR HUB,FIFO,34,XBAR Connection Matrix
+DDS_STBIO1_0212,ISPU,Regmap,34,XBAR Connection Matrix
+DDS_STBIO1_0213,ISPU,SENSOR HUB,34,XBAR Connection Matrix
+DDS_STBIO1_0215,ISPU,FIFO,34,XBAR Connection Matrix
+DDS_STBIO1_0222,ISPU,ADSP,34,XBAR Connection Matrix
+DDS_STBIO1_0216,ISPU debug,Regmap,34,XBAR Connection Matrix
+DDS_STBIO1_0217,ISPU debug,SENSOR HUB,34,XBAR Connection Matrix
+DDS_STBIO1_0218,ISPU debug,ISPU,34,XBAR Connection Matrix
+DDS_STBIO1_0220,ISPU debug,FIFO,34,XBAR Connection Matrix
+DDS_STBIO1_0223,ISPU debug,ADSP,34,XBAR Connection Matrix

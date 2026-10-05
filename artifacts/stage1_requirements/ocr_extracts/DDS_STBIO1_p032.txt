@@ -1,0 +1,42 @@
+31 
+ 
+control modes, and interactions between the various functional blocks.
+ 
+10.2. Definitions 
+ 
+• Power Domain (PD):  A set of logic blocks sharing the same power 
+supply, which can be powered on/off independently. 
+• Always-On Domain (AON): Domain that is always powered, even in 
+low-power modes. 
+• Retention Domain: Domain that retains register state even when the 
+main logic is powered down. 
+• Switchable Domain: Domain that can be completely powered off to 
+save energy. 
+10.3. Power Domain Architecture 
+Domain 
+Name 
+Included Block(s) Domain 
+Type 
+Voltage [V] Control 
+Mode 
+Notes 
+PD_TOP1V2  ADSP, ca_fifo_bist_c, 
+ca_qk_bist_c, 
+ca_qk_rom_bist, 
+multi_channel_fifo, 
+i2c_spi_slave, 
+main_controller_top, 
+senshub_mst_i2c, 
+pad_mux, pmu, 
+stbio1_regmap, 
+scan_out_mux, 
+ta_stbio1_bist_ctlr, 
+xbar_afe            
+Always-On 1.2 HW Always active 
+PD_STREDL STREDL Switchable 1.2 SW Can be 
+powered 
+down in idle 
+PD_TOP3V3 H9A_MEM_OTP_ 
+PUMP_85AL05_2 3A 
+Always-On 2.7÷4.7V HW Always active 
+PD_TOPIO level_shifter_sel Always-On 1.8V÷3.6V HW Always active

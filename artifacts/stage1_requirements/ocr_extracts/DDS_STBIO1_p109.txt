@@ -1,0 +1,51 @@
+108 
+ 
+13.2.3.1. SensorHub Peculiar Requirements 
+ 
+[DDS_STBIO1_9000] Description 
+Sensor hub IP is an IP used to read up-to 4 external I2C devices.  
+Sensor hub IP is compliant with FM+ I2C standard. 
+Both read and write operation are possible: 
+-   Write:  
+o 1 byte on one I2C target 
+- Read:  
+o up-to 12byte on each I2C target 
+o up-to 4 I2C target 
+ 
+[End] 
+ 
+[DDS_STBIO1_9317] Requirement 
+If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. 
+[Vpriority High] [TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9011] Requirement 
+Input scl_master_in of sensor hub shall be connected to input buffer from sensor hub’s SCL 
+PAD. 
+[Vpriority High] [TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9012] Requirement 
+Input sda_master_in of sensor hub shall be connected to input buffer from sensor hub’s SDA 
+PAD. 
+[Vpriority High] [TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9013] Requirement 
+Output scl_master_out of sensor hub shall be connected to enable of output buffer of sensor 
+hub’s SCL PAD  in case it is a bi-directional PAD). 
+[Vpriority High] [TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9014] Requirement 
+Output sda_master_out of sensor hub shall be connected to enable of output buffer of sensor 
+hub’s SDA PAD. 
+[Vpriority High] [TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9017] Requirement 
+The output port sleep_master shall be set to 1 when an I2C operation is not on-going. 
+[Vpriority High] [TO: IPOS_Senshub_MB_i2c]  
+[End] 
+ 
+[DDS_STBIO1_9004] Requirement

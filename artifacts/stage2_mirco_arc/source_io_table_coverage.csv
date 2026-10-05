@@ -1,0 +1,12 @@
+Table title,Owner,Ownership status,First source page,Extracted port rows
+ADSP I/O List,ADSP,approved,86,44
+Digital I/O List,Digital Subsystem,approved,19,224
+FIFO Controller I/O List,Smart FIFO,approved,112,20
+I/O List,STBIOSystem,approved,16,49
+I2C/SPI AHB I/O List,I2C_SPI_AHB,approved,99,39
+ISPU I/O List,ISPU,approved,116,86
+Main Controller I/O List,Main Controller,approved,74,224
+OTP I/O List,OTP,approved,88,18
+PAD MUX I/O List,PAD MUX,approved,49,178
+PMU I/O List,PMU,approved,37,102
+Sensor Hub I/O List,Sensor-Hub,approved,104,44

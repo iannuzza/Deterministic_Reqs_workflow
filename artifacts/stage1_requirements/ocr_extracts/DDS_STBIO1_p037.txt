@@ -1,0 +1,38 @@
+36 
+ 
+13. Modules 
+Instantiations 
+• u_pmu: pmu 
+• u_pad_mux: pad_mux 
+• u_regmap_otp: stbio1_regmap 
+• u_masterblaze_ahb: senshub_mst_i2c 
+• u_xbar_afe: xbar_afe: interconnect 
+• u_ADSP: ADSP 
+• u_fifo: Fifo Controller 
+• u_ispu: ispu 
+• u_i2c_spi_slave: i2c_spi_slave 
+• u_ca_fifo_bist_c: FIFO RAM (Hard Macro) 
+• u_ca_qk_bist_c: ADSP RAM (Hard Macro) 
+• u_ca_qk_rom_bist: ADSP ROM (Hard Macro) 
+• u_psw_ctrl: ISPU Power Island 
+• u_ta_afe_bist_crtl: STBIO1 Bist Controller (Hard Macro) 
+• u_otp: otp (Hard Macro) 
+• u_main_controller_top: main_controller_top 
+ 
+13.1.1. PMU  
+13.1.1.1. PMU TOP Description 
+ 
+PMU oversees the Device Start-Up phase, the clock generation to the Digital and Analog Domain 
+and Reset Sync to the different Clock Domain.  
+13.1.1.2. PMU TOP I/O List 
+Port name Direction Type Description 
+clk_16m input wire Clock 16 MHz from analog ring oscillators 
+clk_64k input wire Clock 64kHz from analog ring oscillators 
+POR1V2_1V2 input wire POR Signal 
+START_CLK_16M input wire Clock ready for 16MHz 
+PDClockF input wire Power Down for 16MHz Ring Oscillator 
+from main controller 
+i_bio_divider input wire Enable 32kHz geneartion from 16MHz when 
+a Bio-Channel is activated 
+EN_LDO input wire enable LDO from main controller 
+PD_CLK_REG input wire power down 16MHz from Regmap

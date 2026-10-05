@@ -1,0 +1,335 @@
+{
+  "finding_count": 47,
+  "findings": [
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 65,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/convert_srs_to_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 120,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/convert_srs_to_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 27,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/crosscheck_sysml_connections.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 24,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/extract_requirements_ocr.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 27,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 329,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 366,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 370,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 452,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 454,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 458,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 506,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 509,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 513,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 514,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 533,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 538,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 604,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 39,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/generate_stage0_ontology_outputs.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 433,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/generate_stage0_ontology_outputs.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 445,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_stage1_requirements.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 446,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_stage1_requirements.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 450,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_stage1_requirements.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 453,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_stage1_requirements.py",
+      "severity": "important"
+    },
+    {
+      "code": "mutable_artifact_read",
+      "line": 634,
+      "message": "Authoritative-looking module reads a mutable artifact directly; verify approved resolver boundary.",
+      "path": "scripts/generate_stage1_requirements.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 2974,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_stage1_requirements.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 232,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/generate_stage2_specs.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 233,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/generate_stage2_specs.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 234,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/generate_stage2_specs.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 235,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/generate_stage2_specs.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 361,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_workflow_ppt_template_v4.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 129,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/review_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "mutable_artifact_read",
+      "line": 1316,
+      "message": "Authoritative-looking module reads a mutable artifact directly; verify approved resolver boundary.",
+      "path": "scripts/run_stage2_micro_arch_and_crosscheck.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 516,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 528,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 530,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 533,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 1123,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 1396,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 1431,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 1504,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 1505,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/validate_downstream_coherence.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 16,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/validate_stage2_mapping.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 27,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/validate_stage2_mapping.py",
+      "severity": "important"
+    },
+    {
+      "code": "mutable_artifact_read",
+      "line": 54,
+      "message": "Authoritative-looking module reads a mutable artifact directly; verify approved resolver boundary.",
+      "path": "scripts/validate_stage2_mapping.py",
+      "severity": "important"
+    },
+    {
+      "code": "mutable_artifact_read",
+      "line": 54,
+      "message": "Authoritative-looking module reads a mutable artifact directly; verify approved resolver boundary.",
+      "path": "scripts/validate_stage2_profile.py",
+      "severity": "important"
+    },
+    {
+      "code": "mutable_artifact_read",
+      "line": 85,
+      "message": "Authoritative-looking module reads a mutable artifact directly; verify approved resolver boundary.",
+      "path": "scripts/validate_stage2_profile.py",
+      "severity": "important"
+    }
+  ],
+  "repo_root": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI"
+}

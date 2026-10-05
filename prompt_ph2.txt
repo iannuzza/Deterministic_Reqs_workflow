@@ -1,0 +1,46 @@
+Phase 2 only.
+
+Fix only the current BLOCK_BEFORE_STAGE2B_FREEZE findings and nothing else.
+
+(Phase 2 = the first state-changing pre-freeze remediation phase after Phase 1 PASS and before S2B freeze. It restores freeze readiness only. No snapshot creation, no downstream generation, no unrelated changes.)
+
+Current blockers to remediate only:
+- hierarchical_placement: 42
+- stale_state approved-snapshot mismatches: 2
+
+Rules:
+- no S2B freeze
+- no snapshot creation
+- no downstream generation
+- no Stage 3-7
+- no broad redesign
+- no requirement text rewrites
+- no unrelated mapping/profile changes
+- no source-type or approved_block ownership-proxy inference
+- preserve approved authoritative placement metadata only:
+  allocation_class
+  owning_target
+  lineage_mode
+  source_origin_req_ids
+  hierarchy_parent_req_ids
+  owning_domain
+
+Required actions:
+1. eliminate freeze-readiness dependence on approved_block as ownership/placement proxy
+2. use only approved authoritative placement metadata where it exists
+3. if authority is missing or contradictory, stop at the approval boundary and report it instead of inventing or inferring
+4. quarantine/invalidate/supersede the 2 stale approved snapshots so they are no longer considered current
+5. add minimal hardening so the same freeze blockers do not silently recur
+6. rerun only:
+   - scripts/validate_source_to_stage2b_coherence.py
+   - the pre-freeze coherence gate
+7. stop
+
+Return only:
+1. files modified
+2. exact fixes applied
+3. approval boundary encountered or not
+4. Phase 1 rerun summary
+5. pre-freeze gate rerun summary
+6. gate decision
+7. exact next recommended step

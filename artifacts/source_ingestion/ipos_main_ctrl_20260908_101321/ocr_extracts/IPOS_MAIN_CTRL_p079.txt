@@ -1,0 +1,22 @@
+78 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+Figure 9: BIA Start-UP Phase Time Diagram 
+205ms

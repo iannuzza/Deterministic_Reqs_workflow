@@ -1,0 +1,158 @@
+Based on the accepted Step 1 constraints and the completed Step 2 foundation, now implement Step 2B: centralized deterministic vocabulary management aligned with the current OCR -> taxonomy update -> RAG index build -> requirement generation -> RAG cross-check pipeline.
+
+Important boundary for this step:
+Do not redesign the canonical schema or core workflow model established in Step 2 unless a concrete compatibility fix is strictly required.
+In this step, focus on centralizing vocabulary resources and migrating consumers to a shared approved vocabulary resolver.
+
+Before editing code, first provide:
+1. target files to modify
+2. new files/modules to add
+3. intended changes per file
+4. any compatibility concern with the Step 2 model/schema
+5. how backward compatibility will be preserved where practical
+
+Goal:
+Move hardcoded vocabulary terms, synonym maps, stopwords, category keywords, block aliases, req-id patterns, phrase-expansion resources, and similar lexical/domain resources out of Python code and into centralized versioned configuration, while preserving deterministic behavior and the current retrieval architecture.
+
+Authoritative/behavioral constraints:
+- project-agnostic
+- deterministic
+- no LLM calls
+- no network calls
+- no cloud dependencies
+- preserve auditability and reproducibility
+- semantic retrieval remains optional, local-only, version-pinned, auditable, and separate from vocabulary approval logic
+- automatic semantic fallback remains limited to the current no-legacy-results condition
+- lexical, normalized, and hybrid retrieval behavior must remain preserved behind stable interfaces unless an explicit compatibility fix is required
+
+Keep the baseline vocabulary architecture based on:
+- global/base vocabulary
+- project-specific vocabulary
+- optional module/domain vocabulary
+
+Extend it with:
+- optional additional project-dependent vocabulary files
+- deterministic extraction of vocabulary candidates from the current project spec
+- reviewable and auditable project-by-project vocabulary enrichment
+- no direct uncontrolled mutation of the active runtime vocabulary
+
+Please implement:
+
+1. Centralized vocabulary resource structure with support for:
+- global/base vocabulary
+- project-specific overrides
+- optional module/domain-specific overrides
+- optional additional vocabulary files for a project/run
+- approved learned vocabulary
+- candidate learned vocabulary stored separately
+
+2. Deterministic vocabulary loader/resolver
+The effective vocabulary must be resolved deterministically from:
+- global
+- project override
+- module override
+- additional project files in declared order
+- approved learned vocabulary
+
+3. Vocabulary validation/schema support
+
+4. Replacement of direct hardcoded vocabulary usage in core consumers with resolver access, prioritizing:
+- OCR parsing normalization helpers
+- taxonomy update inputs
+- normalized retrieval inputs
+- classifier hints
+- mapping aliases/block aliases
+- req-id pattern configuration
+- cross-check lexical/normalized preparation where applicable
+
+5. Deterministic candidate extraction from current project specs for things like:
+- frequent unknown terms
+- abbreviation candidates
+- alias candidates
+- block/function name candidates
+- req-id pattern candidates
+- normalization candidates
+- phrase expansion candidates
+
+6. Storage for extracted vocabulary candidates with evidence such as:
+- term
+- suggested normalized form
+- kind
+- evidence count
+- source locations
+- status
+- timestamps
+- source_spec_id or equivalent source linkage where available
+
+7. Review states such as:
+- suggested
+- approved
+- rejected
+- merged_into_project_vocabulary
+
+8. Integration so normalized retrieval continues to use:
+- rule-based normalization
+- lemmatization
+- acronym/synonym/phrase expansion
+but now driven by centralized approved vocabulary resources
+
+9. Alignment with taxonomy update:
+- vocabulary and taxonomy refresh must remain deterministic and versionable
+- candidate vocabulary extraction may feed future taxonomy candidate refinement, but unapproved candidates must not alter approved runtime behavior
+- distinguish approved vocabulary/taxonomy context from candidate/generated artifacts
+
+10. Support at least these vocabulary domains:
+- synonyms
+- canonical terms
+- stopwords
+- category keywords
+- block aliases
+- req-id patterns
+- phrase expansion hints
+- optional lightweight ontology/relationship hints
+
+Suggested modules:
+- vocabulary_loader.py
+- vocabulary_resolver.py
+- vocabulary_schema.py
+- vocabulary_registry.py
+
+Suggested config/data layout:
+- config/vocabulary/global.yaml
+- config/vocabulary/projects/<project>.yaml
+- config/vocabulary/modules/<module>.yaml
+- config/vocabulary/extras/<file>.yaml
+- data/vocabulary_learning/<project>/extracted_candidates.yaml
+- data/vocabulary_learning/<project>/approved_learned.yaml
+- data/vocabulary_learning/<project>/rejected_candidates.yaml
+
+Supplementary/project-awareness requirements:
+- vocabulary resolution must be compatible with multiple supplementary source specs per project
+- learned candidates should remain source-aware where possible
+- nothing in this step should assume only one supplementary source exists
+
+Do not:
+- auto-activate learned candidates without explicit approval
+- let unapproved learned vocabulary affect authoritative generation, canonical merge decisions, or approved retrieval behavior
+- make semantic retrieval depend on vocabulary learning approval
+- rewrite unrelated modules
+
+Implementation guidance:
+- use the Step 2 model/schema hooks and metadata support rather than inventing a parallel storage model
+- preserve backward compatibility where practical
+- if needed, add compatibility wrappers while migrating consumers away from embedded lists
+- keep vocabulary logic centralized and reusable across parser, taxonomy update, retrieval, mapping, and cross-check paths
+- isolate project-specific rules in config/adapters, not in core workflow code
+
+At the end of this Step 2B implementation, provide a checkpoint summary with:
+1. what was implemented
+2. which files were modified or added
+3. effective vocabulary precedence rules
+4. which consumers were migrated to the centralized resolver
+5. how learned candidates are generated and stored
+6. how approval affects runtime vocabulary
+7. how normalized retrieval and taxonomy update now consume the centralized vocabulary
+8. any remaining embedded vocabulary still present
+9. any follow-up work for Step 3, Step 4, or Step 5
+
+If anything is ambiguous, ask for clarification before making broad refactors.

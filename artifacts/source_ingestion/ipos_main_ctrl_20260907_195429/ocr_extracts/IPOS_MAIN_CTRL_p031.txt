@@ -1,0 +1,19 @@
+30 
+ 
+Generic name Type Value Description 
+ppg_frame_bit int 4  
+ppg_frame_bit_ALC_BTIA int 12  
+n_max_frame int 5  
+5.2.1.2. Ports 
+Port name Direction Type Description 
+i_clk input   
+i_rst_n input   
+i_en_cm_buf input   
+i_en_rld input   
+i_en_avg1 input   
+i_en_avg2 input   
+i_en_gsr_dc_cds input [1:0]  
+i_hc_en input   
+i_start_su_ecg_mc input   
+i_start_su_bia_mc input   
+i_debug input

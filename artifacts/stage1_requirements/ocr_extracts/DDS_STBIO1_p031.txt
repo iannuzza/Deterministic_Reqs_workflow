@@ -1,0 +1,32 @@
+30 
+ 
+T_OUT_GSR output 0 wire from u_scan_out_mux 
+T_OUT_PPG_BUF output 0 wire from u_scan_out_mux 
+T_SENSE_1V2 output 0 wire from u_scan_out_mux 
+T_SENSEIBG_1V2 output 0 wire from u_scan_out_mux 
+T_CM_HLT_1 output 0 wire from u_scan_out_mux 
+T_SENSEVBG_1V2 output 0 wire from u_scan_out_mux 
+o_end_calibration_1V2 output 0 wire from u_scan_out_mux 
+pd_osc_clk32k output 0 wire from u_scan_out_mux, Description: se si 
+seleziona 
+o_pd_buf_gpio1 output 1 wire from u_scan_out_mux 
+o_pd_buf_gpio2 output 1 wire from u_scan_out_mux 
+EN_CLK_EXT output 0 wire from u_scan_out_mux 
+WHO_AM_I input D7 wire 
+[7:0] 
+to u_regmap_otp.DEV_ID_i, Description: 
+? OK ? 
+if_sclk_i3c_in input   wire to u_pad_mux 
+if_sda_sdi_i3c_in input   wire to u_pad_mux 
+VREF input  wire to u_otp 
+IREF input  wire to u_otp 
+OTP_IREF_WAKEUP output 0 wire from u_scan_out_mux, Description: 
+Enable Mirror OTP 
+ 
+  
+Table 6: Digital I/O List 
+ 
+10. Power Domains 
+10.1. Introduction 
+This document paragraph describes the Power Domain architecture implemented in the STBIO1. 
+The goal is to provide a detailed overview of the power domain partitioning, their functionalities,

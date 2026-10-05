@@ -1,0 +1,5 @@
+Level,Project A,Project B,Difference,Impact
+L0,STBIO_AI,MEMS_3axis_gyro,Top system node,none
+L1,Core subsystems=12,Core subsystems=10,2,partitioning
+L2,Boundary/interface nodes=2,Boundary/interface nodes=2,0,interface handling
+Depth,3,3,0,hierarchy clarity

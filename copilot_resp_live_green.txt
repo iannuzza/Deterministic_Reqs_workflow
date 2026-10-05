@@ -1,0 +1,21 @@
+copilot resp fro live green:
+
+Formula verde esatta:
+
+Formula rossa esatta:
+
+Range applicato:
+
+J2:P315
+T2:T315
+worksheet: Architecture Mapping Review
+Righe testate:
+
+DDS_STBIO1_0035: riga 24, dati completi e validi.
+DDS_STBIO1_8000: riga 27, dati completi e validi.
+Con review_decision="approved", entrambe soddisfano la formula verde.
+Conclusione: nessuna sotto-condizione della formula risulta falsa per le due righe. Il workbook reale contiene le regole aggiornate, con priorità verde prima del rosso e fill verde serializzato.
+
+Diagnosi: il problema non è formula CF, range CF o validità della riga. È Excel che non rivaluta/renderizza la conditional formatting live nel workbook aperto.
+
+Fix minimo: rendere la formula CF più semplice, basandola solo su review_decision="approved", oppure usare una colonna helper row_valid calcolata nel workbook e una formula CF semplice basata su AND($K2="approved",$U2=TRUE). La validazione CSV/Stage 2A resterebbe comunque l’autorità effettiva.

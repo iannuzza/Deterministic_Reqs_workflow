@@ -1,0 +1,11 @@
+145 
+ 
+ 
+Figure 20: Boot Phase Flow 
+15.2. Configuration Phase 
+ 
+[DDS_STBIO1_ 0117] Requirement: 
+During the Configuration Phase (IDLE STATE of the Device_FSM), the user shall be able to: 
+• Configure Bio-Channel or Optical Channel, the ADC Calibration and then Start a 
+measurement cycle. 
+• Put the device in Debug-Mode. [TO: IPOS_MAIN_CTRL] [END]

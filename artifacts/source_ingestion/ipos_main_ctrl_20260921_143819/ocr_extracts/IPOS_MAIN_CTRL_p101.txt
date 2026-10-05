@@ -1,0 +1,22 @@
+100 
+ 
+Port name Direction Type Description 
+i_EN_TIA input  enable tia from ppg fsm 
+i_EN_BUFF input  enable buffer from ppg fsm 
+i_EN_IDAC input  enable Idac from ppg 
+i_reset_alc input  reset alc phase 
+i_gain_start input [gain_max_bit-1:0] gain start value 
+i_gain_max_set input [gain_max_bit-1:0] gain max value 
+i_reset_ppg_start_up input  reset for start up phase 
+i_ALC_comp_start input  start of alc phase 
+i_comp_rx_out input  comparator value from analog 
+domain 
+i_T_TIAON input [T1_max_bit_from_decoder-
+1:0] TIA Time 
+i_T1 input [T1_max_bit_from_decoder-
+1:0] T1 value for alc phase 
+i_T2 input [T2_max_bit_from_decoder-
+1:0] T2 value for alc phase 
+o_comp_rx_ck output  comp rx ck for analog domain 
+o_ALC_comp_end output  end of alc compensation 
+o_rx_ch_gain output [gain_max_bit-1:0] rx channel gain

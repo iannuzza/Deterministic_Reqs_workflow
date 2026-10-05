@@ -1,0 +1,43 @@
+```text
+Do not redesign anything.
+
+Use this allocation taxonomy exactly:
+
+- system_level -> SRS -> end-to-end / global system behavior
+- top_digital_architecture -> DRS -> top-level digital architecture/integration, shared digital resources, inter-block digital coordination
+- top_analog_architecture -> ARS -> top-level analog/mixed-signal architecture/integration, shared analog resources, pads/reference/bias architecture
+- block_local_digital -> Digital IPOS -> local implementation detail of one digital block
+- block_local_analog -> Analog IPOS -> local implementation detail of one analog block
+- descriptive_only -> none -> descriptive/non-normative text, no implementable obligation
+
+Mandatory rules:
+- source type must not determine placement
+- approved_block must not imply IPOS
+- block mention must not imply block-local
+- do not invent artificial parents
+- do not duplicate the same normative requirement across levels
+- digital source-to-destination connection contracts belong to DRS unless they are truly abstract system-level capabilities
+
+Now:
+1. align the current allocation draft strictly to the taxonomy above
+2. prefill the Stage 2A Architecture Map Review workbook/CSV with:
+   - allocation_class
+   - owning_target
+   - allocation_rationale
+   - lineage_mode
+   - source_origin_req_ids
+   - hierarchy_parent_req_ids
+   - owning_domain
+3. if evidence is insufficient, do not guess; leave the row for user review
+
+Return only:
+- corrected table used
+- counts by allocation_class
+- counts by owning_target
+- prefilled rows count
+- review-needed rows count
+- 15 representative examples
+
+Do not auto-approve.
+Do not run downstream stages.
+```

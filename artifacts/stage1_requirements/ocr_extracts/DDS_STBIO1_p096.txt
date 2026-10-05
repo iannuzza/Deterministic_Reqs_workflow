@@ -1,0 +1,16 @@
+95 
+ 
+ 
+Figure 15 : OTP Reading timing diagram 
+[End] 
+ 
+  
+ 
+OTP_PDN 
+OTP_TREAD 
+OTP_PRG 
+OTP_A 
+OTP_BANKEN 
+OTP_FUSE 
+OTP_D 
+OTP_SELECTWLBL

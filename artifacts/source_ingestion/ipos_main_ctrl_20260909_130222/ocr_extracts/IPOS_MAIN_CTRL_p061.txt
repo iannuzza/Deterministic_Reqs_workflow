@@ -1,0 +1,42 @@
+60 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_020]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 
+and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 15ms after the falling of 
+O_PD_IMP, the O_RST_IMP shall go low. [END] 
+ 
+  
+[IPOS_STBIO1_MAIN_CONTROLLER_021]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 
+and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of 
+O_RST_IMP, if EN_CHOP_CLK_IMP  (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, 
+O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be 
+run at 10kHz frequency.  
+On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set 
+to 0, then O_CK_CHOP_IMP shall stay low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_022]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 
+and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 30ms after the falling of 
+O_RST_IMP, O_RSTI_IMP shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_023]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal 
+to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set 
+to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low.  
+Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the 
+falling of O_RSTI_IMP, O_SUG_IMP shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_024]  REQUIREMENT :  
+When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register 
+(DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set 
+to 1  and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and 
+MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after 
+WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal 
+to 0x04)[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 3124] REQUIREMENT :  
+ 
+When the ELAB_FSM is in ECG State and only ECG0 is selected, the  o_ADC_EN shall go high, 
+5 acquisitions are required (acquisitions described in section 5.4 ADC PHASE). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_025]  REQUIREMENT :

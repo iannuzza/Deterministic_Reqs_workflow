@@ -1,0 +1,40 @@
+99 
+ 
+i_if_sda_sdi_in input  SDA/SDI from pad 
+o_if_sda_sdi_en_n output  SDA/SDI pad enable 
+o_if_sda_sdi_out output  SDA/SDI to pad 
+o_ctrl_reg_7 output [7:0] 8 configuration bit set by 
+local register (addr. 0x5e) 
+i_ext_reg_dt input  [7:0] Data from external register 
+block (if present) 
+o_ext_reg_wr_add output [7:0] Write address to external 
+register block (if present) 
+o_ext_reg_rd_add output [7:0] Read address to external 
+register block (if present) 
+o_ext_reg_dt output [7:0] Data to external register 
+block (if present) 
+o_ext_reg_ck_wr output  Write enable for external 
+register block (if present) 
+o_ext_reg_we output  
+Write direct enable for 
+external register block (if 
+present) 
+rst_16m_n   Sw reset for AHB domain 
+sys_16m_clk input  AHB clock 
+o_hselm output  AHB_M 
+o_haddrm output [31:0] AHB_M 
+o_htransm output [1:0] AHB_M 
+o_hmasterm output [3:0] AHB_M 
+o_hwritem output  AHB_M 
+o_hsizem output [2:0] AHB_M 
+o_hmastlockm output  AHB_M 
+o_hwdatam output [31:0] AHB_M 
+o_hburstm output [2:0] AHB_M 
+o_hprotm output [3:0] AHB_M 
+i_hrdatam input  [31:0] AHB_M 
+i_hreadym input  AHB_M 
+i_hrespm input  AHB_M 
+o_gt_ck_on output  
+Pulse on interface clock to 
+inform system that AHB 
+clock must be switched on

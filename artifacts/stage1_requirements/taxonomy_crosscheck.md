@@ -1,0 +1,21 @@
+# Stage 1 Taxonomy Crosscheck
+
+- Source spec: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf
+- Stage 2 profile: config/stage2_mirco_arc_profile.json
+- Removed legacy mapping keys: none
+- Detected domain signals from source spec:
+  - Sensor-Hub: sensor, i2c, master, external, targets, including, trigger, enable, collection, fifo, analog
+  - ADC: adc, convert, configured, optical, channel, inputs, samples, sampling, test, debug, modes, analog, digital
+  - ADSP: adsp, execute, firmware, boot, write, test, elaboration, mapped, program, register, memory, samples, configuration, elaborated
+  - Main Controller: main, controller, generate, receive, analog, domain, signals, perform, elaboration, adc, outputs, write, elaborated, results, defined, addresses, configuration, register, sampled, state
+  - Smart FIFO: smart, fifo, provide, storage, memory, access, mutually, exclusive, unique, multiple, modes, including, sub-fifo, depth, sensor, digital, samples, configuration
+  - Regmap: regmap, implement, mapped, system, registers, configuration, while, reset, host, read, write, transactions, register, fields
+  - SPI interface: spi, provide, serial, access, path, i2c, register, specified, constraint, transaction
+  - I2C interface: provide, host, i2c, serial, access, path, supporting, standard, optionally, operation, configured, device, address, scl, sda, register, transaction
+  - IRQ logic: logic, fifo, sensor, ispu, software, timer, interrupt, configured, gpio, outputs, threshold, int1, int2
+  - PMU: sequence, ldo1v8, enable, clocks, release, boot, power, modes, reset, clock, references, configuration, controls, gating, ready, signals, power modes
+  - BIST Controller: bist, controller, operating, modes, adc, test, operations, their, results, calibration
+  - I2C_SPI_AHB: spi, accept, i2c, accesses, translate, needed, transactions, device, configuration, including, ispu, access, host
+  - OTP: provide, memory, used, adsp, boot, programming, test, routines, address, bank, selection, trim, voltage, signals, read, bank selection
+  - PAD MUX: functional, scan, bist, debug, signals, device, pads, selection, controls, test, internal, block, outputs
+- Applied mapping_rules updates: none

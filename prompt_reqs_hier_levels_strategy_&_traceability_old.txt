@@ -1,0 +1,220 @@
+Please review and update the full hierarchical requirement-generation and traceability strategy across:
+- primary source top spec(s)
+- supplementary source spec(s)
+- SRS
+- DRS
+- ARS
+- Digital IPOS
+- Analog IPOS
+
+I want one coherent, project-agnostic, deterministic strategy that covers:
+1. hierarchical requirement generation from source top specs down to IPOS
+2. traceability accounting
+3. valid downstream coverage targets per requirement class
+4. guaranteed coherence and full downward requirement coverage from primary and supplementary sources
+5. the best supporting data model
+6. GUI and report behavior
+
+## Target strategy
+
+### A. Hierarchical requirement-generation strategy
+Use this hierarchy/ownership model:
+
+- **SRS** contains only system-level requirements and descriptions:
+  - system behavior
+  - externally visible behavior
+  - system modes/power states
+  - system-level performance/safety/monitoring
+  - top-level external interfaces
+  - cross-domain system coordination
+  - system-level power-domain architecture, low-power strategy, on/off sequencing, wake-up features
+
+- **DRS** contains only top-digital / architecture / integration-level requirements and descriptions:
+  - digital inter-block coordination
+  - shared digital resources
+  - digital clock/reset/power coordination
+  - firmware-visible top-digital behavior
+  - digital decomposition of system modes / low-power / wake-up
+  - top-level digital interface contracts
+
+- **ARS** contains only top-analog / mixed-signal / architecture-level requirements and descriptions:
+  - analog partitioning and coordination
+  - analog supply/bias/power-domain behavior
+  - analog sequencing / wake-up / settling / retention / isolation at architecture level
+  - analog/digital interaction constraints
+
+- **IPOS** contains the full detailed block-local requirements and descriptions of one block:
+  - local functional behavior
+  - local sequencing / state-machine behavior
+  - local register / interface / timing / control / error details
+  - local low-power / reset / init behavior
+  - specific block IO list
+  - specific block port map
+
+Rules:
+- detailed block-local requirements belong primarily in IPOS
+- block-specific IO lists and port maps belong only in IPOS
+- higher-level specs may contain the same topic only at their own abstraction level
+- do not duplicate the same detailed block-local requirement text across SRS / DRS / ARS / IPOS
+
+### B. Source and supplementary-source strategy
+- primary top/source specs may contain:
+  - system-level requirements
+  - architecture-level requirements
+  - block-local requirements
+- supplementary source specs may also be:
+  - domain-level
+  - architecture-level
+  - block-dedicated
+  - already IPOS-like
+
+Rules:
+- if a supplementary source is dedicated to one block, it shall primarily feed that block’s IPOS
+- only the subset with true higher-level architecture/integration relevance shall also appear in DRS or ARS
+- if a top/source spec already contains clearly block-local requirements, those may also feed the corresponding IPOS directly
+- do not invent artificial intermediate DRS/ARS parents when no meaningful intermediate generated parent exists
+
+### C. Traceability strategy
+Use this rule:
+- each generated requirement shall normally render `Covers:` only to the **nearest relevant approved parent** in the decomposition path
+- full end-to-end lineage must still be preserved in the authoritative traceability model and reports
+- direct source-to-IPOS or supplementary-source-to-IPOS traceability is allowed whenever the requirement is already clearly block-local and no meaningful intermediate generated parent exists
+
+Normal rendered Covers path:
+- SRS -> Source
+- DRS -> SRS
+- ARS -> SRS
+- Digital IPOS -> DRS
+- Analog IPOS -> ARS
+
+Allowed direct block-local path:
+- top/source block-local requirement -> owning IPOS
+- supplementary block-local requirement -> owning IPOS
+
+### D. Traceability accounting strategy
+Do not use a naive rule that every source requirement must appear in every level.
+
+Instead:
+- define traceability/coverage by requirement class and ownership
+- count a requirement as fully covered when it reaches all required downstream targets for its approved class
+- distinguish:
+  - covered
+  - under-covered
+  - over-propagated
+  - misallocated
+  - orphaned
+- report both normal hierarchical paths and direct block-local source-to-IPOS paths
+
+### E. Valid downstream coverage targets per class
+Please define and implement a clear requirement-class / expected-target strategy, for example covering classes such as:
+- system_level
+- top_digital_architecture
+- top_analog_architecture
+- shared_cross_domain
+- block_local_digital
+- block_local_analog
+- interface_contract
+- supplementary_block_local
+- descriptive_only / non-propagating if applicable
+
+For each approved class, define:
+- valid downstream target specs
+- required downstream target specs
+- allowed direct-source-to-IPOS behavior
+- whether DRS/ARS intermediate coverage is required, optional, or not applicable
+
+### F. Coherence and full downward coverage
+Guarantee coherence and full requirement coverage downward from both:
+- primary source top specs
+- supplementary source specs
+
+This means:
+- every approved in-scope source/supplementary-source requirement must have a valid coverage classification
+- every requirement must reach all required downstream targets according to that classification
+- direct source-to-IPOS paths must be treated as valid when justified, not as missing coverage
+- higher-level omission must be distinguishable from valid block-local direct allocation
+- reports and validators must detect:
+  - missing required coverage
+  - wrong owner/block/domain allocation
+  - wrong hierarchy placement
+  - unjustified duplication
+  - unjustified skipped hierarchy
+
+### G. Best data model
+Please define the best authoritative data model to support this strategy.
+
+At minimum, requirements/traceability records should support fields like:
+- req_id
+- source_type (primary source, supplementary source, generated)
+- spec_level
+- immediate_parent_req_ids
+- source_origin_req_ids
+- owning_block
+- owning_domain
+- hierarchy/coverage class
+- valid_downstream_targets
+- actual_downstream_targets
+- rendered_in_specs
+- direct_source_to_ipos flag or lineage type
+- snapshot_id
+- allocation / mapping metadata
+- status / approval metadata
+
+Make sure the model supports:
+- full lineage reconstruction
+- nearest-parent rendered Covers logic
+- coverage accounting by class
+- GUI/report traceability navigation
+- direct source-to-IPOS and supplementary-source-to-IPOS cases
+
+### H. GUI and report behavior
+Update the GUI and traceability/reporting outputs so they clearly show:
+- primary vs supplementary source provenance
+- nearest-parent rendered Covers relation
+- full end-to-end lineage reconstruction
+- requirement class
+- owning block
+- hierarchy level
+- system/digital/analog scope
+- valid downstream targets
+- actual downstream targets
+- coverage status (covered / under-covered / over-propagated / misallocated / orphaned)
+- direct source-to-IPOS and supplementary-source-to-IPOS cases
+- which specs actually contain the requirement or its decomposition
+
+Update:
+- GUI traceability views
+- traceability matrices
+- statistics
+- coverage reports
+- hierarchy/mapping reports
+- exported docs/artifacts
+
+## Before editing, tell me clearly:
+1. where the current generation strategy is inconsistent across source -> SRS -> DRS/ARS -> IPOS
+2. where detailed block-local requirements are still duplicated upward
+3. where direct source-to-IPOS or supplementary-source-to-IPOS cases are currently mishandled
+4. what requirement classes and downstream coverage targets you will define
+5. what traceability accounting model/statuses you will implement
+6. what authoritative data-model changes are needed
+7. how GUI and reports will present this clearly
+8. which generators, traceability modules, GUI files, validators, reports, and docs you will modify
+9. what tests you will add for:
+- correct hierarchy placement
+- nearest-parent Covers rendering
+- valid direct source-to-IPOS behavior
+- full downward coverage accounting
+- no unnecessary duplication
+- coherent GUI/report traceability views
+- correct statistics across all involved specs
+
+Constraints:
+- project-agnostic
+- update general rules
+- deterministic
+- local-only
+- no LLM calls
+- no network/cloud dependencies
+- no weakening of traceability completeness
+- no flattening of the hierarchy
+- no artificial duplication just to satisfy formal trace paths

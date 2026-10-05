@@ -1,0 +1,85 @@
+Good analysis. Proceed, but apply these corrections only and keep the implementation project-agnostic, deterministic, local-only, and centralized in one authoritative allocation/policy/ledger layer shared by generators, validators, reports, and GUI.
+
+1. Separate **coverage/accounting status** from **lineage/path mode**.
+- Coverage/accounting statuses should be only:
+  - `covered`
+  - `under_covered`
+  - `over_propagated`
+  - `misallocated`
+  - `orphaned`
+  - `approved_exclusion`
+  - `unassigned_review`
+- Model path/lineage separately, e.g.:
+  - `normal_hierarchical`
+  - `direct_source_to_ipos`
+  - `direct_supplementary_to_ipos`
+  - `split_lineage`
+
+2. Tighten **required-target semantics**.
+- Required targets must be defined by the nearest meaningful decomposition/ownership path, not by blanket multi-document presence.
+- Use owning-target logic such as:
+  - `system_level` -> owning target `SRS`
+  - `top_digital_architecture` -> owning target `DRS`
+  - `top_analog_architecture` -> owning target `ARS`
+  - `shared_cross_domain` -> owning target `SRS`, with `DRS`/`ARS` decomposition only when meaningful
+  - `block_local_digital` -> owning target `Digital IPOS`
+  - `block_local_analog` -> owning target `Analog IPOS`
+  - `supplementary_block_local` -> owning target owning `IPOS`
+- Distinguish explicitly:
+  - authoritative owning target
+  - required downstream targets
+  - allowed contextual/higher-level presence
+  - forbidden upward duplication
+
+3. Do **not** model `SRS`/`DRS`/`ARS` as optional targets for the same **block-local requirement**.
+- For `block_local_digital` and `block_local_analog`, the unchanged obligation must not be rendered upward.
+- Higher-level specs may contain only:
+  - a valid higher-level parent requirement, or
+  - a separate architecture-level derivative/constraint
+- They must not render the same block-local obligation as optional presence.
+
+4. Make **mixed-requirement handling** explicit.
+- If one source requirement mixes architecture-level and block-local content, split it before rendering.
+- The source item remains provenance only, not verbatim multi-level content.
+- Each descendant must carry:
+  - its own class
+  - its own hierarchy level
+  - its own owner
+  - its own immediate parent
+  - shared source-origin linkage
+
+5. Add explicit gating for **direct source-to-IPOS** and **supplementary-source-to-IPOS**.
+A direct path is valid only if all are true:
+- approved and in scope
+- owning block deterministically identified
+- requirement classified as block-local
+- no meaningful DRS/ARS intermediate parent is required by class/policy
+- not a mixed requirement that must be split first
+- lineage/provenance preserved in the authoritative model
+
+6. Make **topic-family placement machine-enforceable** via shared reviewable policy/config, not only heuristics.
+- Add deterministic policy for allowed levels/allocation behavior, especially for leakage-prone families:
+  - local clock/reset
+  - local registers/access semantics
+  - local FIFO/buffering
+  - local interrupts/events/status
+  - local timing/protocol details
+  - local mode/state transitions
+  - exact IO/port definitions
+
+7. Explicitly distinguish **valid abstraction split** from **duplicate propagation**.
+- Same source origin across levels is not automatically duplication.
+- Flag duplication only when materially the same obligation is repeated across levels without abstraction change.
+
+8. In GUI/reports, add **allocation rationale / policy basis** for each requirement.
+- Show not only class/topic/level/path/status, but also why it was placed there.
+
+Update the implementation and tests accordingly, especially for:
+- class-to-owning-target correctness
+- forbidden upward rendering of unchanged block-local requirements
+- valid direct source-to-IPOS gating
+- split-lineage handling for mixed requirements
+- machine-enforced topic-family placement
+- clear separation between coverage status and lineage mode
+
+Before editing, briefly confirm how you will apply these corrections within the planned edit surface.

@@ -1,0 +1,26 @@
+25 
+ 
+Port name Directi
+on Type Description 
+o_pd_rld output  power down rld 
+o_pd_avg1 output  power down avg1 
+o_pd_avg2 output  power down avg2 
+o_mc_ahb_clk_en output  enable for master 
+ahb clock 
+o_main_controller_device_status_regis
+ter output [2:0] device status 
+register 
+o_main_controller_elab_status_registe
+r output [3:0] device status 
+register 
+o_en_ldo_1v8 output  enable ldo 
+o_en_bufxbio output  enable biobuffer to 
+analog domain 
+o_rx_ch_frame output [ppg_rx_channel_bit_top-1:0] selected rx ch frame 
+to analog domain 
+o_ldo_ext output  enable external ldo 
+o_ppg_status_register output [n_state_bit-1:0] ppg state status 
+register 
+o_b_cap_idac output [1:0] b cap idac to 
+analog domain 
+o_ispu_irq_ctrl output [3:0] ispu irq

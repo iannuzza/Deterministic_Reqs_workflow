@@ -1,0 +1,29 @@
+18 
+ 
+ 
+Figure 5: STBIO1 Digital Engine 
+9.1. TOP Pinout List 
+Port name Directio
+n 
+POR 
+State of 
+Signal 
+Type Description 
+i_comp_rx_out input 0 wire to u_main_controller_top, Description: 
+"Inserire LS 
+o_BIDAC output 0 wire 
+[11:0] 
+from u_scan_out_mux 
+o_BDC_PPG output 0 wire 
+[7:0] 
+from u_scan_out_mux 
+o_BTIA_gain output 0 wire 
+[3:0] 
+from u_scan_out_mux 
+o_PD_PGA output 1 wire from u_scan_out_mux 
+o_PD_IDAC output 1 wire from u_scan_out_mux 
+o_PD_TIA output 1 wire from u_scan_out_mux 
+o_comp_rx_ck output 0 wire from u_scan_out_mux 
+BT_IDAC_N output 0 wire 
+[6:0] 
+from u_scan_out_mux

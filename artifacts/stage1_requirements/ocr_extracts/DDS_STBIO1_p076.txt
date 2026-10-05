@@ -1,0 +1,29 @@
+75 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+i_clk_32kHz input   clk 32kHz from pmu 
+i_clk_16MHz input   clk 16MHz from pmu 
+i_clk_gsr_16M input   clk for gsr signal 
+i_clk_ahb_master input   clock for ahb master 
+i_rstn input   reset in 16MHz domain 
+i_rstn_sync_32 input   reset in 32kz domain 
+i_wave_velocity_mode input   enable of the wave velocity mode 
+i_ispu_end_elab input    
+i_n_ppg_frame input [ppg_frame_bit_top-1:0]  number of frame selected 
+i_const_value_ioff input [data_in_size_bit_top-1:0]  constant value from regmap used for ppg ioff 
+calibraton 
+i_rx_ch_frame input [n_max_frame-1:0]  ppg rx channel frame from regamp 
+i_T_tx_led_set input [n_max_frame-1:0]  tx led set time from regmap 
+i_T_tx_led_off input [n_max_frame-1:0]  tx led off time from regmap 
+i_curr_sel_tx_frame_x input [n_max_frame-1:0]  current injection 
+i_tx1_outlab_sel_frame_x input [n_max_frame-1:0]  led output selected from regmap for each frame 
+i_tx2_outlab_sel_frame_x input [n_max_frame-1:0]  led output selected from regmap for each frame 
+i_tx3_outlab_sel_frame_x input [n_max_frame-1:0]  led output selected from regmap for each frame 
+i_tx4_outlab_sel_frame_x input [n_max_frame-1:0]  led output selected from regmap for each frame 
+i_idac_dc_ppg_frame input [n_max_frame-1:0]  idac value for each frame selected from regmap 
+i_average_ppg input [n_max_frame-1:0]  average ppg for each frame selected from 
+regmap 
+i_gain_alc_start input [gain_max_bit_top-1:0]  btia gain for alc from regmap 
+i_gain_start input [n_max_frame-1:0]  btia gain start for compensation from regmap 
+i_Tx_idac_Vref_debug input [Nmax_bit_top-1:0]  Idac value for debug from regmap

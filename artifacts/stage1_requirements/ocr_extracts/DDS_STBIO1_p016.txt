@@ -1,0 +1,25 @@
+15 
+ 
+6. Symbol 
+[DDS_STBIO1_0008] Definition 
+ 
+ 
+Figure 4: STBIO1 - Ball out. TOP View (Ball side down) 
+ 
+7. I/O List 
+ 
+[DDS_STBIO1_0009] Definition 
+ 
+Nr. Name Function Pin No. Type 
+1 AV1V8 1.8 V Analog Power Supply D5 Power 
+2 AV3V3 3.3 V Analog Power Supply D4 Power 
+3 AGND Analog Ground D6 Power 
+4 DVDD 1.8 V Digital Power Supply A3 Power 
+5 GNDD Digital Ground B3 Power 
+6 VDDIO I/O Power Supply. A2 Power 
+7 GNDIO I/O Ground B2 Power 
+8 LGND LED Ground F2 Power 
+9 VREF Voltage Reference D7 Analog 
+10 PDIN5N Photodiode 5 N A7 Analog 
+11 PDIN1P Photodiode 5 P A6 Analog 
+12 PDIN6N Photodiode 6 N A5 Analog

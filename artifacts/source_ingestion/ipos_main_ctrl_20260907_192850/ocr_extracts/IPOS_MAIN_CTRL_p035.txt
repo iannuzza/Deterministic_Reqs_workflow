@@ -1,0 +1,19 @@
+34 
+ 
+Port name Direction Type Description 
+o_curr_sel_tx_frame_x_cfg output [n_max_frame-1:0]  
+o_tx1_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_tx2_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_tx3_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_tx4_outlab_sel_frame_x_cfg output [n_max_frame-1:0]  
+o_average_ppg_cfg output [n_max_frame-1:0]  
+o_gain_start_cfg output [n_max_frame-1:0]  
+o_gain_max_cfg output [gain_max_bit-1:0]  
+o_en_txi_cfg output [n_max_frame-1:0]  
+o_frame_repetition_cfg output [n_max_frame-1:0]  
+o_T_rx_set_cfg output [T1_max_bit_from_decoder-1:0]  
+o_nstart_case_cfg output [Nmax_bit-1:0]  
+o_T_delta1_to_reg_cfg output [delta_bit-1:0]  
+o_Nmax_to_reg_cfg output [Nmax_bit-1:0]  
+o_T1_cfg output [T1_max_bit_from_decoder-1:0]  
+o_T2_cfg output [T2_max_bit_from_decoder-1:0]

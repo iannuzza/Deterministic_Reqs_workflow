@@ -1,0 +1,40 @@
+16 
+ 
+Nr. Name Function Pin No. Type 
+13 PDIN6P Photodiode 6 P A4 Analog 
+14 PDIN3N Photodiode 3 N B7 Analog 
+15 PDIN3P Photodiode 3 P B6 Analog 
+16 PDIN4N Photodiode 4 N B5 Analog 
+17 PDIN4P Photodiode 4 P B4 Analog 
+18 PDIN2P Photodiode 2 P C4 Analog 
+19 PDIN2N Photodiode 2 N C5 Analog 
+20 PDIN1P Photodiode 1 P C6 Analog 
+21 PDIN1N Photodiode 1 N C7 Analog 
+22 LED1 LED driver 1 G3 Analog 
+23 LED2 LED driver 2 G2 Analog 
+24 LED3 LED driver 3 G1 Analog 
+25 LED4 LED driver 4 F1 Analog 
+26 LED5 LED driver 5 F3 Analog 
+27 LED6 LED driver 6 E1 Analog 
+28 LED7 LED driver 7 E2 Analog 
+29 LED8 LED driver 8 E3 Analog 
+30 ECGIP ECG Positive Input E7 Analog 
+31 ECGIN ECG Negative Input E6 Analog 
+32 RLD Right LEG Driver E5 Analog 
+33 IMPIP BIA Positive Input F7 Analog 
+34 IMPIN BIA Negative Input F6 Analog 
+35 GSRP GSR Positive Input G7 Analog 
+36 GSRN GSR Negative Input G6 Analog 
+37 CIP BIA Injection Positive Output. G5 Analog 
+38 CIN BIA Injection Negative Output. F Analog 
+39 GPIO3 General-Purpose Input/Output 3 G4 Analog 
+40 GPIO4 General-Purpose Input/Output 4 F4 Analog 
+41 SCLK SPI Clock INPUT A1 Digital 
+42 CLKext External Clock C2 Digital 
+43 SDA_SDI I2C / SPI serial data line B1 Digital 
+44 SH_SDA Sensor Hub Data D1 Digital 
+45 CS Chip Select C1 Digital 
+46 SH_CK Sensor Hub Clock C3  
+47 GPIO0 General-Purpose Input/Output 0 D2 Digital 
+48 GPIO1 General-Purpose Input/Output 1 D3 Digital 
+49 GPIO2 General-Purpose Input/Output 2 E4 Digital

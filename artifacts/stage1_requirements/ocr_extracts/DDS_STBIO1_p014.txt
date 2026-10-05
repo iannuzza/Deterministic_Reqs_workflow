@@ -1,0 +1,26 @@
+13 
+ 
+We also need to define the other 4 parameters: Mecg, Mbia, Mgsr and Mppg, also called 
+Division Index. 
+These parameters are used to define the Data Rate Interval of a single Frame Slot. 
+ 
+ 𝑅𝑎𝑡𝑒 𝐼𝑛𝑡𝑒𝑟𝑣𝑎𝑙 =  𝑇𝑖𝑚𝑒 𝑆𝑙𝑜𝑡
+𝑀𝑥  
+ 
+With x = ecg,ppg,bia and gsr. 
+Depending on the value of the Mx parameters, a Time_Slot can be composed by one or more 
+Frame Slot or none. In the last case, the device will remain in SLEEP_OPERATIVE (as 
+described in the next paragraphs). [END] 
+ 
+ 
+ 
+STBIO1 die size is 3700μm x 4000μm including scribe line of 80um. Technology used is 
+HCMOS9A (130nm) 
+ 
+PDK_STM_HCMOS9A 11.8.b-03 
+PDK_STM_PLUS 04.04-02 
+ 
+ 
+ 
+ 
+Figure 2: STBIO1 Device Scheme

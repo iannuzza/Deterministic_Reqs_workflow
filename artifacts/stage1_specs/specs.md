@@ -1,0 +1,957 @@
+# Requirements Baseline
+
+Date: 2026-09-21
+
+## Scope
+- Stage 2 formalization baseline generated from Stage 1 requirements summary.
+
+## Requirements
+- DDS_STBIO1_4000: [DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1.
+- DDS_STBIO1_0201: 11.1. XBAR Connection Matrix Destination Source Regmap SENSOR HUB ISPU FIFO ADSP Main Controller
+- DDS_STBIO1_0202: 11.1. XBAR Connection Matrix Destination Source Regmap SENSOR HUB ISPU FIFO ADSP Main Controller
+- DDS_STBIO1_0219: 11.1. XBAR Connection Matrix Destination Source Regmap SENSOR HUB ISPU FIFO ADSP Main Controller
+- DDS_STBIO1_0203: ADSP
+- DDS_STBIO1_0204: ADSP
+- DDS_STBIO1_0206: ADSP
+- DDS_STBIO1_0207: I2C_SPI_AHB
+- DDS_STBIO1_0208: I2C_SPI_AHB
+- DDS_STBIO1_0209: I2C_SPI_AHB
+- DDS_STBIO1_0210: I2C_SPI_AHB
+- DDS_STBIO1_0221: I2C_SPI_AHB
+- DDS_STBIO1_0211: SENSOR HUB
+- DDS_STBIO1_0212: ISPU
+- DDS_STBIO1_0213: ISPU
+- DDS_STBIO1_0215: ISPU
+- DDS_STBIO1_0222: ISPU
+- DDS_STBIO1_0216: ISPU debug
+- DDS_STBIO1_0217: ISPU debug
+- DDS_STBIO1_0218: ISPU debug
+- DDS_STBIO1_0220: ISPU debug
+- DDS_STBIO1_0223: ISPU debug
+- DDS_STBIO1_0104: When the device is turned on, i_POR1V2_1V2 shall be high. [TO: IPOS_PMU]
+- DDS_STBIO1_0105: When i_POR1V2_1V2 is low, o_ EN_LDO1V8 shall be low. [TO: IPOS_PMU]
+- DDS_STBIO1_0106: When i_POR1V2_1V2 is low, o_PD_CLKF shall be high. [TO: IPOS_PMU]
+- DDS_STBIO1_0107: When i_POR1V2_1V2 is low, o_CLK_16M_READY shall be low. [TO: IPOS_PMU]
+- DDS_STBIO1_0108: When i_POR1V2_1V2 is low, o_DIS_RC_VIREF shall be high. [TO: IPOS_PMU]
+- DDS_STBIO1_0109: When i_POR1V2_1V2 rises, after at least 10 cycles of i_clk_64k (64kHz), o_ EN_LDO1V8 shall be high and the clk_64k_divided is considered stable. [TO: IPOS_PMU]
+- DDS_STBIO1_0110: When clk_64k_divided is stable, after at least 352 cycles of clk_64k_divided (32kHz), o_DIS_RC_VIREF shall be low. [TO: IPOS_PMU]
+- DDS_STBIO1_0111: When i_mask_en_ldo_pdclkf_reg and o_EN_LDO1V8 are set to 1, o_PD_CLKF shall be low after at least 40 cycles of the clk_64k_divided. [TO: IPOS_PMU]
+- DDS_STBIO1_0112: When i_START_CLK_16M is high, after at least 20 cycles of i_clk_16M (16MHz), o_CLK_16M_READY shall be high. [TO: IPOS_PMU]
+- DDS_STBIO1_0113: When i_START_CLK_16M is high for the first time, after at least 20 cycles of i_clk_16M (16MHz), o_main_resetn shall be high. [TO: IPOS_PMU]
+- DDS_STBIO1_1020: The stbio1_top.clk_16m signal shall be connected to the stbio1_top.dig_wrapper_LV.u_pmu.clk_16m signal, with frequency 16 MHz and without clock gating.
+- DDS_STBIO1_1021: The stbio1_top.clk_64k signal shall be connected to the stbio1_top.dig_wrapper_LV.u_pmu.clk_64k signal, with frequency 64 kHz and without clock gating.
+- DDS_STBIO1_1027: The stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_32k signal shall be connected to the stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_32kHz signal, with frequency 32 kHz and without clock gating.
+- DDS_STBIO1_1022: The stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft signal shall be connected to the stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk signal, with frequency 16 MHz and with clock gating stbio1_top.dig_wrapper_LV.u_pm u.adsp_run | stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode | ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable.
+- DDS_STBIO1_1023: The stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk signal shall be connected to the stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk signal, with frequency 16 MHz and with clock gating stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk | stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode | ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable.
+- DDS_STBIO1_1024: The stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft signal shall be connected to the stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk signal, with frequency 16 MHz and with clock gating stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en | stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode | ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable.
+- DDS_STBIO1_2024: The stbio1_top.dig_wrapper_LV.u_pmuclk_xbar signal shall be connected to the stbio1_top.dig_wrapper_LV.u.fifo.HCLK signal, with frequency 16 MHz and with clock gating stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2 | stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode | stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2_reg | ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable.
+- DDS_STBIO1_2025: The stbio1_top.dig_wrapper_LV.u_pmu.clk_stredl signal shall be connected to the stbio1_top.dig_wrapper_LV.u_ispu.clk signal, with frequency 16 MHz and without clock gating.
+- DDS_STBIO1_2026: The stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar signal shall be connected to the stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk signal, with frequency 16 MHz and with clock gating stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 | stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode | stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg | stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 | ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable.
+- DDS_STBIO1_1025: The u_stbio1_top.u_pmu.u_device_startup.tst_clk_32k signal shall be connected to the stbio1_top.dig_wrapper_LV.tst_clk_32k signal, with frequency 32 kHz and without clock gating.
+- DDS_STBIO1_1026: The stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m signal shall be connected to the stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz signal, with frequency 16 MHz and with clock gating stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep | stbio1_top.dig_wrapper_LV.u_pm u.scan_mode | ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable.
+- DDS_STBIO1_1050: The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_stmcu_stbio1_top.dig_wrapper_LV.u_ADSP.HRESETn signal.
+- DDS_STBIO1_1051: The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_masterblazeu_stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.HRESETn signal.
+- DDS_STBIO1_1052: The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_regmapu_stbio1_top.dig_wrapper_LV.u_regmap_otp.hresetn signal.
+- DDS_STBIO1_2052: The stbio1_top.dig_wrapper_LV.u_pmu. signal shall be connected to the u_device_startup.u_por_main_resetn.RST_N_FF[0]u_stbio1_top.dig_wrapper_LV.u_xbar_afe.hresetn signal.
+- DDS_STBIO1_2053: The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_regmapu_stbio1_top.dig_wrapper_LV.u_ispu.main_rst_n signal.
+- DDS_STBIO1_1053: The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_fifou_stbio1_top.dig_wrapper_LV.u_multi_channel_fifo_top.HRESETn signal.
+- DDS_STBIO1_1054: The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_main_ctrlu_stbio1_top.dig_wrapper_LV.u_main_controller_top.i_rstn signal.
+- DDS_STBIO1_2054: The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_32k_main_ctrlu_stbio1_top.dig_wrapper_LV.u_main_controller_top.i_rstn_sync_32 signal.
+- DDS_STBIO1_302: If MODE_CONFIG register is 0x00 the operative mode shall be functional. [Vpriority High]
+- DDS_STBIO1_303: If MODE_CONFIG register is 0x01 the operative mode shall be SCAN.
+- DDS_STBIO1_304: If MODE_CONFIG register is 0x04 the operative mode shall be BIST.
+- DDS_STBIO1_305: If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG.
+- DDS_STBIO1_306: If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG. [Vpriority High]
+- DDS_STBIO1_307: If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode. [Vpriority High]
+- DDS_STBIO1_308: If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode. [Vpriority High]
+- DDS_STBIO1_314: In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is “0” [Vpriority High]
+- DDS_STBIO1_309: In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is “0” [Vpriority High]
+- DDS_STBIO1_310: In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is “0” [Vpriority High]
+- DDS_STBIO1_311: In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is “0” [Vpriority High]
+- DDS_STBIO1_312: In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is “0” [Vpriority High]
+- DDS_STBIO1_313: In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is “0” [Vpriority High]
+- DDS_STBIO1_392: If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'
+- DDS_STBIO1_393: If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'
+- DDS_STBIO1_394: If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'
+- DDS_STBIO1_0014: The BOOT routine shall starts when the OTP_BOOT bit rises and shall completes when quokka_boot_end rises. [Vpriority High]
+- DDS_STBIO1_0015: During OTP boot operation, the ADSP shall copy the content of the OTP memory into the OTP registers, following the procedure to access OTP memory [Vpriority High]
+- DDS_STBIO1_0016: During BOOT routine, ADSP shall first read the last location of the OTP memory, at address 0x7F. If the content is 0xFF, called “lifecycle” byte, then the READ operation proceeds from address 0 to address 0x2F; otherwise, ADSP shall not perform any further reads.
+- DDS_STBIO1_0017: To perform a BOOT routine, OTP_BOOT bit shall be written when quokka_run is low. [Vpriority High]
+- DDS_STBIO1_0018: The WRITE routine shall start when OTP Write Bit rises and completes when quokka_run falls. [Vpriority High]
+- DDS_STBIO1_0019: During WRITE routine ADSP shall copy the content of the OTP regmap into the OTP memory, following the procedure to burn the fuses as expressed in the OTP datasheet [Vpriority High]
+- DDS_STBIO1_0020: During WRITE routine, ADSP shall allow copying all OTP Registers into the OTP Memory only if the location 0x24 of OTP Memory (OTP[24] in the following diagram) is not set to 0xFF.
+- DDS_STBIO1_0021: During the WRITE routine and after copying all OTP Registers into the OTP Memory, ADSP shall compare each value inside the OTP memory with the corresponding value in OTP Registers to check if the WRITE routine has been succesfull. In that case ADSP shall write 0xFF into the last location of the OTP memory.
+- DDS_STBIO1_0022: OTP_WRITE, OTP_BOOT and OTP_TEST bits shall be cleared by ADSP at the end of their respective operation [Vpriority High]
+- DDS_STBIO1_0023: A new operation shall start only when quokka_run is low, and one between OTP_TEST bit, OTP_WRITE bit or OTP_BOOT bit is written to 1 [Vpriority High]
+- DDS_STBIO1_0028: [DDS_STBIO1_0028] Requirement: The TEST routines shall allow reading an 8-bit word on OTP of a specific address written in OTP_A register, and write this value in OTP_D_TEST register.
+- DDS_STBIO1_0024: OTP_IREF_WAKEUP shall be set to one by an external I2C/SPI to AHB write before initiating a new OTP_TEST or OTP_WRITE operation [Vpriority High]
+- DDS_STBIO1_0025: OTP_IREF_WAKEUP shall be setted to zero by an external I2C/SPI to AHB write at the end of OTP_TEST or OTP_WRITE operation [Vpriority High]
+- DDS_STBIO1_0026: After startup phase, once started with an operation, the IP shall ignore any further start incoming transactions. [Vpriority High]
+- DDS_STBIO1_0027: The TEST routine shall start when OTP Test Bit rises and completes when quokka_run falls. [Vpriority High]
+- DDS_STBIO1_0034: During the Soft Reset routine, ADSP shall write the ADSP RAM with the value 0. Only the first 3.5Kbyte of ADSP RAM shall be cleared, from address 0x000 to address 0xDFF [Vpriority High]
+- DDS_STBIO1_0036: [DDS_STBIO1_0036] Requirement: If bit OTP_PRG10[31] in OTP Registers, called write_protection_en, is set to 1, and STBIO1 is not in debug_mode, register map shall refuse any incoming write request if the transaction address is within the OTP Registers space (from 0xCD000 to 0xCD02F).
+- DDS_STBIO1_0032: After each Boot routine performed by the ADSP, a value of 0x04 shall be written once to address 0x0CA00C to ensure correct operation of the AHB transactions. [Vpriority High]
+- DDS_STBIO1_0033: The Soft Reset routine shall start when SOFT_RESET Bit (in CONTROL_A register) rises and completes when quokka_run falls. [Vpriority High]
+- DDS_STBIO1_0035: If during the start of a new operation, more than one bit is written into CONTROL_A reg in the same write operation, ADSP shall execute only the routine at higher priority and discard the others. Priority is listed below, with first routine at higher priority: 1. SOFT RESET routine 2. OTP WRITE routine 3. OTP TEST routine 4. OTP BOOT routine [Vpriority High]
+- DDS_STBIO1_8100: CONNECTION fifo_dpt 8 FIFO depth. Suggested val 8
+- DDS_STBIO1_8101: rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read. If timer expires the operation is aborted and proper flag is activated. Suggested val. 1200
+- DDS_STBIO1_8102: i2c_hs_mode 1'b0 To activate HS I2C
+- DDS_STBIO1_8103: i2c_master_code 8'h00 Master code for HS I2C
+- DDS_STBIO1_8104: ser_mode "i2c_spi" To choose if the interface is SPI only, I2C only or both. Suggested : i2c_spi
+- DDS_STBIO1_8105: ip_version 8'haa IP version
+- DDS_STBIO1_8106: i2c_dev_id 7'h5f I2C device address
+- DDS_STBIO1_8000: [DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported.
+- DDS_STBIO1_8001: Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]
+- DDS_STBIO1_8003: An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]
+- DDS_STBIO1_8004: A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]
+- DDS_STBIO1_8005: An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]
+- DDS_STBIO1_8002: The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]
+- DDS_STBIO1_8006: On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]
+- DDS_STBIO1_8007: On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]
+- DDS_STBIO1_9317: If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9013: Output scl_master_out of sensor hub shall be connected to enable of output buffer of sensor hub's SCL PAD in case it is a bi-directional PAD). [Vpriority High] [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9014: Output sda_master_out of sensor hub shall be connected to enable of output buffer of sensor hub's SDA PAD. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9011: Input scl_master_in of sensor hub shall be connected to input buffer from sensor hub's SCL PAD. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9012: Input sda_master_in of sensor hub shall be connected to input buffer from sensor hub's SDA PAD. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9017: The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9004: Input sys_clk of sensor hub shall be connected to 8MHz clock to generate I2C communications compliant with FM+ I2C standard. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9018: [DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER.
+- DDS_STBIO1_9024: [DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation.
+- DDS_STBIO1_9027: [DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed.
+- DDS_STBIO1_9030: [DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12).
+- DDS_STBIO1_9032: [DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0.
+- DDS_STBIO1_9029: AUX_SENS_ON possible values shall be 0,1,2,3. All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9031: All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9033: All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9035: When Quokka MasterBlaze µP runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9300: [DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated.
+- DDS_STBIO1_9500: [DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' .
+- DDS_STBIO1_9034: The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9260: Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9261: 3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9262: 24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_9263: The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]
+- DDS_STBIO1_00000102: The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]
+- DDS_STBIO1_00000202: The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]
+- DDS_STBIO1_89456557: The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address. [TO: IPOS_FIFO_CTRL_89456557]
+- DDS_STBIO1_89459082: The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]
+- DDS_STBIO1_89455261: The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]
+- DDS_STBIO1_89455449: The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO. These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]
+- DDS_STBIO1_89455232: As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]
+- DDS_STBIO1_89456975: The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]
+- DDS_STBIO1_89457435: The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]
+- DDS_STBIO1_89457790: The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address. Example: FIFO Memory Base Address = 0xC4000, then: FIFO 0 memory location 0xC4000 FIFO 1 memory location 0xC4100 FIFO 2 memory location 0xC4200 FIFO 3 memory location 0xC4300 FIFO 4 memory location 0xC4400 FIFO 5 memory location 0xC4500 Table 29: SUB FIFO Memory Address [TO: IPOS_FIFO_CTRL_89457790]
+- DDS_STBIO1_00000008: If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]
+- DDS_STBIO1_00000199: If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]
+- DDS_STBIO1_00001199: When in Multiple Fifo, the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG0_DC BIA FIFO OFFSET BIA_AC_P, BIA_DC_P, BIA_AC_Q, BIA_DC_Q, ECG1_AC, ECG2_DC GSR FIFO OFFSET GSR, ECG1_DC, ECG2_AC PPG FIFO OFFSET PPG Table 31 : FIFO Offset Data Table
+- DDS_STBIO1_0501: The irq_FIFO_U_M_IRQ_STsATUS interrupt shall be connected to FIFO status to bit 29.
+- DDS_STBIO1_0502: The irq_SENSHUB_STS interrupt shall be connected to SENSOR HUB status to bit 28.
+- DDS_STBIO1_0503: The irq_ISPU_MC_INTR_STS interrupt shall be connected to ECG, BIA or PPG samples ready for elaboration to bit 27.
+- DDS_STBIO1_0504: The sw_interrupt interrupt shall be connected to sw interrupt used by ADSP or external user to bit 26:11 16.
+- DDS_STBIO1_0505: The irq_timer interrupt shall be connected to Internal timer to bit 1.
+- DDS_STBIO1_0509: [DDS_STBIO1_0509] Requirement: To put the ISPU into sleep mode, it is necessary to perform a read at address 0x80054.
+- DDS_STBIO1_05010: [DDS_STBIO1_05010] Requirement: To wake up the ISPU, it is necessary to trigger an interrupt.
+- DDS_STBIO1_05011: [DDS_STBIO1_05011] Requirement: When the ISPU is in sleep mode, it is possible to perform reads and writes from the data and code memory by triggering an AHB transition.
+- DDS_STBIO1_0508: To turn off the ISPU shall be: • Disable the power island by writing to regmap POWER CONFIGURATION REGISTER via AHB interface (ADDRESS=0xCA000, DATA=0x00)
+- DDS_STBIO1_0507: After the initial boot phase, to turn on the ISPU shall be: • Select page 3 of the regmap (ADDRESS=0x04, DATA=0x03) • Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x02) • Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x12) • Enable user mode by writing to regmap (ADDRESS=0x5E, DATA=0x01) • Enable the power island by writing to regmap POWER CONFIGURATION REGISTER via AHB interface (ADDRESS=0xCA000, DATA=0x01)
+- DDS_STBIO1_3000: 132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4. STBIO1 Register Map 13.4.1. STBIO1 Register Map Here is described the list of registers in the register map. The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB. The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers. BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn
+- DDS_STBIO1_3001: 0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn
+- DDS_STBIO1_3002: 0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n
+- DDS_STBIO1_3003: 0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn
+- DDS_STBIO1_3004: 0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn
+- DDS_STBIO1_3005: 0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn
+- DDS_STBIO1_3006: 0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn
+- DDS_STBIO1_1114: To perform a SOFT Reset procedure, the user shall perform the following steps: 1. If Mode Operation has been set to 1, shall be reset to 0 2. Set the Soft Reset Main Controller Bit (SW_RESETN_REG[0]) to 0 for at least 1 ms 3. Set the Soft Reset Main Controller Bit (SW_RESETN_REG[0]) to 1 4. Wait for the DEVICE_STATUS_REGISTER to reach the IDLE Value
+- DDS_STBIO1_0114: At the release of the POR signal from the analog domain, the PMU shall manage the turn-on of the LDO1V8 and starts clocks Start-Up Sequence (reported in PMU IPOS) [TO: IPOS_PMU]
+- DDS_STBIO1_0115: After At least 2 ms from the Release of the POR, the reset of the digital domain shall be de- asserted (an overlook on this part is described in the PMU IPOS) and the device shall start the Boot Phase [TO: IPOS_PMU]
+- DDS_STBIO1_0116: To check the end of the BOOT phase, the user shall read the main_controller_status_register (DEVICE_STATUS_REG register [2:0]) and follow these steps: • Read the DEVICE_STATUS_REG [2:0] • Check if the Value is 1 (BOOT phase still in process) • If the value is 2, then the BOOT phase is ended and the device is in IDLE. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0117: During the Configuration Phase (IDLE STATE of the Device_FSM), the user shall be able to: • Configure Bio-Channel or Optical Channel, the ADC Calibration and then Start a measurement cycle. • Put the device in Debug-Mode. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0118: • The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2] [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0119: • The user shall select active channel, in this case only ECG0_SEL and DS_SEL (Data Storage Mode) in DEVICE_CONFIG_CHANNEL register writing 0x21. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0120: • The user shall select a division index for ECG, configuring M_ECG_l and M_ECG_h in SET_ECG_FREQ_l register and SET_ECG_FREQ_h register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0121: • The user shall set the number of clocks for sampling ECG data from ADC in ADC_CONFIG_ECG register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0122: • The User shall set at 1 HC_EN in ECG_CTRL register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0123: • The user shall start measurement writing register DEVICE_CONFIG_OPERATION [0] at 1. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0124: • To check data in unique FIFO (default config) the user shall check the first MSB which will have to be equal to the table in DATA TAG Table. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0125: [DDS_STBIO1_0125] Requirement: • The user shall configure the time slot duration in DEVICE_CONFIG_OPERATION register [4:2].
+- DDS_STBIO1_0126: • The user shall select active channel, in this case ECG0_SEL, BIA_SEL and DS_SEL (Data Storage Mode) in DEVICE_CONFIG_CHANNEL writing 0x23. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0127: • The user shall select a division index for ECG, configuring M_ECG_l and M_ECG_h in SET_ECG_FREQ_l register and SET_ECG_FREQ_h register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0128: • The user shall select a division index for ECG, configuring M_BIA_l and M_BIA_h in SET_BIA_FREQ_l register and SET_BIA_FREQ_h register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0129: • The user shall set number of clocks for sampling ECG and BIA data from ADC in ADC_CONFIG_ECG register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0130: • The user shall set at 1 HC_EN in ECG_CTRL register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0140: • The user shall set at 1 IMP_EN in IMP_CTRL register. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0141: • The user shall start measurement writing register DEVICE_CONFIG_OPERATION [0] at 1. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0142: • To check data in unique FIFO (default config) the user shall check the first MSB which will have to be equal to the one described in the DATA TAG Table. [TO: IPOS_MAIN_CTRL]
+- DDS_STBIO1_0143: [DDS_STBIO1_0143] Requirement: • The User shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2].
+- DDS_STBIO1_0145: [DDS_STBIO1_0145] Requirement: • The user shall configure a division index PPG, writing M_PPG_l and M_PPG_h in SET_PPG_FREQ_l register and SET_PPG_FREQ_h register.
+- DDS_STBIO1_0146: [DDS_STBIO1_0146] Requirement: • The user shall configure the number of clocks for sampling PPG data from ADC in ADC_CONFIG_PPG register.
+- DDS_STBIO1_0144: • The user shall select active channel, in this case only PPG_SEL and DS_SEL (data Storage) in DEVICE_CONFIG_CHANNEL register shall be set to 0x30.
+- DDS_STBIO1_0147: The user shall configure each frame following these steps: 5.1 ALC PARAMETERS: • T1 in PPG_ALC_CONFIG_PARAM_1 register. • T2, GAIN_START_SET, GAIN_MAX_SET in PPG_ALC_CONFIG_PARAM_2 register. 5.2 DIGITAL RAMP PARAMETERS: • N_MAX, T_DELTA in DIGITAL_RAMP_CONFIG_PARAM_1 register. • DELTA, T_DELTA1 in DIGITAL_RAMP_CONFIG_PARAM_2 register. • DELTA1 in DIGITAL_RAMP_CONFIG_PARAM_3 register. 5.3 GENERAL PPG PARAMETERS: • N_PPG_FRAME, WAVE_VELOCITY_MODE, SEL_PPG_ELAB in GENERAL_PPG_PARAMETERS_1 register. • T_TX_STARTUP in GENERAL_PPG_PARAMETERS_2 register. • T_RX_SET, PPG_START_UP_TIME_l in GENERAL_PPG_PARAMETERS_3 register. • PPG_START_UP_TIME_h in GENERAL_PPG_PARAMETERS_4 register. 5.4 PARAMETERS FOR EACH FRAME CONFIGURED BY USER: • RX_CH_FRAME_{n}, FRAME_{n}_SAMPLES, FRAME_{n}_REPETITION in FRAME_n_PARAMETERS_1 register. • BTIA_GAIN_FRAME_{n}, TX_LEDSET_FRAME_l_{n} in FRAME_n_PARAMETERS_2 register. • TX_LEDSET_FRAME_h_{n}, TX_LEDOFF_FRAME_l_{n} in FRAME_n_PARAMETERS_3 register. • TX_LEDOFF_FRAME_h_{n} in FRAME_n_PARAMETERS_4 register. • IDAC_DC_PPG_FRAME_{n} in FRAME_n_PARAMETERS_5 register. • EN_TX_i in FRAME_n_PARAMETERS_6 register. • CURR_SEL_TX_FRAME{n} in FRAME_n_PARAMETERS_7 register. • TX1_OUTAB_SEL_FRAME_{n}, TX2_OUTAB_SEL_FRAME_{n}, TX3_OUTAB_SEL_FRAME_{n}, TX4_OUTAB_SEL_FRAME_{n} in FRAME_n_PARAMETERS_10 register.
+- DDS_STBIO1_0148: [DDS_STBIO1_0148] Requirement: • The user shall write DEVICE_CONFIG_OPERATION register [0] at 1.
+- DDS_STBIO1_0149: • To check data in unique FIFO (default config) the user shall check the first MSB. PPG DATA has 20 bits of data and 4 of TAG. The 4 bits, from 0 to 11, are used to identify the frame (as described in the table in DATA TAG table).
+- DDS_STBIO1_0699: After the initial boot phase, only with SPI interface, to turn on the Scan mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) • Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x02) • Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x12) • Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x01) Figure 26 scan mode activation timing
+- DDS_STBIO1_0700: After the initial boot phase, to turn on the Debug mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) • Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x02) • Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x12) • Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x08)
+- DDS_STBIO1_0701: To turn on the ADC TEST LOW NOISE mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) • Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0xF, DATA=0x02) • Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x12) • Enable ADC in debug mode (ADDRESS=0x09, DATA=0x06) • Select page 2 of the regmap (ADDRESS=0x40, DATA=0x02) • Enable ADC TEST LOW NOISE and input of ADC from GPIO (ADDRESS=0x0A, DATA=0x14) • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x02) • Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x08)
+- DDS_STBIO1_0702: To turn on the ADC TEST LOW NOISE mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) • Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0xF, DATA=0x02) • Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x12) • Enable ADC in debug mode (ADDRESS=0x09, DATA=0x06) • Select page 2 of the regmap (ADDRESS=0x40, DATA=0x02) • Enable ADC TEST LOW NOISE and input of ADC from GPIO (ADDRESS=0x0A, DATA=0x14) • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x02) • Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x08)
+- DDS_STBIO1_1507: To turn on the ADC TEST LOW NOISE mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) • Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0xF, DATA=0x02) • Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x12) • Enable ADC in debug mode (ADDRESS=0x09, DATA=0x06) • Select page 2 of the regmap (ADDRESS=0x40, DATA=0x02) • Enable ADC TEST LOW NOISE and input of ADC from GPIO (ADDRESS=0x0A, DATA=0x0C) • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x02) • Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x08)
+- DDS_STBIO1_2507: After the initial boot phase, to turn on the Debug mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) • Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x02) • Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register (ADDRESS=0x0F, DATA=0x12) • Enable the power island [DDS_STBIO1_0507] • Enable bist mode by writing to regmap (ADDRESS=0x3E, DATA=0x04)
+- DDS_STBIO1_0013: To move OTP signal, ADSP shall write a new value in a regbank by AHB protocol.
+- DDS_STBIO1_395: The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_002: The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5015: [Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5016: When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for these two channels shall be written in the following regmap registers ECG0_AC ECG0_DC ECG1_BIA_P_AC ECG1_BIA_P_DC ECG2_BIA_Q_AC ECG2_BIA_Q_DC GSR_RESULT
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5004: The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5005: If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1004: [Covers: DDS_STBIO1_0118] [Covers: DDS_STBIO1_0125] The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2]
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1005: The user shall configure which channel is selected and if work in Data Storage mode for the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1007: [Covers: DDS_STBIO1_0120] [Covers: DDS_STBIO1_0122] [Covers: DDS_STBIO1_0127] [Covers: DDS_STBIO1_0130] In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1008: [Covers: DDS_STBIO1_0128] [Covers: DDS_STBIO1_0140] In Order to enable a BIA Channel Operation, the user shall always select the BIA channel
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1009: In Order to enable a GSR Channel Operation, the user shall always select the GSR channel
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1010: In Order to enable a PPG Channel Operation, the user shall always select the PPG channel
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1011: In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_004: [Covers: DDS_STBIO1_0116] When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and that
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_008: When in unique_fifo_mode (i_multiple_fifo set to 0), if during a time slot an operation is done, the Main_Controller_FSM shall write the time_slot_data inside the FIFO with a dedicated tag. The value of the time_slot_data shall be referred to the start of the entire measurement cycle (for
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_009: [Covers: DDS_STBIO1_0123] [Covers: DDS_STBIO1_0141] When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL (DEVICE_CONFIG_CHANNEL register [3]) is set high, or ADC_DO_CALIBRATION ( ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE (GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL (DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_010: [Covers: DDS_STBIO1_0119] When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 0, ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall go low and the Device_FSM FSM shall go to the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_011: When the HC_EN (ECG_CTRL register [0]) is set to 0 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the Device_FSM shall go to the WAIT_SU State, so main_controller_status_register
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_016: When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low within 5 clock cycle at
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_017: When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_018: When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall be chosen from 20kHz, 50kHz, 100kHz, 200kHz . On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_019: When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_021: When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of O_RST_IMP, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be run at 10kHz frequency. On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_023: When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_024: When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3124: When the ELAB_FSM is in ECG State and only ECG0 is selected, the o_ADC_EN shall go high,
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3125: When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE).
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_026: When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3126: When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3127: When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions described in section 5.4 ADC PHASE ) and then device shall go in
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_028: When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_128: When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in section 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_029: When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_030: When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_031: When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES (FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_032: When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, o_Txi_idac_VREF shall be increase its value of N_START for next step o_Txi_idac_VREF shall
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_033: When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) , Device_FSM shall go back in IDLE only if the user turns off the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_034: When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state (DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1034: Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_035: When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_036: When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck at 0) occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_436: When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_037: In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_038: When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions (described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_039: When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3128: When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3129: When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_044: When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_045: The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_047: When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_049: When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_051: [Covers: DDS_STBIO1_0121] [Covers: DDS_STBIO1_0129] The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_052: When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_0152: If the calibration has been done, the ADC_error_caps values computed shall reset only if the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_053: When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_054: When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_055: After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_058: The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_059: If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_060: When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_061: When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_062: When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_063: When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result shall be bypassed in favor of the value written inside the registers
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_064: When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in ADC_GENERAL_DEBUG_0 and the sampled data shall be written in ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and In this mode, before start a new sampling operation, the RESET_DEBUG_ADC DATA in
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_073: When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_074: When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0- ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_077: 20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0,
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_078: If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4079: If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4080: If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_080: When the user selects an operative mode that includes the BIA channel, a start-up shall be done.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_082: When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_083: At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_085: 20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_087: If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4090: If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4091: If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5092: i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_088: The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass between two GSR acquisitions following this formula: GSRdata = time_slot 2 ∗ m_gsr
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_089: If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_092: If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_093: If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then mediated to get one single value for each of them, and then the final result shall be the subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_094: When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE State and shall go back in Operative State only when the measurement shall be run or, in case of
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_7095: All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_095: The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high when the PPG_FSM is
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_096: When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and PPG_SEL in DEVICE_CONFIG_CHANNEL register is set to 1, when the ELAB_FSM is in PPG STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6098: When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6070: When i_wave_velocity mode is enabled together with the DISABLE_ALC, the PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_098: When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_099: When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_100: When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1, the o_BIDAC shall maintain the value reached during the ALC Compensation summed up, if i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_101: When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time (GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_102: When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_103: When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1102: Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1104: Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_8106: If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_104: When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_105: When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_106: When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_108: When in Measurement state, the PPG_FSM shall stay in this state until the rising of the i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_109: When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_110: When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_111: When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time (depends on the user's configuration of Digital Ramp parameters) and bring itself into the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_112: When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_113: When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1095: The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_115: At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. Once the Average is computed, if no averages_between_equal_frames option is selected, the data shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there is avareges_between_equal_frames option selected from regmap, after the computations of this average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1116: When the Ioff Calibration algorithm is enabled, it shall be performed every time a new
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_118: When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_120: When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_126: When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start (PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_728: At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6129: When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_134: According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_137: The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_138: The average block shall perform the average on 16 sample acquisition for GSR. When the CDS mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1139: The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_140: Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed as follow: I_N_Average_PPG Samples Result with ALC MASK=0 Result with ALC Mask=1 0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 Table 18: PPG Result Table Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1143: For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2143: When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2,
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2144: [Covers: DDS_STBIO1_0124] [Covers: DDS_STBIO1_0142] The data written in FIFO shall have the following tag: DATA TYPE BIT: 23 - 20 BIT: 19 - 16 BIT: 15 - 0 PPG FRAME 0 0000 DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT PPG FRAME 1 0001 PPG FRAME 2 0010 PPG FRAME 3 0011 PPG FRAME 4 0100 PPG FRAME 5 0101 PPG FRAME 6 0110 PPG FRAME 7 0111 PPG FRAME 8 1000 PPG FRAME 9 1001 PPG FRAME 10 1010 PPG FRAME 11 1011 TIME SLOT DATA 1111 0000 DATA 16 BIT ECG0_AC 1100 0000 DATA 16 BIT ECG0_DC 1101 0000 DATA 16 BIT ECG1_AC 1100 0001 DATA 16 BIT ECG1_DC 1101 0001 DATA 16 BIT ECG2_AC 1100 0010 DATA 16 BIT ECG2_DC 1101 0010 DATA 16 BIT
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2146: In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at the start of the next frame or frame repetition.
+- ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2145: The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be obtained as explained in [IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT 3. After the last repetition has been accumulated, the data output shall be obtained dividing by the number of repeated frames the accumulated data to obtain a 20 bit data. The final result shall be computed as follows: Number of times the Frame has been repeated Result 2 (Res_F_R1 + Res_F_R2)/2 4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 Table 20: Frame Repetitions Result Computation table Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the result of the second repetition of the frame.
+
+## Acceptance Tests (Given-When-Then)
+- AT-DDS_STBIO1_4000: Given nominal setup, when scenario for DDS_STBIO1_4000 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0201: Given nominal setup, when scenario for DDS_STBIO1_0201 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0202: Given nominal setup, when scenario for DDS_STBIO1_0202 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0219: Given nominal setup, when scenario for DDS_STBIO1_0219 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0203: Given nominal setup, when scenario for DDS_STBIO1_0203 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0204: Given nominal setup, when scenario for DDS_STBIO1_0204 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0206: Given nominal setup, when scenario for DDS_STBIO1_0206 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0207: Given nominal setup, when scenario for DDS_STBIO1_0207 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0208: Given nominal setup, when scenario for DDS_STBIO1_0208 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0209: Given nominal setup, when scenario for DDS_STBIO1_0209 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0210: Given nominal setup, when scenario for DDS_STBIO1_0210 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0221: Given nominal setup, when scenario for DDS_STBIO1_0221 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0211: Given nominal setup, when scenario for DDS_STBIO1_0211 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0212: Given nominal setup, when scenario for DDS_STBIO1_0212 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0213: Given nominal setup, when scenario for DDS_STBIO1_0213 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0215: Given nominal setup, when scenario for DDS_STBIO1_0215 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0222: Given nominal setup, when scenario for DDS_STBIO1_0222 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0216: Given nominal setup, when scenario for DDS_STBIO1_0216 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0217: Given nominal setup, when scenario for DDS_STBIO1_0217 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0218: Given nominal setup, when scenario for DDS_STBIO1_0218 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0220: Given nominal setup, when scenario for DDS_STBIO1_0220 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0223: Given nominal setup, when scenario for DDS_STBIO1_0223 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0104: Given nominal setup, when scenario for DDS_STBIO1_0104 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0105: Given nominal setup, when scenario for DDS_STBIO1_0105 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0106: Given nominal setup, when scenario for DDS_STBIO1_0106 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0107: Given nominal setup, when scenario for DDS_STBIO1_0107 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0108: Given nominal setup, when scenario for DDS_STBIO1_0108 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0109: Given nominal setup, when scenario for DDS_STBIO1_0109 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0110: Given nominal setup, when scenario for DDS_STBIO1_0110 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0111: Given nominal setup, when scenario for DDS_STBIO1_0111 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0112: Given nominal setup, when scenario for DDS_STBIO1_0112 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0113: Given nominal setup, when scenario for DDS_STBIO1_0113 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1020: Given nominal setup, when scenario for DDS_STBIO1_1020 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1021: Given nominal setup, when scenario for DDS_STBIO1_1021 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1027: Given nominal setup, when scenario for DDS_STBIO1_1027 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1022: Given nominal setup, when scenario for DDS_STBIO1_1022 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1023: Given nominal setup, when scenario for DDS_STBIO1_1023 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1024: Given nominal setup, when scenario for DDS_STBIO1_1024 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_2024: Given nominal setup, when scenario for DDS_STBIO1_2024 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_2025: Given nominal setup, when scenario for DDS_STBIO1_2025 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_2026: Given nominal setup, when scenario for DDS_STBIO1_2026 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1025: Given nominal setup, when scenario for DDS_STBIO1_1025 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1026: Given nominal setup, when scenario for DDS_STBIO1_1026 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1050: Given nominal setup, when scenario for DDS_STBIO1_1050 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1051: Given nominal setup, when scenario for DDS_STBIO1_1051 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1052: Given nominal setup, when scenario for DDS_STBIO1_1052 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_2052: Given nominal setup, when scenario for DDS_STBIO1_2052 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_2053: Given nominal setup, when scenario for DDS_STBIO1_2053 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1053: Given nominal setup, when scenario for DDS_STBIO1_1053 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1054: Given nominal setup, when scenario for DDS_STBIO1_1054 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_2054: Given nominal setup, when scenario for DDS_STBIO1_2054 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_302: Given nominal setup, when scenario for DDS_STBIO1_302 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_303: Given nominal setup, when scenario for DDS_STBIO1_303 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_304: Given nominal setup, when scenario for DDS_STBIO1_304 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_305: Given nominal setup, when scenario for DDS_STBIO1_305 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_306: Given nominal setup, when scenario for DDS_STBIO1_306 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_307: Given nominal setup, when scenario for DDS_STBIO1_307 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_308: Given nominal setup, when scenario for DDS_STBIO1_308 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_314: Given nominal setup, when scenario for DDS_STBIO1_314 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_309: Given nominal setup, when scenario for DDS_STBIO1_309 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_310: Given nominal setup, when scenario for DDS_STBIO1_310 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_311: Given nominal setup, when scenario for DDS_STBIO1_311 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_312: Given nominal setup, when scenario for DDS_STBIO1_312 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_313: Given nominal setup, when scenario for DDS_STBIO1_313 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_392: Given nominal setup, when scenario for DDS_STBIO1_392 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_393: Given nominal setup, when scenario for DDS_STBIO1_393 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_394: Given nominal setup, when scenario for DDS_STBIO1_394 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0014: Given nominal setup, when scenario for DDS_STBIO1_0014 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0015: Given nominal setup, when scenario for DDS_STBIO1_0015 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0016: Given nominal setup, when scenario for DDS_STBIO1_0016 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0017: Given nominal setup, when scenario for DDS_STBIO1_0017 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0018: Given nominal setup, when scenario for DDS_STBIO1_0018 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0019: Given nominal setup, when scenario for DDS_STBIO1_0019 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0020: Given nominal setup, when scenario for DDS_STBIO1_0020 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0021: Given nominal setup, when scenario for DDS_STBIO1_0021 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0022: Given nominal setup, when scenario for DDS_STBIO1_0022 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0023: Given nominal setup, when scenario for DDS_STBIO1_0023 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0028: Given nominal setup, when scenario for DDS_STBIO1_0028 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0024: Given nominal setup, when scenario for DDS_STBIO1_0024 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0025: Given nominal setup, when scenario for DDS_STBIO1_0025 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0026: Given nominal setup, when scenario for DDS_STBIO1_0026 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0027: Given nominal setup, when scenario for DDS_STBIO1_0027 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0034: Given nominal setup, when scenario for DDS_STBIO1_0034 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0036: Given nominal setup, when scenario for DDS_STBIO1_0036 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0032: Given nominal setup, when scenario for DDS_STBIO1_0032 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0033: Given nominal setup, when scenario for DDS_STBIO1_0033 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0035: Given nominal setup, when scenario for DDS_STBIO1_0035 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8100: Given nominal setup, when scenario for DDS_STBIO1_8100 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8101: Given nominal setup, when scenario for DDS_STBIO1_8101 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8102: Given nominal setup, when scenario for DDS_STBIO1_8102 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8103: Given nominal setup, when scenario for DDS_STBIO1_8103 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8104: Given nominal setup, when scenario for DDS_STBIO1_8104 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8105: Given nominal setup, when scenario for DDS_STBIO1_8105 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8106: Given nominal setup, when scenario for DDS_STBIO1_8106 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8000: Given nominal setup, when scenario for DDS_STBIO1_8000 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8001: Given nominal setup, when scenario for DDS_STBIO1_8001 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8003: Given nominal setup, when scenario for DDS_STBIO1_8003 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8004: Given nominal setup, when scenario for DDS_STBIO1_8004 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8005: Given nominal setup, when scenario for DDS_STBIO1_8005 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8002: Given nominal setup, when scenario for DDS_STBIO1_8002 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8006: Given nominal setup, when scenario for DDS_STBIO1_8006 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_8007: Given nominal setup, when scenario for DDS_STBIO1_8007 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9317: Given nominal setup, when scenario for DDS_STBIO1_9317 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9013: Given nominal setup, when scenario for DDS_STBIO1_9013 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9014: Given nominal setup, when scenario for DDS_STBIO1_9014 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9011: Given nominal setup, when scenario for DDS_STBIO1_9011 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9012: Given nominal setup, when scenario for DDS_STBIO1_9012 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9017: Given nominal setup, when scenario for DDS_STBIO1_9017 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9004: Given nominal setup, when scenario for DDS_STBIO1_9004 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9018: Given nominal setup, when scenario for DDS_STBIO1_9018 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9024: Given nominal setup, when scenario for DDS_STBIO1_9024 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9027: Given nominal setup, when scenario for DDS_STBIO1_9027 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9030: Given nominal setup, when scenario for DDS_STBIO1_9030 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9032: Given nominal setup, when scenario for DDS_STBIO1_9032 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9029: Given nominal setup, when scenario for DDS_STBIO1_9029 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9031: Given nominal setup, when scenario for DDS_STBIO1_9031 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9033: Given nominal setup, when scenario for DDS_STBIO1_9033 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9035: Given nominal setup, when scenario for DDS_STBIO1_9035 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9300: Given nominal setup, when scenario for DDS_STBIO1_9300 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9500: Given nominal setup, when scenario for DDS_STBIO1_9500 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9034: Given nominal setup, when scenario for DDS_STBIO1_9034 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9260: Given nominal setup, when scenario for DDS_STBIO1_9260 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9261: Given nominal setup, when scenario for DDS_STBIO1_9261 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9262: Given nominal setup, when scenario for DDS_STBIO1_9262 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_9263: Given nominal setup, when scenario for DDS_STBIO1_9263 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_00000102: Given nominal setup, when scenario for DDS_STBIO1_00000102 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_00000202: Given nominal setup, when scenario for DDS_STBIO1_00000202 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89456557: Given nominal setup, when scenario for DDS_STBIO1_89456557 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89459082: Given nominal setup, when scenario for DDS_STBIO1_89459082 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89455261: Given nominal setup, when scenario for DDS_STBIO1_89455261 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89455449: Given nominal setup, when scenario for DDS_STBIO1_89455449 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89455232: Given nominal setup, when scenario for DDS_STBIO1_89455232 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89456975: Given nominal setup, when scenario for DDS_STBIO1_89456975 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89457435: Given nominal setup, when scenario for DDS_STBIO1_89457435 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_89457790: Given nominal setup, when scenario for DDS_STBIO1_89457790 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_00000008: Given nominal setup, when scenario for DDS_STBIO1_00000008 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_00000199: Given nominal setup, when scenario for DDS_STBIO1_00000199 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_00001199: Given nominal setup, when scenario for DDS_STBIO1_00001199 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0501: Given nominal setup, when scenario for DDS_STBIO1_0501 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0502: Given nominal setup, when scenario for DDS_STBIO1_0502 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0503: Given nominal setup, when scenario for DDS_STBIO1_0503 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0504: Given nominal setup, when scenario for DDS_STBIO1_0504 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0505: Given nominal setup, when scenario for DDS_STBIO1_0505 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0509: Given nominal setup, when scenario for DDS_STBIO1_0509 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_05010: Given nominal setup, when scenario for DDS_STBIO1_05010 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_05011: Given nominal setup, when scenario for DDS_STBIO1_05011 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0508: Given nominal setup, when scenario for DDS_STBIO1_0508 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0507: Given nominal setup, when scenario for DDS_STBIO1_0507 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_3000: Given nominal setup, when scenario for DDS_STBIO1_3000 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_3001: Given nominal setup, when scenario for DDS_STBIO1_3001 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_3002: Given nominal setup, when scenario for DDS_STBIO1_3002 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_3003: Given nominal setup, when scenario for DDS_STBIO1_3003 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_3004: Given nominal setup, when scenario for DDS_STBIO1_3004 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_3005: Given nominal setup, when scenario for DDS_STBIO1_3005 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_3006: Given nominal setup, when scenario for DDS_STBIO1_3006 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1114: Given nominal setup, when scenario for DDS_STBIO1_1114 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0114: Given nominal setup, when scenario for DDS_STBIO1_0114 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0115: Given nominal setup, when scenario for DDS_STBIO1_0115 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0116: Given nominal setup, when scenario for DDS_STBIO1_0116 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0117: Given nominal setup, when scenario for DDS_STBIO1_0117 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0118: Given nominal setup, when scenario for DDS_STBIO1_0118 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0119: Given nominal setup, when scenario for DDS_STBIO1_0119 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0120: Given nominal setup, when scenario for DDS_STBIO1_0120 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0121: Given nominal setup, when scenario for DDS_STBIO1_0121 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0122: Given nominal setup, when scenario for DDS_STBIO1_0122 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0123: Given nominal setup, when scenario for DDS_STBIO1_0123 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0124: Given nominal setup, when scenario for DDS_STBIO1_0124 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0125: Given nominal setup, when scenario for DDS_STBIO1_0125 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0126: Given nominal setup, when scenario for DDS_STBIO1_0126 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0127: Given nominal setup, when scenario for DDS_STBIO1_0127 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0128: Given nominal setup, when scenario for DDS_STBIO1_0128 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0129: Given nominal setup, when scenario for DDS_STBIO1_0129 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0130: Given nominal setup, when scenario for DDS_STBIO1_0130 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0140: Given nominal setup, when scenario for DDS_STBIO1_0140 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0141: Given nominal setup, when scenario for DDS_STBIO1_0141 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0142: Given nominal setup, when scenario for DDS_STBIO1_0142 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0143: Given nominal setup, when scenario for DDS_STBIO1_0143 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0145: Given nominal setup, when scenario for DDS_STBIO1_0145 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0146: Given nominal setup, when scenario for DDS_STBIO1_0146 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0144: Given nominal setup, when scenario for DDS_STBIO1_0144 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0147: Given nominal setup, when scenario for DDS_STBIO1_0147 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0148: Given nominal setup, when scenario for DDS_STBIO1_0148 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0149: Given nominal setup, when scenario for DDS_STBIO1_0149 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0699: Given nominal setup, when scenario for DDS_STBIO1_0699 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0700: Given nominal setup, when scenario for DDS_STBIO1_0700 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0701: Given nominal setup, when scenario for DDS_STBIO1_0701 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0702: Given nominal setup, when scenario for DDS_STBIO1_0702 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_1507: Given nominal setup, when scenario for DDS_STBIO1_1507 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_2507: Given nominal setup, when scenario for DDS_STBIO1_2507 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_0013: Given nominal setup, when scenario for DDS_STBIO1_0013 is exercised, then expected behavior is observed.
+- AT-DDS_STBIO1_395: Given nominal setup, when scenario for DDS_STBIO1_395 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_002: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_002 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5015: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5015 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5016: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5016 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5004: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5004 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5005: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5005 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1004: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1004 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1005: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1005 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1007: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1007 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1008: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1008 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1009: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1009 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1010: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1010 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1011: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1011 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_004: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_004 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_008: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_008 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_009: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_009 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_010: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_010 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_011: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_011 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_016: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_016 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_017: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_017 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_018: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_018 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_019: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_019 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_021: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_021 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_023: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_023 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_024: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_024 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3124: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3124 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3125: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3125 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_026: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_026 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3126: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3126 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3127: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3127 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_028: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_028 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_128: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_128 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_029: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_029 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_030: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_030 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_031: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_031 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_032: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_032 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_033: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_033 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_034: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_034 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1034: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1034 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_035: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_035 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_036: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_036 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_436: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_436 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_037: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_037 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_038: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_038 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_039: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_039 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3128: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3128 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3129: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3129 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_044: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_044 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_045: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_045 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_047: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_047 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_049: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_049 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_051: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_051 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_052: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_052 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_0152: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_0152 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_053: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_053 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_054: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_054 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_055: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_055 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_058: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_058 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_059: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_059 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_060: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_060 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_061: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_061 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_062: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_062 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_063: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_063 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_064: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_064 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_073: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_073 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_074: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_074 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_077: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_077 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_078: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_078 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4079: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4079 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4080: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4080 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_080: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_080 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_082: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_082 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_083: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_083 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_085: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_085 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_087: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_087 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4090: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4090 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4091: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4091 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5092: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5092 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_088: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_088 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_089: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_089 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_092: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_092 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_093: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_093 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_094: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_094 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_7095: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_7095 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_095: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_095 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_096: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_096 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6098: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6098 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6070: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6070 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_098: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_098 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_099: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_099 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_100: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_100 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_101: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_101 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_102: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_102 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_103: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_103 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1102: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1102 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1104: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1104 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_8106: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_8106 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_104: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_104 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_105: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_105 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_106: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_106 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_108: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_108 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_109: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_109 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_110: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_110 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_111: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_111 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_112: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_112 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_113: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_113 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1095: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1095 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_115: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_115 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1116: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1116 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_118: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_118 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_120: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_120 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_126: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_126 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_728: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_728 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6129: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6129 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_134: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_134 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_137: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_137 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_138: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_138 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1139: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1139 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_140: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_140 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1143: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1143 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2143: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2143 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2144: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2144 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2146: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2146 is exercised, then expected behavior is observed.
+- AT-ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2145: Given nominal setup, when scenario for ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2145 is exercised, then expected behavior is observed.
+
+## Assertions
+- ASSERT_DDS_STBIO1_4000_01: trigger(DDS_STBIO1_4000) -> expected(DDS_STBIO1_4000)
+- ASSERT_DDS_STBIO1_0201_01: trigger(DDS_STBIO1_0201) -> expected(DDS_STBIO1_0201)
+- ASSERT_DDS_STBIO1_0202_01: trigger(DDS_STBIO1_0202) -> expected(DDS_STBIO1_0202)
+- ASSERT_DDS_STBIO1_0219_01: trigger(DDS_STBIO1_0219) -> expected(DDS_STBIO1_0219)
+- ASSERT_DDS_STBIO1_0203_01: trigger(DDS_STBIO1_0203) -> expected(DDS_STBIO1_0203)
+- ASSERT_DDS_STBIO1_0204_01: trigger(DDS_STBIO1_0204) -> expected(DDS_STBIO1_0204)
+- ASSERT_DDS_STBIO1_0206_01: trigger(DDS_STBIO1_0206) -> expected(DDS_STBIO1_0206)
+- ASSERT_DDS_STBIO1_0207_01: trigger(DDS_STBIO1_0207) -> expected(DDS_STBIO1_0207)
+- ASSERT_DDS_STBIO1_0208_01: trigger(DDS_STBIO1_0208) -> expected(DDS_STBIO1_0208)
+- ASSERT_DDS_STBIO1_0209_01: trigger(DDS_STBIO1_0209) -> expected(DDS_STBIO1_0209)
+- ASSERT_DDS_STBIO1_0210_01: trigger(DDS_STBIO1_0210) -> expected(DDS_STBIO1_0210)
+- ASSERT_DDS_STBIO1_0221_01: trigger(DDS_STBIO1_0221) -> expected(DDS_STBIO1_0221)
+- ASSERT_DDS_STBIO1_0211_01: trigger(DDS_STBIO1_0211) -> expected(DDS_STBIO1_0211)
+- ASSERT_DDS_STBIO1_0212_01: trigger(DDS_STBIO1_0212) -> expected(DDS_STBIO1_0212)
+- ASSERT_DDS_STBIO1_0213_01: trigger(DDS_STBIO1_0213) -> expected(DDS_STBIO1_0213)
+- ASSERT_DDS_STBIO1_0215_01: trigger(DDS_STBIO1_0215) -> expected(DDS_STBIO1_0215)
+- ASSERT_DDS_STBIO1_0222_01: trigger(DDS_STBIO1_0222) -> expected(DDS_STBIO1_0222)
+- ASSERT_DDS_STBIO1_0216_01: trigger(DDS_STBIO1_0216) -> expected(DDS_STBIO1_0216)
+- ASSERT_DDS_STBIO1_0217_01: trigger(DDS_STBIO1_0217) -> expected(DDS_STBIO1_0217)
+- ASSERT_DDS_STBIO1_0218_01: trigger(DDS_STBIO1_0218) -> expected(DDS_STBIO1_0218)
+- ASSERT_DDS_STBIO1_0220_01: trigger(DDS_STBIO1_0220) -> expected(DDS_STBIO1_0220)
+- ASSERT_DDS_STBIO1_0223_01: trigger(DDS_STBIO1_0223) -> expected(DDS_STBIO1_0223)
+- ASSERT_DDS_STBIO1_0104_01: trigger(DDS_STBIO1_0104) -> expected(DDS_STBIO1_0104)
+- ASSERT_DDS_STBIO1_0105_01: trigger(DDS_STBIO1_0105) -> expected(DDS_STBIO1_0105)
+- ASSERT_DDS_STBIO1_0106_01: trigger(DDS_STBIO1_0106) -> expected(DDS_STBIO1_0106)
+- ASSERT_DDS_STBIO1_0107_01: trigger(DDS_STBIO1_0107) -> expected(DDS_STBIO1_0107)
+- ASSERT_DDS_STBIO1_0108_01: trigger(DDS_STBIO1_0108) -> expected(DDS_STBIO1_0108)
+- ASSERT_DDS_STBIO1_0109_01: trigger(DDS_STBIO1_0109) -> expected(DDS_STBIO1_0109)
+- ASSERT_DDS_STBIO1_0110_01: trigger(DDS_STBIO1_0110) -> expected(DDS_STBIO1_0110)
+- ASSERT_DDS_STBIO1_0111_01: trigger(DDS_STBIO1_0111) -> expected(DDS_STBIO1_0111)
+- ASSERT_DDS_STBIO1_0112_01: trigger(DDS_STBIO1_0112) -> expected(DDS_STBIO1_0112)
+- ASSERT_DDS_STBIO1_0113_01: trigger(DDS_STBIO1_0113) -> expected(DDS_STBIO1_0113)
+- ASSERT_DDS_STBIO1_1020_01: trigger(DDS_STBIO1_1020) -> expected(DDS_STBIO1_1020)
+- ASSERT_DDS_STBIO1_1021_01: trigger(DDS_STBIO1_1021) -> expected(DDS_STBIO1_1021)
+- ASSERT_DDS_STBIO1_1027_01: trigger(DDS_STBIO1_1027) -> expected(DDS_STBIO1_1027)
+- ASSERT_DDS_STBIO1_1022_01: trigger(DDS_STBIO1_1022) -> expected(DDS_STBIO1_1022)
+- ASSERT_DDS_STBIO1_1023_01: trigger(DDS_STBIO1_1023) -> expected(DDS_STBIO1_1023)
+- ASSERT_DDS_STBIO1_1024_01: trigger(DDS_STBIO1_1024) -> expected(DDS_STBIO1_1024)
+- ASSERT_DDS_STBIO1_2024_01: trigger(DDS_STBIO1_2024) -> expected(DDS_STBIO1_2024)
+- ASSERT_DDS_STBIO1_2025_01: trigger(DDS_STBIO1_2025) -> expected(DDS_STBIO1_2025)
+- ASSERT_DDS_STBIO1_2026_01: trigger(DDS_STBIO1_2026) -> expected(DDS_STBIO1_2026)
+- ASSERT_DDS_STBIO1_1025_01: trigger(DDS_STBIO1_1025) -> expected(DDS_STBIO1_1025)
+- ASSERT_DDS_STBIO1_1026_01: trigger(DDS_STBIO1_1026) -> expected(DDS_STBIO1_1026)
+- ASSERT_DDS_STBIO1_1050_01: trigger(DDS_STBIO1_1050) -> expected(DDS_STBIO1_1050)
+- ASSERT_DDS_STBIO1_1051_01: trigger(DDS_STBIO1_1051) -> expected(DDS_STBIO1_1051)
+- ASSERT_DDS_STBIO1_1052_01: trigger(DDS_STBIO1_1052) -> expected(DDS_STBIO1_1052)
+- ASSERT_DDS_STBIO1_2052_01: trigger(DDS_STBIO1_2052) -> expected(DDS_STBIO1_2052)
+- ASSERT_DDS_STBIO1_2053_01: trigger(DDS_STBIO1_2053) -> expected(DDS_STBIO1_2053)
+- ASSERT_DDS_STBIO1_1053_01: trigger(DDS_STBIO1_1053) -> expected(DDS_STBIO1_1053)
+- ASSERT_DDS_STBIO1_1054_01: trigger(DDS_STBIO1_1054) -> expected(DDS_STBIO1_1054)
+- ASSERT_DDS_STBIO1_2054_01: trigger(DDS_STBIO1_2054) -> expected(DDS_STBIO1_2054)
+- ASSERT_DDS_STBIO1_302_01: trigger(DDS_STBIO1_302) -> expected(DDS_STBIO1_302)
+- ASSERT_DDS_STBIO1_303_01: trigger(DDS_STBIO1_303) -> expected(DDS_STBIO1_303)
+- ASSERT_DDS_STBIO1_304_01: trigger(DDS_STBIO1_304) -> expected(DDS_STBIO1_304)
+- ASSERT_DDS_STBIO1_305_01: trigger(DDS_STBIO1_305) -> expected(DDS_STBIO1_305)
+- ASSERT_DDS_STBIO1_306_01: trigger(DDS_STBIO1_306) -> expected(DDS_STBIO1_306)
+- ASSERT_DDS_STBIO1_307_01: trigger(DDS_STBIO1_307) -> expected(DDS_STBIO1_307)
+- ASSERT_DDS_STBIO1_308_01: trigger(DDS_STBIO1_308) -> expected(DDS_STBIO1_308)
+- ASSERT_DDS_STBIO1_314_01: trigger(DDS_STBIO1_314) -> expected(DDS_STBIO1_314)
+- ASSERT_DDS_STBIO1_309_01: trigger(DDS_STBIO1_309) -> expected(DDS_STBIO1_309)
+- ASSERT_DDS_STBIO1_310_01: trigger(DDS_STBIO1_310) -> expected(DDS_STBIO1_310)
+- ASSERT_DDS_STBIO1_311_01: trigger(DDS_STBIO1_311) -> expected(DDS_STBIO1_311)
+- ASSERT_DDS_STBIO1_312_01: trigger(DDS_STBIO1_312) -> expected(DDS_STBIO1_312)
+- ASSERT_DDS_STBIO1_313_01: trigger(DDS_STBIO1_313) -> expected(DDS_STBIO1_313)
+- ASSERT_DDS_STBIO1_392_01: trigger(DDS_STBIO1_392) -> expected(DDS_STBIO1_392)
+- ASSERT_DDS_STBIO1_393_01: trigger(DDS_STBIO1_393) -> expected(DDS_STBIO1_393)
+- ASSERT_DDS_STBIO1_394_01: trigger(DDS_STBIO1_394) -> expected(DDS_STBIO1_394)
+- ASSERT_DDS_STBIO1_0014_01: trigger(DDS_STBIO1_0014) -> expected(DDS_STBIO1_0014)
+- ASSERT_DDS_STBIO1_0015_01: trigger(DDS_STBIO1_0015) -> expected(DDS_STBIO1_0015)
+- ASSERT_DDS_STBIO1_0016_01: trigger(DDS_STBIO1_0016) -> expected(DDS_STBIO1_0016)
+- ASSERT_DDS_STBIO1_0017_01: trigger(DDS_STBIO1_0017) -> expected(DDS_STBIO1_0017)
+- ASSERT_DDS_STBIO1_0018_01: trigger(DDS_STBIO1_0018) -> expected(DDS_STBIO1_0018)
+- ASSERT_DDS_STBIO1_0019_01: trigger(DDS_STBIO1_0019) -> expected(DDS_STBIO1_0019)
+- ASSERT_DDS_STBIO1_0020_01: trigger(DDS_STBIO1_0020) -> expected(DDS_STBIO1_0020)
+- ASSERT_DDS_STBIO1_0021_01: trigger(DDS_STBIO1_0021) -> expected(DDS_STBIO1_0021)
+- ASSERT_DDS_STBIO1_0022_01: trigger(DDS_STBIO1_0022) -> expected(DDS_STBIO1_0022)
+- ASSERT_DDS_STBIO1_0023_01: trigger(DDS_STBIO1_0023) -> expected(DDS_STBIO1_0023)
+- ASSERT_DDS_STBIO1_0028_01: trigger(DDS_STBIO1_0028) -> expected(DDS_STBIO1_0028)
+- ASSERT_DDS_STBIO1_0024_01: trigger(DDS_STBIO1_0024) -> expected(DDS_STBIO1_0024)
+- ASSERT_DDS_STBIO1_0025_01: trigger(DDS_STBIO1_0025) -> expected(DDS_STBIO1_0025)
+- ASSERT_DDS_STBIO1_0026_01: trigger(DDS_STBIO1_0026) -> expected(DDS_STBIO1_0026)
+- ASSERT_DDS_STBIO1_0027_01: trigger(DDS_STBIO1_0027) -> expected(DDS_STBIO1_0027)
+- ASSERT_DDS_STBIO1_0034_01: trigger(DDS_STBIO1_0034) -> expected(DDS_STBIO1_0034)
+- ASSERT_DDS_STBIO1_0036_01: trigger(DDS_STBIO1_0036) -> expected(DDS_STBIO1_0036)
+- ASSERT_DDS_STBIO1_0032_01: trigger(DDS_STBIO1_0032) -> expected(DDS_STBIO1_0032)
+- ASSERT_DDS_STBIO1_0033_01: trigger(DDS_STBIO1_0033) -> expected(DDS_STBIO1_0033)
+- ASSERT_DDS_STBIO1_0035_01: trigger(DDS_STBIO1_0035) -> expected(DDS_STBIO1_0035)
+- ASSERT_DDS_STBIO1_8100_01: trigger(DDS_STBIO1_8100) -> expected(DDS_STBIO1_8100)
+- ASSERT_DDS_STBIO1_8101_01: trigger(DDS_STBIO1_8101) -> expected(DDS_STBIO1_8101)
+- ASSERT_DDS_STBIO1_8102_01: trigger(DDS_STBIO1_8102) -> expected(DDS_STBIO1_8102)
+- ASSERT_DDS_STBIO1_8103_01: trigger(DDS_STBIO1_8103) -> expected(DDS_STBIO1_8103)
+- ASSERT_DDS_STBIO1_8104_01: trigger(DDS_STBIO1_8104) -> expected(DDS_STBIO1_8104)
+- ASSERT_DDS_STBIO1_8105_01: trigger(DDS_STBIO1_8105) -> expected(DDS_STBIO1_8105)
+- ASSERT_DDS_STBIO1_8106_01: trigger(DDS_STBIO1_8106) -> expected(DDS_STBIO1_8106)
+- ASSERT_DDS_STBIO1_8000_01: trigger(DDS_STBIO1_8000) -> expected(DDS_STBIO1_8000)
+- ASSERT_DDS_STBIO1_8001_01: trigger(DDS_STBIO1_8001) -> expected(DDS_STBIO1_8001)
+- ASSERT_DDS_STBIO1_8003_01: trigger(DDS_STBIO1_8003) -> expected(DDS_STBIO1_8003)
+- ASSERT_DDS_STBIO1_8004_01: trigger(DDS_STBIO1_8004) -> expected(DDS_STBIO1_8004)
+- ASSERT_DDS_STBIO1_8005_01: trigger(DDS_STBIO1_8005) -> expected(DDS_STBIO1_8005)
+- ASSERT_DDS_STBIO1_8002_01: trigger(DDS_STBIO1_8002) -> expected(DDS_STBIO1_8002)
+- ASSERT_DDS_STBIO1_8006_01: trigger(DDS_STBIO1_8006) -> expected(DDS_STBIO1_8006)
+- ASSERT_DDS_STBIO1_8007_01: trigger(DDS_STBIO1_8007) -> expected(DDS_STBIO1_8007)
+- ASSERT_DDS_STBIO1_9317_01: trigger(DDS_STBIO1_9317) -> expected(DDS_STBIO1_9317)
+- ASSERT_DDS_STBIO1_9013_01: trigger(DDS_STBIO1_9013) -> expected(DDS_STBIO1_9013)
+- ASSERT_DDS_STBIO1_9014_01: trigger(DDS_STBIO1_9014) -> expected(DDS_STBIO1_9014)
+- ASSERT_DDS_STBIO1_9011_01: trigger(DDS_STBIO1_9011) -> expected(DDS_STBIO1_9011)
+- ASSERT_DDS_STBIO1_9012_01: trigger(DDS_STBIO1_9012) -> expected(DDS_STBIO1_9012)
+- ASSERT_DDS_STBIO1_9017_01: trigger(DDS_STBIO1_9017) -> expected(DDS_STBIO1_9017)
+- ASSERT_DDS_STBIO1_9004_01: trigger(DDS_STBIO1_9004) -> expected(DDS_STBIO1_9004)
+- ASSERT_DDS_STBIO1_9018_01: trigger(DDS_STBIO1_9018) -> expected(DDS_STBIO1_9018)
+- ASSERT_DDS_STBIO1_9024_01: trigger(DDS_STBIO1_9024) -> expected(DDS_STBIO1_9024)
+- ASSERT_DDS_STBIO1_9027_01: trigger(DDS_STBIO1_9027) -> expected(DDS_STBIO1_9027)
+- ASSERT_DDS_STBIO1_9030_01: trigger(DDS_STBIO1_9030) -> expected(DDS_STBIO1_9030)
+- ASSERT_DDS_STBIO1_9032_01: trigger(DDS_STBIO1_9032) -> expected(DDS_STBIO1_9032)
+- ASSERT_DDS_STBIO1_9029_01: trigger(DDS_STBIO1_9029) -> expected(DDS_STBIO1_9029)
+- ASSERT_DDS_STBIO1_9031_01: trigger(DDS_STBIO1_9031) -> expected(DDS_STBIO1_9031)
+- ASSERT_DDS_STBIO1_9033_01: trigger(DDS_STBIO1_9033) -> expected(DDS_STBIO1_9033)
+- ASSERT_DDS_STBIO1_9035_01: trigger(DDS_STBIO1_9035) -> expected(DDS_STBIO1_9035)
+- ASSERT_DDS_STBIO1_9300_01: trigger(DDS_STBIO1_9300) -> expected(DDS_STBIO1_9300)
+- ASSERT_DDS_STBIO1_9500_01: trigger(DDS_STBIO1_9500) -> expected(DDS_STBIO1_9500)
+- ASSERT_DDS_STBIO1_9034_01: trigger(DDS_STBIO1_9034) -> expected(DDS_STBIO1_9034)
+- ASSERT_DDS_STBIO1_9260_01: trigger(DDS_STBIO1_9260) -> expected(DDS_STBIO1_9260)
+- ASSERT_DDS_STBIO1_9261_01: trigger(DDS_STBIO1_9261) -> expected(DDS_STBIO1_9261)
+- ASSERT_DDS_STBIO1_9262_01: trigger(DDS_STBIO1_9262) -> expected(DDS_STBIO1_9262)
+- ASSERT_DDS_STBIO1_9263_01: trigger(DDS_STBIO1_9263) -> expected(DDS_STBIO1_9263)
+- ASSERT_DDS_STBIO1_00000102_01: trigger(DDS_STBIO1_00000102) -> expected(DDS_STBIO1_00000102)
+- ASSERT_DDS_STBIO1_00000202_01: trigger(DDS_STBIO1_00000202) -> expected(DDS_STBIO1_00000202)
+- ASSERT_DDS_STBIO1_89456557_01: trigger(DDS_STBIO1_89456557) -> expected(DDS_STBIO1_89456557)
+- ASSERT_DDS_STBIO1_89459082_01: trigger(DDS_STBIO1_89459082) -> expected(DDS_STBIO1_89459082)
+- ASSERT_DDS_STBIO1_89455261_01: trigger(DDS_STBIO1_89455261) -> expected(DDS_STBIO1_89455261)
+- ASSERT_DDS_STBIO1_89455449_01: trigger(DDS_STBIO1_89455449) -> expected(DDS_STBIO1_89455449)
+- ASSERT_DDS_STBIO1_89455232_01: trigger(DDS_STBIO1_89455232) -> expected(DDS_STBIO1_89455232)
+- ASSERT_DDS_STBIO1_89456975_01: trigger(DDS_STBIO1_89456975) -> expected(DDS_STBIO1_89456975)
+- ASSERT_DDS_STBIO1_89457435_01: trigger(DDS_STBIO1_89457435) -> expected(DDS_STBIO1_89457435)
+- ASSERT_DDS_STBIO1_89457790_01: trigger(DDS_STBIO1_89457790) -> expected(DDS_STBIO1_89457790)
+- ASSERT_DDS_STBIO1_00000008_01: trigger(DDS_STBIO1_00000008) -> expected(DDS_STBIO1_00000008)
+- ASSERT_DDS_STBIO1_00000199_01: trigger(DDS_STBIO1_00000199) -> expected(DDS_STBIO1_00000199)
+- ASSERT_DDS_STBIO1_00001199_01: trigger(DDS_STBIO1_00001199) -> expected(DDS_STBIO1_00001199)
+- ASSERT_DDS_STBIO1_0501_01: trigger(DDS_STBIO1_0501) -> expected(DDS_STBIO1_0501)
+- ASSERT_DDS_STBIO1_0502_01: trigger(DDS_STBIO1_0502) -> expected(DDS_STBIO1_0502)
+- ASSERT_DDS_STBIO1_0503_01: trigger(DDS_STBIO1_0503) -> expected(DDS_STBIO1_0503)
+- ASSERT_DDS_STBIO1_0504_01: trigger(DDS_STBIO1_0504) -> expected(DDS_STBIO1_0504)
+- ASSERT_DDS_STBIO1_0505_01: trigger(DDS_STBIO1_0505) -> expected(DDS_STBIO1_0505)
+- ASSERT_DDS_STBIO1_0509_01: trigger(DDS_STBIO1_0509) -> expected(DDS_STBIO1_0509)
+- ASSERT_DDS_STBIO1_05010_01: trigger(DDS_STBIO1_05010) -> expected(DDS_STBIO1_05010)
+- ASSERT_DDS_STBIO1_05011_01: trigger(DDS_STBIO1_05011) -> expected(DDS_STBIO1_05011)
+- ASSERT_DDS_STBIO1_0508_01: trigger(DDS_STBIO1_0508) -> expected(DDS_STBIO1_0508)
+- ASSERT_DDS_STBIO1_0507_01: trigger(DDS_STBIO1_0507) -> expected(DDS_STBIO1_0507)
+- ASSERT_DDS_STBIO1_3000_01: trigger(DDS_STBIO1_3000) -> expected(DDS_STBIO1_3000)
+- ASSERT_DDS_STBIO1_3001_01: trigger(DDS_STBIO1_3001) -> expected(DDS_STBIO1_3001)
+- ASSERT_DDS_STBIO1_3002_01: trigger(DDS_STBIO1_3002) -> expected(DDS_STBIO1_3002)
+- ASSERT_DDS_STBIO1_3003_01: trigger(DDS_STBIO1_3003) -> expected(DDS_STBIO1_3003)
+- ASSERT_DDS_STBIO1_3004_01: trigger(DDS_STBIO1_3004) -> expected(DDS_STBIO1_3004)
+- ASSERT_DDS_STBIO1_3005_01: trigger(DDS_STBIO1_3005) -> expected(DDS_STBIO1_3005)
+- ASSERT_DDS_STBIO1_3006_01: trigger(DDS_STBIO1_3006) -> expected(DDS_STBIO1_3006)
+- ASSERT_DDS_STBIO1_1114_01: trigger(DDS_STBIO1_1114) -> expected(DDS_STBIO1_1114)
+- ASSERT_DDS_STBIO1_0114_01: trigger(DDS_STBIO1_0114) -> expected(DDS_STBIO1_0114)
+- ASSERT_DDS_STBIO1_0115_01: trigger(DDS_STBIO1_0115) -> expected(DDS_STBIO1_0115)
+- ASSERT_DDS_STBIO1_0116_01: trigger(DDS_STBIO1_0116) -> expected(DDS_STBIO1_0116)
+- ASSERT_DDS_STBIO1_0117_01: trigger(DDS_STBIO1_0117) -> expected(DDS_STBIO1_0117)
+- ASSERT_DDS_STBIO1_0118_01: trigger(DDS_STBIO1_0118) -> expected(DDS_STBIO1_0118)
+- ASSERT_DDS_STBIO1_0119_01: trigger(DDS_STBIO1_0119) -> expected(DDS_STBIO1_0119)
+- ASSERT_DDS_STBIO1_0120_01: trigger(DDS_STBIO1_0120) -> expected(DDS_STBIO1_0120)
+- ASSERT_DDS_STBIO1_0121_01: trigger(DDS_STBIO1_0121) -> expected(DDS_STBIO1_0121)
+- ASSERT_DDS_STBIO1_0122_01: trigger(DDS_STBIO1_0122) -> expected(DDS_STBIO1_0122)
+- ASSERT_DDS_STBIO1_0123_01: trigger(DDS_STBIO1_0123) -> expected(DDS_STBIO1_0123)
+- ASSERT_DDS_STBIO1_0124_01: trigger(DDS_STBIO1_0124) -> expected(DDS_STBIO1_0124)
+- ASSERT_DDS_STBIO1_0125_01: trigger(DDS_STBIO1_0125) -> expected(DDS_STBIO1_0125)
+- ASSERT_DDS_STBIO1_0126_01: trigger(DDS_STBIO1_0126) -> expected(DDS_STBIO1_0126)
+- ASSERT_DDS_STBIO1_0127_01: trigger(DDS_STBIO1_0127) -> expected(DDS_STBIO1_0127)
+- ASSERT_DDS_STBIO1_0128_01: trigger(DDS_STBIO1_0128) -> expected(DDS_STBIO1_0128)
+- ASSERT_DDS_STBIO1_0129_01: trigger(DDS_STBIO1_0129) -> expected(DDS_STBIO1_0129)
+- ASSERT_DDS_STBIO1_0130_01: trigger(DDS_STBIO1_0130) -> expected(DDS_STBIO1_0130)
+- ASSERT_DDS_STBIO1_0140_01: trigger(DDS_STBIO1_0140) -> expected(DDS_STBIO1_0140)
+- ASSERT_DDS_STBIO1_0141_01: trigger(DDS_STBIO1_0141) -> expected(DDS_STBIO1_0141)
+- ASSERT_DDS_STBIO1_0142_01: trigger(DDS_STBIO1_0142) -> expected(DDS_STBIO1_0142)
+- ASSERT_DDS_STBIO1_0143_01: trigger(DDS_STBIO1_0143) -> expected(DDS_STBIO1_0143)
+- ASSERT_DDS_STBIO1_0145_01: trigger(DDS_STBIO1_0145) -> expected(DDS_STBIO1_0145)
+- ASSERT_DDS_STBIO1_0146_01: trigger(DDS_STBIO1_0146) -> expected(DDS_STBIO1_0146)
+- ASSERT_DDS_STBIO1_0144_01: trigger(DDS_STBIO1_0144) -> expected(DDS_STBIO1_0144)
+- ASSERT_DDS_STBIO1_0147_01: trigger(DDS_STBIO1_0147) -> expected(DDS_STBIO1_0147)
+- ASSERT_DDS_STBIO1_0148_01: trigger(DDS_STBIO1_0148) -> expected(DDS_STBIO1_0148)
+- ASSERT_DDS_STBIO1_0149_01: trigger(DDS_STBIO1_0149) -> expected(DDS_STBIO1_0149)
+- ASSERT_DDS_STBIO1_0699_01: trigger(DDS_STBIO1_0699) -> expected(DDS_STBIO1_0699)
+- ASSERT_DDS_STBIO1_0700_01: trigger(DDS_STBIO1_0700) -> expected(DDS_STBIO1_0700)
+- ASSERT_DDS_STBIO1_0701_01: trigger(DDS_STBIO1_0701) -> expected(DDS_STBIO1_0701)
+- ASSERT_DDS_STBIO1_0702_01: trigger(DDS_STBIO1_0702) -> expected(DDS_STBIO1_0702)
+- ASSERT_DDS_STBIO1_1507_01: trigger(DDS_STBIO1_1507) -> expected(DDS_STBIO1_1507)
+- ASSERT_DDS_STBIO1_2507_01: trigger(DDS_STBIO1_2507) -> expected(DDS_STBIO1_2507)
+- ASSERT_DDS_STBIO1_0013_01: trigger(DDS_STBIO1_0013) -> expected(DDS_STBIO1_0013)
+- ASSERT_DDS_STBIO1_395_01: trigger(DDS_STBIO1_395) -> expected(DDS_STBIO1_395)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_002_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_002) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_002)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_5015_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5015) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5015)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_5016_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5016) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5016)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_5004_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5004) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5004)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_5005_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5005) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5005)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1004_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1004) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1004)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1005_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1005) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1005)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1007_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1007) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1007)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1008_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1008) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1008)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1009_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1009) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1009)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1010_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1010) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1010)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1011_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1011) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1011)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_004_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_004) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_004)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_008_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_008) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_008)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_009_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_009) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_009)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_010_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_010) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_010)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_011_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_011) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_011)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_016_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_016) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_016)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_017_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_017) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_017)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_018_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_018) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_018)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_019_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_019) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_019)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_021_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_021) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_021)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_023_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_023) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_023)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_024_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_024) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_024)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_3124_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3124) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3124)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_3125_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3125) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3125)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_026_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_026) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_026)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_3126_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3126) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3126)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_3127_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3127) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3127)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_028_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_028) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_028)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_128_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_128) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_128)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_029_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_029) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_029)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_030_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_030) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_030)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_031_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_031) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_031)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_032_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_032) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_032)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_033_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_033) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_033)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_034_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_034) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_034)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1034_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1034) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1034)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_035_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_035) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_035)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_036_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_036) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_036)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_436_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_436) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_436)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_037_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_037) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_037)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_038_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_038) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_038)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_039_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_039) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_039)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_3128_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3128) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3128)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_3129_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3129) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_3129)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_044_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_044) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_044)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_045_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_045) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_045)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_047_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_047) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_047)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_049_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_049) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_049)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_051_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_051) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_051)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_052_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_052) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_052)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_0152_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_0152) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_0152)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_053_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_053) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_053)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_054_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_054) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_054)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_055_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_055) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_055)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_058_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_058) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_058)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_059_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_059) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_059)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_060_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_060) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_060)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_061_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_061) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_061)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_062_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_062) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_062)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_063_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_063) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_063)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_064_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_064) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_064)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_073_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_073) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_073)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_074_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_074) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_074)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_077_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_077) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_077)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_078_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_078) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_078)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_4079_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4079) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4079)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_4080_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4080) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4080)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_080_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_080) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_080)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_082_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_082) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_082)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_083_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_083) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_083)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_085_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_085) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_085)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_087_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_087) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_087)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_4090_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4090) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4090)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_4091_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4091) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_4091)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_5092_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5092) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_5092)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_088_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_088) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_088)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_089_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_089) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_089)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_092_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_092) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_092)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_093_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_093) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_093)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_094_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_094) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_094)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_7095_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_7095) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_7095)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_095_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_095) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_095)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_096_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_096) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_096)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_6098_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6098) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6098)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_6070_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6070) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6070)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_098_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_098) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_098)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_099_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_099) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_099)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_100_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_100) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_100)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_101_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_101) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_101)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_102_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_102) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_102)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_103_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_103) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_103)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1102_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1102) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1102)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1104_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1104) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1104)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_8106_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_8106) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_8106)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_104_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_104) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_104)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_105_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_105) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_105)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_106_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_106) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_106)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_108_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_108) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_108)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_109_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_109) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_109)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_110_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_110) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_110)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_111_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_111) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_111)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_112_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_112) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_112)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_113_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_113) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_113)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1095_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1095) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1095)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_115_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_115) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_115)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1116_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1116) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1116)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_118_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_118) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_118)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_120_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_120) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_120)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_126_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_126) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_126)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_728_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_728) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_728)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_6129_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6129) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_6129)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_134_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_134) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_134)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_137_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_137) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_137)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_138_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_138) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_138)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1139_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1139) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1139)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_140_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_140) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_140)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_1143_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1143) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_1143)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_2143_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2143) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2143)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_2144_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2144) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2144)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_2146_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2146) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2146)
+- ASSERT_ipos_main_ctrl_20260907_171517_IPOS_STBIO1_MAIN_CONTROLLER_2145_01: trigger(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2145) -> expected(ipos_main_ctrl_20260907_171517:IPOS_STBIO1_MAIN_CONTROLLER_2145)
+
+## Open Ambiguities
+- Full Stage 2 review pending for requirements beyond this generated baseline.

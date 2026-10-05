@@ -1,0 +1,31 @@
+92 
+ 
+The Ioff Calibration algorithm shall be enabled or disabled by a dedicated field in regmap. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1116] REQUIREMENT : 
+When the Ioff Calibration algorithm is enabled, it shall be performed every time a new 
+measurements cycle starts. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 118] REQUIREMENT : 
+Nm0 shall be the result of average on 8 acquired samples. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 119] REQUIREMENT : 
+Nm1 shall be the result of average on 8 acquired samples. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 120] ASSUMPTION   
+Nstep1 shall change as the following table: 
+ 
+RX Gain [ohm] Ideal OFFSET  [uA] MAX OFFSET [uA] Typical Nstep2 Max Nstep2 Nstep1 
+8000 1.38E-04 1.65E-04 275 330 55 
+16000 6.88E-05 8.25E-05 137 165 27 
+32000 3.44E-05 4.13E-05 68 82 13 
+64000 1.72E-05 2.06E-05 34 41 7 
+128000 8.59E-06 1.03E-05 17 20 3 
+256000 4.30E-06 5.16E-06 8 10 1 
+512000 2.15E-06 2.58E-06 4 5 1 
+1024000 1.07E-06 1.29E-06 2 2 1 
+2048000 5.37E-07 6.45E-07 1 1 1 
+Table 10: Nstep1 values 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 121] REQUIREMENT  
+During the Ioff calibration algorithm EN_TIA, EN_PGA and ADC_EN shall be set to 1. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 122] REQUIREMENT  
+During the Ioff calibration algorithm the RX_GAIN (o_BTIA_gain on top) shall change from 0 to 8. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 322] ASSUMPTION  
+Nstep2 is the result of the ioff calibration[END]

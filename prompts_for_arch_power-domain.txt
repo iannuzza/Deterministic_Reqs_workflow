@@ -1,0 +1,31 @@
+Add this as a small incremental integration to the completed workflow.
+
+Detect power-management architecture concepts in the system source spec, such as:
+- power domain
+- power island
+- power mode
+- power gating
+- retention domain
+- isolation domain
+- similar concepts
+
+Behavior:
+- if the system source spec is tagged:
+  include these as architecture/main functionality descriptions, even if not tied to tagged requirements
+- if the system source spec is untagged:
+  treat them as requirement-like candidates for SRS tagging and DRS, ARS handling, associated by default with PMU / Power Management Unit or equivalent configured block, aanlog and digital.
+
+Constraints:
+- deterministic only
+- no LLM/network
+- preserve provenance
+- do not invent requirements
+- keep it project-agnostic
+- reuse existing logic if present
+- otherwise add the rule in the minimal analysis/candidate-generation/mapping layer
+- avoid broad refactor
+
+Before editing code, first tell me:
+1. where this should be integrated
+2. whether similar logic already exists
+3. what minimal change is needed

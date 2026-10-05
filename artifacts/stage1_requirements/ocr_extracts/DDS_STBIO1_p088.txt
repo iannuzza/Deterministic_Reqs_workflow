@@ -1,0 +1,45 @@
+87 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+13.2.1.1.1. OTP I/O List 
+ 
+[DDS_STBIO1_0011] Definition: 
+ 
+Pin Name Function 
+PDN Power down command. 
+Memory is in low power mode when PDN is 
+low. 
+A<6:0> A<6:0> is the word address for read or 
+programming operation 
+BANKEN<1:0> Bank selection bits. 
+Used to program and read each bank 
+separately. 
+Or to activate redundancy when reading (2 
+banks read simultaneously, 
+correction enabled) 
+BITSEL<2:0> To define the bit to be programmed in the 8 bit 
+word. 
+Decimal value of (BITSEL<2:0>) 
+SELECTWLBL To select antifuse block to be programmed 
+PRG To select programming mode (active high) 
+FUSE Fuse command to program bit cell. 
+TREAD<3:0> For read condition trimming (sense current and 
+read voltage). 
+VREF Analog 1.25V+/-5% bandgap reference voltage 
+IREF Pin requiring external current sink of 10uA+/-
+30% 
+Table 20: OTP I/O List 
+[End] 
+ 
+13.2.1.1.2. Requirements 
+ 
+[DDS_STBIO1_0012] Definition: 
+There are three routine that the ADSP use to interact with the OTP memory, which are the Write, 
+Boot and Test routine. In ADSP registers map there are 3 specific bits used to trigger these OTP 
+routines:

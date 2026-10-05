@@ -1,0 +1,39 @@
+73 
+ 
+Port name Direction Type Description 
+o_su_hc2 output  hc2 to analog domain 
+o_en_ck_hc2_10k output  output clk chopper 
+o_reset_reg_rst output  end of reset async phase 
+ 
+Table 88: ECG SU I/O List 
+5.5.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_072]  REQUIREMENT : 
+When the i_hc_en is set to 1 and i_imp_en is set to 0 and i_n_ecg_channel is equal to 1, ECG0 
+shall be active so the o_pd_hc2 shall go low and counter shall be work. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_073]  REQUIREMENT : 
+When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 
+and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low 
+and counter shall be work. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_074]  REQUIREMENT : 
+When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0-
+ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and 
+counter shall be work. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_075]  REQUIREMENT : 
+The counter that defines the timing during the start-up phase shall work at 32KHz. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_076]  REQUIREMENT : 
+15ms after that the o_pd_hc2 is gone low, the o_rst_hc2 shall go low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_077]  REQUIREMENT : 
+20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be 
+generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0, 
+then o_rsti_hc2 shall go low after 30ms since the falling of o_rst_hc2. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_078]  REQUIREMENT : 
+If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go 
+low. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_079]  REQUIREMENT :

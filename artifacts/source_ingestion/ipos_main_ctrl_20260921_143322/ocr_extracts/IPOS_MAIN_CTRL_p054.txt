@@ -1,0 +1,33 @@
+53 
+ 
+Port name Direction Type Descr. 
+o_en_mask_ldo_pdclkf_reg output  
+mask ldo 
+control 
+during boot 
+o_boot_state_sync output  
+boot_state 
+sync on 
+16MHz 
+o_ispu_irq_ctrl output [3:0] ispu irqs 
+o_cfg_enable output  
+enabling 
+shadow 
+register 
+o_check_update output  check update 
+configuration 
+o_first_cfg output  first 
+configuration 
+o_start_operative_16MHz output  
+start 
+operative 
+mask for Lead 
+Off detection 
+o_main_controller_device_status_register output [2:0] device fsm 
+status register 
+o_main_controller_elab_status_register output [3:0] elab fsm 
+status register 
+o_en_bufxbio output  
+en biobuffer 
+to analog 
+domain

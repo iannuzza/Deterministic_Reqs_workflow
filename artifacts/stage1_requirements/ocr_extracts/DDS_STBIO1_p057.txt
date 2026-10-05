@@ -1,0 +1,19 @@
+56 
+ 
+i_bfail_ispu3 input 
+ 
+bist fail ispu ram data mem 2 
+i_bfail_ispu4 input 
+ 
+bist fail ispu ram data mem 3 
+i_bend input 
+ 
+bist end signal 
+i_bbad input 
+ 
+signal fail bist test 
+o_bypass output 
+ 
+bypass memory signal 
+ 
+Table 1313: PAD MUX I/O List

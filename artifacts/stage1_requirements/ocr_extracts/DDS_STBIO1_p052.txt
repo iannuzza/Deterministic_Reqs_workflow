@@ -1,0 +1,74 @@
+51 
+ 
+i_ext_reg_we input 
+ 
+i2c/spi regmap direct write enable 
+if_sclk_in input 
+ 
+ZI_I2C 
+if_sclk_i3c_in input 
+ 
+ZI_I3C 
+if_sclk_out output 
+ 
+A 
+if_sclk_en output 
+ 
+EN 
+if_sclk_tud output 
+ 
+TUD 
+if_sda_sdi_in input 
+ 
+ZI_I2C 
+if_sda_sdi_i3c_in input 
+ 
+ZI_I3C 
+if_sda_sdi_out output 
+ 
+A 
+if_sda_sdi_en output 
+ 
+EN 
+if_sda_sdi_tud output 
+ 
+TUD 
+if_cs_in input 
+ 
+ZI CS 
+if_cs_out output 
+ 
+A 
+if_cs_en output 
+ 
+EN 
+if_cs_tud output 
+ 
+TUD 
+if_gpio0_in input 
+ 
+ZI GPIO0 
+if_gpio0_out output 
+ 
+A 
+if_gpio0_en output 
+ 
+EN 
+if_gpio0_tud output 
+ 
+TUD 
+if_gpio1_in input 
+ 
+ZI GPIO1 
+if_gpio1_out output 
+ 
+A 
+if_gpio1_en output 
+ 
+EN 
+if_gpio1_tud output 
+ 
+TUD 
+if_gpio2_in input 
+ 
+ZI GPIO2

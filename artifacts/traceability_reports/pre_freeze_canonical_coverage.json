@@ -1,0 +1,29 @@
+{
+  "canonical_counts_by_source": {
+    "DDS_STBIO1.pdf": 191,
+    "IPOS_MAIN_CTRL.pdf": 123
+  },
+  "expected_in_scope_source_specs": [
+    "DDS_STBIO1.pdf",
+    "IPOS_MAIN_CTRL.pdf"
+  ],
+  "explicit_approved_exclusions": [],
+  "merge_history_present_by_source": {
+    "DDS_STBIO1.pdf": true,
+    "IPOS_MAIN_CTRL.pdf": true
+  },
+  "missing_approved_req_ids": [],
+  "missing_source_registrations": [],
+  "project_id": "STBIO",
+  "registered_canonical_source_specs": [
+    "DDS_STBIO1.pdf",
+    "IPOS_MAIN_CTRL.pdf"
+  ],
+  "rejection_reasons": [],
+  "review_counts_by_source": {
+    "DDS_STBIO1.pdf": 191,
+    "IPOS_MAIN_CTRL.pdf": 123
+  },
+  "review_row_count": 314,
+  "status": "pass"
+}

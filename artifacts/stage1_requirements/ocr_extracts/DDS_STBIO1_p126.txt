@@ -1,0 +1,58 @@
+125 
+ 
+the number 
+of 
+memories. 
+For a 
+shared 
+collar there 
+would be as 
+many 
+repairable 
+outputs as 
+the number 
+of memories 
+ca_stredl_bist_c_serial_out output 
+BIST Serial 
+Output Data 
+from Tester / 
+External 
+World 
+u_ispu_ca_stredl_bist_c_serial_out_
+sig 
+ 
+ca_stredl_bist_c_bypass input 
+BIST 
+Memory 
+Bypass Pin 
+for RAM 
+type 
+memories. 
+One top 
+level port 
+per collar. 
+u_pad_mux_scan_mode_sig 
+ 
+ca_stredl_bist_c_serial_in input 
+BIST Serial 
+Input Data 
+from Tester / 
+External 
+World 
+u_ta_afe_bist_crtl_serial_out_ctlr_si
+g 
+ 
+ 
+ca_stredl_bist_c_test_se input 
+BIST Scan 
+Enable 
+Signal Used 
+internally by 
+the BIST to 
+prevent 
+memory 
+operation 
+during scan 
+shifting (a 
+dedicated 
+u_pad_mux_scan_enable_sig

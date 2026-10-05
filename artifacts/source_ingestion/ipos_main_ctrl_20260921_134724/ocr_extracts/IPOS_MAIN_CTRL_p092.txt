@@ -1,0 +1,49 @@
+91 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_111]  REQUIREMENT : 
+When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time 
+(depends on the user's configuration of Digital Ramp parameters) and bring itself into the 
+SECOND_ALC_SAMPLES state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_112]  REQUIREMENT : 
+When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of 
+the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_113]  REQUIREMENT : 
+When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of 
+the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, 
+the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel 
+rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there 
+are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG 
+state and the into the ALC_Compensation  state. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1095] REQUIREMENT : 
+The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac 
+and o_en_buffer of respectively. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_115]  REQUIREMENT : 
+At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. 
+Once the Average is computed, if no averages_between_equal_frames option is selected, the data 
+shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there 
+is avareges_between_equal_frames option selected from regmap, after the computations of this 
+average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB 
+Master interface. [END] 
+ 
+ 
+ 
+Figure 14: Ioff Calibration phase 
+𝑁𝑠𝑡𝑒𝑝2 = ⌊𝑁𝑠𝑡𝑒𝑝1 ∗  (𝑁𝑚0 − 2731)
+(𝑁𝑚0 − 𝑁𝑚1) ⌋ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1115] REQUIREMENT  
+Switch ON RX TIA, PGA, ADC
+RX_GAIN(0:3) Set Gain N
+PD_CH_SEL(0:2) PD channels OFF 0
+OFFSET(0:9) Chose value 0
+ADC SAR S M S M S M S M S M S M S M S M S M
+Tstartup Tset_IDAC Tset_IDAC
+Nstep1 Nstep2
+Nm0 Nm1 opt. check

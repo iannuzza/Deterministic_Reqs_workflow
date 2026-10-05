@@ -1,0 +1,48 @@
+57 
+ 
+The user shall select a division index for ECG, BIA, GSR and PPG configuring M_ECG_l, 
+M_ECG_h, M_BIA_l, M_BIA_h, M_GSR_l, M_GSR_h, M_PPG_l and M_PPG_h writing in the 
+dedicated registers. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1007] REQUIREMENT:  
+[Covers: DDS_STBIO1_0120] 
+[Covers: DDS_STBIO1_0122] 
+[Covers: DDS_STBIO1_0127] 
+[Covers: DDS_STBIO1_0130] 
+In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel 
+(DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and set to HC_EN. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1008] REQUIREMENT:  
+[Covers: DDS_STBIO1_0128] 
+[Covers: DDS_STBIO1_0140] 
+In Order to enable a BIA Channel Operation, the user shall always select the BIA channel 
+(DEVICE_CONFIG_CHANNEL), set the i_M_BIA greater than zero and set to IMP_EN. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1009] REQUIREMENT:  
+In Order to enable a GSR Channel Operation, the user shall always select the GSR channel 
+(DEVICE_CONFIG_CHANNEL) and set the i_M_GSR greater than zero. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1010] REQUIREMENT:  
+In Order to enable a PPG Channel Operation, the user shall always select the PPG channel 
+(DEVICE_CONFIG_CHANNEL) and set the i_M_PPG greater than zero. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1011] REQUIREMENT:  
+In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the 
+ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and 
+IMP_EN set to 1. [END] 
+ 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_004] REQUIREMENT:  
+[Covers: DDS_STBIO1_0116] 
+When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 
+0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, 
+checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the 
+Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 
+0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and  that  
+the O_PD_CLKF signal is set to high. [End] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_008]  REQUIREMENT :  
+When in unique_fifo_mode (i_multiple_fifo set to 0), if during a time slot an operation is done, the 
+Main_Controller_FSM shall write the time_slot_data inside the FIFO with a dedicated tag. The 
+value of the time_slot_data shall be referred to the start of the entire measurement cycle (for

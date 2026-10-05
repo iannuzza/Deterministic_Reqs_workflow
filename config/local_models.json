@@ -1,0 +1,6 @@
+{
+  "models": [
+    "phi-3-mini",
+    "llama3.1:8b"
+  ]
+}

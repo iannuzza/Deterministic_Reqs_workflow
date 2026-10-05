@@ -1,0 +1,186 @@
+{
+  "project_name": "STBIO",
+  "source_spec_path": "specs/DDS_STBIO1.pdf",
+  "ocr_index_path": "artifacts/stage1_requirements/ocr_extracts/index.csv",
+  "rag_db_path": "artifacts/rag_DDS_STBIO1/rag_index.sqlite",
+  "rag_manifest_path": "artifacts/rag_DDS_STBIO1/index_manifest.json",
+  "rag_query_output_path": "artifacts/rag_DDS_STBIO1/last_query_results.md",
+  "retrieval_benchmark_cases_path": "config/retrieval_benchmark_cases.json",
+  "retrieval_benchmark_report_path": "artifacts/rag_DDS_STBIO1/retrieval_benchmark_report.json",
+  "retrieval_selection_path": "config/retrieval_selection.json",
+  "domain_vocabulary_path": "config/domain_vocabulary.json",
+  "ontology_links_path": "artifacts/stage0_ontology/ontology_requirement_links.csv",
+  "semantic_issues_path": "artifacts/stage0_ontology/semantic_issues.md",
+  "stage2_profile_path": "config/stage2_mirco_arc_profile.json",
+  "stage2_traceability_path": "artifacts/stage2_mirco_arc/requirement_to_block_traceability.csv",
+  "requirement_id_rules": {
+    "tagged_source_mode": true,
+    "source_req_id_patterns": [
+      "DDS_STBIO1_\\d+"
+    ],
+    "table_req_id_patterns": [
+      "DDS_STBIO1_\\d+"
+    ],
+    "tag_label": "Requirement",
+    "tag_requires_label": true,
+    "allow_bare_req_id_outside_tables": false,
+    "table_context_required": true,
+    "allow_compact_ids": false,
+    "non_requirement_id_labels": [
+      "Definition",
+      "Description",
+      "Assumption",
+      "Note",
+      "Reference",
+      "N/A"
+    ],
+    "tag_terminator": "[End]",
+    "table_id_columns_priority": [
+      "Req_id",
+      "ID",
+      "Spec ID"
+    ]
+  },
+  "image_block_rules": {
+    "Image 1": [
+      {
+        "name": "ambient sensor",
+        "category": "System",
+        "statement": "{image_label} indicates an ambient sensor sub-block in the system context.",
+        "trigger_any": [
+          "ambient sensor"
+        ],
+        "match_any": [
+          "ambient sensor"
+        ]
+      },
+      {
+        "name": "remote sensor",
+        "category": "System",
+        "statement": "{image_label} indicates an optional remote sensor sub-block in the system context.",
+        "trigger_any": [
+          "remote sensor"
+        ],
+        "match_any": [
+          "remote sensor"
+        ]
+      },
+      {
+        "name": "actuator/heating interface",
+        "category": "System",
+        "statement": "{image_label} indicates an actuator/heating-system interface sub-block in the system context.",
+        "trigger_any": [
+          "actuator",
+          "heating system"
+        ],
+        "match_any": [
+          "heating-system",
+          "heating system",
+          "actuator"
+        ]
+      },
+      {
+        "name": "power supply",
+        "category": "System",
+        "statement": "{image_label} indicates a power supply sub-block in the system context.",
+        "trigger_any": [
+          "power supply"
+        ],
+        "match_any": [
+          "power supply"
+        ]
+      },
+      {
+        "name": "external host / host pc",
+        "category": "System",
+        "statement": "{image_label} indicates an external host interface sub-block in the system context.",
+        "trigger_any": [
+          "external host",
+          "host pc",
+          "host"
+        ],
+        "match_any": [
+          "external host",
+          "host pc"
+        ]
+      },
+      {
+        "name": "microcontroller",
+        "category": "Digital",
+        "statement": "{image_label} indicates a microcontroller processing/control sub-block in the system context.",
+        "trigger_any": [
+          "microcontroller"
+        ],
+        "match_any": [
+          "microcontroller"
+        ]
+      },
+      {
+        "name": "adc interface",
+        "category": "Analog",
+        "statement": "{image_label} indicates an ADC interface sub-block between sensor path and controller.",
+        "trigger_any": [
+          "analog-to-digital converter",
+          "adc"
+        ],
+        "match_any": [
+          "adc interface"
+        ]
+      },
+      {
+        "name": "gpio interface",
+        "category": "Digital",
+        "statement": "{image_label} indicates GPIO interface/control-line connectivity for local interfaces and outputs.",
+        "trigger_any": [
+          "gpio",
+          "relay output",
+          "led",
+          "push button"
+        ],
+        "match_any": [
+          "gpio interface"
+        ]
+      },
+      {
+        "name": "led interface",
+        "category": "Digital",
+        "statement": "{image_label} indicates an LED status-indicator interface sub-block.",
+        "trigger_any": [
+          "led"
+        ],
+        "match_any": [
+          "led"
+        ]
+      },
+      {
+        "name": "push button",
+        "category": "Digital",
+        "statement": "{image_label} indicates a push-button user-interface input sub-block.",
+        "trigger_any": [
+          "push button"
+        ],
+        "match_any": [
+          "push-button",
+          "push button"
+        ]
+      },
+      {
+        "name": "relay output driver",
+        "category": "System",
+        "statement": "{image_label} indicates a relay output control/driver sub-block.",
+        "trigger_any": [
+          "relay output"
+        ],
+        "match_any": [
+          "relay output control/driver",
+          "relay output"
+        ]
+      }
+    ]
+  },
+  "source_bootstrap_profile_id": "source-baseline-3cd73f95eb8d8094aa5635c1",
+  "source_tag_status": "ambiguous",
+  "source_req_id_prefix": "DDS_STBIO1",
+  "source_bootstrap_approved_by": "gui",
+  "source_bootstrap_approved_at": "2026-09-15T16:54:48"
+}

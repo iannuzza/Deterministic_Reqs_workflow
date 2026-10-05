@@ -1,0 +1,31 @@
+27 
+ 
+if_gpio4_tud output 1 wire from 
+u_level_shifter_sel.if_gpio4_tud_ls_out 
+if_sclk_en output   wire from u_level_shifter_sel.if_sclk_en_ls_out 
+if_sclk_in input   wire to u_pad_mux 
+if_sclk_out output  1 wire from 
+u_level_shifter_sel.if_sclk_out_ls_out 
+if_sclk_tud output 1 wire from 
+u_level_shifter_sel.if_sclk_tud_ls_out 
+if_sda_sdi_en output   wire from 
+u_level_shifter_sel.if_sda_sdi_en_ls_out 
+if_sda_sdi_in input   wire to u_pad_mux 
+if_sda_sdi_out output  1 wire from 
+u_level_shifter_sel.if_sda_sdi_out_ls_out 
+if_sda_sdi_tud output 1 wire from 
+u_level_shifter_sel.if_sda_sdi_tud_ls_out 
+if_sh_ck_en output   wire from 
+u_level_shifter_sel.if_sh_ck_en_ls_out 
+if_sh_ck_in input   wire to u_pad_mux 
+if_sh_ck_out output   wire from 
+u_level_shifter_sel.if_sh_ck_out_ls_out 
+if_sh_ck_tud output 1 wire from 
+u_level_shifter_sel.if_sh_ck_tud_ls_out 
+if_sh_sda_en output   wire from 
+u_level_shifter_sel.if_sh_sda_en_ls_out 
+if_sh_sda_in input   wire to u_pad_mux 
+if_sh_sda_out output  1 wire from 
+u_level_shifter_sel.if_sh_sda_out_ls_out 
+if_sh_sda_tud output 1 wire from 
+u_level_shifter_sel.if_sh_sda_tud_ls_out

@@ -1,0 +1,199 @@
+Based on the accepted Step 1 constraints and the completed Step 2 + Step 2B + Step 3 + Step 4 foundation, now implement Step 5: GUI integration, hierarchical XLSX reports, snapshot-based SysML/output actions, final hardening of remaining legacy paths, tests, and consistency cleanup.
+
+Important boundary:
+Do not redesign the canonical workflow foundation unless a concrete compatibility fix is strictly required.
+In this step, focus on GUI/user-facing integration, approved-snapshot output actions, final hardening of remaining legacy/non-authoritative paths, tests, and cleanup of residual bypasses.
+
+Before editing code, first provide:
+1. target GUI files to modify
+2. target test files or test directories
+3. new helper modules to add
+4. any compatibility concern with previous steps
+5. how backward compatibility will be preserved where practical
+
+Current constraints that must remain true:
+- project-agnostic
+- deterministic
+- no LLM calls in the authoritative workflow
+- no network calls in the authoritative workflow
+- no cloud dependencies
+- Canonical SQLite remains authoritative
+- Retrieval/index SQLite remains separate and non-authoritative
+- CSV/JSON/Markdown/XLSX/SysML outputs remain derived artifacts only
+- GUI chat, if retained, must remain visibly non-authoritative
+- legacy compatibility functions may remain available, but must stay clearly non-authoritative
+- no GUI or user-facing authoritative workflow should route generation through legacy compatibility paths
+
+Please implement:
+
+1. GUI primary source bootstrap support
+Treat primary source spec selection as an S0 bootstrap capability exposed through the GUI.
+
+Add a GUI action/button to select the primary source spec.
+
+When the user selects the primary source spec, the tool must:
+- allow file selection
+- run a deterministic local auto-check to determine whether the source appears tagged, untagged, or ambiguous/partially tagged
+- inspect requirement identifier patterns in the source
+- also inspect req_id tags inside tables, especially under columns such as:
+  - Req-ID
+  - Req_ID
+  - Req Id
+  - Requirement ID
+  - similar normalized variants
+- verify whether this table-based req_id detection logic already exists and reuse/align with it if present
+- propose a base req_id tag prefix candidate
+- show detected tagging status and proposed req_id prefix to the user as a cross-check / approval step
+- allow the user to approve, edit, or reject the proposal before it becomes authoritative metadata
+
+Requirements:
+- deterministic only
+- no LLM calls
+- no network calls
+- preserve evidence/reasoning for tagged/untagged classification and prefix proposal
+- keep proposed vs approved metadata separate if supported by the current model
+- do not auto-approve
+
+2. GUI supplementary-source enhancements
+When the user adds a supplementary source spec in the GUI, also collect and store:
+- source revision number
+- source revision date
+
+These must remain tracked source metadata and remain separate from ingestion timestamp.
+
+3. GUI workflow visibility
+Update the GUI, if present, to reflect the strengthened workflow and show relevant review/output context such as:
+- staging revision
+- canonical revision
+- impact analysis presence/status
+- workflow state
+- snapshot ID used for generation where applicable
+- active vocabulary/taxonomy profile info where feasible
+- whether approved learned vocabulary is included where feasible
+- whether the source is primary or supplementary where applicable
+
+4. GUI report generation menu
+Add a GUI menu for hierarchical report generation, for example:
+- Generate SRS Report
+- Generate DRS Report
+- Generate ARS Report
+- Generate All Reports
+
+These actions must use approved snapshot-based data only.
+
+5. Hierarchical XLSX report generation
+Add the actual generation/export path for:
+- SRS report to its own .xlsx file
+- DRS report to its own .xlsx file
+- ARS report to its own .xlsx file
+
+Rules:
+- generated from approved snapshots only
+- record snapshot ID and generation metadata
+- remain derived artifacts only
+- do not read mutable live data
+
+6. Conflict review/report integration
+Complete user-facing review/report handling for same-req_id-different-text conflicts.
+
+Requirements:
+- expose reviewable summary/report data showing:
+  - req_id
+  - competing source versions
+  - competing texts
+  - source revision numbers/dates
+  - default proposed winner
+  - approval status
+  - provenance/evidence linkage
+- latest revision/date may be shown as the default proposed winner
+- this must remain approval-gated and must not auto-merge
+- integrate this into GUI/report flows where practical
+
+7. GUI output actions for snapshot-based derived artifacts
+Where applicable, add GUI actions or menu items for:
+- snapshot-based SysML generation/update
+- snapshot-based report generation
+- possibly snapshot selection or explicit approved snapshot choice if the GUI already supports similar actions
+
+Rules:
+- SysML generation/update must consume approved immutable snapshots only
+- GUI must not trigger authoritative output generation from mutable live data
+- no GUI path should use legacy compatibility functions as authoritative generation paths
+
+8. Final hardening of remaining legacy paths
+Harden the remaining legacy/non-authoritative areas identified after Step 4.
+
+In particular:
+- legacy compatibility functions may remain available, but keep them clearly non-authoritative:
+  - load_approved_input
+  - freeze_legacy_export
+  - direct Python callable use of generate_ipos_specs.generate()
+- no GUI or authoritative user-facing path should route through them
+- harden remaining legacy classification paths that still consume staged classification fields directly so that authoritative behavior respects approved profile / approved resolver context wherever required
+- identify any remaining legacy CSV/JSON authoritative assumptions and remove, replace, or clearly flag them
+
+9. Final downstream/output integration check
+Ensure GUI and user-facing commands are aligned with:
+- approved snapshot resolver
+- approved profile/vocabulary/taxonomy resolver context
+- explicit snapshot selection rules
+- impact/review state visibility
+- derived artifact generation only
+
+10. Tests
+Add or update tests for:
+- staging does not overwrite canonical directly
+- non-destructive merge preserves revisions
+- provenance is preserved
+- proposed vs approved classification remain separate
+- invalid state transitions are blocked
+- merge impact analysis is required before merge
+- unsafe category transitions are blocked
+- same req_id different text conflicts remain approval-gated
+- supplementary multi-source/multi-scope handling remains traceable
+- architecture review does not silently mutate canonical data
+- rollback preserves history
+- downstream generation uses only immutable approved snapshots
+- impacted snapshots are not used for authoritative generation
+- vocabulary precedence works deterministically across global/project/module/additional/approved-learned layers
+- unapproved learned candidates do not affect runtime behavior
+- same config produces same effective vocabulary
+- normalized retrieval deterministically reflects approved centralized vocabulary
+- lexical/normalized/hybrid behavior remains reproducible
+- semantic mode remains optional and local-only
+- automatic semantic fallback only triggers under configured conditions
+- audit/snapshot metadata captures vocabulary/taxonomy/retrieval/index context
+- SRS/DRS/ARS XLSX reports are generated from approved snapshots only
+- SysML generation/update is snapshot-based only
+- primary source tagged/untagged detection and req_id prefix proposal remain deterministic
+- table-based req_id detection is covered where applicable
+- GUI user approval is required before primary source metadata becomes authoritative
+
+11. Final consistency cleanup
+Perform a final cleanup pass to:
+- identify any remaining project-specific assumptions in core workflow code
+- move them behind config, adapters, or validation rule sets where practical
+- identify any remaining embedded vocabulary and migrate or flag it
+- identify any remaining hidden retrieval/taxonomy coupling and make it explicit
+- identify any remaining legacy CSV/JSON authoritative assumptions and remove or flag them
+- keep the implementation deterministic, auditable, and reusable across projects
+
+Implementation guidance:
+- keep GUI integrations consistent with the actual GUI framework used by the repository
+- preserve backward compatibility where practical
+- do not rewrite unrelated modules
+- keep derived artifact generation clearly separated from authoritative workflow state
+
+At the end of this Step 5 implementation, provide a final summary with:
+1. files changed
+2. new modules added
+3. tests added or updated
+4. GUI actions added or updated
+5. remaining project-specific assumptions, if any
+6. remaining embedded vocabulary, if any
+7. remaining retrieval/taxonomy alignment gaps, if any
+8. remaining legacy non-authoritative paths, if any
+9. outstanding risks
+10. recommended next follow-up steps
+
+If anything is ambiguous, ask for clarification before making broad refactors.

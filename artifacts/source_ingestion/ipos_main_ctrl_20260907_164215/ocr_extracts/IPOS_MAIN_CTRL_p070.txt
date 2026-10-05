@@ -1,0 +1,48 @@
+69 
+ 
+When the elab_fsm is in PPG State, the I_PPG_ADC_CONTROL _EN Shall be 0, otherwise can be 
+0 or 1. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_047]  REQUIREMENT :  
+When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high 
+until the reset is not asserted or the i_reset_end_calibration is set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_048]  REQUIREMENT :  
+When the i_reset_end_calibration , i_do_calibration and i_mode_operation  are set to 1, the 
+o_end_cal_phase shall be set to 0. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_049]  REQUIREMENT :  
+When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_051]  REQUIREMENT :  
+[Covers: DDS_STBIO1_0121] 
+[Covers: DDS_STBIO1_0129] 
+The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This 
+signal indicates the number of clock that o_ADC_start shall stay high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_052]  REQUIREMENT :  
+When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except 
+for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if 
+i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end 
+of the calibration phase. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_0 152] REQUIREMENT :  
+If the calibration has been done, the ADC_error_caps values computed shall reset only if the 
+POR signal is asserted or shall be overwritten if another calibration is performed. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_053]  REQUIREMENT :  
+When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before 
+the ADC is ready to work. The first i_ADC_EOC shall be ignored. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_054]  REQUIREMENT :  
+When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay 
+High for i_N_clk+1 cycles. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_055]  REQUIREMENT :  
+After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new 
+data on the falling edge of the clock. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_057]  REQUIREMENT :

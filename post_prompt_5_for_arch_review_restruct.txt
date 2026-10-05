@@ -1,0 +1,44 @@
+Treat the current Step 5 result as accepted.
+
+Now produce a final post-Step-5 audit and hardening plan for the remaining gaps, without implementing code and without broad redesign.
+
+Known remaining items:
+- richer hierarchical XLSX formatting is still a follow-up
+- Tkinter GUI runtime interaction was not automated because it needs a display session
+- compatibility paths still exist:
+  - load_approved_input
+  - freeze_legacy_export
+  - direct callable use of generate_ipos_specs.generate()
+- some older Stage 1 classification code still consumes staged classification fields directly instead of fully enforcing approved profile / approved resolver context
+- project-specific vocabulary/constants still remain in some legacy generation modules
+
+Hard constraints:
+- keep the workflow project-agnostic
+- deterministic
+- no LLM/network/cloud dependency in the authoritative workflow
+- do not propose broad schema redesign unless strictly required
+- treat compatibility paths as non-authoritative
+
+Please provide only:
+1. a prioritized hardening/cleanup plan
+2. for each item: severity = critical hardening / important cleanup / low-risk follow-up / optional polish
+3. why each item matters and what risk remains if left as-is
+4. recommended execution order
+5. likely affected files/modules
+6. recommended follow-up strategy:
+   - one cleanup pass
+   - two smaller prompts
+   - three smaller prompts
+7. deprecation guidance for compatibility paths:
+   - keep documented
+   - warn
+   - hide from default flows
+   - later removal
+8. a concise readiness assessment:
+   - production-ready now
+   - conditionally acceptable
+   - still needs hardening
+
+Do not implement code.
+Do not reopen settled architecture decisions unless there is a concrete blocker.
+Keep the answer concise, implementation-oriented, and action-focused.

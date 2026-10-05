@@ -1,0 +1,30 @@
+49 
+ 
+Port name Direction Type Descr. 
+o_change_address_clk_en output  
+change 
+address clock 
+gating enable 
+o_reset_write output  reset write 
+operation 
+o_done_frame output  end frame 
+ppg 
+o_average_clk_en output  
+average ip 
+clock gating 
+enable 
+o_ppg_fsm_clk_en output  
+ppg fsm ip 
+clock gating 
+enable 
+o_quokka_start_en output  adsp start 
+enable 
+o_trim_ldo_d output [1:0] trim ldo 
+output 
+o_calibration_phase output  
+end of 
+calibration 
+phase 
+o_quokka_write output  write ahb for 
+adsp 
+o_tag_data output [7:0] data tag

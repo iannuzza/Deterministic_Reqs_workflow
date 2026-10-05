@@ -1,0 +1,44 @@
+70 
+ 
+When i_calibration_phase is set to 1 and ADC is ready, the calibration phase shall start. In this 
+case, the o_end_cal_phase shall be asserted when the calibration phase is ended. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_058]  REQUIREMENT :  
+The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration 
+algorithm. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_059]  REQUIREMENT :  
+If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall 
+be divided by 2. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 6059] REQUIREMENT :  
+I_noise shall be set to 0 during the ADC calibration. [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_060]  REQUIREMENT :  
+When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall 
+set to high the o_do_avarage signal for 1 clock cycle. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_061]  REQUIREMENT :  
+When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to 
+convert the input in Two Complement. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_062]  REQUIREMENT :  
+When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples 
+used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to 
+speed-up the AM-S simulation). [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_063]  REQUIREMENT :  
+When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 
+en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result 
+shall be bypassed in favor of the value written inside the registers 
+ADC_ERROR_CAP_x_DEBUG [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_064]  REQUIREMENT :  
+When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , 
+the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the 
+Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in 
+ADC_GENERAL_DEBUG_0 and the sampled data shall be written in 
+ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and  In this mode, 
+before start a new sampling operation, the RESET_DEBUG_ADC DATA in 
+ADC_GENERAL_DEBUG_0 shall be set to 1 and then to 0. [END]

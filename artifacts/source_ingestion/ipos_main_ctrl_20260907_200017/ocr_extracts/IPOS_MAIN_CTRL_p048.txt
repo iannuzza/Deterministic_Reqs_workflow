@@ -1,0 +1,27 @@
+47 
+ 
+Port name Direction Type Descr. 
+o_pwr_dwn_16MHz output  
+enable for 
+16MHz ring 
+oscillator 
+o_reset_average output  reset average 
+o_quokka_data_valid output [quokka_routine_bit-1:0] start ADSP 
+o_n_ppg_frame output [ppg_frame_bit-1:0] number for 
+ppg frame 
+o_rx_ch_frame output [ppg_rx_channel_bit-1:0] rx channel 
+output 
+o_en_ldo_1v8 output  enable ldo 
+1v8 
+o_T_tx_led_set output [T_tx_led_set_bit-1:0] time led set 
+for ppg fsm 
+o_T_tx_led_off output [T_tx_led_off_max_bit-1:0] time led off 
+for ppg fsm 
+o_idac_dc_ppg_frame output [idac_dc_ppg_frame_bit-1:0] idac dc ppg 
+for ppg fsm 
+o_curr_sel_tx_frame_x output [curr_sel_bit-1:0] 
+curr sel tx for 
+frame 
+running 
+o_tx1_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel 
+o_tx2_outlab_sel_frame_x output [bit_outab_sel-1:0] tx outab sel

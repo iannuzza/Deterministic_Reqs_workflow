@@ -1,0 +1,37 @@
+130 
+ 
+ 
+[DDS_STBIO1_0507] Requirement: 
+After the initial boot phase, to turn on the ISPU shall be: 
+• Select page 3 of the regmap (ADDRESS=0x04, DATA=0x03) 
+• Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x02) 
+• Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x12) 
+• Enable user mode by writing to regmap (ADDRESS=0x5E, DATA=0x01) 
+• Enable the power island by writing to regmap POWER CONFIGURATION 
+REGISTER via AHB interface (ADDRESS=0xCA000, DATA=0x01) 
+[End] 
+ 
+Figure 18: Timing turn on ISPU 
+[DDS_STBIO1_0508] Requirement: 
+To turn off the ISPU shall be: 
+• Disable the power island by writing to regmap POWER CONFIGURATION 
+REGISTER via AHB interface (ADDRESS=0xCA000, DATA=0x00) 
+[End] 
+ 
+[DDS_STBIO1_0509] Requirement: 
+To put the ISPU into sleep mode, it is necessary to perform a read at address 0x80054. 
+[End] 
+ 
+[DDS_STBIO1_05010] Requirement: 
+To wake up the ISPU, it is necessary to trigger an interrupt. 
+[End] 
+ 
+[DDS_STBIO1_05011] Requirement: 
+When the ISPU is in sleep mode, it is possible to perform reads and writes from the data and 
+code memory by triggering an AHB transition.  
+[End] 
+ 
+ 
+Stato corrente TMS = 0 TMS = 1

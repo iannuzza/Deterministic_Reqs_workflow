@@ -1,0 +1,32 @@
+103 
+ 
+13.2.3. SensorHub integration 
+Generic name Type Value TOP CONNECTION 
+ADDRWIDTH    
+EBMwriteAddr    
+TAGid    
+Table 25: Sensor Hub Parameter 
+ 
+Port name Direction Type TOP CONNECTION 
+scan_mode input   
+scan_enable input   
+scan_rstn input   
+HCLKM input   
+HCLKS input   
+sys_clk input   
+HRESETn input   
+DEBUG_MODE_i input   
+scl_master_in input   
+sda_master_in input   
+scl_master_out output   
+sda_master_out output   
+dvalid_masterblaze_ext input   
+dvalid_masterblaze_ext_enable input   
+sleep_master output   
+master_end_op_pulse output   
+SH_SMARTFIFO_OCCUPATION Input   
+fifo_mode input   
+fifo_offset input [11:0]  
+HSELS input   
+HADDRS input [ADDRWIDTH-
+1:0]

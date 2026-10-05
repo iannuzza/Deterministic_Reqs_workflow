@@ -1,0 +1,29 @@
+44 
+ 
+Port name Direction Type Descr. 
+i_change_cfg_ppg input  
+change 
+configuration 
+signal for ppg 
+i_change_curr input  change curr 
+for ppg 
+i_change_gain_start input  change gain 
+start for ppg 
+i_change_idac_dc_ppg input  change idac 
+value for ppg 
+i_sleep_master input  
+sleep master 
+from sensor 
+hub 
+i_adc_mux_bio_channel_debug input [2:0] adc mux bio 
+channel 
+i_adc_mux_sel_debug input  adc mux 
+debug 
+i_quokka_boot_end input  adsp boot 
+end signal 
+i_data_storage_mode input  data storage 
+mode 
+i_quokka_run input  
+adsp 
+elaboration 
+running

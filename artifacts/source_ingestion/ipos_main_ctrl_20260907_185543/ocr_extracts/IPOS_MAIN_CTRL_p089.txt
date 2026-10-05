@@ -1,0 +1,37 @@
+88 
+ 
+Port name Directi
+on Type Description 
+o_end_ioff_calibration output  end ppg ioff calibration 
+o_ioff_offset output [ppg_ioff_offset_bit-1:0] ioff offset value 
+o_ppg_calib_data_n_m0 output  ppg galibration data valid 
+o_reset_avg_calib_0 output  reset avg calib 0 
+o_reset_avg_calib_1 output  reset avg calib 1 
+ 
+Table 10: PPG FSM I/O List 
+5.8.5. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 7095] REQUIREMENT : 
+All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the 
+states values are described in the register’s comment). [END] 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_095]  REQUIREMENT : 
+The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high  when the PPG_FSM is 
+RX_START UP state. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_300]  REQUIREMENT : 
+When the rstn_i is asserted low, the PPG FSM shall return in Reset state immediately.  [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_096]  REQUIREMENT : 
+When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and 
+PPG_SEL in DEVICE_CONFIG_CHANNEL register  is set to 1, when the ELAB_FSM is in PPG 
+STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set 
+to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_097]  REQUIREMENT : 
+When in Reset state, if the rstn_i is de-asserted , i_wave_velocity_mode is and the i_start_ppg_fsm 
+is high, if i_ID_Frame is equal to 0 or two successively frame have two different i_rx_ch_frame , 
+then the PPG FSM shall go to ALC Compensation state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 6098] REQUIREMENT : 
+When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the 
+ELAB FSM is into the PPG_ALC_STORAGE and then never repeated. [END]

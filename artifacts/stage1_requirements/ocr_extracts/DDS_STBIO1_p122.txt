@@ -1,0 +1,57 @@
+121 
+ 
+registers to 
+serial 
+interface 
+registers of 
+the collar 
+ca_stredl_bist_c_march_e
+nd output 
+BIST March 
+end signal 
+from each 
+SP / ROM / 
+RF / DP 
+collar type 
+u_ispu_ca_stredl_bist_c_march_en
+d_sig 
+ 
+ca_stredl_bist_c_bbad_1 output 
+BIST 
+Indicates 
+bbad for a 
+specific 
+memory. 
+There are 
+as many 
+bbad signals 
+as the 
+number of 
+memories. 
+NO CONN 
+ca_stredl_bist_c_bfail_1 output 
+BIST 
+Indicates 
+bfail for a 
+specific 
+memory. 
+There are 
+as many 
+bbad signals 
+as the 
+number of 
+memories. 
+u_ispu_ca_stredl_bist_c_bfail_1_sig 
+ 
+ca_stredl_bist_c_repairabl
+e_1 output 
+BIST 
+Indicates 
+repairable 
+for a specific 
+memory.The
+re are as 
+many 
+repairable 
+signals as 
+NO CONN

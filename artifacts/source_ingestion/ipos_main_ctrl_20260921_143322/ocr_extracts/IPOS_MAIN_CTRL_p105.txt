@@ -1,0 +1,21 @@
+104 
+ 
+Port name Direction Type Description 
+i_force_reset input  force reset avg 
+i_save_alc input  save alc value in regmap 
+i_ppg_ioff_calib input  ppg ioff calibration phase 
+i_alc_mask input  mask alc average result 
+i_ppg_ioff_data_calib_n_m0 input  nm0 computation 
+i_ppg_ioff_data_calib_n_m1 input  nm1 computation 
+i_reset_avg_calib_0 input  reset average for nm0 
+i_reset_avg_calib_1 input  reset average for nm1 
+i_id_frame input [ n_ppg_frame_bit-1:0]  
+i_gsr_result input  start computation for gsr result 
+i_en_gsr_cds input  enabling gsr cds mode 
+i_n_average_ppg input [ n_average_ppg_max_bit-1:0] number of acquisition for ppg 
+i_data_valid_ecg_bia_adc input  data valid for ecg and bia data 
+i_data_valid_ppg_adc input  data valid for ppg data 
+i_data_valid_gsr_adc input  data valid for gsr 
+i_data_valid_noise_ppg_adc input  data valid for noise ppg 
+i_end_of_conversion input  end of conversion from adc 
+phases

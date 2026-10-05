@@ -1,0 +1,63 @@
+50 
+ 
+o_pd_p output 
+ 
+enable lead off mode DCCK_P, 
+Destination:Analog block 
+o_pd_n output 
+ 
+enable lead off mode DCCK_N, 
+Destination:Analog block 
+O_DCCK_P_i input 
+ 
+status lead off mode DCCK_P {0:low 
+impedance,1:floating electrode}, Source: 
+Analog block 
+O_DCCK_N_i input 
+ 
+status lead off mode DCCK_N {0:low 
+impedance,1:floating electrode}, Source: 
+Analog block 
+if_gpio1_in_reg output 
+ 
+ZI value from regmap 
+if_gpio1_en_reg input 
+ 
+EN value from regmap 
+if_gpio1_out_reg input 
+ 
+OUT value from regmap 
+if_gpio2_in_reg output 
+ 
+ZI value from regmap// ZI 
+if_gpio2_en_reg input 
+ 
+EN value from regmap 
+if_gpio2_out_reg input 
+ 
+OUT value from regmap 
+if_gpio3_in_reg output 
+ 
+ZI value from regmap 
+if_gpio3_en_reg input 
+ 
+EN value from regmap 
+if_gpio3_out_reg input 
+ 
+OUT value from regmap 
+if_gpio4_in_reg output 
+ 
+ZI value from regmap 
+if_gpio4_en_reg input 
+ 
+EN value from regmap 
+if_gpio4_out_reg input 
+ 
+OUT value from regmap 
+o_ext_reg_dt_afe input [7:0] i2c/spi read data u_regmap_otp 
+o_ext_reg_dt output [7:0] i2c/spi read data output 
+i_ext_reg_add input [7:0] i2c/spi address 
+i_ext_reg_dt input [7:0] i2c/spi write data 
+i_ext_reg_ck_wr input 
+ 
+i2c/spi clk

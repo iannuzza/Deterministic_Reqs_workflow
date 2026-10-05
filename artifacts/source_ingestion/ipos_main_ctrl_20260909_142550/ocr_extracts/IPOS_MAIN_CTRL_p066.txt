@@ -1,0 +1,23 @@
+65 
+ 
+5.4.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  16 MHz Clock 
+i_rstn input  Reset 
+i_N_clk input [N_clk_max_bit-1:0] Clock cycles for sampling 
+phase 
+i_ADC_en_mc input  adc enable from main 
+controller 
+i_start_ADC_mc input  Start adc from main 
+controller 
+i_start_ADC_ppg input  start adc from PPG 
+i_ADC_EOC input  End Of Conversion from 
+Analog ADC 
+i_en_ADC_debug input  enable for adc debug 
+phase 
+i_do_calibration input  calibration enable 
+i_adc_en_mask input  mask for adc enable 
+i_ppg_adc_control_en input  adc enable from ppg 
+i_debug_adc_error_cap8_0_bypass input  debug enable for debug 
+capacitance 
+i_adc_error_cap8_debug input [6:0] cap debug value

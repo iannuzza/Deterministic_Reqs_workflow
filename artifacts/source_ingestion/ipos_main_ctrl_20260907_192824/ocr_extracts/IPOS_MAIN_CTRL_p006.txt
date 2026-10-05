@@ -1,0 +1,28 @@
+5 
+ 
+DUT Device Under Test 
+HDL Hardware Description Language 
+ADC Analog Digital Converter 
+FSM Finite State Machine 
+ECG ElectroCardioGraphy 
+BIA Bio Impedance 
+GSR Galvanic Skin Resistance 
+PPG PhotoPlethysmoGram 
+Bio-Channel ECG, BIA, GSR 
+ADSP Advanced Digital Signal Processing Processor 
+PMU Power Management Unit 
+ISPU Intelligent Sensor Processor Unit 
+REGMAP Register Map 
+Table 3: Terms and Abbreviations Table 
+ 
+5. Main Controller Top 
+5.1. Description of Main Controller 
+The Main Controller is in charge of generating and receiving all the control signals for the Analog 
+Domain, furthermore, performs DSP elaboration on ADC Output and writes it in different 
+Address. This block IP is divided into different sub-blocks, all at the same hierarchy level and 
+described in the next chapter. Together with the Analog Domain, this block is interfaced with the 
+FIFO Controller, the ADSP and the PMU, these last two will not be described in this document. 
+The block IP is divided into different sub-blocks, all at the same hierarchy level and described in 
+the next chapter. 
+ 
+Figure 1: Main Controller Ip Block Diagram

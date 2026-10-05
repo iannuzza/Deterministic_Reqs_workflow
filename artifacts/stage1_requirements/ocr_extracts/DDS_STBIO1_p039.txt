@@ -1,0 +1,29 @@
+38 
+ 
+clk_en_s4 input wire clock gating logic inside stredl_afe_top 
+clk_en_s5 input wire clock gating logic inside masterblaze_ahb 
+clk_en_m0 input wire clock gating logic inside stredl_afe_top 
+clk_en_m1 input wire HSEL M1 from xbar to STMC AHB Slave 
+clk_en_m2 input wire HSEL M2 from xbar to FIFO 
+clk_en_m22 input wire HSEL M2 from xbar to MASTERBLAZE 
+clk_en_m3 input wire HSEL M3 from xbar to Regmap 
+iso_i input wire from register 
+vdden_i input wire enable ISPU Power Island 
+i_start_operative_16MHz input wire enable the lead of check 
+main_ctrl_sw_resetn input wire soft reset for main controller 
+stmc_sw_resetn input wire adsp soft reset 
+fifo_sw_resetn input wire fifo soft reset 
+masterblaze_sw_resetn input wire sensor hub soft reset 
+regmap_sw_resetn input wire regmap soft reset 
+adsp_run input wire adsp is running 
+adsp_xbar_sw_en input wire adsp clk ahb 
+i_en_clk_gsr_16M input wire enable the clock for gsr digital circuit 
+i_en_ck_m_p_q input wire enable quadrature and phase clock 
+i_en_clk_mod_debug input wire enable the clock modulation debug 
+i_en_chop_ref input wire enable chopper clock 
+i_en_ck_chop_imp input wire enable chopper clock for bia 
+i_en_ck_hc2_10k input wire enable health channel clock 
+i_freq_bia_m_p_q input wire 
+[2:0] 
+frequency selector for phase and 
+quadrature

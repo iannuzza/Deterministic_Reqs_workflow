@@ -1,0 +1,17 @@
+90 
+ 
+ 
+Figure 12: Boot Routine 
+[Vpriority High] [End] 
+ 
+ 
+ 
+[DDS_STBIO1_0017] Requirement: 
+To perform a BOOT routine, OTP_BOOT bit shall be written when quokka_run is low. 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0018] Requirement: 
+The WRITE routine shall start when OTP Write Bit rises and completes when quokka_run falls. 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0019] Requirement:

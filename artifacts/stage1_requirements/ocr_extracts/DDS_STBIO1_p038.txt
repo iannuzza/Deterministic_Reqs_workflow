@@ -1,0 +1,30 @@
+37 
+ 
+EN_LDO1V8_REG input wire Enable LDO from regmap 
+bist_mode input wire enable bist mode 
+debug_mode input wire enable debug 
+scan_mode input wire enable scan mode 
+scan_enable input wire start scan mode 
+scan_clk input wire scan clk 
+scan_rstn input wire scan rst 
+clk_bistctlr input wire bist controller and collar clock 
+rst_bistctlr_n input wire bist controller and collar resetn 
+clk_ext_en input wire enable external clock from pad 
+clk_ext_slow input wire external clock 32kHz 
+i_en_sh_clk input wire enable sensor hub clock 
+i_senshub_clk_sel input wire 
+[2:0] 
+selector for sensor hub clock 
+i_test_clk_fast input wire enable test and trimming for 16MHz clock 
+i_half_charge_ldo input wire enable the low power mode for ldo when 
+only ppg is selected 
+mask_en_ldo_pdclkf input wire mask the control of pdf and ldo control 
+during boot 
+clk_en_s0 input wire clock gating logic inside stredl_afe_top 
+clk_en_s1 input wire if present should be HSEL STMC AHB 
+Master 
+clk_en_s2_i2c input wire if present should be HSEL STMC AHB 
+Master 
+clk_en_s2_on input wire clk gating ON from AHB I2C/SPI Interface 
+clk_en_s2_off input wire clk gating OFF from AHB I2C/SPI Interface 
+clk_en_s3 input wire clk gating from AHB Master Main Controller

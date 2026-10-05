@@ -1,0 +1,25 @@
+155 
+ 
+16. SCAN 
+16.1. Top Level Approach  
+ 
+ 
+ 
+OUTPUT 
+• Scan out 1 (GPIO3/PMBF) 
+• Scan out 2 (SDA_SDI) 
+INPUT FROM PADS 
+• Scan in 1 (GPIO4/PMBS) 
+• Scan in 2 (SCLK) 
+• Scan clk (SH_CK) 
+• Scan en (GPIO0) 
+• Scan reset (CS) 
+ 
+INPUT FROM REGISTER 
+• Scan mode (ADDRESS=0x3E, BIT=0x01) 
+• SCAN_COMPR_EN (ADDRESS=0x3E, BIT=0x02) 
+ 
+ANALOG PADS: 
+• sense internal V1V2 (GPIO1) 
+• force = V1V2 SUPPLY (GPIO2) 
+• T_force_v1v2 (SH_SDA)

@@ -1,0 +1,53 @@
+124 
+ 
+the number 
+of 
+memories. 
+For a 
+shared 
+collar there 
+would be as 
+many 
+repairable 
+outputs as 
+the number 
+of memories 
+ca_stredl_bist_c_bbad_4 output 
+BIST 
+Indicates 
+bbad for a 
+specific 
+memory. 
+There are 
+as many 
+bbad signals 
+as the 
+number of 
+memories. 
+NO CONN 
+ca_stredl_bist_c_bfail_4 output 
+BIST 
+Indicates 
+bfail for a 
+specific 
+memory. 
+There are 
+as many 
+bbad signals 
+as the 
+number of 
+memories. 
+u_ispu_ca_stredl_bist_c_bfail_4_sig 
+ 
+ca_stredl_bist_c_repairabl
+e_4 output 
+BIST 
+Indicates 
+repairable 
+for a specific 
+memory.The
+re are as 
+many 
+repairable 
+signals as 
+NO CONN

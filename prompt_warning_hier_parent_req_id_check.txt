@@ -1,0 +1,52 @@
+Apply the hierarchy_parent_req_ids policy change in the identified direct-change files, then verify the downstream/forwarding files for consistency.
+
+Policy to implement everywhere:
+- hierarchy_parent_req_ids is required only for true lower-level requirement-to-requirement hierarchy relations
+- it is not required for approved top-level SRS/DRS/ARS requirements
+- top-level placement must never be forced under artificial parent requirement IDs
+- do not infer or invent parent IDs
+- do not use approved_block as hierarchy evidence
+- preserve approved authority exactly
+- keep this project-agnostic, deterministic, and local-only
+
+Direct-change files:
+1. copilot-instructions.md
+2. validate_source_to_stage2b_coherence.py
+3. pre_freeze_coherence_gate.py
+4. mapping_review_sync.py
+5. generate_stage2_specs.py
+6. requirement_corpus.py
+7. snapshot_manager.py
+8. allocation_ledger.py
+
+Verification targets:
+1. pre_freeze_warning_remediation.py
+2. workflow_cli.py
+3. freeze_stage2b_snapshot.py
+4. validate_stage2_mapping.py
+5. run_stage2_micro_arch_and_crosscheck.py
+6. workflow_gui.py
+
+Required work:
+- update the General Rules and workflow policy
+- update validation/gate logic so top-level SRS/DRS/ARS rows are not blocked for empty hierarchy_parent_req_ids
+- keep lower-level true child/dependent rows requiring real parent requirement IDs
+- ensure workbook sync preserves user edits to hierarchy_parent_req_ids where applicable
+- ensure Stage 2A/corpus/snapshot/ledger paths preserve and validate the field consistently under the revised required/optional policy
+- verify that downstream forwarding paths do not reintroduce the old assumption
+
+After changes, rerun only:
+1. scripts/validate_source_to_stage2b_coherence.py
+2. the pre-freeze coherence gate
+
+Stop there.
+
+Return only:
+1. files modified
+2. workflow/policy changes made
+3. verification results for the secondary files
+4. how many blockers were cleared
+5. remaining blockers if any
+6. Phase 1 summary
+7. pre-freeze gate summary
+8. exact next recommended step

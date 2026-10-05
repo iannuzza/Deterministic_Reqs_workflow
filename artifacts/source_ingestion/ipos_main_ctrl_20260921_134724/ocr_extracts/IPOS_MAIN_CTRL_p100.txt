@@ -1,0 +1,20 @@
+99 
+ 
+5.10.2. I/O List 
+5.10.2.1. Parameters 
+Generic name Type Value Description 
+gain_max_bit int 4  
+T1_max_bit_from_decoder int 4  
+T2_max_bit_from_decoder int 2  
+T1_max_bit int 8  
+T2_max_bit int 5  
+BTIA_ALC_register_bit int 9  
+T1_add_T2_max_bit int 13  
+n_iteration_bit int 4  
+ppg_frame_bit int 4  
+ppg_frame_bit_ALC_BTIA int 12  
+n_max_frame int 5  
+5.10.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  16 MHz clock 
+i_rstn input  reset signal

@@ -1,0 +1,44 @@
+Execute Phase 2 only.
+
+Use the Phase 1 report and fix only the blocking coherence issues required to make Source-to-Stage-2B state consistent enough for a new validation pass.
+
+Phase 2 scope is authorized for targeted state-changing fixes only in the minimum necessary area.
+
+Fix only these blockers found by Phase 1:
+1. missing merge_manifest.json for the active batch
+2. stale approved mapping CSV hash
+3. architecture profile draft still pending approval if this is a coherence-state mismatch caused by stale or unsynchronized workflow artifacts
+
+Mandatory constraints:
+- do not perform downstream regeneration
+- do not create or approve snapshots
+- do not run Stage 3+
+- do not auto-approve mapping review content
+- do not alter approved technical decisions unless required to restore coherence
+- do not change requirement text/content except where strictly required by already-approved authority
+- do not introduce project-specific policy logic
+- keep all fixes deterministic, local-only, minimal, and auditable
+
+Must preserve and validate:
+- selected and approved hierarchical placement for every requirement
+- allocation_class / owning_target / lineage_mode / source_origin_req_ids / hierarchy_parent_req_ids / owning_domain coherence
+- no fallback to source type or approved_block as ownership proxy
+- no recomputation of placement from heuristics when approved authority exists
+
+Required work:
+A. create/repair the active batch merge_manifest.json with the minimum authoritative content required by the workflow
+B. repair stale hash / approval-state coherence so that approvals describe the current effective artifacts only
+C. remove or reject stale/historical references that conflict with the active authoritative lineage, but only where required for coherence
+D. add or tighten validations that prevent the same blockers from recurring
+E. rerun only the Phase 1 checker after fixes
+
+Return only:
+1. files modified
+2. exact fixes applied
+3. whether any approval-boundary was encountered
+4. Phase 1 checker rerun summary
+5. PASS or FAIL after Phase 2
+6. exact next recommended step
+
+Do not start Phase 3.
+Do not perform merge approval, Architecture Map approval, snapshot approval, or downstream generation unless explicitly blocked and separately requested.

@@ -1,0 +1,36 @@
+17 
+ 
+Table 5: I/O List 
+8. STBIO1: Functional Modes 
+Different measurement flow can be distinguished according to the operative mode set by the 
+user: 
+8.1. Data Storage Mode 
+• Set DS_SEL bit in Device_Config_Channel register to 1 and PPG_ELAB to 0 in 
+General_Parameters_PPG  
+o This will cut the communication between Main Controller and ADSP 
+• Analog control Interface samples ECG and BIA signals from ADC, average and stores 
+data sampled in appropriate in FIFO.  
+• Analog control Interface samples GSR signal from ADC and stores GSR data raw in 
+FIFO.  
+• Analog control Interface samples PPG signal from ADC, average (according to the user's 
+configuration) and stores data in FIFO.  
+• Raw data are always available in FIFO after stored. (Except when FIFO FULL occurs)  
+ 
+In this mode, the ADSP is turned off, but it’s possible to turn on the ISPU before the start of a 
+measurement Cycle. In this case, the ISPU shall read the data from FIFO and can 
+communicate with the ADSP. 
+ 
+8.2. Normal Mode 
+• Set DS_SEL bit in Device_Config_Channel register to 0 
+o Set PPG_ELAB to 1 if also PPG data shall be elaborated by the ADSP 
+• Analog control Interface samples of ECG, BIA or GSR from ADC, average and stores 
+data sampled in appropriate registers (SYSTEM REGISTERS from 0x007C to 0x0094) 
+accessible by ADSP and other AHB Master.  
+• Analog control Interface samples PPG signal from ADC, average (according to the user's 
+configuration) and stores data in FIFO.  
+• ECG, BIA or GSR data raw in SYSTEM REGISTERS are processed by ADSP. 
+o If PPG_ELAB is set to 1, ADSP Shall read PPG Raw Data Directly from FIFO  
+• Finished processing phase ADSP stores elaborated data in FIFO.  
+ 
+In this mode is possible to turn on the ISPU to work with raw data and/or ADSP elaborated Data. 
+9. Digital Architecture Overview

@@ -1,0 +1,20 @@
+{
+  "approval_required": true,
+  "input_identity": {
+    "benchmark_config_sha256": "ac29b4461ab2bf355740130c4822dce611c9eb9a0bcfca256c57000f93af1b1b",
+    "cases_sha256": "514bcae71349901b981b0ef1269439162525a5ce4a742f7874dfa0c9506973ae"
+  },
+  "mapping": {
+    "authority_note": "Final mapping is held constant across retrieval modes; semantic widening is candidate-only and cannot override reviewed ownership.",
+    "candidate_mapping_accuracy": 1.0,
+    "digital_analog_system_scope_accuracy": 1.0,
+    "evaluated": 314,
+    "final_requirement_to_block_accuracy": 0.8407643312101911,
+    "requirement_to_hierarchy_accuracy": 0.8407643312101911,
+    "top_level_vs_block_local_error_rate": 0.14968152866242038
+  },
+  "overall_recommendation": "retain hybrid baseline; reject global semantic retrieval",
+  "project_name": "STBIO",
+  "semantic_delta": {},
+  "semantic_evaluation_enabled": false
+}

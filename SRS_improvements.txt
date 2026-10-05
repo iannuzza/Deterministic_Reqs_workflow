@@ -1,0 +1,42 @@
+
+Update SRS generation with these rules, and reuse the same relevant formatting rules for all generated specs where applicable.
+
+Formatting:
+- title and metadata on page 1; the TOC starts first on page 2, followed by Document Navigation
+- Version History must show the document version number, not "Current workspace revision"
+- start document version at 0.1
+- every paragraph, sub-paragraph, and internal sub-section starts on a new line
+- block lists and similar lists must use bullet format
+- every paragraph and sub-paragraph title must be bold
+- all tables must show full grid borders
+
+Content quality:
+- do not dump raw table content
+- do not copy/paste random source phrases
+- do not include broken OCR fragments, accidental field/value fragments, or casual text snippets
+- prefer clean synthesized engineering wording
+- if correct synthesis is not possible from authoritative source content, omit the text
+- do not invent
+
+For "Timing conditions and involved blocks":
+- do not repeat clock scheme tables or clock/reset tables
+- write only an elaborated functional summary of timing conditions and clock/reset relationships among involved blocks
+- if no good supported synthesis is possible, write nothing
+
+Use the same rule for "Clock and synchronization across domains":
+- no raw table dump
+- no random copied phrases
+- only supported engineering summary, otherwise omit
+
+For "Power-domain architecture":
+- each sub-description starts on its own line, for example Domain type, Notes, Functions, Characteristics
+- do not repeat descriptions
+- do not narrate complex raw tables such as PAD configuration tables by copying fragments
+- do not include fragments like "gpio2_irq_sel=4) input force = V1V2 SUPPLY..." or "next chapter. Together with the Analog Domain"
+
+Keep changes minimal, deterministic, project-agnostic, and preserve existing correct snapshot, allocation, and traceability behavior.
+
+Return:
+- files changed
+- rules updated
+- whether shared formatting rules were applied to other generated specs

@@ -1,0 +1,25 @@
+46 
+ 
+Port name Direction Type Descr. 
+i_busy_ppg input  ppg running 
+i_en_gsr_cds input  en gsr cds 
+mode 
+i_do_calibration input  do calibration 
+for adc 
+i_reset_curr_frame input  reset current 
+ppg frame 
+i_wave_velocity_mode input  enable wave 
+velocity mode 
+i_start_up_time_ppg_done input  start up ppg 
+done 
+i_reset_async_reg_ecg input  reset async 
+ecg done 
+i_reset_async_reg_bia input  reset async 
+bia done 
+o_ADC_en_mc output  
+adc enable 
+main 
+controller 
+o_start_adc output  start for 
+analog adc 
+o_start_ppg output  start ppg fsm

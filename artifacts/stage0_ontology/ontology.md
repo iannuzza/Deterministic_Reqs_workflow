@@ -1,0 +1,671 @@
+# Ontology Baseline
+
+Date: 2026-09-15
+
+## Phase 0 - Source Baseline and Scope Lock
+- Source specification: specs/DDS_STBIO1.pdf
+- Source type: pdf
+- OCR/reference inputs used: artifacts/stage1_requirements/integrated_ocr_index.csv, artifacts/stage1_requirements/requirements_summary.csv
+- Scope notes: source-derived System/Analog/Digital ontology for downstream traceability.
+
+## Phase 1 - Structural Parsing and Segmentation
+- Sections indexed: derived from requirement sources (Section/Paragraph tags).
+- Paragraphs indexed: derived from requirement summary source tags.
+- Tables indexed: 4 evidence rows
+- Images indexed: 3 evidence rows
+- Source-type mapping complete: yes
+- Captions and references: treated as source-bearing evidence when present in extracted statements.
+
+## Phase 2 - Concept Harvesting
+- System concepts extracted: 159
+- Analog concepts extracted: 3
+- Digital concepts extracted: 177
+- Alias groups normalized: 0
+
+## Phase 3 - Taxonomy Classification Summary
+- Comment: 0
+- Definition: 0
+- Assumption: 0
+- Requirement: 314
+
+## Concepts
+- ONT_SYS_001: acquisition (attribute)
+- ONT_SYS_002: ADC (entity)
+- ONT_SYS_003: ADC_CAL_CONFIG (entity)
+- ONT_SYS_004: ADC_GENERAL_DEBUG_0 (entity)
+- ONT_SYS_005: adc_phases (entity)
+- ONT_SYS_006: ADSP (attribute)
+- ONT_SYS_007: after (attribute)
+- ONT_SYS_008: AHB (attribute)
+- ONT_SYS_009: ALC (attribute)
+- ONT_SYS_010: ALC_COMP (attribute)
+- ONT_SYS_011: average (attribute)
+- ONT_SYS_012: been (attribute)
+- ONT_SYS_013: BIA (attribute)
+- ONT_SYS_014: BIO (attribute)
+- ONT_SYS_015: block (attribute)
+- ONT_SYS_016: BOOT (attribute)
+- ONT_SYS_017: calibration (attribute)
+- ONT_SYS_018: CDS (attribute)
+- ONT_SYS_019: channel (attribute)
+- ONT_SYS_020: covers (attribute)
+- ONT_ANA_001: DCC (attribute)
+- ONT_ANA_002: feature (attribute)
+- ONT_ANA_003: stages (attribute)
+- ONT_DIG_001: activate (attribute)
+- ONT_DIG_002: ADC (entity)
+- ONT_DIG_003: ADC_CONFIG_ECG (entity)
+- ONT_DIG_004: address (attribute)
+- ONT_DIG_005: ADSP (attribute)
+- ONT_DIG_006: AFE_BLOCK (attribute)
+- ONT_DIG_007: AHB (attribute)
+- ONT_DIG_008: ALC (attribute)
+- ONT_DIG_009: AUX_SENS_ON (attribute)
+- ONT_DIG_010: BIA (attribute)
+- ONT_DIG_011: BIA_SEL (attribute)
+- ONT_DIG_012: BIST (attribute)
+- ONT_DIG_013: BOOT (attribute)
+- ONT_DIG_014: BURST (attribute)
+- ONT_DIG_015: BUS (attribute)
+- ONT_DIG_016: BYTE (attribute)
+- ONT_DIG_017: changes (attribute)
+- ONT_DIG_018: clk_16m (attribute)
+- ONT_DIG_019: clk_64k (attribute)
+- ONT_DIG_020: clk_64k_divided (attribute)
+
+## Role Discovery
+- Catalog source: config/ontology_role_taxonomy.json
+- Catalog roles are search candidates; only source-supported roles become ontology facts.
+- top_level_system: System (found)
+- top_level_system: Subsystem (not-found)
+- top_level_system: Block (found)
+- top_level_system: Module (not-found)
+- top_level_system: Cluster (not-found)
+- top_level_system: Path (not-found)
+- top_level_system: Pipeline (not-found)
+- top_level_system: Domain (found)
+- top_level_system: Mode (found)
+- top_level_system: State (found)
+- top_level_system: Function (found)
+- top_level_system: Capability (not-found)
+- top_level_system: Constraint (not-found)
+- top_level_system: Requirement (found)
+- top_level_system: Configuration (found)
+- top_level_system: Instance (not-found)
+- control_orchestration: Controller (found)
+- control_orchestration: Sequencer (not-found)
+- control_orchestration: Supervisor (not-found)
+- control_orchestration: Manager (not-found)
+- control_orchestration: Scheduler (not-found)
+- control_orchestration: Arbiter (not-found)
+- control_orchestration: State Machine (not-found)
+- control_orchestration: Mode Controller (not-found)
+- control_orchestration: Calibration Controller (not-found)
+- control_orchestration: Power Manager (not-found)
+- control_orchestration: Reset Controller (not-found)
+- control_orchestration: Clock Controller (not-found)
+- control_orchestration: Interrupt Controller (not-found)
+- control_orchestration: Debug Controller (not-found)
+- control_orchestration: Test Controller (not-found)
+- data_path: Source (found)
+- data_path: Destination (found)
+- data_path: Producer (not-found)
+- data_path: Consumer (not-found)
+- data_path: Sink (not-found)
+- data_path: Forwarder (not-found)
+- data_path: Router (not-found)
+- data_path: Translator (not-found)
+- data_path: Converter (not-found)
+- data_path: Buffer (found)
+- data_path: FIFO (found)
+- data_path: Accumulator (not-found)
+- data_path: Aggregator (not-found)
+- data_path: Filter (not-found)
+- data_path: Formatter (not-found)
+- data_path: Serializer (not-found)
+- data_path: Deserializer (not-found)
+- data_path: Encoder (not-found)
+- data_path: Decoder (not-found)
+- data_path: Sampler (not-found)
+- data_path: Sampler Holder (not-found)
+- data_path: Sampler Clocked Block (not-found)
+- sensor_analog_front_end: Sensor (found)
+- sensor_analog_front_end: Transducer (not-found)
+- sensor_analog_front_end: Analog Front End (not-found)
+- sensor_analog_front_end: Amplifier (not-found)
+- sensor_analog_front_end: PGA (found)
+- sensor_analog_front_end: Comparator (not-found)
+- sensor_analog_front_end: ADC (found)
+- sensor_analog_front_end: DAC (found)
+- sensor_analog_front_end: Reference Generator (not-found)
+- sensor_analog_front_end: Bias Generator (not-found)
+- sensor_analog_front_end: Oscillator (not-found)
+- sensor_analog_front_end: PLL (not-found)
+- sensor_analog_front_end: Filter (not-found)
+- sensor_analog_front_end: Modulator (not-found)
+- sensor_analog_front_end: Demodulator (not-found)
+- sensor_analog_front_end: Chopper (found)
+- sensor_analog_front_end: Multiplexer (not-found)
+- sensor_analog_front_end: Demultiplexer (not-found)
+- sensor_analog_front_end: Signal Conditioner (not-found)
+- sensor_analog_front_end: Offset Compensation Block (not-found)
+- sensor_analog_front_end: Gain Trim Block (not-found)
+- digital_processing: Processor (found)
+- digital_processing: DSP (found)
+- digital_processing: ISPU (found)
+- digital_processing: Microcontroller (not-found)
+- digital_processing: Core (not-found)
+- digital_processing: Algorithm Engine (not-found)
+- digital_processing: Math Engine (not-found)
+- digital_processing: Feature Extractor (not-found)
+- digital_processing: Classifier (not-found)
+- digital_processing: Threshold Detector (not-found)
+- digital_processing: Packetizer (not-found)
+- digital_processing: Command Decoder (not-found)
+- digital_processing: Data Compressor (not-found)
+- digital_processing: Data Logger (not-found)
+- memory_storage: Memory (found)
+- memory_storage: Register File (not-found)
+- memory_storage: Regmap (found)
+- memory_storage: FIFO (found)
+- memory_storage: Buffer (found)
+- memory_storage: Cache (not-found)
+- memory_storage: Scratchpad (not-found)
+- memory_storage: Mailbox (not-found)
+- memory_storage: Queue (not-found)
+- memory_storage: Latch (not-found)
+- memory_storage: Retention Register (not-found)
+- memory_storage: Shadow Register (not-found)
+- memory_storage: Status Register (not-found)
+- memory_storage: Control Register (not-found)
+- memory_storage: Configuration Register (found)
+- interface_communication: Interface (found)
+- interface_communication: Bus (found)
+- interface_communication: Bridge (not-found)
+- interface_communication: Adapter (not-found)
+- interface_communication: Protocol Converter (not-found)
+- interface_communication: Bus Master (not-found)
+- interface_communication: Bus Slave (not-found)
+- interface_communication: Channel (found)
+- interface_communication: Port (found)
+- interface_communication: Link (not-found)
+- interface_communication: Endpoint (not-found)
+- interface_communication: Packet Interface (not-found)
+- interface_communication: Serial Interface (found)
+- interface_communication: Parallel Interface (not-found)
+- interface_communication: Handshake Controller (not-found)
+- interface_communication: DMA Interface (not-found)
+- interface_communication: Register Access Interface (not-found)
+- power_clock: Power Domain (not-found)
+- power_clock: Power Switch (not-found)
+- power_clock: Always-On Block (not-found)
+- power_clock: Retention Block (not-found)
+- power_clock: Isolation Block (not-found)
+- power_clock: Clock Domain (not-found)
+- power_clock: Clock Gater (not-found)
+- power_clock: Clock Divider (not-found)
+- power_clock: Clock Mux (not-found)
+- power_clock: PLL (not-found)
+- power_clock: Oscillator (not-found)
+- power_clock: Wake-up Controller (not-found)
+- power_clock: Low-Power Manager (not-found)
+- test_debug_validation: Test Block (not-found)
+- test_debug_validation: Debug Block (not-found)
+- test_debug_validation: Scan Chain (not-found)
+- test_debug_validation: Loopback Block (not-found)
+- test_debug_validation: Self-Test Block (not-found)
+- test_debug_validation: BIST Engine (not-found)
+- test_debug_validation: Monitor (not-found)
+- test_debug_validation: Probe Point (not-found)
+- test_debug_validation: Comparator/Checker (not-found)
+- test_debug_validation: Tracer (not-found)
+- test_debug_validation: Logger (not-found)
+- test_debug_validation: Qualification Controller (not-found)
+- support_auxiliary: Reference (not-found)
+- support_auxiliary: Trim Element (not-found)
+- support_auxiliary: Calibration Element (not-found)
+- support_auxiliary: Protection Block (not-found)
+- support_auxiliary: Guard Band Element (not-found)
+- support_auxiliary: Limiter (not-found)
+- support_auxiliary: Clamp (found)
+- support_auxiliary: Reset Source (not-found)
+- support_auxiliary: Event Generator (not-found)
+- support_auxiliary: Interrupt Source (not-found)
+- support_auxiliary: Status Reporter (not-found)
+
+## Entities
+- ONT_SYS_002: ADC; function/evidence: ADC is a entity concept extracted from SYS requirements. Observed behavior: When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions...
+- ONT_SYS_003: ADC_CAL_CONFIG; function/evidence: ADC_CAL_CONFIG is a entity concept extracted from SYS requirements. Observed behavior: When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, exce...
+- ONT_SYS_004: ADC_GENERAL_DEBUG_0; function/evidence: ADC_GENERAL_DEBUG_0 is a entity concept extracted from SYS requirements. Observed behavior: When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_...
+- ONT_SYS_005: adc_phases; function/evidence: adc_phases is a entity concept extracted from SYS requirements. Observed behavior: When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay
+- ONT_SYS_061: EN_ADC_DEBUG; function/evidence: EN_ADC_DEBUG is a entity concept extracted from SYS requirements. Observed behavior: When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the samp...
+- ONT_SYS_066: FIFO; function/evidence: FIFO is a entity concept extracted from SYS requirements. Observed behavior: When in unique_fifo_mode (i_multiple_fifo set to 0), if during a time slot an operation is done, the...
+- ONT_SYS_078: i_adc_en_mc; function/evidence: i_adc_en_mc is a entity concept extracted from SYS requirements. Observed behavior: When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before
+- ONT_SYS_082: i_data_out_adc; function/evidence: i_data_out_adc is a entity concept extracted from SYS requirements. Observed behavior: When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in...
+- ONT_SYS_083: i_debug_adc_error_cap8_0_bypass; function/evidence: i_debug_adc_error_cap8_0_bypass is a entity concept extracted from SYS requirements. Observed behavior: When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_e...
+- ONT_SYS_112: o_adc_ready; function/evidence: o_adc_ready is a entity concept extracted from SYS requirements. Observed behavior: The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not
+- ONT_SYS_142: SENSOR; function/evidence: SENSOR is a entity concept extracted from SYS requirements. Observed behavior: SENSOR HUB
+- ONT_DIG_002: ADC; function/evidence: ADC is a entity concept extracted from DIG requirements. Observed behavior: During the Configuration Phase (IDLE STATE of the Device_FSM), the user shall be able to: • Configure...
+- ONT_DIG_003: ADC_CONFIG_ECG; function/evidence: ADC_CONFIG_ECG is a entity concept extracted from DIG requirements. Observed behavior: • The user shall set the number of clocks for sampling ECG data from ADC in ADC_CONFIG_ECG...
+- ONT_DIG_057: FIFO; function/evidence: FIFO is a entity concept extracted from DIG requirements. Observed behavior: CONNECTION fifo_dpt 8 FIFO depth. Suggested val 8 / [DDS_STBIO1_9500] Requirement In case also other...
+- ONT_DIG_059: fifo_dpt; function/evidence: fifo_dpt is a entity concept extracted from DIG requirements. Observed behavior: CONNECTION fifo_dpt 8 FIFO depth. Suggested val 8
+- ONT_DIG_081: IPOS_FIFO_CTRL_00000008; function/evidence: IPOS_FIFO_CTRL_00000008 is a entity concept extracted from DIG requirements. Observed behavior: If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory...
+- ONT_DIG_082: IPOS_FIFO_CTRL_00000202; function/evidence: IPOS_FIFO_CTRL_00000202 is a entity concept extracted from DIG requirements. Observed behavior: The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000:...
+- ONT_DIG_083: IPOS_FIFO_CTRL_89455232; function/evidence: IPOS_FIFO_CTRL_89455232 is a entity concept extracted from DIG requirements. Observed behavior: As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]
+- ONT_DIG_084: IPOS_FIFO_CTRL_89455449; function/evidence: IPOS_FIFO_CTRL_89455449 is a entity concept extracted from DIG requirements. Observed behavior: The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO....
+- ONT_DIG_085: IPOS_FIFO_CTRL_89456557; function/evidence: IPOS_FIFO_CTRL_89456557 is a entity concept extracted from DIG requirements. Observed behavior: The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit addres...
+- ONT_DIG_086: IPOS_FIFO_CTRL_89456975; function/evidence: IPOS_FIFO_CTRL_89456975 is a entity concept extracted from DIG requirements. Observed behavior: The user shall select the Multiple FIFO mode setting to 1 the first bit into the...
+- ONT_DIG_087: IPOS_FIFO_CTRL_89457435; function/evidence: IPOS_FIFO_CTRL_89457435 is a entity concept extracted from DIG requirements. Observed behavior: The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple...
+- ONT_DIG_088: IPOS_FIFO_CTRL_89457790; function/evidence: IPOS_FIFO_CTRL_89457790 is a entity concept extracted from DIG requirements. Observed behavior: The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained...
+- ONT_DIG_089: IPOS_FIFO_CTRL_89459082; function/evidence: IPOS_FIFO_CTRL_89459082 is a entity concept extracted from DIG requirements. Observed behavior: The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_894...
+- ONT_DIG_093: irq_fifo_u_m_irq_stsatus; function/evidence: irq_fifo_u_m_irq_stsatus is a entity concept extracted from DIG requirements. Observed behavior: The irq_FIFO_U_M_IRQ_STsATUS interrupt shall be connected to FIFO status to bit 29.
+- ONT_DIG_144: SENSOR; function/evidence: SENSOR is a entity concept extracted from DIG requirements. Observed behavior: 11.1. XBAR Connection Matrix Destination Source Regmap SENSOR HUB ISPU FIFO ADSP Main Controller
+- ONT_DIG_145: sensor_hub_x; function/evidence: sensor_hub_x is a entity concept extracted from DIG requirements. Observed behavior: All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IP...
+
+## Attributes
+- ONT_SYS_001: acquisition; evidence: requirements_summary.csv
+- ONT_SYS_006: ADSP; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 018 (page 34)
+- ONT_SYS_007: after; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 014 (page 94)
+- ONT_SYS_008: AHB; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 031 (page 131)
+- ONT_SYS_009: ALC; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
+- ONT_SYS_010: ALC_COMP; evidence: requirements_summary.csv
+- ONT_SYS_011: average; evidence: requirements_summary.csv
+- ONT_SYS_012: been; evidence: requirements_summary.csv
+- ONT_SYS_013: BIA; evidence: requirements_summary.csv
+- ONT_SYS_014: BIO; evidence: requirements_summary.csv
+- ONT_SYS_015: block; evidence: requirements_summary.csv
+- ONT_SYS_016: BOOT; evidence: requirements_summary.csv
+- ONT_SYS_017: calibration; evidence: requirements_summary.csv
+- ONT_SYS_018: CDS; evidence: requirements_summary.csv
+- ONT_SYS_019: channel; evidence: requirements_summary.csv
+- ONT_SYS_020: covers; evidence: requirements_summary.csv
+- ONT_SYS_021: CURR_INJ; evidence: requirements_summary.csv
+- ONT_SYS_022: DDS; evidence: requirements_summary.csv
+- ONT_SYS_023: DDS_STBIO1_0116; evidence: requirements_summary.csv
+- ONT_SYS_024: DDS_STBIO1_0118; evidence: requirements_summary.csv
+- ONT_SYS_025: DDS_STBIO1_0119; evidence: requirements_summary.csv
+- ONT_SYS_026: DDS_STBIO1_0120; evidence: requirements_summary.csv
+- ONT_SYS_027: DDS_STBIO1_0121; evidence: requirements_summary.csv
+- ONT_SYS_028: DDS_STBIO1_0122; evidence: requirements_summary.csv
+- ONT_SYS_029: DDS_STBIO1_0123; evidence: requirements_summary.csv
+- ONT_SYS_030: DDS_STBIO1_0124; evidence: requirements_summary.csv
+- ONT_SYS_031: DDS_STBIO1_0125; evidence: requirements_summary.csv
+- ONT_SYS_032: DDS_STBIO1_0127; evidence: requirements_summary.csv
+- ONT_SYS_033: DDS_STBIO1_0128; evidence: requirements_summary.csv
+- ONT_SYS_034: DDS_STBIO1_0129; evidence: requirements_summary.csv
+- ONT_SYS_035: DDS_STBIO1_0140; evidence: requirements_summary.csv
+- ONT_SYS_036: DDS_STBIO1_0141; evidence: requirements_summary.csv
+- ONT_SYS_037: DDS_STBIO1_0142; evidence: requirements_summary.csv
+- ONT_SYS_038: DDS_STBIO1_05010; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 027 (page 131)
+- ONT_SYS_039: DDS_STBIO1_05011; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 031 (page 131)
+- ONT_SYS_040: DDS_STBIO1_0509; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 023 (page 131)
+- ONT_SYS_041: DDS_STBIO1_1114; evidence: requirements_summary.csv
+- ONT_SYS_042: debug; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 022 (page 34)
+- ONT_SYS_043: DEVICE; evidence: requirements_summary.csv
+- ONT_SYS_044: DEVICE_CONFIG_CHANNEL; evidence: requirements_summary.csv
+- ONT_SYS_045: DEVICE_CONFIG_OPERATION; evidence: requirements_summary.csv
+- ONT_SYS_046: DEVICE_FSM; evidence: requirements_summary.csv
+- ONT_SYS_049: DIGITAL_RAMP_CONFIG_PARAM_1; evidence: requirements_summary.csv
+- ONT_SYS_050: DIGITAL_RAMP_CONFIG_PARAM_3; evidence: requirements_summary.csv
+- ONT_SYS_051: DISABLE_ALC; evidence: requirements_summary.csv
+- ONT_SYS_052: EC0; evidence: requirements_summary.csv
+- ONT_SYS_053: ECG; evidence: requirements_summary.csv
+- ONT_SYS_054: ECG0; evidence: requirements_summary.csv
+- ONT_SYS_055: ECG1; evidence: requirements_summary.csv
+- ONT_SYS_056: ECG1_ECG2; evidence: requirements_summary.csv
+- ONT_SYS_057: ECG2; evidence: requirements_summary.csv
+- ONT_SYS_058: ECG_CTRL; evidence: requirements_summary.csv
+- ONT_SYS_059: ELAB; evidence: requirements_summary.csv
+- ONT_SYS_060: ELAB_FSM; evidence: requirements_summary.csv
+- ONT_SYS_062: en_gsr_cds; evidence: requirements_summary.csv
+- ONT_SYS_063: equal; evidence: requirements_summary.csv
+- ONT_SYS_064: ERROR; evidence: requirements_summary.csv
+- ONT_SYS_065: falling_ramp; evidence: requirements_summary.csv
+- ONT_SYS_067: FIRST_ALC_SAMPLES; evidence: requirements_summary.csv
+- ONT_SYS_068: FSM; evidence: requirements_summary.csv
+- ONT_SYS_069: function; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 038 (page 59)
+- ONT_SYS_070: GENERAL_PPG_PARAMETERS_3; evidence: requirements_summary.csv
+- ONT_SYS_071: GPIO1; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 038 (page 59)
+- ONT_SYS_072: GSR; evidence: requirements_summary.csv
+- ONT_SYS_073: GSR_CDS; evidence: requirements_summary.csv
+- ONT_SYS_074: GSR_CTRL; evidence: requirements_summary.csv
+- ONT_SYS_075: GSR_SNS; evidence: requirements_summary.csv
+- ONT_SYS_076: HC_EN; evidence: requirements_summary.csv
+- ONT_SYS_077: HUB; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 020 (page 34)
+- ONT_SYS_080: i_clk_hlt_en; evidence: requirements_summary.csv
+- ONT_SYS_081: i_clk_imp_en; evidence: requirements_summary.csv
+- ONT_SYS_084: i_debug_calibration; evidence: requirements_summary.csv
+- ONT_SYS_085: i_imp_curinj; evidence: requirements_summary.csv
+- ONT_SYS_086: i_m_gsr; evidence: requirements_summary.csv
+- ONT_SYS_087: i_noise; evidence: requirements_summary.csv
+- ONT_SYS_088: i_rst_async_bia; evidence: requirements_summary.csv
+- ONT_SYS_089: i_rst_async_ecg; evidence: requirements_summary.csv
+- ONT_SYS_090: i_su_hlt_dly; evidence: requirements_summary.csv
+- ONT_SYS_092: IDAC_DC_PPG_FRAME_; evidence: requirements_summary.csv
+- ONT_SYS_093: IDLE; evidence: requirements_summary.csv
+- ONT_SYS_094: IMP_CURRINJ_EN; evidence: requirements_summary.csv
+- ONT_SYS_095: IMP_EN; evidence: requirements_summary.csv
+- ONT_SYS_096: input; evidence: requirements_summary.csv
+- ONT_SYS_097: into; evidence: requirements_summary.csv
+- ONT_SYS_098: IOFF; evidence: requirements_summary.csv
+- ONT_SYS_099: IOFF_OFFSET; evidence: requirements_summary.csv
+- ONT_SYS_100: ip_version; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 040 (page 99)
+- ONT_SYS_101: IPOS_STBIO1_MAIN_CONTROLLER_1; evidence: Table 20. OTP I/O List
+- ONT_SYS_102: ISPU; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 023 (page 131)
+- ONT_SYS_103: last; evidence: requirements_summary.csv
+- ONT_SYS_104: least; evidence: requirements_summary.csv
+- ONT_SYS_105: LED; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 051 (page 59)
+- ONT_SYS_106: MASK; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
+- ONT_SYS_107: MEASUREMENT; evidence: requirements_summary.csv
+- ONT_SYS_109: MSB; evidence: requirements_summary.csv
+- ONT_SYS_110: multiple; evidence: requirements_summary.csv
+- ONT_SYS_111: N_MAX; evidence: requirements_summary.csv
+- ONT_SYS_113: O_CK_Q; evidence: requirements_summary.csv
+- ONT_SYS_114: o_en_buff; evidence: requirements_summary.csv
+- ONT_SYS_115: o_en_tia; evidence: requirements_summary.csv
+- ONT_SYS_116: o_end_cal_phases; evidence: requirements_summary.csv
+- ONT_SYS_117: o_pd_idac; evidence: requirements_summary.csv
+- ONT_SYS_118: o_pd_tia; evidence: requirements_summary.csv
+- ONT_SYS_119: OFF; evidence: requirements_summary.csv
+- ONT_SYS_120: once; evidence: requirements_summary.csv
+- ONT_SYS_121: only; evidence: requirements_summary.csv
+- ONT_SYS_122: operation; evidence: requirements_summary.csv
+- ONT_SYS_123: operations; evidence: requirements_summary.csv
+- ONT_SYS_124: OPERATIVE; evidence: requirements_summary.csv
+- ONT_SYS_125: order; evidence: requirements_summary.csv
+- ONT_SYS_126: phase; evidence: requirements_summary.csv
+- ONT_SYS_127: PPG; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
+- ONT_SYS_128: PPG_ALC_CONFIG_PARAM_2; evidence: requirements_summary.csv
+- ONT_SYS_129: PPG_ALC_STORAGE; evidence: requirements_summary.csv
+- ONT_SYS_130: PPG_FSM; evidence: requirements_summary.csv
+- ONT_SYS_131: PPG_SEL; evidence: requirements_summary.csv
+- ONT_SYS_133: preset; evidence: requirements_summary.csv
+- ONT_SYS_134: RAM; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 013 (page 97)
+- ONT_SYS_135: rd_to_max_val; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 025 (page 99)
+- ONT_SYS_136: requirement; evidence: Table 20. OTP I/O List
+- ONT_SYS_137: RES_F_R2; evidence: Table 20. OTP I/O List
+- ONT_SYS_138: RESERVED; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 033 (page 133)
+- ONT_SYS_139: RESET_PPG; evidence: requirements_summary.csv
+- ONT_SYS_140: RISING_RAMP; evidence: requirements_summary.csv
+- ONT_SYS_141: SECOND_ALC_SAMPLES; evidence: requirements_summary.csv
+- ONT_SYS_143: set_gsr_freq_h; evidence: requirements_summary.csv
+- ONT_SYS_144: shall; evidence: requirements_summary.csv
+- ONT_SYS_145: sleep; evidence: requirements_summary.csv
+- ONT_SYS_149: time; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 025 (page 99)
+- ONT_SYS_150: time_slot_data; evidence: requirements_summary.csv
+- ONT_SYS_151: TIMER; evidence: requirements_summary.csv
+- ONT_SYS_152: TX_LEDOFF_FRAME_; evidence: requirements_summary.csv
+- ONT_SYS_153: user; evidence: requirements_summary.csv
+- ONT_SYS_154: version; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 040 (page 99)
+- ONT_SYS_155: WAIT_SU; evidence: requirements_summary.csv
+- ONT_SYS_156: when; evidence: requirements_summary.csv
+- ONT_SYS_157: xc80ec; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 033 (page 133)
+- ONT_SYS_158: xc9030; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 039 (page 133)
+- ONT_SYS_159: xca144; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 049 (page 133)
+- ONT_ANA_001: DCC; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 033 (page 71)
+- ONT_ANA_002: feature; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 033 (page 71)
+- ONT_ANA_003: stages; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 033 (page 71)
+- ONT_DIG_001: activate; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 028 (page 99)
+- ONT_DIG_004: address; evidence: Figure 26
+- ONT_DIG_005: ADSP; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 92)
+- ONT_DIG_006: AFE_BLOCK; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 028 (page 133)
+- ONT_DIG_007: AHB; evidence: Section 13.2.2.1 I2C_SPI_AHB Peculiar Requirements (under Section 13.2.2 I2C_SPI_AHB integration), paragraph 009 (page 102)
+- ONT_DIG_008: ALC; evidence: Section 5 PPG FRAMES CONFIG: (under Section 15.3.3 PPG Only), paragraph 026 (page 152)
+- ONT_DIG_009: AUX_SENS_ON; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 026 (page 110)
+- ONT_DIG_010: BIA; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 009 (page 130)
+- ONT_DIG_011: BIA_SEL; evidence: Section 2 SELECT CHANNEL: (under Section 15.3.2 ECG and BIA), paragraph 016 (page 150)
+- ONT_DIG_012: BIST; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 018 (page 59)
+- ONT_DIG_013: BOOT; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 004 (page 90)
+- ONT_DIG_014: BURST; evidence: Section 13.2.2.1 I2C_SPI_AHB Peculiar Requirements (under Section 13.2.2 I2C_SPI_AHB integration), paragraph 047 (page 102)
+- ONT_DIG_015: BUS; evidence: Section 13.2.4.1 FIFO_CTRL Peculiar Requirements (under Section 13.2.4 FIFO_CTRL integration), paragraph 022 (page 113)
+- ONT_DIG_016: BYTE; evidence: Section 13.2.2.1 I2C_SPI_AHB Peculiar Requirements (under Section 13.2.2 I2C_SPI_AHB integration), paragraph 042 (page 102)
+- ONT_DIG_017: changes; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 018 (page 71)
+- ONT_DIG_018: clk_16m; evidence: Section 13.1.1.4 Clocks and Reset (under Section 13.1.1 PMU), paragraph 015 (page 45)
+- ONT_DIG_019: clk_64k; evidence: Section 1020 stbio1_top.clk_16m stbio1_top.dig_wrapper_LV.u_pmu.clk (under Section 13.1.1.4 Clocks and Reset), paragraph 021 (page 45)
+- ONT_DIG_020: clk_64k_divided; evidence: Section 13.1.1.3 PMU Peculiar Requirements (under Section 13.1.1 PMU), paragraph 034 (page 43)
+- ONT_DIG_021: CONFIGURATION; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 017 (page 131)
+- ONT_DIG_022: CONNECTION; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 008 (page 99)
+- ONT_DIG_023: CONTROL_A; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 97)
+- ONT_DIG_024: controller; evidence: Section 13.2.4.1 FIFO_CTRL Peculiar Requirements (under Section 13.2.4 FIFO_CTRL integration), paragraph 041 (page 113)
+- ONT_DIG_025: DATA; evidence: Table 31. Address Register Map ................................ ................................ .............................. 132
+- ONT_DIG_026: DCCK_IRQ_MASK; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 018 (page 71)
+- ONT_DIG_027: DDS_STBIO1_0028; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 023 (page 94)
+- ONT_DIG_028: DDS_STBIO1_0036; evidence: Section 4 OTP BOOT routine, paragraph 030 (page 97)
+- ONT_DIG_029: DDS_STBIO1_0125; evidence: Section 1 TIME SLOT LENGTH: (under Section 15.3.2 ECG and BIA), paragraph 012 (page 150)
+- ONT_DIG_030: DDS_STBIO1_0143; evidence: Section 1 TIME SLOT LENGTH: (under Section 15.3.3 PPG Only), paragraph 010 (page 152)
+- ONT_DIG_031: DDS_STBIO1_0145; evidence: Section 3 SELECT DIVISION INDEX FOR CONFIGURED CHANNELS: (under Section 15.3.3 PPG Only), paragraph 018 (page 152)
+- ONT_DIG_032: DDS_STBIO1_0146; evidence: Section 4 CONFIGURE ADC SAMPLING PERIOD: (under Section 15.3.3 PPG Only), paragraph 022 (page 152)
+- ONT_DIG_033: DDS_STBIO1_0148; evidence: Section 6 SELECT OPERATIVE MODE: (under Section 15.3.3 PPG Only), paragraph 008 (page 153)
+- ONT_DIG_034: DDS_STBIO1_4000; evidence: Section 13.4.2 STBIO1 Register Map Peculiar Requirements (under Section 13.4 STBIO1 Register Map), paragraph 023 (page 135)
+- ONT_DIG_035: DDS_STBIO1_8000; evidence: Section 13.2.2.1 I2C_SPI_AHB Peculiar Requirements (under Section 13.2.2 I2C_SPI_AHB integration), paragraph 005 (page 102)
+- ONT_DIG_036: DDS_STBIO1_9018; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 008 (page 110)
+- ONT_DIG_037: DDS_STBIO1_9024; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 014 (page 110)
+- ONT_DIG_038: DDS_STBIO1_9027; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 020 (page 110)
+- ONT_DIG_039: DDS_STBIO1_9030; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 032 (page 110)
+- ONT_DIG_040: DDS_STBIO1_9032; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 044 (page 110)
+- ONT_DIG_041: DDS_STBIO1_9300; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 033 (page 111)
+- ONT_DIG_042: DDS_STBIO1_9500; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 039 (page 111)
+- ONT_DIG_043: DEBUG; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 022 (page 59)
+- ONT_DIG_044: default; evidence: Section 13.2.4.1 FIFO_CTRL Peculiar Requirements (under Section 13.2.4 FIFO_CTRL integration), paragraph 032 (page 113)
+- ONT_DIG_045: DEVICE_CONFIG_CHANNEL; evidence: Section 2 SELECT CHANNEL: (under Section 15.3.1 ECG Only), paragraph 012 (page 148)
+- ONT_DIG_046: DEVICE_CONFIG_OPERATION; evidence: Section 6 SELECT OPERATIVE MODE: (under Section 15.3.1 ECG Only), paragraph 031 (page 148)
+- ONT_DIG_049: dig_wrapper_lv; evidence: Section 32 kHz (under Section 13.1.1.4 Clocks and Reset), paragraph 015 (page 46)
+- ONT_DIG_050: DS_SEL; evidence: Section 2 SELECT CHANNEL: (under Section 15.3.1 ECG Only), paragraph 012 (page 148)
+- ONT_DIG_052: each; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 013 (page 111)
+- ONT_DIG_053: ECG; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 009 (page 130)
+- ONT_DIG_054: ECG0_SEL; evidence: Section 2 SELECT CHANNEL: (under Section 15.3.1 ECG Only), paragraph 012 (page 148)
+- ONT_DIG_055: ECG_CTRL; evidence: Section 5 GENERAL CONFIG: (under Section 15.3.1 ECG Only), paragraph 027 (page 148)
+- ONT_DIG_056: EN_LDO1V8; evidence: Section 13.1.1.3 PMU Peculiar Requirements (under Section 13.1.1 PMU), paragraph 017 (page 43)
+- ONT_DIG_060: function; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 043 (page 59)
+- ONT_DIG_061: GPIO1; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 043 (page 59)
+- ONT_DIG_062: HC_EN; evidence: Section 5 GENERAL CONFIG: (under Section 15.3.1 ECG Only), paragraph 027 (page 148)
+- ONT_DIG_063: HCLK; evidence: Section 16 MHz (under Section 13.1.1.4 Clocks and Reset), paragraph 056 (page 46)
+- ONT_DIG_064: high; evidence: Section 13.1.1.3 PMU Peculiar Requirements (under Section 13.1.1 PMU), paragraph 008 (page 44)
+- ONT_DIG_065: HMASTER; evidence: Section 13.2.4.1 FIFO_CTRL Peculiar Requirements (under Section 13.2.4 FIFO_CTRL integration), paragraph 017 (page 114)
+- ONT_DIG_066: HUB; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 008 (page 130)
+- ONT_DIG_074: i_por1v2_1v2; evidence: Section 13.1.1.3 PMU Peculiar Requirements (under Section 13.1.1 PMU), paragraph 021 (page 43)
+- ONT_DIG_075: IDLE; evidence: Section 15.2 Configuration Phase (under Section 15 Measurement Cycle Examples), paragraph 007 (page 146)
+- ONT_DIG_076: IMP_CTRL; evidence: Section 5 GENERAL CONFIG: (under Section 15.3.2 ECG and BIA), paragraph 036 (page 150)
+- ONT_DIG_077: IMP_EN; evidence: Section 5 GENERAL CONFIG: (under Section 15.3.2 ECG and BIA), paragraph 036 (page 150)
+- ONT_DIG_078: input; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 022 (page 109)
+- ONT_DIG_080: IPOS; evidence: Section 15.1 BOOT Phase (under Section 15 Measurement Cycle Examples), paragraph 009 (page 145)
+- ONT_DIG_091: IPOS_MAIN_CTRL; evidence: Section 6 SELECT OPERATIVE MODE: (under Section 15.3.1 ECG Only), paragraph 031 (page 148)
+- ONT_DIG_092: IPOS_PMU; evidence: Section 13.1.1.3 PMU Peculiar Requirements (under Section 13.1.1 PMU), paragraph 013 (page 43)
+- ONT_DIG_094: irq_senshub_sts; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 008 (page 130)
+- ONT_DIG_095: irq_timer; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 013 (page 130)
+- ONT_DIG_096: ISPU; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 004 (page 131)
+- ONT_DIG_097: ISPU_DEBUG; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 026 (page 59)
+- ONT_DIG_098: last; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 028 (page 111)
+- ONT_DIG_099: LDO; evidence: Section 18.2 Debug mode (under Section 18 Digital DFT), paragraph 024 (page 159)
+- ONT_DIG_100: LDO1V8; evidence: Section 15.1 BOOT Phase (under Section 15 Measurement Cycle Examples), paragraph 005 (page 145)
+- ONT_DIG_101: LED; evidence: Section 4 OTP BOOT routine, paragraph 030 (page 97)
+- ONT_DIG_102: LOCKED; evidence: Section 13.2.2.1 I2C_SPI_AHB Peculiar Requirements (under Section 13.2.2 I2C_SPI_AHB integration), paragraph 047 (page 102)
+- ONT_DIG_103: LOW; evidence: Section 18.3 ADC TEST LOW NOISE (under Section 18 Digital DFT), paragraph 006 (page 160)
+- ONT_DIG_104: master; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 031 (page 99)
+- ONT_DIG_105: MEM_LOC; evidence: Section 13.2.4.1 FIFO_CTRL Peculiar Requirements (under Section 13.2.4 FIFO_CTRL integration), paragraph 004 (page 113)
+- ONT_DIG_106: memory; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 012 (page 90)
+- ONT_DIG_107: MEMSAFE; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 030 (page 59)
+- ONT_DIG_110: MSB; evidence: Section 7 CHECK DATA: (under Section 15.3.1 ECG Only), paragraph 036 (page 148)
+- ONT_DIG_112: o_dcck_n_i; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 023 (page 71)
+- ONT_DIG_113: o_dcck_p_i; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 018 (page 71)
+- ONT_DIG_114: OFFSET; evidence: Table 31. Address Register Map ................................ ................................ .............................. 132
+- ONT_DIG_115: operative; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 010 (page 59)
+- ONT_DIG_116: OTP; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 92)
+- ONT_DIG_117: OTP_BOOT; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 004 (page 90)
+- ONT_DIG_118: OTP_IREF_WAKEUP; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 004 (page 94)
+- ONT_DIG_119: OTP_PRG10; evidence: Section 4 OTP BOOT routine, paragraph 030 (page 97)
+- ONT_DIG_120: OTP_TEST; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 011 (page 93)
+- ONT_DIG_121: OTP_WRITE; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 011 (page 93)
+- ONT_DIG_122: output; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 034 (page 109)
+- ONT_DIG_123: PAD; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 034 (page 109)
+- ONT_DIG_124: PARAMETERS; evidence: Section 5 PPG FRAMES CONFIG: (under Section 15.3.3 PPG Only), paragraph 026 (page 152)
+- ONT_DIG_125: perform; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 009 (page 91)
+- ONT_DIG_126: PMU; evidence: Section 15.1 BOOT Phase (under Section 15 Measurement Cycle Examples), paragraph 005 (page 145)
+- ONT_DIG_127: POR; evidence: Section 15.1 BOOT Phase (under Section 15 Measurement Cycle Examples), paragraph 005 (page 145)
+- ONT_DIG_128: port; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 046 (page 109)
+- ONT_DIG_129: POWER; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 017 (page 131)
+- ONT_DIG_130: PPG; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 009 (page 130)
+- ONT_DIG_131: PPG_ALC_CONFIG_PARAM_1; evidence: Section 5 PPG FRAMES CONFIG: (under Section 15.3.3 PPG Only), paragraph 026 (page 152)
+- ONT_DIG_132: PPG_SEL; evidence: Section 2 SELECT CHANNEL: (under Section 15.3.3 PPG Only), paragraph 014 (page 152)
+- ONT_DIG_133: quokka; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 054 (page 110)
+- ONT_DIG_134: RAM; evidence: Section 13.2.4.1 FIFO_CTRL Peculiar Requirements (under Section 13.2.4 FIFO_CTRL integration), paragraph 004 (page 113)
+- ONT_DIG_138: requirement; evidence: Section 6 SELECT OPERATIVE MODE: (under Section 15.3.3 PPG Only), paragraph 008 (page 153)
+- ONT_DIG_139: reset; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 008 (page 111)
+- ONT_DIG_140: RST_N_FF; evidence: Section 16 MHz, paragraph 021 (page 47)
+- ONT_DIG_141: SCAN; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 014 (page 59)
+- ONT_DIG_142: SCL; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 017 (page 109)
+- ONT_DIG_143: SDA; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 017 (page 109)
+- ONT_DIG_146: shall; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 004 (page 90)
+- ONT_DIG_147: signal; evidence: Section 16 MHz (under Section 13.1.1.4 Clocks and Reset), paragraph 098 (page 46)
+- ONT_DIG_148: SLAVE0_DEV_ADD; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 014 (page 110)
+- ONT_DIG_149: SLAVE0_NUMOP; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 044 (page 110)
+- ONT_DIG_150: SLAVE1_DEV_ADD; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 020 (page 110)
+- ONT_DIG_151: SLAVE2_DEV_ADD; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 020 (page 110)
+- ONT_DIG_152: SOFT; evidence: Section 14.1 Main Controller Soft Reset (under Section 14 Soft Reset Procedures), paragraph 009 (page 144)
+- ONT_DIG_153: SOFT_RESET; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 97)
+- ONT_DIG_156: STBIO1; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 028 (page 133)
+- ONT_DIG_157: stbio1_top; evidence: Section 32 kHz (under Section 13.1.1.4 Clocks and Reset), paragraph 015 (page 46)
+- ONT_DIG_158: stored; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 013 (page 111)
+- ONT_DIG_159: SUB; evidence: Table 29. Data Tag ................................ ................................ ................................ .................. 114
+- ONT_DIG_162: sys_clk; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 051 (page 109)
+- ONT_DIG_164: TAG; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 028 (page 111)
+- ONT_DIG_165: TEST; evidence: Section 18.3 ADC TEST LOW NOISE (under Section 18 Digital DFT), paragraph 006 (page 160)
+- ONT_DIG_166: TRIMM; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 054 (page 133)
+- ONT_DIG_167: tst_clk_32k; evidence: Section 16 MHz (under Section 13.1.1.4 Clocks and Reset), paragraph 098 (page 46)
+- ONT_DIG_168: turned; evidence: Section 13.1.1.3 PMU Peculiar Requirements (under Section 13.1.1 PMU), paragraph 013 (page 43)
+- ONT_DIG_169: user; evidence: Section 6 SELECT OPERATIVE MODE: (under Section 15.3.1 ECG Only), paragraph 031 (page 148)
+- ONT_DIG_170: valid; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 038 (page 110)
+- ONT_DIG_171: when; evidence: Section 13.1.1.3 PMU Peculiar Requirements (under Section 13.1.1 PMU), paragraph 013 (page 43)
+- ONT_DIG_172: WORD; evidence: Section 13.2.2.1 I2C_SPI_AHB Peculiar Requirements (under Section 13.2.2 I2C_SPI_AHB integration), paragraph 042 (page 102)
+- ONT_DIG_173: words; evidence: Section 13.2.3.1 SensorHub Peculiar Requirements (under Section 13.2.3 SensorHub integration), paragraph 018 (page 111)
+- ONT_DIG_174: WRITE; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 92)
+- ONT_DIG_175: XBAR; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 017 (page 34)
+- ONT_DIG_176: xc9000; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 034 (page 133)
+- ONT_DIG_177: xca000; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 044 (page 133)
+
+## Phase 4 - Relation and Dependency Modeling
+- Relation model: is-a, part-of, depends-on, drives, constrains
+
+## Relationships
+- I2C --part-of--> digital interface
+- SPI --part-of--> digital interface
+
+## Hierarchies
+- I2C --part-of--> digital interface
+- SPI --part-of--> digital interface
+
+## Synonyms and Aliases
+- None explicitly confirmed; suspected naming variants remain subject to semantic review.
+
+## Ambiguities
+- Ambiguities and unresolved terminology conflicts are recorded in artifacts/stage0_ontology/semantic_issues.md.
+- Each ambiguity must identify competing interpretations, affected concepts or requirements, evidence, severity, and clarification need.
+
+## Concept Map
+- Top-level domains:
+  - System
+  - Analog
+  - Digital
+- Cross-source concept extraction scope:
+  - main text
+  - tables
+  - images/screenshots
+  - block diagrams
+  - timing diagrams
+  - mode/register tables
+  - footnotes/captions/references
+- Cross-domain relation anchors:
+- I2C --part-of--> digital interface
+- SPI --part-of--> digital interface
+
+## Requirements Model
+- Model entities: Requirement, Configuration, InterfaceConstraint, TimingConstraint
+- Primary key: requirement id
+- Required fields: requirement_statement, category, source, content_class, requirement_type
+- Category distribution:
+  - Digital: 161
+  - Unknown: 123
+  - System: 29
+  - Analog: 1
+- Requirement-type distribution:
+  - other: 150
+  - Unknown: 123
+  - functional: 21
+  - interface: 9
+  - mode-behavior: 4
+  - timing: 4
+  - electrical: 2
+  - configuration: 1
+- Content-class distribution:
+  - Requirement: 190
+  - Unknown: 123
+  - Configuration: 1
+
+## Formal Schema
+- Concept schema:
+  - concept_id: ONT_DOMAIN_NNN (DOMAIN in {SYS, ANA, DIG})
+  - canonical_term: string
+  - type: entity|attribute|interface|state|event|constraint|procedure
+  - definition: string
+  - source_evidence: string
+  - confidence: high|medium|low
+- Requirement schema linkage:
+  - requirement.id -> ontology concept_id (many-to-many via evidence terms)
+  - requirement.category -> ontology domain mapping (System->SYS, Analog->ANA, Digital->DIG)
+- Relation schema:
+  - relation_type: is-a|part-of|depends-on|drives|constrains
+  - subject_concept_id, object_concept_id
+
+## Automatic Checks And Traceability Basis
+- Check 1: placeholder rejection (angle-bracket template tokens are forbidden)
+- Check 2: minimum ontology density (>= 5 ontology IDs)
+- Check 3: glossary population (header + meaningful data rows)
+- Check 4: semantic issue severity sections must exist (Critical/Major/Minor)
+- Check 5: non-narrative evidence coverage (table/image/mode evidence expected)
+- Current non-narrative counters: table=4, image=3, mode=65
+- Traceability basis: requirement source references and IDs are retained in Stage 1 summary and mapped into ontology concepts.
+- Comparison-for-completion workflow:
+  - read textual description
+  - extract table/image/figure/caption content
+  - compare cross-source semantics
+  - identify completion gaps where one source resolves another
+  - trace unresolved conflicts into semantic issues
+
+## Phase 5 - Non-Narrative Coverage Expansion
+- Table-derived ontology entries: 4
+- Mode/transition ontology entries: 65
+- Numeric constraint ontology entries: inferred from parameter/value fields in requirement summary.
+- Image/diagram-derived ontology entries: 3
+- Table captions captured: 11
+- Figure/image captions captured: 2
+
+## Cross-Source Evidence Digest
+- Table evidence examples:
+- Table 31. Address Register Map ................................ ................................ .............................. 132 :: When in Multiple Fifo, the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG...
+- Table 29. Data Tag ................................ ................................ ................................ .................. 114 :: The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address. Exa...
+- Table 29. Data Tag ................................ ................................ ................................ .................. 114 :: The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address. Exa...
+- Table 31. Address Register Map ................................ ................................ .............................. 132 :: When in Multiple Fifo, the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG...
+- Table 29. Data Tag ................................ ................................ ................................ .................. 114 :: The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address. Exa...
+- Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86 :: Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be s...
+- Table 20. OTP I/O List :: The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be...
+- Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86 :: Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be s...
+- Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86 :: Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be s...
+- Table 20. OTP I/O List :: The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be...
+- Figure/image evidence examples:
+- Figure 26 :: After the initial boot phase, only with SPI interface, to turn on the Scan mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DA...
+- Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 92) :: During WRITE routine, ADSP shall allow copying all OTP Registers into the OTP Memory only if the location 0x24 of OTP Memory (OTP[24] in...
+- Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 92) :: During WRITE routine, ADSP shall allow copying all OTP Registers into the OTP Memory only if the location 0x24 of OTP Memory (OTP[24] in...
+- Figure 26 :: After the initial boot phase, only with SPI interface, to turn on the Scan mode shall be: • Select page 3 of the regmap (ADDRESS=0x40, DA...
+- Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 008 (page 92) :: During WRITE routine, ADSP shall allow copying all OTP Registers into the OTP Memory only if the location 0x24 of OTP Memory (OTP[24] in...
+- requirements_summary.csv :: According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configu...
+- requirements_summary.csv :: According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configu...
+
+## Phase 6 - Semantic Risk and Blockers
+- See artifacts/stage0_ontology/semantic_issues.md
+
+## Phase 7 - Gate 0 Packaging and Handoff
+- Gate 0 recommendation: go (subject to crosscheck quality gates).
+- Handoff notes for Stage 1: use ontology terms as category/type priors and traceability anchors.
+
+## Notes
+- This artifact is generated from concrete extracted evidence, not a static template.

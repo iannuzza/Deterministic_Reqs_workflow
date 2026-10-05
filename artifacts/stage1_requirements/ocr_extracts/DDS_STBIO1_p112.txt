@@ -1,0 +1,39 @@
+111 
+ 
+13.2.4. FIFO_CTRL integration 
+ 
+Generic name Type Value TOP CONNECTION 
+AW  13  
+Table 27: Fifo Parameter 
+  
+Port name Direction Type Description TOP CONNECTION 
+TEST_MODE input  ScanMode u_pad_mux. 
+scan_mode 
+HCLK input  AHB Master Handler 
+Clock 16MHz clock u_pmu.clk_fifo 
+HRESETn input   u_pmu.resetn_fifo 
+HSEL input  AHB Slave Port u_afa_xbar.hsel_M2 
+ 
+HADDR input [AW-1:0] AHB Slave Port u_afa_xbar.haddr_M2 
+ 
+HMASTER input [3:0] AHB Slave Port u_afa_xbar.hmaster_M2 
+ 
+HTRANS input [1:0] AHB Slave Port u_afa_xbar.htrans_M2 
+ 
+HSIZE input [2:0] AHB Slave Port u_afa_xbar.hsize_M2 
+ 
+HWRITE input  AHB Slave Port u_afa_xbar. 
+HWDATA input [31:0] AHB Slave Port u_afa_xbar. 
+HREADY input  AHB Slave Port u_afa_xbar. 
+HREADYOUT output  AHB Slave Port u_afa_xbar. 
+HRDATA output [31:0] AHB Slave Port u_afa_xbar. 
+HRESP output  AHB Slave Port u_afa_xbar. 
+O_FIFO_RAM_A output [ADDR_WIDTH-
+1:0] 
+ u_ca_fifo_bist_c.ags_1 
+O_FIFO_RAM_D output [23:0]  u_ca_fifo_bist_c.csns_1 
+O_FIFO_RAM_CSN output   u_ca_fifo_bist_c.dgs_1 
+O_FIFO_RAM_M output [23:0]  u_ca_fifo_bist_c.wens_1 
+O_FIFO_RAM_WEN output   u_ca_fifo_bist_c.mgs_1 
+I_FIFO_RAM_Q input [23:0]  u_ca_fifo_bist_c.dgrs_1 
+Table 28: FIFO Controller I/O List

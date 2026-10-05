@@ -1,0 +1,29 @@
+35 
+ 
+12. STBIO1 Operating Modes 
+ 
+Digital blocks status for different operating modes is reported in table, where ON indicates the 
+clock is running and OFF that it is gated: 
+ 
+ PMU ADSP Regmap FIFO_CTRL Sensor 
+hub 
+Main 
+CTRL ISPU Req_ID 
+Power Down On Off Off Off Off On Off DDS_STBIO1_10200 
+Boot On On On Off Off On Off DDS_STBIO1_10201 
+Configuration 
+Phase On Off On Off Off On Off DDS_STBIO1_10202 
+Operative 
+data storage 
+mode 
+On Off Off On On On On 
+(optionally) DDS_STBIO1_10203 
+Operative 
+elaboration 
+mode 
+On On Off On On On On 
+(optionally) DDS_STBIO1_10204 
+Sleep On Off Off On 
+(Optionally) Off On On 
+(optionally) DDS_STBIO1_10205 
+Table 9: Operating modes Table

@@ -1,0 +1,37 @@
+12 
+ 
+main benefits of the ISPU are C programming and an enhanced ecosystem with libraries and 3rd 
+party tools/IDE. ISPU has 32 Kbyte program RAM, 24 Kbyte Data RAM capability and Floating-
+point support.  
+FIFO digital IPs oversees data collecting from multiple sources: internal and external data read 
+by sensor hub, meta-data generated from both ADSP and ISPU.  
+The internal and external data that can be collected in FIFO are: 
+• ECG 
+• BIA 
+• GSR & 6 channels PPG 
+• up to 4 external sensors (expressed on 12 bytes each).  
+All the data are stored inside a Smart FIFO that can be configured as: 
+• Unique FIFO: Classic FIFO, the First Data that is written inside the Memory is also the 
+First that is read. 
+• Multiple Fifo: The FIFO is split up to 6 Sub-FIFO (one for each Channels plus one for 
+Sensor Hub and Elaboration results). The depth of each Sub-FIFO is configurable by 
+regmap. Each Sub-FIFO behavior as a Classic FIFO. 
+ 
+[DDS_STBIO1_0101] Definition: 
+To understand how STBIO1 works, is necessary to define some basic concepts: 
+- TIME_SLOT= represents the interval within measurements are performed. It can be 
+configured by the regmap field TIME_SLOT_SELECTION and its range is from 4096Hz to 
+64 Hz.  
+- In each TIME_SLOT we can distinguish two phases: 
+o Operative: where all user configured measures are executed and ADSP and/or 
+ISPU eventually runs its algorithms. 
+o Sleep: where measures are finished, eventually only ADSP and/or ISPU is 
+terminating its algorithms and writing elaborated data in FIFO.  
+ 
+ 
+Figure 1: Time Slot Definition 
+ 
+If all the selected operations do not end in a single Time Slot, an error shall be raised. 
+ 
+The Time Slot is composed of different Frame Slot representing the time-interval of a single 
+operation (for example, ECG).

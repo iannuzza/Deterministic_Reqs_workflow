@@ -1,0 +1,34 @@
+68 
+ 
+Port name Direction Type Description 
+o_ADC_start output  adc start to analog 
+domain 
+o_EOC output  end of conversion to 
+average block 
+o_data_out output [data_in_size_bit-1:0] sampled data 
+o_do_average output  start average operation 
+o_data_out_debug_adc output [15:0] data out in debug mode 
+o_end_cal_phase output  end of calibration phase 
+o_adc_ready output  adc ready signal 
+ 
+Table 7: ADC Phgen I/O List 
+5.4.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_042]  ASSUMPTION :  
+The representation of the sampled signal is 16 bit in Two Complements. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_043]  REQUIREMENT :  
+The ADC_PHGEN shall work at 16 MHz clock frequency. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_044]  REQUIREMENT :  
+When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set 
+to 9 and o_end_cal_phase that shall be set to high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_045]  REQUIREMENT :  
+The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not  
+160 clock cycles are passed), or i_calibration_phase is set to 1 or i_adc_start is set to 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_046]  ASSUMPTION :  
+The capacitor under calibration shall be read by the o_adc_test_cap[9:0] signal, which shall be use 
+the one hot encoding. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1047] REQUIREMENT :

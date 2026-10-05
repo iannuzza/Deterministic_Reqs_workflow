@@ -1,0 +1,29 @@
+78 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+i_ispu_core_sw_rstn input   ispu core enabling 
+i_T_TIAON input [T1_max_bit_from_decoder_top-
+1:0] 
+ TIA Time 
+i_scan_mode input   scan mode enabling 
+i_reset_debug_adc_data input   reset adc data debug 
+i_start_adc_debug input   pilot adc start om debug 
+i_en_ADC_debug input   enabling adc debug 
+i_debug_adc_readout_bypass input   enabling adc readout bypass 
+i_su_hlt_dly input   enabling start up delay for ecg 
+i_multiple_fifo_sel input   enabling multiple fifo 
+i_debug_calibration input   enabling debug calibraiton 
+i_en_gsr_dc_cds input [1:0]  enabling gsr cds mode 
+i_ADC_EOC input   end of conversion from adc 
+i_ecg0_sel input   select ecg0 channel 
+i_bia_sel input   select bia channel 
+i_gsr_sel input   select gsr channel 
+i_ppg_sel input   select ppg channel 
+i_ppg_ioff_calibration input   enabling ppg ioff calibration 
+i_ecg1_ecg2_sel input   enabling ecg1 and ecg2 channel 
+i_rst_async_ecg input   reset async for ecg 
+i_rst_async_bia input   reset async for bia 
+i_ppg_quokka_elab_sel input   enabling adsp elab for ppg 
+i_data_ADC_out input [data_in_size_bit_top-1:0]  (from analog circuit) 
+i_time_slot_selection input [time_slot_sel_bit_top-1:0]  odr selection from regmap

@@ -1,0 +1,32 @@
+158 
+ 
+ANALOG PADS: 
+• sense internal V1V2 (GPIO1) 
+• force = V1V2 SUPPLY (GPIO2) 
+ 
+ 
+ 
+18. Digital DFT 
+18.1. Scan mode 
+[DDS_STBIO1_0699] Requirement: 
+After the initial boot phase, only with SPI interface, to turn on the Scan mode shall be: 
+• Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) 
+• Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x02) 
+• Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x12) 
+• Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x01) 
+ 
+Figure 26 scan mode activation timing 
+[End] 
+ 
+18.2. Debug mode 
+[DDS_STBIO1_0700] Requirement: 
+After the initial boot phase, to turn on the Debug mode shall be: 
+• Select page 3 of the regmap (ADDRESS=0x40, DATA=0x03) 
+• Enable LDO 1V8 by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x02) 
+• Enable clock by writing to regmap VIREF_LDO1V8_CLK16M register 
+(ADDRESS=0x0F, DATA=0x12) 
+• Enable debug mode by writing to regmap (ADDRESS=0x3E, DATA=0x08) 
+[End]

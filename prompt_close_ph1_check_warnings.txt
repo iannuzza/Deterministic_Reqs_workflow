@@ -1,0 +1,26 @@
+Phase 1 is now PASS.
+
+Do not change any workflow state.
+Do not merge.
+Do not create snapshots.
+Do not run Stage 2B freeze.
+Do not run downstream generation.
+
+Next step: analyze only the remaining 86 warnings from scripts/validate_source_to_stage2b_coherence.py and produce a compact triage report.
+
+Required output:
+1. group warnings by category
+2. identify which warnings are:
+   - informational only
+   - should be hardened later
+   - should become blockers before Stage 2B freeze
+   - should become blockers before downstream generation
+3. identify any warnings related to hierarchical placement preservation
+4. identify any warnings related to stale IDs / stale artifacts / stale lineage
+5. recommend the smallest safe next phase
+6. do not modify files unless a read-only report artifact is already part of the checker workflow
+
+Return only:
+- warning categories with counts
+- blocker recommendations
+- exact next recommended step

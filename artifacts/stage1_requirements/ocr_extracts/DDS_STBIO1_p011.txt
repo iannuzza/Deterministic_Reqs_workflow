@@ -1,0 +1,46 @@
+10 
+ 
+ASIC  Application Specific Intergrated Circuit  
+B     
+BIST  Built In Self Test  
+…  
+C  
+CRM Clock and Reset Management 
+  
+F  
+FMEA  Failure Mode and Effect Analysis  
+FMEDA  Failure Mode, Effect and Diagnostic Analysis  
+FSM  Functional Safety Management  
+FTA  Fault Tree Analysis  
+CTRL Controller 
+PPG Photoplethysmography 
+EDA Electro-Dermal Activity 
+GSR Galvanic Skin Response 
+PMU Power Management Unit 
+Table 4: Abbreviations Table 
+ 
+ 
+ 
+ 
+ 
+ 
+[DDS_STBIO1_0007] Definition 
+ 
+Category Convention: 
+ 
+Comment:  This category denotes that the content of the object text is a general 
+comment. For example, this may be an explanation why the 
+requirement demands certain items when there would also be other 
+possibilities. A comment should not be necessary to understand the 
+related requirements.  
+Definition:  This category is used for the definition of terms, wordings, technical 
+expressions etc. It is a documentation of design decisions and general 
+instructions that belong to the document itself, e.g. owner of the 
+document, structure of the document. It is needed to understand a 
+related requirement. It is not linked to any test case.  
+Assumption This category is used for requirements this document provide 
+upstream to another document, indicating what this IP/block/system 
+needs to work properly. 
+Requirement:  This category denotes a requirement that has to be implemented and 
+verified. Accordingly, it is necessary to establish traces from the 
+different requirement levels to the test cases for this category.

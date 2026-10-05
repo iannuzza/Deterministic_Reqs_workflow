@@ -1,0 +1,34 @@
+39 
+ 
+Port name Direction Type Descr. 
+i_time_slot_count_clk input  time slot 
+count clock 
+i_rstn input  reset 16MHz 
+i_rstn_sync_32 input  reset 32 kHz 
+i_n_ppg_frame input [ppg_frame_bit-1:0] number of 
+frame for ppg 
+i_rx_ch_frame input [n_max_frame-
+1:0][ppg_rx_channel_bit-1:0] 
+rx channel for 
+each ppg 
+frame 
+i_average_ppg input [n_max_frame-
+1:0][n_average_ppg_max_bit-1:0] 
+average for 
+each ppg 
+frame 
+i_T_tx_led_set input [n_max_frame-
+1:0][T_tx_led_set_bit-1:0] 
+time tx led set 
+for each 
+frame 
+i_ppg_ioff_calibration input  
+ioff 
+calibration 
+mode for ppg 
+i_end_ioff_calibration input  
+end ioff 
+calibration 
+mode for ppg 
+i_ppg_alc_frame_save input [ppg_frame_bit-1:0] ppg alc frame 
+save

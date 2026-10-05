@@ -1,0 +1,33 @@
+97 
+ 
+ 
+Figure 16: OTP Writing timing diagram 
+[End] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+13.2.2. I2C_SPI_AHB integration 
+ 
+  
+ 
+OTP_PDN 
+OTP_PRG 
+OTP_TREAD 
+OTP_A 
+OTP_BANKEN 
+OTP_BITSEL 
+OTP_FUSE 
+OTP_D 
+OTP_SELECTWLBL

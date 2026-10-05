@@ -1,0 +1,15 @@
+{
+  "semantic_retrieval": {
+    "enabled": false,
+    "backend": "exact_cosine",
+    "index_path": "artifacts/rag_DDS_STBIO1/semantic_index",
+    "model_path": "models/local_embedding_model",
+    "model_type": "local_hash",
+    "dimension": 256,
+    "batch_size": 32,
+    "device": "cpu",
+    "normalize_embeddings": true
+    ,"semantic_rrf_weight": 0.25
+    ,"automatic_fallback": true
+  }
+}

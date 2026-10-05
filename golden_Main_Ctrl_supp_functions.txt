@@ -1,0 +1,55 @@
+1.2 Supported functions and scope
+
+From the currently allowed Main Controller evidence, the pilot should retain these distinct local sub-functions:
+
+Configuration update
+Captures channel, mode, timing, sampling, storage and debug settings before operation.
+Interacts with Device FSM, Elab FSM, ADC phase generation and result-routing selection.
+
+Device FSM
+Controls the device lifecycle across Boot, Idle, startup, Operative, Sleep and Error states.
+Interacts with ADSP boot completion, power/clock controls, Elab FSM and status/error outputs.
+
+Elab FSM
+Selects and sequences the ECG, BIA, GSR and PPG elaboration paths after operation starts.
+Interacts with Device FSM, ADC phase generation, averaging, PPG sequencing and output routing.
+
+ECG startup control
+Executes the local ECG/health-channel startup and recovery sequence.
+Interacts with Analog Domain controls, ECG clocks and Device FSM startup progression.
+
+BIA startup and modulation control
+Executes impedance-channel startup, current-injection, modulation and chopping control.
+Interacts with Analog Domain, clock generation and Device FSM startup progression.
+
+ADC phase generation and calibration
+Controls ADC enable, readiness, sampling start, conversion completion and calibration flow.
+Interacts with Elab FSM, Analog Domain ADC controls and sampled-data processing.
+
+ECG/BIA acquisition sequencing
+Applies the selected ECG/BIA acquisition sequence and ADC mux progression.
+Interacts with Elab FSM, ADC phase generation, averaging and subsequent result routing.
+
+GSR acquisition and CDS processing
+Schedules GSR acquisitions, controls current-on/off behavior and supports CDS measurement handling.
+Interacts with ADC acquisition, averaging and the Device FSM sleep/operative path.
+
+PPG FSM and frame sequencing
+Controls PPG startup, frame execution, RX selection, ADC sampling and frame repetition.
+Interacts with Elab FSM, Analog Domain TX/RX controls, ADC and PPG status reporting.
+
+PPG ALC and IOFF coordination
+Coordinates ALC compensation, IOFF calibration, compensation completion and transition to PPG receive startup.
+Interacts with the ALC function, PPG FSM, comparator/BTIA controls and ADC sampling.
+
+Digital-ramp control
+Controls TX preset plus rising and falling digital-ramp phases for PPG operation.
+Interacts with PPG FSM and Analog Domain IDAC/TX reference controls.
+
+Averaging and result formation
+Coordinates ECG/BIA/GSR averaging and PPG raw/noise accumulation into local results.
+Interacts with ADC conversion completion, PPG/GSR processing paths and data output selection.
+
+Data routing, tagging and storage
+Routes eligible results to Regmap-visible outputs or FIFO through the local AHB-master path; applies time-slot or frame tags where supported.
+Interacts with averaging/elaboration completion, FIFO, Regmap and data-storage mode.

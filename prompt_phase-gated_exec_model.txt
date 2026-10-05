@@ -1,0 +1,27 @@
+Use a strict phase-gated execution model.
+
+Do not execute all phases autonomously.
+Execute only the current phase, then stop and wait for my explicit approval before moving to the next one.
+
+Phase gate checklist:
+
+1) Run read-only validate_source_to_stage2b_coherence.py only.
+2) Report real gaps/blockers across source review -> staging -> canonical -> Architecture Map -> Stage 2A -> Stage 2B.
+3) Stop before any state-changing fix.
+4) Next: fix batch/revision coherence and reject stale staged IDs. Approval required.
+5) Then: harden merge manifest/canonical merge and Architecture Map persistence. Approval required.
+6) Then: add approval/hash invalidation and Stage 2B completeness hardening. Approval required.
+7) Then: controlled rerun/rebuild of authoritative and review artifacts. Approval required.
+8) Only after explicit human approval: merge approval, Architecture Map approval, snapshot approval, then downstream regeneration.
+Current instruction:
+
+execute Phase 1 only
+do not implement Phase 2 or later
+after Phase 1, return only:
+findings
+blockers
+affected files/tables/functions
+smallest next state-changing fix step
+the exact approval request needed to proceed to Phase 2
+Invariant:
+derived artifacts must never outrun authoritative canonical/mapping/snapshot state.

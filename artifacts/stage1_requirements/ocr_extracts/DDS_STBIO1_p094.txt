@@ -1,0 +1,43 @@
+93 
+ 
+ 
+[DDS_STBIO1_0024] Requirement: 
+OTP_IREF_WAKEUP shall be set to one by an external I2C/SPI to AHB write before initiating a 
+new OTP_TEST or OTP_WRITE operation 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0025] Requirement: 
+OTP_IREF_WAKEUP shall be setted to zero by an external I2C/SPI to AHB write at the end of 
+OTP_TEST or OTP_WRITE operation 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0026] Requirement: 
+After startup phase, once started with an operation, the IP shall ignore any further start incoming 
+transactions. 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0027] Requirement: 
+The TEST routine shall start when OTP Test Bit rises and completes when quokka_run falls. 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0028] Requirement: 
+The TEST routines shall allow reading an 8-bit word on OTP of a specific address written in 
+OTP_A register, and write this value in OTP_D_TEST register. 
+ [Vpriority High] [End] 
+ 
+ 
+ 
+[DDS_STBIO1_0029] Definition: 
+Timing parameter Value 
+ts_pdnr_tread 3 µs 
+ts_pdnr_fuse 3 µs 
+th_pdnr_selectwlbl 8 µs 
+ts_selectwlblr_a 6 µs 
+ts_selectwlblr_prg 5 µs 
+ts_fuser_selectwlbl 5 µs 
+tfuse_high 100 µs 
+th_fusef_selectwlbl 5 µs 
+t_selectwlbl_high_read 10 µs 
+td_selectwlblr_dout 8 µs 
+tselectwbl_low 7 µs 
+th_selectwlblf_a 2*clk_period

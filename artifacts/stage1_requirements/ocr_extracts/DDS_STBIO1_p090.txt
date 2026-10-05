@@ -1,0 +1,22 @@
+89 
+ 
+ 
+[DDS_STBIO1_0014] Requirement: 
+The BOOT routine shall starts when the OTP_BOOT bit rises and shall completes when 
+quokka_boot_end rises. 
+[Vpriority High] [End] 
+ 
+ 
+ 
+ 
+[DDS_STBIO1_0015] Requirement: 
+During OTP boot operation, the ADSP shall copy the content of the OTP memory into the OTP 
+registers, following the procedure to access OTP memory 
+[Vpriority High] [End]  
+ 
+ 
+ 
+[DDS_STBIO1_0016] Requirement: 
+During BOOT routine, ADSP shall first read the last location of the OTP memory, at address 
+0x7F. If the content is 0xFF, called “lifecycle” byte, then the READ operation proceeds from 
+address 0 to address 0x2F; otherwise, ADSP shall not perform any further reads.

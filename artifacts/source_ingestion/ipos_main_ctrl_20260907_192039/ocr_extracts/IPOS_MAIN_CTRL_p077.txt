@@ -1,0 +1,21 @@
+76 
+ 
+5.6. BIA Start-Up Phase 
+5.6.1. IP Description 
+This block oversees the generation of the signal useful for the BIA start-up Analog Circuit 
+5.6.2. I/O List 
+5.6.2.1. Ports 
+Port name Direction Type Description 
+i_clk input  Clock general 
+i_rstn input  reset general 
+i_imp_en input  BIA En channel 
+i_imp_curinj input  current injection for BIA 
+i_su_hlt_dly input  delay for start up phase 
+i_clk_imp_en input  clock BIA filter enable 
+i_reg_rst_imp_sync input  reset sync from main controller fsm 
+o_pd_imp_from_bia output  power down for analog domain 
+o_en_ck_m_p_q output  clock for modulation 
+o_imp_curinj_pd output  current injection into analog domain 
+o_rst_imp output  reset bia for analog domain 
+o_en_ck_chop_imp output  enable clock chopper for bia 
+o_rsti_imp output  rsti for analog domain

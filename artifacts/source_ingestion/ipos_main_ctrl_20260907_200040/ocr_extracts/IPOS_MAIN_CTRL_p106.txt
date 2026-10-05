@@ -1,0 +1,26 @@
+105 
+ 
+Port name Direction Type Description 
+i_average_repetion input [ max_frame_repetition-1:0] number of ppg frame repetition 
+o_data_out output [ data_size_out_bit-1:0] output data after average 
+o_end_average output  end average operation 
+o_alc_data output [ data_size_out_bit+2:0] alc data output 
+o_ppg_data_raw output [ data_size_out_bit+2:0] ppg data raw output 
+o_n_m0 output [ data_size_bit-1:0] nm0 data output 
+o_n_m1 output [ data_size_bit-1:0] nm1 data output 
+o_saturation_flag output [ n_ppg_frame-1:0] saturation flag for ppg 
+o_adc_data_debug_alc_1 output [ frame_ppg_debug_alc-1:0] alc 1 registers data debug 
+o_adc_data_debug_alc_2 output [ frame_ppg_debug_alc-1:0] alc 2 registers data debug 
+o_adc_data_debug_ppg_raw output [ frame_ppg_debug_ppg_raw-1:0] ppg raw registers data debug 
+o_write_enable output  start ahb operation 
+ 
+Table 145: Average Block I/O List 
+5.11.3. Requirements 
+[IPOS_STBIO1_MAIN_CONTROLLER_136]  ASSUMPTION : 
+The Average block shall accumulate data every time the i_end_of_conversion signal is asserted . 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1136] REQUIREMENT : 
+After the assertion of i_end_of_conversion a number of times equals to i_n_average_ecg_bia_gsr 
+(in case of ECG,  BIA and GSR) or i_n_average_ppg (in case of PPG without frame repetitions) , 
+after at least one clock cycle o_data_result shall be computed and o_write_enable shall rise [END]

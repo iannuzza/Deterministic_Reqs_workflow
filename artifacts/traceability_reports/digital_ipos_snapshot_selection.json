@@ -1,0 +1,38 @@
+{
+  "attempted_snapshots": [
+    {
+      "accepted": true,
+      "reason": "complete approved canonical requirements and mappings",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "accepted": false,
+      "reason": "Approved snapshot references missing approved allocation mappings.",
+      "snapshot_id": "snap-822e8d5271009b93686f3df3"
+    },
+    {
+      "accepted": false,
+      "reason": "Approved snapshot references missing approved allocation mappings.",
+      "snapshot_id": "snap-47c10659f9f66dd7fe360652"
+    },
+    {
+      "accepted": false,
+      "reason": "Approved snapshot references missing approved allocation mappings.",
+      "snapshot_id": "snap-3b1527d86765218dce8a53a4"
+    },
+    {
+      "accepted": false,
+      "reason": "Approved snapshot references missing approved allocation mappings.",
+      "snapshot_id": "snap-1b7e6ec41815176038ef03fa"
+    },
+    {
+      "accepted": false,
+      "reason": "Approved snapshot references missing approved allocation mappings.",
+      "snapshot_id": "snap-b311b5f2b5be074c201368a1"
+    }
+  ],
+  "completeness_criteria": "approved status; project match; non-empty canonical and mapping sets; one approved mapping per requirement; resolver hash validation",
+  "selected_approved_at": "2026-09-22T08:46:02+00:00",
+  "selected_snapshot_id": "snap-b2e8101b00dc6909feaed885",
+  "selection_mode": "deterministic_complete_candidate"
+}

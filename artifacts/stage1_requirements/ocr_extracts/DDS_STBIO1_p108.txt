@@ -1,0 +1,10 @@
+107 
+ 
+5. Data read can be read through I2C/SPI interface 
+ 
+ 
+[End] 
+ 
+[DDS_STBIO1_XXXX] Description 
+Sensor hub configuration sequence at system level to be added 
+[End]

@@ -1,0 +1,28 @@
+83 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+o_adc_error_cap5 output [6:0] 0 adc calibration result 
+o_adc_error_cap4 output [6:0] 0 adc calibration result 
+o_adc_error_cap3 output [6:0] 0 adc calibration result 
+o_adc_error_cap2 output [6:0] 0 adc calibration result 
+o_adc_error_cap1 output [6:0] 0 adc calibration result 
+o_adc_error_cap0 output [6:0] 0 adc calibration result 
+o_pd_cm_buf output  1 power down common buffer 
+o_pd_rld output  1 power down rld 
+o_pd_avg1 output  1 power down avg1 
+o_pd_avg2 output  1 power down avg2 
+o_mc_ahb_clk_en output  0 enable for master ahb clock 
+o_main_controller_device_status_register output [2:0] 0 device status register 
+o_main_controller_elab_status_register output [3:0] 0 device status register 
+o_en_ldo_1v8 output  0 enable ldo 
+o_en_bufxbio output  0 enable biobuffer to analog domain 
+o_rx_ch_frame output [ppg_rx_channel_bit_top-1:0] 0 selected rx ch frame to analog domain 
+o_ldo_ext output  0 enable external ldo 
+o_ppg_status_register output [n_state_bit-1:0] 0 ppg state status register 
+o_b_cap_idac output [1:0] 0 b cap idac to analog domain 
+o_ispu_irq_ctrl output [3:0] 0 ispu irq 
+o_irq_start_measurement output  0 irq start measurement to GPIO 
+o_end_calibration output  1 end calibration to analog domain 
+o_alc_data output [data_out_size_bit_top+2:0] 0 alc data to regmap 
+o_ppg_data_raw output [data_out_size_bit_top+2:0] 0 ppg raw data to regmap

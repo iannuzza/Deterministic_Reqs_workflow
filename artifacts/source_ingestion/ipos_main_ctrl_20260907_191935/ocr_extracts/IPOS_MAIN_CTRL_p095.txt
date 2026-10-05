@@ -1,0 +1,20 @@
+94 
+ 
+5.9. Digital Ramp 
+5.9.1. IP Description 
+This block Is in charge to generate a user-configurable ramp for the PPG Analog Circuit 
+ 
+Figure 15: Digital Ramp Time Diagram 
+ 
+5.9.2. I/O List 
+5.9.2.1. Parameters 
+Generic name Type Value Description 
+Nmax_bit int 4  
+delta_bit int 2  
+5.9.2.2. Ports 
+Port name Direction Type Description 
+i_clk input  Clock 
+i_rstn input  Asynchronous reset active low 
+i_start_digital_ramp input  start rising digital ramp 
+i_falling_digital_ramp input  start falling digital ramp 
+i_Nmax_to_reg input [ Nmax_bit-1:0]

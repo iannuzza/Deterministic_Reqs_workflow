@@ -1,0 +1,98 @@
+#!/usr/bin/env python3
+"""Dedicated Step 1 runner: OCR, taxonomy update, RAG build, Stage 1 generation, and crosscheck."""
+
+from __future__ import annotations
+
+import subprocess
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import List
+
+
+@dataclass
+class CmdStep:
+    name: str
+    args: List[str]
+
+
+def _run(repo_root: Path, step: CmdStep) -> int:
+    cmd = [sys.executable, *step.args]
+    print(f"\n{step.name}: START")
+    print("Command:", " ".join(cmd))
+    rc = subprocess.run(cmd, cwd=repo_root).returncode
+    if rc != 0:
+        print(f"{step.name}: FAIL (exit={rc})")
+        return rc
+    print(f"{step.name}: PASS")
+    return 0
+
+
+def main() -> int:
+    repo_root = Path(__file__).resolve().parent.parent
+    sync_cmd = [sys.executable, "scripts/sync_repo_memory_local.py", "--quiet"]
+    sync_rc = subprocess.run(sync_cmd, cwd=repo_root).returncode
+    if sync_rc != 0:
+        print(f"Step 1: FAIL (memory sync exit={sync_rc})")
+        return sync_rc
+
+    steps = [
+        CmdStep("Step 1.1 OCR extraction", ["scripts/extract_requirements_ocr.py", "--spec-folder", "specs"]),
+        CmdStep(
+            "Step 1.2 Taxonomy crosscheck/update",
+            ["scripts/run_taxonomy_crosscheck_update.py", "--index-csv", "artifacts/stage1_requirements/ocr_extracts/index.csv"],
+        ),
+        CmdStep("Step 1.3 Build RAG index", ["scripts/build_rag_index.py"]),
+        CmdStep(
+            "Step 1.4 Generate Stage 1 requirements",
+            [
+                "scripts/generate_stage1_requirements.py",
+                "--index",
+                "artifacts/stage1_requirements/ocr_extracts/index.csv",
+                "--raw",
+                "artifacts/stage1_requirements/requirements_raw.md",
+                "--summary-csv",
+                "artifacts/stage1_requirements/requirements_summary.csv",
+                "--summary-md",
+                "artifacts/stage1_requirements/requirements_summary.md",
+                "--stage-report",
+                "artifacts/orchestrator/stage_01_report.md",
+                "--min-target",
+                "100",
+            ],
+        ),
+        CmdStep(
+            "Step 1.5 Crosscheck requirements vs RAG",
+            [
+                "scripts/crosscheck_stage1_requirements_rag.py",
+                "--summary-csv",
+                "artifacts/stage1_requirements/requirements_summary.csv",
+                "--index-csv",
+                "artifacts/stage1_requirements/ocr_extracts/index.csv",
+                "--summary-md",
+                "artifacts/stage1_requirements/requirements_summary.md",
+                "--raw-md",
+                "artifacts/stage1_requirements/requirements_raw.md",
+                "--stage-report",
+                "artifacts/orchestrator/stage_01_report.md",
+                "--crosscheck-report",
+                "artifacts/stage1_requirements/requirements_rag_crosscheck.md",
+            ],
+        ),
+        CmdStep(
+            "Step 1.6 Requirements coverage crosscheck agent",
+            ["scripts/run_requirements_coverage_crosscheck_agent.py"],
+        ),
+    ]
+
+    for step in steps:
+        rc = _run(repo_root, step)
+        if rc != 0:
+            return rc
+
+    print("\nStep 1: PASS")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,0 +1,69 @@
+116 
+ 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1 
+ 
+clk_en output 
+Enable 
+clock at 
+ISPU core 
+u_ispu_clk_en_sig 
+ 
+S_HSEL input AHB HSEL 
+Slave Port 
+u_xbar_afe_hsel_M0_sig 
+ 
+S_HREADY input 
+AHB 
+HREADY 
+Slave Port 
+u_xbar_afe_hreadymux_M0_sig 
+ 
+S_HREADYOUT output 
+AHB 
+HREADYOU
+T Slave Port 
+u_ispu_S_HREADYOUT_sig 
+ 
+S_HTRANS input 
+AHB 
+HTRANS 
+Slave Port 
+u_xbar_afe_htrans_M0_sig 
+ 
+S_HADDR input 
+AHB 
+HADRR 
+Slave Port 
+u_xbar_afe_haddr_M0_sig 
+ 
+S_HSIZE input AHB HSIZE 
+Slave Port 
+u_xbar_afe_hsize_M0_sig[1:0] 
+ 
+S_HWRITE input 
+AHB 
+HWRITE 
+Slave Port 
+u_xbar_afe_hwrite_M0_sig 
+ 
+S_HWDATA input 
+AHB 
+HWDATA 
+Slave Port 
+u_xbar_afe_hwdata_M0_sig 
+ 
+S_HRDATA output 
+AHB 
+HRDATA 
+Slave Port 
+u_ispu_S_HRDATA_sig 
+ 
+S_HRESP output 
+AHB 
+HRESP 
+Slave Port 
+u_ispu_S_HRESP_sig

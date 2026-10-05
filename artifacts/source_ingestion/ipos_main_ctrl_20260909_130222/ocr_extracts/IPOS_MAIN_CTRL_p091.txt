@@ -1,0 +1,48 @@
+90 
+ 
+Tx Preset shall be set to 0 0.5us after the Digital Ramp reach the 0 value during the falling phase 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1104] REQUIREMENT : 
+Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase 
+(i_start_falling_ramp) of the digital ramp [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 1105] REQUIREMENT : 
+If no multiple frame is selected (i_frame_repetition in ppg_fsm set to 0), when Tx Preset falls 
+from 1 to 0, also the en_tx shall pass from 1 to 0.[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 8106] REQUIREMENT : 
+If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls 
+from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when 
+o_end_ppg_fsm is set, en_tx is 0).[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_104]  REQUIREMENT : 
+When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp 
+signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_105]  REQUIREMENT : 
+When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to 
+the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the 
+frame that is being executed. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_106]  REQUIREMENT : 
+When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time 
+and then go into the Measurement state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_107]  REQUIREMENT : 
+When in Measurement state, after the wait at least of the TX_ledset time related to the frame that 
+is being executed. (TX_LEDSET_FRAME {n}]), the o_start_adc signal shall be set high. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_108]  REQUIREMENT : 
+When in Measurement state, the PPG_FSM shall stay in this state until the rising of the 
+i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling 
+Ramp state. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_109]  REQUIREMENT : 
+When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the 
+FALLING_RAMP State and shall stay 1 until i_falling_ramp_end is different from 1. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_110]  REQUIREMENT : 
+When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be 
+set to 0. [END]

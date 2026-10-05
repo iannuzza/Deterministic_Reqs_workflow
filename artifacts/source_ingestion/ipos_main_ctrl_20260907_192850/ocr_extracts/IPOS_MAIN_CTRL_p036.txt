@@ -1,0 +1,19 @@
+35 
+ 
+Port name Direction Type Description 
+o_ppg_start_up_time output [ppg_start_up_decod_bit-1:0]  
+o_wave_velocity_mode_cfg output   
+o_time_slot_selection_cfg output [time_slot_sel_bit-1:0]  
+o_en_gsr_cds output   
+o_gsr_dc_mode output   
+o_T_TIAON_cfg output [T1_max_bit_from_decoder-1:0] TIA Time 
+o_gain_alc_start output [gain_max_bit-1:0]  
+o_en_ldo_1v8_ext output   
+o_reset_time_slot_cfg output   
+o_done_cfg output   
+o_change_curr output   
+o_change_gain_start output   
+o_change_idac_dc_ppg output   
+o_b_cap_idac output [1:0]  
+ 
+Table 5:Configuration Register Update

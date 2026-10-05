@@ -1,0 +1,14 @@
+43 
+ 
+ 
+[DDS_STBIO1_0111] Requirement: 
+When i_mask_en_ldo_pdclkf_reg and o_EN_LDO1V8 are set to 1, o_PD_CLKF shall be low 
+after at least 40 cycles of the clk_64k_divided. [TO: IPOS_PMU] [END] 
+ 
+[DDS_STBIO1_0112] Requirement:  
+When i_START_CLK_16M is high, after at least 20 cycles of i_clk_16M (16MHz), 
+o_CLK_16M_READY shall be high. [TO: IPOS_PMU] [END] 
+  
+[DDS_STBIO1_0113] Requirement: 
+When i_START_CLK_16M is high for the first time, after at least 20 cycles of i_clk_16M 
+(16MHz), o_main_resetn shall be high. [TO: IPOS_PMU] [END]

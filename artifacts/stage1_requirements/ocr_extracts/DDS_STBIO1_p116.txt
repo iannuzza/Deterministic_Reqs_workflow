@@ -1,0 +1,60 @@
+115 
+ 
+13.3. ISPU integration 
+Por name Directi
+on Comment TOP CONNECTION 
+clk input clk 16MHz 
+from pmu 
+u_pmu_clk_stredl_sig 
+ 
+main_rst_n input 
+reset in 
+16MHz 
+domain 
+u_pmu_resetn_stredl_sig 
+ 
+POR_n input 
+reset in 
+16MHz 
+domain 
+u_pmu_resetn_stredl_sig 
+ 
+ispu_xbar_sw_resetn input 
+Software 
+reset ISPU 
+xbar 
+u_regmap_otp_ispu_xbar_sw_reset
+n_sig 
+ 
+ispu_core_sw_resetn input 
+Software 
+reset ISPU 
+core 
+u_regmap_otp_ispu_core_sw_reset
+n_sig 
+ 
+scan_mode input Scan mode u_pad_mux_scan_mode_sig 
+ 
+scan_enable input Scan enable u_pad_mux_scan_enable_sig 
+ 
+test_rst_n input Scan reset u_pad_mux_scan_rstn_sig 
+ 
+bist_mode input Bist mode 
+enable 
+u_pad_mux_bist_mode_sig 
+ 
+interrupt input Interrupt 
+lines 
+ 
+u_ca_fifo_bist_c_oen_1, 
+u_fifo_irq_FIFO_U_M_IRQ_STATU
+S_sig, 
+u_regmap_otp_irq_SENSHUB_STS
+_sig, 
+u_regmap_otp_irq_ISPU_MC_INTR
+_STS_sig, 
+u_regmap_otp_sw_interrupt_sig, 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1,

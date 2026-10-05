@@ -1,0 +1,21 @@
+87 
+ 
+Port name Directi
+on Type Description 
+o_start_ADC output  start ADC 
+o_reset_ramp output  reset ramp value 
+o_busy_ppg output  busy ppg signal 
+o_ppg_calib_data_n_m1 output  ppg calib data valid for nm1 
+o_alc_clk_en output  alc compensation clock enable 
+o_tx_preset output  set tx preset 
+o_en_txi output  enable tx channel 
+o_average_repetion output [max_frame_repetition-1:0] average repetition value 
+o_ppg_status_register output [n_state_bit-1:0] ppg state status register 
+o_noise output  ppg noise data valid 
+o_BTIA_ALC output [BTIA_ALC_register_bit-1:0] btia alc value 
+o_reset_curr_frame output  reset current frame 
+o_start_up_time_ppg_don
+e output  end of start up ppg 
+o_N_step2_reg output [ppg_ioff_offset_bit-1:0] value stored for n_step2 
+o_mask_ADC_en output  mask adc enable 
+o_en_rx_ch output  enable rx channel

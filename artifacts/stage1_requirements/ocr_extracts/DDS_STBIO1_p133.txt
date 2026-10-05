@@ -1,0 +1,61 @@
+132 
+ 
+**Update-IR** Run-Test/Idle Select-DR-Scan 
+ 
+ 
+13.4. STBIO1 Register Map 
+ 
+13.4.1. STBIO1 Register Map 
+Here is described the list of registers in the register map. The AFE_BLOCK registers are 
+accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB. 
+The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the 
+address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers. 
+ 
+  
+BASE 
+START ADDRESS ADDRESS BLOCK REGISTER 
+WIDTH 
+BASE END 
+ADDRE 
+VREF_TRIM 
+SS 
+RESET 
+REQ_ID  
+0xC8000 AFE_BLOCK 8 0xC80EB 
+tst_main_reset_n, 
+regmap_sw_resetn 
+ 
+DDS_STBIO1_3000 
+0xC80EC RESERVED  0xC8FFF 
+tst_main_reset_n, 
+regmap_sw_resetn 
+ 
+DDS_STBIO1_3001 
+0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n DDS_STBIO1_3002 
+0xC9030 RESERVED  0xC9FFF 
+tst_main_reset_n, 
+regmap_sw_resetn 
+ 
+DDS_STBIO1_3003 
+0xCA000 SYSTEM_REGISTER 32 0xCA140 
+tst_main_reset_n, 
+regmap_sw_resetn 
+ 
+DDS_STBIO1_3004 
+0xCA144 RESERVED  0xCCFFF 
+tst_main_reset_n, 
+regmap_sw_resetn 
+ 
+DDS_STBIO1_3005 
+0xCD000 OTP (TRIMM REGS) 32 0xCD02F 
+tst_main_reset_n, 
+regmap_sw_resetn 
+ 
+DDS_STBIO1_3006 
+ 
+Table 33: Address Register Map 
+ 
+ 
+The device is configurable/readable by the I2C/AHB bridge. This IP is in charge of take an 
+I2C/SPI access and (eventually) transform it into an AHB transaction, to allow the 
+configuration/reading of the device using the ISPU.

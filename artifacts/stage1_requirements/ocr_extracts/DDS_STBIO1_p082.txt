@@ -1,0 +1,28 @@
+81 
+ 
+Port name Direction Type Output 
+Reset Value Description 
+HBUSREQ output  0 AHB Protocol signals 
+HLOCK output  0 AHB Protocol signals 
+o_bio_clock_div output  0 output for clock chopper 
+o_BIDAC output [IDAC_offset-1:0] 0 IDAC for top 
+o_rst_imp output  1 bia start up rst signal 
+o_rsti_imp output  1 bia start up rsti signal 
+o_sug_imp output  1 bia start up sug channel 
+o_pd_imp output  1 bia start up pd channel 
+o_start_operative_16MHz output  0 start operative 16MHz 
+o_su_hc2 output  1 ecg start up hc2 signal 
+o_rst_hc2 output  1 ecg start up rst signal 
+o_rsti_hc2 output  1 ecg start up rsti signal 
+o_pd_hc2 output  1 ecg start up pd signal 
+o_reset_reg_rst output  1 end of reset async phase 
+o_reset_reg_rst_imp_async output  1 end of reset async phase 
+o_imp_curinj_pd output  0 bia current injection output 
+o_Txi_IDAC_Vref output [Nmax_bit_top-1:0] 0 TX IDAC VREF TO analog domain 
+o_comp_rx_ck output  0 output for comparator debug 
+o_BTIA_gain output [gain_max_bit_top-1:0] 0 BTIA gain output to analog domain 
+o_data_out_debug_adc output [15:0] 0 o data output for adc debug 
+o_en_mask_ldo_pdclkf_reg output  1 mask for en_ldo and pdf 
+o_pd_clkf output  1 pd_clkf 
+o_trim_ldo_d output [1:0] 3 trim ldo value 
+o_BDC_PPG output [idac_dc_ppg_frame_bit_top-1:0] 0 idac dc ppg frame output

@@ -1,0 +1,27 @@
+39 
+ 
+i_en_clk_16MHz_sleep input wire enable clock in SLEEP mode when a bio-
+channel is selected 
+EN_ADC_TEST_LOW_NOISE input wire enable adc test low noise 
+EN_ADC_TEST_FAST input wire enable adc test fast 
+if_sh_ck_in input wire sensor hub clock interface 
+o_EN_LDO1V8 output wire enable ldo to analog domain 
+o_PD_CLKF output wire power down 16MHz clock to analog domain 
+o_CLK_16M_READY output wire clock ready to the digital domain 
+o_DIS_RC_VIREF output wire dis rc viref to the analog domain 
+pd_osc_clk32k output wire power down for clk 64kHz 
+tst_clk_32k output wire clock slow 32k to main_controller 
+tst_clk_16m output wire clock fast 16M 
+tst_clk_bistctlr output wire test clock for bist ctrl 
+tst_rst_bistctlr_n output wire test reset for bist ctrl 
+clk_stredl output wire clock gating logic inside stredl_afe_top 
+clk_xbar output wire xbar clock 
+clk_intf output wire interface clock 
+clk_main_ctrl output wire clock for main controller 
+clk_stmc output wire adsp clock 
+clk_stmc_ahb output wire adsp clk elaboration 
+clk_fifo output wire fifo clock 
+clk_masterblaze_m output wire sensor hub master clock 
+clk_masterblaze_s output wire sensor hub slave clock 
+clk_regmap output wire regmap clock 
+o_clk_ext_en output wire enable external clock

@@ -1,0 +1,72 @@
+117 
+ 
+M_HSEL output AHB HSEL 
+Master Port 
+u_ispu_M_HSEL_sig 
+ 
+M_HREADY input 
+AHB 
+HREADY 
+Master Port 
+u_xbar_afe_hready_S0_sig 
+ 
+M_HTRANS output 
+AHB 
+HTRANS 
+Master Port 
+u_ispu_M_HTRANS_sig 
+ 
+M_HADDR output 
+AHB 
+HADDR 
+Master Port 
+u_ispu_M_HADDR_sig 
+ 
+M_HSIZE output AHB HSIZE 
+Master Port 
+u_ispu_M_HSIZE_sig 
+ 
+M_HWRITE output 
+AHB 
+HWRITE 
+Master Port 
+u_ispu_M_HWRITE_sig 
+ 
+M_HWDATA output 
+AHB 
+HWDATA 
+Master Port 
+u_ispu_M_HWDATA_sig 
+ 
+M_HRDATA input 
+AHB 
+HRDATA 
+Master Port 
+u_xbar_afe_hrdata_S0_sig 
+ 
+M_HRESP input 
+AHB 
+HRESP 
+Master Port 
+u_xbar_afe_hresp_S0_sig 
+ 
+DBG_HREADY input 
+AHB 
+HREADY 
+Debug 
+Master Port 
+u_xbar_afe_hready_S4_sig 
+ 
+DBG_HTRANS output 
+AHB 
+HTRANS 
+Debug 
+Master Port 
+u_ispu_DBG_HTRANS_sig 
+ 
+DBG_HADDR output 
+AHB 
+HADDR 
+Debug 
+Master Port 
+u_ispu_DBG_HADDR_sig

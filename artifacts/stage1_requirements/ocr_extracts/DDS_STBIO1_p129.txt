@@ -1,0 +1,43 @@
+128 
+ 
+clock and 
+memory 
+ports in 
+ATPG mode 
+0: 
+Functional 
+Clock / 
+Functional 
+Ports 1: 
+Test Clock/ 
+Test Ports 
+ca_stredl_bist_c_tst_mem_
+selck_4 input 
+BIST To 
+select the 
+clock and 
+memory 
+ports in 
+ATPG mode 
+0: 
+Functional 
+Clock / 
+Functional 
+Ports 1: 
+Test Clock/ 
+Test Ports 
+u_ca_fifo_bist_c_oen_1 
+ 
+ca_stredl_bist_c_par_mem
+sel input 
+BIST 
+Parallel 
+Memory 
+Selection 
+Bus 
+{ 1'b0, u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1, 
+u_ca_fifo_bist_c_oen_1 } 
+ 
+ 
+Table 32: ISPU I/O List

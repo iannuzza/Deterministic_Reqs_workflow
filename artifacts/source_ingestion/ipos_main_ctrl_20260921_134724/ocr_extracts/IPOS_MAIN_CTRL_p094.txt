@@ -1,0 +1,45 @@
+93 
+ 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 123] REQUIREMENT  
+During the Ioff calibration algorithm the PD_CH_SEL (o_rx_ch_frame on top) Shall be set to 0. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 124] REQUIREMENT  
+During the Ioff calibration algorithm the OFFSET (o_ioff_offset on ppg_fsm) shall change to 0 
+during the Nm0 computation and to Nstep1 during the Nm1 computation. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 125] REQUIREMENT  
+The Ioff Calibration algorithm shall be repeated 9 times, one for each RX gain value. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 126] REQUIREMENT  
+All the OFFSET Value shall be stored (See Ioff calibration Read Only registers in regmap) and 
+used during the PPG acquisition based on the RX_GAIN configuration chosen by the user. 
+[END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 127] ASSUMPTION  
+During the Ioff Calibration algorithm, all the PPG data (Nmo, Nm1, Nstep1 and final offset result) 
+shall be considered unsigned. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 128] ASSUMPTION  
+Outside the Ioff Calibration algorithm, all the PPG data shall be considered signed in two’s 
+complement. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 129] REQUIREMENT  
+When o_reset_state is set to 1, the o_BIDAC, o_BTIA_gain and o_rx_ch_frame (all checked 
+from main_controller_top) shall be set to 0. [END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 130] ASSUMPTION  
+When o_reset_state falls from 1 to 0, the o_BIDAC, o_BTIA_gain and o_rx_ch_frame shall be 
+considered stable. [END] 
+[IPOS_STBIO1_MAIN_CONTROLLER_ 2130] ASSUMPTION  
+The result of the IOFF CALIBRATION Nstep2 for rx gain equal to 2048000 shall be always 1. 
+[END] 
+ 
+[IPOS_STBIO1_MAIN_CONTROLLER_1 131] REQUIREMENT  
+To reset the IOFF_CALIBRATION PROCEDURE and relaunch it after that the mode Operation 
+has been set to 0 and then again to 1, the user shall perform the following steps: 
+• Set the RESET_IOFF_CALIBRATION TO 1 (GENERAL_PARAMETERS1) to 1 
+• WAIT that the DEVICE_STATUS_REGISTER is equal to the OPERATIVE value 
+and the ELAB_STATUS_REGISTER is equal to the PPG value 
+• Reset the RESET_IOFF_CALIBRATION FROM 1 (GENERAL_PARAMETERS1) 
+to 0 
+• Set the MODE_OPERATION to 0 
+• Wait at least 1ms and the SET MODE_OPERATION to 1 
+[END]

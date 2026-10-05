@@ -1,0 +1,27 @@
+157 
+ 
+17.2.3. Top Level Approach  
+Figure 66: Top Level Controller Configuration  
+In this configuration, there is only one controller for the entire chip. All associated collars are 
+spread into the design (at top level and within subblocks) 
+ 
+Figure 25 Top Level Controller Configuration 
+OUTPUT 
+• Bend: Indicates that all the activities of the test run of all Memories in the current 
+BIST mode are complete 
+• Bfail: Indicates bfail for a specific memory. There are as many bfail signals as the 
+number of memories. Bfail also goes high at the first cycle of each march element 
+run. This pulse should be used as a reference in clk_m domain to calculate the 
+number of cycles after which bfail went high in case of a failure in a specific march 
+sequence run. 
+• Tdo:TAP serial output Updated on falling edge of tck 
+INPUT FROM PAD 
+• Tck: TAP clock 
+• Tdi: TAP serial input Sampled on rising edge of tck 
+• Tms: TAP test mode select Sampled on rising edge of tck 
+• Trstn: TAP reset 
+INPUT FROM REGISTER 
+• Memsafe (ADDRESS=0x3E, BIT=0x05): to globally deactivate the memory by 
+making CSN high internally 
+• Mem_atpg_mode (ADDRESS=0x3E, BIT=0x06): Used to constraint few memory 
+inputs and improve controllability and observability.

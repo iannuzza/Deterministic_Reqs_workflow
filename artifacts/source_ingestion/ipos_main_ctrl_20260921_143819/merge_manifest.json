@@ -1,0 +1,17 @@
+{
+  "active_batch": "ipos_main_ctrl_20260921_143819",
+  "ingestion_batch_id": "ingest-ipos-main-ctrl-20260921-143819",
+  "source_spec": "IPOS_MAIN_CTRL.pdf",
+  "source_revision": "1",
+  "source_revision_date": "2026-09-21",
+  "source_revision_id": "source-rev-db3d1f0ab762a5e1d80cb718",
+  "staging_batch_id": "stage-ipos-main-ctrl-20260921-143819",
+  "review_row_counts": {
+    "approved": 164
+  },
+  "merge_readiness": "ready_for_approval",
+  "merge_approval_required": true,
+  "canonical_handoff_ready": false,
+  "canonical_merge_performed": false,
+  "notes": "Deterministic manifest for the active reviewed staging batch; no merge or approval performed."
+}

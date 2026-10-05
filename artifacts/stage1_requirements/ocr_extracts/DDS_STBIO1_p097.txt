@@ -1,0 +1,49 @@
+96 
+ 
+[DDS_STBIO1_0032] Requirement: 
+After each Boot routine performed by the ADSP, a value of 0x04 shall be written once to address 
+0x0CA00C to ensure correct operation of the AHB transactions. 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0033] Requirement: 
+The Soft Reset routine shall start when SOFT_RESET Bit (in CONTROL_A register) rises and 
+completes when quokka_run falls. 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0034] Requirement: 
+During the Soft Reset routine, ADSP shall write the ADSP RAM with the value 0. Only the first 
+3.5Kbyte of ADSP RAM shall be cleared, from address 0x000 to address 0xDFF 
+[Vpriority High] [End] 
+ 
+ 
+[DDS_STBIO1_0035] Requirement: 
+If during the start of a new operation, more than one bit is written into CONTROL_A reg in the 
+same write operation, ADSP shall execute only the routine at higher priority and discard the 
+others. 
+Priority is listed below, with first routine at higher priority: 
+1. SOFT RESET routine 
+2. OTP WRITE routine 
+3. OTP TEST routine 
+4. OTP BOOT routine 
+[Vpriority High] [End] 
+ 
+[DDS_STBIO1_0036] Requirement: 
+If bit OTP_PRG10[31] in OTP Registers, called write_protection_en, is set to 1, and STBIO1 is 
+not in debug_mode, register map shall refuse any incoming write request if the transaction 
+address is within the OTP Registers space (from 0xCD000 to 0xCD02F). 
+[End] 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[DDS_STBIO1_0037] Definition:

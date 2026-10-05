@@ -1,0 +1,26 @@
+29 
+ 
+t_en_gpio4 output 0 wire from u_scan_out_mux 
+t_ecg0_out_pre_buf output 0 wire from u_scan_out_mux 
+t_offset_gpio12 output 0 wire from u_scan_out_mux 
+t_in_bio_buf34 output 0 wire from u_scan_out_mux 
+t_ecg1_out_pre_bufp_3 output 0 wire from u_scan_out_mux 
+t_ecg1_out_pre_bufn_4 output 0 wire from u_scan_out_mux 
+t_ecg2_out_pre_bufn_3 output 0 wire from u_scan_out_mux 
+t_ecg2_out_pre_bufp_4 output 0 wire from u_scan_out_mux 
+T_CM_HLT_2 output 0 wire from u_scan_out_mux 
+T_CM_RLD_1 output 0 wire from u_scan_out_mux 
+T_ECG0_AC_1 output 0 wire from u_scan_out_mux 
+T_ECG0_DC_2 output 0 wire from u_scan_out_mux 
+T_EXT_HPF_ECG0 output 0 wire from u_scan_out_mux 
+T_FORCE_1V2 output 0 wire from u_pad_mux.o_t_force_1v2 
+T_IBG_1u_2 output 0 wire from u_scan_out_mux 
+T_IMPP_AC_1 output 0 wire from u_scan_out_mux 
+T_IMPP_DC_2 output 0 wire from u_scan_out_mux 
+T_IMPQ_AC_2 output 0 wire from u_scan_out_mux 
+T_IMPQ_DC_1 output 0 wire from u_scan_out_mux 
+T_IN_BIO_BUF output 0 wire from u_scan_out_mux 
+T_IPTAT_1u_1 output 0 wire from u_scan_out_mux 
+T_OP55_1 output 0 wire from u_scan_out_mux 
+T_OP90_2 output 0 wire from u_scan_out_mux 
+T_OUT_BIO_BUF output 0 wire from u_scan_out_mux

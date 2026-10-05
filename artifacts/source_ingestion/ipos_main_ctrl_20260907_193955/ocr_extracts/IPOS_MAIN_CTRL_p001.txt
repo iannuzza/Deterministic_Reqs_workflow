@@ -1,0 +1,51 @@
+ST Confidential 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+REV. DATE AUTHOR 
+Draft 1.0 5 October 
+2025 
+Aldo Torino, Sonia Andronaco, Giuliana De Milato 
+ APPROVED By  DATE 
+ Francesco Villa, Pasquale Biancolillo 10 October 2025 
+2025 
+Main_Controller IP Objective Specification 
+STBIO1 
+Aldo Torino, Sonia Andronaco, Giuliana De Milato

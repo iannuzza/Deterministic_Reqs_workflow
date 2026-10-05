@@ -1,0 +1,27 @@
+17 
+ 
+Port name Directi
+on Type Description 
+i_nstart_case input [Nmax_bit_top-1:0] n_start value for 
+frist sterp 
+i_debug_rx_ch input [rx_ch_frame_n_bit_top-1:0] enabling debug for 
+rx channel 
+i_T_delta1_to_reg input [delta_bit_top-1:0] delta 1 time for 
+digital ramp 
+i_gain_max_set input [gain_max_bit_top-1:0] gain max for alc 
+i_BTIA_ALC_debug input [BTIA_ALC_register_bit_top-1:0] BTIA ALC Debug 
+enable 
+i_comp_rx_out input  input from analog 
+comparator 
+i_adc_error_cap8_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap7_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap6_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap5_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap4_debug input [6:0] adc cap error 
+debug 
+i_adc_error_cap3_debug input [6:0] adc cap error 
+debug

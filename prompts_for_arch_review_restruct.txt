@@ -1,0 +1,75 @@
+Now complete the strengthened workflow integration by updating the GUI/workflow visualization and adding tests.
+
+Before editing code, first list:
+- target GUI files to modify, if any
+- target test files or test directories
+- any new helper modules needed
+- what final cleanup/generalization work is still pending
+
+Please do the following:
+
+1. Update the Python GUI, if present, to reflect the strengthened workflow stages:
+- S0
+- S1
+- S2
+- S2A
+- S2B
+- S2C
+- S2D
+- S2E
+- S2F
+- S2G
+- S2H
+- Stage 3
+- Stage 4
+- Stage 5
+- Stage 6
+- Stage 7
+
+Also show:
+- supplementary source path
+- loopbacks
+- approved snapshot as the only downstream source
+
+Detect the GUI framework used and integrate consistently.
+Keep rendering local-only.
+
+2. Add tests for:
+- staging does not overwrite canonical directly
+- non-destructive merge preserves revisions
+- provenance is preserved
+- proposed vs approved classification remain separate
+- invalid state transitions are blocked
+- merge impact analysis is required before merge
+- unsafe category transitions are blocked
+- architecture review does not silently mutate canonical data
+- rollback preserves history
+- downstream generation uses only immutable approved snapshots
+- supplementary source rework/rejection preserves history
+- snapshot consistency is validated before generation
+
+3. Perform a final consistency pass
+- identify any remaining project-specific assumptions in core workflow code
+- move them behind config, adapters, or validation rule sets where practical
+- keep the implementation deterministic, auditable, and reusable across projects
+
+Hard constraints:
+- project-agnostic
+- deterministic
+- no LLM calls
+- no network calls
+- no cloud dependencies
+
+Implement this step incrementally and safely.
+Do not rewrite unrelated modules.
+Preserve backward compatibility where practical.
+
+At the end, provide a final summary with:
+1. files changed
+2. new modules added
+3. tests added or updated
+4. remaining project-specific assumptions, if any
+5. outstanding risks
+6. recommended next follow-up steps
+
+If anything is ambiguous, ask for clarification before making broad refactors.

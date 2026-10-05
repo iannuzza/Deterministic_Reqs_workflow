@@ -1,0 +1,44 @@
+28 
+ 
+o_trim_ldo_d output 0 wire 
+[1:0] 
+from 
+u_level_shifter_sel.o_trim_ldo_d_ls_out 
+ADC_BUFF_REFRESH_DIS output 0 wire from u_scan_out_mux 
+ADC_EXTRAPERIOD_DIS output 0 wire from u_scan_out_mux 
+ADC_INPUT_FROM_GPIO output 0 wire from u_scan_out_mux 
+ADC_REF_FROM_GPIO output 0 wire from u_scan_out_mux 
+AFE_SPARE_0_1V2 output 0 wire 
+[7:0] 
+from u_scan_out_mux 
+AFE_SPARE_1 output 0 wire 
+[7:0] 
+from u_scan_out_mux, Description: 
+modificato l'utilizzo 
+DIS_LDOD_HP output 0 wire from u_scan_out_mux 
+DIS_LDOD_IP output 0 wire from u_scan_out_mux 
+EN_LDOD_FIFO output 0 wire from u_scan_out_mux 
+EN_LDOD_STREDL output 0 wire from u_scan_out_mux 
+OTP_SPARE output 00007F0
+0 
+wire 
+[31:0] 
+from u_scan_out_mux, Description: i 
+PMB_EXT sono collegati 
+OVERCURR_N_IN_i input 0 wire to u_regmap_otp 
+OVERCURR_P_IN_i input 0 wire to u_regmap_otp 
+O_DCCK_N_i input 
+0 
+wire to 
+u_pad_mux/u_regmap_otp/u_regmap_o
+tp.DCCK_N_IRQ_i/u_N_not_logic.A, 
+O_DCCK_P_i input 
+0 
+wire to 
+u_pad_mux/u_regmap_otp/u_regmap_o
+tp.DCCK_P_IRQ_i/u_P_not_logic.A, 
+t_en_gpio1 output 0 wire from u_scan_out_mux, Description: 
+spostato il bit 
+t_en_gpio2 output 0 wire from u_scan_out_mux, Description: 
+spostato il bit 
+t_en_gpio3 output 0 wire from u_scan_out_mux

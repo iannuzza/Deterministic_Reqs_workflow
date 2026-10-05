@@ -1,0 +1,10 @@
+110 
+ 
+7. Appendix 
+7.1. Example of Results for PPG IOFF Calibration 
+ 
+Figure 16: PPG IOFF Calibration example Results 
+ 
+ 
+7.2. AHB Protocol Reference 
+https://developer.arm.com/documentation/ihi0033/latest/

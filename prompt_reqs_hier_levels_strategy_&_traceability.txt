@@ -1,0 +1,212 @@
+Review and update the full hierarchical requirement-generation and traceability strategy across primary source specs, supplementary source specs, SRS, DRS, ARS, Digital IPOS, and Analog IPOS.
+
+Goal: implement one coherent, project-agnostic, deterministic, local-only strategy for:
+- hierarchical requirement generation
+- traceability accounting
+- valid downstream coverage targets per requirement class
+- guaranteed full downward coverage from primary and supplementary sources
+- authoritative data-model support
+- GUI/report behavior
+
+Before editing, first explain clearly:
+1. where the current strategy is inconsistent across source -> SRS -> DRS/ARS -> IPOS
+2. where block-local detail is still duplicated upward
+3. where direct source-to-IPOS or supplementary-source-to-IPOS is mishandled
+4. where the topic families below are currently allocated to the wrong hierarchy level, especially DRS vs IPOS
+5. what requirement classes and downstream targets you will define
+6. what traceability accounting model/statuses you will implement
+7. what authoritative data-model changes are needed
+8. how GUI and reports will show this clearly
+9. which generators, traceability modules, GUI files, validators, reports, docs, and tests you will modify
+
+Then implement the strategy below.
+
+Hierarchy boundaries:
+- SRS = system-level only: system behavior, externally visible behavior, system modes/power states, system-level safety/monitoring/performance, top-level external interfaces, cross-domain coordination, system-level power-domain architecture, low-power strategy, on/off sequencing, wake-up
+- DRS = top-digital architecture/integration only: digital inter-block coordination, shared digital resources, shared clock/reset/power coordination, firmware-visible top-digital behavior, digital decomposition of system modes/low-power/wake-up, top-level digital interface contracts, integration behavior across multiple digital blocks
+- ARS = top-analog / mixed-signal architecture only: analog partitioning/coordination, analog supply/bias/power-domain behavior, analog sequencing/wake-up/settling/retention/isolation at architecture level, analog/digital interaction constraints
+- IPOS = full detailed block-local requirements/descriptions: local functional behavior, local sequencing/state-machine behavior, local register/interface/timing/control/error details, local reset/init/low-power behavior, specific block IO list, specific block port map
+
+Mandatory rules:
+- detailed block-local requirements belong primarily in IPOS
+- block-specific IO lists and port maps belong only in IPOS
+- higher-level specs may discuss the same topic only at their own abstraction level
+- do not duplicate unchanged block-local detail upward into SRS/DRS/ARS
+- if a source requirement mixes integration-level and block-local content, split it deterministically into architecture-level requirement(s) and block-local requirement(s)
+- do not duplicate one mixed requirement verbatim across levels
+
+Enforce correct DRS/ARS vs IPOS placement for these topic families:
+- functional behavior
+- clocking and reset
+- power management, power states, retention, wake-up
+- bus/interconnect/protocol behavior
+- memory map, register access, protection
+- interrupts, events, status reporting
+- boot, initialization, configuration
+- security, access control, isolation
+- DMA, data movement, buffering, FIFO behavior
+- arbitration, priority, QoS
+- error handling, fault reporting, recovery
+- performance, latency, throughput constraints
+- CDC/RDC/synchronization behavior
+- debug, trace, test, DFT visibility
+- interface requirements to analog, pads, and external systems
+- low-power domain coordination
+- firmware-visible behavior
+- mode transitions and operational states
+- safety, monitoring, watchdog, timeout behavior
+- block interaction and integration rules
+
+Placement rule:
+- DRS/ARS must contain only architecture/integration-level obligations, shared coordination, inter-block or inter-domain contracts, shared ownership, firmware-visible integration behavior, and multi-block dependencies
+- Digital/Analog IPOS must contain the full owning-block detail: local behavior, local registers, local signals, local timing, local sequencing, local state behavior, local error handling, local reset/init/low-power behavior, local protocol details, local FIFO/buffer behavior, local interrupts/events/status, exact local interface semantics, exact IO/port mapping
+- DRS/ARS must not become dumps of IPOS-level detail
+- IPOS must not copy full multi-block integration rules verbatim; keep only the owning block obligations derived from them
+
+Source and supplementary-source policy:
+- primary top/source specs may contain system-level, architecture-level, and block-local requirements
+- supplementary source specs may be domain-level, architecture-level, block-dedicated, or already IPOS-like
+- a block-dedicated supplementary source shall primarily feed the owning IPOS
+- only the subset with real higher-level architecture/integration relevance may also feed DRS or ARS
+- clearly block-local requirements found in a top/source spec may feed IPOS directly
+- do not invent artificial DRS/ARS intermediate parents when no meaningful intermediate generated parent exists
+- do not push exact local register tables, local interrupt conditions, local FIFO details, local state transitions, local signal semantics, local port maps, or similar block-local details upward into DRS/ARS only because they appear in a top spec
+
+Traceability strategy:
+- each generated requirement shall normally render Covers only to the nearest relevant approved parent
+- full end-to-end lineage must still be preserved in the authoritative model and reports
+- direct source-to-IPOS and supplementary-source-to-IPOS are valid when the requirement is already clearly block-local and no meaningful intermediate parent exists
+
+Normal rendered Covers path:
+- SRS -> Source
+- DRS -> SRS
+- ARS -> SRS
+- Digital IPOS -> DRS
+- Analog IPOS -> ARS
+
+Allowed direct path:
+- top/source block-local requirement -> owning IPOS
+- supplementary block-local requirement -> owning IPOS
+
+Traceability accounting:
+- do not use a naive rule that every source requirement must appear at every level
+- define coverage by requirement class and ownership
+- a requirement is covered only when it reaches all required downstream targets for its approved class
+- distinguish at least: covered, under-covered, over-propagated, misallocated, orphaned
+- detect and report:
+  - DRS contains IPOS-only block-local detail
+  - ARS contains analog-IPOS-only detail
+  - IPOS contains copied multi-block integration rules that should remain primarily in DRS/ARS
+  - unchanged obligation duplicated across levels
+  - wrong hierarchy placement for the topic families above
+  - unjustified skipped hierarchy
+  - justified direct source-to-IPOS cases versus true missing coverage
+
+Define a deterministic requirement-class and downstream-target model, at minimum covering:
+- system_level
+- top_digital_architecture
+- top_analog_architecture
+- shared_cross_domain
+- block_local_digital
+- block_local_analog
+- interface_contract
+- supplementary_block_local
+- descriptive_only or non_propagating if applicable
+
+For each class define:
+- valid downstream target specs
+- required downstream target specs
+- whether DRS/ARS intermediate coverage is required, optional, or not applicable
+- whether direct source-to-IPOS is allowed
+- how mixed integration-plus-local source requirements are split and counted
+
+Also define deterministic mapping expectations for each topic family, such as:
+- SRS only
+- SRS -> DRS
+- SRS -> ARS
+- SRS -> DRS -> Digital IPOS
+- SRS -> ARS -> Analog IPOS
+- direct source/supplementary source -> IPOS
+- justified split between architecture-level and block-local descendants
+
+Define the authoritative data model needed to support this strategy. At minimum support:
+- req_id
+- source_type
+- spec_level
+- immediate_parent_req_ids
+- source_origin_req_ids
+- owning_block
+- owning_domain
+- hierarchy_or_coverage_class
+- valid_downstream_targets
+- actual_downstream_targets
+- rendered_in_specs
+- direct_source_to_ipos flag or lineage type
+- snapshot_id
+- allocation/mapping metadata
+- status/approval metadata
+- abstraction level
+- integration-level versus block-local classification
+- system / top-digital / top-analog / block-local scope
+- topic family
+- split lineage where one source item produces both architecture-level and block-local descendants
+- duplication/misallocation detection support
+- full lineage reconstruction support
+- nearest-parent Covers rendering support
+- GUI/report traceability navigation support
+
+Update GUI and reporting so they clearly show:
+- primary vs supplementary provenance
+- nearest-parent rendered Covers
+- full lineage reconstruction
+- requirement class
+- owning block
+- hierarchy level
+- system/digital/analog scope
+- valid downstream targets
+- actual downstream targets
+- coverage status
+- direct source-to-IPOS and supplementary-source-to-IPOS cases
+- which specs actually contain the requirement or its decomposition
+- integration-level versus block-local classification
+- topic family
+- justified split lineage
+- wrong-level placement or upward duplication when detected
+
+Update as needed:
+- generators
+- traceability modules
+- hierarchy/mapping logic
+- GUI traceability views
+- traceability matrices
+- statistics
+- coverage reports
+- hierarchy/mapping reports
+- exported docs/artifacts
+- validators
+- shared rules/policy docs
+- Copilot instructions / skill docs if applicable
+- tests
+
+Add focused tests for:
+- correct hierarchy placement
+- correct DRS/ARS vs IPOS allocation for all listed topic families
+- nearest-parent Covers rendering
+- valid direct source-to-IPOS behavior
+- full downward coverage accounting
+- no unnecessary duplication
+- correct handling of mixed source requirements split into architecture-level and block-local descendants
+- coherent GUI/report traceability views
+- correct statistics across all involved specs
+
+Constraints:
+- project-agnostic
+- update general rules
+- deterministic
+- local-only
+- no LLM calls
+- no network/cloud dependencies
+- no weakening of traceability completeness
+- no flattening of the hierarchy
+- no artificial duplication just to satisfy formal trace paths
+- update general/shared rules so this behavior is enforced consistently across generators, validators, reports, and UI

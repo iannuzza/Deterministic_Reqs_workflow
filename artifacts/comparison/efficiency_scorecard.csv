@@ -1,0 +1,10 @@
+Criterion,Project A Score,Project B Score,Better Project,Rationale
+block_count_efficiency,0.357,0.917,Project B,Interaction-to-block proportionality.
+functional_separation,1.000,1.000,Tie,Separation between functional blocks and interface labels.
+coupling_level,0.824,0.894,Project B,Lower normalized edge density is better.
+reuse_of_common_blocks,0.000,0.000,Tie,Common normalized blocks across both projects.
+hierarchy_clarity,0.438,0.857,Project B,Balance between hierarchy granularity and interactions.
+interface_sharing_quality,0.300,0.300,Tie,Overlap quality for micro/serial-like interfaces.
+duplication_of_connections,1.000,1.000,Tie,Penalizes repeated edge entries.
+maintainability,0.655,0.917,Project B,Composite architecture maintainability score.
+traceability,1.000,1.000,Tie,Requirement trace row density relative to block inventory.
