@@ -2,7 +2,7 @@
 
 Requirement-driven design flow implemented through a deterministic pipeline chain.
 
-# STBIO_AI
+# STBIO_AI - project name example
 
 Generic reusable scaffold for a multi-stage engineering workflow driven by specialized agents.
 
