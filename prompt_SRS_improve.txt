@@ -1,0 +1,34 @@
+Do not leave overview sections empty when safe approved evidence already exists, including evidence previously selected or excluded only because of topic or output limits.
+Treat this first as a projection/rendering problem, not automatically as an authority-absence problem.
+Populate overview sections with system-level technical prose, not raw source fragments, OCR stitching, table dumps, path dumps, or block-local descriptions.
+Expected overview content
+General System Description: describe the system or product itself, not the purpose of the document.
+Main System Capabilities: summarize top-level capabilities only, without implementation detail, registers, signals, or raw data-name lists.
+Main Architectural Domains and Subsystems: aggregate into top-level domains or subsystems, not block inventories.
+External Interfaces and System Boundaries: explain system boundaries and interface roles, with tables only as support.
+Operating Concept: explain the role of approved operating modes, not just list them, and do not include local control detail.
+Power, Clock, and Reset Overview: describe only safe top-level structure supported by clean evidence; keep unsupported portions as narrow targeted gaps.
+Scope, Assumptions, and Allocation Boundaries: state engineering scope and allocation boundaries, not generator disclaimers.
+Writing rules
+Use natural technical prose.
+Present meaning first, support tables second.
+Keep final narrative free of audit language and evidence counting.
+Do not copy normative text into descriptive prose.
+Do not infer functionality from the mere presence of blocks, ports, signals, or connections.
+Keep descriptive provenance in audit artifacts; keep normative traceability separate through approved mechanisms such as Covers.
+Deduplication
+Do not repeat the same block or subsystem description across sections.
+Keep each section focused on its own role: overview for meaning, detailed sections for structure, interfaces, requirements, or allocation.
+Remove repeated block-purpose prose from list sections and data-path sections when it already appears elsewhere.
+Formatting
+Render structured technical content for readability, not as flat bullet dumps.
+For repeated structured items such as domains, modes, interface groups, or subsystem groups:
+separate each item clearly
+visually distinguish the item name
+use indented sub-items for attributes
+Improve readability without changing content meaning.
+Governance
+Keep everything deterministic, centralized, and project-agnostic.
+Do not hardcode project names, block names, or review examples into shared rules, generators, selectors, validators, or policy.
+Do not introduce new authority paths.
+Do not import authority from parallel documents unless explicitly allowed by the approved workflow contract.

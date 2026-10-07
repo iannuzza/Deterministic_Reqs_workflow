@@ -1,10 +1,11 @@
 {
 	"version": "2.0.0",
+	"options": { "cwd": "${workspaceFolder}" },
 	"tasks": [
 		{
 			"label": "stage0-init-artifacts",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/init_stage0_artifacts.py"
 			],
@@ -13,7 +14,7 @@
 		{
 			"label": "stage0-validate-gate",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/validate_stage0_gate.py"
 			],
@@ -22,7 +23,7 @@
 		{
 			"label": "stage1-ocr-extract",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/extract_requirements_ocr.py",
 				"--spec-folder",
@@ -33,7 +34,7 @@
 		{
 			"label": "stage1-validate-gate",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/validate_stage1_gate.py"
 			],
@@ -42,7 +43,7 @@
 		{
 			"label": "stage1-taxonomy-crosscheck-update",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/run_taxonomy_crosscheck_update.py",
 				"--index-csv",
@@ -53,7 +54,7 @@
 		{
 			"label": "stage1-generate-requirements",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/generate_stage1_requirements.py",
 				"--index",
@@ -74,7 +75,7 @@
 		{
 			"label": "stage1-crosscheck-requirements-rag",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/crosscheck_stage1_requirements_rag.py",
 				"--summary-csv",
@@ -95,7 +96,7 @@
 		{
 			"label": "stage2-validate-gate",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/validate_stage2_gate.py"
 			],
@@ -104,7 +105,7 @@
 		{
 			"label": "stage2-generate-specs",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/generate_stage2_specs.py"
 			],
@@ -113,7 +114,7 @@
 		{
 			"label": "stage1-full-flow-gate1",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/run_stage1_requirements_gate1.py"
 			],
@@ -122,7 +123,7 @@
 		{
 			"label": "stage1-specs-full-flow-gate2",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/run_stage1_specs_gate2.py"
 			],
@@ -131,7 +132,7 @@
 		{
 			"label": "stage2-micro-arc-full-flow",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/run_stage2_micro_arc_gate.py"
 			],
@@ -140,7 +141,7 @@
 		{
 			"label": "stage3-srs-full-flow",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/run_stage3_srs_gate.py"
 			],
@@ -149,7 +150,7 @@
 		{
 			"label": "stage4-ars-full-flow",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/run_stage4_ars_gate.py"
 			],
@@ -158,7 +159,7 @@
 		{
 			"label": "stage5-drs-full-flow",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/run_stage5_drs_gate.py"
 			],
@@ -167,7 +168,7 @@
 		{
 			"label": "preflight-read-experience",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/preflight_experience.py",
 				"--experience-file",
@@ -182,7 +183,7 @@
 		{
 			"label": "rag-build-index",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/build_rag_index.py"
 			],
@@ -191,7 +192,7 @@
 		{
 			"label": "rag-query-smoke",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/query_rag_index.py",
 				"--query",
@@ -204,7 +205,7 @@
 		{
 			"label": "sync-memories",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/sync_repo_memory_local.py"
 			],
@@ -427,7 +428,7 @@
 		{
 			"label": "stage1-validate-dualid",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"scripts/validate_stage1_gate.py"
 			],
@@ -436,9 +437,9 @@
 		{
 			"label": "Validate ARS ID contract",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
-				"scripts\\run_stage4_ars_gate.py"
+				"scripts/run_stage4_ars_gate.py"
 			],
 			"isBackground": false,
 			"problemMatcher": []
@@ -446,7 +447,7 @@
 		{
 			"label": "Python: Interactive Console",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"-i"
 			],
@@ -461,7 +462,7 @@
 		{
 			"label": "Python: Run Current File",
 			"type": "shell",
-			"command": "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+			"command": "${command:python.interpreterPath}",
 			"args": [
 				"${file}"
 			],

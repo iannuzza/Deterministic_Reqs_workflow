@@ -44,6 +44,7 @@ from workflow_routing import (
     runtime_user_name,
     document_author_name,
     document_version_for_snapshot,
+    document_version_history_markdown,
     apply_shared_spec_markdown_formatting,
     compose_technical_block_purpose,
     project_architecture_interactions,
@@ -2856,9 +2857,10 @@ def _write_drs_markdown(
 
     lines.append("### 0.3 Document control")
     lines.append("#### Table 1. Version history")
-    lines.append("| Version | Date | Description | Author |")
-    lines.append("|---|---|---|---|")
-    lines.append(f"| {document_version} | {today} | Snapshot {snapshot_id} DRS baseline generated from Stage 1 and Stage 2 artifacts | {document_author} |")
+    lines.extend(document_version_history_markdown(
+        output_path, snapshot_id, document_version, today,
+        f"Snapshot {snapshot_id} DRS baseline generated from Stage 1 and Stage 2 artifacts", document_author,
+    ))
     lines.append("")
 
     lines.append("#### Table 2. Reference documents")
@@ -3718,8 +3720,6 @@ def main() -> int:
         snapshot_id=args.snapshot_id,
     )
     downstream_contract = resolve_downstream_contract(repo_root, requirement_input.snapshot_id)
-    if baseline.get("snapshot_id") != requirement_input.snapshot_id:
-        raise RuntimeError("DRS preservation baseline does not match the approved snapshot")
     coherence = validate_downstream_coherence(repo_root, requirement_input.snapshot_id)
     blocking = [finding for finding in coherence["findings"] if not (
         args.regenerate_downstream and finding.startswith(("DRS_CONTRACT:", "DRS: "))

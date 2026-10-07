@@ -8,6 +8,7 @@ import csv
 import re
 from collections import defaultdict
 from pathlib import Path
+from repo_paths import resolve_repo_path
 from typing import Dict, List, Tuple
 
 
@@ -61,12 +62,11 @@ def _read_inventory(path: Path) -> set[str]:
 
 
 def _read_pages(index_path: Path) -> List[Tuple[str, Path, List[str]]]:
+    repo_root = Path(__file__).resolve().parent.parent
     pages: List[Tuple[str, Path, List[str]]] = []
     with index_path.open(newline="", encoding="utf-8-sig") as handle:
         for row in csv.DictReader(handle):
-            text_path = Path((row.get("text_file") or "").strip())
-            if not text_path.is_absolute():
-                text_path = index_path.parent / text_path
+            text_path = resolve_repo_path(repo_root, (row.get("text_file") or "").strip())
             if not text_path.exists():
                 continue
             pages.append((

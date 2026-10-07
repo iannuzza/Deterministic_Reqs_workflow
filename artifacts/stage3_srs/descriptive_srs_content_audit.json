@@ -1,0 +1,1143 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "snap-b2e8101b00dc6909feaed885",
+  "project_name": "STBIO",
+  "profile": "srs-document-content",
+  "profile_version": 1,
+  "profile_fingerprint": "29ee2a92abcfa04e082ffb4de2d077b3e187f8667164be6c55fa3625171b62ab",
+  "projection_adapter": "srs-document-content",
+  "writing_rule_id": "srs-introductory-authority-bounded-v1",
+  "writing_rule_fingerprint": "358c2bd5d19cdd163a31170e998969f4583a609a1eda6b74c981b05c7d94f9b4",
+  "records": [
+    {
+      "record_id": "srs-source-03ff0913e884e6c0c8e9",
+      "text": "This document presents the system-level requirements and supporting context for STBIO included in the selected approved baseline. Descriptive content does not add requirements or change their allocation.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS document-purpose policy"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-13b0360c833bf1948ccd",
+      "text": "The scope is limited to system-level requirements allocated to this document and the supporting system context. Analog and digital behavior, interfaces, operating conditions and verification information are described only to the extent supported by the approved content. This description does not extend subsystem or block-level allocations.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS document-scope policy"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-e0ef32b74f3914795c54",
+      "text": "This document is intended for system architects, analog and digital design engineers, firmware engineers, verification and validation engineers, test and product engineers, and program and customer stakeholders.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS intended-audience policy"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-8ea125e23ed79b33302b",
+      "text": "Reference documents are listed in Table 2. Source links for any included requirements are recorded in the associated traceability matrix. Listing a document or standard does not itself establish applicability or add obligations.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS reference-document policy"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-cfe497ce907d23f8e6c1",
+      "text": "These definitions aid interpretation of the system descriptions and document abbreviations. They do not establish capabilities, ownership or allocation; specific meanings follow the approved content.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-9304b025f52baaaed345",
+      "text": "**System:** The device or functional scope identified in the approved descriptions.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1:System"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-d13cbb9f1339a4e588e0",
+      "text": "**Subsystem:** A grouping of related functions identified in the approved architecture context.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1:Subsystem"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-e62939657d03256f8866",
+      "text": "**Block:** A concrete unit identified in the approved architecture context.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1:Block"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-ebbd9f1d66d6bca02947",
+      "text": "**SRS:** System Requirements Specification; the system-level requirements and context document.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1:SRS"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-b306ac34cf6f075331bb",
+      "text": "**ARS:** Analog Requirements Specification; the analog and mixed-signal integration document.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1:ARS"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-62e2798d78726f609ce7",
+      "text": "**DRS:** Digital Requirements Specification; the digital integration document.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1:DRS"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-ac9fb0cb83d5b5e86478",
+      "text": "**IPOS:** The block-local implementation requirements specification.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.1:IPOS"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-ea1f933b3e31b8f2832b",
+      "text": "Analog terms are descriptive. Ranges, operating conditions and performance limits are those stated in the applicable approved content.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-5d30a3081295c0125b36",
+      "text": "**Input/output range:** The span of input or output values considered under stated operating conditions.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:Input/output range"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-757e85ed63cd5d5b2102",
+      "text": "**Gain:** The ratio of a change in output to the corresponding change in input.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:Gain"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-e251720f82eea8d2a918",
+      "text": "**Offset:** The deviation from the specified reference response at a reference input.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:Offset"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-a5e77ba754e36be2df0c",
+      "text": "**Noise:** Unwanted variations superimposed on a signal or measurement.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:Noise"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-13423a97fff3697bad0c",
+      "text": "**Bandwidth:** The frequency interval over which a response meets a defined criterion.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:Bandwidth"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-6daf99172dde2dfb24b6",
+      "text": "**Full-scale:** The reference magnitude or span corresponding to the specified measurement range.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:Full-scale"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-95153926435c8b07473f",
+      "text": "**ODR:** Output data rate; the rate at which new output samples become available.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:ODR"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-08b190d3b724d57b4a62",
+      "text": "**Sensitivity:** The change in output per unit change in the measured quantity.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.2:Sensitivity"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-73d92a748c118b82b081",
+      "text": "Digital terms aid interpretation of configuration and control descriptions. Their inclusion does not imply a particular implementation or supported feature.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-e9ca8ae5fd5f76fbb1e0",
+      "text": "**Register:** A named storage element used to expose data, configuration or status.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:Register"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-d958950f195531298c39",
+      "text": "**Bit field:** A defined subset of bits within a register or data word.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:Bit field"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-2a837f684d12f2d3ebba",
+      "text": "**Mode:** An operating configuration described in the applicable content.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:Mode"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-85911067760f2927bdd1",
+      "text": "**State:** A condition of control logic identified within a described operating sequence.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:State"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-9cb4520eb9ee0a1a24ad",
+      "text": "**Reset:** Initialization of affected logic as described in the applicable content.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:Reset"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-1ff4b364236cacfec45e",
+      "text": "**Interrupt:** An event notification that requests attention from a controller or processor.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:Interrupt"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-166a4045ed262a0f4768",
+      "text": "**Boot sequence:** An initialization sequence described in the applicable content.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:Boot sequence"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-7574641ff17354674e8b",
+      "text": "**Interface:** A defined boundary through which components exchange data, control or status.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.3:Interface"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-da88e1e6146f2216bc3e",
+      "text": "Measurement terms aid interpretation of verification information. Test conditions, limits and acceptance criteria remain those specified in the applicable approved requirements.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-1996762305bb3d946c9d",
+      "text": "**RMS noise:** The root-mean-square amplitude of noise over a stated measurement interval and bandwidth.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:RMS noise"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-17cba5bbb4ad7691e2e8",
+      "text": "**SNR:** Signal-to-noise ratio; the ratio of signal power to noise power, commonly expressed in decibels.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:SNR"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-a08b4c28db41c447d4b9",
+      "text": "**Latency:** The elapsed time between a defined initiating event and its corresponding response.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:Latency"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-434dcad4d82e25fc9ac2",
+      "text": "**Precision:** The repeatability of measurement results under stated conditions.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:Precision"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-625c57748900aa4c9801",
+      "text": "**Tolerance:** A permitted deviation where specified relative to a reference value or condition.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:Tolerance"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-75cc06757b7dac49c255",
+      "text": "**GR&R:** Gage repeatability and reproducibility; the evaluation of measurement-system variation.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:GR&R"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-237873803f6b99eaf302",
+      "text": "**Guard band:** A margin between acceptance and specification limits where such a margin is specified.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:Guard band"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-134f8d66fca17d29c6e9",
+      "text": "**Pass/fail:** An assessment against acceptance criteria specified by the applicable requirements.",
+      "authority_tier": "presentation_policy",
+      "ownership_scope": "document",
+      "provenance": [
+        "SRS terminology policy:2.4:Pass/fail"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-1a6d00006a19d432f939",
+      "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"DDS_STBIO1_9317\", \"DDS_STBIO1_9263\", \"DDS_STBIO1_9500\", \"DDS_STBIO1_9012\", \"DDS_STBIO1_9027\", \"DDS_STBIO1_9030\", \"DDS_STBIO1_9017\", \"DDS_STBIO1_9024\", \"DDS_STBIO1_9004\", \"DDS_STBIO1_9029\", \"DDS_STBIO1_9260\", \"DDS_STBIO1_9033\", \"DDS_STBIO1_9261\", \"DDS_STBIO1_9014\", \"DDS_STBIO1_9011\", \"DDS_STBIO1_9013\", \"DDS_STBIO1_9262\", \"DDS_STBIO1_9035\", \"DDS_STBIO1_9018\", \"DDS_STBIO1_9032\", \"DDS_STBIO1_9031\", \"DDS_STBIO1_9300\", \"DDS_STBIO1_9034\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-e91b127061927025e022",
+      "text": "Execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"DDS_STBIO1_0022\", \"DDS_STBIO1_0024\", \"DDS_STBIO1_0020\", \"DDS_STBIO1_0023\", \"DDS_STBIO1_0026\", \"DDS_STBIO1_0034\", \"DDS_STBIO1_0015\", \"DDS_STBIO1_0032\", \"DDS_STBIO1_0014\", \"DDS_STBIO1_0021\", \"DDS_STBIO1_0016\", \"DDS_STBIO1_0018\", \"DDS_STBIO1_0019\", \"DDS_STBIO1_0035\", \"DDS_STBIO1_0025\", \"DDS_STBIO1_0013\", \"DDS_STBIO1_0027\", \"DDS_STBIO1_0033\", \"DDS_STBIO1_0028\", \"DDS_STBIO1_0017\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-a9ea41725872d08f46fa",
+      "text": "Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"IPOS_STBIO1_MAIN_CONTROLLER_2146\", \"IPOS_STBIO1_MAIN_CONTROLLER_118\", \"IPOS_STBIO1_MAIN_CONTROLLER_051\", \"IPOS_STBIO1_MAIN_CONTROLLER_1104\", \"IPOS_STBIO1_MAIN_CONTROLLER_1095\", \"IPOS_STBIO1_MAIN_CONTROLLER_100\", \"IPOS_STBIO1_MAIN_CONTROLLER_5092\", \"IPOS_STBIO1_MAIN_CONTROLLER_4091\", \"IPOS_STBIO1_MAIN_CONTROLLER_102\", \"IPOS_STBIO1_MAIN_CONTROLLER_094\", \"IPOS_STBIO1_MAIN_CONTROLLER_3128\", \"IPOS_STBIO1_MAIN_CONTROLLER_6098\", \"IPOS_STBIO1_MAIN_CONTROLLER_052\", \"IPOS_STBIO1_MAIN_CONTROLLER_011\", \"DDS_STBIO1_0142\", \"DDS_STBIO1_0123\", \"IPOS_STBIO1_MAIN_CONTROLLER_1009\", \"IPOS_STBIO1_MAIN_CONTROLLER_092\", \"DDS_STBIO1_0126\", \"IPOS_STBIO1_MAIN_CONTROLLER_5016\", \"IPOS_STBIO1_MAIN_CONTROLLER_049\", \"IPOS_STBIO1_MAIN_CONTROLLER_080\", \"IPOS_STBIO1_MAIN_CONTROLLER_1102\", \"IPOS_STBIO1_MAIN_CONTROLLER_140\", \"IPOS_STBIO1_MAIN_CONTROLLER_026\", \"IPOS_STBIO1_MAIN_CONTROLLER_1034\", \"IPOS_STBIO1_MAIN_CONTROLLER_096\", \"IPOS_STBIO1_MAIN_CONTROLLER_1005\", \"IPOS_STBIO1_MAIN_CONTROLLER_103\", \"IPOS_STBIO1_MAIN_CONTROLLER_108\", \"DDS_STBIO1_0141\", \"DDS_STBIO1_0122\", \"IPOS_STBIO1_MAIN_CONTROLLER_002\", \"IPOS_STBIO1_MAIN_CONTROLLER_5005\", \"IPOS_STBIO1_MAIN_CONTROLLER_082\", \"IPOS_STBIO1_MAIN_CONTROLLER_8106\", \"IPOS_STBIO1_MAIN_CONTROLLER_039\", \"IPOS_STBIO1_MAIN_CONTROLLER_032\", \"IPOS_STBIO1_MAIN_CONTROLLER_3127\", \"IPOS_STBIO1_MAIN_CONTROLLER_7095\", \"IPOS_STBIO1_MAIN_CONTROLLER_028\", \"IPOS_STBIO1_MAIN_CONTROLLER_106\", \"IPOS_STBIO1_MAIN_CONTROLLER_105\", \"IPOS_STBIO1_MAIN_CONTROLLER_4090\", \"IPOS_STBIO1_MAIN_CONTROLLER_1143\", \"DDS_STBIO1_0121\", \"DDS_STBIO1_0127\", \"IPOS_STBIO1_MAIN_CONTROLLER_109\", \"IPOS_STBIO1_MAIN_CONTROLLER_1139\", \"IPOS_STBIO1_MAIN_CONTROLLER_3129\", \"IPOS_STBIO1_MAIN_CONTROLLER_138\", \"DDS_STBIO1_0117\", \"DDS_STBIO1_0128\", \"IPOS_STBIO1_MAIN_CONTROLLER_111\", \"DDS_STBIO1_0124\", \"IPOS_STBIO1_MAIN_CONTROLLER_047\", \"IPOS_STBIO1_MAIN_CONTROLLER_2145\", \"IPOS_STBIO1_MAIN_CONTROLLER_115\", \"IPOS_STBIO1_MAIN_CONTROLLER_017\", \"IPOS_STBIO1_MAIN_CONTROLLER_009\", \"IPOS_STBIO1_MAIN_CONTROLLER_044\", \"IPOS_STBIO1_MAIN_CONTROLLER_0152\", \"IPOS_STBIO1_MAIN_CONTROLLER_128\", \"IPOS_STBIO1_MAIN_CONTROLLER_059\", \"IPOS_STBIO1_MAIN_CONTROLLER_078\", \"IPOS_STBIO1_MAIN_CONTROLLER_089\", \"IPOS_STBIO1_MAIN_CONTROLLER_104\", \"IPOS_STBIO1_MAIN_CONTROLLER_1008\", \"IPOS_STBIO1_MAIN_CONTROLLER_055\", \"DDS_STBIO1_1114\", \"IPOS_STBIO1_MAIN_CONTROLLER_018\", \"IPOS_STBIO1_MAIN_CONTROLLER_063\", \"IPOS_STBIO1_MAIN_CONTROLLER_036\", \"IPOS_STBIO1_MAIN_CONTROLLER_034\", \"IPOS_STBIO1_MAIN_CONTROLLER_134\", \"IPOS_STBIO1_MAIN_CONTROLLER_3124\", \"IPOS_STBIO1_MAIN_CONTROLLER_037\", \"IPOS_STBIO1_MAIN_CONTROLLER_024\", \"IPOS_STBIO1_MAIN_CONTROLLER_110\", \"IPOS_STBIO1_MAIN_CONTROLLER_126\", \"IPOS_STBIO1_MAIN_CONTROLLER_045\", \"IPOS_STBIO1_MAIN_CONTROLLER_004\", \"IPOS_STBIO1_MAIN_CONTROLLER_054\", \"IPOS_STBIO1_MAIN_CONTROLLER_053\", \"IPOS_STBIO1_MAIN_CONTROLLER_2143\", \"IPOS_STBIO1_MAIN_CONTROLLER_016\", \"IPOS_STBIO1_MAIN_CONTROLLER_029\", \"IPOS_STBIO1_MAIN_CONTROLLER_4079\", \"IPOS_STBIO1_MAIN_CONTROLLER_021\", \"IPOS_STBIO1_MAIN_CONTROLLER_083\", \"IPOS_STBIO1_MAIN_CONTROLLER_436\", \"IPOS_STBIO1_MAIN_CONTROLLER_099\", \"IPOS_STBIO1_MAIN_CONTROLLER_074\", \"IPOS_STBIO1_MAIN_CONTROLLER_098\", \"IPOS_STBIO1_MAIN_CONTROLLER_038\", \"IPOS_STBIO1_MAIN_CONTROLLER_087\", \"IPOS_STBIO1_MAIN_CONTROLLER_5004\", \"IPOS_STBIO1_MAIN_CONTROLLER_093\", \"IPOS_STBIO1_MAIN_CONTROLLER_019\", \"DDS_STBIO1_0125\", \"IPOS_STBIO1_MAIN_CONTROLLER_113\", \"DDS_STBIO1_0130\", \"IPOS_STBIO1_MAIN_CONTROLLER_3126\", \"IPOS_STBIO1_MAIN_CONTROLLER_1007\", \"IPOS_STBIO1_MAIN_CONTROLLER_023\", \"IPOS_STBIO1_MAIN_CONTROLLER_008\", \"IPOS_STBIO1_MAIN_CONTROLLER_728\", \"IPOS_STBIO1_MAIN_CONTROLLER_088\", \"IPOS_STBIO1_MAIN_CONTROLLER_035\", \"IPOS_STBIO1_MAIN_CONTROLLER_6070\", \"DDS_STBIO1_0120\", \"DDS_STBIO1_0129\", \"IPOS_STBIO1_MAIN_CONTROLLER_1010\", \"IPOS_STBIO1_MAIN_CONTROLLER_060\", \"IPOS_STBIO1_MAIN_CONTROLLER_064\", \"IPOS_STBIO1_MAIN_CONTROLLER_1011\", \"IPOS_STBIO1_MAIN_CONTROLLER_010\", \"DDS_STBIO1_0119\", \"IPOS_STBIO1_MAIN_CONTROLLER_033\", \"IPOS_STBIO1_MAIN_CONTROLLER_073\", \"IPOS_STBIO1_MAIN_CONTROLLER_2144\", \"IPOS_STBIO1_MAIN_CONTROLLER_077\", \"IPOS_STBIO1_MAIN_CONTROLLER_5015\", \"IPOS_STBIO1_MAIN_CONTROLLER_3125\", \"IPOS_STBIO1_MAIN_CONTROLLER_058\", \"IPOS_STBIO1_MAIN_CONTROLLER_031\", \"IPOS_STBIO1_MAIN_CONTROLLER_6129\", \"IPOS_STBIO1_MAIN_CONTROLLER_112\", \"DDS_STBIO1_0140\", \"IPOS_STBIO1_MAIN_CONTROLLER_101\", \"IPOS_STBIO1_MAIN_CONTROLLER_030\", \"IPOS_STBIO1_MAIN_CONTROLLER_095\", \"IPOS_STBIO1_MAIN_CONTROLLER_4080\", \"IPOS_STBIO1_MAIN_CONTROLLER_085\", \"IPOS_STBIO1_MAIN_CONTROLLER_137\", \"IPOS_STBIO1_MAIN_CONTROLLER_061\", \"DDS_STBIO1_0118\", \"IPOS_STBIO1_MAIN_CONTROLLER_1004\", \"IPOS_STBIO1_MAIN_CONTROLLER_1116\", \"IPOS_STBIO1_MAIN_CONTROLLER_120\", \"IPOS_STBIO1_MAIN_CONTROLLER_062\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-5ce3ac2625b66f59db22",
+      "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"DDS_STBIO1_89456975\", \"DDS_STBIO1_89457435\", \"DDS_STBIO1_89455232\", \"DDS_STBIO1_00000102\", \"DDS_STBIO1_00000008\", \"DDS_STBIO1_00001199\", \"DDS_STBIO1_89455261\", \"DDS_STBIO1_89455449\", \"DDS_STBIO1_89456557\", \"DDS_STBIO1_00000199\", \"DDS_STBIO1_00000202\", \"DDS_STBIO1_89459082\", \"DDS_STBIO1_89457790\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-dc386c3fa4fedab7b200",
+      "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"DDS_STBIO1_3004\", \"DDS_STBIO1_0508\", \"DDS_STBIO1_0507\", \"DDS_STBIO1_3006\", \"DDS_STBIO1_3002\", \"DDS_STBIO1_3001\", \"DDS_STBIO1_3005\", \"DDS_STBIO1_3003\", \"DDS_STBIO1_4000\", \"DDS_STBIO1_3000\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-2e6514ea38bce1873d3e",
+      "text": "Sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"DDS_STBIO1_0115\", \"DDS_STBIO1_0113\", \"DDS_STBIO1_2054\", \"DDS_STBIO1_1024\", \"DDS_STBIO1_1023\", \"DDS_STBIO1_0106\", \"DDS_STBIO1_0110\", \"DDS_STBIO1_2026\", \"DDS_STBIO1_0108\", \"DDS_STBIO1_1025\", \"DDS_STBIO1_2052\", \"DDS_STBIO1_1053\", \"DDS_STBIO1_1052\", \"DDS_STBIO1_0107\", \"DDS_STBIO1_1022\", \"DDS_STBIO1_1050\", \"DDS_STBIO1_2024\", \"DDS_STBIO1_0111\", \"DDS_STBIO1_1051\", \"DDS_STBIO1_0114\", \"DDS_STBIO1_2025\", \"DDS_STBIO1_1021\", \"DDS_STBIO1_0112\", \"DDS_STBIO1_0105\", \"DDS_STBIO1_1054\", \"DDS_STBIO1_2053\", \"DDS_STBIO1_1026\", \"DDS_STBIO1_0109\", \"DDS_STBIO1_1027\", \"DDS_STBIO1_1020\", \"DDS_STBIO1_0104\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-8487f91d3bfa11308747",
+      "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"DDS_STBIO1_8003\", \"DDS_STBIO1_8104\", \"DDS_STBIO1_8102\", \"DDS_STBIO1_8007\", \"DDS_STBIO1_8004\", \"DDS_STBIO1_8005\", \"DDS_STBIO1_8103\", \"DDS_STBIO1_8000\", \"DDS_STBIO1_8100\", \"DDS_STBIO1_8105\", \"DDS_STBIO1_8001\", \"DDS_STBIO1_8101\", \"DDS_STBIO1_8106\", \"DDS_STBIO1_8002\", \"DDS_STBIO1_8006\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-34bdcc395c3dcd2e16f2",
+      "text": "Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+        "approved classification sources:[\"DDS_STBIO1_0116\", \"DDS_STBIO1_0036\"]"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-b757ec150974184d4860",
+      "text": "PD_TOP1V2: Included block(s): ADSP,, multi_channel_fifo, i2c_spi_slave, main_controller_top, senshub_mst_i2c, pad_mux, pmu, stbio1_regmap, scan_out_mux, xbar_afe. Domain type: Always-On. Control mode: HW. Notes: Always active. \u2022 Function: Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub acquisition, FIFO read and write data, Elaboration Mode with ADSP only). \u2022 Characteristics: Never powered down. \u2022 Control: Managed by hardware.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "Stage 1 OCR power-domain table/description (PD_TOP1V2)"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-c7aae4f72eb40cc6a91b",
+      "text": "PD_STREDL: Included block(s): STREDL. Domain type: Switchable. Control mode: SW. Notes: Can be powered down in idle. \u2022 Function: Powers the STREDL core and associated cache. \u2022 Characteristics: Can be powered down when STREDL is not in use. \u2022 Control: Managed via software (power management driver)(see 12.3.1)",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "Stage 1 OCR power-domain table/description (PD_STREDL)"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-f7b5fd8f88512b650e3b",
+      "text": "PD_TOP3V3: Included block(s): H9A_MEM_OTP_ PUMP_85AL05_2. Domain type: Always-On. Voltage: 3A. Control mode: HW. Notes: Always active. \u2022 Function: power supply to the OTP memory block. \u2022 Characteristics: Never powered down. It provides 4.7V of power supply to the OTP memory block during programming (write) operations \u2022 Control: Managed by hardware.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "Stage 1 OCR power-domain table/description (PD_TOP3V3)"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    },
+    {
+      "record_id": "srs-source-4b980d12641c12e98d1c",
+      "text": "PD_TOPIO: Included block(s): level_shifter_sel. Domain type: Always-On. Control mode: HW. Notes: Always active 32 10.4.. \u2022 Function: Powers communication PAD \u2022 Characteristics: Never powered down. \u2022 Control: Managed by hardware.",
+      "authority_tier": "admitted_context",
+      "ownership_scope": "architecture",
+      "provenance": [
+        "Stage 1 OCR power-domain table/description (PD_TOPIO)"
+      ],
+      "decision": "selected",
+      "rationale": "SRS document-specific presentation"
+    }
+  ],
+  "units": [
+    {
+      "unit_id": "srs-unit-b1efd6c9faf7ac4d718b",
+      "section": "1.1",
+      "text": "This document presents the system-level requirements and supporting context for STBIO included in the selected approved baseline. Descriptive content does not add requirements or change their allocation.",
+      "source_record_ids": [
+        "srs-source-03ff0913e884e6c0c8e9"
+      ],
+      "output_order": 0
+    },
+    {
+      "unit_id": "srs-unit-82f97f622353c390a69c",
+      "section": "1.2",
+      "text": "The scope is limited to system-level requirements allocated to this document and the supporting system context. Analog and digital behavior, interfaces, operating conditions and verification information are described only to the extent supported by the approved content. This description does not extend subsystem or block-level allocations.",
+      "source_record_ids": [
+        "srs-source-13b0360c833bf1948ccd"
+      ],
+      "output_order": 1
+    },
+    {
+      "unit_id": "srs-unit-7ef6d0ba508d9b4bbc38",
+      "section": "1.3",
+      "text": "This document is intended for system architects, analog and digital design engineers, firmware engineers, verification and validation engineers, test and product engineers, and program and customer stakeholders.",
+      "source_record_ids": [
+        "srs-source-e0ef32b74f3914795c54"
+      ],
+      "output_order": 2
+    },
+    {
+      "unit_id": "srs-unit-aba78865b4e2be4cf9cd",
+      "section": "1.4",
+      "text": "Reference documents are listed in Table 2. Source links for any included requirements are recorded in the associated traceability matrix. Listing a document or standard does not itself establish applicability or add obligations.",
+      "source_record_ids": [
+        "srs-source-8ea125e23ed79b33302b"
+      ],
+      "output_order": 3
+    },
+    {
+      "unit_id": "srs-unit-bf2c1bd0cc6e64da907e",
+      "section": "2.1",
+      "text": "These definitions aid interpretation of the system descriptions and document abbreviations. They do not establish capabilities, ownership or allocation; specific meanings follow the approved content.",
+      "source_record_ids": [
+        "srs-source-cfe497ce907d23f8e6c1"
+      ],
+      "output_order": 4
+    },
+    {
+      "unit_id": "srs-unit-61447f70f64dada0a641",
+      "section": "2.1",
+      "text": "**System:** The device or functional scope identified in the approved descriptions.",
+      "source_record_ids": [
+        "srs-source-9304b025f52baaaed345"
+      ],
+      "output_order": 5
+    },
+    {
+      "unit_id": "srs-unit-7c3c8b7c26f332c5c66c",
+      "section": "2.1",
+      "text": "**Subsystem:** A grouping of related functions identified in the approved architecture context.",
+      "source_record_ids": [
+        "srs-source-d13cbb9f1339a4e588e0"
+      ],
+      "output_order": 6
+    },
+    {
+      "unit_id": "srs-unit-dd91ee91f4fe9be9bd99",
+      "section": "2.1",
+      "text": "**Block:** A concrete unit identified in the approved architecture context.",
+      "source_record_ids": [
+        "srs-source-e62939657d03256f8866"
+      ],
+      "output_order": 7
+    },
+    {
+      "unit_id": "srs-unit-6538356a01406a3f3d35",
+      "section": "2.1",
+      "text": "**SRS:** System Requirements Specification; the system-level requirements and context document.",
+      "source_record_ids": [
+        "srs-source-ebbd9f1d66d6bca02947"
+      ],
+      "output_order": 8
+    },
+    {
+      "unit_id": "srs-unit-373a0b92a96771fe1464",
+      "section": "2.1",
+      "text": "**ARS:** Analog Requirements Specification; the analog and mixed-signal integration document.",
+      "source_record_ids": [
+        "srs-source-b306ac34cf6f075331bb"
+      ],
+      "output_order": 9
+    },
+    {
+      "unit_id": "srs-unit-8e05911baf2dfc24f5e2",
+      "section": "2.1",
+      "text": "**DRS:** Digital Requirements Specification; the digital integration document.",
+      "source_record_ids": [
+        "srs-source-62e2798d78726f609ce7"
+      ],
+      "output_order": 10
+    },
+    {
+      "unit_id": "srs-unit-8da5efb15ebe3a2d033a",
+      "section": "2.1",
+      "text": "**IPOS:** The block-local implementation requirements specification.",
+      "source_record_ids": [
+        "srs-source-ac9fb0cb83d5b5e86478"
+      ],
+      "output_order": 11
+    },
+    {
+      "unit_id": "srs-unit-68a0cc3df005a1047f5f",
+      "section": "2.2",
+      "text": "Analog terms are descriptive. Ranges, operating conditions and performance limits are those stated in the applicable approved content.",
+      "source_record_ids": [
+        "srs-source-ea1f933b3e31b8f2832b"
+      ],
+      "output_order": 12
+    },
+    {
+      "unit_id": "srs-unit-eae0e978a6ffeae143a6",
+      "section": "2.2",
+      "text": "**Input/output range:** The span of input or output values considered under stated operating conditions.",
+      "source_record_ids": [
+        "srs-source-5d30a3081295c0125b36"
+      ],
+      "output_order": 13
+    },
+    {
+      "unit_id": "srs-unit-659b77980f3300d8be46",
+      "section": "2.2",
+      "text": "**Gain:** The ratio of a change in output to the corresponding change in input.",
+      "source_record_ids": [
+        "srs-source-757e85ed63cd5d5b2102"
+      ],
+      "output_order": 14
+    },
+    {
+      "unit_id": "srs-unit-458dd770dc588275c40c",
+      "section": "2.2",
+      "text": "**Offset:** The deviation from the specified reference response at a reference input.",
+      "source_record_ids": [
+        "srs-source-e251720f82eea8d2a918"
+      ],
+      "output_order": 15
+    },
+    {
+      "unit_id": "srs-unit-bde9a1d3ecda7fe296c7",
+      "section": "2.2",
+      "text": "**Noise:** Unwanted variations superimposed on a signal or measurement.",
+      "source_record_ids": [
+        "srs-source-a5e77ba754e36be2df0c"
+      ],
+      "output_order": 16
+    },
+    {
+      "unit_id": "srs-unit-a4bace2aa5619ae11bbd",
+      "section": "2.2",
+      "text": "**Bandwidth:** The frequency interval over which a response meets a defined criterion.",
+      "source_record_ids": [
+        "srs-source-13423a97fff3697bad0c"
+      ],
+      "output_order": 17
+    },
+    {
+      "unit_id": "srs-unit-68b894ed7dfe5fce2fbe",
+      "section": "2.2",
+      "text": "**Full-scale:** The reference magnitude or span corresponding to the specified measurement range.",
+      "source_record_ids": [
+        "srs-source-6daf99172dde2dfb24b6"
+      ],
+      "output_order": 18
+    },
+    {
+      "unit_id": "srs-unit-51f47ac43d8cce8a69d2",
+      "section": "2.2",
+      "text": "**ODR:** Output data rate; the rate at which new output samples become available.",
+      "source_record_ids": [
+        "srs-source-95153926435c8b07473f"
+      ],
+      "output_order": 19
+    },
+    {
+      "unit_id": "srs-unit-471810abc15d14d53914",
+      "section": "2.2",
+      "text": "**Sensitivity:** The change in output per unit change in the measured quantity.",
+      "source_record_ids": [
+        "srs-source-08b190d3b724d57b4a62"
+      ],
+      "output_order": 20
+    },
+    {
+      "unit_id": "srs-unit-03d1b69cded0cf3c68e3",
+      "section": "2.3",
+      "text": "Digital terms aid interpretation of configuration and control descriptions. Their inclusion does not imply a particular implementation or supported feature.",
+      "source_record_ids": [
+        "srs-source-73d92a748c118b82b081"
+      ],
+      "output_order": 21
+    },
+    {
+      "unit_id": "srs-unit-70eb391bea57029e72df",
+      "section": "2.3",
+      "text": "**Register:** A named storage element used to expose data, configuration or status.",
+      "source_record_ids": [
+        "srs-source-e9ca8ae5fd5f76fbb1e0"
+      ],
+      "output_order": 22
+    },
+    {
+      "unit_id": "srs-unit-ee33cff7293f81bb4658",
+      "section": "2.3",
+      "text": "**Bit field:** A defined subset of bits within a register or data word.",
+      "source_record_ids": [
+        "srs-source-d958950f195531298c39"
+      ],
+      "output_order": 23
+    },
+    {
+      "unit_id": "srs-unit-74fa0987415cf542a5c3",
+      "section": "2.3",
+      "text": "**Mode:** An operating configuration described in the applicable content.",
+      "source_record_ids": [
+        "srs-source-2a837f684d12f2d3ebba"
+      ],
+      "output_order": 24
+    },
+    {
+      "unit_id": "srs-unit-edf9e5e349504509212b",
+      "section": "2.3",
+      "text": "**State:** A condition of control logic identified within a described operating sequence.",
+      "source_record_ids": [
+        "srs-source-85911067760f2927bdd1"
+      ],
+      "output_order": 25
+    },
+    {
+      "unit_id": "srs-unit-c6afc20d023848100a52",
+      "section": "2.3",
+      "text": "**Reset:** Initialization of affected logic as described in the applicable content.",
+      "source_record_ids": [
+        "srs-source-9cb4520eb9ee0a1a24ad"
+      ],
+      "output_order": 26
+    },
+    {
+      "unit_id": "srs-unit-2b48d8aeca83ae76d33d",
+      "section": "2.3",
+      "text": "**Interrupt:** An event notification that requests attention from a controller or processor.",
+      "source_record_ids": [
+        "srs-source-1ff4b364236cacfec45e"
+      ],
+      "output_order": 27
+    },
+    {
+      "unit_id": "srs-unit-71001aac30482cd4a24f",
+      "section": "2.3",
+      "text": "**Boot sequence:** An initialization sequence described in the applicable content.",
+      "source_record_ids": [
+        "srs-source-166a4045ed262a0f4768"
+      ],
+      "output_order": 28
+    },
+    {
+      "unit_id": "srs-unit-af11e56cb5507f9b65bb",
+      "section": "2.3",
+      "text": "**Interface:** A defined boundary through which components exchange data, control or status.",
+      "source_record_ids": [
+        "srs-source-7574641ff17354674e8b"
+      ],
+      "output_order": 29
+    },
+    {
+      "unit_id": "srs-unit-8a769c6f30b88e4f5cf4",
+      "section": "2.4",
+      "text": "Measurement terms aid interpretation of verification information. Test conditions, limits and acceptance criteria remain those specified in the applicable approved requirements.",
+      "source_record_ids": [
+        "srs-source-da88e1e6146f2216bc3e"
+      ],
+      "output_order": 30
+    },
+    {
+      "unit_id": "srs-unit-c366f30c0be4a4301773",
+      "section": "2.4",
+      "text": "**RMS noise:** The root-mean-square amplitude of noise over a stated measurement interval and bandwidth.",
+      "source_record_ids": [
+        "srs-source-1996762305bb3d946c9d"
+      ],
+      "output_order": 31
+    },
+    {
+      "unit_id": "srs-unit-791dda9676bc758f6978",
+      "section": "2.4",
+      "text": "**SNR:** Signal-to-noise ratio; the ratio of signal power to noise power, commonly expressed in decibels.",
+      "source_record_ids": [
+        "srs-source-17cba5bbb4ad7691e2e8"
+      ],
+      "output_order": 32
+    },
+    {
+      "unit_id": "srs-unit-2c715285928265977b5b",
+      "section": "2.4",
+      "text": "**Latency:** The elapsed time between a defined initiating event and its corresponding response.",
+      "source_record_ids": [
+        "srs-source-a08b4c28db41c447d4b9"
+      ],
+      "output_order": 33
+    },
+    {
+      "unit_id": "srs-unit-4ddf785f54281faaa63d",
+      "section": "2.4",
+      "text": "**Precision:** The repeatability of measurement results under stated conditions.",
+      "source_record_ids": [
+        "srs-source-434dcad4d82e25fc9ac2"
+      ],
+      "output_order": 34
+    },
+    {
+      "unit_id": "srs-unit-67a8075ece2621441bc4",
+      "section": "2.4",
+      "text": "**Tolerance:** A permitted deviation where specified relative to a reference value or condition.",
+      "source_record_ids": [
+        "srs-source-625c57748900aa4c9801"
+      ],
+      "output_order": 35
+    },
+    {
+      "unit_id": "srs-unit-e3ce1c6f8c86de0f92f1",
+      "section": "2.4",
+      "text": "**GR&R:** Gage repeatability and reproducibility; the evaluation of measurement-system variation.",
+      "source_record_ids": [
+        "srs-source-75cc06757b7dac49c255"
+      ],
+      "output_order": 36
+    },
+    {
+      "unit_id": "srs-unit-9b1e8a571d589cab95a3",
+      "section": "2.4",
+      "text": "**Guard band:** A margin between acceptance and specification limits where such a margin is specified.",
+      "source_record_ids": [
+        "srs-source-237873803f6b99eaf302"
+      ],
+      "output_order": 37
+    },
+    {
+      "unit_id": "srs-unit-29dd43a30c2bf41a6926",
+      "section": "2.4",
+      "text": "**Pass/fail:** An assessment against acceptance criteria specified by the applicable requirements.",
+      "source_record_ids": [
+        "srs-source-134f8d66fca17d29c6e9"
+      ],
+      "output_order": 38
+    },
+    {
+      "unit_id": "srs-unit-61256fa6dc34c0122a8c",
+      "section": "5.1",
+      "text": "- **Sensor-Hub**\n\n  The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.",
+      "source_record_ids": [
+        "srs-source-1a6d00006a19d432f939"
+      ],
+      "output_order": 39
+    },
+    {
+      "unit_id": "srs-unit-61914928f1451bb0630e",
+      "section": "5.1",
+      "text": "- **ADSP**\n\n  The ADSP block is designed to execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.",
+      "source_record_ids": [
+        "srs-source-e91b127061927025e022"
+      ],
+      "output_order": 40
+    },
+    {
+      "unit_id": "srs-unit-c84c807071904ec4b3fc",
+      "section": "5.1",
+      "text": "- **Main Controller**\n\n  The Main Controller block is designed to generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.",
+      "source_record_ids": [
+        "srs-source-a9ea41725872d08f46fa"
+      ],
+      "output_order": 41
+    },
+    {
+      "unit_id": "srs-unit-8d27726f92e85e5a287d",
+      "section": "5.1",
+      "text": "- **Smart FIFO**\n\n  The Smart FIFO block is designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.",
+      "source_record_ids": [
+        "srs-source-5ce3ac2625b66f59db22"
+      ],
+      "output_order": 42
+    },
+    {
+      "unit_id": "srs-unit-244e8d96ad544e959ab3",
+      "section": "5.1",
+      "text": "- **Regmap**\n\n  The Regmap block is designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.",
+      "source_record_ids": [
+        "srs-source-dc386c3fa4fedab7b200"
+      ],
+      "output_order": 43
+    },
+    {
+      "unit_id": "srs-unit-3f22fb9f73bea6d56c8e",
+      "section": "5.1",
+      "text": "- **PMU**\n\n  The PMU block is designed to sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.",
+      "source_record_ids": [
+        "srs-source-2e6514ea38bce1873d3e"
+      ],
+      "output_order": 44
+    },
+    {
+      "unit_id": "srs-unit-558a4c117b8fd0fef4ee",
+      "section": "5.1",
+      "text": "- **I2C_SPI_AHB**\n\n  The I2C_SPI_AHB block is designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.",
+      "source_record_ids": [
+        "srs-source-8487f91d3bfa11308747"
+      ],
+      "output_order": 45
+    },
+    {
+      "unit_id": "srs-unit-0edd789774b97b327b01",
+      "section": "5.1",
+      "text": "- **OTP**\n\n  The OTP block is designed to provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines.",
+      "source_record_ids": [
+        "srs-source-34bdcc395c3dcd2e16f2"
+      ],
+      "output_order": 46
+    },
+    {
+      "unit_id": "srs-unit-281d8702cd39d8177e12",
+      "section": "3.6",
+      "text": "| PD_TOP1V2 | Always-On | HW | Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub acquisition, FIFO read and write data, Elaboration Mode with ADSP only). Associated blocks: ADSP, multi_channel_fifo, i2c_spi_slave, main_controller_top, senshub_mst_i2c, pad_mux, pmu, stbio1_regmap, scan_out_mux, xbar_afe | Always active. Never powered down |",
+      "source_record_ids": [
+        "srs-source-b757ec150974184d4860"
+      ],
+      "output_order": 47
+    },
+    {
+      "unit_id": "srs-unit-bc6c504ed33a6f7aafcd",
+      "section": "3.6",
+      "text": "| PD_STREDL | Switchable | SW | Powers the STREDL core and associated cache. Associated blocks: STREDL | Can be powered down in idle. Can be powered down when STREDL is not in use |",
+      "source_record_ids": [
+        "srs-source-c7aae4f72eb40cc6a91b"
+      ],
+      "output_order": 48
+    },
+    {
+      "unit_id": "srs-unit-8299084fe9e85e27d48e",
+      "section": "3.6",
+      "text": "| PD_TOP3V3 | Always-On | HW | power supply to the OTP memory block. Associated blocks: H9A_MEM_OTP_ PUMP_85AL05_2 | Always active. Never powered down. It provides 4.7V of power supply to the OTP memory block during programming (write) operations |",
+      "source_record_ids": [
+        "srs-source-f7b5fd8f88512b650e3b"
+      ],
+      "output_order": 49
+    },
+    {
+      "unit_id": "srs-unit-460c342c7f615cdbd978",
+      "section": "3.6",
+      "text": "| PD_TOPIO | Always-On | HW | Powers communication PAD. Associated blocks: level_shifter_sel | Never powered down |",
+      "source_record_ids": [
+        "srs-source-4b980d12641c12e98d1c"
+      ],
+      "output_order": 50
+    }
+  ],
+  "catalog_entries": [
+    {
+      "block": "Sensor-Hub",
+      "category": "digital",
+      "function": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"DDS_STBIO1_9317\", \"DDS_STBIO1_9263\", \"DDS_STBIO1_9500\", \"DDS_STBIO1_9012\", \"DDS_STBIO1_9027\", \"DDS_STBIO1_9030\", \"DDS_STBIO1_9017\", \"DDS_STBIO1_9024\", \"DDS_STBIO1_9004\", \"DDS_STBIO1_9029\", \"DDS_STBIO1_9260\", \"DDS_STBIO1_9033\", \"DDS_STBIO1_9261\", \"DDS_STBIO1_9014\", \"DDS_STBIO1_9011\", \"DDS_STBIO1_9013\", \"DDS_STBIO1_9262\", \"DDS_STBIO1_9035\", \"DDS_STBIO1_9018\", \"DDS_STBIO1_9032\", \"DDS_STBIO1_9031\", \"DDS_STBIO1_9300\", \"DDS_STBIO1_9034\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "block": "ADSP",
+      "category": "digital",
+      "function": "Execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"DDS_STBIO1_0022\", \"DDS_STBIO1_0024\", \"DDS_STBIO1_0020\", \"DDS_STBIO1_0023\", \"DDS_STBIO1_0026\", \"DDS_STBIO1_0034\", \"DDS_STBIO1_0015\", \"DDS_STBIO1_0032\", \"DDS_STBIO1_0014\", \"DDS_STBIO1_0021\", \"DDS_STBIO1_0016\", \"DDS_STBIO1_0018\", \"DDS_STBIO1_0019\", \"DDS_STBIO1_0035\", \"DDS_STBIO1_0025\", \"DDS_STBIO1_0013\", \"DDS_STBIO1_0027\", \"DDS_STBIO1_0033\", \"DDS_STBIO1_0028\", \"DDS_STBIO1_0017\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "block": "Main Controller",
+      "category": "digital",
+      "function": "Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"IPOS_STBIO1_MAIN_CONTROLLER_2146\", \"IPOS_STBIO1_MAIN_CONTROLLER_118\", \"IPOS_STBIO1_MAIN_CONTROLLER_051\", \"IPOS_STBIO1_MAIN_CONTROLLER_1104\", \"IPOS_STBIO1_MAIN_CONTROLLER_1095\", \"IPOS_STBIO1_MAIN_CONTROLLER_100\", \"IPOS_STBIO1_MAIN_CONTROLLER_5092\", \"IPOS_STBIO1_MAIN_CONTROLLER_4091\", \"IPOS_STBIO1_MAIN_CONTROLLER_102\", \"IPOS_STBIO1_MAIN_CONTROLLER_094\", \"IPOS_STBIO1_MAIN_CONTROLLER_3128\", \"IPOS_STBIO1_MAIN_CONTROLLER_6098\", \"IPOS_STBIO1_MAIN_CONTROLLER_052\", \"IPOS_STBIO1_MAIN_CONTROLLER_011\", \"DDS_STBIO1_0142\", \"DDS_STBIO1_0123\", \"IPOS_STBIO1_MAIN_CONTROLLER_1009\", \"IPOS_STBIO1_MAIN_CONTROLLER_092\", \"DDS_STBIO1_0126\", \"IPOS_STBIO1_MAIN_CONTROLLER_5016\", \"IPOS_STBIO1_MAIN_CONTROLLER_049\", \"IPOS_STBIO1_MAIN_CONTROLLER_080\", \"IPOS_STBIO1_MAIN_CONTROLLER_1102\", \"IPOS_STBIO1_MAIN_CONTROLLER_140\", \"IPOS_STBIO1_MAIN_CONTROLLER_026\", \"IPOS_STBIO1_MAIN_CONTROLLER_1034\", \"IPOS_STBIO1_MAIN_CONTROLLER_096\", \"IPOS_STBIO1_MAIN_CONTROLLER_1005\", \"IPOS_STBIO1_MAIN_CONTROLLER_103\", \"IPOS_STBIO1_MAIN_CONTROLLER_108\", \"DDS_STBIO1_0141\", \"DDS_STBIO1_0122\", \"IPOS_STBIO1_MAIN_CONTROLLER_002\", \"IPOS_STBIO1_MAIN_CONTROLLER_5005\", \"IPOS_STBIO1_MAIN_CONTROLLER_082\", \"IPOS_STBIO1_MAIN_CONTROLLER_8106\", \"IPOS_STBIO1_MAIN_CONTROLLER_039\", \"IPOS_STBIO1_MAIN_CONTROLLER_032\", \"IPOS_STBIO1_MAIN_CONTROLLER_3127\", \"IPOS_STBIO1_MAIN_CONTROLLER_7095\", \"IPOS_STBIO1_MAIN_CONTROLLER_028\", \"IPOS_STBIO1_MAIN_CONTROLLER_106\", \"IPOS_STBIO1_MAIN_CONTROLLER_105\", \"IPOS_STBIO1_MAIN_CONTROLLER_4090\", \"IPOS_STBIO1_MAIN_CONTROLLER_1143\", \"DDS_STBIO1_0121\", \"DDS_STBIO1_0127\", \"IPOS_STBIO1_MAIN_CONTROLLER_109\", \"IPOS_STBIO1_MAIN_CONTROLLER_1139\", \"IPOS_STBIO1_MAIN_CONTROLLER_3129\", \"IPOS_STBIO1_MAIN_CONTROLLER_138\", \"DDS_STBIO1_0117\", \"DDS_STBIO1_0128\", \"IPOS_STBIO1_MAIN_CONTROLLER_111\", \"DDS_STBIO1_0124\", \"IPOS_STBIO1_MAIN_CONTROLLER_047\", \"IPOS_STBIO1_MAIN_CONTROLLER_2145\", \"IPOS_STBIO1_MAIN_CONTROLLER_115\", \"IPOS_STBIO1_MAIN_CONTROLLER_017\", \"IPOS_STBIO1_MAIN_CONTROLLER_009\", \"IPOS_STBIO1_MAIN_CONTROLLER_044\", \"IPOS_STBIO1_MAIN_CONTROLLER_0152\", \"IPOS_STBIO1_MAIN_CONTROLLER_128\", \"IPOS_STBIO1_MAIN_CONTROLLER_059\", \"IPOS_STBIO1_MAIN_CONTROLLER_078\", \"IPOS_STBIO1_MAIN_CONTROLLER_089\", \"IPOS_STBIO1_MAIN_CONTROLLER_104\", \"IPOS_STBIO1_MAIN_CONTROLLER_1008\", \"IPOS_STBIO1_MAIN_CONTROLLER_055\", \"DDS_STBIO1_1114\", \"IPOS_STBIO1_MAIN_CONTROLLER_018\", \"IPOS_STBIO1_MAIN_CONTROLLER_063\", \"IPOS_STBIO1_MAIN_CONTROLLER_036\", \"IPOS_STBIO1_MAIN_CONTROLLER_034\", \"IPOS_STBIO1_MAIN_CONTROLLER_134\", \"IPOS_STBIO1_MAIN_CONTROLLER_3124\", \"IPOS_STBIO1_MAIN_CONTROLLER_037\", \"IPOS_STBIO1_MAIN_CONTROLLER_024\", \"IPOS_STBIO1_MAIN_CONTROLLER_110\", \"IPOS_STBIO1_MAIN_CONTROLLER_126\", \"IPOS_STBIO1_MAIN_CONTROLLER_045\", \"IPOS_STBIO1_MAIN_CONTROLLER_004\", \"IPOS_STBIO1_MAIN_CONTROLLER_054\", \"IPOS_STBIO1_MAIN_CONTROLLER_053\", \"IPOS_STBIO1_MAIN_CONTROLLER_2143\", \"IPOS_STBIO1_MAIN_CONTROLLER_016\", \"IPOS_STBIO1_MAIN_CONTROLLER_029\", \"IPOS_STBIO1_MAIN_CONTROLLER_4079\", \"IPOS_STBIO1_MAIN_CONTROLLER_021\", \"IPOS_STBIO1_MAIN_CONTROLLER_083\", \"IPOS_STBIO1_MAIN_CONTROLLER_436\", \"IPOS_STBIO1_MAIN_CONTROLLER_099\", \"IPOS_STBIO1_MAIN_CONTROLLER_074\", \"IPOS_STBIO1_MAIN_CONTROLLER_098\", \"IPOS_STBIO1_MAIN_CONTROLLER_038\", \"IPOS_STBIO1_MAIN_CONTROLLER_087\", \"IPOS_STBIO1_MAIN_CONTROLLER_5004\", \"IPOS_STBIO1_MAIN_CONTROLLER_093\", \"IPOS_STBIO1_MAIN_CONTROLLER_019\", \"DDS_STBIO1_0125\", \"IPOS_STBIO1_MAIN_CONTROLLER_113\", \"DDS_STBIO1_0130\", \"IPOS_STBIO1_MAIN_CONTROLLER_3126\", \"IPOS_STBIO1_MAIN_CONTROLLER_1007\", \"IPOS_STBIO1_MAIN_CONTROLLER_023\", \"IPOS_STBIO1_MAIN_CONTROLLER_008\", \"IPOS_STBIO1_MAIN_CONTROLLER_728\", \"IPOS_STBIO1_MAIN_CONTROLLER_088\", \"IPOS_STBIO1_MAIN_CONTROLLER_035\", \"IPOS_STBIO1_MAIN_CONTROLLER_6070\", \"DDS_STBIO1_0120\", \"DDS_STBIO1_0129\", \"IPOS_STBIO1_MAIN_CONTROLLER_1010\", \"IPOS_STBIO1_MAIN_CONTROLLER_060\", \"IPOS_STBIO1_MAIN_CONTROLLER_064\", \"IPOS_STBIO1_MAIN_CONTROLLER_1011\", \"IPOS_STBIO1_MAIN_CONTROLLER_010\", \"DDS_STBIO1_0119\", \"IPOS_STBIO1_MAIN_CONTROLLER_033\", \"IPOS_STBIO1_MAIN_CONTROLLER_073\", \"IPOS_STBIO1_MAIN_CONTROLLER_2144\", \"IPOS_STBIO1_MAIN_CONTROLLER_077\", \"IPOS_STBIO1_MAIN_CONTROLLER_5015\", \"IPOS_STBIO1_MAIN_CONTROLLER_3125\", \"IPOS_STBIO1_MAIN_CONTROLLER_058\", \"IPOS_STBIO1_MAIN_CONTROLLER_031\", \"IPOS_STBIO1_MAIN_CONTROLLER_6129\", \"IPOS_STBIO1_MAIN_CONTROLLER_112\", \"DDS_STBIO1_0140\", \"IPOS_STBIO1_MAIN_CONTROLLER_101\", \"IPOS_STBIO1_MAIN_CONTROLLER_030\", \"IPOS_STBIO1_MAIN_CONTROLLER_095\", \"IPOS_STBIO1_MAIN_CONTROLLER_4080\", \"IPOS_STBIO1_MAIN_CONTROLLER_085\", \"IPOS_STBIO1_MAIN_CONTROLLER_137\", \"IPOS_STBIO1_MAIN_CONTROLLER_061\", \"DDS_STBIO1_0118\", \"IPOS_STBIO1_MAIN_CONTROLLER_1004\", \"IPOS_STBIO1_MAIN_CONTROLLER_1116\", \"IPOS_STBIO1_MAIN_CONTROLLER_120\", \"IPOS_STBIO1_MAIN_CONTROLLER_062\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "block": "Smart FIFO",
+      "category": "digital",
+      "function": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"DDS_STBIO1_89456975\", \"DDS_STBIO1_89457435\", \"DDS_STBIO1_89455232\", \"DDS_STBIO1_00000102\", \"DDS_STBIO1_00000008\", \"DDS_STBIO1_00001199\", \"DDS_STBIO1_89455261\", \"DDS_STBIO1_89455449\", \"DDS_STBIO1_89456557\", \"DDS_STBIO1_00000199\", \"DDS_STBIO1_00000202\", \"DDS_STBIO1_89459082\", \"DDS_STBIO1_89457790\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "block": "Regmap",
+      "category": "digital",
+      "function": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"DDS_STBIO1_3004\", \"DDS_STBIO1_0508\", \"DDS_STBIO1_0507\", \"DDS_STBIO1_3006\", \"DDS_STBIO1_3002\", \"DDS_STBIO1_3001\", \"DDS_STBIO1_3005\", \"DDS_STBIO1_3003\", \"DDS_STBIO1_4000\", \"DDS_STBIO1_3000\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "block": "PMU",
+      "category": "digital",
+      "function": "Sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"DDS_STBIO1_0115\", \"DDS_STBIO1_0113\", \"DDS_STBIO1_2054\", \"DDS_STBIO1_1024\", \"DDS_STBIO1_1023\", \"DDS_STBIO1_0106\", \"DDS_STBIO1_0110\", \"DDS_STBIO1_2026\", \"DDS_STBIO1_0108\", \"DDS_STBIO1_1025\", \"DDS_STBIO1_2052\", \"DDS_STBIO1_1053\", \"DDS_STBIO1_1052\", \"DDS_STBIO1_0107\", \"DDS_STBIO1_1022\", \"DDS_STBIO1_1050\", \"DDS_STBIO1_2024\", \"DDS_STBIO1_0111\", \"DDS_STBIO1_1051\", \"DDS_STBIO1_0114\", \"DDS_STBIO1_2025\", \"DDS_STBIO1_1021\", \"DDS_STBIO1_0112\", \"DDS_STBIO1_0105\", \"DDS_STBIO1_1054\", \"DDS_STBIO1_2053\", \"DDS_STBIO1_1026\", \"DDS_STBIO1_0109\", \"DDS_STBIO1_1027\", \"DDS_STBIO1_1020\", \"DDS_STBIO1_0104\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "block": "I2C_SPI_AHB",
+      "category": "digital",
+      "function": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"DDS_STBIO1_8003\", \"DDS_STBIO1_8104\", \"DDS_STBIO1_8102\", \"DDS_STBIO1_8007\", \"DDS_STBIO1_8004\", \"DDS_STBIO1_8005\", \"DDS_STBIO1_8103\", \"DDS_STBIO1_8000\", \"DDS_STBIO1_8100\", \"DDS_STBIO1_8105\", \"DDS_STBIO1_8001\", \"DDS_STBIO1_8101\", \"DDS_STBIO1_8106\", \"DDS_STBIO1_8002\", \"DDS_STBIO1_8006\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    },
+    {
+      "block": "OTP",
+      "category": "digital",
+      "function": "Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines.",
+      "source": "snapshot architecture profile:da6da6cadbc138d8a87f68d6d92193a375a87a47ae1d76c2d492737e25c85474",
+      "classification_sources": "[\"DDS_STBIO1_0116\", \"DDS_STBIO1_0036\"]",
+      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+    }
+  ],
+  "power_rows": [
+    {
+      "source": "Stage 1 OCR power-domain table/description (PD_TOP1V2)",
+      "statement": "PD_TOP1V2: Included block(s): ADSP,, multi_channel_fifo, i2c_spi_slave, main_controller_top, senshub_mst_i2c, pad_mux, pmu, stbio1_regmap, scan_out_mux, xbar_afe. Domain type: Always-On. Control mode: HW. Notes: Always active. \u2022 Function: Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub acquisition, FIFO read and write data, Elaboration Mode with ADSP only). \u2022 Characteristics: Never powered down. \u2022 Control: Managed by hardware.",
+      "domain": "PD_TOP1V2",
+      "row": "| PD_TOP1V2 | Always-On | HW | Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub acquisition, FIFO read and write data, Elaboration Mode with ADSP only). Associated blocks: ADSP, multi_channel_fifo, i2c_spi_slave, main_controller_top, senshub_mst_i2c, pad_mux, pmu, stbio1_regmap, scan_out_mux, xbar_afe | Always active. Never powered down |"
+    },
+    {
+      "source": "Stage 1 OCR power-domain table/description (PD_STREDL)",
+      "statement": "PD_STREDL: Included block(s): STREDL. Domain type: Switchable. Control mode: SW. Notes: Can be powered down in idle. \u2022 Function: Powers the STREDL core and associated cache. \u2022 Characteristics: Can be powered down when STREDL is not in use. \u2022 Control: Managed via software (power management driver)(see 12.3.1)",
+      "domain": "PD_STREDL",
+      "row": "| PD_STREDL | Switchable | SW | Powers the STREDL core and associated cache. Associated blocks: STREDL | Can be powered down in idle. Can be powered down when STREDL is not in use |"
+    },
+    {
+      "source": "Stage 1 OCR power-domain table/description (PD_TOP3V3)",
+      "statement": "PD_TOP3V3: Included block(s): H9A_MEM_OTP_ PUMP_85AL05_2. Domain type: Always-On. Voltage: 3A. Control mode: HW. Notes: Always active. \u2022 Function: power supply to the OTP memory block. \u2022 Characteristics: Never powered down. It provides 4.7V of power supply to the OTP memory block during programming (write) operations \u2022 Control: Managed by hardware.",
+      "domain": "PD_TOP3V3",
+      "row": "| PD_TOP3V3 | Always-On | HW | power supply to the OTP memory block. Associated blocks: H9A_MEM_OTP_ PUMP_85AL05_2 | Always active. Never powered down. It provides 4.7V of power supply to the OTP memory block during programming (write) operations |"
+    },
+    {
+      "source": "Stage 1 OCR power-domain table/description (PD_TOPIO)",
+      "statement": "PD_TOPIO: Included block(s): level_shifter_sel. Domain type: Always-On. Control mode: HW. Notes: Always active 32 10.4.. \u2022 Function: Powers communication PAD \u2022 Characteristics: Never powered down. \u2022 Control: Managed by hardware.",
+      "domain": "PD_TOPIO",
+      "row": "| PD_TOPIO | Always-On | HW | Powers communication PAD. Associated blocks: level_shifter_sel | Never powered down |"
+    }
+  ],
+  "review_findings": [
+    "SRS_CATALOG_CLASSIFICATION_MISSING: IRQ logic",
+    "SRS_CATALOG_CLASSIFICATION_MISSING: BIST Controller",
+    "SRS_CATALOG_CLASSIFICATION_CONFLICT: PAD MUX",
+    "SRS_CATALOG_APPROVAL_MISSING: ISPU",
+    "SRS_POWER_VOLTAGE_UNRELIABLE: Stage 1 OCR power-domain table/description (PD_TOP3V3): 3A",
+    "SRS_POWER_NOTE_UNREADABLE: Stage 1 OCR power-domain table/description (PD_TOPIO): Always active 32 10.4"
+  ]
+}

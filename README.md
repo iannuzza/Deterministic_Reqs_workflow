@@ -8,9 +8,19 @@ Generic reusable scaffold for a multi-stage engineering workflow driven by speci
 
 ## Workflow Abstract
 
-This workflow converts tagged or untagged engineering specifications into validated, traceable system documentation. It is organized as an agentic AI pipeline in which each stage has a focused mission, explicit input/output artifacts, and an independent gate before the next stage can consume its results. The agentic structure is used at design time to separate specialized responsibilities such as ontology analysis, requirement extraction, formalization, architecture mapping, SRS generation, ARS generation, DRS generation, and crosschecks. Runtime execution is deterministic: the executable workflow is driven by Python scripts and local artifact files, and the standard CLI stage flows do not make AI/LLM calls.
+This workflow converts tagged or untagged engineering specifications into validated, traceable system documentation and SysML models. It is organized as an agentic AI-like pipeline with a centralized, stage-gated structure: each stage has a focused mission, explicit input/output artifacts, dedicated crosschecks, and a gate before the next stage can consume its results. The AI-like organization separates specialized responsibilities such as ontology analysis, requirement extraction, formalization, architecture mapping, SRS generation, ARS generation, DRS generation, block-level IPOS generation, SysML model generation, and crosschecks; it does not imply autonomous AI execution at runtime.
+
+Repository SKILLS, particularly the workflow-stage-gate skill, define the shared execution, evidence, approval, and handoff contracts used by design-time agents and reviewers. The Workflow Orchestrator agent coordinates responsibilities, gate decisions, and blocker routing without duplicating generation or validation policies. Runtime control is centralized in [scripts/workflow_cli.py](scripts/workflow_cli.py), which sequences the executable stages, runs preflight checks, selects the approved snapshot for downstream stages, and stops on the first runner or validator failure. Stage-specific crosschecks and gates validate local outputs, while the central validator-orchestrator in [scripts/validate_downstream_coherence.py](scripts/validate_downstream_coherence.py) supplies the shared snapshot-bound contract for allocation, ownership, partitions, traceability, and downstream/SysML coherence. Generators, reports, and GUI views reuse this central contract rather than establishing separate authority or local copies of the same policies. Standard CLI execution remains deterministic, local-only, and script-driven; it does not automatically invoke SKILLS, agents, or AI/LLM calls.
 
 The pipeline extracts requirements, semantics, functions, properties, and relationships while preserving source IDs or assigning stable generated IDs with provenance. It identifies architectural roles and functions and generates a Stage 2 architecture profile review package with a preliminary requirement-ID-to-block mapping preview, generated block paragraph previews, summary tables, and traceability outputs. Stage 2A requirement-to-block mapping starts only after explicit approval linked to current evidence hashes, the reviewed draft fingerprint, and resolved or waived critical and major ambiguities. Independent gates verify coverage, mapping correctness, semantic evidence, approval freshness, and forward-only traceability across the resulting system requirements specification (SRS), analog requirement specification (ARS), and digital requirement specification (DRS) hierarchy.
+
+Stage 1 creates a local RAG evidence index from source-specification OCR/parsing artifacts, storing source-preserving chunks and file/page provenance in a rebuildable SQLite/FTS5 database. Queries retrieve passages by requirement ID, keyword, or engineering concept using lexical search, vocabulary normalization, or hybrid reciprocal rank fusion (RRF). Retrieved passages support source inspection and requirement crosschecks without direct source-specification access in later stages. RAG here provides deterministic evidence retrieval, not LLM-generated answers; the index is derived evidence, never canonical requirement or approval authority.
+
+The approved immutable mapping snapshot also drives Digital and Analog IPOS generation for each concrete block with approved block-local requirements. Each generated block specification preserves exact requirement statements, upstream `Covers` references, source provenance, and snapshot identity, alongside block-local functional descriptions and source I/O tables. Blocks without approved IPOS scope do not receive artificial specifications; an approved-empty partition remains valid-empty.
+
+SysML generation produces `.sysml` model files for the system, digital and analog hierarchy levels, and materialized IPOS blocks. An architecture-generation phase after Stage 2A provides structural models for review before Stage 3. A separate final phase after Stage 7 generates the complete snapshot-bound model set and checks requirement coverage and downstream coherence. The GUI provides architecture and hierarchy views across these levels and all generated blocks, with selectable block diagrams, port maps, and full model-source inspection. These views expose derived models for navigation and review; they do not replace approved mapping or snapshot authority.
+
+Traceability report generation provides Excel workbooks for individual hierarchy relationships, all levels including generated requirements, and the Primary and integrated source catalogs. Snapshot-based reports preserve approved requirement lineage, while source-catalog exports remain explicitly labeled as derived extraction views. The System Traceability GUI complements the reports with a coverage-links diagram and summary table spanning source specifications, SRS, ARS, DRS, and generated Digital and Analog IPOS blocks. It shows approved source and upstream requirement coverage, and synchronizes table, block, and link selection so users can inspect relationships throughout the hierarchy.
 
 The main advantages of this structure are modularity, auditability, repeatability, and flexibility. Individual stages can be rerun or improved without redesigning the full workflow, artifacts create reviewable handoffs, and project-specific behavior is supplied through configuration and generated evidence rather than hardcoded source-document assumptions. The tradeoffs are stricter artifact contracts, more intermediate files to maintain, and explicit approval points that slow execution when source evidence or architecture ownership is ambiguous. These tradeoffs are intentional: they favor deterministic engineering traceability over opaque automatic regeneration.
 
@@ -33,6 +43,43 @@ For the restore checkpoint, artifact fingerprints, and handoff notes, see [`loca
 - **System Traceability Diagram** shows approved Primary-to-Supplementary coverage in the Supplementary box and table when that relationship exists, using the Supplementary requirement denominator. Downstream specification boxes and rows show coverage only for their named upstreams. Selecting a table row highlights its diagram block and connected arrows in blue; selecting a block or arrow selects the corresponding table row (the arrow selects its target block). Redraws retain the selection; the explicit Refresh action clears it.
 - The new report classification compares catalog provenance with the Primary specification identified by the Stage 1 OCR index; relationship matching and table/diagram selection use payload node IDs rather than STBIO-specific requirement IDs or document names. This is a scoped claim about these features; older SysML/architecture paths elsewhere in the GUI and central validator still contain project-specific names.
 - For the current approved snapshot (`snap-b2e8101b00dc6909feaed885`), the Primary catalog has 271 rows; the integrated catalog has 191 Primary and 123 Supplementary rows. Its Supplementary-to-Primary relationship reports 123 / 123 (100.0%). These counts describe this project's artifacts, not hardcoded thresholds. The latest focused traceability suite has 16 passing tests; this is not a full Stage 0-7 gate rerun. See the latest System Traceability checkpoint for verification boundaries.
+
+### SRS Introductory And Content Repairs (2026-10-07)
+
+The preferred introduction/terminology writing rule is frozen as `srs-introductory-authority-bounded-v1`. Its project-agnostic policy is centralized in `SRS_INTRODUCTORY_WRITING_RULE` in [scripts/workflow_routing.py](scripts/workflow_routing.py), the shared general instructions and descriptive-policy guidance. SRS prose presents only allocated requirements and supported context, avoids blanket coverage/allocation/performance/implementation claims, and treats terminology as a reading aid rather than independent authority. References alone do not establish applicability. The SRS audit records and validates the rule identity/fingerprint; deliberate future changes require authorization and a new rule version. This is an SRS-only presentation preference, not a shared default for DRS, ARS or IPOS. The revised SRS was regenerated at the unchanged snapshot/history; 82 shared and 15 SRS tests, Stage 3 and central coherence passed.
+
+The subsequently authorized SRS content revision is materialized in [artifacts/stage3_srs/system_requirements_specification.md](artifacts/stage3_srs/system_requirements_specification.md) and its DOCX, at the unchanged snapshot and document history.
+
+- All introductory subsections 1.1-1.4 and terminology subsections 2.1-2.4 are explicit document text, populated even with an empty SRS requirement partition. Scope states system-level boundaries; References points to the existing document-control table and traceability. Audience covers architecture, analog/digital design, firmware, verification/validation, test, product and program/customer stakeholders. Generic terminology follows the SRS template without asserting device capabilities or limits; section 2.5 retains the four shared DRS category conventions unchanged.
+- Section 3 preserves supported roles, conditions, modality, alternatives and qualifiers without silent caps; unsupported syntax remains an audited projection gap. Section 3.6 has explanatory prose, four source-backed domain rows and separate clock/reset discussion. Section 6.4 references this table instead of repeating raw fields.
+- Catalogs use the architecture profile fingerprint bound to the snapshot plus explicit approved owning-domain metadata, never name/function guessing, requirement counts or IPOS materialization. Eight digital entries have bold names and indented functional summaries. No analog concrete block has a resolved approved classification.
+- The explicit SRS document-content profile reuses normalized records and semantic units in [artifacts/stage3_srs/descriptive_srs_content_audit.json](artifacts/stage3_srs/descriptive_srs_content_audit.json). Existing Stage 3/central boundaries validate profile linkage, introductory content, catalog coverage/provenance/deduplication, table fidelity/placement and Markdown/DOCX consistency.
+- Six review findings remain visible in section 10.1: missing classifications for IRQ logic and BIST Controller, conflicting classification for PAD MUX, missing approved block context for ISPU, unreliable voltage and unreadable power note. Gate success verifies fidelity, not closure of these review issues.
+- Focused tests, SRS generation/crosschecks, final Stage 3 gate, central coherence and source-independence guard passed. Other specification generators were not run; no new approvals, allocations, source-spec reads, full pipeline rerun or Word visual-layout certification are claimed.
+
+### Shared Descriptive Contract (2026-10-07)
+
+The reusable runtime flow in [scripts/workflow_routing.py](scripts/workflow_routing.py) is:
+
+`admissible evidence -> structured facts -> compatible aggregation -> paragraph composition -> audit linkage -> independent validation`
+
+- `DescriptiveWritingProfile` declares document identity/version, scopes, evidence kinds, authority tiers, owner policy, domains/layers, adapters, topic roles, detail exclusions and runtime activation. All boundary controls are explicit; empty domain/layer/detail tuples mean unrestricted, never inherited SRS rules.
+- `run_descriptive_flow(records, profile=..., adapter_name=..., adapter=..., owner=...)` consumes existing `NormalizedSourceRecord` objects. Callers supply already governed evidence decisions; the flow does not resolve or create approvals, allocations or ownership. An adapter returns structured facts plus an optional projection-gap reason. It must retain admitted statement/provenance/scope and pass profile controls.
+- `aggregate_descriptive_facts` preserves distinct actions, conditions, modes, polarity, modality, alternatives, owners, domains and layers. Composition retains every projected fact and contributor in input order; there are no silent caps. `DescriptiveFlowResult` carries normalized records, facts, paragraphs, existing `SemanticUnit` objects and derived audit rows. Existing contracts in [scripts/spec_document_contract.py](scripts/spec_document_contract.py) are reused, not replaced.
+- `validate_descriptive_flow` checks prose preservation, normalized-record/fact/unit linkage, contributor coverage and profile fingerprints independently. SRS persisted-audit and final Markdown/DOCX checks reuse this shared validator through existing Stage 3 and central validation paths.
+- `descriptive_profile("SRS")` is the only active built-in runtime profile. DRS digital-integration, ARS analog/mixed-signal-integration and later IPOS same-owner block-local profiles are immutable, declared, runtime-disabled policy hooks. Unknown profiles/adapters and inactive or altered built-in runtime profiles fail closed. Lower-level policy tests do not activate generation; future integration requires separately authorized adapters and profile validation.
+- SRS detail exclusions belong only to its profile/adapter. Generic profiles may admit local technical detail. The inactive IPOS policy permits approved same-owner normative refinement evidence and legitimate block detail while normative source text remains unchanged and rendered descriptive prose remains non-normative.
+- Validation: shared/legacy descriptive suite 82 PASS; SRS adopter slice 15 PASS; existing document contracts 7 PASS; snapshot/history suite 8 PASS (112 total). Source-independence guard, SRS generation/crosschecks, Stage 3 gate and central coherence PASS; central findings 0. All 52 inactive ARS/DRS/IPOS artifact hashes are unchanged after the SRS-only refresh; snapshot and SRS revision history remain unchanged.
+- Scope excludes document-content repairs, Purpose/catalog/power-table changes, DRS/ARS/IPOS activation, SysML/GUI work, new authority and normative semantics changes. Adapter coverage remains bounded; preservation checks are not a proof of complete source semantics. No full pipeline rerun or Word visual-layout inspection is claimed.
+
+### Initial SRS Fact-To-Prose Rollout (2026-10-07)
+
+- [scripts/workflow_routing.py](scripts/workflow_routing.py) now supplies immutable descriptive facts, explicit scope profiles, conservative aggregation, deterministic paragraph rendering and independent preservation checks. SRS activates this core for supported capabilities, operating-mode functions, domain responsibilities and power relationships; identity, interfaces and scope retain their existing scoped projections. No LLM or new source/approval authority is involved.
+- [scripts/run_srs_gen_spec_agent.py](scripts/run_srs_gen_spec_agent.py) writes fact JSON, stable derived fact IDs and all paragraph contributors in the existing overview audit. The shared overview validator checks persisted contributor consistency and selected text in final Markdown/DOCX; DOCX typographic apostrophes are normalized, not treated as factual differences.
+- General rules are in [.github/copilot-instructions.md](.github/copilot-instructions.md), with gate guidance in [.github/skills/workflow-stage-gate/SKILL.md](.github/skills/workflow-stage-gate/SKILL.md) and the SRS-specific contract in [templates/SRS_gen_AI_template_prompt.md](templates/SRS_gen_AI_template_prompt.md). Future DRS/ARS/IPOS migration uses document-specific adapters/profiles. IPOS same-block normative refinement eligibility remains intact; those generators were not migrated or regenerated.
+- Verification: [tests/test_descriptive_summary.py](tests/test_descriptive_summary.py), 78 PASS; the `srs_overview` slice of [tests/test_srs_integrity_policy.py](tests/test_srs_integrity_policy.py), 15 PASS; [tests/test_generator_snapshot_binding.py](tests/test_generator_snapshot_binding.py), 8 PASS. Source-independence guard, SRS generation/crosschecks, Stage 3 gate and central downstream coherence PASS with 0 central findings.
+- Only SRS was regenerated at `snap-b2e8101b00dc6909feaed885`; its version history remains `1.1`, dated `2026-10-06`, with the original author. Approved counts remain 314: SRS 0, ARS 0, DRS 55, Digital IPOS 259, Analog IPOS 0.
+- Final overview audit has 20 fact-contributor rows and 4 conservative projection-gap flags. A parser gap is not evidence of authority absence or proof that a whole source paragraph was omitted; compare its source and any separately rendered scoped projection. Adapter syntax remains bounded, token preservation is not a proof of complete source meaning, and DOCX visual layout was not inspected in Word. No full pipeline rerun or cross-project certification is claimed.
 
 ## Workflow Step-by-Step
 
@@ -81,6 +128,47 @@ Generated stage artifacts are not interchangeable with canonical authority. In p
 ## Runtime
 
 - Python: 3.11 (64-bit)
+
+### Clone And Start
+
+Clone the repository and open the clone root itself in VS Code. No original project folder or account-specific Python installation is required.
+
+```text
+git clone https://github.com/iannuzza/Deterministic_Reqs_workflow.git
+cd Deterministic_Reqs_workflow
+```
+
+Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe scripts/workflow_gui.py
+```
+
+Linux/macOS (Python must include Tk support):
+
+```sh
+python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python scripts/workflow_gui.py
+```
+
+Select the clone's `.venv` using **Python: Select Interpreter** in VS Code. Tasks use that selected interpreter and the workspace root, not a hardcoded account path.
+
+Keep source inputs under `specs/` and configure paths relative to the repository root in `config/project_context.json`. New OCR indexes, RAG manifests, review evidence and memory-sync metadata store repository-relative paths. Readers resolve repository-owned legacy absolute addresses against the current clone, independently of the shell's working directory. External source files must be copied into the repository before producing portable artifacts.
+
+To normalize an existing derived OCR index without rerunning OCR, use the selected interpreter:
+
+```sh
+python scripts/repo_paths.py --normalize-ocr-index artifacts/stage1_requirements/ocr_extracts/index.csv
+```
+
+This rewrites only the two address columns, not OCR text, source IDs, requirements, approval hashes or snapshots. Normal gate and evidence-freshness checks still apply after a derived artifact changes.
+
+Existing approved snapshots, profile revisions and audit history are preserved verbatim; historical absolute addresses in those records are provenance, not a dependency on the original folder. Moving or cloning the repository must not rewrite approval fingerprints or silently reapprove changed evidence. The bundled project is an example with its existing configuration and approvals; configuring a different project still requires its normal source, mapping and approval steps.
+
+Path portability is not a claim that all legacy logic is project-agnostic. The authority scan still identifies existing project-specific identifiers and lexical resources, particularly in SysML/architecture modules. Those require a separate configuration/adapter refactor before certifying the complete workflow for arbitrary projects.
 
 ## Workflow GUI
 

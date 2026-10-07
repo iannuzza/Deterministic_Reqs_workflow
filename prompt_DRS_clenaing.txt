@@ -1,0 +1,14 @@
+Clean repeated phrasing and improve narrative flow in DRS descriptive sections, including sections such as 4.2 and following paragraphs as examples only.
+
+Apply project-agnostic fixes only. Do not hardcode any project, block, section title, or paragraph-specific rule into shared logic.
+
+Requirements:
+- remove repeated phrases and repeated block-purpose wording
+- use natural human technical prose
+- describe function, behavior, coordination, and architectural role
+- avoid stitched audit language, path-dump prose, and reused block summaries
+- keep tables as support, not as narrative replacement
+- preserve approved meaning and deterministic behavior
+- do not introduce new authority or import content from parallel documents
+
+Goal: make descriptive sections read as coherent architecture narrative rather than repeated template text.

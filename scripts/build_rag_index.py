@@ -15,6 +15,7 @@ import sqlite3
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from repo_paths import portable_repo_path, resolve_repo_path
 from typing import Dict, Iterable, List, Set
 
 try:
@@ -173,14 +174,12 @@ def _load_index(index_csv: Path, repo_root: Path) -> List[PageRecord]:
         for row in reader:
             if (row.get("status") or "").strip() != "text-extracted":
                 continue
-            text_file = Path(row["text_file"])
-            if not text_file.is_absolute():
-                text_file = (repo_root / text_file).resolve()
+            text_file = resolve_repo_path(repo_root, row["text_file"])
             if not text_file.exists():
                 continue
             records.append(
                 PageRecord(
-                    source_file=row["source_file"],
+                    source_file=portable_repo_path(repo_root, row["source_file"]),
                     page=int(row["page"]),
                     text_file=text_file,
                 )
@@ -508,9 +507,7 @@ def main() -> int:
         with conn:
             for rec in records:
                 text = ""
-                source_path = Path(rec.source_file)
-                if not source_path.is_absolute():
-                    source_path = (repo_root / source_path).resolve()
+                source_path = resolve_repo_path(repo_root, rec.source_file)
 
                 if source_path.suffix.lower() in {".html", ".htm"} and source_path.exists():
                     cache_key = source_path.as_posix()
@@ -541,7 +538,7 @@ def main() -> int:
                             chunk.end_char,
                             chunk.text,
                             normalized_terms,
-                            rec.text_file.as_posix(),
+                            portable_repo_path(repo_root, rec.text_file),
                         ),
                     )
                     chunk_id = cur.lastrowid
@@ -561,8 +558,8 @@ def main() -> int:
     sources = sorted({rec.source_file for rec in records})
     manifest = {
         "built_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "source_index": source_index.as_posix(),
-        "db_path": db_path.as_posix(),
+        "source_index": portable_repo_path(repo_root, source_index),
+        "db_path": portable_repo_path(repo_root, db_path),
         "chunk_size": args.chunk_size,
         "chunk_overlap": args.chunk_overlap,
         "pages_indexed": len(records),

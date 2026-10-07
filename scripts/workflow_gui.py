@@ -211,6 +211,15 @@ def compact_workflow_node_y(node, zoom: float = 1.0) -> float:
     return (node["y"] * 0.70 if node["kind"] == "main" else 330) * zoom
 
 
+def fit_workflow_label(canvas, label, width: float, height: float, font_size: float) -> None:
+    """Fit wrapped stage text to its available box area using rendered bounds."""
+    for size in range(max(1, round(font_size)), 0, -1):
+        canvas.itemconfigure(label, width=max(1, width), font=("Segoe UI", size, "bold"))
+        bounds = canvas.bbox(label)
+        if bounds is None or (bounds[2] - bounds[0] <= width and bounds[3] - bounds[1] <= height):
+            break
+
+
 def responsive_layout_scale(screen_width: int, screen_height: int) -> float:
     """Scale GUI dimensions proportionally to the available screen resolution."""
     width_scale = screen_width / 1440
@@ -238,6 +247,7 @@ class WorkflowDiagramRenderer:
         "loopback": {"fill": "#fff3cd", "outline": "#8a5a12", "line": "#8a5a12"},
         "selectable": {"fill": SELECTABLE_WORKFLOW_NODE_FILL, "outline": "#64686c", "line": "#64686c"},
         "active": {"fill": "#9be59b", "outline": "#2c8a2c", "line": "#2c8a2c"},
+        "failed": {"fill": "#f8b4b4", "outline": "#b3261e", "line": "#b3261e"},
     }
 
     def __init__(self, parent: ttk.Frame, nodes=None, edges=None, on_node_click=None, selectable_nodes=None) -> None:
@@ -248,6 +258,7 @@ class WorkflowDiagramRenderer:
         self.selectable_nodes = set(selectable_nodes or ())
         self.node_items = {}
         self.active_stage = None
+        self.stage_failure_reasons = {}
         self.canvas = tk.Canvas(parent, background="#ffffff", highlightthickness=0, scrollregion=(0, 0, 1500, 620))
         self.vertical_scroll = ttk.Scrollbar(parent, orient=tk.VERTICAL, command=self.canvas.yview)
         self.horizontal_scroll = ttk.Scrollbar(parent, orient=tk.HORIZONTAL, command=self.canvas.xview)
@@ -279,7 +290,10 @@ class WorkflowDiagramRenderer:
         active_style = self.COLORS["active"]
         for node_id, (rect, _label) in self.node_items.items():
             node_stage = WORKFLOW_NODE_STAGE_KEYS.get(node_id)
-            if stage is not None and node_stage == stage:
+            if node_stage in self.stage_failure_reasons:
+                failed_style = self.COLORS["failed"]
+                self.canvas.itemconfig(rect, fill=failed_style["fill"], outline=failed_style["outline"], width=3)
+            elif stage is not None and node_stage == stage:
                 self.canvas.itemconfig(rect, fill=active_style["fill"], outline=active_style["outline"], width=3)
             else:
                 style_key = "selectable" if node_id in SELECTABLE_WORKFLOW_NODE_IDS else next(
@@ -287,6 +301,10 @@ class WorkflowDiagramRenderer:
                 )
                 style = self.COLORS[style_key]
                 self.canvas.itemconfig(rect, fill=style["fill"], outline=style["outline"], width=2)
+
+    def set_stage_failures(self, reasons: dict[str, str]) -> None:
+        self.stage_failure_reasons = dict(reasons)
+        self.set_active_stage(self.active_stage)
 
     def _on_vertical_wheel(self, event):
         self.canvas.yview_scroll(-1 if event.delta > 0 else 1, "units")
@@ -351,6 +369,7 @@ class WorkflowDiagramRenderer:
                 font=("Segoe UI", 9, "bold"), fill="#1f2d3d", justify=tk.CENTER,
                 tags=("workflow-node", node["id"]),
             )
+            fit_workflow_label(self.canvas, label, width - 12, height - 12, 9)
             self.node_items[node["id"]] = (rect, label)
             if self.on_node_click and node["id"] in self.selectable_nodes:
                 self.canvas.tag_bind(node["id"], "<Button-1>", lambda _event, value=node["id"]: self.on_node_click(value))
@@ -472,7 +491,7 @@ def format_gui_review_context(context: dict[str, str]) -> str:
 class WorkflowGUI:
     def __init__(self, root: tk.Tk) -> None:
         self.root = root
-        self.root.title("Requirement AI workflow")
+        self.root.title("Deterministic Requirement Driven workflow")
         self.layout_scale = responsive_layout_scale(root.winfo_screenwidth(), root.winfo_screenheight())
         try:
             tk_scaling = float(root.tk.call("tk", "scaling"))
@@ -1026,10 +1045,10 @@ class WorkflowGUI:
         self._draw_generated_dependency_graph(self.traceability_graph_canvas)
         self.traceability_window_status_var.set(
             f"Central payload: {len(graph.get('nodes') or [])} nodes, "
-            f"{sum(1 for edge in graph.get('edges') or [] if int((edge.get('coverage') or {}).get('covered') or 0) > 0)} visible approved RM edges, "
+            f"{sum(1 for edge in graph.get('edges') or [] if int((edge.get('coverage') or {}).get('covered') or 0) > 0)} visible approved requirement traceability links, "
             f"{len(graph.get('source_spec_edges') or [])} source-to-document and "
             f"{len(graph.get('source_spec_relationship_edges') or [])} source-to-source coverage links. "
-            "RM edges use approved Covers; source-spec links show reciprocal source and target ID coverage."
+            "Requirement traceability links between generated specifications use approved Covers references; source-spec links show reciprocal source and target ID coverage."
             " Source-ledger coverage is source IDs represented by a node divided by unique IDs in the approved allocation ledger."
         )
 
@@ -1202,6 +1221,7 @@ class WorkflowGUI:
                 depth[node_id] = max(0, min(targets) - 1)
         widths: dict[str, float] = {}
         heights: dict[str, float] = {}
+        node_text: dict[str, str] = {}
         for node in node_list:
             label = str(node.get("label") or "")
             if node.get("kind") in {"source_spec", "supplementary_spec"}:
@@ -1216,8 +1236,16 @@ class WorkflowGUI:
                     for value in node.get("upstream_coverage") or []
                 )
             longest = max((body_font.measure(line) for line in lines), default=180)
-            widths[str(node["id"])] = max(220 * zoom, min(430 * zoom, longest + 28 * zoom))
-            heights[str(node["id"])] = max(70 * zoom, (len(lines) * 18 + 24) * zoom)
+            node_id = str(node["id"])
+            node_text[node_id] = "\n".join(lines)
+            widths[node_id] = max(220 * zoom, min(430 * zoom, longest + 28 * zoom))
+            measurement = canvas.create_text(
+                0, 0, anchor="nw", text=node_text[node_id], font=body_font,
+                justify=tk.CENTER, width=widths[node_id] - 16 * zoom,
+            )
+            bounds = canvas.bbox(measurement)
+            canvas.delete(measurement)
+            heights[node_id] = max(70 * zoom, bounds[3] - bounds[1] + 24 * zoom)
 
         positions: dict[str, tuple[float, float]] = {}
         column_gap = 90 * zoom
@@ -1308,14 +1336,6 @@ class WorkflowGUI:
         for node in node_list:
             node_id = str(node["id"])
             x, y = positions[node_id]
-            if node.get("kind") in {"source_spec", "supplementary_spec"}:
-                source_role = "Primary spec" if node.get("kind") == "source_spec" else "Supplementary spec"
-                lines = [str(node.get("label") or ""), f"Source ledger: {source_role}"]
-                if node.get("kind") == "supplementary_spec":
-                    lines.extend(str(value) for value in node.get("upstream_coverage") or [])
-            else:
-                lines = [str(node.get("label") or "")]
-                lines.extend("Upstream coverage: " + str(value) for value in node.get("upstream_coverage") or [])
             selected = self.traceability_selected_block == node_id
             tags = ("traceability_node", f"traceability_node:{node_id}")
             canvas.create_rectangle(
@@ -1325,7 +1345,7 @@ class WorkflowGUI:
                 width=max(2, int(3 * zoom)) if selected else max(1, int(2 * zoom)),
                 tags=tags,
             )
-            canvas.create_text(x + widths[node_id] / 2, y + heights[node_id] / 2, text="\n".join(lines), font=body_font, fill="#1f2d3d", justify=tk.CENTER, width=widths[node_id] - 16 * zoom, tags=tags)
+            canvas.create_text(x + widths[node_id] / 2, y + heights[node_id] / 2, text=node_text[node_id], font=body_font, fill="#1f2d3d", justify=tk.CENTER, width=widths[node_id] - 16 * zoom, tags=tags)
         max_x = max((x + widths[node_id] for node_id, (x, _y) in positions.items()), default=0) + 50 * zoom
         max_y = max((y + heights[node_id] for node_id, (_x, y) in positions.items()), default=0) + 50 * zoom
         canvas.configure(scrollregion=(0, 0, max_x, max_y))
@@ -1966,7 +1986,7 @@ class WorkflowGUI:
 
         ttk.Label(
             header,
-            text="Requirement AI workflow",
+            text="Deterministic Requirement Driven workflow",
             font=("Segoe UI", 18, "bold"),
         ).pack(anchor=tk.W)
 
@@ -3281,10 +3301,11 @@ class WorkflowGUI:
                 (y1 + y2) / 2,
                 text=node["label"],
                 width=max(1, x2 - x1 - 12 * zoom),
-                font=("Segoe UI", 8, "bold"),
+                font=("Segoe UI", max(1, round(8 * zoom)), "bold"),
                 justify=tk.CENTER,
                 tags=tags,
             )
+            fit_workflow_label(c, label, x2 - x1 - 12 * zoom, y2 - y1 - 12 * zoom, 8 * zoom)
             if stage:
                 self.stage_rects[stage] = rect
                 self.stage_labels[stage] = label
@@ -3400,9 +3421,13 @@ class WorkflowGUI:
         self._refresh_stage_styles()
 
     def _refresh_stage_styles(self) -> None:
+        renderer = getattr(self, "workflow_diagram_renderer", None)
+        if renderer is not None:
+            renderer.set_stage_failures(self.stage_failure_reasons)
         for key, rect in self.stage_rects.items():
             if key in self.stage_failure_reasons:
-                self.diagram_canvas.itemconfig(rect, fill="#f8b4b4", outline="#b3261e", width=3)
+                failed_style = WorkflowDiagramRenderer.COLORS["failed"]
+                self.diagram_canvas.itemconfig(rect, fill=failed_style["fill"], outline=failed_style["outline"], width=3)
                 self.diagram_canvas.itemconfig(self.stage_labels[key], fill="#7f1510")
             elif key == self.active_stage:
                 active_style = WorkflowDiagramRenderer.COLORS["active"]
@@ -3492,27 +3517,66 @@ class WorkflowGUI:
         dialog.transient(self.root)
         dialog.grab_set()
         dialog.columnconfigure(0, weight=1)
+        dialog.rowconfigure(0, weight=1)
         body = ttk.Frame(dialog, padding=16)
         body.grid(row=0, column=0, sticky="nsew")
         body.columnconfigure(0, weight=1)
-        ttk.Label(body, text="The selected approved snapshot cannot continue to Stage 3–7 because some generated downstream outputs are not valid yet.", wraplength=620, justify="left").grid(row=0, column=0, sticky="w", pady=(0, 12))
-        ttk.Label(body, text="Snapshot:", font=("Segoe UI", 10, "bold")).grid(row=1, column=0, sticky="w")
-        ttk.Label(body, text=snapshot_id, wraplength=620).grid(row=2, column=0, sticky="w", pady=(0, 10))
-        ttk.Label(body, text="Problems found:", font=("Segoe UI", 10, "bold")).grid(row=3, column=0, sticky="w")
-        ttk.Label(body, text=problems, justify="left", anchor="w").grid(row=4, column=0, sticky="w", pady=(0, 10))
-        ttk.Label(body, text="What you can do now:", font=("Segoe UI", 10, "bold")).grid(row=5, column=0, sticky="w")
-        ttk.Label(body, text="- Do not run Stage 3–7 yet\n- Do not run SysML yet\n- Review the validation report\n- If available, use Repair downstream outputs and then try again\n- Otherwise, send the report to the workflow maintainer", justify="left", anchor="w").grid(row=6, column=0, sticky="w", pady=(0, 10))
-        ttk.Label(body, text="Report:", font=("Segoe UI", 10, "bold")).grid(row=7, column=0, sticky="w")
-        ttk.Label(body, text=report_path.relative_to(REPO_ROOT).as_posix(), wraplength=620).grid(row=8, column=0, sticky="w", pady=(0, 14))
+        body.rowconfigure(0, weight=1)
+        diagnostic_text = "\n\n".join((
+            "The selected approved snapshot cannot continue to Stage 3–7 because some generated downstream outputs are not valid yet.",
+            f"Snapshot:\n{snapshot_id}",
+            f"Problems found:\n{problems}",
+            "What you can do now:\n- Do not run Stage 3–7 yet\n- Do not run SysML yet\n- Review the validation report\n- If available, use Repair downstream outputs and then try again\n- Otherwise, send the report to the workflow maintainer",
+            f"Report:\n{report_path.relative_to(REPO_ROOT).as_posix()}",
+            f"Command:\n{command_text}",
+        ))
+        diagnostic_viewer = tk.Text(body, wrap=tk.WORD, width=76, height=24, font=("Segoe UI", 10))
+        diagnostic_scroll = ttk.Scrollbar(body, orient=tk.VERTICAL, command=diagnostic_viewer.yview)
+        diagnostic_viewer.configure(yscrollcommand=diagnostic_scroll.set)
+        diagnostic_viewer.grid(row=0, column=0, sticky="nsew", pady=(0, 14))
+        diagnostic_scroll.grid(row=0, column=1, sticky="ns", pady=(0, 14))
+        diagnostic_viewer.insert("1.0", diagnostic_text)
+        diagnostic_viewer.configure(state=tk.DISABLED)
+        self._bind_copy_support(diagnostic_viewer)
 
         buttons = ttk.Frame(body)
-        buttons.grid(row=9, column=0, sticky="e")
+        buttons.grid(row=1, column=0, columnspan=2, sticky="e")
 
         def open_report() -> None:
             try:
-                os.startfile(str(report_path))
+                report_text = report_path.read_text(encoding="utf-8")
             except OSError as exc:
                 messagebox.showerror("Open validation report", str(exc), parent=dialog)
+                return
+
+            report_dialog = tk.Toplevel(dialog)
+            report_dialog.title("Downstream validation report")
+            report_dialog.transient(dialog)
+            report_dialog.grab_set()
+            frame = ttk.Frame(report_dialog, padding=16)
+            frame.pack(fill=tk.BOTH, expand=True)
+            frame.columnconfigure(0, weight=1)
+            frame.rowconfigure(1, weight=1)
+            ttk.Label(frame, text=str(report_path), wraplength=760).grid(row=0, column=0, columnspan=2, sticky="w", pady=(0, 10))
+            report_viewer = tk.Text(frame, wrap=tk.NONE, font=("Consolas", 10))
+            vertical_scroll = ttk.Scrollbar(frame, orient=tk.VERTICAL, command=report_viewer.yview)
+            horizontal_scroll = ttk.Scrollbar(frame, orient=tk.HORIZONTAL, command=report_viewer.xview)
+            report_viewer.configure(yscrollcommand=vertical_scroll.set, xscrollcommand=horizontal_scroll.set)
+            report_viewer.grid(row=1, column=0, sticky="nsew")
+            vertical_scroll.grid(row=1, column=1, sticky="ns")
+            horizontal_scroll.grid(row=2, column=0, sticky="ew")
+            report_viewer.insert("1.0", report_text)
+            report_viewer.configure(state=tk.DISABLED)
+            self._bind_copy_support(report_viewer)
+
+            def close_report() -> None:
+                report_dialog.destroy()
+                dialog.grab_set()
+                dialog.lift()
+
+            ttk.Button(frame, text="Close", command=close_report).grid(row=3, column=0, columnspan=2, sticky="e", pady=(10, 0))
+            report_dialog.protocol("WM_DELETE_WINDOW", close_report)
+            self._set_responsive_geometry(report_dialog, 880, 640, 680, 420)
 
         def copy_report_path() -> None:
             self.root.clipboard_clear()
@@ -3704,11 +3768,16 @@ class WorkflowGUI:
                     stderr=subprocess.STDOUT,
                     text=True,
                     bufsize=1,
+                    env={**os.environ, "PYTHONUNBUFFERED": "1"},
                 )
 
                 for line in self.current_process.stdout:
                     output_lines.append(line)
-                    stage_match = re.search(r"\bStage\s+(0|1|2a|3|4|5|6)\b", line, re.IGNORECASE)
+                    stage_match = re.match(
+                        r"^\[[^\]]+\]\s+Stage\s+(2a|[0-7])\b(?:\s+(?:Digital|Analog)\s+IPOS)?\s+run\s+1/1\s*$",
+                        line,
+                        re.IGNORECASE,
+                    ) if "workflow_cli.py" in " ".join(str(item) for item in cmd) else None
                     if stage_match:
                         last_stage = stage_match.group(1).lower()
                         self.clear_stage_failure(last_stage)
@@ -3730,7 +3799,11 @@ class WorkflowGUI:
                     prior_callback = success_callback
                     success_callback = lambda prior_callback=prior_callback: self._refresh_traceability_after_generation(prior_callback)
                 if code != 0:
-                    stopped_stage = re.search(r"\bSTOP at stage\s+(0|1|2a|3|4|5|6)\b", "".join(output_lines), re.IGNORECASE)
+                    stopped_stage = re.search(
+                        r"^\[[^\]]+\]\s+STOP at stage\s+(2a|[0-7])\b",
+                        "".join(output_lines),
+                        re.IGNORECASE | re.MULTILINE,
+                    )
                     failed_stage = stopped_stage.group(1).lower() if stopped_stage else last_stage
                     failure_reason = self._failure_reason(output_lines)
                     if failed_stage:
@@ -4405,6 +4478,7 @@ class WorkflowGUI:
             self._run_command_async(
                 [PYTHON_EXE, str(SCRIPTS_DIR / "run_stage7_analog_ipos_gate.py"), *selector, "--regenerate-downstream"],
                 "Stage 7 Analog IPOS",
+                stage="7",
             )
             return
         if stage == "arch-compare":
@@ -4683,41 +4757,21 @@ class WorkflowGUI:
         else:
             selector = []
 
-        ipos_stages = [stage for stage in selected_stages if stage in {"6", "7"}]
-
-        def run_ipos(index: int = 0) -> None:
-            if index >= len(ipos_stages):
-                return
-            stage = ipos_stages[index]
-            script = "run_stage6_digital_ipos_gate.py" if stage == "6" else "run_stage7_analog_ipos_gate.py"
-            label = "Stage 6 Digital IPOS" if stage == "6" else "Stage 7 Analog IPOS"
-            self._run_command_async(
-                [PYTHON_EXE, str(SCRIPTS_DIR / script), *selector],
-                label,
-                stage=stage,
-                on_success=lambda: run_ipos(index + 1),
-            )
-
-        core_stages = [stage for stage in selected_stages if stage in STAGE_KEYS]
-        if not core_stages:
-            run_ipos()
-            return
         cmd = [
             PYTHON_EXE,
             str(SCRIPTS_DIR / "workflow_cli.py"),
             "run",
             "--from-stage",
-            core_stages[0],
+            start_stage,
             "--to-stage",
-            core_stages[-1],
+            end_stage,
             *selector,
         ]
         self._run_command_async(
             cmd,
             f"CLI run range {start_stage} -> {end_stage}",
-            stage=core_stages[0],
-            approval_after_success=core_stages[-1] == "2",
-            on_success=run_ipos if ipos_stages else None,
+            stage=start_stage,
+            approval_after_success=end_stage == "2",
         )
 
     def _show_architecture_map_review_dialog(self) -> None:
@@ -5251,7 +5305,12 @@ WScript.Quit 0
         review_help.pack(fill=tk.X, pady=(10, 8))
         tk.Label(
             review_help,
-            text="1. Review and edit the workbook, then save it.  2. Enable the gate after every row is reviewed.",
+            text=(
+                "1. Open Architecture Map in Excel (orange button): review/change, save, and close the Excel file.\n"
+                "2. Enable Gate from Workbook (green button).\n"
+                "3. Run Stage 2A.\n"
+                "4. After Stage 2A passes, Freeze Stage 2B Snapshot."
+            ),
             background="#fff3cd",
             foreground="#554000",
             font=("Segoe UI", 11, "bold"),
@@ -5416,8 +5475,8 @@ WScript.Quit 0
         buttons = ttk.Frame(frame)
         buttons.pack(fill=tk.X)
         ttk.Button(buttons, text="Close", command=close_dialog, width=12).pack(side=tk.RIGHT)
-        ttk.Button(buttons, text="Run Stage 2A", command=run_stage2a_after_approval, width=14).pack(side=tk.RIGHT, padx=(0, 8))
         ttk.Button(buttons, text="Freeze Stage 2B Snapshot", command=freeze_stage2b_snapshot, width=23).pack(side=tk.RIGHT, padx=(0, 8))
+        ttk.Button(buttons, text="Run Stage 2A", command=run_stage2a_after_approval, width=14).pack(side=tk.RIGHT, padx=(0, 8))
         ttk.Button(buttons, text="Review Workbook", command=approve_all_mapping_rows, width=18).pack(side=tk.LEFT)
         tk.Button(
             buttons,
@@ -5947,8 +6006,10 @@ WScript.Quit 0
         self.sysml_hierarchy_window_canvas = canvas
         details_frame = ttk.LabelFrame(content_pane, text="Selected Block Port Map and Full SysML Source", padding=6)
         content_pane.add(details_frame, weight=3)
-        port_frame = ttk.Frame(details_frame)
-        port_frame.pack(side=tk.LEFT, fill=tk.Y, padx=(0, 8))
+        details_pane = ttk.Panedwindow(details_frame, orient=tk.HORIZONTAL)
+        details_pane.pack(fill=tk.BOTH, expand=True)
+        port_frame = ttk.Frame(details_pane)
+        details_pane.add(port_frame, weight=1)
         port_controls = ttk.Frame(port_frame)
         port_controls.pack(fill=tk.X, pady=(0, 4))
         self.sysml_port_zoom = getattr(self, "sysml_port_zoom", 1.0)
@@ -5957,16 +6018,20 @@ WScript.Quit 0
         self.sysml_hierarchy_port_canvas = tk.Canvas(port_frame, width=620, height=300, background="#ffffff", highlightthickness=1, highlightbackground="#c8d2dc")
         port_scroll = ttk.Scrollbar(port_frame, orient=tk.VERTICAL, command=self.sysml_hierarchy_port_canvas.yview)
         self.sysml_hierarchy_port_canvas.configure(yscrollcommand=port_scroll.set)
-        self.sysml_hierarchy_port_canvas.pack(side=tk.LEFT, fill=tk.Y)
         port_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        self.sysml_hierarchy_port_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         self.sysml_hierarchy_port_canvas.bind("<Control-MouseWheel>", self._zoom_sysml_port_wheel, add="+")
-        self.sysml_hierarchy_details = tk.Text(details_frame, height=14, wrap=tk.WORD, state=tk.DISABLED)
+        text_frame = ttk.Frame(details_pane)
+        details_pane.add(text_frame, weight=1)
+        text_frame.grid_rowconfigure(0, weight=1)
+        text_frame.grid_columnconfigure(0, weight=1)
+        self.sysml_hierarchy_details = tk.Text(text_frame, height=14, wrap=tk.WORD, state=tk.DISABLED)
         self.sysml_hierarchy_details.tag_configure("find_hit", background="#fff2a8")
         self.sysml_hierarchy_details.tag_configure("find_current", background="#ffbf47")
-        details_scroll = ttk.Scrollbar(details_frame, orient=tk.VERTICAL, command=self.sysml_hierarchy_details.yview)
+        details_scroll = ttk.Scrollbar(text_frame, orient=tk.VERTICAL, command=self.sysml_hierarchy_details.yview)
         self.sysml_hierarchy_details.configure(yscrollcommand=details_scroll.set)
-        self.sysml_hierarchy_details.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        details_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        self.sysml_hierarchy_details.grid(row=0, column=0, sticky="nsew")
+        details_scroll.grid(row=0, column=1, sticky="ns")
         self._bind_copy_support(self.sysml_hierarchy_details)
         self.sysml_hierarchy_details.bind(
             "<Control-f>",

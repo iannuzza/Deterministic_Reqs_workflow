@@ -166,12 +166,12 @@ class DownstreamContract:
 
 
 def downstream_contract_fingerprint(contract: DownstreamContract) -> str:
-    """Return a stable fingerprint for the selected snapshot allocation contract."""
+    """Hash the operational allocation contract, excluding candidate lineage evidence."""
     payload = {
         source_id: {
             key: str(value or "").strip()
             for key, value in sorted(metadata.items())
-            if key != "canonical_id"
+            if key not in {"canonical_id", "lineage_candidate_parent_req_ids"}
         }
         for source_id, metadata in sorted(contract.expected.items())
     }
@@ -198,6 +198,73 @@ def approved_sysml_block_scope(repo_root: Path, snapshot_id: str | None = None) 
         if str(allocation.get("owning_target") or "").strip() in {"Digital IPOS", "Analog IPOS"}
         and str(allocation.get("approved_block") or "").strip()
     }
+
+
+def snapshot_architecture_context(repo_root: Path, contract: DownstreamContract) -> dict:
+    from canonical_store import connect
+
+    connection = connect(repo_root)
+    try:
+        snapshot = connection.execute("SELECT project_id, metadata_json FROM snapshots WHERE snapshot_id = ?",
+                                      (contract.snapshot_id,)).fetchone()
+        fingerprint = json.loads(snapshot["metadata_json"])["profiles"]["architecture"]
+        rows = connection.execute(
+            "SELECT * FROM profile_revisions WHERE project_id = ? AND profile_kind = ? "
+            "AND content_fingerprint = ? AND approval_state = ? AND lifecycle_state = ?",
+            (snapshot["project_id"], "architecture", fingerprint, "approved", "approved"),
+        ).fetchall()
+        if not rows:
+            raise DownstreamCoherenceError("Snapshot-bound approved architecture profile is unavailable.")
+        payloads = [json.loads(row["profile_payload_json"]) for row in rows]
+        if any(payload != payloads[0] for payload in payloads):
+            raise DownstreamCoherenceError("Snapshot-bound architecture profile is ambiguous.")
+        return {"payload": payloads[0], "fingerprint": fingerprint}
+    finally:
+        connection.close()
+
+
+def srs_catalog_from_context(inventory: list[dict[str, str]], contract: DownstreamContract,
+                             context: dict) -> tuple[list[dict[str, str]], list[str]]:
+    definitions = context["payload"].get("block_defs", {})
+    entries: list[dict[str, str]] = []
+    findings: list[str] = []
+    categories = {"analog": "analog", "mixed signal": "analog", "digital": "digital",
+                  "digital or system": "digital"}
+    seen: set[str] = set()
+    for row in inventory:
+        block = str(row.get("Block") or "").strip()
+        key = human_label_key(block)
+        if not key:
+            continue
+        if key in seen:
+            findings.append(f"SRS_CATALOG_DUPLICATE: {block}")
+            continue
+        seen.add(key)
+        matches = [value for name, value in definitions.items() if human_label_key(name) == key]
+        allocations = [(source_id, value) for source_id, value in contract.expected.items()
+                       if human_label_key(value.get("approved_block")) == key]
+        if not matches and not allocations:
+            findings.append(f"SRS_CATALOG_APPROVAL_MISSING: {block}")
+            continue
+        if any(str(value.get("entity_kind") or "").casefold() in {"interface", "group", "subsystem"}
+               for value in matches):
+            continue
+        classifications = {categories[normalize_human_label(value.get("classification"))]
+                           for value in matches if normalize_human_label(value.get("classification")) in categories}
+        classifications.update(categories[normalize_human_label(value.get("owning_domain"))]
+                               for _, value in allocations if normalize_human_label(value.get("owning_domain")) in categories)
+        functions = {str(value.get("function") or "").strip() for value in matches if value.get("function")}
+        if len(classifications) != 1:
+            findings.append(f"SRS_CATALOG_CLASSIFICATION_{'CONFLICT' if classifications else 'MISSING'}: {block}")
+            continue
+        if len(functions) != 1:
+            findings.append(f"SRS_CATALOG_FUNCTION_{'CONFLICT' if functions else 'MISSING'}: {block}")
+            continue
+        entries.append({"block": block, "category": next(iter(classifications)), "function": next(iter(functions)),
+                        "source": "snapshot architecture profile:" + context["fingerprint"],
+                        "classification_sources": json.dumps([source_id for source_id, _ in allocations]),
+                        "snapshot_id": contract.snapshot_id})
+    return entries, findings
 
 
 def _read_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:

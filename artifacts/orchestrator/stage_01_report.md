@@ -1,10 +1,10 @@
 # Stage 01 Report
 
-Date: 2026-09-15
+Date: 2026-10-06
 
 ## Scope
 - Functional requirement extraction and summary table generation from full specification text.
-- Source specification: `C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf`.
+- Source specification: `specs/DDS_STBIO1.pdf`.
 
 ## Evidence
 - Functional requirements extracted
@@ -19,9 +19,9 @@ Date: 2026-09-15
 
 ## Extraction Metrics
 - Total requirements listed: 271
-- System requirements: 115
-- Analog requirements: 1
-- Digital requirements: 155
+- System requirements: 117
+- Analog requirements: 0
+- Digital requirements: 154
 - Tagged preserve rows: 191
 - Generated standard rows: 0
 
@@ -35,6 +35,6 @@ Date: 2026-09-15
 ## Stage1 Text Quality Cross-Check
 - Checked requirements: 271
 - Corrected split/truncated statements: 11
-- RAG exact matches: 235
-- RAG warnings: 36
+- RAG exact matches: 232
+- RAG warnings: 39
 - RAG fails: 0

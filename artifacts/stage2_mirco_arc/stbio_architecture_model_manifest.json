@@ -1,29 +1,29 @@
 {
   "snapshot_id": "snap-b2e8101b00dc6909feaed885",
-  "generated_at": "2026-09-24T14:26:01",
+  "generated_at": "2026-10-06T15:15:24",
   "model_path": "artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml",
   "model_files": {
-    "artifacts/stage2_mirco_arc/sysml/shared_definitions.sysml": "5cbff3b612a8a045d978fee3b1e899c550ef9aa08de08cd7032d8b09025f7847",
-    "artifacts/stage2_mirco_arc/sysml/DigitalSubsystem.sysml": "4dcb3af0d6a046469320ac48732ecde5774f152603ff804ced1f465c465f8a1e",
-    "artifacts/stage2_mirco_arc/sysml/blocks/adsp.sysml": "2ebe7126fd148f73513564694b1f9d4e0dec18f4060be0e3db9c41be893772fa",
-    "artifacts/stage2_mirco_arc/sysml/blocks/i2c_spi_ahb.sysml": "02074de0540bad083291770c92af5c064c15fef33ca0b02139c5f8879daf1c85",
-    "artifacts/stage2_mirco_arc/sysml/blocks/main_controller.sysml": "e62bc080368a0b15a22e944c17753a71b4015b016aad8e15ea25abdd7d7be724",
-    "artifacts/stage2_mirco_arc/sysml/blocks/pmu.sysml": "3f38873cb0e53af2888769a9d70f19ccac0bfa9463c6932d482eb494128bd25a",
-    "artifacts/stage2_mirco_arc/sysml/blocks/pad_mux.sysml": "3c044af9368e263c19c4a19e4fa3274f251e3d76892452b323e15151d489b198",
-    "artifacts/stage2_mirco_arc/sysml/blocks/regmap.sysml": "009feaa0dd32f96a0213d07eea2679ea177ac559d3e410af2bc88ce9e27641b2",
-    "artifacts/stage2_mirco_arc/sysml/blocks/sensor_hub.sysml": "8066474aaaf7315d9eaa23eb21372e643da620fb1997898b25ee1cb0af188624",
-    "artifacts/stage2_mirco_arc/sysml/blocks/smart_fifo.sysml": "8d30a531bc1e0855fd1061bc5a4d347903f267f0fa5d5cb17d59ac753d5f5ace",
-    "artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml": "d9242b50388173eb40fb403e65afa93730af8d968665075ff1e6c3c370bd7bb6"
+    "artifacts/stage2_mirco_arc/sysml/shared_definitions.sysml": "1f947fd101c323ef90e19b0d099b86f495009e94c5e39947e94762944f2c537e",
+    "artifacts/stage2_mirco_arc/sysml/DigitalSubsystem.sysml": "de318b0060e0cbcaa878d81ed3ee97dce3039d4ebfbe9cb2453511fedcc88bd9",
+    "artifacts/stage2_mirco_arc/sysml/blocks/adsp.sysml": "93bf4f90f04a2e1080171f11af998ae65a0a4b08d522265a8dcc81519ffbafe4",
+    "artifacts/stage2_mirco_arc/sysml/blocks/i2c_spi_ahb.sysml": "7fc3849f5eb1a2a906a74512b754e23802647786f96c20b89384e82f728c0308",
+    "artifacts/stage2_mirco_arc/sysml/blocks/main_controller.sysml": "e326e5d3a73e0458fda45ab153fb9ad63fe84eb82277600ca8b876ef821b4f93",
+    "artifacts/stage2_mirco_arc/sysml/blocks/pmu.sysml": "304959d9bfabe0eabbdc9b41be636621d08717cd2674d9fa54830822138fb707",
+    "artifacts/stage2_mirco_arc/sysml/blocks/pad_mux.sysml": "d80b2de2dec8c755e88a26f6d0582f1a3be07f684cd90c2202d8d501bbada893",
+    "artifacts/stage2_mirco_arc/sysml/blocks/regmap.sysml": "f1fbbd0d19a8c6fe38155303999d6b4debaf726912a99791290501413320a2c7",
+    "artifacts/stage2_mirco_arc/sysml/blocks/sensor_hub.sysml": "12d38f4dc5f3580655f0fd28d00a3f702d27da893bd7128e188538ce317b6d17",
+    "artifacts/stage2_mirco_arc/sysml/blocks/smart_fifo.sysml": "b90db30bfc910377fcb32b659d6bf21fca8dbaef1bd138ebb3a4145654b437d8",
+    "artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml": "71f8388ce2c7be1f0306c5d57323155c8f9a4c2f64a38203712219c463c43379"
   },
   "inputs": {
     "artifacts/stage2_mirco_arc/requirement_to_block_traceability.csv": "9d44a2449b8120355641f2a3a150646fd6e734c4d5f36484b5b8ee7f60b4ce4f",
-    "artifacts/stage1_specs/architecture_mapping_preview.csv": "58665c249807d32f8e971174482ed02d0556d2e5f446053eedab2833e20732f0",
+    "artifacts/stage1_specs/architecture_mapping_preview.csv": "7c760deeae568c64fa619526c1b5b57d440425969fb03c4b9c8887b0874ca4e6",
     "artifacts/stage1_requirements/source_matrix_edges.csv": "339530103af4689cbaef7a6129fc7d11d069b6439091815ce3f1096058c63d6e",
-    "artifacts/stage1_requirements/requirements_summary.csv": "9921b3ab8def123e4adf91c1bfaebe6fb1963b1fac1f200045c3e583103bc7ee",
+    "artifacts/stage1_requirements/requirements_summary.csv": "5778920e306ea762eaa66ae09be49c26ee407cba15b6ac0a665d280d36596555",
     "artifacts/stage2_mirco_arc/block_inventory.csv": "00fc8254ea4796cbd70527e2d46e116a3f57098f7fecc21403c01b040a94cc2e",
     "artifacts/stage2_mirco_arc/interaction_matrix.csv": "65997c59e61fc451005616234cd31df6ac5489f4004ffcf79b4f279eecd9fda8",
     "artifacts/stage2_mirco_arc/source_port_catalog.csv": "fdbbe39b04c028ea87a7ad3e1cc8dc54011d43c1b4e5fc9967cbc248e0769c03",
-    "artifacts/stage1_specs/approved_block_list.xlsx": "59531914df29c21f04380451be77954dd7521b04bf72440613a281e133ea246b"
+    "artifacts/stage1_specs/approved_block_list.xlsx": "9a5837dfc5e8f0e6d65e76a84ee2e0cc5c7017edf0a0e5d0ca498f3a8e12c407"
   },
   "counts": {
     "requirements": 259,

@@ -1,5 +1,5 @@
 {
-  "finding_count": 47,
+  "finding_count": 48,
   "findings": [
     {
       "code": "hardcoded_project_identifier",
@@ -24,7 +24,7 @@
     },
     {
       "code": "embedded_lexical_resource",
-      "line": 24,
+      "line": 25,
       "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
       "path": "scripts/extract_requirements_ocr.py",
       "severity": "important"
@@ -129,23 +129,16 @@
     },
     {
       "code": "embedded_lexical_resource",
-      "line": 39,
+      "line": 40,
       "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
       "path": "scripts/generate_stage0_ontology_outputs.py",
       "severity": "important"
     },
     {
       "code": "embedded_lexical_resource",
-      "line": 433,
+      "line": 431,
       "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
       "path": "scripts/generate_stage0_ontology_outputs.py",
-      "severity": "important"
-    },
-    {
-      "code": "hardcoded_project_identifier",
-      "line": 445,
-      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
-      "path": "scripts/generate_stage1_requirements.py",
       "severity": "important"
     },
     {
@@ -157,37 +150,37 @@
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 450,
+      "line": 447,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/generate_stage1_requirements.py",
       "severity": "important"
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 453,
+      "line": 451,
+      "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
+      "path": "scripts/generate_stage1_requirements.py",
+      "severity": "important"
+    },
+    {
+      "code": "hardcoded_project_identifier",
+      "line": 454,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/generate_stage1_requirements.py",
       "severity": "important"
     },
     {
       "code": "mutable_artifact_read",
-      "line": 634,
+      "line": 635,
       "message": "Authoritative-looking module reads a mutable artifact directly; verify approved resolver boundary.",
       "path": "scripts/generate_stage1_requirements.py",
       "severity": "important"
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 2974,
+      "line": 2973,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/generate_stage1_requirements.py",
-      "severity": "important"
-    },
-    {
-      "code": "embedded_lexical_resource",
-      "line": 232,
-      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
-      "path": "scripts/generate_stage2_specs.py",
       "severity": "important"
     },
     {
@@ -212,8 +205,15 @@
       "severity": "important"
     },
     {
+      "code": "embedded_lexical_resource",
+      "line": 236,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/generate_stage2_specs.py",
+      "severity": "important"
+    },
+    {
       "code": "hardcoded_project_identifier",
-      "line": 361,
+      "line": 367,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/generate_workflow_ppt_template_v4.py",
       "severity": "important"
@@ -223,6 +223,13 @@
       "line": 129,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/review_architecture_sysml.py",
+      "severity": "important"
+    },
+    {
+      "code": "embedded_lexical_resource",
+      "line": 795,
+      "message": "Local vocabulary, alias, stopword, or project approval constant should be configuration-backed.",
+      "path": "scripts/run_drs_gen_spec_agent.py",
       "severity": "important"
     },
     {
@@ -262,35 +269,35 @@
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 1123,
+      "line": 1435,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/validate_downstream_coherence.py",
       "severity": "important"
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 1396,
+      "line": 1708,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/validate_downstream_coherence.py",
       "severity": "important"
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 1431,
+      "line": 1743,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/validate_downstream_coherence.py",
       "severity": "important"
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 1504,
+      "line": 1816,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/validate_downstream_coherence.py",
       "severity": "important"
     },
     {
       "code": "hardcoded_project_identifier",
-      "line": 1505,
+      "line": 1817,
       "message": "Project-specific identifier appears in reusable/authoritative-looking code.",
       "path": "scripts/validate_downstream_coherence.py",
       "severity": "important"
@@ -331,5 +338,5 @@
       "severity": "important"
     }
   ],
-  "repo_root": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI"
+  "repo_root": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow"
 }

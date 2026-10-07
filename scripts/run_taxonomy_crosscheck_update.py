@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import csv
 from pathlib import Path
+from repo_paths import resolve_repo_path
 from typing import List
 
 from extract_requirements_ocr import _update_taxonomy_rules_from_spec
@@ -81,9 +82,7 @@ def main() -> int:
         if not source_file:
             print("Taxonomy crosscheck/update: FAIL - source_file is empty in OCR index")
             return 1
-        initial_spec = Path(source_file)
-        if not initial_spec.is_absolute():
-            initial_spec = repo_root / initial_spec
+        initial_spec = resolve_repo_path(repo_root, source_file)
 
     try:
         _update_taxonomy_rules_from_spec(repo_root, initial_spec.resolve(), rows)

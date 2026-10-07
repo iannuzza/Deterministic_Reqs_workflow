@@ -15,6 +15,7 @@ from datetime import datetime
 import hashlib
 import json
 from pathlib import Path
+from repo_paths import portable_repo_path, resolve_repo_path
 import re
 import subprocess
 import sys
@@ -35,7 +36,7 @@ PROJECT_CONTEXT = Path("config/project_context.json")
 
 
 def _configured_path(repo_root: Path, context: Dict[str, object], key: str, default: str) -> Path:
-    return (repo_root / str(context.get(key, default))).resolve()
+    return resolve_repo_path(repo_root, str(context.get(key, default)))
 
 
 def _append_log(repo_root: Path, script_name: str, message: str) -> None:
@@ -1258,15 +1259,15 @@ def _write_architecture_profile_draft(
             preview_owner_ids[block_name].append(req_id)
     source_hashes = {
         "requirements_summary_csv": {
-            "path": summary_csv.as_posix(),
+            "path": portable_repo_path(summary_csv.parents[2], summary_csv),
             "sha256": _sha256_file(summary_csv),
         },
         "ontology_requirement_links_csv": {
-            "path": ontology_links_path.as_posix(),
+            "path": portable_repo_path(summary_csv.parents[2], ontology_links_path),
             "sha256": _sha256_file(ontology_links_path),
         },
         "semantic_issues_md": {
-            "path": semantic_issues_path.as_posix(),
+            "path": portable_repo_path(summary_csv.parents[2], semantic_issues_path),
             "sha256": _sha256_file(semantic_issues_path),
         },
     }

@@ -30,6 +30,7 @@ from workflow_routing import (
     apply_docx_ipos_requirement_style_guard,
     document_author_name,
     document_version_for_snapshot,
+    document_version_history_markdown,
 )
 from spec_document_contract import write_materialization_audit
 from allocation_ledger import read_csv, refresh_ledger
@@ -204,9 +205,10 @@ def _write_ipos_document(
         "",
         "### 0.2 Document control",
         "#### Table 1. Version history",
-        "| Version | Date | Description | Author |",
-        "|---|---|---|---|",
-        f"| {document_version} | {date.today().isoformat()} | Snapshot {snapshot_id} {kind} IPOS block baseline | {document_author} |",
+        *document_version_history_markdown(
+            markdown_path, snapshot_id, document_version, date.today().isoformat(),
+            f"Snapshot {snapshot_id} {kind} IPOS block baseline", document_author,
+        ),
         "",
         "### 0.3 Requirement navigation",
         "| Requirement | Internal link |",

@@ -5,17 +5,19 @@ from __future__ import annotations
 import csv
 import difflib
 import getpass
+import hashlib
 import json
 import os
 import re
 import tempfile
 import zipfile
 import xml.etree.ElementTree as ET
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass, replace
 from pathlib import Path
-from typing import Dict, Iterable, List, Mapping, Sequence, Set, Tuple
+from types import MappingProxyType
+from typing import Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Set, Tuple
 
-from spec_document_contract import NormalizedSourceRecord, SemanticUnit
+from spec_document_contract import NormalizedSourceRecord, SemanticUnit, drs_document_events, drs_table_inventory, stable_payload_hash
 from ipos_semantic_normalizer import (
     extract_structural_function_name as _normalized_structural_function_name,
 )
@@ -50,7 +52,7 @@ def document_author_name() -> str:
 
 
 def validate_document_author_fields(markdown_path: Path) -> List[str]:
-    """Keep the document author consistent across its title, history, and DOCX."""
+    """Validate current authorship while preserving historical snapshot authors."""
     if not markdown_path.exists() or not markdown_path.with_suffix(".docx").exists():
         return [f"document_author_artifact_missing:{markdown_path}"]
     lines = markdown_path.read_text(encoding="utf-8").splitlines()
@@ -59,10 +61,9 @@ def validate_document_author_fields(markdown_path: Path) -> List[str]:
         return [f"document_author_missing:{markdown_path}"]
     findings: List[str] = []
     try:
-        history_index = lines.index("| Version | Date | Description | Author |")
-        history_author = lines[history_index + 2].strip().strip("|").split("|")[-1].strip()
-        if history_author != authors[0]:
-            findings.append(f"document_history_author_mismatch:{markdown_path}")
+        history_rows = _document_history_rows(markdown_path)
+        if not history_rows or any(not row[-1].strip() for row in history_rows):
+            findings.append(f"document_history_author_missing:{markdown_path}")
     except (ValueError, IndexError):
         findings.append(f"document_history_author_missing:{markdown_path}")
     try:
@@ -76,19 +77,49 @@ def validate_document_author_fields(markdown_path: Path) -> List[str]:
     return findings
 
 
+def _document_history_rows(output_path: Path) -> List[List[str]]:
+    if not output_path.exists():
+        return []
+    tables = [
+        table for table in drs_table_inventory(drs_document_events(output_path))
+        if table["rows"] and table["rows"][0] == ["Version", "Date", "Description", "Author"]
+    ]
+    if len(tables) != 1 or any(len(row) != 4 for row in tables[0]["rows"]):
+        raise ValueError(f"Missing, duplicate or malformed version history: {output_path}")
+    return tables[0]["rows"][1:]
+
+
+def _document_snapshot_id(output_path: Path) -> str:
+    if not output_path.exists():
+        return ""
+    text = output_path.read_text(encoding="utf-8")
+    match = re.search(r"(?:Snapshot ID:\s*|Snapshot:\s*`)([^`\s]+)", text, re.IGNORECASE)
+    if match is None:
+        raise ValueError(f"Missing document snapshot: {output_path}")
+    return match.group(1)
+
+
+def document_version_history_markdown(
+    output_path: Path, snapshot_id: str, version: str, run_date: str, description: str, author: str,
+) -> List[str]:
+    """Append a snapshot version entry; leave same-snapshot history unchanged."""
+    rows = _document_history_rows(output_path)
+    if _document_snapshot_id(output_path) != snapshot_id or not rows:
+        rows.append([version, run_date, description, author])
+    return [
+        "| Version | Date | Description | Author |",
+        "|---|---|---|---|",
+        *["| " + " | ".join(cell.replace("|", r"\|") for cell in row) + " |" for row in rows],
+    ]
+
+
 def document_version_for_snapshot(output_path: Path, snapshot_id: str) -> str:
     """Keep the document version stable, incrementing it when the snapshot changes."""
     if not output_path.exists():
         return GENERATED_SPEC_VERSION
-    text = output_path.read_text(encoding="utf-8", errors="ignore")
-    previous_snapshot = next(
-        (
-            match.group(1)
-            for match in re.finditer(r"(?:Snapshot ID:\s*|Snapshot:\s*`)([^`\s]+)", text, re.IGNORECASE)
-        ),
-        "",
-    )
-    version_match = re.search(r"\|\s*(\d+)\.(\d+)\s*\|", text)
+    previous_snapshot = _document_snapshot_id(output_path)
+    history_rows = _document_history_rows(output_path)
+    version_match = re.fullmatch(r"(\d+)\.(\d+)", history_rows[-1][0]) if history_rows else None
     if not version_match:
         return GENERATED_SPEC_VERSION
     major, minor = int(version_match.group(1)), int(version_match.group(2))
@@ -693,6 +724,1245 @@ SRS_SYSTEM_OVERVIEW_HEADINGS = (
 )
 
 
+@dataclass(frozen=True)
+class DescriptiveWritingProfile:
+    name: str
+    allowed_scopes: Tuple[str, ...]
+    document_type: str
+    evidence_kinds: Tuple[str, ...]
+    authority_tiers: Tuple[str, ...]
+    owner_policy: str
+    allowed_domains: Tuple[str, ...]
+    allowed_layers: Tuple[str, ...]
+    projection_adapters: Tuple[str, ...]
+    topic_roles: Tuple[str, ...]
+    excluded_terms: Tuple[str, ...]
+    runtime_enabled: bool
+    version: int = 1
+
+    def __post_init__(self) -> None:
+        if not self.name or not self.document_type or self.version != 1:
+            raise ValueError("Invalid descriptive profile identity or version")
+        if self.owner_policy not in {"unrestricted", "same_owner"}:
+            raise ValueError("Unsupported descriptive owner policy")
+        for values in (self.allowed_scopes, self.evidence_kinds, self.authority_tiers, self.projection_adapters):
+            if not values or len(set(values)) != len(values) or any(not value.strip() for value in values):
+                raise ValueError("Explicit nonempty descriptive profile controls required")
+
+
+@dataclass(frozen=True)
+class DescriptiveFact:
+    subject: str
+    action: str
+    objects: Tuple[str, ...]
+    source: str
+    statement: str
+    scope: str
+    section: str = ""
+    mode: str = ""
+    condition: str = ""
+    modality: str = ""
+    negative: bool = False
+    coordination: str = "and"
+    object_suffix: str = ""
+    plural_subject: bool = False
+    qualifiers: Tuple[str, ...] = ()
+    results: Tuple[str, ...] = ()
+    evidence_kind: str = "descriptive"
+    owner: str = ""
+    domain: str = ""
+    layer: str = ""
+
+    @property
+    def fact_id(self) -> str:
+        payload = json.dumps(asdict(self), sort_keys=True, ensure_ascii=True)
+        return "desc-" + hashlib.sha256(payload.encode("utf-8")).hexdigest()[:20]
+
+
+@dataclass(frozen=True)
+class DescriptiveParagraph:
+    text: str
+    facts: Tuple[DescriptiveFact, ...]
+
+
+SRS_DESCRIPTIVE_PROFILE = DescriptiveWritingProfile(
+    "srs-overview-v1", ("system", "architecture"), "SRS", ("descriptive",),
+    ("admitted_context",), "unrestricted", (), (), ("srs-overview",),
+    SRS_SYSTEM_OVERVIEW_HEADINGS,
+    ("register", "regmap", "address", "signal name", "port name"), True,
+)
+DRS_DESCRIPTIVE_PROFILE = DescriptiveWritingProfile(
+    "drs-integration-v1", ("architecture", "digital_integration"), "DRS", ("descriptive",),
+    ("admitted_context",), "unrestricted", ("digital", "shared"), ("integration",),
+    ("drs-integration",), ("integration", "interfaces", "operating_concept", "power"), (), False,
+)
+ARS_DESCRIPTIVE_PROFILE = DescriptiveWritingProfile(
+    "ars-integration-v1", ("architecture", "analog_integration"), "ARS", ("descriptive",),
+    ("admitted_context",), "unrestricted", ("analog", "mixed_signal", "shared"), ("integration",),
+    ("ars-integration",), ("integration", "interfaces", "operating_concept", "power"), (), False,
+)
+IPOS_DESCRIPTIVE_PROFILE = DescriptiveWritingProfile(
+    "ipos-local-v1", ("block_local",), "IPOS", ("descriptive", "approved_normative"),
+    ("admitted_context", "approved_normative"), "same_owner", (), ("block",),
+    ("ipos-local",), ("function", "interfaces", "operating_concept", "power"), (), False,
+)
+DESCRIPTIVE_PROFILES = MappingProxyType({profile.document_type: profile for profile in (
+    SRS_DESCRIPTIVE_PROFILE, DRS_DESCRIPTIVE_PROFILE, ARS_DESCRIPTIVE_PROFILE, IPOS_DESCRIPTIVE_PROFILE,
+)})
+
+
+def descriptive_profile(document_type: str) -> DescriptiveWritingProfile:
+    try:
+        profile = DESCRIPTIVE_PROFILES[document_type]
+    except KeyError:
+        raise ValueError("Unknown descriptive document profile: " + document_type) from None
+    if not profile.runtime_enabled:
+        raise ValueError("Descriptive profile not activated: " + document_type)
+    return profile
+
+
+def descriptive_fact_findings(
+    fact: DescriptiveFact, *, profile: DescriptiveWritingProfile, owner: str = "",
+) -> List[str]:
+    findings = []
+    if fact.scope not in profile.allowed_scopes or fact.evidence_kind not in profile.evidence_kinds:
+        findings.append("descriptive_scope_or_kind_invalid")
+    if profile.allowed_domains and fact.domain not in profile.allowed_domains:
+        findings.append("descriptive_domain_invalid")
+    if profile.allowed_layers and fact.layer not in profile.allowed_layers:
+        findings.append("descriptive_layer_invalid")
+    if profile.owner_policy == "same_owner" and (not owner or fact.owner != owner):
+        findings.append("descriptive_owner_invalid")
+    if profile.topic_roles and fact.section not in profile.topic_roles:
+        findings.append("descriptive_topic_invalid")
+    if any(not isinstance(value, str) or not value.strip() for value in
+           (fact.source, fact.statement, fact.subject, fact.action, *fact.objects)) or not fact.objects:
+        findings.append("descriptive_fact_or_provenance_incomplete")
+    if fact.modality not in {"", "can", "may"} or fact.coordination not in {"and", "or"}:
+        findings.append("descriptive_grammar_unsupported")
+    descriptive_text = " ".join((fact.subject, fact.action, *fact.objects, fact.object_suffix,
+                                 fact.condition, fact.mode, *fact.qualifiers, *fact.results))
+    if any(re.search(r"\b" + re.escape(term) + r"\b", descriptive_text, re.IGNORECASE)
+           for term in profile.excluded_terms):
+        findings.append("descriptive_profile_detail_excluded")
+    return findings
+
+
+@dataclass(frozen=True)
+class DescriptiveFlowResult:
+    records: Tuple[NormalizedSourceRecord, ...]
+    facts: Tuple[DescriptiveFact, ...]
+    paragraphs: Tuple[DescriptiveParagraph, ...]
+    units: Tuple[SemanticUnit, ...]
+    audit: Tuple[Dict[str, str], ...]
+
+
+def descriptive_evidence_findings(
+    record: NormalizedSourceRecord, *, profile: DescriptiveWritingProfile,
+) -> List[str]:
+    findings = []
+    if not record.record_id or not record.text.strip() or not record.provenance or any(not source.strip() for source in record.provenance):
+        findings.append("descriptive_evidence_provenance_incomplete")
+    if record.decision not in {"selected", "retained"} or record.authority_tier not in profile.authority_tiers:
+        findings.append("descriptive_evidence_not_admissible")
+    if record.ownership_scope not in profile.allowed_scopes:
+        findings.append("descriptive_evidence_scope_invalid")
+    return findings
+
+
+def run_descriptive_flow(
+    records: Iterable[NormalizedSourceRecord], *, profile: DescriptiveWritingProfile,
+    adapter_name: str,
+    adapter: Callable[[NormalizedSourceRecord], Tuple[Sequence[DescriptiveFact], str]],
+    owner: str = "",
+) -> DescriptiveFlowResult:
+    registered = DESCRIPTIVE_PROFILES.get(profile.document_type)
+    if not profile.runtime_enabled or (registered is not None and profile != registered):
+        raise ValueError("Descriptive profile not activated or changed: " + profile.document_type)
+    if adapter_name not in profile.projection_adapters:
+        raise ValueError("Projection adapter outside descriptive profile: " + adapter_name)
+    inputs = tuple(records)
+    if len({record.record_id for record in inputs}) != len(inputs):
+        raise ValueError("Duplicate descriptive source record IDs")
+    facts: List[DescriptiveFact] = []
+    origins: Dict[str, List[str]] = {}
+    audits: List[Dict[str, str]] = []
+    fingerprint = stable_payload_hash(asdict(profile))
+
+    def audit(record: NormalizedSourceRecord, decision: str, reason: str, **fields: str) -> None:
+        audits.append({
+            "profile": profile.name, "profile_version": str(profile.version),
+            "profile_fingerprint": fingerprint, "projection_adapter": adapter_name,
+            "source_record_id": record.record_id, "normalized_record_json": json.dumps(asdict(record), sort_keys=True),
+            "decision": decision, "reason": reason, "fact_id": "", "fact_json": "",
+            "contributor_ids": "[]", "unit_id": "", "semantic_unit_json": "", **fields,
+        })
+
+    for record in inputs:
+        if descriptive_evidence_findings(record, profile=profile):
+            audit(record, "rejected_evidence", record.rationale or "outside explicit evidence boundary")
+            continue
+        projected, reason = adapter(record)
+        projected = tuple(projected)
+        if not projected:
+            audit(record, "projection_gap", reason or "no supported construction")
+            continue
+        for fact in projected:
+            if (fact.statement != record.text or fact.source not in record.provenance
+                    or fact.scope != record.ownership_scope
+                    or (fact.evidence_kind == "approved_normative" and record.authority_tier != "approved_normative")):
+                raise ValueError("Projection changed admitted provenance or evidence scope")
+            findings = descriptive_fact_findings(fact, profile=profile, owner=owner)
+            if findings:
+                raise ValueError("Invalid descriptive projection: " + "; ".join(findings))
+            facts.append(fact)
+            origins.setdefault(fact.fact_id, []).append(record.record_id)
+        audit(record, "admitted", "explicit evidence and profile boundary passed")
+        if reason:
+            audit(record, "projection_gap", reason)
+
+    paragraphs = compose_descriptive_paragraphs(facts, profile=profile, owner=owner)
+    findings = validate_descriptive_paragraphs(paragraphs, facts=facts, profile=profile, owner=owner)
+    if findings:
+        raise ValueError("Descriptive preservation failed: " + "; ".join(findings))
+    by_id = {record.record_id: record for record in inputs}
+    units = []
+    for order, paragraph in enumerate(paragraphs, start=1):
+        contributors = tuple(dict.fromkeys(fact.fact_id for fact in paragraph.facts))
+        source_ids = tuple(dict.fromkeys(source_id for fact_id in contributors for source_id in origins[fact_id]))
+        unit = SemanticUnit("desc-unit-" + stable_payload_hash((fingerprint, contributors, paragraph.text))[:20],
+                            paragraph.facts[0].section, paragraph.text, source_ids, order)
+        units.append(unit)
+        for fact in paragraph.facts:
+            for source_id in dict.fromkeys(origins[fact.fact_id]):
+                audit(by_id[source_id], "selected", "compatible facts; all contributors retained",
+                      fact_id=fact.fact_id, fact_json=json.dumps(asdict(fact), sort_keys=True),
+                      contributor_ids=json.dumps(contributors), unit_id=unit.unit_id,
+                      semantic_unit_json=json.dumps(asdict(unit), sort_keys=True))
+    result = DescriptiveFlowResult(inputs, tuple(facts), tuple(paragraphs), tuple(units), tuple(audits))
+    findings = validate_descriptive_flow(result, profile=profile, owner=owner)
+    if findings:
+        raise ValueError("Descriptive audit linkage failed: " + "; ".join(findings))
+    return result
+
+
+def validate_descriptive_flow(
+    result: DescriptiveFlowResult, *, profile: DescriptiveWritingProfile, owner: str = "",
+) -> List[str]:
+    findings = validate_descriptive_paragraphs(result.paragraphs, facts=result.facts, profile=profile, owner=owner)
+    records = {record.record_id: record for record in result.records}
+    units = {unit.unit_id: unit for unit in result.units}
+    facts = {fact.fact_id: fact for fact in result.facts}
+    fingerprint = stable_payload_hash(asdict(profile))
+    if len(units) != len(result.units) or len(result.units) != len(result.paragraphs):
+        findings.append("descriptive_semantic_units_invalid")
+    expected_links = set()
+    for paragraph, unit in zip(result.paragraphs, result.units):
+        contributors = tuple(dict.fromkeys(fact.fact_id for fact in paragraph.facts))
+        origins = tuple(dict.fromkeys(record.record_id for fact in paragraph.facts for record in result.records
+                                     if fact.statement == record.text and fact.source in record.provenance
+                                     and fact.scope == record.ownership_scope
+                                     and (fact.evidence_kind != "approved_normative" or record.authority_tier == "approved_normative")
+                                     and not descriptive_evidence_findings(record, profile=profile)))
+        if (not paragraph.facts or unit.text != paragraph.text or unit.section != paragraph.facts[0].section
+                or unit.source_record_ids != origins or unit.output_order < 1
+                or unit.unit_id != "desc-unit-" + stable_payload_hash((fingerprint, contributors, paragraph.text))[:20]):
+            findings.append("descriptive_semantic_unit_changed")
+        for fact in paragraph.facts:
+            if not any(fact.statement == records[record_id].text and fact.source in records[record_id].provenance for record_id in origins):
+                findings.append("descriptive_fact_source_link_missing:" + fact.fact_id)
+            for record_id in origins:
+                record = records[record_id]
+                if fact.statement == record.text and fact.source in record.provenance:
+                    expected_links.add((unit.unit_id, fact.fact_id, record_id))
+    actual_links = set()
+    audited_records = set()
+    for row in result.audit:
+        record_id = row.get("source_record_id", "")
+        record = records.get(record_id)
+        audited_records.add(record_id)
+        try:
+            if (record is None or row["profile"] != profile.name or row["profile_version"] != str(profile.version)
+                    or row["profile_fingerprint"] != fingerprint
+                    or row["projection_adapter"] not in profile.projection_adapters
+                    or json.loads(row["normalized_record_json"]) != json.loads(json.dumps(asdict(record)))):
+                raise ValueError("Invalid profile or normalized record")
+            if row["decision"] == "selected":
+                if descriptive_evidence_findings(record, profile=profile):
+                    raise ValueError("Selected audit record is not admissible")
+                unit = units[row["unit_id"]]
+                fact = facts[row["fact_id"]]
+                paragraph = next(paragraph for paragraph in result.paragraphs
+                                 if paragraph.text == unit.text and paragraph.facts[0].section == unit.section
+                                 and fact in paragraph.facts)
+                if (json.loads(row["fact_json"]) != json.loads(json.dumps(asdict(fact)))
+                        or json.loads(row["semantic_unit_json"]) != json.loads(json.dumps(asdict(unit)))
+                        or json.loads(row["contributor_ids"]) != list(dict.fromkeys(member.fact_id for member in paragraph.facts))):
+                    raise ValueError("Invalid fact or semantic unit")
+                actual_links.add((unit.unit_id, fact.fact_id, record_id))
+            elif row["decision"] not in {"admitted", "rejected_evidence", "projection_gap"}:
+                raise ValueError("Invalid audit decision")
+        except (KeyError, TypeError, ValueError, StopIteration):
+            findings.append("descriptive_audit_link_invalid:" + record_id)
+    if set(records) != audited_records:
+        findings.append("descriptive_record_audit_coverage_invalid")
+    if expected_links != actual_links:
+        findings.append("descriptive_contributor_audit_coverage_invalid")
+    return findings
+
+
+def _descriptive_join(values: Sequence[str], conjunction: str = "and") -> str:
+    if len(values) < 2:
+        return values[0] if values else ""
+    return ", ".join(values[:-1]) + f" {conjunction} " + values[-1]
+
+
+def _descriptive_fact_key(fact: DescriptiveFact) -> tuple:
+    return (
+        fact.subject, fact.action, fact.scope, fact.section, fact.mode, fact.condition,
+        fact.modality, fact.negative, fact.coordination, fact.object_suffix,
+        fact.plural_subject, fact.qualifiers, fact.results,
+        fact.objects if fact.coordination == "or" else (),
+        fact.evidence_kind, fact.owner, fact.domain, fact.layer,
+    )
+
+
+def aggregate_descriptive_facts(
+    facts: Iterable[DescriptiveFact], *, profile: DescriptiveWritingProfile, owner: str = "",
+) -> List[Tuple[DescriptiveFact, ...]]:
+    groups: Dict[tuple, List[DescriptiveFact]] = {}
+    for fact in facts:
+        findings = descriptive_fact_findings(fact, profile=profile, owner=owner)
+        if findings:
+            raise ValueError("Invalid descriptive fact: " + "; ".join(findings))
+        groups.setdefault(_descriptive_fact_key(fact), []).append(fact)
+    return [tuple(members) for members in groups.values()]
+
+
+def compose_descriptive_paragraphs(
+    facts: Iterable[DescriptiveFact], *, profile: DescriptiveWritingProfile, owner: str = "",
+) -> List[DescriptiveParagraph]:
+    paragraphs: List[DescriptiveParagraph] = []
+    for members in aggregate_descriptive_facts(facts, profile=profile, owner=owner):
+        first = members[0]
+        objects = list(dict.fromkeys(value for fact in members for value in fact.objects))
+        action = first.action
+        if first.modality:
+            predicate = first.modality + (" not " if first.negative else " ") + action
+        elif first.negative:
+            predicate = ("do not " if first.plural_subject else "does not ") + action
+        elif first.plural_subject:
+            predicate = action
+        elif action.endswith("y") and len(action) > 1 and action[-2] not in "aeiou":
+            predicate = action[:-1] + "ies"
+        else:
+            predicate = action + ("es" if action.endswith(("s", "sh", "ch", "x", "z", "o")) else "s")
+        text = f"{first.subject} {predicate} {_descriptive_join(objects, first.coordination)}"
+        if first.object_suffix:
+            text += " " + first.object_suffix
+        if first.qualifiers:
+            text += " " + " ".join(first.qualifiers)
+        if first.results:
+            text += (", " if len(first.results) > 1 else " and ") + _descriptive_join(first.results)
+        if first.condition:
+            text = f"{first.condition}, {text[0].lower() + text[1:]}"
+        if first.mode:
+            text = f"In {first.mode}, {text[0].lower() + text[1:]}"
+        paragraphs.append(DescriptiveParagraph(text.rstrip(".") + ".", tuple(members)))
+    return paragraphs
+
+
+def validate_descriptive_paragraphs(
+    paragraphs: Sequence[DescriptiveParagraph], *, facts: Sequence[DescriptiveFact],
+    profile: DescriptiveWritingProfile, owner: str = "",
+) -> List[str]:
+    findings: List[str] = []
+    expected = {fact.fact_id for fact in facts}
+    represented: Set[str] = set()
+    for paragraph in paragraphs:
+        keys = {_descriptive_fact_key(fact) for fact in paragraph.facts}
+        if len(keys) != 1:
+            findings.append("descriptive_incompatible_aggregation")
+        text = " ".join(paragraph.text.casefold().split())
+        if re.search(r"\b(?:shall|must|required to)\b|\bCovers\s*:", paragraph.text, re.IGNORECASE):
+            findings.append("descriptive_normative_wording")
+        for fact in paragraph.facts:
+            represented.add(fact.fact_id)
+            findings.extend(descriptive_fact_findings(fact, profile=profile, owner=owner))
+            if fact.scope not in profile.allowed_scopes or not fact.source or not fact.statement:
+                findings.append("descriptive_scope_or_provenance_invalid")
+            terms = (*fact.objects, fact.subject, fact.object_suffix, fact.condition, fact.mode, *fact.qualifiers, *fact.results)
+            if any(" ".join(term.casefold().split()) not in text for term in terms if term):
+                findings.append("descriptive_fact_content_lost:" + fact.fact_id)
+            if fact.modality and not re.search(r"\b" + re.escape(fact.modality) + r"\b", text):
+                findings.append("descriptive_modality_lost:" + fact.fact_id)
+            if fact.negative != bool(re.search(r"\b(?:does not|do not|can not|may not)\b", text)):
+                findings.append("descriptive_polarity_changed:" + fact.fact_id)
+            if not re.search(r"\b" + re.escape(fact.action) + r"(?:s|es)?\b", text) and not (
+                fact.action.endswith("y") and re.search(r"\b" + re.escape(fact.action[:-1]) + r"ies\b", text)
+            ):
+                findings.append("descriptive_action_lost:" + fact.fact_id)
+            if fact.coordination == "or" and len(fact.objects) > 1 and " or " not in text:
+                findings.append("descriptive_alternative_lost:" + fact.fact_id)
+    for fact_id in sorted(expected - represented):
+        findings.append("descriptive_fact_not_rendered:" + fact_id)
+    for fact_id in sorted(represented - expected):
+        findings.append("descriptive_unexpected_contributor:" + fact_id)
+    return findings
+
+
+def extract_srs_descriptive_facts(
+    statement: str, *, source: str, scope: str, section: str, mode: str = "",
+) -> Tuple[List[DescriptiveFact], str]:
+    facts: List[DescriptiveFact] = []
+    recognized = False
+    unsupported = False
+    for clause in re.split(r"[•]|(?<=[.!?])\s+(?=[A-Z])", statement):
+        clause = clause.strip()
+        if not clause or re.search(r"\b(?:shall|must|required to|Covers:)\b", clause, re.IGNORECASE):
+            continue
+        condition = ""
+        conditional = re.match(r"^((?:When|If|Unless)\s+[^,]+),\s*(.+)$", clause, re.IGNORECASE)
+        if conditional:
+            condition, clause = conditional.groups()
+        external = re.search(
+            r"\bcan\s+read\s+external\s+sensors\s+by\s+means\s+of\s+(?:an?\s+)?"
+            r"([A-Za-z0-9+ -]+?\s+protocol)\b", clause, re.IGNORECASE,
+        )
+        samples = re.search(
+            r"\bsamples(?:\s+of)?\s+([A-Za-z ,/-]+?)\s+(?:signals?\s+)?from\s+ADC\b"
+            r"([^.!?]*\bstores\b[^.!?]*)[.!?]$", clause, re.IGNORECASE,
+        )
+        processed = re.fullmatch(
+            r"([A-Za-z ,/-]+?)\s+data\s+raw\s+in\b.+?\bare\s+processed\s+by\b.+?[.!?]",
+            clause, re.IGNORECASE,
+        )
+        accessible = re.fullmatch(
+            r"The data collected by\b.+?\bis accessible from\b.+?,\s*for sensor fusion algorithm elaboration[.!?]",
+            clause, re.IGNORECASE,
+        )
+        impedance = re.fullmatch(
+            r".+?\s+channel\s+delivers\s+both\s+the real and the imaginary parts of\s+(.+?)[.!?]",
+            clause, re.IGNORECASE,
+        )
+        direct = re.fullmatch(
+            r"The system\s+(?:(can|may)\s+(not\s+)?(support|provide|perform|integrate|acquire|process|store)|"
+            r"(does not)\s+(support|provide|perform|integrate|acquire|process|store)|"
+            r"(supports|provides|performs|integrates|acquires|processes|stores))\s+(.+)[.]",
+            clause, re.IGNORECASE,
+        )
+        if not any((external, samples, processed and mode, accessible, impedance, direct)):
+            unsupported = True
+            continue
+        recognized = True
+        guarded_clause = re.sub(r"according to the user's configuration", "", clause, flags=re.IGNORECASE)
+        if not direct and re.search(
+            r"\b(?:not|no|cannot|never|may|might|optionally|only|if|when|unless|until|before|after|without|except)\b",
+            guarded_clause, re.IGNORECASE,
+        ):
+            continue
+        values = dict(subject="The system", source=source, statement=statement, scope=scope,
+                      section=section, mode=mode, condition=condition)
+        if external:
+            qualifiers = ["through " + external.group(1).strip()]
+            tail = clause[external.end():].strip(" .")
+            if tail:
+                if re.fullmatch(r",\s*enabling data collection in\s+\S+\s+and embedded elaboration also on external data domain", tail, re.IGNORECASE):
+                    qualifiers.append("with data collection and embedded processing of external measurements")
+                else:
+                    unsupported = True
+                    continue
+            facts.append(DescriptiveFact(
+                action="acquire", objects=("external sensor measurements",), modality="can",
+                qualifiers=tuple(qualifiers), **values,
+            ))
+        elif samples:
+            measured = samples.group(1).strip()
+            coordination = "or" if re.search(r"\bor\b", measured) else "and"
+            objects = tuple(item.strip() for item in re.split(r",\s*|\s+(?:and|or)\s+", measured) if item.strip())
+            results = []
+            if re.search(r"\baverag(?:e|es|ing)\b", samples.group(2), re.IGNORECASE):
+                averaging = "averages the samples"
+                if "according to the user's configuration" in samples.group(2).casefold():
+                    averaging += " according to the user's configuration"
+                results.append(averaging)
+            results.append("stores the raw sampled data" if re.search(r"\braw\b", samples.group(2), re.IGNORECASE)
+                           else "stores the sampled data")
+            facts.append(DescriptiveFact(action="acquire", objects=objects, coordination=coordination,
+                                         object_suffix="measurements", results=tuple(results), **values))
+        elif processed and mode:
+            measured = processed.group(1).strip()
+            objects = tuple(item.strip() for item in re.split(r",\s*|\s+(?:and|or)\s+", measured) if item.strip())
+            facts.append(DescriptiveFact(action="process", objects=objects, object_suffix="measurements",
+                                         coordination="or" if re.search(r"\bor\b", measured) else "and", **values))
+        elif accessible:
+            if not any(fact.objects == ("external sensor measurements",) for fact in facts):
+                unsupported = True
+                continue
+            facts.append(DescriptiveFact(action="provide", objects=("collected external sensor measurements",),
+                                         qualifiers=("for sensor-fusion processing",), **values))
+        elif impedance:
+            facts.append(DescriptiveFact(action="provide",
+                                         objects=("the real and the imaginary parts of " + impedance.group(1),), **values))
+        elif direct:
+            if re.search(r"\b(?:register|regmap|address|port|signal)\b|[_=]|\b0x[0-9a-f]+\b", direct.group(7), re.IGNORECASE):
+                continue
+            action = (direct.group(3) or direct.group(5) or direct.group(6)).casefold()
+            action = "process" if action == "processes" else action.removesuffix("s") if direct.group(6) else action
+            facts.append(DescriptiveFact(action=action, objects=(direct.group(7).strip(),),
+                                         modality=(direct.group(1) or "").casefold(),
+                                         negative=bool(direct.group(2) or direct.group(4)), **values))
+    reason = "unsupported descriptive clause requires explicit projection" if facts and unsupported else (
+        "" if facts else "qualifier construction requires explicit projection" if recognized else "no supported functional construction"
+    )
+    return facts, reason
+
+
+def compose_srs_system_overview(
+    records: Iterable[Mapping[str, object]],
+    *,
+    mode_rows: Iterable[Mapping[str, object]] = (),
+    interface_rows: Iterable[Mapping[str, object]] = (),
+    power_records: Iterable[Mapping[str, object]] = (),
+    block_names: Sequence[str] = (),
+    audit_rows: Optional[List[Dict[str, str]]] = None,
+) -> Dict[str, List[str]]:
+    profile = descriptive_profile("SRS")
+    """Project scoped descriptive evidence into a non-authoritative SRS overview."""
+    overview_records: List[Tuple[str, str]] = []
+    overview_scopes: Dict[Tuple[str, str], str] = {}
+    recovered_modes: Dict[str, List[str]] = {}
+    projected_facts: List[DescriptiveFact] = []
+
+    def audit(section: str, record: Mapping[str, object], summary: str, reason: str) -> None:
+        if audit_rows is not None:
+            audit_rows.append({
+                "section": section,
+                "statement": csv_cell_text(record.get("statement") or record.get("Purpose") or record.get("text")),
+                "source": csv_cell_text(record.get("source") or record.get("provenance")),
+                "scope": csv_cell_text(record.get("scope") or ""),
+                "rendered_summary": summary,
+                "decision": "selected" if summary else "rejected",
+                "reason": reason,
+                "profile": SRS_DESCRIPTIVE_PROFILE.name,
+                "fact_id": "",
+                "fact_json": "",
+                "contributor_ids": "[]",
+                "profile_version": str(profile.version),
+                "profile_fingerprint": stable_payload_hash(asdict(profile)),
+                "projection_adapter": "srs-overview",
+                "source_record_id": "",
+                "normalized_record_json": "",
+                "unit_id": "",
+                "semantic_unit_json": "",
+            })
+
+    def audit_candidate(section: str, statement: str, source: str, summary: str) -> None:
+        audit(section, {"statement": statement, "source": source, "scope": overview_scopes[(statement, source)]}, summary,
+              "system-level projection of complete descriptive relationship")
+
+    for record in records:
+        statement = csv_cell_text(record.get("statement") or record.get("function") or record.get("text")).strip()
+        source = csv_cell_text(record.get("source") or record.get("provenance")).strip()
+        scope = csv_cell_text(record.get("scope") or record.get("evidence_scope")).casefold().strip()
+        kind = csv_cell_text(record.get("evidence_kind") or record.get("record_type")).casefold().strip()
+        if not statement or not source or scope not in {"system", "architecture"} or kind == "power_domain":
+            audit("", record, "", "not a provenanced system/architecture descriptive record")
+            continue
+        mode_match = re.search(r"\bSection\s+\d+(?:\.\d+)*\s+([^,(]+?\bMode)\b", source, re.IGNORECASE)
+        mode = mode_match.group(1).strip() if mode_match else csv_cell_text(record.get("mode")).strip()
+        if mode:
+            recovered_modes.setdefault(mode, [])
+        facts, projection_reason = extract_srs_descriptive_facts(
+            statement, source=source, scope=scope,
+            section=SRS_SYSTEM_OVERVIEW_HEADINGS[4 if mode else 1], mode=mode,
+        )
+        projected_facts.extend(facts)
+        if projection_reason:
+            audit("", record, "", "projection_gap: " + projection_reason)
+        if re.search(
+            r"\b(?:shall|must|required to|Covers:)\b|\b(?:register|regmap|address|port\s+name|signal\s+(?:level|name)|"
+            r"ATPG|BIST|scan|clock\s+gating|reset\s+synchroniz|transparenc|Req_ID|Target|Delay|Requirements Definition)\b|"
+            r"\b0x[0-9a-f]+\b|[_=]|[|•]",
+            statement,
+            re.IGNORECASE,
+        ):
+            audit("", record, "", "raw/implementation text not eligible for direct narrative")
+            continue
+        if re.match(r"^(?:aim of this document|this document|in the following table|table\s+\d+)\b", statement, re.IGNORECASE):
+            continue
+        if len(statement) < 35 or not re.search(r"[.!?]\s*$", statement):
+            continue
+        if any(
+            re.search(r"\b" + r"[-_\s]+".join(re.escape(token) for token in re.split(r"[-_\s]+", label.strip()) if token) + r"\b", statement, re.IGNORECASE)
+            for label in block_names if label.strip()
+        ):
+            audit("", record, "", "named block text not eligible for direct narrative")
+            continue
+        overview_records.append((statement, source))
+        overview_scopes[(statement, source)] = scope
+        audit("", record, statement, "complete scoped descriptive candidate")
+
+    sections: Dict[str, List[str]] = {heading: [] for heading in SRS_SYSTEM_OVERVIEW_HEADINGS}
+    identity_re = re.compile(r"^([A-Z][A-Za-z0-9.-]*)\s+is\s+((?:an?|the)\s+.+)$", re.IGNORECASE)
+    capability_re = re.compile(
+        r"^(?:The\s+)?(.+?)\s+signal\s+chain\s+is\s+designed\s+for\s+(.+?)\.?$",
+        re.IGNORECASE,
+    )
+    feature_capability_re = re.compile(
+        r"^(?:The\s+)?(.+?)\s+signal\s+chain\s+has\b.+?\bfeatures\s+supporting\s+(.+?)"
+        r"(?:,\s*(?:such as|including)\b.*)?\.?$",
+        re.IGNORECASE,
+    )
+    identities: List[str] = []
+    capabilities: List[str] = []
+    measurement_facts: List[DescriptiveFact] = []
+    interface_roles: List[str] = []
+    for statement, source in overview_records:
+        identity_match = identity_re.match(statement)
+        if identity_match:
+            identity = identity_match.group(2).rstrip('.')
+            identity = re.sub(r"\banalog front end device\b", "analog front end", identity, flags=re.IGNORECASE)
+            identity = re.sub(r"\bembedded process capabilities\b", "embedded processing capabilities", identity, flags=re.IGNORECASE)
+            identities.append(f"The system is {identity}.")
+            audit_candidate(SRS_SYSTEM_OVERVIEW_HEADINGS[0], statement, source, identities[-1])
+        elif re.match(r"^The system is\b", statement, re.IGNORECASE):
+            identities.append(statement)
+            audit_candidate(SRS_SYSTEM_OVERVIEW_HEADINGS[0], statement, source, identities[-1])
+
+        capability_match = capability_re.match(statement)
+        if capability_match:
+            role = re.split(r",\s*(?:such as|including)\b|\.\s+", capability_match.group(2), maxsplit=1, flags=re.IGNORECASE)[0].strip().rstrip(".")
+        elif feature_capability_re.match(statement):
+            feature_match = feature_capability_re.match(statement)
+            role = re.split(r",\s*(?:such as|including)\b|\.\s+", feature_match.group(2), maxsplit=1, flags=re.IGNORECASE)[0].strip().rstrip(".")
+        else:
+            role = ""
+        if role:
+            role_parts = re.split(r"\s+(?=with\b|without\b|only\b|when\b|during\b)", role, maxsplit=1, flags=re.IGNORECASE)
+            fact = DescriptiveFact(
+                subject="The system", action="support", objects=(role_parts[0],),
+                qualifiers=tuple(role_parts[1:]), source=source, statement=statement,
+                scope=overview_scopes[(statement, source)], section=SRS_SYSTEM_OVERVIEW_HEADINGS[1],
+            )
+            projected_facts.append(fact)
+            measurement_facts.append(fact)
+            if len(re.split(r"\.\s+", statement)) > 1 and not any(fact.source == source for fact in projected_facts[:-1]):
+                audit("", {"statement": statement, "source": source, "scope": overview_scopes[(statement, source)]}, "",
+                      "projection_gap: additional sentence has no supported functional construction")
+        if re.search(r"\b(?:system boundary|external interface|host interface|cross-domain interface)\b", statement, re.IGNORECASE):
+            interface_roles.append(statement)
+
+    def unique(values: Iterable[str]) -> List[str]:
+        result: List[str] = []
+        seen: Set[str] = set()
+        for value in values:
+            normalized = re.sub(r"\s+", " ", value).strip()
+            key = normalized.casefold()
+            if key and key not in seen:
+                seen.add(key)
+                result.append(normalized)
+        return result
+
+    def project(facts: Sequence[DescriptiveFact]) -> List[DescriptiveParagraph]:
+        normalized: Dict[str, NormalizedSourceRecord] = {}
+        projected: Dict[str, List[DescriptiveFact]] = {}
+        for fact in facts:
+            record_id = "desc-source-" + stable_payload_hash((fact.statement, fact.source, fact.scope))[:20]
+            normalized[record_id] = NormalizedSourceRecord(record_id, fact.statement, "admitted_context",
+                                                          fact.scope, (fact.source,), "selected",
+                                                          "SRS adapter admitted scoped context")
+            projected.setdefault(record_id, []).append(fact)
+        result = run_descriptive_flow(normalized.values(), profile=profile, adapter_name="srs-overview",
+                                      adapter=lambda record: (projected[record.record_id], ""))
+        for linkage in result.audit:
+            if linkage["decision"] != "selected":
+                continue
+            fact = next(fact for fact in result.facts if fact.fact_id == linkage["fact_id"])
+            unit = next(unit for unit in result.units if unit.unit_id == linkage["unit_id"])
+            audit(fact.section, {"statement": fact.statement, "source": fact.source, "scope": fact.scope},
+                  unit.text, linkage["reason"])
+            if audit_rows is not None:
+                audit_rows[-1].update(linkage)
+        return list(result.paragraphs)
+
+    for paragraph in project(projected_facts):
+        first = paragraph.facts[0]
+        if first.mode:
+            recovered_modes[first.mode].append(paragraph.text)
+        else:
+            capabilities.append(paragraph.text)
+
+    identities = unique(identities)
+    capabilities = unique(capabilities)
+    sections[SRS_SYSTEM_OVERVIEW_HEADINGS[0]] = identities or ["The system identity and product role are not specified."]
+    sections[SRS_SYSTEM_OVERVIEW_HEADINGS[1]] = [
+        item for item in capabilities
+        if item.casefold() not in {identity.casefold() for identity in identities}
+    ] or ["System-level capabilities are not specified."]
+
+    domain_items: List[str] = []
+    domain_groups = [
+        ("Sensing and measurement", "The measurement paths", True, measurement_facts),
+        ("External acquisition and data handling", "The acquisition and data paths", True,
+         [fact for fact in projected_facts if not fact.mode and fact.action in {"acquire", "store", "provide"}]),
+        ("Embedded processing", "The processing function", False,
+         [fact for fact in projected_facts if fact.action == "process" and not fact.negative]),
+    ]
+    for name, subject, plural, facts in domain_groups:
+        if not facts:
+            continue
+        paragraphs = project([replace(fact, subject=subject, plural_subject=plural,
+                                      section=SRS_SYSTEM_OVERVIEW_HEADINGS[2]) for fact in facts])
+        domain_items.append(f"- **{name}**\n" + "\n".join("  - " + text for text in unique(paragraph.text for paragraph in paragraphs)))
+    sections[SRS_SYSTEM_OVERVIEW_HEADINGS[2]] = domain_items or [
+        "Top-level domain and subsystem responsibilities are not specified in the available descriptions."
+    ]
+
+    interface_groups: Dict[str, Dict[str, Set[str]]] = {}
+    group_specs = (
+        ("Sensing input", r"\b(?:sensor|sensing|analog input)\b"),
+        ("Serial communication", r"\b(?:serial|i2c|spi)\b"),
+        ("Measurement data exchange", r"\b(?:digitized samples?|buffered (?:output )?samples?)\b"),
+        ("Interrupt reporting", r"\binterrupt\b"),
+        ("Power supply", r"\bsupply\b"),
+    )
+    interface_sources: Dict[str, List[Mapping[str, object]]] = {}
+    for row in interface_rows:
+        purpose = csv_cell_text(row.get("Purpose") or row.get("Description")).strip()
+        if not purpose:
+            continue
+        searchable = purpose.casefold()
+        group = next((name for name, pattern in group_specs if re.search(pattern, searchable, re.IGNORECASE)), "")
+        if not group:
+            continue
+        interface_sources.setdefault(group, []).append(row)
+        values = interface_groups.setdefault(group, {"direction": set(), "type": set()})
+        direction = csv_cell_text(row.get("Direction")).strip().casefold()
+        medium = csv_cell_text(row.get("Type")).strip().casefold()
+        if direction in {"input", "output", "bidirectional"}:
+            values["direction"].add(direction)
+        if medium in {"analog", "digital", "power"}:
+            values["type"].add(medium)
+    interface_content: List[str] = []
+    if interface_groups:
+        role_names = [name.casefold() for name in interface_groups]
+        interface_content.append(
+            "The interfaces provide " + _descriptive_join(role_names) + " roles. "
+            "External versus internal placement is not specified for every interface."
+        )
+        interface_content.extend([
+            "",
+            "| Boundary role | Direction | Medium |",
+            "|---|---|---|",
+        ])
+        direction_order = {"input": 0, "bidirectional": 1, "output": 2}
+        for group, values in interface_groups.items():
+            directions = ", ".join(sorted(values["direction"], key=lambda item: direction_order[item]))
+            media = ", ".join(sorted(values["type"]))
+            summary = f"| {group} | {directions} | {media} |"
+            interface_content.append(summary)
+            for row in interface_sources[group]:
+                audit(SRS_SYSTEM_OVERVIEW_HEADINGS[3], row, summary, "interface role from purpose; no pin-name inference")
+    elif interface_roles:
+        interface_content.extend(unique(interface_roles))
+    else:
+        interface_content.append("External and cross-domain interface roles are not specified at system level.")
+    sections[SRS_SYSTEM_OVERVIEW_HEADINGS[3]] = interface_content
+
+    modes = unique(
+        csv_cell_text(row.get("mode")).strip()
+        for row in mode_rows
+        if csv_cell_text(row.get("mode")).strip()
+        and not csv_cell_text(row.get("evidence")).casefold().startswith("derived default:")
+    )
+    modes = unique([*modes, *recovered_modes])
+    mode_items: List[str] = []
+    for mode in modes:
+        descriptions = [
+            statement for statement, _source in overview_records
+            if re.search(r"\b" + re.escape(mode) + r"\b", statement, re.IGNORECASE)
+        ]
+        role = unique([*recovered_modes.get(mode, []), *descriptions])
+        mode_items.append(
+            f"- **{mode}**\n" + "\n".join(f"  - {item}" for item in role) if role else
+            f"- **{mode}**\n  - Its system-level role and transitions are not specified."
+        )
+        for statement, source in overview_records:
+            if statement in descriptions:
+                audit_candidate(SRS_SYSTEM_OVERVIEW_HEADINGS[4], statement, source, statement)
+    sections[SRS_SYSTEM_OVERVIEW_HEADINGS[4]] = mode_items or ["System-level operating modes are not specified."]
+
+    eligible_power = [
+        record for record in power_records
+        if csv_cell_text(record.get("source") or record.get("provenance"))
+        and csv_cell_text(record.get("scope") or record.get("evidence_scope")).casefold() in {"system", "architecture"}
+        and not re.search(
+            r"\b(?:shall|must)\b|\b(?:not|no)\s+(?:switchable|power-gated|always[- ]on|retention)\b|"
+            r"\b(?:cannot|can not|does not|do not)\s+(?:be powered|preserve|retain)\b",
+            csv_cell_text(record.get("statement")), re.IGNORECASE,
+        )
+        and "definitions" not in csv_cell_text(record.get("source")).casefold()
+    ]
+    power_items: List[str] = []
+    power_roles = (
+        (r"\b(?:power domain|power domains|supply domain)\b.*\b(?:independent|independently)\b", "Supply-domain structure", "The architecture separates logic into supply domains with independent power control."),
+        (r"\b(?:always[- ]on|always active|never powered down)\b", "Always-on behavior", "An always-on domain remains powered during low-power operation."),
+        (r"\b(?:switchable|power-gated)\b|\b(?:domain|domain logic)\b.{0,60}\b(?:can|may)\s+be\s+powered\s+down\b", "Switchable behavior", "The power architecture includes a domain whose supply can be switched off."),
+        (r"\b(?:retains|preserves)\s+(?:register\s+)?state\b.{0,100}\bpowered down\b", "Retention behavior", "State is preserved while the main logic is powered down."),
+    )
+    for pattern, label, _summary in power_roles:
+        matches = [record for record in eligible_power if re.search(pattern, csv_cell_text(record.get("statement")), re.IGNORECASE)]
+        facts = []
+        for record in matches:
+            statement = csv_cell_text(record.get("statement"))
+            if re.search(r"\b(?:only|unless|if|after|before|until|except)\b", statement, re.IGNORECASE):
+                audit("", record, "", "projection_gap: power qualifier requires explicit projection")
+                continue
+            values = dict(source=csv_cell_text(record.get("source") or record.get("provenance")),
+                          statement=statement, scope=csv_cell_text(record.get("scope") or record.get("evidence_scope")).casefold(),
+                          section=SRS_SYSTEM_OVERVIEW_HEADINGS[5])
+            if label == "Supply-domain structure":
+                fact = DescriptiveFact(subject="The supply domains", plural_subject=True, action="support",
+                                       objects=("independent power control",), **values)
+            elif label == "Always-on behavior":
+                fact = DescriptiveFact(subject="An always-on domain", action="remain", objects=("powered",), **values)
+            elif label == "Switchable behavior":
+                qualifiers = []
+                if re.search(r"\bin idle\b", statement, re.IGNORECASE):
+                    qualifiers.append("in idle")
+                if re.search(r"\bwhen\b[^.!?•]*\bnot in use\b", statement, re.IGNORECASE):
+                    qualifiers.append("when its associated logic is not in use")
+                modal = re.search(r"\b(can|may)\s+be\s+powered\s+down\b", statement, re.IGNORECASE)
+                fact = DescriptiveFact(subject="A switchable domain", action="enter", objects=("a powered-down state",),
+                                       modality=modal.group(1).casefold() if modal else "can",
+                                       qualifiers=tuple(qualifiers), **values)
+            else:
+                fact = DescriptiveFact(subject="The power architecture", action="preserve", objects=("state",),
+                                       qualifiers=("while the main logic is powered down",), **values)
+            facts.append(fact)
+        paragraphs = project(facts)
+        if paragraphs:
+            power_items.append(f"- **{label}**\n" + "\n".join("  - " + paragraph.text for paragraph in paragraphs))
+    if not any("**Retention behavior**" in item for item in power_items):
+        power_items.append("- **Retention**\n  - State retention across system power transitions is not specified.")
+    clock_reset = [
+        statement for statement, _source in overview_records
+        if re.search(r"\b(?:clock|reset)\b", statement, re.IGNORECASE)
+    ]
+    if clock_reset:
+        power_items.extend(f"- **Clock and reset**\n  - {item}" for item in unique(clock_reset))
+    else:
+        power_items.append("- **Clock and reset**\n  - Top-level clock and reset coordination are not specified.")
+    sections[SRS_SYSTEM_OVERVIEW_HEADINGS[5]] = power_items
+
+    scope_content = [
+        statement for statement, _source in overview_records
+        if re.search(r"\b(?:system scope|scope covers|system assumes|allocation boundar|engineering scope)\b", statement, re.IGNORECASE)
+    ]
+    sections[SRS_SYSTEM_OVERVIEW_HEADINGS[6]] = unique(scope_content) or [
+        "System-level scope covers product capabilities and externally observable behavior. Subsystem implementation remains within its engineering allocation.",
+        "- **Assumptions**\n  - Additional system-level assumptions are not described in the available descriptions.",
+    ]
+    for statement, source in overview_records:
+        if statement in scope_content:
+            audit_candidate(SRS_SYSTEM_OVERVIEW_HEADINGS[6], statement, source, statement)
+    if audit_rows is not None:
+        rendered = "\n".join(item for items in sections.values() for item in items)
+        for row in audit_rows:
+            if row["rendered_summary"] and (not row["section"] or row["rendered_summary"] not in rendered):
+                row["decision"] = "candidate_only"
+                row["reason"] = "candidate retained; not rendered in this overview"
+    return sections
+
+
+SRS_INTRODUCTORY_SECTIONS = ("1.1", "1.2", "1.3", "1.4", "2.1", "2.2", "2.3", "2.4")
+
+SRS_INTRODUCTORY_WRITING_RULE_ID = "srs-introductory-authority-bounded-v1"
+SRS_INTRODUCTORY_WRITING_RULE = (
+    "Use concise, natural technical prose bounded by the selected approved content.",
+    "Describe document purpose and scope without promising complete coverage or creating allocation.",
+    "Mention behavior, interfaces, performance and implementation only to the extent supported by approved content.",
+    "Treat terminology as a reading aid, not authority for capabilities, limits, obligations or acceptance criteria.",
+    "Reference existing source and traceability information without implying new applicability or approval.",
+    "Keep this preferred writing rule within the SRS introductory profile; do not inherit it in DRS, ARS or IPOS.",
+)
+
+SRS_DOCUMENT_CONTENT_PROFILE = DescriptiveWritingProfile(
+    name="srs-document-content", document_type="SRS", allowed_scopes=("document", "system", "architecture"),
+    evidence_kinds=("document_introduction", "document_terminology", "block_catalog", "power_domain"),
+    authority_tiers=("presentation_policy", "admitted_context"), owner_policy="unrestricted",
+    allowed_domains=(), allowed_layers=(), projection_adapters=("srs-document-content",),
+    topic_roles=(*SRS_INTRODUCTORY_SECTIONS, "3.6", "4.1", "5.1"), excluded_terms=(), runtime_enabled=True,
+)
+
+
+def compose_srs_support_content(project_name: str, snapshot_id: str,
+                                catalog_entries: Sequence[Mapping[str, str]], catalog_findings: Sequence[str],
+                                power_records: Sequence[Mapping[str, object]]) -> Tuple[Dict[str, List[str]], Dict[str, object]]:
+    sections: Dict[str, List[str]] = {section: [] for section in SRS_DOCUMENT_CONTENT_PROFILE.topic_roles}
+    records: List[NormalizedSourceRecord] = []
+    units: List[SemanticUnit] = []
+    power_rows: List[Dict[str, str]] = []
+    gaps: List[str] = list(catalog_findings)
+
+    def retain(section: str, text: str, source_text: str, provenance: Tuple[str, ...], tier: str,
+               scope: str = "architecture") -> None:
+        record_id = "srs-source-" + stable_payload_hash((section, source_text, provenance))[:20]
+        record = NormalizedSourceRecord(record_id, source_text, tier, scope,
+                                        provenance, "selected", "SRS document-specific presentation")
+        unit = SemanticUnit("srs-unit-" + stable_payload_hash((section, text, record_id))[:20], section, text,
+                            (record_id,), len(units))
+        records.append(record)
+        units.append(unit)
+        sections[section].append(text)
+
+    purpose = (f"This document presents the system-level requirements and supporting context for {project_name} "
+               "included in the selected approved baseline. Descriptive content does not add requirements or change their allocation.")
+    retain("1.1", purpose, purpose, ("SRS document-purpose policy",), "presentation_policy", "document")
+    scope = ("The scope is limited to system-level requirements allocated to this document and the supporting system context. "
+             "Analog and digital behavior, interfaces, operating conditions and verification information are described only "
+             "to the extent supported by the approved content. This description does not extend subsystem or block-level allocations.")
+    retain("1.2", scope, scope, ("SRS document-scope policy",), "presentation_policy", "document")
+    audience = ("This document is intended for system architects, analog and digital design engineers, firmware engineers, "
+                "verification and validation engineers, test and product engineers, and program and customer stakeholders.")
+    retain("1.3", audience, audience, ("SRS intended-audience policy",), "presentation_policy", "document")
+    references = ("Reference documents are listed in Table 2. Source links for any included requirements are recorded "
+                  "in the associated traceability matrix. Listing a document or standard does not itself establish "
+                  "applicability or add obligations.")
+    retain("1.4", references, references, ("SRS reference-document policy",), "presentation_policy", "document")
+    terminology = {
+        "2.1": (
+            ("System", "The device or functional scope identified in the approved descriptions."),
+            ("Subsystem", "A grouping of related functions identified in the approved architecture context."),
+            ("Block", "A concrete unit identified in the approved architecture context."),
+            ("SRS", "System Requirements Specification; the system-level requirements and context document."),
+            ("ARS", "Analog Requirements Specification; the analog and mixed-signal integration document."),
+            ("DRS", "Digital Requirements Specification; the digital integration document."),
+            ("IPOS", "The block-local implementation requirements specification."),
+        ),
+        "2.2": (
+            ("Input/output range", "The span of input or output values considered under stated operating conditions."),
+            ("Gain", "The ratio of a change in output to the corresponding change in input."),
+            ("Offset", "The deviation from the specified reference response at a reference input."),
+            ("Noise", "Unwanted variations superimposed on a signal or measurement."),
+            ("Bandwidth", "The frequency interval over which a response meets a defined criterion."),
+            ("Full-scale", "The reference magnitude or span corresponding to the specified measurement range."),
+            ("ODR", "Output data rate; the rate at which new output samples become available."),
+            ("Sensitivity", "The change in output per unit change in the measured quantity."),
+        ),
+        "2.3": (
+            ("Register", "A named storage element used to expose data, configuration or status."),
+            ("Bit field", "A defined subset of bits within a register or data word."),
+            ("Mode", "An operating configuration described in the applicable content."),
+            ("State", "A condition of control logic identified within a described operating sequence."),
+            ("Reset", "Initialization of affected logic as described in the applicable content."),
+            ("Interrupt", "An event notification that requests attention from a controller or processor."),
+            ("Boot sequence", "An initialization sequence described in the applicable content."),
+            ("Interface", "A defined boundary through which components exchange data, control or status."),
+        ),
+        "2.4": (
+            ("RMS noise", "The root-mean-square amplitude of noise over a stated measurement interval and bandwidth."),
+            ("SNR", "Signal-to-noise ratio; the ratio of signal power to noise power, commonly expressed in decibels."),
+            ("Latency", "The elapsed time between a defined initiating event and its corresponding response."),
+            ("Precision", "The repeatability of measurement results under stated conditions."),
+            ("Tolerance", "A permitted deviation where specified relative to a reference value or condition."),
+            ("GR&R", "Gage repeatability and reproducibility; the evaluation of measurement-system variation."),
+            ("Guard band", "A margin between acceptance and specification limits where such a margin is specified."),
+            ("Pass/fail", "An assessment against acceptance criteria specified by the applicable requirements."),
+        ),
+    }
+    terminology_context = {
+        "2.1": ("These definitions aid interpretation of the system descriptions and document abbreviations. "
+            "They do not establish capabilities, ownership or allocation; specific meanings follow the approved content."),
+        "2.2": ("Analog terms are descriptive. Ranges, operating conditions and performance limits are those "
+            "stated in the applicable approved content."),
+        "2.3": ("Digital terms aid interpretation of configuration and control descriptions. Their inclusion "
+            "does not imply a particular implementation or supported feature."),
+        "2.4": ("Measurement terms aid interpretation of verification information. Test conditions, limits and "
+            "acceptance criteria remain those specified in the applicable approved requirements."),
+    }
+    for section, definitions in terminology.items():
+        context = terminology_context[section]
+        retain(section, context, context, ("SRS terminology policy:" + section,), "presentation_policy", "document")
+        for term, definition in definitions:
+            text = f"**{term}:** {definition}"
+            retain(section, text, text, ("SRS terminology policy:" + section + ":" + term,), "presentation_policy", "document")
+    for entry in catalog_entries:
+        section = "4.1" if entry["category"] == "analog" else "5.1"
+        summary = compose_technical_block_purpose(entry["block"], entry["function"])
+        retain(section, f"- **{entry['block']}**\n\n  {summary}", entry["function"],
+               (entry["source"], "approved classification sources:" + entry["classification_sources"]), "admitted_context")
+    labels = re.compile(r"(?:Included block\(s\)|Domain type|Voltage|Control mode|Notes|Function|Characteristics|Control):\s*", re.IGNORECASE)
+    for record in power_records:
+        statement = csv_cell_text(record.get("statement"))
+        source = csv_cell_text(record.get("source") or record.get("provenance"))
+        scope = csv_cell_text(record.get("scope") or record.get("evidence_scope")).casefold()
+        if csv_cell_text(record.get("evidence_kind") or record.get("record_type")).casefold() != "power_domain":
+            continue
+        if not source or scope not in {"architecture", "system"}:
+            gaps.append("SRS_POWER_SCOPE_OR_PROVENANCE_MISSING: " + source)
+            continue
+        matches = list(labels.finditer(statement))
+        name = statement[:matches[0].start()].strip(" :.") if matches else ""
+        fields = {match.group(0).split(":")[0].casefold():
+                  statement[match.end():matches[index + 1].start() if index + 1 < len(matches) else len(statement)].strip(" .\u2022")
+                  for index, match in enumerate(matches)}
+        if not name or not fields.get("domain type") or not fields.get("function"):
+            gaps.append("SRS_POWER_PROJECTION_GAP: " + source)
+            continue
+        role = fields["function"]
+        blocks = fields.get("included block(s)", "")
+        if blocks:
+            role += ". Associated blocks: " + ", ".join(value.strip() for value in blocks.split(",") if value.strip())
+        voltage = fields.get("voltage", "")
+        if voltage:
+            if re.fullmatch(r"\d+(?:\.\d+)?\s*(?:mV|V)", voltage):
+                role += ". Supply voltage: " + voltage
+            else:
+                gaps.append("SRS_POWER_VOLTAGE_UNRELIABLE: " + source + ": " + voltage)
+        conditions = fields.get("characteristics", "")
+        notes = fields.get("notes", "")
+        if notes and notes.casefold() not in conditions.casefold():
+            if re.search(r"\s+\d+\s+\d+(?:\.\d+)*$", notes):
+                gaps.append("SRS_POWER_NOTE_UNREADABLE: " + source + ": " + notes)
+            else:
+                conditions = notes + (". " + conditions if conditions else "")
+        cells = [name, fields["domain type"], fields.get("control mode") or fields.get("control") or "Not specified",
+                 role, conditions or "Not specified"]
+        text = "| " + " | ".join(value.replace("|", "\\|").replace("\n", " ") for value in cells) + " |"
+        retain("3.6", text, statement, (source,), "admitted_context", scope)
+        power_rows.append({"source": source, "statement": statement, "domain": name, "row": text})
+    return sections, {"schema_version": 1, "snapshot_id": snapshot_id, "project_name": project_name,
+                      "profile": SRS_DOCUMENT_CONTENT_PROFILE.name, "profile_version": SRS_DOCUMENT_CONTENT_PROFILE.version,
+                      "profile_fingerprint": stable_payload_hash(asdict(SRS_DOCUMENT_CONTENT_PROFILE)),
+                      "projection_adapter": "srs-document-content",
+                      "writing_rule_id": SRS_INTRODUCTORY_WRITING_RULE_ID,
+                      "writing_rule_fingerprint": stable_payload_hash(SRS_INTRODUCTORY_WRITING_RULE),
+                      "records": [asdict(record) for record in records], "units": [asdict(unit) for unit in units],
+                      "catalog_entries": list(catalog_entries), "power_rows": power_rows, "review_findings": gaps}
+
+
+def _validate_srs_fact_audit(markdown_path: Path, section_bodies: Mapping[str, str]) -> List[str]:
+    audit_path = markdown_path.with_name("descriptive_system_overview_audit.csv")
+    if not audit_path.exists():
+        return []
+    findings: List[str] = []
+    groups: Dict[Tuple[str, str, Tuple[str, ...]], List[tuple]] = {}
+    with audit_path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if not {"profile", "fact_id", "fact_json", "contributor_ids", "profile_version", "profile_fingerprint",
+            "projection_adapter", "source_record_id", "normalized_record_json", "unit_id", "semantic_unit_json"}.issubset(reader.fieldnames or []):
+            return ["srs_descriptive_audit_schema_missing"]
+        for row in reader:
+            if not row.get("fact_id"):
+                continue
+            try:
+                payload = json.loads(row["fact_json"])
+                for field in ("objects", "qualifiers", "results"):
+                    payload[field] = tuple(payload[field])
+                fact = DescriptiveFact(**payload)
+                contributors = json.loads(row["contributor_ids"])
+                if not isinstance(contributors, list) or any(not isinstance(value, str) for value in contributors):
+                    raise ValueError("Invalid contributors")
+                if fact.fact_id not in contributors or len(set(contributors)) != len(contributors):
+                    findings.append("srs_descriptive_audit_contributors_invalid:" + fact.section)
+                if (fact.fact_id != row["fact_id"] or row["profile"] != SRS_DESCRIPTIVE_PROFILE.name
+                        or row["decision"] != "selected" or row["section"] != fact.section
+                        or any(row[field] != getattr(fact, field) for field in ("source", "statement", "scope"))):
+                    raise ValueError("Audit fields disagree with fact")
+                record_payload = json.loads(row["normalized_record_json"])
+                record_payload["provenance"] = tuple(record_payload["provenance"])
+                record = NormalizedSourceRecord(**record_payload)
+                unit_payload = json.loads(row["semantic_unit_json"])
+                unit_payload["source_record_ids"] = tuple(unit_payload["source_record_ids"])
+                unit = SemanticUnit(**unit_payload)
+                if (record.record_id != row["source_record_id"] or record.text != fact.statement
+                        or record.ownership_scope != fact.scope or fact.source not in record.provenance
+                        or descriptive_evidence_findings(record, profile=SRS_DESCRIPTIVE_PROFILE)
+                        or row["profile_version"] != str(SRS_DESCRIPTIVE_PROFILE.version)
+                        or row["profile_fingerprint"] != stable_payload_hash(asdict(SRS_DESCRIPTIVE_PROFILE))
+                        or row["projection_adapter"] not in SRS_DESCRIPTIVE_PROFILE.projection_adapters
+                        or unit.unit_id != row["unit_id"] or unit.section != fact.section
+                        or unit.text != row["rendered_summary"] or record.record_id not in unit.source_record_ids
+                        or unit.unit_id != "desc-unit-" + stable_payload_hash(
+                            (row["profile_fingerprint"], tuple(contributors), unit.text))[:20]):
+                    raise ValueError("Invalid profile or materialization linkage")
+                groups.setdefault((fact.section, row["rendered_summary"], tuple(contributors)), []).append(
+                    (fact, contributors, row, record, unit))
+            except (KeyError, TypeError, ValueError):
+                findings.append("srs_descriptive_audit_fact_invalid:" + row.get("fact_id", ""))
+    docx_path = markdown_path.with_suffix(".docx")
+    docx_text = None
+    if docx_path.exists():
+        try:
+            from docx import Document
+            document = Document(docx_path)
+            docx_text = " ".join(paragraph.text for paragraph in document.paragraphs)
+        except Exception:
+            findings.append("srs_descriptive_docx_unreadable")
+    normalize = lambda text: " ".join(text.replace("\u2019", "'").replace("\u2018", "'").casefold().split())
+    for (section, summary, _contributors), members in groups.items():
+        facts = [member[0] for member in members]
+        expected = list(dict.fromkeys(fact.fact_id for fact in facts))
+        if any(member[1] != expected for member in members):
+            findings.append("srs_descriptive_audit_contributors_invalid:" + section)
+        records = tuple({member[3].record_id: member[3] for member in members}.values())
+        result = DescriptiveFlowResult(records, tuple(facts), (DescriptiveParagraph(summary, tuple(facts)),),
+                                       (members[0][4],), tuple(member[2] for member in members))
+        findings.extend(validate_descriptive_flow(result, profile=SRS_DESCRIPTIVE_PROFILE))
+        if not summary or normalize(summary) not in normalize(section_bodies.get(section, "")):
+            findings.append("srs_descriptive_fact_missing_from_markdown:" + section)
+        if docx_text is not None and normalize(summary) not in normalize(docx_text):
+            findings.append("srs_descriptive_fact_missing_from_docx:" + section)
+    return findings
+
+
+def validate_srs_support_content(markdown_path: Path) -> List[str]:
+    audit_path = markdown_path.with_name("descriptive_srs_content_audit.json")
+    repo_root = markdown_path.parents[2]
+    production = (repo_root / "data/canonical/canonical_store.sqlite").exists()
+    if not audit_path.exists():
+        return ["srs_content_audit_missing"] if production else []
+    findings: List[str] = []
+    try:
+        audit = json.loads(audit_path.read_text(encoding="utf-8"))
+        if audit["schema_version"] != 1:
+            raise ValueError("Unknown content audit schema")
+        profile = SRS_DOCUMENT_CONTENT_PROFILE
+        if (audit["profile"] != profile.name or audit["profile_version"] != profile.version
+                or audit["profile_fingerprint"] != stable_payload_hash(asdict(profile))
+                or audit["projection_adapter"] not in profile.projection_adapters):
+            raise ValueError("Invalid SRS document-content profile")
+        if (audit["writing_rule_id"] != SRS_INTRODUCTORY_WRITING_RULE_ID
+                or audit["writing_rule_fingerprint"] != stable_payload_hash(SRS_INTRODUCTORY_WRITING_RULE)):
+            raise ValueError("Invalid SRS introductory writing rule")
+        records = {record["record_id"]: record for record in audit["records"]}
+        if len(records) != len(audit["records"]):
+            raise ValueError("Duplicate normalized source IDs")
+        text = markdown_path.read_text(encoding="utf-8")
+        def body(section: str) -> str:
+            match = re.search(r"(?ms)^### " + re.escape(section) + r"\s[^\n]*\n(.*?)(?=^#{1,3}\s|\Z)", text)
+            return match.group(1) if match else ""
+        def normalized(value: str) -> str:
+            value = re.sub(r"<[^>]+>|&nbsp;", "", value)
+            return " ".join(value.replace("**", "").replace("\u2019", "'").replace("\u2018", "'").split()).casefold()
+        sections = {section: body(section) for section in profile.topic_roles}
+        if not normalized(sections["1.1"]) or "this document presents the system-level requirements" not in normalized(sections["1.1"]):
+            findings.append("srs_purpose_missing")
+        if not normalized(sections["1.3"]):
+            findings.append("srs_intended_audience_missing")
+        for section in SRS_INTRODUCTORY_SECTIONS:
+            if not normalized(sections[section]):
+                findings.append("srs_introductory_section_missing:" + section)
+        snapshot = re.search(r"(?m)^Snapshot ID:\s*(\S+)", text)
+        if not snapshot or snapshot.group(1) != audit["snapshot_id"]:
+            findings.append("srs_content_snapshot_mismatch")
+        if production:
+            from canonical_store import read_stage2_descriptive_evidence
+            from validate_downstream_coherence import resolve_downstream_contract, snapshot_architecture_context, srs_catalog_from_context
+            contract = resolve_downstream_contract(repo_root, audit["snapshot_id"])
+            with (repo_root / "artifacts/stage2_mirco_arc/block_inventory.csv").open(encoding="utf-8-sig", newline="") as handle:
+                inventory = list(csv.DictReader(handle))
+            entries, review = srs_catalog_from_context(inventory, contract, snapshot_architecture_context(repo_root, contract))
+            if audit["catalog_entries"] != entries:
+                findings.append("srs_catalog_authority_mismatch")
+            source_power = [record for record in read_stage2_descriptive_evidence(repo_root)
+                            if csv_cell_text(record.get("evidence_kind")).casefold() == "power_domain"]
+            _, expected = compose_srs_support_content(audit["project_name"], audit["snapshot_id"], entries, review, source_power)
+            expected = json.loads(json.dumps(expected))
+            for field in ("records", "units", "power_rows", "review_findings"):
+                if audit[field] != expected[field]:
+                    findings.append("srs_content_provenance_mismatch:" + field)
+        docx_sections: Dict[str, str] = {}
+        docx_tables: List[List[List[str]]] = []
+        docx_path = markdown_path.with_suffix(".docx")
+        if docx_path.exists():
+            from docx import Document
+            from docx.oxml.ns import qn
+            from docx.table import Table
+            document = Document(docx_path)
+            current = ""
+            for element in document.element.body:
+                words = " ".join(node.text or "" for node in element.iter(qn("w:t")))
+                if element.tag == qn("w:p"):
+                    heading = re.match(r"^(\d+(?:\.\d+)*)\.?\s", words)
+                    if heading:
+                        current = heading.group(1)
+                if current in sections:
+                    docx_sections[current] = docx_sections.get(current, "") + " " + words
+                if current == "3.6" and element.tag == qn("w:tbl"):
+                    table = Table(element, document)
+                    docx_tables.append([[cell.text for cell in row.cells] for row in table.rows])
+        used_records: Set[str] = set()
+        seen_units: Set[str] = set()
+        for index, unit in enumerate(audit["units"]):
+            section = unit["section"]
+            origins = unit["source_record_ids"]
+            if (unit["unit_id"] in seen_units or unit["output_order"] != index or len(origins) != 1
+                    or any(origin not in records for origin in origins)):
+                findings.append("srs_content_linkage_invalid")
+                continue
+            seen_units.add(unit["unit_id"])
+            used_records.update(origins)
+            record = records[origins[0]]
+            if (section not in profile.topic_roles or record["authority_tier"] not in profile.authority_tiers
+                    or record["ownership_scope"] not in profile.allowed_scopes
+                    or (section in SRS_INTRODUCTORY_SECTIONS) != (record["authority_tier"] == "presentation_policy")
+                    or not record["provenance"] or not record["text"] or record["decision"] != "selected"
+                    or record["record_id"] != "srs-source-" + stable_payload_hash(
+                        (section, record["text"], tuple(record["provenance"])))[:20]
+                    or unit["unit_id"] != "srs-unit-" + stable_payload_hash((section, unit["text"], record["record_id"]))[:20]):
+                findings.append("srs_content_provenance_invalid:" + section)
+            rendered = unit["text"]
+            if section == "3.6":
+                if rendered not in sections[section]:
+                    findings.append("srs_domain_row_missing_or_changed")
+                cells = [value.strip().replace("\\|", "|") for value in re.split(r"(?<!\\)\|", rendered)[1:-1]]
+                if docx_path.exists() and not any(cells == row for table in docx_tables for row in table):
+                    findings.append("srs_domain_row_missing_from_docx")
+            else:
+                summary = rendered.split("\n\n", 1)[-1].strip()
+                if normalized(rendered) not in normalized(sections.get(section, "")):
+                    findings.append("srs_content_missing_from_markdown:" + section)
+                if docx_path.exists() and normalized(summary) not in normalized(docx_sections.get(section, "")):
+                    findings.append("srs_content_missing_from_docx:" + section)
+                if section in {"4.1", "5.1"}:
+                    remainder = text.replace(sections[section], "", 1)
+                    if normalized(summary) in normalized(remainder):
+                        findings.append("srs_catalog_summary_repeated_outside_catalog")
+        if used_records != set(records):
+            findings.append("srs_content_contributor_coverage_invalid")
+        for section, category in (("4.1", "analog"), ("5.1", "digital")):
+            names = re.findall(r"(?m)^\s*- \*\*([^*]+)\*\*", sections[section])
+            expected_names = [entry["block"] for entry in audit["catalog_entries"] if entry["category"] == category]
+            if names != expected_names:
+                findings.append("srs_catalog_coverage_invalid:" + section)
+        headers = ["Domain", "Type", "Control", "Functional Role", "Power Conditions"]
+        if audit["power_rows"]:
+            header = "| " + " | ".join(headers) + " |"
+            if header not in sections["3.6"]:
+                findings.append("srs_domain_table_header_missing")
+            else:
+                table_start = sections["3.6"].index(header)
+                if not normalized(sections["3.6"][:table_start]):
+                    findings.append("srs_power_explanation_missing")
+                clock_start = sections["3.6"].find("**Clock and reset**")
+                if clock_start >= 0 and clock_start < table_start:
+                    findings.append("srs_power_clock_reset_order_invalid")
+            rows = [line.strip() for line in sections["3.6"].splitlines() if line.strip().startswith("|")]
+            if rows != [header, "|---|---|---|---|---|", *[row["row"] for row in audit["power_rows"]]]:
+                findings.append("srs_domain_table_fidelity_invalid")
+            if docx_path.exists() and not any(table and table[0] == headers for table in docx_tables):
+                findings.append("srs_domain_table_header_missing_from_docx")
+        for finding in audit["review_findings"]:
+            if finding not in text:
+                findings.append("srs_content_review_finding_missing")
+    except (KeyError, ValueError, TypeError, OSError, IndexError) as exc:
+        findings.append("srs_content_audit_invalid:" + str(exc))
+    return findings
+
+
 def validate_srs_system_overview(markdown_path: Path) -> List[str]:
     """Independently validate the SRS system-level overview contract."""
     if not markdown_path.exists():
@@ -702,18 +1972,48 @@ def validate_srs_system_overview(markdown_path: Path) -> List[str]:
     if not match:
         return ["srs_system_overview_section_missing"]
     overview = match.group(0)
+    narrative = re.sub(r"(?m)^\| Domain \| Type \| Control \| Functional Role \| Power Conditions \|\s*\n(?:^\|[^\n]*\|\s*\n)+", "", overview)
     findings: List[str] = []
+    section_bodies: Dict[str, str] = {}
     for heading in SRS_SYSTEM_OVERVIEW_HEADINGS:
-        if len(re.findall(rf"^### {re.escape(heading)}\b", overview, flags=re.MULTILINE)) != 1:
+        heading_matches = list(re.finditer(rf"^### {re.escape(heading)}\b[^\n]*", overview, flags=re.MULTILINE))
+        if len(heading_matches) != 1:
             findings.append(f"srs_system_overview_heading_invalid:{heading}")
+            continue
+        section_start = heading_matches[0].end()
+        next_heading = re.search(r"(?m)^### |^## 4\.", overview[section_start:])
+        section_body = overview[section_start:section_start + next_heading.start()] if next_heading else overview[section_start:]
+        section_bodies[heading] = section_body
+        meaningful_body = re.sub(r"(?is)<p\s*>\s*&nbsp;\s*</p>", "", section_body)
+        meaningful_body = re.sub(r"(?is)<[^>]+>|&nbsp;|\s+", "", meaningful_body)
+        if not meaningful_body:
+            findings.append(f"srs_system_overview_section_empty:{heading}")
     if re.search(r"\b(?:DRS|ARS|IPOS)\b|^\s*Covers:\s*", overview, flags=re.IGNORECASE | re.MULTILINE):
         findings.append("srs_system_overview_contains_downstream_or_normative_linkage")
     if re.search(
         r"\b(?:register|regmap|port\s+name|address|signal\s+level|signal\s+name)\b",
-        overview,
+        narrative,
         flags=re.IGNORECASE,
     ):
         findings.append("srs_system_overview_contains_implementation_detail")
+    if re.search(r"\b(?:approved evidence|approved architecture|topic output limit|evidence count|need clarification|aim of this document|audit)\b", overview, re.IGNORECASE):
+        findings.append("srs_system_overview_contains_audit_or_filler_language")
+    if re.search(r"\b(?:shall|must|required to|Covers:)\b|\b0x[0-9a-f]+\b|\b(?:i|o|ca|u)_[a-z0-9_]+\b|\b[A-Za-z][A-Za-z0-9.-]*_[A-Za-z0-9_.-]+\b", narrative, re.IGNORECASE):
+        findings.append("srs_system_overview_contains_normative_or_raw_source_fragment")
+    if re.search(r"(?m)^\|[^\n]*\bOwner\b[^\n]*\|\s*\n\|[-| ]+\|", overview, re.IGNORECASE):
+        findings.append("srs_system_overview_contains_raw_interface_dump")
+    normalized_lines: Dict[str, str] = {}
+    for line in overview.splitlines():
+        normalized = re.sub(r"[*_`#>-]", "", line).strip().casefold()
+        normalized = re.sub(r"\s+", " ", normalized)
+        if len(normalized) < 60 or normalized.startswith("|") or normalized in {"&nbsp;"}:
+            continue
+        if normalized in normalized_lines:
+            findings.append("srs_system_overview_repeats_narrative_content")
+            break
+        normalized_lines[normalized] = line
+    findings.extend(_validate_srs_fact_audit(markdown_path, section_bodies))
+    findings.extend(validate_srs_support_content(markdown_path))
     return findings
 
 

@@ -1,6 +1,63 @@
 {
-  "timestamp": "2026-10-01 15:28:34",
-  "target_dir": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\local_memory",
+  "latest_followup": {
+    "timestamp": "2026-10-07",
+    "checkpoint_id": "2026-10-07-srs-authority-bounded-writing-rule",
+    "scope": "Refine, freeze and centralize the SRS-only authority-bounded introductory/terminology writing rule",
+    "preferred_srs_writing_rule": "srs-introductory-authority-bounded-v1",
+    "writing_rule_metadata_mutation_test": "PASS",
+    "approved_snapshot_id": "snap-b2e8101b00dc6909feaed885",
+    "descriptive_summary_tests": 82,
+    "srs_overview_tests": 15,
+    "srs_catalog_tests": 1,
+    "final_audience_renderer_test": "PASS",
+    "final_introduction_renderer_test": "PASS",
+    "introductory_sections": ["1.1", "1.2", "1.3", "1.4", "2.1", "2.2", "2.3", "2.4", "2.5"],
+    "snapshot_binding_tests": 8,
+    "stage3_gate": "PASS",
+    "downstream_coherence_findings": 0,
+    "active_descriptive_profiles": ["SRS"],
+    "inactive_descriptive_profiles": ["DRS", "ARS", "IPOS"],
+    "inactive_artifact_hashes_rechecked": false,
+    "catalog_entries": 8,
+    "power_domain_rows": 4,
+    "unresolved_content_review_findings": 6,
+    "full_pipeline_rerun": false,
+    "docx_visual_layout_inspected": false
+  },
+  "timestamp": "2026-10-06 16:35:30",
+  "target_dir": "local_memory",
   "mode": "local_memory_only",
-  "file_count": 4
+  "file_count": 4,
+  "checkpoint_id": "2026-10-06-local-fixes-snapshot-history",
+  "checkpoint_file": "local_memory/checkpoint.md",
+  "active_repository": "Deterministic_Reqs_workflow",
+  "git_base_revision": "c665f5013ac7fdf52c80f1e614227ff571ac8490",
+  "git_checkpoint_created": false,
+  "rollback_backup_created": false,
+  "worktree_state": "dirty_preserved",
+  "approved_snapshot_id": "snap-b2e8101b00dc6909feaed885",
+  "project_id": "STBIO",
+  "history_policy": "append_only_for_changed_approved_snapshot;_same_snapshot_history_unchanged",
+  "files": [
+    "local_memory/chat_handoff.md",
+    "local_memory/checkpoint.md",
+    "local_memory/environment.md",
+    "local_memory/project_activity_log.md"
+  ],
+  "verification": {
+    "snapshot_binding_tests": 8,
+    "drs_contract_tests": 8,
+    "descriptive_summary_tests": 74,
+    "history_change_test_total": 90,
+    "gui_tests": 46,
+    "fingerprint_coherence_tests": 19,
+    "downstream_coherence_findings": 0,
+    "stage2_plus_guard_exit_code": 0,
+    "full_pipeline_rerun_after_final_changes": false,
+    "production_new_snapshot_exercised": false
+  },
+  "remaining_issues": [
+    "Unrelated undefined text in DRS _is_non_normative_table_row; not fixed",
+    "Editor import-resolution warnings for dynamic scripts-path test imports"
+  ]
 }

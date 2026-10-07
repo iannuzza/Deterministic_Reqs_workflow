@@ -1,6 +1,6 @@
 # Semantic Issues
 
-Date: 2026-09-15
+Date: 2026-10-06
 
 Legend:
 - critical: blocks Stage 1 handoff until resolved or explicitly waived.

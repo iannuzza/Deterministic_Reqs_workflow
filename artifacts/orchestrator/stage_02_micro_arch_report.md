@@ -1,6 +1,6 @@
 # Stage 02 Micro-Architecture Report
 
-Date: 2026-09-22
+Date: 2026-10-06
 
 ## Scope
 - Stage 2 micro-architecture synthesis and mandatory architectural crosscheck.
@@ -8,7 +8,7 @@ Date: 2026-09-22
 ## Provenance
 - Stage 2 profile: config/stage2_mirco_arc_profile.json
 - OCR index: artifacts/stage1_requirements/ocr_extracts/index.csv
-- Source document (from OCR index): C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf
+- Source document (from OCR index): specs/DDS_STBIO1.pdf
 
 ## Micro-Architecture Outputs
 - Blocks identified: 11

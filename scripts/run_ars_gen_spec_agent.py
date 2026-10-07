@@ -41,6 +41,7 @@ from workflow_routing import (
     runtime_user_name,
     document_author_name,
     document_version_for_snapshot,
+    document_version_history_markdown,
 )
 from approved_snapshot_resolver import resolve_complete_authoritative_input
 from traceability_rules import is_direct_upstream_source_id
@@ -1278,9 +1279,10 @@ def _write_ars_markdown(
     lines.append("### 0.3 Document control")
     lines.append("")
     lines.append("#### Table 1. Version history")
-    lines.append("| Version | Date | Description | Author |")
-    lines.append("|---|---|---|---|")
-    lines.append(f"| {document_version} | {today} | Snapshot {snapshot_id} ARS baseline generated from Stage 1 and Stage 2 artifacts | {document_author} |")
+    lines.extend(document_version_history_markdown(
+        output_path, snapshot_id, document_version, today,
+        f"Snapshot {snapshot_id} ARS baseline generated from Stage 1 and Stage 2 artifacts", document_author,
+    ))
     lines.append("")
 
     lines.append("#### Table 2. Reference documents")

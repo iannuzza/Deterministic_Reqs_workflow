@@ -286,13 +286,16 @@ Legacy numeric stage commands remain compatibility aliases during migration.
 - Reproducibility requires fixed local inputs, stable ordering, explicit configuration, protected exact identifiers, no network/cloud/LLM calls, no self-modification, and identical results for identical approved inputs and configuration. Environment-sensitive latency is reported but does not alter the recommendation.
 
 ## Shared Descriptive-Summary Contract
+- Apply the frozen preferred SRS introductory rule `srs-introductory-authority-bounded-v1` from `.github/copilot-instructions.md` and `SRS_INTRODUCTORY_WRITING_RULE` in `scripts/workflow_routing.py` only within the SRS document-content profile. Introduction and terminology use concise professional prose bounded by approved content; they do not promise coverage, create allocation, assert performance/implementation detail, or make glossary definitions independent authority. Preserve the shared literal category conventions. Validate rule identity/fingerprint, provenance and final Markdown/DOCX through existing SRS gates. This presentation preference contains no project-specific wording and does not change DRS/ARS/IPOS profiles, activate generators, or create approval/snapshot authority.
 - Apply the general cross-document descriptive policy from `.github/copilot-instructions.md` through one deterministic shared assembly boundary. This skill defines how the policy is gated: evidence must be artifact-only after Stage 1, scope and authority filters must be explicit, provenance must be audited, Markdown and final DOCX must be checked independently, and descriptive output must never create requirements or `Covers` dependencies.
+- For the SRS-first normalized descriptive flow, apply the common evidence/fact/profile/preservation rules in that policy. Validate profile fingerprint, normalized-record/fact/semantic-unit linkage and selected sentences through the existing SRS/central checker, not a parallel authority gate. DRS/ARS/IPOS profile hooks are runtime-disabled; policy tests do not activate them. SRS exclusions must not become generic defaults. Unsupported adapter constructions remain audited projection gaps; later migration requires separate authorization and profile-specific validation.
 - Natural technical prose and readable block/function summaries are a document-type-independent
   quality rule for appropriate descriptive sections, not an IPOS section-number template.
   Rendered prose must be bounded by approved document-specific authority, deterministic,
   auditable, and independently checked against approval/process scaffolding and normative form.
-  The first rollout validates DRS plus system-scope SRS descriptive sections. ARS and IPOS remain
-  outside this rollout until separately authorized.
+  Existing legacy checks cover DRS and scoped SRS descriptive sections. Adoption of the new
+  normalized evidence/fact/profile flow is SRS-only; DRS/ARS/IPOS hooks remain inactive until
+  separately authorized and validated.
 - The validated DRS path uses existing approved inventory `Function` and explicit `Entity kind =
   concrete_block` plus the established digital-block selection policy. Every selected block
   receives one natural-purpose sentence with exact inventory provenance in the existing
@@ -308,8 +311,9 @@ Legacy numeric stage commands remain compatibility aliases during migration.
   emits complete statements with page/line provenance, and assigns `system` or one uniquely
   matched runtime block scope. Ambiguous matches remain system-scoped; it never guesses an owner.
   DRS may map system evidence to its top-digital descriptive context and uniquely matched block
-  evidence to the existing approved DRS block scope. SRS may consume only system-scoped records
-  in descriptive sections. Neither path changes authored requirements, allocations, snapshots,
+  evidence to the existing approved DRS block scope. The SRS normalized adapter accepts only
+  explicit system/architecture context admitted by its profile, not block-local evidence.
+  Neither path changes authored requirements, allocations, snapshots,
   hierarchy, source-origin lineage, or `Covers`.
 - SRS, DRS, ARS, Digital IPOS, Analog IPOS, and any future approved block- or layer-level generated specification may render configured descriptive overview sections such as System Main Functions, Digital Main Functions, Analog Main Functions, Operating Modes, Power States, and other configured topics.
 - These summaries are derived, non-authoritative outputs only. They must not create or modify requirement authority, canonical approval state, mapping authority, block/layer ownership authority, provenance, or source-of-truth artifacts.

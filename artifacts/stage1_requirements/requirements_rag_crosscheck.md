@@ -1,12 +1,12 @@
 # Requirements RAG Cross-Check
 
-- Timestamp: 2026-09-15 16:56:00
+- Timestamp: 2026-10-06 13:56:22
 - Checked requirements: 271
 - Corrected statements: 11
-- RAG exact: 235
-- RAG warn: 36
+- RAG exact: 232
+- RAG warn: 39
 - RAG fail: 0
-- Rule-check warn: 4
+- Rule-check warn: 5
 - Rule-check fail: 0
 
 ## Ontology and Extraction Rule Checks
@@ -25,7 +25,7 @@
 - image block inventory coverage: WARN (missing_blocks=Image 1:ambient sensor, Image 1:remote sensor, Image 1:actuator/heating interface, Image 1:power supply, Image 1:external host / host pc, Image 1:microcontroller, Image 1:adc interface, Image 1:gpio interface, Image 1:led interface, Image 1:push button, Image 1:relay output driver)
 - atomic image candidates only: PASS (generic_image_summary_rows=0)
 - functional description all-sentence rule: WARN (functional_description_rows=0)
-- category coverage: PASS (categories=['Analog', 'Digital', 'System'], missing=[])
+- category coverage: WARN (categories=['Digital', 'System'], missing=['Analog'])
 
 ## Details
 - REQ_SYS-RQ-005: status=ok reason=exact_match changed=True
@@ -60,6 +60,9 @@
 - DDS_STBIO1_1053: status=warn reason=structural_table_derivation changed=False
 - DDS_STBIO1_1054: status=warn reason=structural_table_derivation changed=False
 - DDS_STBIO1_2054: status=warn reason=structural_table_derivation changed=False
+- DDS_STBIO1_0016: status=warn reason=high_overlap=0.95 changed=False
+- DDS_STBIO1_0020: status=warn reason=high_overlap=0.91 changed=False
+- DDS_STBIO1_0021: status=warn reason=high_overlap=0.92 changed=False
 - DDS_STBIO1_0036: status=warn reason=high_overlap=0.97 changed=False
 - DDS_STBIO1_8007: status=warn reason=high_overlap=0.93 changed=False
 - DDS_STBIO1_9004: status=warn reason=partial_overlap=0.74 changed=False
@@ -71,7 +74,7 @@
 - DDS_STBIO1_0504: status=warn reason=structural_table_derivation changed=False
 - DDS_STBIO1_0505: status=warn reason=structural_table_derivation changed=False
 - DDS_STBIO1_0147: status=warn reason=partial_overlap=0.76 changed=False
+- DDS_STBIO1_0149: status=warn reason=high_overlap=0.89 changed=False
 - DDS_STBIO1_0699: status=warn reason=high_overlap=0.90 changed=False
 - DDS_STBIO1_2507: status=warn reason=high_overlap=0.89 changed=False
 - DDS_STBIO1_0013: status=warn reason=high_overlap=1.00 changed=False
-- DDS_STBIO1_395: status=warn reason=partial_overlap=0.79 changed=False

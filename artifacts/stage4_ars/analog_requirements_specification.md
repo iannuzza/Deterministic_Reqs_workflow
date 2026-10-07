@@ -6,7 +6,7 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>&nbsp;</p>
 
-Date: 2026-10-01
+Date: 2026-10-06
 
 <p>&nbsp;</p>
 
@@ -14,7 +14,7 @@ Snapshot ID: snap-b2e8101b00dc6909feaed885
 
 <p>&nbsp;</p>
 
-Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf
+Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/specs/DDS_STBIO1.pdf
 
 <p>&nbsp;</p>
 
@@ -160,7 +160,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/
 
 | Version | Date | Description | Author |
 |---|---|---|---|
-| 1.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 ARS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
+| 1.1 | 2026-10-06 | Snapshot snap-b2e8101b00dc6909feaed885 ARS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
 
 <p>&nbsp;</p>
 

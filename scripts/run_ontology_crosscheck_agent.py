@@ -8,6 +8,7 @@ import json
 import re
 from datetime import datetime
 from pathlib import Path
+from repo_paths import resolve_repo_path
 
 
 REQUIRED = [
@@ -48,10 +49,7 @@ def _load_project_context(repo_root: Path) -> dict:
 
 
 def _resolve_path(repo_root: Path, raw: str) -> Path:
-    p = Path(raw)
-    if p.is_absolute():
-        return p
-    return repo_root / p
+    return resolve_repo_path(repo_root, raw)
 
 
 def _collect_detected_struct_refs(repo_root: Path) -> tuple[set[str], set[str]]:

@@ -6,6 +6,7 @@ import csv
 import json
 import re
 from pathlib import Path
+from repo_paths import resolve_repo_path
 from typing import Iterable, Mapping, Sequence
 
 
@@ -84,8 +85,7 @@ def power_domain_records_from_ocr(repo_root: Path, *, ocr_root: Path | None = No
         with index_path.open("r", encoding="utf-8", newline="") as handle:
             for row in csv.DictReader(handle):
                 if str(row.get("status") or "").casefold() == "text-extracted":
-                    path = Path(str(row.get("text_file") or ""))
-                    paths.append(path if path.is_absolute() else ocr_root / path)
+                    paths.append(resolve_repo_path(repo_root, str(row.get("text_file") or "")))
     else:
         paths = sorted(ocr_root.glob("*.txt"))
     paths = [path for path in paths if path.exists()]

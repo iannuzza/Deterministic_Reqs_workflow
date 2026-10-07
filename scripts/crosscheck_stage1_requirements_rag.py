@@ -20,6 +20,7 @@ import sqlite3
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from repo_paths import portable_repo_path, resolve_repo_path
 from typing import Dict, List, Optional, Tuple
 
 TRAILING_BAD_ENDINGS = {
@@ -607,6 +608,7 @@ def _contains_new_definition_token(text: str, current_req_id: str) -> bool:
 
 
 def _load_index(index_csv: Path) -> Tuple[Dict[int, Path], Optional[str]]:
+    repo_root = Path(__file__).resolve().parent.parent
     page_to_file: Dict[int, Path] = {}
     source_spec: Optional[str] = None
     with index_csv.open("r", encoding="utf-8", newline="") as handle:
@@ -615,9 +617,9 @@ def _load_index(index_csv: Path) -> Tuple[Dict[int, Path], Optional[str]]:
             if (row.get("status") or "").strip() != "text-extracted":
                 continue
             if not source_spec and (row.get("source_file") or "").strip():
-                source_spec = (row.get("source_file") or "").strip()
+                source_spec = portable_repo_path(repo_root, row["source_file"])
             page = int(row["page"])
-            page_to_file[page] = Path(row["text_file"])
+            page_to_file[page] = resolve_repo_path(repo_root, row["text_file"])
     return page_to_file, source_spec
 
 

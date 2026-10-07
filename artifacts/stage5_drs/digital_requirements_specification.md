@@ -6,7 +6,7 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>&nbsp;</p>
 
-Date: 2026-10-01
+Date: 2026-10-06
 
 <p>&nbsp;</p>
 
@@ -14,7 +14,7 @@ Snapshot ID: snap-b2e8101b00dc6909feaed885
 
 <p>&nbsp;</p>
 
-Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf
+Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/specs/DDS_STBIO1.pdf
 
 <p>&nbsp;</p>
 
@@ -237,11 +237,7 @@ This category denotes a requirement that has to be implemented and verified. Acc
 <p>&nbsp;</p>
 
 ## **3. Top Level Overview** {#3-top-level-overview}
-The ASIC STBIO1 integrates electronic interfaces for ECG, Bio-impedance, EDA and PPG (Photoplethysmography) embedded in a single die. The FIFO data path carries ECG, BIA, GSR and six PPG channels, and up to four external sensors represented in 12 bytes each.
-
-The STBIO1 features an advanced digital engine, composed of multiple IPs able to reduce external host processing workload, reducing bus congestion, providing meta-data useful for final application, both in time and frequency domain. The data collected by sensor hub is accessible from the Advanced DSP and ISPU, for sensor fusion algorithm elaboration.
-
-FIFO digital IPs oversees data collecting from multiple sources: internal and external data read by sensor hub, meta-data generated from both ADSP and ISPU. The Digital Top is the digital integration layer for the recorded top-level interfaces.
+The ASIC STBIO1 integrates electronic interfaces for ECG, Bio-impedance, EDA and PPG (Photoplethysmography) embedded in a single die. The Digital Top is the digital integration layer for the recorded top-level interfaces.
 
 It supports digital acquisition, data movement, and buffering across the recorded integration paths; supports configuration, control, status, and interrupt interactions; provides the recorded serial, bus, and host-facing integration paths; and coordinates the recorded power, clock, and operating-mode interactions. The source material does not define a separate application role.
 
@@ -250,12 +246,12 @@ It supports digital acquisition, data movement, and buffering across the recorde
 ### **3.1 Digital Main Functions** {#31-digital-main-functions}
 
 #### **Sensor-Hub** {#sensor-hub}
-The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination. Sensor hub IP can read external sensors by means of an I2C master protocol, enabling data collection in FIFO and embedded elaboration also on external data domain.
+The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
 
 <p>&nbsp;</p>
 
 #### **ADSP** {#adsp}
-The ADSP block is designed to execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. ADSP is an embedded IP able to elaborate ultra-low-power custom DSP functions. The main purpose of ADSP is to reduce the computation workload on both ISPU and host processor, while saving power through the optimization of both hardware and algorithm.
+The ADSP block is designed to execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.
 
 <p>&nbsp;</p>
 
@@ -265,7 +261,7 @@ The Main Controller block is designed to generate and receive Analog Domain cont
 <p>&nbsp;</p>
 
 #### **Smart FIFO** {#smart-fifo}
-The Smart FIFO block is designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
+The Smart FIFO block is designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting. Smart FIFO data collector.
 
 <p>&nbsp;</p>
 
@@ -305,7 +301,7 @@ The PAD MUX block is designed to route source-specified functional, scan, BIST, 
 <p>&nbsp;</p>
 
 #### **ISPU** {#ispu}
-An interrupt triggers ISPU wake-up. The advanced ISPU (32bit proprietary core) is an ultra-low-power, high-performance programmable core which can execute signal processing and AI algorithms in the edge. The main benefits of the ISPU are C programming and an enhanced ecosystem with libraries and 3rd party tools/IDE. ISPU has 32 Kbyte program RAM, 24 Kbyte Data RAM capability and Floating- point support.
+An interrupt triggers ISPU wake-up. ISPU 32-bit processor.
 
 <p>&nbsp;</p>
 

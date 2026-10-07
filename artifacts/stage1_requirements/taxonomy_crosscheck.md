@@ -1,6 +1,6 @@
 # Stage 1 Taxonomy Crosscheck
 
-- Source spec: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf
+- Source spec: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/specs/DDS_STBIO1.pdf
 - Stage 2 profile: config/stage2_mirco_arc_profile.json
 - Removed legacy mapping keys: none
 - Detected domain signals from source spec:

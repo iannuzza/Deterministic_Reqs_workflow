@@ -1,9 +1,9 @@
 # SysML Architecture Model Review
 
 - Status: approved
-- Reviewed at: 2026-09-24T15:05:54
+- Reviewed at: 2026-10-06T15:15:26
 - Model: artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml
-- Model SHA-256: d9242b50388173eb40fb403e65afa93730af8d968665075ff1e6c3c370bd7bb6
+- Model SHA-256: 71f8388ce2c7be1f0306c5d57323155c8f9a4c2f64a38203712219c463c43379
 
 ## Checks
 

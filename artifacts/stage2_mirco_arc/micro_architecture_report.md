@@ -1,12 +1,12 @@
 # Stage 2 Micro-Architecture Analysis Report
 
-- Date: 2026-09-22
+- Date: 2026-10-06
 - Requirement source: artifacts/stage1_requirements/requirements_summary.csv
 
 ## Provenance
 - Stage 2 profile: config/stage2_mirco_arc_profile.json
 - OCR index: artifacts/stage1_requirements/ocr_extracts/index.csv
-- Source document (from OCR index): C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf
+- Source document (from OCR index): specs/DDS_STBIO1.pdf
 
 ## Generated Artifacts
 - artifacts/stage2_mirco_arc/block_inventory.csv

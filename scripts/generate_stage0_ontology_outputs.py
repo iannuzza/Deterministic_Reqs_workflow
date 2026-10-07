@@ -20,6 +20,7 @@ from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from repo_paths import resolve_repo_path
 from typing import Dict, List, Optional, Tuple
 
 
@@ -106,10 +107,7 @@ def _load_context(path: Path) -> Dict[str, object]:
 
 
 def _resolve_path(repo_root: Path, raw_path: str) -> Path:
-    candidate = Path(raw_path)
-    if candidate.is_absolute():
-        return candidate
-    return repo_root / candidate
+    return resolve_repo_path(repo_root, raw_path)
 
 
 def _clean_snippet(text: str, limit: int = 220) -> str:

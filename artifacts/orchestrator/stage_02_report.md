@@ -1,14 +1,14 @@
 # Stage 02 Report
 
-Date: 2026-09-21
+Date: 2026-10-06
 
 ## Scope
 - Stage 2 specification formalization baseline generated from Stage 1 artifacts.
 
 ## Specification Notes
 - Requirement normalization status: baseline generated from 314 Stage 1 requirements.
-- Acceptance test coverage: seed entries created for 314 requirements.
-- Assertion coverage: assertion seeds created for 314 requirements.
+- Acceptance test coverage: seed entries created for 40 requirements.
+- Assertion coverage: assertion seeds created for 20 requirements.
 
 ## Evidence
 - Specs baseline generated

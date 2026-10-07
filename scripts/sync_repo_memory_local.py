@@ -13,6 +13,7 @@ import argparse
 import json
 from datetime import datetime
 from pathlib import Path
+from repo_paths import portable_repo_path
 
 
 PROTECTED_TARGET_FILES = {"sync_manifest.json", "README.md"}
@@ -38,7 +39,7 @@ def main() -> int:
 
     manifest = {
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        "target_dir": str(target_dir),
+        "target_dir": portable_repo_path(repo_root, target_dir),
         "mode": "local_memory_only",
         "file_count": len(data_files),
     }

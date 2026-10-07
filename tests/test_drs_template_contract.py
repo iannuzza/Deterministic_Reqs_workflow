@@ -94,6 +94,27 @@ class DrsTemplateContractTests(unittest.TestCase):
                     ])
                 self.assertTrue(validate_drs_events(events, self.contract, baseline))
 
+    def test_version_history_allows_append_but_rejects_loss_or_rewrite(self):
+        original = self.fixture_events()
+        baseline = drs_table_inventory(original)
+        table_index = next(index + 1 for index, event in enumerate(original) if event.get("text") == "Table 1. Version history")
+        appended = copy.deepcopy(original)
+        appended[table_index]["rows"].extend([["Run", "new"], ["Run", "new"]])
+        self.assertEqual(validate_drs_events(appended, self.contract, baseline), [])
+        for mutation in ("remove", "rewrite", "reorder", "duplicate_table"):
+            with self.subTest(mutation=mutation):
+                events = copy.deepcopy(appended)
+                rows = events[table_index]["rows"]
+                if mutation == "remove":
+                    rows.pop(1)
+                elif mutation == "rewrite":
+                    rows[1][1] = "changed"
+                elif mutation == "reorder":
+                    rows[1], rows[2] = rows[2], rows[1]
+                else:
+                    events.extend(copy.deepcopy(events[table_index - 1:table_index + 1]))
+                self.assertTrue(any("version history" in finding for finding in validate_drs_events(events, self.contract, baseline)))
+
     def test_docx_only_definition_divergence(self):
         events = self.fixture_events()
         with tempfile.TemporaryDirectory() as folder:

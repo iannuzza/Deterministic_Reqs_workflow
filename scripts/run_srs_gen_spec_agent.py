@@ -37,13 +37,18 @@ from workflow_routing import (
     DESCRIPTIVE_MODE_TOPIC_SPECS,
     DESCRIPTIVE_POWER_TOPIC_SPECS,
     DESCRIPTIVE_SYSTEM_TOPIC_SPECS,
+    SRS_SYSTEM_OVERVIEW_HEADINGS,
     assemble_descriptive_summary,
+    compose_srs_system_overview,
+    compose_srs_support_content,
+    SRS_INTRODUCTORY_SECTIONS,
     write_descriptive_audit,
     read_retained_rows,
     source_parent_title,
     runtime_user_name,
     document_author_name,
     document_version_for_snapshot,
+    document_version_history_markdown,
 )
 from approved_snapshot_resolver import resolve_complete_authoritative_input
 from canonical_store import connect, read_stage2_descriptive_evidence
@@ -52,6 +57,8 @@ from validate_downstream_coherence import (
     canonical_human_label,
     downstream_contract_fingerprint,
     resolve_downstream_contract,
+    snapshot_architecture_context,
+    srs_catalog_from_context,
     validate as validate_downstream_coherence,
 )
 from low_power_descriptive import (
@@ -1907,126 +1914,6 @@ def _rewrite_internal_links(
     return rewritten, resolved_count, non_link_count
 
 
-SRS_TOPIC_SPECS = DESCRIPTIVE_SYSTEM_TOPIC_SPECS
-
-
-def _descriptive_summary_lines(
-    records: List[Mapping[str, object]],
-    topic_specs=SRS_TOPIC_SPECS,
-    *,
-    include_general: bool = True,
-) -> List[str]:
-    grouped = assemble_descriptive_summary(records, topic_specs, include_general=include_general).topics
-    lines: List[str] = []
-    for topic, entries in grouped.items():
-        lines.append(f"#### {topic}")
-        lines.extend(f"- {entry}" for entry in entries)
-        lines.append("")
-    return lines
-
-
-def _system_overview_prose(
-    records: List[Mapping[str, object]],
-    topic_specs: Sequence[Tuple[str, Sequence[str]]],
-    *,
-    include_general: bool = True,
-) -> List[str]:
-    """Render shared descriptive topics as prose-first system overview text."""
-    grouped = assemble_descriptive_summary(
-        records, topic_specs, include_general=include_general
-    ).topics
-    lines: List[str] = []
-    for entries in grouped.values():
-        for entry in entries:
-            lines.extend([entry, ""])
-    return lines or ["need clarification", ""]
-    
-def _eligible_srs_overview_record(
-    record: Mapping[str, object],
-    *,
-    blocked_labels: Sequence[str] = (),
-) -> bool:
-    """Keep overview evidence system-level, descriptive, and implementation-bounded."""
-    statement = str(record.get("statement") or "").strip()
-    if not statement:
-        return False
-    if re.search(r"\b(?:shall|must|required to|Covers:)\b", statement, re.IGNORECASE):
-        return False
-    if re.search(
-        r"\b(?:register|regmap|port\s+name|bit\s+field|address|system\s+registers|0x[0-9a-f]+|"
-        r"included\s+block|domain\s+type|control\s+mode|function:|characteristics:|"
-        r"^to\s+activate|\b(?:input|output)\s+(?:wire|pin|signal)?|table\s+\d+)\b",
-        statement,
-        re.IGNORECASE,
-    ):
-        return False
-    if len(statement) < 45 or not re.search(r"[.!?]\s*$", statement):
-        return False
-    for label in blocked_labels:
-        tokens = [re.escape(token) for token in re.split(r"[-_\s]+", label.strip()) if token]
-        if tokens and re.search(r"\b" + r"[-_\s]+".join(tokens) + r"\b", statement, re.IGNORECASE):
-            return False
-    return str(record.get("scope") or "").casefold() in {"system", "architecture"}
-
-
-def _srs_capability_projection(statement: str) -> str:
-    """Project approved capability evidence into system-level descriptive prose."""
-    text = re.sub(r"\s+", " ", statement or "").strip()
-    if not text or re.search(r"\b(?:shall|must|required to|Covers:)\b", text, re.IGNORECASE):
-        return ""
-    if re.search(
-        r"\b(?:register|regmap|address|port\s+name|system\s+registers|0x[0-9a-f]+|"
-        r"input|output|table|clock|reset|ATPG|BIST|power\s+domain|always[- ]on\s+domain|"
-        r"mode\s+selections|collar|controller)\b|\[[A-Z][A-Z0-9_]+\]|\b[01]'b[01]+\b",
-        text,
-        re.IGNORECASE,
-    ):
-        return ""
-    if re.match(r"^Aim of this document\b", text, re.IGNORECASE):
-        return ""
-    sensor_match = re.match(
-        r"^(?:The\s+)?sensor\s+hub\s+IP\s+can\s+read\s+external\s+sensors\s+by\s+means\s+of\s+(.+?),\s+enabling\s+(.+?)(?:\.\s+The\s+data collected.*)?\.?$",
-        text,
-        re.IGNORECASE,
-    )
-    if sensor_match:
-        return f"The system supports external sensor acquisition through {sensor_match.group(1)}, enabling {sensor_match.group(2)}."
-    acquisition_match = re.match(
-        r"^(?:The\s+)?(?:analog\s+control\s+)?interface\s+samples\s+(.+?)\s+signal\s+from\s+ADC(?:,\s+average)?\s+and\s+stores\s+data(?:\s+raw)?\s+in\s+FIFO\.?$",
-        text,
-        re.IGNORECASE,
-    )
-    if acquisition_match:
-        return f"The system supports acquisition of {acquisition_match.group(1)} data from the analog-to-digital conversion path and storage for subsequent processing."
-    signal_match = re.match(r"^The\s+(.+?)\s+signal\s+chain\s+is\s+designed\s+for\s+(.+?)\.$", text, re.IGNORECASE)
-    if signal_match:
-        return f"The system supports {signal_match.group(2)}."
-    if re.match(r"^STBIO1\s+is\s+an\s+Analog\s+Front\s+End\s+Device\b", text, re.IGNORECASE):
-        return "The system is an analog front end with embedded processing capabilities."
-    if re.match(r"^(?:The\s+)?[A-Za-z][A-Za-z -]+\s+(?:IP\s+)?(?:can|is|oversees)\b", text):
-        return ""
-    if re.search(r"\b(?:FIFO|block(?:s)?|domain\s+type|control\s+mode|included\s+block)\b", text, re.IGNORECASE):
-        return ""
-    return text if re.search(r"[.!?]\s*$", text) and len(text) >= 45 else ""
-
-
-def _srs_system_capability_records(records: Iterable[Mapping[str, object]]) -> List[str]:
-    projected: List[str] = []
-    seen: Set[str] = set()
-    for record in records:
-        if str(record.get("scope") or "").casefold() not in {"system", "architecture"}:
-            continue
-        evidence_kind = str(record.get("evidence_kind") or record.get("record_type") or "").casefold()
-        if evidence_kind == "power_domain" or "power-domain table" in str(record.get("source") or "").casefold():
-            continue
-        value = _srs_capability_projection(str(record.get("statement") or ""))
-        key = value.casefold()
-        if value and key not in seen:
-            seen.add(key)
-            projected.append(value)
-    return projected
-
-
 def _structured_srs_low_power_records(repo_root: Path, function_rows: List[Tuple[str, str, str]]) -> List[Mapping[str, object]]:
     records = read_stage2_descriptive_evidence(repo_root)
     if records:
@@ -2327,6 +2214,8 @@ def _write_srs_markdown(
     snapshot_id: str,
     contract_fingerprint: str,
     document_version: str,
+    catalog_entries: Optional[List[Dict[str, str]]] = None,
+    catalog_findings: Optional[List[str]] = None,
 ) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     today = datetime.now().strftime("%Y-%m-%d")
@@ -2435,11 +2324,15 @@ def _write_srs_markdown(
         "XDN": "Cross-domain",
     }
 
-    owner_types = _interface_types_by_owner(interface_rows)
+    support_sections, support_audit = compose_srs_support_content(
+        project_name, snapshot_id, catalog_entries or [], catalog_findings or [],
+        _structured_srs_low_power_records(_resolve_repo_root(), function_rows),
+    )
+    output_path.with_name("descriptive_srs_content_audit.json").write_text(
+        json.dumps(support_audit, indent=2, ensure_ascii=True) + "\n", encoding="utf-8",
+    )
     block_category = {
-        (row.get("Block") or "").strip(): _classify_block_category(row, owner_types)
-        for row in block_inventory_rows
-        if (row.get("Block") or "").strip()
+        entry["block"]: entry["category"] for entry in (catalog_entries or [])
     }
     analog_blocks = [
         block_name
@@ -2451,12 +2344,6 @@ def _write_srs_markdown(
         for block_name, category in block_category.items()
         if category == BLOCK_CLASS_DIGITAL
     ]
-    interface_summary = [
-        f"{r.get('Interface', '')} ({r.get('Direction', '')}, {r.get('Type', '')}, owner={r.get('Owner', '')})"
-        for r in interface_rows
-        if r.get("Interface", "")
-    ]
-
     def _interface_rows_for_block(block_name: str) -> List[Dict[str, str]]:
         block_terms = set(re.findall(r"[a-z0-9]+", block_name.lower()))
         return [
@@ -2581,7 +2468,7 @@ def _write_srs_markdown(
             continue
 
         # Artifact-synthesized sections replace template directive text.
-        if not approved_srs_source_ids or sec_num in {"3.1", "3.3", "4.1", "5.1", "5.5", "6.3", "6.4"}:
+        if not approved_srs_source_ids or sec_num in SRS_INTRODUCTORY_SECTIONS or sec_num in {"3.1", "3.3", "4.1", "5.1", "5.5", "6.3", "6.4"}:
             _append_section_with_template_body(lines, level, title, [])
         else:
             _append_section_with_template_body(lines, level, title, body)
@@ -2589,6 +2476,10 @@ def _write_srs_markdown(
         if sec_num == "0.1":
             lines.append(marker_toc)
             lines.append("")
+
+        elif sec_num in SRS_INTRODUCTORY_SECTIONS:
+            for paragraph in support_sections[sec_num]:
+                lines.extend([paragraph, ""])
 
         elif sec_num == "2.5":
             lines.extend(shared_category_conventions_markdown())
@@ -2634,9 +2525,10 @@ def _write_srs_markdown(
 
         elif sec_num == "0.3":
             lines.append("#### Table 1. Version history {#table-1-version-history}")
-            lines.append("| Version | Date | Description | Author |")
-            lines.append("|---|---|---|---|")
-            lines.append(f"| {document_version} | {today} | Snapshot {snapshot_id} SRS baseline generated from Stage 1 and Stage 2 artifacts | {document_author} |")
+            lines.extend(document_version_history_markdown(
+                output_path, snapshot_id, document_version, today,
+                f"Snapshot {snapshot_id} SRS baseline generated from Stage 1 and Stage 2 artifacts", document_author,
+            ))
             lines.append("")
 
             lines.append("#### Table 2. Reference documents {#table-2-reference-documents}")
@@ -2668,107 +2560,53 @@ def _write_srs_markdown(
             lines.append("")
 
         elif sec_num == "3.1":
-            capability_text = _srs_system_capability_records(descriptive_records)
-            identity = next(
-                (text for text in capability_text if "analog front end" in text.casefold()),
-                capability_text[0] if capability_text else "need clarification",
+            overview_audit: List[Dict[str, str]] = []
+            overview_sections = compose_srs_system_overview(
+                descriptive_records,
+                mode_rows=mode_rows,
+                interface_rows=[{
+                    **row,
+                    "source": f"artifacts/stage2_mirco_arc/interface_catalog.csv:row {index}",
+                    "scope": "architecture",
+                } for index, row in enumerate(interface_rows, start=2)],
+                power_records=[
+                    *_structured_srs_low_power_records(_resolve_repo_root(), function_rows),
+                    *descriptive_records,
+                ],
+                block_names=list(render_block_functions),
+                audit_rows=overview_audit,
             )
-            lines.extend([identity, ""])
-            lines.append("### 3.2 Main System Capabilities")
-            lines.append("")
-            lines.extend([f"{text}\n" for text in capability_text if text != identity] or ["need clarification", ""])
-            lines.append("### 3.3 Main Architectural Domains and Subsystems")
-            lines.append("")
-            domain_categories = set(block_category.values())
-            domain_lines = []
-            if BLOCK_CLASS_ANALOG in domain_categories:
-                domain_lines.append("The approved architecture includes an analog and mixed-signal acquisition domain.")
-            if BLOCK_CLASS_DIGITAL in domain_categories:
-                domain_lines.append("The approved architecture includes a digital processing and control domain.")
-            if BLOCK_CLASS_POWER in domain_categories:
-                domain_lines.append("The approved architecture includes a power-management and domain-control responsibility.")
-            lines.extend([f"{text}\n" for text in domain_lines] or ["need clarification", ""])
-            lines.append("### 3.4 External Interfaces and System Boundaries")
-            lines.append("")
-            if interface_summary:
-                interface_types = sorted({
-                    (row.get("Type") or "").strip().casefold()
-                    for row in interface_rows
-                    if (row.get("Type") or "").strip()
-                })
-                type_text = ", ".join(interface_types) if interface_types else "external and internal"
-                lines.append(
-                    f"The approved system boundary includes {type_text} interface roles for sensing, communication, control, and supply exchange."
-                )
+            audit_path = output_path.with_name("descriptive_system_overview_audit.csv")
+            with audit_path.open("w", encoding="utf-8", newline="") as audit_handle:
+                audit_writer = csv.DictWriter(audit_handle, fieldnames=[
+                    "section", "statement", "source", "scope", "rendered_summary", "decision", "reason",
+                    "profile", "fact_id", "fact_json", "contributor_ids",
+                    "profile_version", "profile_fingerprint", "projection_adapter",
+                    "source_record_id", "normalized_record_json", "unit_id", "semantic_unit_json",
+                ])
+                audit_writer.writeheader()
+                audit_writer.writerows(overview_audit)
+            for heading in SRS_SYSTEM_OVERVIEW_HEADINGS:
+                if not heading.startswith("3.1 "):
+                    lines.extend([f"### {heading}", ""])
+                if heading.startswith("3.6 ") and support_sections["3.6"]:
+                    for item in overview_sections[heading]:
+                        if not item.startswith("- **Clock and reset**"):
+                            for sentence in item.split("\n")[1:]:
+                                lines.extend([sentence.removeprefix("  - "), ""])
+                    lines.extend(["", "| Domain | Type | Control | Functional Role | Power Conditions |",
+                                  "|---|---|---|---|---|", *support_sections["3.6"], ""])
+                    lines.extend(item for item in overview_sections[heading] if item.startswith("- **Clock and reset**"))
+                else:
+                    lines.extend(overview_sections[heading])
                 lines.append("")
-                lines.append("Approved system-boundary evidence identifies the following interfaces:")
-                lines.append("")
-                lines.append("| Interface | Direction | Type | Owner |")
-                lines.append("|---|---|---|---|")
-                for row in interface_rows:
-                    if row.get("Interface", ""):
-                        lines.append("| " + " | ".join(
-                            (row.get(key, "") or "").replace("|", "\\|")
-                            for key in ("Interface", "Direction", "Type", "Owner")
-                        ) + " |")
-                lines.append("")
-            else:
-                lines.extend(["need clarification", ""])
-            lines.append("### 3.5 Operating Concept")
-            lines.append("")
-            mode_names = sorted({
-                match.group(1).strip()
-                for record in descriptive_records
-                for match in [re.search(r"\b([A-Z][A-Za-z -]+Mode)\b", str(record.get("source") or ""))]
-                if match
-            })
-            if mode_rows:
-                mode_names = sorted(set(mode_names).union(
-                    row.get("mode", "").strip() for row in mode_rows if row.get("mode", "").strip()
-                ))
-            if mode_names:
-                lines.append("The approved operating concept includes the following system modes: " + ", ".join(mode_names) + ".")
-                lines.append("")
-            else:
-                lines.extend(["need clarification", ""])
-            lines.append("### 3.6 Power, Clock, and Reset Overview")
-            lines.append("")
-            power_statements = " ".join(str(record.get("statement") or "") for record in descriptive_records)
-            power_lines = []
-            if re.search(r"always[- ]on|always active", power_statements, re.IGNORECASE):
-                power_lines.append("Approved evidence identifies always-on power domains that remain active for system continuity.")
-            if re.search(r"switchable|powered down|power down", power_statements, re.IGNORECASE):
-                power_lines.append("Approved evidence also identifies switchable power domains that may be powered down when their associated activity is idle.")
-            if re.search(r"retention|retains state", power_statements, re.IGNORECASE):
-                power_lines.append("Retention behavior is defined for preserving state across an applicable low-power transition.")
-            lines.extend([f"{text}\n" for text in power_lines] or ["need clarification", ""])
-            lines.append("### 3.7 Assumptions, Scope Limits, and Allocation Boundaries")
-            lines.append("")
-            lines.append(
-                "The system scope covers approved sensing, processing, data exchange, operating-mode, and power-domain behavior. Detailed implementation remains outside this overview and follows the approved allocation boundaries."
-            )
-            lines.append("")
 
         elif sec_num == "4.1":
-            lines.append("Analog behavior is summarized at system level here. Detailed analog block ownership, requirements, and I/O are maintained in ARS and the corresponding analog IPOS specifications.")
-            if analog_blocks:
-                lines.append("")
-                lines.append("Analog blocks in the approved architecture: " + ", ".join(analog_blocks) + ".")
-                for block in analog_blocks:
-                    function = render_block_functions.get(block, "")
-                    if function:
-                        lines.append(f"- {block}: {function}")
+            lines.extend(support_sections["4.1"] or ["No analog block catalog entries have a resolved classification in the selected architecture context."])
             lines.append("")
 
         elif sec_num == "5.1":
-            lines.append("Digital behavior is summarized at system level here. Detailed digital block ownership, requirements, and I/O are maintained in DRS and the corresponding digital IPOS specifications.")
-            if digital_blocks:
-                lines.append("")
-                lines.append("Digital blocks in the approved architecture: " + ", ".join(digital_blocks) + ".")
-                for block in digital_blocks:
-                    function = render_block_functions.get(block, "")
-                    if function:
-                        lines.append(f"- {block}: {function}")
+            lines.extend(support_sections["5.1"] or ["No digital block catalog entries have a resolved classification in the selected architecture context."])
             lines.append("")
 
         elif sec_num == "6.1":
@@ -2846,15 +2684,10 @@ def _write_srs_markdown(
                 ])
             else:
                 architecture_data_path = [
-                    f"{block}: {function}"
-                    for block, function in render_block_functions.items()
-                    if re.search(r"\b(?:fifo|buffer|queue|overflow|underflow|full|empty|depth|throughput|backpressure)\b", function, re.IGNORECASE)
-                ]
-                architecture_data_path.extend(
                     interaction_path
                     for interaction_path in interaction_summary
                     if re.search(r"\b(?:fifo|buffer|queue|overflow|underflow|full|empty|depth|throughput|backpressure)\b", interaction_path, re.IGNORECASE)
-                )
+                ]
                 if architecture_data_path:
                     lines.append("Data-path conditions and involved blocks:")
                     lines.extend(f"- {item}" for item in architecture_data_path[:8])
@@ -2873,7 +2706,10 @@ def _write_srs_markdown(
                 repo_root=_resolve_repo_root(),
                 profile="srs",
             )
-            lines.extend(render_low_power_topics(power_grouped))
+            lines.append("Supply-domain functions and operating conditions are described in [section 3.6](#36-power-clock-and-reset-overview).")
+            lines.append("")
+            lines.extend(render_low_power_topics({topic: entries for topic, entries in power_grouped.items()
+                                                 if topic != "Power-domain architecture"}))
             lines.append("")
 
         elif sec_num == "8.3":
@@ -3110,6 +2946,11 @@ def _write_srs_markdown(
         lines.append("- None")
     lines.append("")
 
+    if support_audit["review_findings"]:
+        lines.extend(["### 10.1 Descriptive content review findings", ""])
+        lines.extend("- " + finding for finding in support_audit["review_findings"])
+        lines.append("")
+
     lines = _deduplicate_authored_requirement_blocks(lines)
     heading_registry = _build_heading_registry(lines)
     lines = _apply_heading_registry_anchors(lines, heading_registry)
@@ -3189,7 +3030,7 @@ def _write_srs_markdown(
         lines_rendered,
         heading_registry,
     )
-    lines_rendered = [_to_text(item).replace("•", "-") for item in lines_rendered]
+    lines_rendered = [line for item in lines_rendered for line in _to_text(item).replace("•", "-").split("\n")]
     lines_rendered = _ensure_blank_line_between_paragraphs(lines_rendered)
     lines_rendered = _ensure_requirement_block_spacing(lines_rendered)
     lines_rendered = _ensure_subparagraph_heading_spacing(lines_rendered)
@@ -3518,6 +3359,9 @@ def main() -> int:
         req_to_block = _read_req_to_block(req_block_trace_csv)
         block_inventory_rows = _read_csv_rows(block_inventory_csv)
         _require_block_functions(block_inventory_rows)
+        catalog_entries, catalog_findings = srs_catalog_from_context(
+            block_inventory_rows, downstream_contract, snapshot_architecture_context(repo_root, downstream_contract),
+        )
         inventory_block_names = [
             (row.get("Block") or "").strip()
             for row in block_inventory_rows
@@ -3665,7 +3509,8 @@ def main() -> int:
         )
         architecture_records = architecture_records_from_function_rows(function_rows)
         stage1_descriptive_records = extract_stage1_descriptive_evidence(
-            repo_root / "artifacts/stage1_requirements/ocr_extracts/index.csv"
+            repo_root / "artifacts/stage1_requirements/ocr_extracts/index.csv",
+            block_names=block_names,
         )
         descriptive_records = filter_configured_descriptive_exclusions(
             [*stage1_descriptive_records, *architecture_records],
@@ -3675,7 +3520,7 @@ def main() -> int:
             out_srs_md.with_name("descriptive_summary_audit.csv"),
             assemble_descriptive_summary(
                 descriptive_records,
-                SRS_TOPIC_SPECS,
+                DESCRIPTIVE_SYSTEM_TOPIC_SPECS,
                 max_items_per_topic=max(len(descriptive_records), 1),
             ),
             section="System Main Functions",
@@ -3737,6 +3582,8 @@ def main() -> int:
             requirement_input.snapshot_id,
             downstream_contract_fingerprint(downstream_contract),
             document_version,
+            catalog_entries=catalog_entries,
+            catalog_findings=catalog_findings,
         )
         docx_generated = False
         if shutil.which("pandoc") is None:

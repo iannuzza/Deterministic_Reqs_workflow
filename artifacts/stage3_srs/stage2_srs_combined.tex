@@ -11,7 +11,7 @@
 
 \title{Stage 2 SRS Combined Document}
 \author{Alessandro Lucio IANNUZZI}
-\date{2026-10-01}
+\date{2026-10-07}
 
 \begin{document}
 \thispagestyle{empty}
@@ -33,7 +33,7 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>\&nbsp;</p>
 
-Date: 2026-10-01
+Date: 2026-10-07
 
 <p>\&nbsp;</p>
 
@@ -41,11 +41,11 @@ Snapshot ID: snap-b2e8101b00dc6909feaed885
 
 <p>\&nbsp;</p>
 
-Downstream contract fingerprint: 5424834735474f3f97ba3357e63e8703bd7f341f5995c19ba9e75bcba49d8157
+Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
 
 <p>\&nbsp;</p>
 
-Source specification: C:/Users/iannuzza/LOCAL\_PROJ/Github\_copilot\_proj/STBIO\_AI/specs/DDS\_STBIO1.pdf
+Source specification: C:/Users/iannuzza/LOCAL\_PROJ/Github\_copilot\_proj/Deterministic\_Reqs\_workflow/specs/DDS\_STBIO1.pdf
 
 <p>\&nbsp;</p>
 
@@ -111,6 +111,7 @@ Source specification: C:/Users/iannuzza/LOCAL\_PROJ/Github\_copilot\_proj/STBIO\
 \item [8.3 Residual requirement catalog by domain](\#83-residual-requirement-catalog-by-domain)
 \item [9. Project-specific block sections](\#9-project-specific-block-sections)
 \item [10. Missing Inputs](\#10-missing-inputs)
+\item [10.1 Descriptive content review findings](\#101-descriptive-content-review-findings)
 \item [Assumptions and TBD](\#assumptions-and-tbd)
 \end{itemize}
 
@@ -237,6 +238,8 @@ Section & Paragraph anchor & Internal link & Page (rendered PDF) \\
 \hline
 10. Missing Inputs & 10 & [Jump](\#10-missing-inputs) & Auto \\
 \hline
+10.1 Descriptive content review findings & 10.1 & [Jump](\#101-descriptive-content-review-findings) & Auto \\
+\hline
 \end{longtable}
 
 
@@ -295,7 +298,7 @@ Version & Date & Description & Author \\
 Version & Date & Description & Author \\
 \hline
 \endhead
-1.1 & 2026-10-01 & Snapshot snap-b2e8101b00dc6909feaed885 SRS baseline generated from Stage 1 and Stage 2 artifacts & Alessandro Lucio IANNUZZI \\
+1.1 & 2026-10-06 & Snapshot snap-b2e8101b00dc6909feaed885 SRS baseline generated from Stage 1 and Stage 2 artifacts & Alessandro Lucio IANNUZZI \\
 \hline
 \end{longtable}
 
@@ -395,14 +398,30 @@ Table 6 & Category convention & [Go to Table 6](\#table-6-category-convention) \
 \subsubsection{1.1 Purpose \{\#11-purpose\}}
 
 
+This document presents the system-level requirements and supporting context for STBIO included in the selected approved baseline. Descriptive content does not add requirements or change their allocation.
+
+<p>\&nbsp;</p>
+
 \subsubsection{1.2 Scope \{\#12-scope\}}
 
+
+The scope is limited to system-level requirements allocated to this document and the supporting system context. Analog and digital behavior, interfaces, operating conditions and verification information are described only to the extent supported by the approved content. This description does not extend subsystem or block-level allocations.
+
+<p>\&nbsp;</p>
 
 \subsubsection{1.3 Intended audience \{\#13-intended-audience\}}
 
 
+This document is intended for system architects, analog and digital design engineers, firmware engineers, verification and validation engineers, test and product engineers, and program and customer stakeholders.
+
+<p>\&nbsp;</p>
+
 \subsubsection{1.4 References \{\#14-references\}}
 
+
+Reference documents are listed in Table 2. Source links for any included requirements are recorded in the associated traceability matrix. Listing a document or standard does not itself establish applicability or add obligations.
+
+<p>\&nbsp;</p>
 
 \subsection{2. Definitions and terminology \{\#2-definitions-and-terminology\}}
 
@@ -410,14 +429,84 @@ Table 6 & Category convention & [Go to Table 6](\#table-6-category-convention) \
 \subsubsection{2.1 System terminology \{\#21-system-terminology\}}
 
 
+These definitions aid interpretation of the system descriptions and document abbreviations. They do not establish capabilities, ownership or allocation; specific meanings follow the approved content.
+
+**System:** The device or functional scope identified in the approved descriptions.
+
+**Subsystem:** A grouping of related functions identified in the approved architecture context.
+
+**Block:** A concrete unit identified in the approved architecture context.
+
+**SRS:** System Requirements Specification; the system-level requirements and context document.
+
+**ARS:** Analog Requirements Specification; the analog and mixed-signal integration document.
+
+**DRS:** Digital Requirements Specification; the digital integration document.
+
+**IPOS:** The block-local implementation requirements specification.
+
 \subsubsection{2.2 Analog terminology \{\#22-analog-terminology\}}
 
+
+Analog terms are descriptive. Ranges, operating conditions and performance limits are those stated in the applicable approved content.
+
+**Input/output range:** The span of input or output values considered under stated operating conditions.
+
+**Gain:** The ratio of a change in output to the corresponding change in input.
+
+**Offset:** The deviation from the specified reference response at a reference input.
+
+**Noise:** Unwanted variations superimposed on a signal or measurement.
+
+**Bandwidth:** The frequency interval over which a response meets a defined criterion.
+
+**Full-scale:** The reference magnitude or span corresponding to the specified measurement range.
+
+**ODR:** Output data rate; the rate at which new output samples become available.
+
+**Sensitivity:** The change in output per unit change in the measured quantity.
 
 \subsubsection{2.3 Digital terminology \{\#23-digital-terminology\}}
 
 
+Digital terms aid interpretation of configuration and control descriptions. Their inclusion does not imply a particular implementation or supported feature.
+
+**Register:** A named storage element used to expose data, configuration or status.
+
+**Bit field:** A defined subset of bits within a register or data word.
+
+**Mode:** An operating configuration described in the applicable content.
+
+**State:** A condition of control logic identified within a described operating sequence.
+
+**Reset:** Initialization of affected logic as described in the applicable content.
+
+**Interrupt:** An event notification that requests attention from a controller or processor.
+
+**Boot sequence:** An initialization sequence described in the applicable content.
+
+**Interface:** A defined boundary through which components exchange data, control or status.
+
 \subsubsection{2.4 Measurement and acceptance terms \{\#24-measurement-and-acceptance-terms\}}
 
+
+Measurement terms aid interpretation of verification information. Test conditions, limits and acceptance criteria remain those specified in the applicable approved requirements.
+
+**RMS noise:** The root-mean-square amplitude of noise over a stated measurement interval and bandwidth.
+
+**SNR:** Signal-to-noise ratio; the ratio of signal power to noise power, commonly expressed in decibels.
+
+**Latency:** The elapsed time between a defined initiating event and its corresponding response.
+
+**Precision:** The repeatability of measurement results under stated conditions.
+
+**Tolerance:** A permitted deviation where specified relative to a reference value or condition.
+
+**GR\&R:** Gage repeatability and reproducibility; the evaluation of measurement-system variation.
+
+**Guard band:** A margin between acceptance and specification limits where such a margin is specified.
+
+**Pass/fail:** An assessment against acceptance criteria specified by the applicable requirements.
 
 \subsubsection{2.5 Category Convention \{\#25-category-convention\}}
 
@@ -465,81 +554,64 @@ The system is an analog front end with embedded processing capabilities.
 \subsubsection{3.2 Main System Capabilities \{\#32-main-system-capabilities\}}
 
 
-The system supports external sensor acquisition through an I2C master protocol, enabling data collection in FIFO and embedded elaboration also on external data domain.
-
-
-<p>\&nbsp;</p>
-
-The ECG signal chain has several complementary features supporting ECG measurement, such as driven reference for common-mode rejection and lead off detection to identify a fallen electrode.
-
+The system can acquire external sensor measurements through I2C master protocol with data collection and embedded processing of external measurements.
 
 <p>\&nbsp;</p>
 
-The system supports body impedance and human breathing measurements with a configurable excitation path and measurement path. BIA channel delivers both the real and the imaginary parts of the body and the breathing impedance.
-
-
-<p>\&nbsp;</p>
-
-This configuration generates each time slot, two averaged ECG data, which are ECG AC and ECG DC, respectively.
-
+The system provides collected external sensor measurements for sensor-fusion processing.
 
 <p>\&nbsp;</p>
 
-This configuration generates each time slot, two averaged ECG data, which are ECG AC and ECG DC, respectively and four averaged BIA data which are BIA\_AC\_P, BIA\_DC\_P, BIA\_AC\_Q and BIA\_DC\_Q.
-
+The system provides the real and the imaginary parts of the body and the breathing impedance.
 
 <p>\&nbsp;</p>
 
-This configuration generates each time slot, a number of PPG DATA according to user configuration.
+The system supports body impedance and human breathing measurements with a configurable excitation path and measurement path.
+
+<p>\&nbsp;</p>
+
+The system supports ECG measurement.
+
+<p>\&nbsp;</p>
 
 \subsubsection{3.3 Main Architectural Domains and Subsystems \{\#33-main-architectural-domains-and-subsystems\}}
 
 
-The approved architecture includes a digital processing and control domain.
+\begin{itemize}
+\item **Sensing and measurement**
+\item The measurement paths support ECG measurement.
+\item The measurement paths support body impedance and human breathing measurements with a configurable excitation path and measurement path.
+\item **External acquisition and data handling**
+\item The acquisition and data paths can acquire external sensor measurements through I2C master protocol with data collection and embedded processing of external measurements.
+\item The acquisition and data paths provide collected external sensor measurements for sensor-fusion processing.
+\item The acquisition and data paths provide the real and the imaginary parts of the body and the breathing impedance.
+\item **Embedded processing**
+\item In Normal Mode, the processing function processes ECG, BIA or GSR measurements.
+\end{itemize}
 
 \subsubsection{3.4 External Interfaces and System Boundaries \{\#34-external-interfaces-and-system-boundaries\}}
 
 
-The approved system boundary includes analog, digital, power interface roles for sensing, communication, control, and supply exchange.
+The interfaces provide sensing input, measurement data exchange, serial communication, interrupt reporting and power supply roles. External versus internal placement is not specified for every interface.
 
-<p>\&nbsp;</p>
-
-Approved system-boundary evidence identifies the following interfaces:
-
-\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
 \hline
-Interface & Direction & Type & Owner \\
+Boundary role & Direction & Medium \\
 \hline
 \endfirsthead
 \hline
-Interface & Direction & Type & Owner \\
+Boundary role & Direction & Medium \\
 \hline
 \endhead
-SENSOR\_ANALOG\_INPUT & input & analog & Sensor-Hub \\
+Sensing input & input & analog \\
 \hline
-ADC\_DATA & output & digital & ADC \\
+Measurement data exchange & output & digital \\
 \hline
-FIFO\_DATA & output & digital & Smart FIFO \\
+Serial communication & input, bidirectional, output & digital \\
 \hline
-SERIAL\_CLK & input & digital & SPI interface \\
+Interrupt reporting & output & digital \\
 \hline
-SERIAL\_SELECT & input & digital & SPI interface \\
-\hline
-SERIAL\_DATA\_IN & input & digital & SPI interface \\
-\hline
-SERIAL\_DATA\_OUT & output & digital & SPI interface \\
-\hline
-ALT\_SERIAL\_CLK & input & digital & I2C interface \\
-\hline
-ALT\_SERIAL\_DATA & bidirectional & digital & I2C interface \\
-\hline
-INT1 & output & digital & IRQ logic \\
-\hline
-INT2 & output & digital & IRQ logic \\
-\hline
-VDD & input & power & PMU \\
-\hline
-VDD\_IO & input & power & PMU \\
+Power supply & input & power \\
 \hline
 \end{longtable}
 
@@ -549,31 +621,65 @@ VDD\_IO & input & power & PMU \\
 \subsubsection{3.5 Operating Concept \{\#35-operating-concept\}}
 
 
-The approved operating concept includes the following system modes: Data Storage Mode, Normal Mode.
-
-<p>\&nbsp;</p>
+\begin{itemize}
+\item **Data Storage Mode**
+\item In Data Storage Mode, the system acquires ECG and BIA measurements, averages the samples and stores the sampled data.
+\item In Data Storage Mode, the system acquires GSR measurements and stores the raw sampled data.
+\item In Data Storage Mode, the system acquires PPG measurements, averages the samples according to the user's configuration and stores the sampled data.
+\item **Normal Mode**
+\item In Normal Mode, the system acquires ECG, BIA or GSR measurements, averages the samples and stores the sampled data.
+\item In Normal Mode, the system processes ECG, BIA or GSR measurements.
+\end{itemize}
 
 \subsubsection{3.6 Power, Clock, and Reset Overview \{\#36-power-clock-and-reset-overview\}}
 
 
-Approved evidence identifies always-on power domains that remain active for system continuity.
+An always-on domain remains powered.
+
+<p>\&nbsp;</p>
+
+A switchable domain can enter a powered-down state in idle when its associated logic is not in use.
+
+<p>\&nbsp;</p>
+
+State retention across system power transitions is not specified.
+
+\begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
+\hline
+Domain & Type & Control & Functional Role & Power Conditions \\
+\hline
+\endfirsthead
+\hline
+Domain & Type & Control & Functional Role & Power Conditions \\
+\hline
+\endhead
+PD\_TOP1V2 & Always-On & HW & Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub acquisition, FIFO read and write data, Elaboration Mode with ADSP only). Associated blocks: ADSP, multi\_channel\_fifo, i2c\_spi\_slave, main\_controller\_top, senshub\_mst\_i2c, pad\_mux, pmu, stbio1\_regmap, scan\_out\_mux, xbar\_afe & Always active. Never powered down \\
+\hline
+PD\_STREDL & Switchable & SW & Powers the STREDL core and associated cache. Associated blocks: STREDL & Can be powered down in idle. Can be powered down when STREDL is not in use \\
+\hline
+PD\_TOP3V3 & Always-On & HW & power supply to the OTP memory block. Associated blocks: H9A\_MEM\_OTP\_ PUMP\_85AL05\_2 & Always active. Never powered down. It provides 4.7V of power supply to the OTP memory block during programming (write) operations \\
+\hline
+PD\_TOPIO & Always-On & HW & Powers communication PAD. Associated blocks: level\_shifter\_sel & Never powered down \\
+\hline
+\end{longtable}
 
 
 <p>\&nbsp;</p>
 
-Approved evidence also identifies switchable power domains that may be powered down when their associated activity is idle.
-
-
-<p>\&nbsp;</p>
-
-Retention behavior is defined for preserving state across an applicable low-power transition.
+\begin{itemize}
+\item **Clock and reset**
+\item Top-level clock and reset coordination are not specified.
+\end{itemize}
 
 \subsubsection{3.7 Assumptions, Scope Limits, and Allocation Boundaries \{\#37-assumptions-scope-limits-and-allocation-boundaries\}}
 
 
-The system scope covers approved sensing, processing, data exchange, operating-mode, and power-domain behavior. Detailed implementation remains outside this overview and follows the approved allocation boundaries.
+System-level scope covers product capabilities and externally observable behavior. Subsystem implementation remains within its engineering allocation.
 
-<p>\&nbsp;</p>
+\begin{itemize}
+\item **Assumptions**
+\item Additional system-level assumptions are not described in the available descriptions.
+\end{itemize}
 
 \subsection{4. Analog sub-system \{\#4-analog-sub-system\}}
 
@@ -581,7 +687,7 @@ The system scope covers approved sensing, processing, data exchange, operating-m
 \subsubsection{4.1 Analog block list \{\#41-analog-block-list\}}
 
 
-Analog behavior is summarized at system level here. Detailed analog block ownership, requirements, and I/O are maintained in ARS and the corresponding analog IPOS specifications.
+No analog block catalog entries have a resolved classification in the selected architecture context.
 
 <p>\&nbsp;</p>
 
@@ -606,26 +712,55 @@ Analog behavior is summarized at system level here. Detailed analog block owners
 \subsubsection{5.1 Digital block list \{\#51-digital-block-list\}}
 
 
-Digital behavior is summarized at system level here. Detailed digital block ownership, requirements, and I/O are maintained in DRS and the corresponding digital IPOS specifications.
+\begin{itemize}
+\item **Sensor-Hub**
+\end{itemize}
 
-<p>\&nbsp;</p>
-
-Digital blocks in the approved architecture: Sensor-Hub, ADSP, Main Controller, Smart FIFO, Regmap, IRQ logic, PMU, BIST Controller, I2C\_SPI\_AHB, OTP, PAD MUX, ISPU.
+  The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
 
 \begin{itemize}
-\item Sensor-Hub: Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
-\item ADSP: Execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.
-\item Main Controller: Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.
-\item Smart FIFO: Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
-\item Regmap: Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.
-\item IRQ logic: Aggregate and route FIFO, Sensor Hub, ISPU sample-ready, software, and timer interrupt status to configured GPIO/interrupt outputs.
-\item PMU: Sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.
-\item BIST Controller: Control BIST operating modes and coordinate ADC/OTP test operations and their register-visible results.
-\item I2C\_SPI\_AHB: Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.
-\item OTP: Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines.
-\item PAD MUX: Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.
-\item ISPU: Represent the ISPU digital architecture block and its source/destination responsibilities described by Stage 2 interaction evidence.
+\item **ADSP**
 \end{itemize}
+
+  The ADSP block is designed to execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling.
+
+\begin{itemize}
+\item **Main Controller**
+\end{itemize}
+
+  The Main Controller block is designed to generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses.
+
+\begin{itemize}
+\item **Smart FIFO**
+\end{itemize}
+
+  The Smart FIFO block is designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
+
+\begin{itemize}
+\item **Regmap**
+\end{itemize}
+
+  The Regmap block is designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.
+
+\begin{itemize}
+\item **PMU**
+\end{itemize}
+
+  The PMU block is designed to sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.
+
+\begin{itemize}
+\item **I2C\_SPI\_AHB**
+\end{itemize}
+
+  The I2C\_SPI\_AHB block is designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.
+
+\begin{itemize}
+\item **OTP**
+\end{itemize}
+
+  The OTP block is designed to provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines.
+
+<p>\&nbsp;</p>
 
 \subsubsection{5.2 Control and register requirements \{\#52-control-and-register-requirements\}}
 
@@ -649,14 +784,14 @@ Digital data-path requirements shall state the conditions for full, empty, overf
 Data-path conditions and involved blocks:
 
 \begin{itemize}
-\item Sensor-Hub: Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
-\item Smart FIFO: Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
-\item IRQ logic: Aggregate and route FIFO, Sensor Hub, ISPU sample-ready, software, and timer interrupt status to configured GPIO/interrupt outputs.
 \item Main Controller -> Smart FIFO via sample stream and FIFO mode control (trigger: FIFO enabled)
 \item Smart FIFO -> IRQ logic via watermark/overrun/empty flags (trigger: FIFO status change)
 \item Main Controller -> FIFO via XBAR connection (trigger: XBAR matrix cell)
 \item ADSP -> FIFO via XBAR connection (trigger: XBAR matrix cell)
 \item I2C\_SPI\_AHB -> FIFO via XBAR connection (trigger: XBAR matrix cell)
+\item SENSOR HUB -> FIFO via XBAR connection (trigger: XBAR matrix cell)
+\item ISPU -> FIFO via XBAR connection (trigger: XBAR matrix cell)
+\item ISPU debug -> FIFO via XBAR connection (trigger: XBAR matrix cell)
 \item Overflow: when a write arrives while storage is full, the producing and buffering blocks shall define whether the write is blocked, flagged, or otherwise handled without silent data loss.
 \item Underflow: when a read is requested while storage is empty, the consuming and buffering blocks shall define the returned status/data and recovery behavior.
 \item Throughput and backpressure: when the offered data rate exceeds the available transfer capacity, the producer, buffer, and consumer shall define flow control and recovery behavior.
@@ -690,39 +825,9 @@ Cross-domain orchestration shall be implemented through interaction paths:
 \subsubsection{6.4 Power sequencing across domains \{\#64-power-sequencing-across-domains\}}
 
 
-\paragraph{Power-domain architecture \{\#power-domain-architecture\}}
+Supply-domain functions and operating conditions are described in [section 3.6](\#36-power-clock-and-reset-overview).
 
-
-\begin{itemize}
-\item Domain: PD\_TOP1V2
-\item Included blocks: ADSP,  multi\_channel\_fifo, i2c\_spi\_slave, main\_controller\_top, senshub\_mst\_i2c, pad\_mux, pmu, stbio1\_regmap, scan\_out\_mux, xbar\_afe.
-\item Domain type: Always-On.
-\item Control mode: HW.
-\item Notes: Always active. -.
-\item Functions: Ensures continuity of critical functions (Data Storage Mode, Sensor-Hub acquisition, FIFO read and write data, Elaboration Mode with ADSP only). -.
-\item Characteristics: Never powered down. -.
-\item Domain: PD\_STREDL
-\item Included blocks: STREDL.
-\item Domain type: Switchable.
-\item Control mode: SW.
-\item Notes: Can be powered down in idle. -.
-\item Functions: Powers the STREDL core and associated cache. -.
-\item Characteristics: Can be powered down when STREDL is not in use. -.
-\item Domain: PD\_TOP3V3
-\item Included blocks: H9A\_MEM\_OTP\_ PUMP\_85AL05\_2.
-\item Domain type: Always-On.
-\item Voltage: 3A.
-\item Control mode: HW.
-\item Notes: Always active. -.
-\item Functions: power supply to the OTP memory block. -.
-\item Characteristics: Never powered down. It provides 4.7V of power supply to the OTP memory block during programming (write) operations -.
-\item Domain: PD\_TOPIO
-\item Included blocks: level\_shifter\_sel.
-\item Domain type: Always-On.
-\item Control mode: HW.
-\item Functions: Powers communication PAD -.
-\item Characteristics: Never powered down. -.
-\end{itemize}
+<p>\&nbsp;</p>
 
 \subsection{7. Validation and qualification requirements \{\#7-validation-and-qualification-requirements\}}
 
@@ -806,6 +911,18 @@ This section summarizes system-level functions and digital/analog interactions. 
 
 \begin{itemize}
 \item None
+\end{itemize}
+
+\subsubsection{10.1 Descriptive content review findings \{\#101-descriptive-content-review-findings\}}
+
+
+\begin{itemize}
+\item SRS\_CATALOG\_CLASSIFICATION\_MISSING: IRQ logic
+\item SRS\_CATALOG\_CLASSIFICATION\_MISSING: BIST Controller
+\item SRS\_CATALOG\_CLASSIFICATION\_CONFLICT: PAD MUX
+\item SRS\_CATALOG\_APPROVAL\_MISSING: ISPU
+\item SRS\_POWER\_VOLTAGE\_UNRELIABLE: Stage 1 OCR power-domain table/description (PD\_TOP3V3): 3A
+\item SRS\_POWER\_NOTE\_UNREADABLE: Stage 1 OCR power-domain table/description (PD\_TOPIO): Always active 32 10.4
 \end{itemize}
 
 

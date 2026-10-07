@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from validate_downstream_coherence import (
     _approved_upstream_coverage,
     _check_srs_artifact_coherence,
+    _check_sysml_requirement_coverage,
     _primary_to_supplementary_coverage,
     _source_spec_node_metrics,
     _source_spec_target_metrics,
@@ -29,7 +30,7 @@ from generate_snapshot_reports import (
 )
 from run_srs_gen_spec_agent import _filter_mode_rows_to_srs_allocations, _write_stage_report
 from report_generation_service import generate_snapshot_report
-from workflow_gui import WorkflowGUI
+from workflow_gui import WorkflowGUI, tk
 
 
 class EmptySrsContract:
@@ -41,6 +42,45 @@ class EmptySrsContract:
 
 
 class SrsDownstreamCoherenceTests(unittest.TestCase):
+    def test_traceability_boxes_contain_wrapped_text_at_every_zoom(self):
+        root = tk.Tk()
+        root.withdraw()
+        self.addCleanup(root.destroy)
+        canvas = tk.Canvas(root)
+        gui = object.__new__(WorkflowGUI)
+        gui.traceability_selected_edge = None
+        gui.traceability_selected_block = None
+        graph = {
+            "nodes": [
+                {
+                    "id": "supplementary:long",
+                    "kind": "supplementary_spec",
+                    "label": "Supplementary specification: " + "LongSpecificationName" * 8,
+                    "upstream_coverage": ["Primary coverage (" + "Extended name " * 20 + "): 123 / 123 (100.0%)"],
+                },
+                {"id": "supplementary:short", "kind": "supplementary_spec", "label": "Short specification"},
+            ],
+            "edges": [], "source_spec_edges": [], "source_spec_relationship_edges": [],
+        }
+        with patch("workflow_gui.approved_generated_document_dependency_graph", return_value=graph):
+            for zoom in (0.65, 1.0, 1.5, 2.25):
+                with self.subTest(zoom=zoom):
+                    gui.traceability_zoom = zoom
+                    gui._draw_generated_dependency_graph(canvas)
+                    rectangles = []
+                    for node in graph["nodes"]:
+                        items = canvas.find_withtag("traceability_node:" + node["id"])
+                        rectangle = next(item for item in items if canvas.type(item) == "rectangle")
+                        text = next(item for item in items if canvas.type(item) == "text")
+                        box = canvas.coords(rectangle)
+                        bounds = canvas.bbox(text)
+                        self.assertLessEqual(box[0], bounds[0])
+                        self.assertLessEqual(box[1], bounds[1])
+                        self.assertGreaterEqual(box[2], bounds[2])
+                        self.assertGreaterEqual(box[3], bounds[3])
+                        rectangles.append(box)
+                    self.assertLess(rectangles[0][3], rectangles[1][1])
+
     def test_traceability_table_and_diagram_share_node_selection(self):
         graph = {
             "nodes": [
@@ -56,6 +96,7 @@ class SrsDownstreamCoherenceTests(unittest.TestCase):
         gui.traceability_tree.exists.return_value = True
         gui.traceability_window = MagicMock()
         gui.traceability_graph_canvas = MagicMock()
+        gui.traceability_graph_canvas.bbox.return_value = (0, 0, 200, 54)
         gui.traceability_window_status_var = MagicMock()
         gui.traceability_selected_edge = None
         gui.traceability_selected_block = None
@@ -109,6 +150,7 @@ class SrsDownstreamCoherenceTests(unittest.TestCase):
         gui.traceability_tree = MagicMock()
         gui.traceability_window = MagicMock()
         gui.traceability_graph_canvas = MagicMock()
+        gui.traceability_graph_canvas.bbox.return_value = (0, 0, 200, 54)
         gui.traceability_window_status_var = MagicMock()
         gui.traceability_selected_edge = None
         gui.traceability_selected_block = None
@@ -476,6 +518,99 @@ class SrsDownstreamCoherenceTests(unittest.TestCase):
             findings = _check_srs_artifact_coherence(repo_root, contract, {})
 
         self.assertIn("SRS_RENDERED_REQUIREMENT_ID_SET_MISMATCH: missing=0, extra=1", findings)
+
+
+class OperationalFingerprintTests(unittest.TestCase):
+    def setUp(self):
+        temporary_directory = tempfile.TemporaryDirectory()
+        self.addCleanup(temporary_directory.cleanup)
+        self.repo_root = Path(temporary_directory.name)
+        self.contract = EmptySrsContract()
+        self.contract.expected = {
+            "SOURCE_001": {
+                "canonical_id": "canonical-test",
+                "source_req_id": "SOURCE_001",
+                "allocation_class": "top_digital_architecture",
+                "owning_target": "DRS",
+                "approved_block": "Digital",
+                "owning_domain": "Digital",
+                "allocation_rationale": "Approved digital architecture requirement.",
+                "lineage_mode": "normal_hierarchical",
+                "source_origin_req_ids": "SOURCE_001",
+                "hierarchy_parent_req_ids": "",
+                "lineage_candidate_parent_req_ids": "",
+            },
+        }
+        self.fingerprint = downstream_contract_fingerprint(self.contract)
+        stage3_root = self.repo_root / "artifacts/stage3_srs"
+        stage3_root.mkdir(parents=True)
+        (stage3_root / "srs_traceability_matrix.csv").write_text(
+            "srs_req_id,source_req_id\n", encoding="utf-8",
+        )
+        (stage3_root / "system_requirements_specification.md").write_text(
+            f"Snapshot ID: {self.contract.snapshot_id}\n"
+            f"Downstream contract fingerprint: {self.fingerprint}\n",
+            encoding="utf-8",
+        )
+        sysml_root = self.repo_root / "artifacts/stage2_mirco_arc/sysml"
+        sysml_root.mkdir(parents=True)
+        (sysml_root / "DigitalSubsystem.sysml").write_text(
+            f"// Snapshot ID: {self.contract.snapshot_id}\n"
+            f"// Downstream contract fingerprint: {self.fingerprint}\n"
+            'attribute sourceReqId = "SOURCE_001";\n',
+            encoding="utf-8",
+        )
+
+    def findings(self):
+        with patch("validate_downstream_coherence.created_ipos_block_directories", return_value={}):
+            return (
+                _check_srs_artifact_coherence(self.repo_root, self.contract, self.contract.expected),
+                _check_sysml_requirement_coverage(self.repo_root, self.contract, self.contract.expected),
+            )
+
+    def test_candidate_only_drift_preserves_hash_and_srs_sysml_freshness(self):
+        self.assertEqual(self.findings(), ([], []))
+        metadata = self.contract.expected["SOURCE_001"]
+        for candidates in ("PARENT_001", "PARENT_001;PARENT_002"):
+            with self.subTest(candidates=candidates):
+                metadata["lineage_candidate_parent_req_ids"] = candidates
+                self.assertEqual(downstream_contract_fingerprint(self.contract), self.fingerprint)
+                self.assertEqual(self.findings(), ([], []))
+                self.assertEqual(metadata["lineage_candidate_parent_req_ids"], candidates)
+        del metadata["lineage_candidate_parent_req_ids"]
+        self.assertEqual(downstream_contract_fingerprint(self.contract), self.fingerprint)
+        self.assertEqual(self.findings(), ([], []))
+
+    def test_approved_contract_changes_still_reject_stale_srs_and_sysml(self):
+        metadata = self.contract.expected["SOURCE_001"]
+        for field, changed_value in {
+            "hierarchy_parent_req_ids": "PARENT_001",
+            "lineage_mode": "split_lineage",
+            "source_origin_req_ids": "SOURCE_002",
+            "approved_block": "Other Block",
+            "owning_domain": "Analog",
+            "allocation_class": "top_analog_architecture",
+            "owning_target": "ARS",
+            "allocation_rationale": "Changed approved allocation.",
+        }.items():
+            with self.subTest(field=field):
+                original_value = metadata[field]
+                metadata[field] = changed_value
+                self.assertNotEqual(downstream_contract_fingerprint(self.contract), self.fingerprint)
+                srs_findings, sysml_findings = self.findings()
+                self.assertIn("SRS_STALE_CONTRACT_FINGERPRINT", srs_findings)
+                self.assertIn("SYSML_STALE_CONTRACT_FINGERPRINT", sysml_findings)
+                metadata[field] = original_value
+        self.contract.expected["SOURCE_002"] = dict(metadata)
+        self.assertNotEqual(downstream_contract_fingerprint(self.contract), self.fingerprint)
+        srs_findings, sysml_findings = self.findings()
+        self.assertIn("SRS_STALE_CONTRACT_FINGERPRINT", srs_findings)
+        self.assertIn("SYSML_STALE_CONTRACT_FINGERPRINT", sysml_findings)
+        del self.contract.expected["SOURCE_002"]
+        self.contract.snapshot_id = "snap-other"
+        srs_findings, sysml_findings = self.findings()
+        self.assertTrue(any(finding.startswith("SRS_STALE_SNAPSHOT_MARKERS:") for finding in srs_findings))
+        self.assertTrue(any(finding.startswith("SYSML_STALE_SNAPSHOT_MARKERS:") for finding in sysml_findings))
 
 
 if __name__ == "__main__":

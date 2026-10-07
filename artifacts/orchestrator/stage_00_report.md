@@ -1,6 +1,6 @@
 # Stage 00 Report
 
-Date: 2026-09-15
+Date: 2026-10-06
 
 ## Executive Summary
 - Ontology study definition: identifying and formalizing key concepts, properties, and relationships so the system is unambiguous and consistently modeled.
@@ -8,7 +8,7 @@ Date: 2026-09-15
 - Source type: pdf
 - OCR provenance index: artifacts/stage1_requirements/ocr_extracts/index.csv
 - Requirements analyzed (from Stage 1 summary): 271
-- Category coverage: System=115, Analog=1, Digital=155
+- Category coverage: System=117, Analog=0, Digital=154
 - Semantic issues: critical=0, major=0, minor=18
 - Gate 0 recommendation: go
 
@@ -28,9 +28,9 @@ Date: 2026-09-15
 - Automatic checks and traceability basis: yes
 
 ## System / Analog / Digital Analysis
-- System requirements count: 115
-- Analog requirements count: 1
-- Digital requirements count: 155
+- System requirements count: 117
+- Analog requirements count: 0
+- Digital requirements count: 154
 - Distinct source pages represented: 60
 
 ### Sample Requirements By Category
@@ -39,7 +39,7 @@ Date: 2026-09-15
   - REQ_SYS-RQ-002: STBIO1 is an Analog Front End Device with embedded process capabilities.
   - REQ_SYS-RQ-003: The ECG signal chain has several complementary features supporting ECG measurement, such as driven reference for common-mode rejection an...
 - Analog:
-  - DDS_STBIO1_395: The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV...
+  - None
 - Digital:
   - REQ_DIG-RQ-001: Clocks scheme is shown in the above figure Req_ID Source Target Path Delay Clock Gating Analog Control and Description F Max Requirements...
   - DDS_STBIO1_4000: [DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1.
@@ -51,10 +51,10 @@ Date: 2026-09-15
 - Configuration: 10
 
 ### Requirement Type
-- other: 183
-- functional: 30
+- other: 184
+- functional: 31
 - interface: 22
-- electrical: 11
+- electrical: 10
 - configuration: 10
 - timing: 7
 

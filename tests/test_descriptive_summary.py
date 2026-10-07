@@ -4,6 +4,7 @@ import re
 import sys
 import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -12,6 +13,20 @@ from xml.etree import ElementTree as ET
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from workflow_routing import (
+    DESCRIPTIVE_PROFILES,
+    SRS_DESCRIPTIVE_PROFILE,
+    DRS_DESCRIPTIVE_PROFILE,
+    ARS_DESCRIPTIVE_PROFILE,
+    IPOS_DESCRIPTIVE_PROFILE,
+    descriptive_profile,
+    descriptive_fact_findings,
+    run_descriptive_flow,
+    validate_descriptive_flow,
+    DescriptiveFact,
+    DescriptiveParagraph,
+    DescriptiveWritingProfile,
+    compose_descriptive_paragraphs,
+    validate_descriptive_paragraphs,
     DESCRIPTIVE_MODE_TOPIC_SPECS,
     DESCRIPTIVE_POWER_TOPIC_SPECS,
     DESCRIPTIVE_DIGITAL_TOPIC_SPECS,
@@ -35,6 +50,7 @@ from workflow_routing import (
     write_ipos_descriptive_audit,
     write_descriptive_audit,
 )
+from spec_document_contract import NormalizedSourceRecord
 from low_power_descriptive import (
     architecture_records_from_function_rows,
     assemble_low_power_descriptive,
@@ -58,6 +74,140 @@ from run_drs_gen_spec_agent import (
 
 
 class DescriptiveSummaryTests(unittest.TestCase):
+    def profile(self, name, scopes):
+        return DescriptiveWritingProfile(name, scopes, "TEST", ("descriptive",), ("admitted_context",),
+                                         "unrestricted", (), (), ("synthetic",), (), (), True)
+
+    def test_fact_prose_aggregates_compatible_objects_with_all_contributors(self):
+        profile = self.profile("synthetic", ("system",))
+        facts = [DescriptiveFact("The system", "monitor", (value,), f"source {index}",
+                                 f"The system monitors {value}.", "system")
+                 for index, value in enumerate(("temperature", "humidity", "pressure"))]
+        paragraphs = compose_descriptive_paragraphs(facts, profile=profile)
+        self.assertEqual(paragraphs[0].text, "The system monitors temperature, humidity and pressure.")
+        self.assertEqual(paragraphs[0].facts, tuple(facts))
+        self.assertEqual(validate_descriptive_paragraphs(paragraphs, facts=facts, profile=profile), [])
+        self.assertEqual(paragraphs, compose_descriptive_paragraphs(facts, profile=profile))
+
+    def test_fact_prose_flow_admission_projection_audit_and_determinism(self):
+        profile = self.profile("synthetic", ("system",))
+        records = [NormalizedSourceRecord("record-1", "The system monitors temperature.", "admitted_context",
+                                          "system", ("source-1",), "selected", "eligible"),
+                   NormalizedSourceRecord("record-2", "Unparsed construction.", "admitted_context",
+                                          "system", ("source-2",), "retained", "eligible"),
+                   NormalizedSourceRecord("record-3", "Excluded text.", "unapproved",
+                                          "system", ("source-3",), "selected", "not admissible")]
+        called = []
+        def adapter(record):
+            called.append(record.record_id)
+            return ([DescriptiveFact("The system", "monitor", ("temperature",), record.provenance[0],
+                                     record.text, record.ownership_scope)], "") if record.record_id == "record-1" else ([], "unsupported syntax")
+        result = run_descriptive_flow(records, profile=profile, adapter_name="synthetic", adapter=adapter)
+        self.assertEqual(called, ["record-1", "record-2"])
+        self.assertEqual(result.records, tuple(records))
+        self.assertEqual(result.units[0].source_record_ids, ("record-1",))
+        self.assertEqual(result.paragraphs[0].text, "The system monitors temperature.")
+        self.assertEqual({row["decision"] for row in result.audit}, {"admitted", "selected", "projection_gap", "rejected_evidence"})
+        self.assertEqual(result, run_descriptive_flow(records, profile=profile, adapter_name="synthetic", adapter=adapter))
+        changed = tuple({**row, "contributor_ids": "[]"} if row["decision"] == "selected" else row for row in result.audit)
+        self.assertTrue(validate_descriptive_flow(replace(result, audit=changed), profile=profile))
+        self.assertTrue(validate_descriptive_flow(replace(result, audit=()), profile=profile))
+        self.assertTrue(validate_descriptive_flow(replace(result, units=()), profile=profile))
+        with self.assertRaises(ValueError):
+            run_descriptive_flow(records, profile=profile, adapter_name="undeclared", adapter=adapter)
+        with self.assertRaises(ValueError):
+            run_descriptive_flow([records[0], records[0]], profile=profile, adapter_name="synthetic", adapter=adapter)
+
+    def test_fact_prose_flow_rejects_forged_adapter_provenance(self):
+        record = NormalizedSourceRecord("record", "Original description.", "admitted_context", "system",
+                                        ("original source",), "selected", "eligible")
+        forged = DescriptiveFact("The system", "monitor", ("temperature",), "different source", record.text, "system")
+        with self.assertRaises(ValueError):
+            run_descriptive_flow([record], profile=self.profile("synthetic", ("system",)), adapter_name="synthetic",
+                                 adapter=lambda source: ([forged], ""))
+
+    def test_fact_prose_profiles_keep_future_runtime_inactive(self):
+        self.assertEqual(descriptive_profile("SRS"), SRS_DESCRIPTIVE_PROFILE)
+        self.assertEqual(set(DESCRIPTIVE_PROFILES), {"SRS", "DRS", "ARS", "IPOS"})
+        for profile in (DRS_DESCRIPTIVE_PROFILE, ARS_DESCRIPTIVE_PROFILE, IPOS_DESCRIPTIVE_PROFILE):
+            with self.subTest(profile=profile.document_type):
+                with self.assertRaises(ValueError):
+                    descriptive_profile(profile.document_type)
+                for candidate in (profile, replace(profile, runtime_enabled=True)):
+                    with self.assertRaises(ValueError):
+                        run_descriptive_flow([], profile=candidate, adapter_name=profile.projection_adapters[0],
+                                             adapter=lambda record: ([], ""))
+        with self.assertRaises(ValueError):
+            descriptive_profile("UNKNOWN")
+        with self.assertRaises(TypeError):
+            DESCRIPTIVE_PROFILES["DRS"] = SRS_DESCRIPTIVE_PROFILE
+
+    def test_fact_prose_profile_detail_and_owner_rules_do_not_leak(self):
+        fact = DescriptiveFact("The controller", "provide", ("register access",), "source", "Original requirement.",
+                               "block_local", section="function", evidence_kind="approved_normative",
+                               owner="Controller A", layer="block")
+        self.assertEqual(descriptive_fact_findings(fact, profile=IPOS_DESCRIPTIVE_PROFILE, owner="Controller A"), [])
+        self.assertIn("descriptive_owner_invalid", descriptive_fact_findings(fact, profile=IPOS_DESCRIPTIVE_PROFILE, owner="Controller B"))
+        self.assertTrue(descriptive_fact_findings(fact, profile=SRS_DESCRIPTIVE_PROFILE))
+        srs_fact = replace(fact, scope="system", section=SRS_DESCRIPTIVE_PROFILE.topic_roles[0],
+                   evidence_kind="descriptive", objects=("measurements",), condition="When register access is enabled")
+        self.assertIn("descriptive_profile_detail_excluded", descriptive_fact_findings(srs_fact, profile=SRS_DESCRIPTIVE_PROFILE))
+        synthetic = replace(fact, evidence_kind="descriptive", section="")
+        self.assertIn("register access", compose_descriptive_paragraphs([synthetic], profile=self.profile("local", ("block_local",)))[0].text)
+        for profile, domain in ((DRS_DESCRIPTIVE_PROFILE, "digital"), (ARS_DESCRIPTIVE_PROFILE, "analog")):
+            integration = replace(fact, scope="architecture", section="integration", evidence_kind="descriptive",
+                                  domain=domain, layer="integration")
+            self.assertEqual(descriptive_fact_findings(integration, profile=profile), [])
+            self.assertIn("descriptive_domain_invalid", descriptive_fact_findings(replace(integration, domain="wrong"), profile=profile))
+            self.assertIn("descriptive_layer_invalid", descriptive_fact_findings(replace(integration, layer="block"), profile=profile))
+            self.assertIn("descriptive_scope_or_kind_invalid", descriptive_fact_findings(replace(integration, evidence_kind="approved_normative"), profile=profile))
+        with self.assertRaises(ValueError):
+            replace(IPOS_DESCRIPTIVE_PROFILE, owner_policy="guess")
+        policy = replace(self.profile("local", ("block_local",)), evidence_kinds=("approved_normative",),
+                         authority_tiers=("admitted_context", "approved_normative"))
+        record = NormalizedSourceRecord("record", fact.statement, "approved_normative", "block_local",
+                                        (fact.source,), "selected", "already admitted")
+        result = run_descriptive_flow([record], profile=policy, adapter_name="synthetic", adapter=lambda source: ([fact], ""))
+        self.assertEqual(validate_descriptive_flow(result, profile=policy), [])
+        self.assertTrue(validate_descriptive_flow(replace(result, records=(replace(record, authority_tier="admitted_context"),)), profile=policy))
+
+    def test_fact_prose_preserves_conditions_modalities_and_alternatives(self):
+        profile = self.profile("synthetic", ("block_local",))
+        facts = [DescriptiveFact("The controller", "transfer", ("messages", "commands"),
+                                 "source 1", "Original relationship.", "block_local",
+                                 condition="When enabled", modality="may", coordination="or"),
+                 DescriptiveFact("The controller", "transfer", ("messages",),
+                                 "source 2", "Original prohibition.", "block_local", negative=True)]
+        paragraphs = compose_descriptive_paragraphs(facts, profile=profile)
+        self.assertEqual(len(paragraphs), 2)
+        self.assertEqual(paragraphs[0].text, "When enabled, the controller may transfer messages or commands.")
+        self.assertEqual(paragraphs[1].text, "The controller does not transfer messages.")
+        self.assertEqual(validate_descriptive_paragraphs(paragraphs, facts=facts, profile=profile), [])
+
+    def test_fact_prose_does_not_merge_different_modes_or_conditions(self):
+        profile = self.profile("synthetic", ("system",))
+        facts = [DescriptiveFact("The system", "store", ("measurements",),
+                                 f"source {index}", "Original relationship.", "system",
+                                 mode=mode, condition=condition)
+                 for index, (mode, condition) in enumerate(
+                     (("Mode A", "When enabled"), ("Mode B", "When enabled"), ("Mode B", "When requested")))]
+        self.assertEqual(len(compose_descriptive_paragraphs(facts, profile=profile)), 3)
+
+    def test_fact_prose_validator_detects_loss_without_recomposing(self):
+        profile = self.profile("synthetic", ("system",))
+        fact = DescriptiveFact("The system", "monitor", ("temperature",),
+                               "source", "Original relationship.", "system", modality="may",
+                               qualifiers=("only during maintenance",))
+        paragraph = DescriptiveParagraph("The system monitors humidity.", (fact,))
+        findings = validate_descriptive_paragraphs([paragraph], facts=[fact], profile=profile)
+        self.assertTrue(any("content_lost" in finding for finding in findings))
+        self.assertTrue(any("modality_lost" in finding for finding in findings))
+        self.assertTrue(validate_descriptive_paragraphs([], facts=[fact], profile=profile))
+        normative_link = DescriptiveParagraph("The system may monitor temperature only during maintenance. Covers: SOURCE-ID", (fact,))
+        self.assertIn("descriptive_normative_wording", validate_descriptive_paragraphs([normative_link], facts=[fact], profile=profile))
+        with self.assertRaises(ValueError):
+            compose_descriptive_paragraphs([fact], profile=self.profile("local", ("block_local",)))
+
     def test_drs_top_level_overview_breaks_long_description_into_short_paragraphs(self):
         overview = _drs_top_level_overview(
             [("Sensor", "FIFO", "sample data"), ("Host", "Regmap", "SPI host transactions")],
@@ -233,7 +383,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
             return content.replace("Author: " + document_author_name(), "Author: Different User") if path == markdown_path else content
 
         with patch.object(Path, "read_text", changed_author):
-            self.assertIn(f"document_history_author_mismatch:{markdown_path}", validate_document_author_fields(markdown_path))
+            self.assertIn(f"document_docx_author_mismatch:{markdown_path}", validate_document_author_fields(markdown_path))
 
     def test_drs_domain_projection_and_block_relationships_use_structured_evidence(self):
         records = [{

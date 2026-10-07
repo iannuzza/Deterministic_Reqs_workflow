@@ -231,6 +231,11 @@ def validate_drs_events(events: list[dict], contract: dict, baseline_tables: lis
     actual_tables = drs_table_inventory(events)
     remaining = Counter(stable_payload_hash(table) for table in actual_tables)
     for table in baseline_tables:
+        if table["owner"] == "Table 1. Version history":
+            candidates = [item for item in actual_tables if item["owner"] == table["owner"]]
+            if len(candidates) != 1 or candidates[0]["rows"][:len(table["rows"])] != table["rows"]:
+                findings.append("table_preservation: previous version history rows removed, changed or reordered")
+            continue
         if table["owner"] == "Table 3. Section navigation index":
             candidates = [item for item in actual_tables if item["owner"] == table["owner"]]
             def normalize_navigation_row(row):
@@ -353,8 +358,8 @@ def validate_drs_document_contract(repo_root: Path, *, check_metadata: bool = Tr
             events = drs_document_events(path)
             findings.extend(f"{kind}: {finding}" for finding in validate_drs_events(events, contract, baseline[kind]))
             snapshots = [event["text"].split("Snapshot ID:", 1)[1].strip() for event in events if event.get("text", "").startswith("Snapshot ID:")]
-            if snapshots != [baseline["snapshot_id"]]:
-                findings.append(f"{kind}: preservation baseline snapshot mismatch")
+            if len(snapshots) != 1 or not snapshots[0]:
+                findings.append(f"{kind}: missing or duplicate document snapshot")
         markdown_path = root / "digital_requirements_specification.md"
         markdown = markdown_path.read_text(encoding="utf-8")
         anchors = set(re.findall(r"\{#([^}]+)\}", markdown))

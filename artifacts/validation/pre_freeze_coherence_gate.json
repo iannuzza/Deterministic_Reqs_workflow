@@ -1,385 +1,385 @@
 {
-  "authority_fingerprint": "98fdcd4d78e660a9a9aa30a852e859c6a4913695f5de31482ed0888f00fdc8e4",
+  "authority_fingerprint": "2cc164b16d89e6e9897defe4ba11f01218cd7bd60b4a662477dda3ca1c4c90e6",
   "authority_fingerprint_matches": true,
   "auto_resolved_hierarchy_parent_count": 0,
   "classified_warnings": [
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163118",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163118",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163118",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163215",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163215",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163215",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163337",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163337",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163337",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_163557",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163557",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_163557",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_164215",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_164215",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_164215",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165141",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165141",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165141",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_165431",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165431",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_165431",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171517",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171517",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171517",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_171858",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171858",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_171858",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_185543",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_185543",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_185543",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191849",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191849",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191849",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_191935",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191935",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_191935",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192039",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192039",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192039",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192824",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192824",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192824",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_192850",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192850",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_192850",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193415",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193415",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193415",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193647",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193647",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193647",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193909",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193909",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193909",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_193955",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193955",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_193955",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194231",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194231",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194231",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194411",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194411",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194411",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_194920",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194920",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_194920",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_195429",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_195429",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_195429",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200017",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200017",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200017",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_200040",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200040",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_200040",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_201310",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_201310",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_201310",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260907_203035",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_203035",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260907_203035",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_092940",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_092940",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_092940",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100308",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100308",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100308",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_100408",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100408",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_100408",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101321",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101321",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101321",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_101600",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101600",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_101600",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260908_173306",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_173306",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260908_173306",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_130222",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_130222",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_130222",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_141927",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_141927",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_141927",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260909_142550",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_142550",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260909_142550",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134117",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134117",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134117",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_134724",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134724",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_134724",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_141800",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_141800",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_141800",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142149",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142149",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142149",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_142625",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142625",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_142625",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     },
     {
       "automatic_action": "no_automatic_change",
       "category": "stale_state",
-      "message": "Historical/superseded ingestion batch retained for audit; non-authoritative by workflow metadata: ipos_main_ctrl_20260921_143322",
-      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322",
       "root_cause": "requires deterministic review",
-      "severity": "INFO",
-      "triage_class": "INFO_ONLY"
+      "severity": "WARNING",
+      "triage_class": "HARDEN_LATER"
     }
   ],
   "csv_authority_crosscheck": {
@@ -3156,8 +3156,8 @@
   "mode": "read_only_local_deterministic",
   "next_step": "Proceed only through the separately approved freeze boundary.",
   "phase1_pass": true,
-  "phase1_report": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\STBIO_AI\\artifacts\\validation\\source_to_stage2b_coherence.json",
-  "recorded_authority_fingerprint": "98fdcd4d78e660a9a9aa30a852e859c6a4913695f5de31482ed0888f00fdc8e4",
+  "phase1_report": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\validation\\source_to_stage2b_coherence.json",
+  "recorded_authority_fingerprint": "2cc164b16d89e6e9897defe4ba11f01218cd7bd60b4a662477dda3ca1c4c90e6",
   "remediation_exhausted": true,
   "repeatable_after_authority_change": true,
   "suppressed_top_level_parent_warning_count": 55,
@@ -3165,7 +3165,7 @@
     "BLOCK_BEFORE_DOWNSTREAM": 0,
     "BLOCK_BEFORE_PHASE2": 0,
     "BLOCK_BEFORE_STAGE2B_FREEZE": 0,
-    "HARDEN_LATER": 0,
-    "INFO_ONLY": 42
+    "HARDEN_LATER": 42,
+    "INFO_ONLY": 0
   }
 }

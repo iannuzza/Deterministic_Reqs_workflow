@@ -1,7 +1,7 @@
 {
-  "built_at": "2026-09-15 16:55:54",
-  "source_index": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/artifacts/stage1_requirements/ocr_extracts/index.csv",
-  "db_path": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/artifacts/rag_DDS_STBIO1/rag_index.sqlite",
+  "built_at": "2026-10-06 13:56:12",
+  "source_index": "artifacts/stage1_requirements/ocr_extracts/index.csv",
+  "db_path": "artifacts/rag_DDS_STBIO1/rag_index.sqlite",
   "chunk_size": 1200,
   "chunk_overlap": 150,
   "pages_indexed": 163,
@@ -19,7 +19,7 @@
     "normalized_terms_table": "chunk_terms_fts"
   },
   "source_files": [
-    "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI/specs/DDS_STBIO1.pdf"
+    "specs/DDS_STBIO1.pdf"
   ],
   "html_clean_mode": true
 }

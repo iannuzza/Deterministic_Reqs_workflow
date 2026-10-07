@@ -9,9 +9,9 @@
 5. Resolve or waive every critical/major ambiguity disposition with rationale; minor issues are informational.
 6. Save the approved profile at the configured Stage 2 profile path.
 7. Set `approval.status` to `approved`, provide non-empty `approved_by` and `approved_at`, copy the current evidence hashes, set `approval.reviewed_draft_profile_sha256` to:
-   `4a92bbb6e593a4ed3a040ff74ae4fa673c8879b20cad2d9ede3f781c3b66535c`
+   `6fdfe10f46befb68302fc6471fd0c882cbeff5dfd6f88e47bf9c1c93878e720b`
 8. Set `approval.reviewed_mapping_preview_csv_sha256` to the hash of the reviewed CSV:
-   `24ad3c476b33ade7e8860fc869b5d0d77e766fcdd4c26f986cd767e71a9cabf0`
+   `6de102c284254837a067973fed08275886ab84abbd366cf393f36cdd978be239`
 9. Run Stage 2A only after approval; it will stop when this approval record is incomplete, stale, or has unresolved critical/major ambiguity items.
 
 ## Draft Evidence Summary
@@ -42,9 +42,9 @@
 
 - requirements_summary_csv: `19be065b5a11ef44aaed38641d93827249480615504756c7336c42f9aa00916c`
 - ontology_requirement_links_csv: `28dfcc98be8ceaa3b70308a6b822a98bded7d035b78c163609d2f109a32b98c1`
-- semantic_issues_md: `9161122fba5a620d263acc48c4bbec3556aa1c31a0e92724ed7f3f2abb7659a9`
-- mapping_preview_csv: `24ad3c476b33ade7e8860fc869b5d0d77e766fcdd4c26f986cd767e71a9cabf0`
-- draft_profile_sha256: `4a92bbb6e593a4ed3a040ff74ae4fa673c8879b20cad2d9ede3f781c3b66535c`
+- semantic_issues_md: `e269d17700ea86f63571df34e957d3d8c74b458cc54d1af786ac77b19327c4cc`
+- mapping_preview_csv: `6de102c284254837a067973fed08275886ab84abbd366cf393f36cdd978be239`
+- draft_profile_sha256: `6fdfe10f46befb68302fc6471fd0c882cbeff5dfd6f88e47bf9c1c93878e720b`
 - ADC: 36 source requirements
 - ADSP: 20 source requirements
 - Block: 12 source requirements

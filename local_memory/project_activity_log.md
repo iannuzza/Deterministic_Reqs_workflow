@@ -1,4 +1,82 @@
-﻿# STBIO_AI - Project Activity, Lessons, Errors, and Fixes
+﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
+
+## 2026-10-06 16:35:30 - Local Restart Checkpoint Saved
+- Updated local chat handoff, checkpoint, environment and synchronization
+  manifest in the active Git clone. Older original-project history is retained
+  below and does not override the newest checkpoint.
+- No Git commit/branch/reset, rollback backup, approval change or pipeline run
+  performed for this save. Existing worktree changes remain saved in place.
+
+## 2026-10-06 - Final Snapshot-Only Version History Policy
+- User's FINAL rule: one new history row per new approved snapshot version.
+  Same-snapshot reruns leave the complete history table unchanged. Earlier
+  requests to append on every run were superseded before production regeneration.
+- Shared `document_version_history_markdown` in `scripts/workflow_routing.py`
+  retains old rows and appends only when the document's snapshot changes.
+  `document_version_for_snapshot` reads the last row; minor version increments
+  only for changed snapshots. Snapshot authority still comes from the resolver.
+- Integrated into SRS, ARS, DRS, Digital IPOS and Analog IPOS. Historical authors
+  stay unchanged; current Markdown title and DOCX author remain consistent.
+- DRS table preservation accepts append-only version history and rejects old-row
+  loss, edits, reordering or duplicate history tables. Removed obsolete equality
+  between the current approved snapshot and the historical preservation baseline.
+  Other protected tables retain strict checks; baseline JSON was not rewritten.
+- Source/test files changed: `scripts/workflow_routing.py`,
+  `scripts/spec_document_contract.py`, `scripts/run_srs_gen_spec_agent.py`,
+  `scripts/run_ars_gen_spec_agent.py`, `scripts/run_drs_gen_spec_agent.py`,
+  `scripts/generate_ipos_specs.py`, `tests/test_generator_snapshot_binding.py`,
+  `tests/test_drs_template_contract.py`, `tests/test_descriptive_summary.py`.
+- Verification: 8 snapshot-binding, 8 DRS-contract and 74 descriptive tests PASS
+  (90 total); central coherence PASS / 0 findings; independence guard exit 0.
+  No specifications regenerated or new production snapshot approved in this edit.
+- Remaining separate defect: undefined `text` in DRS
+  `_is_non_normative_table_row`; not part of the history repair.
+
+## 2026-10-06 - Stage 5 DRS Date And Failed-Output Recovery
+- Failure: unchanged snapshot/version replaced the history date 2026-10-01 with
+  2026-10-06. Markdown and DOCX protected-table checks failed; failed output also
+  left stale contract hashes, producing three DRS-local central findings.
+- First date-only repair was superseded by the final shared history helper above.
+- Used existing `run_drs_gen_spec_agent.py --snapshot-id
+  snap-b2e8101b00dc6909feaed885 --regenerate-downstream` to repair DRS-only outputs;
+  crosscheck PASS, 55 requirements. Stage 5 gate PASS at 15:47:22; central PASS/0.
+- Do not bypass unrelated snapshot/authority findings or silently rebaseline.
+  Canonical DB may be touched by derived ledger/audit writes; do not claim
+  byte-for-byte DB identity merely because approval authority is preserved.
+
+## 2026-10-06 - Candidate-Only Fingerprint Drift Repair
+- Nine approved row pairs differed only in `lineage_candidate_parent_req_ids`;
+  no actual parent change justified stale SRS/SysML contract markers.
+- Excluded that candidate field from the operational hash only, leaving review/
+  audit evidence intact and real approved metadata hashed. Kept approval policy,
+  mapping persistence and resolver behavior unchanged.
+- Added candidate-drift stability and actual-contract-change negative regressions
+  to `tests/test_srs_downstream_coherence.py`: 19 PASS.
+- Refreshed SRS/final SysML once from the same snapshot; Stage 3 gate and central
+  coherence PASS. Snapshot/mapping digest before and after remained
+  `a218609a9ab755559e798a050b9400c964760bfe4cf81f1f144fbd09aa6db172`.
+- Operational hash: `8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372`.
+
+## 2026-10-06 - Workflow GUI Lifecycle, Reports And Zoom
+- Active executable stage remains green; failed stage remains red after run
+  completion/redraw. Lifecycle parsing matches actual CLI starts, including 2a;
+  unbuffered subprocess output supports live status. Standalone Analog IPOS uses 7.
+- Validation reports open in the built-in read-only viewer; diagnostics/reports
+  allow selection, Ctrl+C and right-click Copy.
+- Shared Canvas-bounds helper fits wrapped workflow labels in fixed-size boxes
+  and starts compact fonts at zoom-scaled sizes. Full diagram also uses fitting.
+  No layout/color/click changes; 15 zoom steps and three display scales checked.
+- Files: `scripts/workflow_gui.py`, `tests/test_final_polish.py`; GUI suite 46 PASS.
+
+## 2026-10-06 - Earlier Clone Portability And Stage 1 Recovery
+- Active clone path normalization is centralized in `scripts/repo_paths.py`;
+  legacy OCR address rebasing changes addresses, not requirement authority.
+  VS Code tasks use the selected Python interpreter. Prior focused tests: 157 PASS.
+- Stage 1 extraction preserves complete tagged bodies across pages/sections,
+  avoiding truncation or accidental concatenation at the next ID/section.
+  Recovered 271 rows / 191 IDs; 9 focused tests and Stage 1.4-1.7 PASS, RAG fail 0.
+- Original `../STBIO_AI` remains a read-only reference for this work. Do not
+  generalize successful focused tests into complete cross-project qualification.
 
 ## 2026-10-01 - SRS System Overview Audit-Backed Rollout
 - Regenerated only SRS `3.1-3.7` from approved snapshot

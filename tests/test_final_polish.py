@@ -2,13 +2,15 @@ import sys
 import inspect
 import io
 import tempfile
+import tkinter as tk
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from tkinter import ttk
 from types import SimpleNamespace
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
-from openpyxl import Workbook
+from openpyxl import Workbook, load_workbook
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
@@ -20,6 +22,7 @@ from workflow_gui import (
     RANGE_STAGE_LABELS,
     RANGE_STAGE_LABEL_TO_KEY,
     WorkflowGUI,
+    WorkflowDiagramRenderer,
     WORKFLOW_NODE_MEANINGS,
     format_gui_review_context,
     build_gui_review_context,
@@ -56,6 +59,153 @@ from generate_ipos_specs import _convert_ipos_markdown_to_docx
 
 
 class FinalPolishTests(unittest.TestCase):
+    def test_open_validation_report_uses_read_only_viewer_without_file_association(self):
+        root = tk.Tk()
+        root.withdraw()
+        try:
+            gui = object.__new__(WorkflowGUI)
+            gui.root = root
+            gui._set_responsive_geometry = MagicMock()
+            result = {"selected_snapshot_id": "snapshot-test", "findings": ["SRS_STALE_CONTRACT_FINGERPRINT"]}
+
+            def descendants(widget):
+                for child in widget.winfo_children():
+                    yield child
+                    yield from descendants(child)
+
+            with tempfile.TemporaryDirectory() as temporary_dir:
+                repo_root = Path(temporary_dir)
+                report_path = repo_root / "artifacts/validation/downstream_coherence_report.json"
+                with patch("workflow_gui.REPO_ROOT", repo_root), \
+                        patch("workflow_gui.DOWNSTREAM_VALIDATION_REPORT_PATH", report_path), \
+                        patch("validate_downstream_coherence.validate", return_value=result), \
+                        patch("workflow_gui.os.startfile", create=True) as startfile, \
+                        patch("workflow_gui.messagebox.showerror") as showerror:
+                    gui._show_downstream_block_dialog([], ["python", "workflow_cli.py", "run", "--stage", "3"])
+                    dialog = next(child for child in root.winfo_children() if isinstance(child, tk.Toplevel))
+                    diagnostic_viewer = next(child for child in descendants(dialog) if isinstance(child, tk.Text))
+                    diagnostic_text = diagnostic_viewer.get("1.0", "end-1c")
+                    self.assertIn("snapshot-test", diagnostic_text)
+                    self.assertIn("SRS_STALE_CONTRACT_FINGERPRINT", diagnostic_text)
+                    self.assertIn("python workflow_cli.py run --stage 3", diagnostic_text)
+                    self.assertEqual(diagnostic_viewer.cget("state"), tk.DISABLED)
+                    self.assertTrue(diagnostic_viewer.bind("<Control-c>"))
+                    self.assertTrue(diagnostic_viewer.bind("<Button-3>"))
+                    diagnostic_viewer.tag_add(tk.SEL, "1.0", "end-1c")
+                    gui._copy_text_selection(diagnostic_viewer)
+                    self.assertEqual(root.clipboard_get(), diagnostic_text)
+                    diagnostic_viewer.insert("1.0", "unwanted edit")
+                    self.assertEqual(diagnostic_viewer.get("1.0", "end-1c"), diagnostic_text)
+                    open_button = next(child for child in descendants(dialog) if isinstance(child, ttk.Button) and child.cget("text") == "Open validation report")
+                    open_button.invoke()
+                    report_dialog = next(child for child in dialog.winfo_children() if isinstance(child, tk.Toplevel))
+                    viewer = next(child for child in descendants(report_dialog) if isinstance(child, tk.Text))
+                    self.assertEqual(viewer.get("1.0", "end-1c"), report_path.read_text(encoding="utf-8"))
+                    self.assertEqual(viewer.cget("state"), tk.DISABLED)
+                    self.assertTrue(viewer.bind("<Control-c>"))
+                    self.assertTrue(viewer.bind("<Button-3>"))
+                    viewer.tag_add(tk.SEL, "1.0", "end-1c")
+                    gui._copy_text_selection(viewer)
+                    self.assertEqual(root.clipboard_get(), viewer.get("1.0", "end-1c"))
+                    self.assertEqual(root.grab_current(), report_dialog)
+                    viewer.insert("1.0", "unwanted edit")
+                    self.assertNotIn("unwanted edit", viewer.get("1.0", "end-1c"))
+                    close_button = next(child for child in descendants(report_dialog) if isinstance(child, ttk.Button) and child.cget("text") == "Close")
+                    close_button.invoke()
+                    self.assertEqual(root.grab_current(), dialog)
+                    startfile.assert_not_called()
+                    showerror.assert_not_called()
+                    report_path.unlink()
+                    open_button.invoke()
+                    showerror.assert_called_once()
+                    self.assertFalse(any(isinstance(child, tk.Toplevel) for child in dialog.winfo_children()))
+        finally:
+            root.update_idletasks()
+            root.destroy()
+
+    def test_gui_stage_run_tracks_all_executable_stages_and_failure(self):
+        stages = ("0", "1", "2", "2a", "3", "4", "5", "6", "7")
+        for stage in stages:
+            with self.subTest(stage=stage):
+                gui = object.__new__(WorkflowGUI)
+                gui.is_running = False
+                gui.root = MagicMock()
+                gui.root.after.side_effect = lambda delay, callback, *args: callback(*args)
+                for method in ("_set_status", "clear_stage_failure", "set_active_stage", "append_log", "append_chat", "set_stage_failure"):
+                    setattr(gui, method, MagicMock())
+                process = MagicMock()
+                process.stdout = [
+                    f"[2026-10-06 13:00:00] Stage {stage.upper()} run 1/1\n",
+                    "Stage 1.4 legacy substep; references Stage 3 and Stage 7\n",
+                    f"[2026-10-06 13:00:01] STOP at stage {stage} (exit=1)\n",
+                ]
+                process.wait.return_value = 1
+                with patch("workflow_gui.threading.Thread") as thread, \
+                        patch("workflow_gui.subprocess.Popen", return_value=process):
+                    thread.side_effect = lambda **kwargs: SimpleNamespace(start=kwargs["target"])
+                    gui._run_command_async(["python", "workflow_cli.py", "run"], "Stage range")
+                self.assertEqual([call.args[0] for call in gui.set_active_stage.call_args_list], [None, stage, None])
+                self.assertEqual([call.args[0] for call in gui.clear_stage_failure.call_args_list], [None, stage])
+                gui.set_stage_failure.assert_called_once()
+                self.assertEqual(gui.set_stage_failure.call_args.args[0], stage)
+                self.assertEqual(gui.set_active_stage.call_args.args, (None,))
+                self.assertFalse(gui.is_running)
+
+    def test_gui_stage_range_stays_on_stage_that_fails(self):
+        gui = object.__new__(WorkflowGUI)
+        gui.is_running = False
+        gui.root = MagicMock()
+        gui.root.after.side_effect = lambda delay, callback, *args: callback(*args)
+        for method in ("_set_status", "clear_stage_failure", "set_active_stage", "append_log", "append_chat", "set_stage_failure"):
+            setattr(gui, method, MagicMock())
+        process = MagicMock()
+        process.stdout = [
+            "[2026-10-06 13:00:00] Stage 5 run 1/1\n",
+            "[2026-10-06 13:00:01] Stage 6 Digital IPOS run 1/1\n",
+            "[2026-10-06 13:00:02] Stage 7 Analog IPOS run 1/1\n",
+            "ERROR: Stage 7 failed; Stage 3 artifact missing\n",
+            "[2026-10-06 13:00:03] STOP at stage 7 (exit=3)\n",
+        ]
+        process.wait.return_value = 3
+        with patch("workflow_gui.threading.Thread") as thread, \
+                patch("workflow_gui.subprocess.Popen", return_value=process) as popen:
+            thread.side_effect = lambda **kwargs: SimpleNamespace(start=kwargs["target"])
+            gui._run_command_async(["python", "workflow_cli.py", "run"], "Stages 5-7", stage="5")
+        self.assertEqual([call.args[0] for call in gui.set_active_stage.call_args_list], ["5", "5", "6", "7", None])
+        self.assertEqual(gui.set_stage_failure.call_args.args[0], "7")
+        self.assertEqual(popen.call_count, 1)
+        self.assertEqual(popen.call_args.kwargs["env"]["PYTHONUNBUFFERED"], "1")
+
+    def test_full_workflow_diagram_retains_failure_after_run_and_redraw(self):
+        root = tk.Tk()
+        try:
+            frame = ttk.Frame(root)
+            frame.pack(fill=tk.BOTH, expand=True)
+            renderer = WorkflowDiagramRenderer(frame)
+            for stage, node_id in (("2", "s2"), ("2a", "s2a"), ("7", "stage7")):
+                with self.subTest(stage=stage):
+                    renderer.set_stage_failures({})
+                    renderer.set_active_stage(stage)
+                    rect = renderer.node_items[node_id][0]
+                    self.assertEqual(renderer.canvas.itemcget(rect, "fill"), renderer.COLORS["active"]["fill"])
+                    renderer.set_stage_failures({stage: "Gate failed"})
+                    renderer.set_active_stage(None)
+                    renderer.refresh()
+                    rect = renderer.node_items[node_id][0]
+                    self.assertEqual(renderer.canvas.itemcget(rect, "fill"), renderer.COLORS["failed"]["fill"])
+                    renderer.set_stage_failures({})
+                    renderer.set_active_stage(stage)
+                    self.assertEqual(renderer.canvas.itemcget(rect, "fill"), renderer.COLORS["active"]["fill"])
+        finally:
+            root.destroy()
+
+    def test_standalone_analog_ipos_sets_diagram_stage(self):
+        gui = object.__new__(WorkflowGUI)
+        gui._snapshot_selector_args = MagicMock(return_value=["--use-latest-approved"])
+        gui._run_command_async = MagicMock()
+        gui.run_stage_cli("7")
+        self.assertEqual(gui._run_command_async.call_args.kwargs["stage"], "7")
+
     def test_gui_layout_scales_to_screen_and_preserves_saved_position(self):
         self.assertEqual(responsive_layout_scale(1024, 600), 0.72)
         self.assertEqual(responsive_layout_scale(1440, 900), 1.0)
@@ -177,15 +327,121 @@ class FinalPolishTests(unittest.TestCase):
         ])
         self.assertEqual(fields[:3], ["source_req_id", "block", "statement"])
 
+    def test_gui_stage_range_dispatches_one_cli_command(self):
+        gui = object.__new__(WorkflowGUI)
+        gui._run_command_async = MagicMock()
+        gui._snapshot_selector_args = MagicMock(return_value=["--snapshot-id", "approved-test"])
+        for start, end in (("0", "2"), ("2a", "5"), ("3", "7"), ("6", "7")):
+            with self.subTest(start=start, end=end):
+                gui._run_command_async.reset_mock()
+                gui._snapshot_selector_args.reset_mock()
+                gui.from_stage_var = SimpleNamespace(get=lambda: next(label for label, key in RANGE_STAGE_LABEL_TO_KEY.items() if key == start))
+                gui.to_stage_var = SimpleNamespace(get=lambda: next(label for label, key in RANGE_STAGE_LABEL_TO_KEY.items() if key == end))
+                gui.run_stage_range_cli()
+                gui._run_command_async.assert_called_once()
+                command = gui._run_command_async.call_args.args[0]
+                self.assertEqual(Path(command[1]).name, "workflow_cli.py")
+                args = build_parser().parse_args(command[2:])
+                self.assertEqual(args.from_stage, start)
+                self.assertEqual(args.to_stage, end)
+                if end == "2":
+                    gui._snapshot_selector_args.assert_not_called()
+                    self.assertIsNone(args.snapshot_id)
+                else:
+                    gui._snapshot_selector_args.assert_called_once()
+                    self.assertEqual(args.snapshot_id, "approved-test")
+                self.assertEqual(gui._run_command_async.call_args.kwargs["approval_after_success"], end == "2")
+
+    def test_gui_stage_range_preserves_approval_and_order_guards(self):
+        gui = object.__new__(WorkflowGUI)
+        gui.root = None
+        gui._run_command_async = MagicMock()
+        with patch("workflow_gui.messagebox.showinfo") as approval, \
+                patch("workflow_gui.messagebox.showwarning") as invalid:
+            gui.run_stage_range("0", "7")
+            approval.assert_called_once()
+            gui.run_stage_range("5", "3")
+            invalid.assert_called_once()
+        gui._run_command_async.assert_not_called()
+
     def test_report_sheet_has_filter_freeze_pane_and_table(self):
         workbook = Workbook()
         worksheet = workbook.active
         worksheet.append(["source_req_id", "block", "statement"])
         worksheet.append(["REQ-1", "ADC", "shall sample"])
         _style_data_sheet(worksheet, ["source_req_id", "block", "statement"], 1)
+        with io.BytesIO() as buffer:
+            workbook.save(buffer)
+            buffer.seek(0)
+            worksheet = load_workbook(buffer).active
         self.assertEqual(worksheet.freeze_panes, "A2")
-        self.assertEqual(worksheet.auto_filter.ref, "A1:C2")
         self.assertEqual(len(worksheet.tables), 1)
+        table = worksheet.tables["ReportData"]
+        self.assertEqual(table.ref, "A1:C2")
+        self.assertIsNotNone(table.autoFilter)
+        self.assertEqual(table.autoFilter.ref, "A1:C2")
+
+    def test_sysml_hierarchy_source_scrollbar_survives_resize(self):
+        root = tk.Tk()
+        root.withdraw()
+        self.addCleanup(root.destroy)
+        gui = object.__new__(WorkflowGUI)
+        gui.root = root
+        with patch.object(gui, "_set_responsive_geometry"), \
+                patch.object(gui, "_bind_button_help"), \
+                patch.object(gui, "_bind_copy_support"), \
+                patch.object(gui, "_draw_sysml_hierarchy_window"):
+            gui._open_sysml_hierarchy_window()
+        text = gui.sysml_hierarchy_details
+        scrollbar = next(child for child in text.master.winfo_children() if isinstance(child, ttk.Scrollbar))
+        port_canvas = gui.sysml_hierarchy_port_canvas
+        port_scrollbar = next(child for child in port_canvas.master.winfo_children() if isinstance(child, ttk.Scrollbar))
+        port_canvas.configure(scrollregion=(0, 0, 620, 3000))
+        text.configure(state=tk.NORMAL)
+        text.insert("1.0", "SysML source line\n" * 200)
+        text.configure(state=tk.DISABLED)
+        details_pane = text.master.master
+        self.assertIsInstance(details_pane, ttk.Panedwindow)
+        self.assertEqual(str(details_pane.cget("orient")), tk.HORIZONTAL)
+        self.assertEqual(len(details_pane.panes()), 2)
+        for geometry in ("1100x700", "620x420"):
+            with self.subTest(geometry=geometry):
+                gui.sysml_hierarchy_window.geometry(geometry)
+                root.update()
+                details_pane.sashpos(0, int(details_pane.winfo_width() * 0.3))
+                root.update()
+                self.assertTrue(port_scrollbar.winfo_ismapped())
+                self.assertGreater(port_scrollbar.winfo_width(), 1)
+                self.assertLessEqual(port_scrollbar.winfo_x() + port_scrollbar.winfo_width(), port_canvas.master.winfo_width())
+                initial_port_width = gui.sysml_hierarchy_port_canvas.winfo_width()
+                initial_text_width = text.winfo_width()
+                details_pane.sashpos(0, int(details_pane.winfo_width() * 0.7))
+                root.update()
+                self.assertGreater(gui.sysml_hierarchy_port_canvas.winfo_width(), initial_port_width)
+                self.assertLess(text.winfo_width(), initial_text_width)
+                self.assertTrue(scrollbar.winfo_ismapped())
+                self.assertGreater(scrollbar.winfo_width(), 1)
+                self.assertGreater(scrollbar.winfo_height(), 1)
+                self.assertGreater(text.winfo_width(), 1)
+                self.assertLessEqual(scrollbar.winfo_x() + scrollbar.winfo_width(), text.master.winfo_width())
+                text.yview_moveto(0)
+                root.update()
+                self.assertEqual(scrollbar.get()[0], 0)
+                root.tk.call(scrollbar.cget("command"), "moveto", 1.0)
+                root.update()
+                self.assertGreater(text.yview()[0], 0)
+                self.assertGreater(scrollbar.get()[0], 0)
+                self.assertTrue(port_scrollbar.winfo_ismapped())
+                self.assertGreater(port_scrollbar.winfo_width(), 1)
+                self.assertGreater(port_scrollbar.winfo_height(), 1)
+                self.assertLessEqual(port_scrollbar.winfo_x() + port_scrollbar.winfo_width(), port_canvas.master.winfo_width())
+                port_canvas.yview_moveto(0)
+                root.update()
+                self.assertEqual(port_scrollbar.get()[0], 0)
+                root.tk.call(port_scrollbar.cget("command"), "moveto", 1.0)
+                root.update()
+                self.assertGreater(port_canvas.yview()[0], 0)
+                self.assertGreater(port_scrollbar.get()[0], 0)
 
     def test_gui_context_is_deterministic_without_display(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -198,6 +454,11 @@ class FinalPolishTests(unittest.TestCase):
 
     def test_architecture_approval_dialog_stays_open_for_stage2b(self):
         source = inspect.getsource(WorkflowGUI._show_architecture_profile_approval_dialog)
+        self.assertIn("1. Open Architecture Map in Excel (orange button): review/change, save, and close the Excel file.", source)
+        self.assertIn("2. Enable Gate from Workbook (green button).", source)
+        self.assertIn("3. Run Stage 2A.", source)
+        self.assertIn("4. After Stage 2A passes, Freeze Stage 2B Snapshot.", source)
+        self.assertLess(source.index('text="Freeze Stage 2B Snapshot"'), source.index('text="Run Stage 2A"'))
         stage2a_handler = source.split("def run_stage2a_after_approval", 1)[1].split("def freeze_stage2b_snapshot", 1)[0]
         self.assertIn('self.run_stage_cli("2a")', stage2a_handler)
         self.assertNotIn("close_dialog()", stage2a_handler)
@@ -503,6 +764,62 @@ class FinalPolishTests(unittest.TestCase):
         bounds = (0, 0, 1576, 255)
         scrollregion = compact_workflow_scrollregion(bounds, margin=16)
         self.assertEqual(scrollregion, (-16, -16, 1592, 271))
+
+    def test_compact_workflow_labels_fit_boxes_at_every_zoom(self):
+        root = tk.Tk()
+        root.withdraw()
+        try:
+            gui = object.__new__(WorkflowGUI)
+            gui.diagram_canvas = tk.Canvas(root)
+            gui._bind_stage_click = MagicMock()
+            gui._refresh_stage_styles = MagicMock()
+            stage_font_sizes = {}
+            for display_scale in (1.0, 1.5, 2.0):
+                root.tk.call("tk", "scaling", display_scale)
+                for zoom_step in range(6, 21):
+                    zoom = zoom_step / 10
+                    gui.compact_workflow_zoom = zoom
+                    gui._draw_compact_workflow_graph()
+                    for node in WORKFLOW_DIAGRAM_NODES:
+                        with self.subTest(scale=display_scale, zoom=zoom, node=node["id"]):
+                            items = gui.diagram_canvas.find_withtag(node["id"])
+                            rectangle = next(item for item in items if gui.diagram_canvas.type(item) == "rectangle")
+                            label = next(item for item in items if gui.diagram_canvas.type(item) == "text")
+                            box = gui.diagram_canvas.coords(rectangle)
+                            bounds = gui.diagram_canvas.bbox(label)
+                            padding = 5 * zoom
+                            self.assertGreaterEqual(bounds[0], box[0] + padding)
+                            self.assertGreaterEqual(bounds[1], box[1] + padding)
+                            self.assertLessEqual(bounds[2], box[2] - padding)
+                            self.assertLessEqual(bounds[3], box[3] - padding)
+                            self.assertEqual(gui.diagram_canvas.itemcget(label, "text"), node["label"])
+                            self.assertAlmostEqual(box[2] - box[0], (112 if node["kind"] == "main" else 150) * zoom)
+                    if display_scale == 1.0 and zoom in (0.6, 2.0):
+                        stage_font_sizes[zoom] = int(root.tk.splitlist(gui.diagram_canvas.itemcget(gui.stage_labels["0"], "font"))[1])
+            self.assertGreater(stage_font_sizes[2.0], stage_font_sizes[0.6])
+        finally:
+            root.update_idletasks()
+            root.destroy()
+
+    def test_full_workflow_labels_fit_boxes_at_display_scales(self):
+        root = tk.Tk()
+        root.withdraw()
+        try:
+            renderer = WorkflowDiagramRenderer(ttk.Frame(root))
+            for display_scale in (1.0, 1.5, 2.0):
+                root.tk.call("tk", "scaling", display_scale)
+                renderer.refresh()
+                for node_id, (rectangle, label) in renderer.node_items.items():
+                    with self.subTest(scale=display_scale, node=node_id):
+                        box = renderer.canvas.coords(rectangle)
+                        bounds = renderer.canvas.bbox(label)
+                        self.assertGreaterEqual(bounds[0], box[0] + 5)
+                        self.assertGreaterEqual(bounds[1], box[1] + 5)
+                        self.assertLessEqual(bounds[2], box[2] - 5)
+                        self.assertLessEqual(bounds[3], box[3] - 5)
+        finally:
+            root.update_idletasks()
+            root.destroy()
 
     def test_compact_workflow_keeps_digital_and_analog_ipos_on_distinct_rows(self):
         nodes = {node["id"]: node for node in WORKFLOW_DIAGRAM_NODES}

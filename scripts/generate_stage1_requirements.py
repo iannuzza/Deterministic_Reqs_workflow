@@ -15,6 +15,7 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from repo_paths import portable_repo_path, resolve_repo_path
 from typing import Dict, List, Optional, Tuple
 from workflow_routing import source_parent_title
 
@@ -809,16 +810,13 @@ def _normalize_split_req_id_lines(lines: List[str]) -> List[str]:
 
 
 def _normalize_tagged_header_lines(lines: List[str]) -> List[str]:
-    """Join OCR lines that split a bracketed tagged requirement header."""
-    normalized: List[str] = []
-    index = 0
-    while index < len(lines):
-        current = _clean_statement(lines[index])
-        if index + 1 < len(lines) and "[" in current and "]" not in current:
-            current = f"{current} {lines[index + 1].strip()}"
-            index += 1
-        normalized.append(current)
-        index += 1
+    """Join split tagged headers while preserving original page line indices."""
+    normalized = [_clean_statement(line) for line in lines]
+    for index in range(len(normalized) - 1):
+        current = normalized[index]
+        if "[" in current and "]" not in current:
+            normalized[index] = f"{current} {normalized[index + 1]}"
+            normalized[index + 1] = ""
     return normalized
 
 
@@ -984,8 +982,14 @@ def _extract_tagged_reqid_candidate(
     first_body, closed = _split_by_tag_terminator(first_body)
     parts: List[str] = [first_body] if first_body else []
     end_idx = start_idx
+    section_number = ""
+    for previous_line in reversed(lines[:start_idx]):
+        heading = SECTION_HEADING_RE.match(previous_line)
+        if heading and _is_section_or_heading(previous_line):
+            section_number = heading.group("num")
+            break
 
-    scan_lines = lines + (continuation_lines or [])
+    scan_lines = _normalize_tagged_header_lines(lines + (continuation_lines or []))
     if not closed:
         for j in range(start_idx + 1, min(len(scan_lines), start_idx + 400)):
             nxt = _clean_statement(scan_lines[j])
@@ -993,6 +997,16 @@ def _extract_tagged_reqid_candidate(
                 continue
             if re.fullmatch(r"\d{1,4}", nxt):
                 continue
+            next_header = re.sub(r"(?<=_)\s+(?=\d)", "", nxt)
+            if REQ_ID_TAGGED_START_RE.match(next_header):
+                if parts and re.match(r"^\d+(?:\.\d+)*\.?\s+.+:\s*$", parts[-1]):
+                    parts.pop()
+                break
+            heading = SECTION_HEADING_RE.match(nxt)
+            if section_number and heading and _is_section_or_heading(nxt):
+                if not re.search(r"\b(?:shall|must|required|requirement)\b", heading.group("title"), re.IGNORECASE):
+                    if not heading.group("num").startswith(section_number + "."):
+                        break
             part, found_end = _split_by_tag_terminator(nxt)
             if part:
                 parts.append(part)
@@ -2615,6 +2629,7 @@ def _build_rationale(candidate: Candidate, requirement_type: str) -> str:
 
 
 def _read_index(index_csv: Path) -> List[Tuple[int, Path, str]]:
+    repo_root = Path(__file__).resolve().parent.parent
     rows: List[Tuple[int, Path, str]] = []
     with index_csv.open("r", encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
@@ -2622,8 +2637,8 @@ def _read_index(index_csv: Path) -> List[Tuple[int, Path, str]]:
             if (row.get("status") or "").strip() != "text-extracted":
                 continue
             page = int(row["page"])
-            text_file = Path(row["text_file"])
-            source_file = row["source_file"]
+            text_file = resolve_repo_path(repo_root, row["text_file"])
+            source_file = portable_repo_path(repo_root, row["source_file"])
             rows.append((page, text_file, source_file))
     rows.sort(key=lambda x: x[0])
     return rows
@@ -3205,7 +3220,7 @@ def main() -> int:
     candidates = _collect_candidates(index_rows, image_block_rules)
     source_spec = index_rows[0][2]
 
-    source_spec_path = Path(source_spec)
+    source_spec_path = resolve_repo_path(repo_root, source_spec)
     if source_spec_path.suffix.lower() in {".html", ".htm"} and source_spec_path.exists():
         html_req_map = _extract_html_reqid_definitions(source_spec_path)
         _apply_html_reqid_overrides(candidates, html_req_map)

@@ -1,6 +1,6 @@
 # Requirement Coverage Across Document Hierarchy
 
-Date: 2026-10-05 15:50:22
+Date: 2026-10-06 17:07:53
 
 ## Basis
 - Source document: `DDS_STBIO1.pdf` (from the Stage 1 OCR index).

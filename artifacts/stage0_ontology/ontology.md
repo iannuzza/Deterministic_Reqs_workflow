@@ -1,6 +1,6 @@
 # Ontology Baseline
 
-Date: 2026-09-15
+Date: 2026-10-06
 
 ## Phase 0 - Source Baseline and Scope Lock
 - Source specification: specs/DDS_STBIO1.pdf

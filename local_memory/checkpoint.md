@@ -1,4 +1,108 @@
-# STBIO_AI Restore Checkpoint
+# Local Restore Checkpoint - Deterministic_Reqs_workflow
+
+## Latest checkpoint: 2026-10-07 - Frozen Authority-Bounded SRS Writing Rule
+
+- Checkpoint ID: `2026-10-07-srs-authority-bounded-writing-rule`; working files only, no Git commit, new approval or snapshot. Scope limited to refining/freezing/centralizing introductory and terminology wording.
+- Preferred rule `srs-introductory-authority-bounded-v1` is an immutable SRS-only policy in `workflow_routing.py`, referenced by shared general rules, descriptive-policy guidance and SRS template. Avoid blanket scope/coverage/allocation/performance/implementation claims; glossary definitions are reading aids bounded by approved content. Reference listings are not applicability or approval. Shared category conventions and other document profiles unchanged.
+- Existing SRS content audit persists rule identity/fingerprint and the validator independently rejects changed metadata. Revised SRS Markdown/DOCX/LaTeX generated at unchanged snapshot/history; no new sources, requirement selection or authority changes.
+- Verification: shared82 and SRS15 tests PASS (97); rule mutation, central references and skill YAML PASS; generator/crosschecks, Stage3 and central coherence PASS/0 findings; diagnostics clean. Prior six content-review findings remain open. No other generator or full pipeline rerun, no Word visual-layout certification.
+
+## Previous checkpoint: 2026-10-07 - Complete SRS Introduction And Terminology
+
+- Checkpoint ID: `2026-10-07-srs-complete-introduction`. User authorized the deferred SRS content fixes and then restored every introductory 1.x/2.x subsection. Working files only; no Git commit or approval snapshot.
+- Explicit SRS document-content composition and audit now cover Purpose, Scope, Audience, References and terminology 2.1-2.4 independently of requirement count. Generic definitions follow template terms without asserting device capabilities, thresholds or approval. Section2.5 retains shared DRS conventions. Final renderer/Scope-mutation tests, all15 SRS tests, generation/crosschecks, Stage3 and central PASS; diagnostics clean. Markdown/DOCX/LaTeX refreshed, snapshot/history unchanged.
+- Purpose/audience independent of requirement count; supported overview roles retained with audited parser gaps. Four power-domain rows with prose first and separate clock/reset discussion; 6.4 references 3.6.
+- Snapshot-bound explicit architecture/owning-domain classifications produce eight digital functional catalog entries and no resolved analog entries. No heuristic classification or requirement-count/IPOS-materialization selection.
+- SRS document-content profile and normalized-record/semantic-unit audit extend existing final validation for introductory content, coverage, provenance, deduplication and Markdown/DOCX table/section fidelity.
+- Verification: shared82, overview/content15, catalog1, history8 tests passed during repair; final audience renderer mutation test passed. Final SRS generation/crosschecks, Stage3, central coherence and source guard PASS; diagnostics clean. Snapshot `snap-b2e8101b00dc6909feaed885`, 314 authority rows, partitions0/0/55/259/0 and history1.1/2026-10-06 preserved.
+- Six unresolved review findings retained in section10.1/audit: two missing classifications, one conflict, one missing approved context, unreliable voltage and unreadable note. Other generators not run; inactive artifact hashes not remeasured for this follow-up. No full pipeline rerun or Word visual-layout certification.
+
+## Previous checkpoint: 2026-10-07 14:46:14 - Shared Descriptive Contract And Profiles
+
+- Checkpoint ID: `2026-10-07-shared-descriptive-profiles`; working files only, no Git commit/branch, canonical approval or rollback snapshot.
+- User superseded the document-repair plan: implement reusable normalized evidence -> facts -> aggregation -> paragraphs -> audit -> validation, with SRS as first adopter only. Purpose, catalogs, power-table content repairs and other-generator migration are excluded.
+- `scripts/workflow_routing.py`: explicit immutable SRS/DRS/ARS/IPOS profiles, immutable registry and activation guards; shared admission, aggregation, flow result and independent audit/materialization validation. Reuses `NormalizedSourceRecord`/`SemanticUnit` from the existing document contract. SRS exclusions are profile-local, not generic defaults.
+- SRS scoped adapter now enters the shared flow; `scripts/run_srs_gen_spec_agent.py` persists profile version/fingerprint, adapter, normalized source-record and semantic-unit linkage. Existing Stage 3/central callers reuse the expanded shared checker without another authority gate.
+- DRS/ARS/IPOS built-in profiles are runtime-disabled hooks only. Their generators are unchanged. SHA256 comparison of all 52 stage4/5/6/7 artifact files before and after the SRS-only refresh showed no changes.
+- Verification: descriptive/legacy suite82, SRS adopter slice15, document contract7, snapshot/history8 PASS (112 total); source-independence guard exit0; SRS generator/crosschecks, Stage3 and central PASS/0 findings; touched Python diagnostics clean.
+- Approved snapshot stays `snap-b2e8101b00dc6909feaed885`; approved requirement/allocation count314 and partitions0/0/55/259/0 unchanged. SRS history remains1.1 / 2026-10-06 / original author. Only SRS derived audit/materialization and standard validation reports refreshed.
+- Profile policy tests include owner/domain/layer/kind boundaries, normative refinement eligibility without activation, undeclared adapters, forged provenance and audit/unit mutations. No new authority, LLM, full pipeline rerun, source semantic-completeness proof or Word visual inspection.
+
+## Previous checkpoint: 2026-10-07 12:13:32 - SRS Fact-To-Prose Rollout
+
+- Checkpoint ID: `2026-10-07-srs-fact-prose`; saved working files, not a Git commit, rollback backup or approval snapshot.
+- Active clone only; preserve the dirty worktree and leave original `../STBIO_AI` unchanged.
+- Shared core in `scripts/workflow_routing.py`: immutable facts/profiles, conservative grouping, deterministic paragraphs, independent term/qualifier/polarity/modality checks and persisted audit checks against Markdown/DOCX.
+- SRS-only activation: supported capabilities, mode functions, domain responsibilities and power relationships. Exact contributor JSON/IDs are in `descriptive_system_overview_audit.csv`; no requirement or authority IDs are created. General policy, SRS template and stage skill aligned; DRS/ARS/IPOS generators untouched.
+- Final SRS generation/crosschecks and Stage 3 gate PASS; central coherence PASS, 0 findings. Snapshot unchanged: `snap-b2e8101b00dc6909feaed885`; 314 approved requirements/allocations, partitions 0/0/55/259/0.
+- Tests: shared descriptive suite 78 PASS; `srs_overview` slice 15 PASS; snapshot/history suite 8 PASS (101 total). Source-independence guard exit 0. Touched Python diagnostics clean before final documentation update.
+- SRS history remains exactly version 1.1 / 2026-10-06 / original author. Only SRS generated artifacts were refreshed; derived ledger/coherence reports may also refresh through existing generator/validator paths.
+- Final audit: 20 fact-contributor rows and 4 conservative projection-gap flags. Adapters remain bounded; a parser gap is not authority absence or proof of omitted whole paragraphs. No complete semantic-preservation proof, full pipeline rerun, other-generator migration or Word visual-layout validation is claimed.
+- Existing unrelated DRS undefined `text` and two legacy owning-block ledger test expectations remain out of scope. Prior checkpoint details and commands below remain historical.
+
+## Previous checkpoint: 2026-10-06 16:35:30 - Saved Local Fixes
+
+- Checkpoint ID: `2026-10-06-local-fixes-snapshot-history`.
+- Active root: `C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow`.
+- Git base: `c665f5013ac7fdf52c80f1e614227ff571ac8490`.
+- Kind: local-memory restart checkpoint; working files are saved on disk.
+  NOT a Git commit, binary backup, automatic rollback or a new approval snapshot.
+- Worktree: dirty, with existing source/config/database/generated-artifact changes
+  and untracked `scripts/repo_paths.py`, `tests/test_repo_paths.py` and
+  `prompt_SRS_improve.txt`. Preserve user and pre-existing changes.
+- Do not edit the separate original `../STBIO_AI` reference folder.
+- Approved snapshot: `snap-b2e8101b00dc6909feaed885`; project ID `STBIO`.
+- Authority: `data/canonical/canonical_store.sqlite`; 314 approved allocations:
+  SRS 0, ARS 0, DRS 55, Digital IPOS 259, Analog IPOS 0.
+- Interpreter: `C:/Users/syslocadm1906/AppData/Local/Programs/Python/Python311/python.exe`.
+
+### Saved Behavior
+- Portable clone paths and Stage 1 extraction recovery are summarized in the
+  newest chat handoff (157 prior portability tests; 9 extraction tests).
+- GUI: active green/failed red stage state, built-in copyable report/diagnostic
+  text and Canvas-measured zoom-fitting labels. GUI tests: 46 PASS.
+- Operational hash ignores candidate-only parent evidence, but not approved
+  lineage/allocation/ownership. Coherence tests: 19 PASS. Current operational
+  hash: `8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372`.
+- SRS/final SysML were refreshed at the same snapshot and passed checks.
+- DRS date/hash repair: generation/crosscheck and Stage 5 gate PASS
+  (55 requirements, gate at 2026-10-06 15:47:22). Preservation baseline unchanged.
+- FINAL history policy across SRS/ARS/DRS/Digital IPOS/Analog IPOS: preserve all
+  history on same-snapshot reruns. Append one dated version row only on changed
+  approved snapshot, retaining old rows and incrementing the minor version.
+  Do not append a row on every run. Current title/DOCX author need not match
+  historical snapshot authors. Shared helper reads the latest history version.
+- DRS preservation protects prior table rows and permits history growth; it no
+  longer uses the historical baseline snapshot as the current approval identity.
+
+### Verification At This Checkpoint
+- Final history change: 8 snapshot-binding + 8 DRS-contract + 74 descriptive
+  tests PASS (90 total).
+- Full central downstream coherence: PASS / 0 findings / generation allowed.
+- Stage 2+ source-independence guard: exit 0.
+- No production snapshot change or specification regeneration during the final
+  shared-history edit; new-snapshot behavior tested using synthetic fixtures.
+- No complete Stage 0-7 rerun or new Stage 6/7 generation after those edits.
+- Latest DRS gate result and current central coherence are distinct checks;
+  do not combine them into a claimed full forward workflow run.
+
+### Remaining Issues And Boundaries
+- Unfixed unrelated `return text` in DRS `_is_non_normative_table_row`:
+  `text` is undefined. Preserve it pending a separately authorized fix.
+- Dynamic test imports trigger editor-resolution warnings; runtime imports pass.
+- No approved mapping-persistence/resolver refactor was performed.
+- Do not refresh `drs_preservation_baseline.json`, infer parents, rewrite approved
+  source statements, revert dirty files, commit or push without authorization.
+- Earlier hashes, stage statuses and folder/Git statements below are historical.
+
+### Restore Next Session
+Read `local_memory/chat_handoff.md` newest entry first, followed by this checkpoint,
+`local_memory/project_activity_log.md` and `local_memory/environment.md`.
+The handoff contains exact interpreter/test/gate commands and the restore prompt.
+Keep the current snapshot and final history rule. Acknowledge the checkpoint,
+then follow the next user request; do not regenerate or rerun earlier stages
+automatically. Stage 6 can be selected when the user requests it; it was not run
+as part of this checkpoint.
 
 ## Latest checkpoint: 2026-10-05 - System Traceability
 

@@ -98,28 +98,26 @@ List all tables with links.
 
 ### 1. Introduction
 
+Apply the frozen SRS introductory writing rule `srs-introductory-authority-bounded-v1` from the shared general rules and `SRS_INTRODUCTORY_WRITING_RULE` in `scripts/workflow_routing.py`. Use concise professional prose bounded by the selected approved content, without extending coverage, allocation, performance or implementation claims. Terminology is descriptive context, not independent authority. This preference is SRS-specific and does not alter other document profiles.
+
 #### 1.1 Purpose
-Define the purpose of the SRS and device scope.
+Present the document purpose and included approved system-level requirements/context; do not promise completeness or create allocation.
 
 #### 1.2 Scope
-Cover:
-- system-level functionality
-- analog subsystem behavior
-- digital subsystem behavior
-- interfaces and configuration model
-- power, timing, performance constraints
-- validation expectations
+State the limits of this document's allocated system-level requirements and supported system context. Mention behavior, interfaces, operating conditions and verification information only to the extent supported by approved content; do not extend subsystem or block-level allocations.
 
 #### 1.3 Intended audience
 List relevant stakeholders (architecture, design, verification, test, product, customer).
 
 #### 1.4 References
-List project artifacts and external standards.
+Refer to existing document-control references and requirement traceability; listing a document or standard does not establish applicability or obligations.
 
 ### 2. Definitions and terminology
 
+Use the same frozen SRS introductory writing rule. Definitions aid interpretation; specific meanings, operating conditions, limits and acceptance criteria remain bounded by approved content. Do not infer supported features, implementation, ownership or coverage from glossary entries. Keep the existing literal category conventions unchanged.
+
 #### 2.1 System terminology
-Define project-specific system terms and abbreviations.
+Describe system and document terms; project-specific meanings require support in the approved content.
 
 #### 2.2 Analog terminology
 Define analog terms (input/output range, gain, offset, noise, bandwidth, full-scale, ODR, sensitivity).
@@ -136,26 +134,30 @@ Render this section with the shared four literal definitions used by DRS `2.1 Co
 
 ## 3. System Overview
 
+Use the shared deterministic fact-to-prose core and the explicit SRS system/architecture profile for supported constructions. Aggregate compatible factual relationships only; retain modal strength, polarity, alternatives, conditions, mode and functional qualifiers. Record all contributors and unsupported projection gaps in the descriptive audit, never in the technical prose. Check selected facts against final Markdown and DOCX independently. Do not use an LLM or infer authority from vocabulary; identity, interface and scope projections retain their existing scoped rules.
+
 ### 3.1 General System Description
-Describe what the approved system is, its explicitly supported application role, and its system boundary. Use approved Stage 1/source-spec descriptive capability evidence where admitted; do not infer an application role.
+Describe the product or system itself and its explicitly supported application role; do not describe the purpose of this document. Use natural system-level prose and do not infer an application role.
 
 ### 3.2 Main System Capabilities
-Describe distinct approved system capabilities in natural technical prose. Do not repeat block-purpose paragraphs or copy normative requirement text.
+Summarize top-level capabilities only. Exclude implementation detail, registers, signals, data-name lists, block-local descriptions, and copied normative requirement text.
 
 ### 3.3 Main Architectural Domains and Subsystems
-Describe approved system-level domains and subsystem responsibilities without becoming a block-by-block specification. Keep detailed ownership and local implementation in the later subsystem documents.
+Aggregate supported functions into top-level domains or subsystems. Do not produce a block inventory or infer a domain role from the presence of blocks, ports, signals, or connections.
 
 ### 3.4 External Interfaces and System Boundaries
-Describe approved external and cross-domain interfaces at system level. Use tables only when they clarify a supported boundary or relationship.
+Explain the system boundary and supported external or cross-domain interface roles. A table may support that explanation but must not become a raw port/interface dump or imply behavior from interface presence alone.
 
 ### 3.5 Operating Concept
-Describe approved system operating modes and transitions. Do not promote block-local states into system modes without explicit system evidence.
+Explain the system role of supported operating modes and transitions. Mode names alone are not an operating concept; do not promote block-local states.
 
 ### 3.6 Power, Clock, and Reset Overview
-Describe approved system-level power, clock, and reset relationships. Retain exact supported values and routes only where evidence exists.
+Describe only safe top-level power, clock, and reset structure supported by clean evidence. Keep unsupported facets as narrow technical gaps; do not infer behavior from route or signal presence.
 
 ### 3.7 Assumptions, Scope Limits, and Allocation Boundaries
-State approved assumptions and evidence limits. Mark unsupported topics `need clarification`; do not invent behavior or change allocation boundaries.
+State engineering scope, supported assumptions, and allocation boundaries. Do not use generator disclaimers or audit language; identify only the specific unsupported technical points and do not change allocation authority.
+
+Use prose before supporting tables. Keep each section focused on its role and deduplicate meaning across sections. For repeated structured items, bold the item name and place its attributes on indented sub-items. Do not render OCR fragments, table/path dumps, raw source stitching, or evidence counts. Consider all scoped candidates before treating a section as unsupported; a topic/output limit alone is not authority absence. Keep descriptive provenance in audit artifacts and normative traceability in its approved artifacts. Do not use parallel-document authority unless the approved workflow contract explicitly allows it.
 
 ### 4. Analog sub-system
 

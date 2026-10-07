@@ -11,6 +11,7 @@ from datetime import datetime
 import html as html_lib
 import json
 from pathlib import Path
+from repo_paths import portable_repo_path, resolve_repo_path
 import re
 import zipfile
 from typing import Optional
@@ -294,7 +295,7 @@ def _update_taxonomy_rules_from_spec(repo_root: Path, initial_spec: Path, rows: 
     for row in rows:
         if len(row) < 3:
             continue
-        text_path = Path(row[2])
+        text_path = resolve_repo_path(repo_root, row[2])
         if text_path.exists():
             spec_parts.append(text_path.read_text(encoding="utf-8", errors="ignore"))
     spec_text = "\n".join(spec_parts).lower()
@@ -414,7 +415,11 @@ def main() -> int:
     with index.open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle)
         writer.writerow(["source_file", "page", "text_file", "status"])
-        writer.writerows(rows)
+        for source_file, page, text_file, status in rows:
+            writer.writerow([
+                portable_repo_path(repo_root, source_file), page,
+                portable_repo_path(repo_root, text_file), status,
+            ])
 
     print(f"Prepared OCR output folder: {out_dir}")
     print(f"Initial specification: {initial_spec}")

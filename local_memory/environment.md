@@ -1,6 +1,33 @@
-﻿- Active project directory: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/STBIO_AI
+﻿- Active project directory: repository root (`.`), wherever this clone is located.
 - Active source specification: specs/DDS_STBIO1.pdf
 - Use python scripts/... commands in this workspace.
+
+- Latest restart checkpoint: `2026-10-06-local-fixes-snapshot-history` at
+  2026-10-06 16:35:30. Read the newest `local_memory/chat_handoff.md` and
+  `local_memory/checkpoint.md` entries before older records below.
+- Active Git clone: `C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow`.
+  The separate original `../STBIO_AI` is reference-only. Preserve the dirty
+  worktree; no commit or rollback backup has been created.
+- Verified Windows interpreter:
+  `C:/Users/syslocadm1906/AppData/Local/Programs/Python/Python311/python.exe`.
+  Existing terminals can still use original STBIO_AI as cwd; set the clone root
+  or use absolute script/test paths to avoid running the wrong project.
+- Current authority: snapshot `snap-b2e8101b00dc6909feaed885`, project `STBIO`,
+  314 approved rows; SRS/ARS/Analog IPOS valid-empty, DRS 55, Digital IPOS 259.
+- Final history contract across all specification types: new approved snapshot
+  appends a dated minor-version row and preserves old rows; same snapshot leaves
+  all history rows, dates, authors and version unchanged.
+- Latest checks: history/contract/descriptive tests 90 PASS; GUI 46 PASS;
+  fingerprint/coherence suite 19 PASS; central coherence 0 findings; Stage 2+
+  independence guard exit 0. These were separate checks, not a full pipeline run.
+- DRS repair/gate passed at 15:47:22 before the final shared-history code change.
+  Current artifacts still pass coherence after the change; no full regeneration
+  or newly approved production snapshot was exercised for the final history edit.
+- Unfixed unrelated DRS classifier issue: `_is_non_normative_table_row` references
+  undefined `text`. Dynamic test imports also have editor resolution warnings;
+  verified interpreter imports/tests pass.
+- PowerShell may run in constrained language mode; avoid generic collection
+  construction and unsafe shell writes. Use the existing tools and verified Python.
 
 - Current downstream restore state (2026-09-29): approved snapshot `snap-b2e8101b00dc6909feaed885`; full Digital IPOS gate PASS (259/8), Analog IPOS gate PASS valid-empty (0/0), full downstream coherence PASS (0 findings). Focused descriptive tests PASS (60). The newest `local_memory/checkpoint.md` and `chat_handoff.md` supersede older pilot/blocked notes; `docs/ipos-descriptive-rendering.md` retains historical and current Main Controller hashes. Keep IPOS 1.1/1.2 natural technical prose via the common composer/validator, with no new authority inputs.
 
@@ -39,7 +66,9 @@
   - Stage 3: python scripts/run_stage3_srs_gate.py
   - Stage 4: python scripts/run_stage4_ars_gate.py
   - Stage 5: python scripts/run_stage5_drs_gate.py
-  - Stage 6: python scripts/run_stage6_architecture_comparison.py --project-to-compare <project_name>
+  - Stage 6: python scripts/workflow_cli.py run --stage 6 --snapshot-id <approved_snapshot_id> (Digital IPOS)
+  - Stage 7: python scripts/workflow_cli.py run --stage 7 --snapshot-id <approved_snapshot_id> (Analog IPOS)
+  - Optional comparison, not a numbered stage: python scripts/workflow_cli.py arch-compare --project-to-compare <project_name>
 
 - Deterministic local CLI mode:
   - Primary runner: python scripts/workflow_cli.py
