@@ -39,7 +39,7 @@ If any required artifact is missing, report it under an explicit "Missing Inputs
 3. Keep facts and assumptions separated:
 	- Mark assumptions as `ASSUME-<NNN>`.
 4. Do not invent unsupported behavior:
-	- If evidence is weak, mark as `TBD` with rationale.
+	- If evidence is weak, omit unsupported descriptive content and record rationale in the separate user-review report; preserve approved normative text and authority gates.
 5. Provide verification hooks:
 	- Each requirement must include verification method and acceptance criteria.
 6. Keep terminology consistent with project artifacts.
@@ -303,7 +303,7 @@ Readability rule:
 - input artifact coverage summary
 - count of generated SRS requirements by domain
 - count of requirements with full traceability
-- open TBD/assumptions list
+- supported assumptions and a separate user-review issue report (not specification content)
 - blocking issues list
 
 ## Final quality checklist

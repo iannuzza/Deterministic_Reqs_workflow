@@ -183,6 +183,8 @@ def main() -> int:
             findings.append("ARS crosscheck report status is not pass")
 
     ars_md = repo_root / "artifacts/stage4_ars/analog_requirements_specification.md"
+    from spec_document_contract import validate_clean_document_presentation
+    findings.extend(validate_clean_document_presentation(ars_md))
     ars_traceability = repo_root / "artifacts/stage4_ars/ars_traceability_matrix.csv"
     if ars_md.exists():
         ars_text = ars_md.read_text(encoding="utf-8")

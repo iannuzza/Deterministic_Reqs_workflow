@@ -32,8 +32,7 @@ def main() -> int:
             root,
             project_id=str(context.get("project_name") or root.name),
         )
-        if args.regenerate_downstream:
-            snapshot_args = ["--snapshot-id", snapshot_id]
+    snapshot_args = ["--snapshot-id", snapshot_id]
     commands = [
         [
             sys.executable,

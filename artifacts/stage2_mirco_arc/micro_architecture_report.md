@@ -1,6 +1,6 @@
 # Stage 2 Micro-Architecture Analysis Report
 
-- Date: 2026-10-06
+- Date: 2026-10-09
 - Requirement source: artifacts/stage1_requirements/requirements_summary.csv
 
 ## Provenance
@@ -18,7 +18,7 @@
 - artifacts/stage2_mirco_arc/function_decomposition.md
 
 ## Summary
-- Requirements analyzed: 314
+- Requirements analyzed: 357
 - Blocks with assigned requirements: 11
 - Potentially unassigned requirements: 42
 - Unmapped routing ledger entries: 42

@@ -18,11 +18,12 @@ from workflow_routing import (
     IPOS_LOCAL_DIGITAL_TOPIC_SPECS,
     validate_ipos_docx_layout,
     validate_ipos_descriptive_output,
+    validate_ipos_structural_audit,
     validate_spec_internal_links,
     build_ipos_functional_input,
     build_ipos_normalized_records,
 )
-from spec_document_contract import validate_materialization_chain
+from spec_document_contract import validate_materialization_chain, validate_ipos_document_contract
 from allocation_ledger import read_csv
 from requirement_allocation_policy import validate_allocation_rows
 
@@ -137,7 +138,7 @@ def main() -> int:
                 domain=args.kind,
                 materialized=True,
                 provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
-                candidate_requirement_rows=approved_snapshot_candidate_rows(snapshot, resolve_downstream_contract(root, snapshot.snapshot_id)),
+                candidate_requirement_rows=approved_snapshot_candidate_rows(snapshot, resolve_downstream_contract(root, snapshot.snapshot_id), domain=args.kind),
             )
             descriptive_findings = validate_ipos_descriptive_output(
                 markdown_path,
@@ -155,6 +156,11 @@ def main() -> int:
                 markdown_path,
                 docx_path,
             ))
+            descriptive_findings.extend(validate_ipos_structural_audit(
+                block_dir / "descriptive_structure_audit.json", functional_input,
+            ))
+            descriptive_findings.extend(validate_ipos_document_contract(root, markdown_path,
+                                        block_dir / "descriptive_summary_audit.csv", functional_input))
             if descriptive_findings:
                 raise RuntimeError("IPOS descriptive-output findings: " + "; ".join(descriptive_findings[:10]))
         if any(row.get("snapshot_id") != snapshot.snapshot_id for row in rows):

@@ -1,24 +1,20 @@
 // Snapshot ID: snap-b2e8101b00dc6909feaed885
 // Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
 
-package STBIO_Architecture {
+package SystemArchitecture {
 
     // Generated hierarchical top model; block definitions are in sysml/blocks/.
-    private import STBIO_Shared::*;
+    private import ArchitectureShared::*;
 
-    private import STBIO_Block_ADSP::*;
-    private import STBIO_Block_BISTController::*;
-    private import STBIO_Block_I2CSPIAHB::*;
-    private import STBIO_Block_IRQLogic::*;
-    private import STBIO_Block_ISPU::*;
-    private import STBIO_Block_MainController::*;
-    private import STBIO_Block_OTP::*;
-    private import STBIO_Block_PMU::*;
-    private import STBIO_Block_PadMux::*;
-    private import STBIO_Block_Regmap::*;
-    private import STBIO_Block_SensorHub::*;
-    private import STBIO_Block_SmartFIFO::*;
-    private import STBIO_DigitalSubsystem::*;
+    private import Block_ADSP::*;
+    private import Block_I2CSPIAHB::*;
+    private import Block_MainController::*;
+    private import Block_PadMux::*;
+    private import Block_PMU::*;
+    private import Block_Regmap::*;
+    private import Block_SensorHub::*;
+    private import Block_SmartFIFO::*;
+    private import DigitalArchitecture::*;
 
     part def AnalogSubsystem {
         attribute displayName : String = "Analog Subsystem";
@@ -332,48 +328,34 @@ package STBIO_Architecture {
         connection analog_to_digital : ArchitectureConnection connect topAnalog to topDigital;
 
 
-        connection connection_002 : ArchitectureConnection connect topDigital.mainController to topDigital.smartFIFO;
-        doc connection_002 /* signal=sample stream and FIFO mode control | trigger=FIFO enabled | notes=stream/bypass/fifo mode routing | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_003 : ArchitectureConnection connect topDigital.smartFIFO to topDigital.iRQLogic;
-        doc connection_003 /* signal=watermark/overrun/empty flags | trigger=FIFO status change | notes=interrupt condition generation | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_004 : ArchitectureConnection connect topDigital.regmap to topDigital.mainController;
-        doc connection_004 /* signal=configuration writes | trigger=register update | notes=sample-rate/filter/mode setup | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_009 : ArchitectureConnection connect topDigital.pMU to topDigital.mainController;
-        doc connection_009 /* signal=power/clock status | trigger=power mode transition | notes=power-aware digital control | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_010 : ArchitectureConnection connect topDigital.bISTController to topDigital.regmap;
-        doc connection_010 /* signal=self-test/calibration status | trigger=self-test command | notes=status publication through registers | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_013 : ArchitectureConnection connect topDigital.mainController to topDigital.regmap;
+        connection connection_001 : ArchitectureConnection connect topDigital.mainController to topDigital.smartFIFO;
+        doc connection_001 /* signal=sample stream and FIFO mode control | trigger=FIFO enabled | notes=stream/bypass/fifo mode routing | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_002 : ArchitectureConnection connect topDigital.regmap to topDigital.mainController;
+        doc connection_002 /* signal=configuration writes | trigger=register update | notes=sample-rate/filter/mode setup | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_003 : ArchitectureConnection connect topDigital.pMU to topDigital.mainController;
+        doc connection_003 /* signal=power/clock status | trigger=power mode transition | notes=power-aware digital control | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_004 : ArchitectureConnection connect topDigital.mainController to topDigital.regmap;
+        doc connection_004 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_005 : ArchitectureConnection connect topDigital.mainController to topDigital.smartFIFO;
+        doc connection_005 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_006 : ArchitectureConnection connect topDigital.mainController to topDigital.aDSP;
+        doc connection_006 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_007 : ArchitectureConnection connect topDigital.aDSP to topDigital.regmap;
+        doc connection_007 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_008 : ArchitectureConnection connect topDigital.aDSP to topDigital.sensorHub;
+        doc connection_008 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_009 : ArchitectureConnection connect topDigital.aDSP to topDigital.smartFIFO;
+        doc connection_009 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_010 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.regmap;
+        doc connection_010 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_011 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.sensorHub;
+        doc connection_011 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_012 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.smartFIFO;
+        doc connection_012 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
+        connection connection_013 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.aDSP;
         doc connection_013 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_014 : ArchitectureConnection connect topDigital.mainController to topDigital.smartFIFO;
+        connection connection_014 : ArchitectureConnection connect topDigital.sensorHub to topDigital.smartFIFO;
         doc connection_014 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_015 : ArchitectureConnection connect topDigital.mainController to topDigital.aDSP;
-        doc connection_015 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_016 : ArchitectureConnection connect topDigital.aDSP to topDigital.regmap;
-        doc connection_016 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_017 : ArchitectureConnection connect topDigital.aDSP to topDigital.sensorHub;
-        doc connection_017 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_018 : ArchitectureConnection connect topDigital.aDSP to topDigital.smartFIFO;
-        doc connection_018 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_019 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.regmap;
-        doc connection_019 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_020 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.sensorHub;
-        doc connection_020 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_021 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.iSPU;
-        doc connection_021 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_022 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.smartFIFO;
-        doc connection_022 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_023 : ArchitectureConnection connect topDigital.i2CSPIAHB to topDigital.aDSP;
-        doc connection_023 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_024 : ArchitectureConnection connect topDigital.sensorHub to topDigital.smartFIFO;
-        doc connection_024 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_025 : ArchitectureConnection connect topDigital.iSPU to topDigital.regmap;
-        doc connection_025 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_026 : ArchitectureConnection connect topDigital.iSPU to topDigital.sensorHub;
-        doc connection_026 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_027 : ArchitectureConnection connect topDigital.iSPU to topDigital.smartFIFO;
-        doc connection_027 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
-        connection connection_028 : ArchitectureConnection connect topDigital.iSPU to topDigital.aDSP;
-        doc connection_028 /* signal=XBAR connection | trigger=XBAR matrix cell | notes=XBAR Connection Matrix; source-derived cell | sourceReqIds= | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;
     }
 
 }

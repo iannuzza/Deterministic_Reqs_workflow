@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -49,7 +50,8 @@ def create_approved_snapshot(
     profile_hashes = {kind: str(row["content_fingerprint"]) for kind, row in profiles.items()}
     material = snapshot_material(canonical_revision_ids, mapping_ids, profile_hashes, retrieval, semantic_enabled)
     material["semantic_fallback_enabled"] = bool(semantic_fallback_enabled)
-    snapshot_id = create_snapshot_id(material)
+    approved_at = datetime.now(timezone.utc).isoformat(timespec="microseconds")
+    snapshot_id = create_snapshot_id({**material, "approved_by": approved_by, "approved_at": approved_at})
     connection = connect(repo_root)
     try:
         missing_revisions = [item for item in canonical_revision_ids if connection.execute("SELECT 1 FROM canonical_requirement_revisions WHERE revision_id = ?", (item,)).fetchone() is None]
@@ -77,14 +79,14 @@ def create_approved_snapshot(
                 f"incomplete_allocations={incomplete_allocations}"
             )
         connection.execute(
-            """INSERT OR IGNORE INTO snapshots(
+            """INSERT INTO snapshots(
                 snapshot_id, project_id, snapshot_kind, status, canonical_revision_set_json,
                 mapping_revision_set_json, vocabulary_profile_version, vocabulary_profile_hash,
                 taxonomy_profile_version, taxonomy_profile_hash, retrieval_config_version,
                 retrieval_config_hash, semantic_enabled, content_fingerprint, approved_by,
                 approved_at, created_at, metadata_json)
                 VALUES (?, ?, 'mapping', 'approved', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-            (snapshot_id, project_id, json.dumps(sorted(canonical_revision_ids)), json.dumps(sorted(mapping_ids)), profiles.get("vocabulary", {}).get("revision_number"), profile_hashes.get("vocabulary"), profiles.get("taxonomy", {}).get("revision_number"), profile_hashes.get("taxonomy"), retrieval.get("version"), retrieval.get("hash"), int(semantic_enabled), fingerprint(material), approved_by, utc_now(), utc_now(), json.dumps({"semantic_fallback_enabled": bool(semantic_fallback_enabled), "profiles": profile_hashes, "retrieval": dict(retrieval)}, sort_keys=True)),
+            (snapshot_id, project_id, json.dumps(sorted(canonical_revision_ids)), json.dumps(sorted(mapping_ids)), profiles.get("vocabulary", {}).get("revision_number"), profile_hashes.get("vocabulary"), profiles.get("taxonomy", {}).get("revision_number"), profile_hashes.get("taxonomy"), retrieval.get("version"), retrieval.get("hash"), int(semantic_enabled), fingerprint(material), approved_by, approved_at, approved_at, json.dumps({"semantic_fallback_enabled": bool(semantic_fallback_enabled), "profiles": profile_hashes, "retrieval": dict(retrieval)}, sort_keys=True)),
         )
         connection.commit()
     finally:

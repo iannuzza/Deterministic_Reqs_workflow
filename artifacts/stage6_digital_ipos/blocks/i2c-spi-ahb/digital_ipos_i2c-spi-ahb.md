@@ -40,12 +40,18 @@ Author: Alessandro Lucio IANNUZZI
 
 ### **1.1 Functionality** {#11-functionality}
 
-The I2C_SPI_AHB block is designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.
+The I2C_SPI_AHB block serves to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The I2C_SPI_AHB accepts host bus transactions and produces protocol-compliant responses.
-- **Read data preloading.** Preloads data from AHB after a double-byte write to 0x68-0x6f, keeping the internal FIFO ready for the master read request.
+- The I2C_SPI_AHB block accepts Host bus transactions. The I2C_SPI_AHB block produces Protocol-compliant responses.
+- **An I2C/SPI write access to the address 0x60-0x67.** An I2C/SPI write access to the address 0x60-0x67 is translated in an AHB write access to the configured AHB address (contained in registers SAM ADDR BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).
+- **On AHB interface, BURST.** On AHB interface, BURST is not supported as well as LOCKED transfers.
+- **A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read).** A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) starts the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master.
+- **An I2C/SPI read access to the address 0x70-0x7f.** An I2C/SPI read access to the address 0x70-0x7f is translated in an AHB read access to the configured AHB address (contained in registers SAM ADDR BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).
+- **I2C interface.** I2C interface supports all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported.
+- **Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains.** Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains are at least 2 times.
+- **On AHB interface, data size.** On AHB interface, data size is limited to BYTE and WORD.
 
 ## **2. Source I/O** {#2-source-io}
 

@@ -313,3 +313,46 @@ IPOS_STBIO1_MAIN_CONTROLLER_2143,Main Controller,ADC; Main Controller,ADC,suppor
 IPOS_STBIO1_MAIN_CONTROLLER_2144,Main Controller,FIFO; Main Controller,FIFO,supports,[Covers: DDS_STBIO1_0124] [Covers: DDS_STBIO1_0142] The data written in FIFO shall have the following tag: DATA TYPE BIT: 23 - 20 BIT: 19 - 16 BIT: 15 - 0 PPG FRAME 0 0000 DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT PPG FRAME 1 0001 PPG FRAME 2 0010 PPG FRAME 3 0011 PPG FRAME 4 0100 PPG FRAME 5 0101 PPG FRAME 6 0110 PPG FRAME 7 0111 PPG FRAME 8 1000 PPG FRAME 9 1001 PPG FRAME 10 1010 PPG FRAME 11 1011 TIME SLOT DATA 1111 0000 DATA 16 BIT ECG0_AC 1100 0000 DATA 16 BIT ECG0_DC 1101 0000 DATA 16 BIT ECG1_AC 1100 0001 DATA 16 BIT ECG1_DC 1101 0001 DATA 16 BIT ECG2_AC 1100 0010 DATA 16 BIT ECG2_DC 1101 0010 DATA 16 BIT,review_required
 IPOS_STBIO1_MAIN_CONTROLLER_2146,Main Controller,Main Controller,,,,review_required
 IPOS_STBIO1_MAIN_CONTROLLER_2145,Main Controller,Controller; Main Controller,Requirement; Controller,supports,"The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be obtained as explained in [IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT 3. After the last repetition has been accumulated, the data output shall be obtained dividing by the number of repeated frames the accumulated data to obtain a 20 bit data. The final result shall be computed as follows: Number of times the Frame has been repeated Result 2 (Res_F_R1 + Res_F_R2)/2 4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 Table 20: Frame Repetitions Result Computation table Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the result of the second repetition of the frame.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_015,Main Controller,Main Controller; Mode; State,State; Mode,supports,"When the user selects the ECG, BIA, the wave velocity mode or the ppg ioff calibration, the device Shall go to WAIT_SU state.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_020,Main Controller,Channel; Main Controller; State,Channel; State,supports,"When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 15ms after the falling of O_PD_IMP, the O_RST_IMP shall go low.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_022,Main Controller,Channel; Main Controller; State,Channel; State,supports,"When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 30ms after the falling of O_RST_IMP, O_RSTI_IMP shall go low.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_027,Main Controller,Channel; Controller; Main Controller; State,Controller; Channel; State,supports,"When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_4034,Main Controller,Main Controller; State,State,supports,"Every Time a new measurement cycle starts (DEVICE FSM goes in OPERATIVE from another state), the o_irq_start_measurement shall be set to 1 for at least 1 clock cycle",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_040,Main Controller,ADC; Channel; Main Controller; State,Channel; State; ADC,supports,"When the ELAB_FSM is in BIA State (Check ELAB_STATUS_REG), the ADC_Mux (o_adc_mux_biochannel on digital top) output shall be set equal to 011, 100, 101 or 110.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_3130,Main Controller,Main Controller; Mode,Mode,supports,"When the wave velocity mode and the ppg ioff calibration are selected, the wave velocity mode shall be performed first.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_3131,Main Controller,Buffer; Main Controller; State,Buffer; State,supports,"When the ppg ioff calibration is selected and device fsm is in WAIT_SU State, the Elab FSM shall go into the Timer Buffer state and then PPG IOFF CALIB state.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_043,Main Controller,ADC; Main Controller,ADC,supports,The ADC_PHGEN shall work at 16 MHz clock frequency.,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_048,Main Controller,Main Controller; Mode,Mode,supports,"When the i_reset_end_calibration , i_do_calibration and i_mode_operation are set to 1, the o_end_cal_phase shall be set to 0.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_6059,Main Controller,ADC; Main Controller,ADC,supports,I_noise shall be set to 0 during the ADC calibration.,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_072,Main Controller,Channel; Main Controller,Channel,supports,"When the i_hc_en is set to 1 and i_imp_en is set to 0 and i_n_ecg_channel is equal to 1, ECG0 shall be active so the o_pd_hc2 shall go low and counter shall be work.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_075,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_076,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_5080,Main Controller,Main Controller; State,State,supports,i_rst_async_ecg Shall be used only when the Device FSM is in SLEEP or Operative State.,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_081,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_084,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_086,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_5091,Main Controller,Main Controller; State,State,supports,i_rst_async_bia shall be used only when Device FSM is in OPERATIVE or SLEEP state.,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_090,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_300,Main Controller,Main Controller; State,State,supports,"When the rstn_i is asserted low, the PPG FSM shall return in Reset state immediately.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_097,Main Controller,Main Controller; Mode; State,State; Mode,supports,"When in Reset state, if the rstn_i is de-asserted , i_wave_velocity_mode is and the i_start_ppg_fsm is high, if i_ID_Frame is equal to 0 or two successively frame have two different i_rx_ch_frame , then the PPG FSM shall go to ALC Compensation state.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_1105,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_107,Main Controller,ADC; Main Controller; State,State; ADC,supports,"When in Measurement state, after the wait at least of the TX_ledset time related to the frame that is being executed. (TX_LEDSET_FRAME {n}]), the o_start_adc signal shall be set high.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_1118,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_1119,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_8116,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_2117,Main Controller,Main Controller; PGA; State,State; PGA,supports,"When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_121,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_122,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_123,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_124,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_125,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_127,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_129,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_132,Main Controller,Main Controller; State,State,supports,"After T1+T2 (PPG_ALC_CONFIG_PARAM_2 register [1:0]), if o_BTIA_gain (2:0) < i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), during ALC_COMPENSATION state of PPG fsm with o_end_compensation set to 0, o_BTIA_gain increase its value of 1. Instead, if o_BTIA_gain 2:0) >= i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), o_BTIA_gain shall remain at its old value.",review_required
+IPOS_STBIO1_MAIN_CONTROLLER_133,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_9116,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_7135,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_1136,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_139,Main Controller,ADC; Main Controller,ADC,supports,When a PPG Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise (i_data_valid_noise_ppg_adc set to 1) data is sampled (i_end_of_conversion set to 1) the data shall be accumulated until i_n_average_ppg is not reached.,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_9139,Main Controller,Main Controller,,,,review_required
+IPOS_STBIO1_MAIN_CONTROLLER_143,Main Controller,Main Controller,,,,review_required

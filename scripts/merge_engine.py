@@ -12,6 +12,7 @@ from canonical_store import connect, fingerprint, record_audit, utc_now
 from category_transition_rules import can_merge, validate_category
 from impact_analysis import analyze_merge
 from workflow_states import transition
+from supplementary_source_integrity import validate_ingestion_batch
 
 
 _APPROVED = {"approved"}
@@ -39,13 +40,29 @@ def _ensure_project(connection, project_id: str) -> None:
     )
 
 
+def _validate_registered_batch(connection, staging_batch_id: str, ingestion_dir: Path) -> None:
+    normalized = validate_ingestion_batch(ingestion_dir)
+    registered = connection.execute(
+        "SELECT staged_id, source_req_id, requirement_text, source_page, source_chunk_id FROM staged_requirements WHERE staging_batch_id = ?",
+        (staging_batch_id,),
+    ).fetchall()
+    if {row["staged_id"] for row in registered} != {row["staged_id"] for row in normalized}:
+        raise ValueError("Registered supplementary staging identity mismatch; use a new reviewed batch")
+    normalized_by_id = {row["staged_id"]: row for row in normalized}
+    for row in registered:
+        expected = normalized_by_id[row["staged_id"]]
+        for stored_field, source_field in (("source_req_id", "source_req_id"), ("requirement_text", "requirement_statement"),
+                                           ("source_page", "source_page"), ("source_chunk_id", "source_chunk_id")):
+            if str(row[stored_field] or "").strip() != expected.get(source_field, "").strip():
+                raise ValueError("Registered supplementary body mismatch; use a new reviewed batch: " + row["staged_id"])
+
+
 def register_staged_ingestion(repo_root: Path, ingestion_dir: Path) -> str:
     """Register a reviewed source corpus as canonical staging objects."""
     metadata_path = ingestion_dir / "source_metadata.json"
     metadata = json.loads(metadata_path.read_text(encoding="utf-8")) if metadata_path.exists() else {}
-    normalized_path = ingestion_dir / "normalized_requirements.csv"
     review_path = ingestion_dir / "comparison_results.csv"
-    staged_rows = _read_csv(normalized_path) if normalized_path.exists() else []
+    staged_rows = validate_ingestion_batch(ingestion_dir)
     review_rows = {row.get("staged_id", ""): row for row in _read_csv(review_path)} if review_path.exists() else {}
     source_name = str(metadata.get("source_spec") or ingestion_dir.name)
     source_revision = str(metadata.get("source_revision") or "")
@@ -61,6 +78,7 @@ def register_staged_ingestion(repo_root: Path, ingestion_dir: Path) -> str:
     try:
         existing_batch = connection.execute("SELECT staging_batch_id FROM staging_batches WHERE staging_batch_id = ?", (staging_batch_id,)).fetchone()
         if existing_batch:
+            _validate_registered_batch(connection, staging_batch_id, ingestion_dir)
             for staged_id, review in review_rows.items():
                 category = str(review.get("req_class") or review.get("classification") or "new").lower()
                 staged = connection.execute(
@@ -116,7 +134,7 @@ def register_staged_ingestion(repo_root: Path, ingestion_dir: Path) -> str:
         )
         connection.execute(
             "INSERT OR IGNORE INTO staging_batches(staging_batch_id, ingestion_batch_id, workflow_state, created_at, metadata_json) VALUES (?, ?, 'S2_DETERMINISTIC_CLASSIFICATION', ?, ?)",
-            (staging_batch_id, ingestion_batch_id, utc_now(), json.dumps({"source_spec_id": source_spec_id, "source_revision_id": source_revision_id, "source_scope": metadata.get("source_scope", ""), "target_scope": metadata.get("target_scope", "")}, sort_keys=True)),
+            (staging_batch_id, ingestion_batch_id, utc_now(), json.dumps({"source_spec_id": source_spec_id, "source_revision_id": source_revision_id, "source_scope": metadata.get("source_scope", ""), "target_scope": metadata.get("target_scope", ""), "ingestion_dir": ingestion_dir.resolve().relative_to(repo_root.resolve()).as_posix()}, sort_keys=True)),
         )
         connection.execute(
             """INSERT OR REPLACE INTO source_integration_records(
@@ -162,6 +180,24 @@ def register_staged_ingestion(repo_root: Path, ingestion_dir: Path) -> str:
 
 def merge_staging_batch(repo_root: Path, *, project_id: str, staging_batch_id: str, approved_by: str, conflict_winner_ids: Sequence[str] = ()) -> dict[str, object]:
     """Apply an approved batch as new canonical revisions without destructive updates."""
+    validation_connection = connect(repo_root)
+    try:
+        batch = validation_connection.execute(
+            "SELECT sb.metadata_json, ib.metadata_json FROM staging_batches sb JOIN ingestion_batches ib USING(ingestion_batch_id) WHERE staging_batch_id = ?",
+            (staging_batch_id,),
+        ).fetchone()
+        if batch is None:
+            raise ValueError(f"Unknown staging batch: {staging_batch_id}")
+        batch_metadata = json.loads(batch[0] or "{}")
+        ingestion_metadata = json.loads(batch[1] or "{}")
+        relative_dir = batch_metadata.get("ingestion_dir")
+        ingestion_id = ingestion_metadata.get("ingestion_id")
+        if not relative_dir and not ingestion_id:
+            raise ValueError("Supplementary merge has no extracted-body provenance")
+        ingestion_dir = repo_root / relative_dir if relative_dir else repo_root / "artifacts" / "source_ingestion" / ingestion_id
+        _validate_registered_batch(validation_connection, staging_batch_id, ingestion_dir)
+    finally:
+        validation_connection.close()
     impact = analyze_merge(repo_root, project_id=project_id, staging_batch_id=staging_batch_id, actor=approved_by)
     connection = connect(repo_root)
     try:

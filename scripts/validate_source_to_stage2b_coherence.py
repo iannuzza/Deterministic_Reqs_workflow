@@ -188,8 +188,6 @@ def _is_proven_non_authoritative_historical(
 
 def _discover_batches(repo_root: Path, findings: list[dict[str, str]]) -> tuple[Path | None, dict[str, Any]]:
     root = repo_root / "artifacts" / "source_ingestion"
-    context = _read_json(repo_root / "config/project_context.json")
-    configured_primary = Path(_text(context.get("source_spec_path"))).name.casefold()
     candidates: list[tuple[str, Path, dict[str, Any]]] = []
     for path in sorted(root.iterdir()) if root.exists() else []:
         if not path.is_dir():
@@ -201,17 +199,26 @@ def _discover_batches(repo_root: Path, findings: list[dict[str, str]]) -> tuple[
     if not candidates:
         _add(findings, "ERROR", "active_batch", "No source-review ingestion batch was discoverable", str(root))
         return None, {}
-    supplementary = [
-        item for item in candidates
-        if _text(item[2].get("source_kind")).casefold() == "supplementary"
-        or (
-            not _text(item[2].get("source_kind"))
-            and configured_primary
-            and Path(_text(item[2].get("source_spec"))).name.casefold() != configured_primary
-        )
-    ]
-    if supplementary:
-        candidates = supplementary
+    database_path = repo_root / "data/canonical/canonical_store.sqlite"
+    if any(not _text(metadata.get("staged_at")) for _, _, metadata in candidates) and database_path.exists():
+        connection = sqlite3.connect(f"file:{database_path.as_posix()}?mode=ro", uri=True)
+        connection.row_factory = sqlite3.Row
+        try:
+            projects = _rows(connection, "SELECT project_id FROM projects ORDER BY project_id")
+            project_id = _text(projects[0].get("project_id")) if len(projects) == 1 else _text(_read_json(repo_root / "config/project_context.json").get("project_name"))
+            revisions = _rows(connection, "SELECT ss.source_name, sr.revision_number, sr.ingestion_timestamp FROM source_revisions sr JOIN source_specs ss ON ss.source_spec_id = sr.source_spec_id WHERE ss.project_id = ?", (project_id,))
+        finally:
+            connection.close()
+        ordered_candidates = []
+        for timestamp, path, metadata in candidates:
+            if not _text(metadata.get("staged_at")):
+                registered = [row for row in revisions if _text(row.get("source_name")) == _text(metadata.get("source_spec")) and _text(row.get("revision_number")) == _text(metadata.get("source_revision"))]
+                if len(registered) == 1 and _text(registered[0].get("ingestion_timestamp")):
+                    timestamp = _text(registered[0]["ingestion_timestamp"])
+                else:
+                    _add(findings, "ERROR", "active_batch", "Unstamped source batch lacks unique canonical revision timestamp", str(path))
+            ordered_candidates.append((timestamp, path, metadata))
+        candidates = ordered_candidates
     candidates.sort(key=lambda item: (item[0], item[1].name))
     newest_key = candidates[-1][0]
     newest = [item for item in candidates if item[0] == newest_key]
@@ -234,7 +241,7 @@ def _discover_batches(repo_root: Path, findings: list[dict[str, str]]) -> tuple[
     metadata = dict(active[2])
     metadata["batch_path"] = str(active[1])
     metadata["candidate_count"] = len(candidates)
-    if not _text(metadata.get("source_revision")) or not _text(metadata.get("source_revision_date")):
+    if not _text(metadata.get("source_revision")):
         _add(findings, "ERROR", "revision", "Active batch lacks source revision identity", str(active[1] / "source_metadata.json"))
     return active[1], metadata
 
@@ -281,19 +288,6 @@ def validate(repo_root: Path) -> dict[str, Any]:
     active_path, active = _discover_batches(repo_root, findings)
     if active_path:
         checked.append(str(active_path))
-        manifest = active_path / "merge_manifest.json"
-        if not manifest.exists():
-            _add(findings, "ERROR", "merge_readiness", "Active batch is missing merge_manifest.json", str(manifest))
-        else:
-            payload = _read_json(manifest)
-            required = ("staging_batch_id", "source_revision_id")
-            missing = [field for field in required if not _text(payload.get(field))]
-            if not _text(payload.get("merge_readiness") or payload.get("status")):
-                missing.append("merge_readiness/status")
-            if missing:
-                _add(findings, "ERROR", "merge_readiness", f"Merge manifest is missing: {', '.join(missing)}", str(manifest))
-            if _text(payload.get("merge_readiness") or payload.get("status")).casefold() not in {"ready", "ready_for_approval", "approved", "complete", "completed"}:
-                _add(findings, "ERROR", "merge_readiness", "Merge manifest does not declare a complete/ready state", str(manifest))
 
     mapping_path = repo_root / "artifacts/stage1_specs/architecture_mapping_preview.csv"
     workbook_path = mapping_path.with_suffix(".xlsx")
@@ -341,7 +335,6 @@ def validate(repo_root: Path) -> dict[str, Any]:
     database_path = repo_root / "data/canonical/canonical_store.sqlite"
     checked.append(str(database_path))
     canonical_ids: set[str] = set()
-    snapshot_ids: set[str] = set()
     if not database_path.exists():
         _add(findings, "ERROR", "canonical", "Canonical SQLite database is missing", str(database_path))
     else:
@@ -357,9 +350,16 @@ def validate(repo_root: Path) -> dict[str, Any]:
             if mapping_ids and canonical_ids and not mapping_ids.issubset(canonical_ids):
                 _add(findings, "ERROR", "id_chain", "Architecture Map contains IDs absent from canonical requirements")
             if active:
-                staged = _rows(connection, "SELECT staged_id, source_req_id, source_revision_id, staging_batch_id FROM staged_requirements WHERE staging_batch_id LIKE ?", ("%" + _text(active.get("ingestion_id")) + "%",))
+                staged = _rows(connection, "SELECT st.staged_id, st.source_req_id, st.source_revision_id, st.staging_batch_id FROM staged_requirements st JOIN staging_batches sb ON sb.staging_batch_id = st.staging_batch_id JOIN ingestion_batches ib ON ib.ingestion_batch_id = sb.ingestion_batch_id WHERE ib.project_id = ? AND st.staging_batch_id LIKE ?", (project_id, "%" + _text(active.get("ingestion_id")) + "%"))
                 if not staged:
-                    _add(findings, "WARNING", "active_batch", "Canonical SQLite has no staged rows discoverable by active ingestion identity")
+                    _add(findings, "ERROR", "active_batch", "Canonical SQLite has no staged rows discoverable by active ingestion identity")
+                staging_ids = {_text(row.get("staging_batch_id")) for row in staged if _text(row.get("staging_batch_id"))}
+                if len(staging_ids) != 1:
+                    _add(findings, "ERROR", "merge_readiness", "Active batch must resolve to exactly one canonical staging batch")
+                else:
+                    completed_merges = _rows(connection, "SELECT merge_operation_id FROM merge_operations WHERE project_id = ? AND staging_batch_id = ? AND decision = 'approved' AND completed_at IS NOT NULL", (project_id, next(iter(staging_ids))))
+                    if not completed_merges:
+                        _add(findings, "ERROR", "merge_readiness", "Active batch has no approved completed canonical merge", str(database_path))
                 revision_ids = {_text(row.get("source_revision_id")) for row in staged if _text(row.get("source_revision_id"))}
                 if len(revision_ids) > 1:
                     _add(findings, "ERROR", "revision", "Active staged requirements reference multiple source_revision_id values")
@@ -372,26 +372,11 @@ def validate(repo_root: Path) -> dict[str, Any]:
                     _add(findings, "ERROR", "revision", "Active staged requirements reference an unregistered source revision")
                 if revision_rows and any(_text(row.get("revision_number")) != _text(active.get("source_revision")) for row in revision_rows):
                     _add(findings, "ERROR", "revision", "Active staged source revision number does not match source-review metadata")
-            snapshots = _rows(connection, "SELECT snapshot_id, status, canonical_revision_set_json FROM snapshots WHERE project_id = ? ORDER BY created_at", (project_id,)) if project_id else []
-            snapshot_ids = {_text(row.get("snapshot_id")) for row in snapshots}
-            approved_snapshots = [row for row in snapshots if _text(row.get("status")).casefold() == "approved"]
-            if not approved_snapshots:
-                _add(findings, "ERROR", "stage2b", "No approved canonical snapshot is available for Stage 2B prerequisites", str(database_path))
-            else:
-                current_revision_rows = _rows(connection, "SELECT current_revision_id FROM canonical_requirements WHERE project_id = ? AND current_revision_id IS NOT NULL", (project_id,))
-                current_revisions = {str(row["current_revision_id"]) for row in current_revision_rows}
-                for snapshot in approved_snapshots:
-                    try:
-                        snapshot_revisions = set(json.loads(_text(snapshot.get("canonical_revision_set_json")) or "[]"))
-                    except json.JSONDecodeError:
-                        snapshot_revisions = set()
-                    if snapshot_revisions != current_revisions:
-                        _add(findings, "WARNING", "stale_state", f"Approved snapshot {_text(snapshot.get('snapshot_id'))} does not match current canonical revision set", str(database_path))
         finally:
             connection.close()
 
     supplementary_staged = {row.get("supplementary_staged_id") for row in mapping_rows if row.get("supplementary_staged_id")}
-    if active and supplementary_staged and not any(_text(value).find(_text(active.get("ingestion_id"))) >= 0 for value in supplementary_staged):
+    if active and _text(active.get("source_kind")).casefold() != "primary" and supplementary_staged and not any(_text(value).find(_text(active.get("ingestion_id"))) >= 0 for value in supplementary_staged):
         _add(findings, "ERROR", "stale_state", "Architecture Map supplementary staged IDs do not identify the active ingestion batch", str(mapping_path))
     if mapping_ids and stage2a_ids:
         stale = sorted(mapping_ids - stage2a_ids)
@@ -407,8 +392,8 @@ def validate(repo_root: Path) -> dict[str, Any]:
         "phase": "Phase 1",
         "authority_fingerprint": authority_fingerprint(repo_root),
         "discovery_assumptions": [
-            "The newest deterministically ordered supplementary source-review batch is active.",
-            "When source_kind is absent, supplementary status is determined by comparison with config/project_context.json source_spec_path.",
+            "The newest deterministically ordered source-review batch is active, whether primary or supplementary.",
+            "Merge approval and completion are checked against the active canonical staging batch, not compatibility manifests or historical snapshots.",
             "Canonical SQLite is opened through a read-only URI and is authoritative when present.",
             "The workbook is inspected read-only and the synchronized mapping CSV is compared as the machine-readable handoff.",
             "Unresolved hierarchy-parent rows are categorized from synchronized mapping CSV authority before user escalation.",

@@ -278,7 +278,7 @@ The executable workflow CLI supports a single-pass, forward-only stage range:
 
 `Stage 0 -> Stage 1 -> Stage 2 -> Stage 2A -> Stage 3 -> Stage 4 -> Stage 5 -> Stage 6 Digital IPOS -> Stage 7 Analog IPOS`
 
-Stage keys are `0`, `1`, `2`, `2a`, `3`, `4`, `5`, `6`, and `7`. Stage 2B snapshot freezing and the related review/approval operations are explicit commands/services outside ordinary stage ranges. Stages 3-7 require one approved snapshot selected with `--snapshot-id` or `--use-latest-approved`. Each run validates after every stage and stops on the first failure; retries, loops, and backward transitions are not supported. Stage 4 can be skipped only when its runner and validator confirm there are no applicable Analog source requirement IDs. The `drs-after-stage2a` command is the approved forward shortcut from Stage 2A to Stage 5.
+Stage keys are `0`, `1`, `2`, `2a`, `3`, `4`, `5`, `6`, and `7`. Stage 2B snapshot freezing and the related review/approval operations are explicit commands/services outside ordinary stage ranges. Stages 3-7 require one approved snapshot selected with `--snapshot-id` or `--use-latest-approved`. Each run validates after every stage and stops on the first failure; retries, loops, and backward transitions are not supported. Stage 4 always generates and validates the approved ARS allocation, including an approved-empty result when applicable; source categories do not decide stage skipping. Stage 5 uses the normal approved-snapshot workflow; requirement parentage follows the approved hierarchical req_id mapping, not a mandatory immediately preceding specification level.
 
 - Help:
   - `python scripts/workflow_cli.py --help`
@@ -303,13 +303,13 @@ Stage keys are `0`, `1`, `2`, `2a`, `3`, `4`, `5`, `6`, and `7`. Stage 2B snapsh
   - `python scripts/workflow_cli.py final-sysml --use-latest-approved`
 - Run advisory downstream retrieval/mapping validation:
   - `python scripts/workflow_cli.py validate-downstream`
-- Run the approved forward Stage 2A-to-DRS shortcut:
-  - `python scripts/workflow_cli.py drs-after-stage2a`
+- Generate and validate Stage 5 from an approved snapshot:
+  - `python scripts/workflow_cli.py run --stage 5 --snapshot-id <approved_snapshot_id>`
 - Validate all gates:
   - `python scripts/workflow_cli.py validate --all --use-latest-approved`
 
 Operational notes:
-- Stage ranges are inclusive and follow: `0 -> 1 -> 2 -> 2a -> 3 -> 4 -> 5`.
+- Stage ranges are inclusive and follow: `0 -> 1 -> 2 -> 2a -> 3 -> 4 -> 5 -> 6 -> 7`.
 - Ranges may start at any stage but must remain ascending and contiguous; Stage `2a` is mandatory before Stage `3` when included.
 - Use `--dry-run` to print commands without executing them.
 - Each stage is attempted once; any failure stops the run.

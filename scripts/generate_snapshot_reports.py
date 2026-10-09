@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 
 from approved_snapshot_resolver import resolve_complete_authoritative_input
+from allocation_ledger import refresh_ledger
 from report_generation_service import generate_snapshot_report
 from validate_downstream_coherence import approved_primary_source_name
 
@@ -504,6 +505,11 @@ def main() -> int:
     context_path = repo_root / "config" / "project_context.json"
     context = json.loads(context_path.read_text(encoding="utf-8")) if context_path.exists() else {}
     project_id = str(context.get("project_name") or repo_root.name)
+    resolved_snapshot, _selection = resolve_complete_authoritative_input(
+        repo_root, "snapshot-reports", project_id=project_id, snapshot_id=args.snapshot_id,
+    )
+    args.snapshot_id = resolved_snapshot.snapshot_id
+    refresh_ledger(repo_root, snapshot_id=args.snapshot_id)
     selected = tuple(HIERARCHY_REPORTS) if args.report == "all" else (args.report,)
     report_dir = repo_root / TRACEABILITY_REPORT_DIR
     report_dir.mkdir(parents=True, exist_ok=True)

@@ -6,11 +6,11 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>&nbsp;</p>
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 <p>&nbsp;</p>
 
-Snapshot ID: snap-b2e8101b00dc6909feaed885
+Snapshot ID: snap-73c872b1307b6adb5eaf843e
 
 <p>&nbsp;</p>
 
@@ -73,7 +73,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
     - [6.4.26 Section 6 SELECT OPERATIVE MODE: (under Section 15.3.3 PPG Only), paragraph 008 (page 153)](#6426-section-6-select-operative-mode-under-section-1533-ppg-only-paragraph-008-page-153)
     - [6.4.27 Section 7 CHECK DATA: (under Section 15.3.3 PPG Only), paragraph 011 (page 153)](#6427-section-7-check-data-under-section-1533-ppg-only-paragraph-011-page-153)
 - [7. Project-specific analog block sections](#7-project-specific-analog-block-sections)
-- [8. Assumptions and TBD](#8-assumptions-and-tbd)
+- [8.
 - [9. Missing Inputs](#9-missing-inputs)
 
 ### 0.2 Internal index for paragraphs and pages {#02-internal-index-for-paragraphs-and-pages}
@@ -133,7 +133,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 | 6.4.26 Section 6 SELECT OPERATIVE MODE: (under Section 15.3.3 PPG Only), paragraph 008 (page 153) | 6.4.26 | [Jump](#6426-section-6-select-operative-mode-under-section-1533-ppg-only-paragraph-008-page-153) | Auto |
 | 6.4.27 Section 7 CHECK DATA: (under Section 15.3.3 PPG Only), paragraph 011 (page 153) | 6.4.27 | [Jump](#6427-section-7-check-data-under-section-1533-ppg-only-paragraph-011-page-153) | Auto |
 | 7. Project-specific analog block sections | 7 | [Jump](#7-project-specific-analog-block-sections) | Auto |
-| 8. Assumptions and TBD | 8 | [Jump](#8-assumptions-and-tbd) | Auto |
+| 8. Assumptions | 8 |  | Auto |
 | 9. Missing Inputs | 9 | [Jump](#9-missing-inputs) | Auto |
 
 <p>&nbsp;</p>
@@ -161,6 +161,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 1.1 | 2026-10-06 | Snapshot snap-b2e8101b00dc6909feaed885 ARS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
+| 1.2 | 2026-10-09 | Snapshot snap-73c872b1307b6adb5eaf843e ARS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
 
 <p>&nbsp;</p>
 
@@ -398,10 +399,10 @@ ARS requirement catalog entries include statement only; full traceability detail
 
 ### 6.4.27 Section 7 CHECK DATA: (under Section 15.3.3 PPG Only), paragraph 011 (page 153) {#6427-section-7-check-data-under-section-1533-ppg-only-paragraph-011-page-153}
 
-## 8. Assumptions and TBD {#8-assumptions-and-tbd}
+## 8. Assumptions {#8-assumptions}
 
 - ASSUME-001: Analog validation environments provide representative sensor and load stimulus.
-- TBD-001: Unassigned requirements in ARS traceability matrix require architectural owner review.
+
 
 ## 9. Missing Inputs {#9-missing-inputs}
 

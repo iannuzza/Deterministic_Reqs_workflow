@@ -1,40 +1,103 @@
 {
   "snapshot_id": "snap-b2e8101b00dc6909feaed885",
-  "generated_at": "2026-10-06T15:15:24",
-  "model_path": "artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml",
+  "materialization_scope": [
+    {
+      "name": "ADSP",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/adsp.sysml"
+    },
+    {
+      "name": "I2C_SPI_AHB",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/i2c_spi_ahb.sysml"
+    },
+    {
+      "name": "Main Controller",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/main_controller.sysml"
+    },
+    {
+      "name": "Pad Mux",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/pad_mux.sysml"
+    },
+    {
+      "name": "PMU",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/pmu.sysml"
+    },
+    {
+      "name": "Regmap",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/regmap.sysml"
+    },
+    {
+      "name": "Sensor-Hub",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/sensor_hub.sysml"
+    },
+    {
+      "name": "Smart FIFO",
+      "target": "Digital IPOS",
+      "model": "artifacts/stage2_mirco_arc/sysml/blocks/smart_fifo.sysml"
+    }
+  ],
+  "scope_diagnostics": [
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ADC -> Main Controller",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: Smart FIFO -> IRQ logic",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: SPI interface -> Regmap",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: I2C interface -> Regmap",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: Regmap -> SPI interface",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: Regmap -> I2C interface",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: BIST Controller -> Regmap",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: I2C_SPI_AHB -> SPI interface",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: I2C_SPI_AHB -> I2C interface",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: I2C_SPI_AHB -> ISPU",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU -> Regmap",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU -> SENSOR HUB",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU -> FIFO",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU -> ADSP",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU debug -> Regmap",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU debug -> SENSOR HUB",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU debug -> ISPU",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU debug -> FIFO",
+    "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU debug -> ADSP"
+  ],
+  "generated_at": "2026-10-08T15:50:56",
+  "model_path": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml",
   "model_files": {
-    "artifacts/stage2_mirco_arc/sysml/shared_definitions.sysml": "1f947fd101c323ef90e19b0d099b86f495009e94c5e39947e94762944f2c537e",
-    "artifacts/stage2_mirco_arc/sysml/DigitalSubsystem.sysml": "de318b0060e0cbcaa878d81ed3ee97dce3039d4ebfbe9cb2453511fedcc88bd9",
-    "artifacts/stage2_mirco_arc/sysml/blocks/adsp.sysml": "93bf4f90f04a2e1080171f11af998ae65a0a4b08d522265a8dcc81519ffbafe4",
-    "artifacts/stage2_mirco_arc/sysml/blocks/i2c_spi_ahb.sysml": "7fc3849f5eb1a2a906a74512b754e23802647786f96c20b89384e82f728c0308",
-    "artifacts/stage2_mirco_arc/sysml/blocks/main_controller.sysml": "e326e5d3a73e0458fda45ab153fb9ad63fe84eb82277600ca8b876ef821b4f93",
-    "artifacts/stage2_mirco_arc/sysml/blocks/pmu.sysml": "304959d9bfabe0eabbdc9b41be636621d08717cd2674d9fa54830822138fb707",
-    "artifacts/stage2_mirco_arc/sysml/blocks/pad_mux.sysml": "d80b2de2dec8c755e88a26f6d0582f1a3be07f684cd90c2202d8d501bbada893",
-    "artifacts/stage2_mirco_arc/sysml/blocks/regmap.sysml": "f1fbbd0d19a8c6fe38155303999d6b4debaf726912a99791290501413320a2c7",
-    "artifacts/stage2_mirco_arc/sysml/blocks/sensor_hub.sysml": "12d38f4dc5f3580655f0fd28d00a3f702d27da893bd7128e188538ce317b6d17",
-    "artifacts/stage2_mirco_arc/sysml/blocks/smart_fifo.sysml": "b90db30bfc910377fcb32b659d6bf21fca8dbaef1bd138ebb3a4145654b437d8",
-    "artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml": "71f8388ce2c7be1f0306c5d57323155c8f9a4c2f64a38203712219c463c43379"
+    "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/artifacts/stage2_mirco_arc/sysml/shared_definitions.sysml": "a6e963f1600b90d9195a430c6f03803a147aaf4a802473dd7589d34567d0e6e1",
+    "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/artifacts/stage2_mirco_arc/sysml/DigitalSubsystem.sysml": "ec8c098e9a830c180d458b1186c5742aef10cbd01c57998cb1ea4618f5852c31",
+    "artifacts/stage2_mirco_arc/sysml/blocks/adsp.sysml": "bb8891512dc7bdd29fdf19505451512d9914a98f38af1316a05b431141a78cd4",
+    "artifacts/stage2_mirco_arc/sysml/blocks/i2c_spi_ahb.sysml": "5b733a114a12cc923bb98869ae7664894ee8d9feed26001a4d1ad88076d00c15",
+    "artifacts/stage2_mirco_arc/sysml/blocks/main_controller.sysml": "7b00b99d74da6ab4102ea9936779b2e9a88601f319db08829d1bf80d254572a3",
+    "artifacts/stage2_mirco_arc/sysml/blocks/pad_mux.sysml": "20309bc8f5d6beb6d6734eacabb011d4f27bce0d2914687a14793d3a113295f6",
+    "artifacts/stage2_mirco_arc/sysml/blocks/pmu.sysml": "aae0636f154e09f8217fbe871eade09e299f98450f5e24d6b942d526d4832f7b",
+    "artifacts/stage2_mirco_arc/sysml/blocks/regmap.sysml": "c3a93ebf7a0f99599b143136b631473305aa3535ebede4b6b9e6b9cae1e73fb6",
+    "artifacts/stage2_mirco_arc/sysml/blocks/sensor_hub.sysml": "739c624c640fc5d6b3a801ff80ec8cb63fb12a882506e79229ed807a5f371489",
+    "artifacts/stage2_mirco_arc/sysml/blocks/smart_fifo.sysml": "4ba1e842eab7527ffbb1e4678d6cb528b6631aa8e7b633b05d65dea3461df602",
+    "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml": "b7f5dfb84d02823f575e12a6a8fa368c53737f35de17774a9e2f363c08fdbe20"
   },
   "inputs": {
     "artifacts/stage2_mirco_arc/requirement_to_block_traceability.csv": "9d44a2449b8120355641f2a3a150646fd6e734c4d5f36484b5b8ee7f60b4ce4f",
-    "artifacts/stage1_specs/architecture_mapping_preview.csv": "7c760deeae568c64fa619526c1b5b57d440425969fb03c4b9c8887b0874ca4e6",
+    "artifacts/stage1_specs/architecture_mapping_preview.csv": "6de102c284254837a067973fed08275886ab84abbd366cf393f36cdd978be239",
     "artifacts/stage1_requirements/source_matrix_edges.csv": "339530103af4689cbaef7a6129fc7d11d069b6439091815ce3f1096058c63d6e",
     "artifacts/stage1_requirements/requirements_summary.csv": "5778920e306ea762eaa66ae09be49c26ee407cba15b6ac0a665d280d36596555",
     "artifacts/stage2_mirco_arc/block_inventory.csv": "00fc8254ea4796cbd70527e2d46e116a3f57098f7fecc21403c01b040a94cc2e",
     "artifacts/stage2_mirco_arc/interaction_matrix.csv": "65997c59e61fc451005616234cd31df6ac5489f4004ffcf79b4f279eecd9fda8",
     "artifacts/stage2_mirco_arc/source_port_catalog.csv": "fdbbe39b04c028ea87a7ad3e1cc8dc54011d43c1b4e5fc9967cbc248e0769c03",
-    "artifacts/stage1_specs/approved_block_list.xlsx": "9a5837dfc5e8f0e6d65e76a84ee2e0cc5c7017edf0a0e5d0ca498f3a8e12c407"
+    "artifacts/stage1_specs/approved_block_list.xlsx": "8cf790e3f5bb047e67d528d4c66224734c521bfd64ed947317016bf1d118e738"
   },
   "counts": {
     "requirements": 259,
     "blocks": 8,
     "ports": 1028,
-    "connections": 33,
+    "connections": 14,
     "model_files": 11
   },
   "snapshot_requirement_coverage": {
     "partial_export": false,
     "missing_by_block": {},
-    "expected_requirement_count": 0
+    "expected_requirement_count": 259
   }
 }

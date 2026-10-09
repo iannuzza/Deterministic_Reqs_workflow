@@ -20,6 +20,10 @@ from validate_downstream_coherence import (
     created_ipos_block_directories,
     downstream_contract_fingerprint,
     resolve_downstream_contract,
+    resolve_sysml_materialization_scope,
+    SysMLMaterializationScope,
+    sysml_identifier,
+    _sysml_model_file_name,
 )
 
 
@@ -78,9 +82,7 @@ def block_name(value: str) -> str:
 
 
 def sysml_name(value: str) -> str:
-    words = re.findall(r"[A-Za-z0-9]+", value or "")
-    name = "".join(word[:1].upper() + word[1:] for word in words) or "Unnamed"
-    return "Block_" + name if name[0].isdigit() else name
+    return sysml_identifier(value)
 
 
 def requirement_sysml_name(value: str) -> str:
@@ -265,7 +267,7 @@ def port_sysml_name(value: str) -> str:
 
 
 def model_file_name(value: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_") + ".sysml"
+    return _sysml_model_file_name(value)
 
 
 def block_description(name: str, block: Dict[str, str], requirements: List[Dict[str, str]], ports: List[Dict[str, str]]) -> str:
@@ -326,9 +328,9 @@ def _ordered_blocks(
 
 def build_shared_model() -> str:
     lines = [
-        "package STBIO_Shared {",
+        "package ArchitectureShared {",
         "",
-        "    // Shared definitions for the generated STBIO architecture model set.",
+        "    // Shared definitions for the generated architecture model set.",
         "    connection def ArchitectureConnection {",
         "        attribute signalControl : String;",
         "        attribute trigger : String;",
@@ -361,13 +363,17 @@ def build_block_model(
     requirements: List[Dict[str, str]],
     ports: List[Dict[str, str]],
     ipos_requirements: List[Dict[str, str]],
+    *, scope: SysMLMaterializationScope,
 ) -> str:
-    block_id = sysml_name(name)
-    package_id = f"STBIO_Block_{block_id}"
+    scope.require_valid()
+    materialization = scope.block_for_label(name)
+    if materialization is None:
+        raise ValueError(f"SYSML_SCOPE_UNAPPROVED_BLOCK: {name}")
+    block_id, package_id = materialization.definition, materialization.package
     lines = [
         f"package {package_id} {{",
         "",
-        "    private import STBIO_Shared::*;",
+        "    private import ArchitectureShared::*;",
         "",
         f"    part def {block_id} {{",
         f'        attribute displayName : String = "{quote(name)}";',
@@ -439,23 +445,18 @@ def build_digital_subsystem_model(
     blocks: Dict[str, Dict[str, str]],
     ports: List[Dict[str, str]],
     drs_requirements: List[Dict[str, str]],
+    *, scope: SysMLMaterializationScope,
 ) -> str:
-    digital_blocks = sorted(
-        (
-            name for name, metadata in blocks.items()
-            if is_concrete_block(name, metadata)
-            and subsystem_for_block(name) == "Digital Subsystem"
-        ),
-        key=sysml_name,
-    )
+    scope.require_valid()
+    digital_blocks = [block for block in scope.blocks if block.target == "Digital IPOS"]
     lines = [
-        "package STBIO_DigitalSubsystem {",
+        "package DigitalArchitecture {",
         "",
-        "    private import STBIO_Shared::*;",
+        "    private import ArchitectureShared::*;",
         "",
     ]
-    for name in digital_blocks:
-        lines.append(f"    private import STBIO_Block_{sysml_name(name)}::*;")
+    for block in digital_blocks:
+        lines.append(f"    private import {block.package}::*;")
     lines.extend(["", "    part def DigitalSubsystem {"])
     lines.append('        attribute displayName : String = "Digital Subsystem";')
     for row in drs_requirements:
@@ -478,8 +479,8 @@ def build_digital_subsystem_model(
                 f"        satisfy req_{requirement_sysml_name(drs_req_id)} by self;",
             ])
     _append_ports(lines, ports, "        ")
-    for name in digital_blocks:
-        lines.append(f"        part {usage_name(name)} : {sysml_name(name)};")
+    for block in digital_blocks:
+        lines.append(f"        part {block.node.rsplit('.', 1)[-1]} : {block.definition};")
     lines.extend(["    }", "", "}", ""])
     return "\n".join(lines)
 
@@ -491,27 +492,31 @@ def build_model(
     ports_by_owner: Optional[Dict[str, List[Dict[str, str]]]] = None,
     srs_requirements: Optional[List[Dict[str, str]]] = None,
     approved_srs_source_ids: Optional[set[str]] = None,
+    *, scope: SysMLMaterializationScope,
 ) -> str:
     """Build the hierarchical top model; block definitions live in sibling model files."""
-    ordered_blocks = _ordered_blocks(blocks, interactions)
+    scope.require_valid()
+    ordered_blocks = [block.name for block in scope.blocks]
+    interactions = list(scope.interactions)
     ports_by_owner = ports_by_owner or {}
     srs_requirements = srs_requirements or []
     approved_srs_source_ids = approved_srs_source_ids or set()
-    ids = {name: sysml_name(name) for name in ordered_blocks}
+    ids = {block.name: block.definition for block in scope.blocks}
     _requirements_by_owner, system_level_requirements = _requirements_by_block(requirements, set(ordered_blocks))
     subsystem_blocks: Dict[str, List[str]] = {"Analog Subsystem": [], "Digital Subsystem": []}
-    for name in ordered_blocks:
-        subsystem_blocks[subsystem_for_block(name)].append(name)
+    for block in scope.blocks:
+        subsystem = "Digital Subsystem" if block.target == "Digital IPOS" else "Analog Subsystem"
+        subsystem_blocks[subsystem].append(block.name)
     lines = [
-        "package STBIO_Architecture {",
+        "package SystemArchitecture {",
         "",
         "    // Generated hierarchical top model; block definitions are in sysml/blocks/.",
-        "    private import STBIO_Shared::*;",
+        "    private import ArchitectureShared::*;",
         "",
     ]
-    for name in ordered_blocks:
-        lines.append(f"    private import STBIO_Block_{ids[name]}::*;")
-    lines.append("    private import STBIO_DigitalSubsystem::*;")
+    for block in scope.blocks:
+        lines.append(f"    private import {block.package}::*;")
+    lines.append("    private import DigitalArchitecture::*;")
     lines.append("")
     for subsystem in subsystem_blocks:
         if subsystem == "Digital Subsystem":
@@ -522,7 +527,8 @@ def build_model(
         ])
         _append_ports(lines, ports_by_owner.get(subsystem, []), "        ")
         for name in subsystem_blocks[subsystem]:
-            lines.append(f"        part {usage_name(name)} : {ids[name]};")
+            block = scope.block_for_label(name)
+            lines.append(f"        part {block.node.rsplit('.', 1)[-1]} : {block.definition};")
         lines.extend(["    }", ""])
     lines.extend([
         "    part def TopAnalogArchitecture {",
@@ -530,12 +536,12 @@ def build_model(
         "        part analogSubsystem : AnalogSubsystem;",
         "    }",
         "",
-        "    part def STBIOSystem {",
+        f"    part def {scope.system_definition} {{",
         "        doc /* Level 1 system architecture. Concrete requirements are contained by their owning Level 2 block. */;",
         "        part topAnalog : TopAnalogArchitecture;",
         "        part topDigital : DigitalSubsystem;",
     ])
-    _append_ports(lines, ports_by_owner.get("STBIOSystem", []), "        ")
+    _append_ports(lines, ports_by_owner.get(scope.system_definition, []), "        ")
     lines.extend([
         "",
         "        // Level 1 subsystem relationships are derived from the interaction matrix.",
@@ -563,25 +569,11 @@ def build_model(
     lines.append("")
     lines.append("")
     for index, row in enumerate(interactions, start=1):
-        source = block_name(row.get("From block", ""))
-        target = block_name(row.get("To block", ""))
-        if source not in ids or target not in ids:
-            continue
+        source = row["From block"]
+        target = row["To block"]
         connection_id = f"connection_{index:03d}"
-        source_subsystem = usage_name(subsystem_for_block(source))
-        target_subsystem = usage_name(subsystem_for_block(target))
-        source_top = "topDigital" if source_subsystem == "digitalSubsystem" else "topAnalog"
-        target_top = "topDigital" if target_subsystem == "digitalSubsystem" else "topAnalog"
-        source_path = (
-            f"{source_top}.{usage_name(source)}"
-            if source_top == "topDigital"
-            else f"{source_top}.{source_subsystem}.{usage_name(source)}"
-        )
-        target_path = (
-            f"{target_top}.{usage_name(target)}"
-            if target_top == "topDigital"
-            else f"{target_top}.{target_subsystem}.{usage_name(target)}"
-        )
+        source_path = scope.block_for_label(source).node
+        target_path = scope.block_for_label(target).node
         lines.extend([
             f"        connection {connection_id} : ArchitectureConnection connect {source_path} to {target_path};",
             f'        doc {connection_id} /* signal={doc_text(row.get("Signal/control", ""))} | trigger={doc_text(row.get("Trigger", ""))} | notes={doc_text(row.get("Notes", ""))} | sourceReqIds={doc_text(";".join(item.strip() for item in (row.get("Requirement IDs") or "").split(";") if item.strip() in approved_srs_source_ids))} | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;',
@@ -601,8 +593,8 @@ def main() -> int:
     parser.add_argument("--interactions", default="artifacts/stage2_mirco_arc/interaction_matrix.csv")
     parser.add_argument("--ports", default="artifacts/stage2_mirco_arc/source_port_catalog.csv")
     parser.add_argument("--model-dir", default="artifacts/stage2_mirco_arc/sysml")
-    parser.add_argument("--output", default="artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml")
-    parser.add_argument("--manifest", default="artifacts/stage2_mirco_arc/stbio_architecture_model_manifest.json")
+    parser.add_argument("--output", default=None)
+    parser.add_argument("--manifest", default=None)
     parser.add_argument("--partial-export", action="store_true", help="Allow an explicitly partial SysML export; default requires full approved snapshot block coverage.")
     selector = parser.add_mutually_exclusive_group(required=True)
     selector.add_argument("--snapshot-id", help="Explicit approved canonical snapshot ID")
@@ -619,18 +611,23 @@ def main() -> int:
     inventory = Path(args.inventory)
     interactions = Path(args.interactions)
     approved_block_list = Path(args.approved_block_list)
-    output = Path(args.output)
+    output = Path(args.output) if args.output else None
     model_dir = Path(args.model_dir)
-    manifest = Path(args.manifest)
-    inventory_rows = block_rows(inventory)
-    block_inventory = {
-        name: metadata
-        for name, metadata in inventory_rows.items()
-        if is_concrete_block(name, metadata)
-    }
-    interaction_rows = read_csv(interactions)
     drs_traceability = repo_root / "artifacts/stage5_drs/drs_traceability_matrix.csv"
     downstream_contract = resolve_downstream_contract(repo_root, snapshot.snapshot_id)
+    scope = resolve_sysml_materialization_scope(repo_root, contract=downstream_contract).require_valid()
+    manifest = scope.manifest_path
+    if args.manifest and Path(args.manifest).resolve() != manifest.resolve():
+        raise ValueError("SYSML_SCOPE_MANIFEST_ADDRESS_MISMATCH")
+    block_inventory = scope.inventory_metadata(read_csv(inventory))
+    if output is not None and output.resolve() != scope.system_path.resolve():
+        raise ValueError("SYSML_SCOPE_OUTPUT_ADDRESS_MISMATCH")
+    output = scope.system_path
+    if model_dir.resolve() != scope.system_path.parent.resolve():
+        raise ValueError("SYSML_SCOPE_MODEL_DIRECTORY_MISMATCH")
+    interaction_rows = list(scope.interactions)
+    for finding in scope.interaction_findings:
+        print(finding)
     expected = downstream_contract.expected
     contract_fingerprint = downstream_contract_fingerprint(downstream_contract)
     approved_ids_by_target = {
@@ -647,15 +644,7 @@ def main() -> int:
         if (row.get("source_req_id") or "").strip() in approved_ids_by_target["DRS"]
         and (row.get("snapshot_id") or "").strip() == snapshot.snapshot_id
     ]
-    ipos_requirements_by_block = _read_ipos_requirements(repo_root)
-    ipos_requirements_by_block = {
-        owner: [
-            row for row in rows
-            if (row.get("source_req_id") or "").strip() in approved_ids_by_target["Digital IPOS"]
-            and (row.get("snapshot_id") or "").strip() == snapshot.snapshot_id
-        ]
-        for owner, rows in ipos_requirements_by_block.items()
-    }
+    ipos_requirements_by_block = scope.ipos_rows(repo_root)
     srs_traceability = repo_root / "artifacts/stage3_srs/srs_traceability_matrix.csv"
     srs_requirements = read_csv(srs_traceability) if srs_traceability.exists() else []
     srs_requirements = [
@@ -665,48 +654,35 @@ def main() -> int:
     ]
     ports_path = Path(args.ports)
     ports_by_block = port_rows(ports_path)
-    ordered_blocks = _ordered_blocks(block_inventory, interaction_rows, ports_by_block)
-    compact = lambda value: re.sub(r"[^a-z0-9]", "", value.casefold())
-    created_ipos_names = {
-        compact(name)
-        for stage in ("Digital IPOS", "Analog IPOS")
-        for name in created_ipos_block_directories(repo_root, stage)
-    }
-    ordered_blocks = [name for name in ordered_blocks if compact(name) in created_ipos_names]
-    requirements = requirement_rows(
-        traceability,
-        Path(args.mapping_preview),
-        Path(args.source_edges),
-        Path(args.requirements),
-        set(ordered_blocks),
-    )
-    requirements = [
-        row for row in requirements
-        if (row.get("source_req_id") or "").strip()
-        in approved_ids_by_target["Digital IPOS"] | approved_ids_by_target["Analog IPOS"]
-    ]
+    ordered_blocks = [block.name for block in scope.blocks]
+    requirements = [{**row, "mapping": block.name}
+                    for block in scope.blocks for row in ipos_requirements_by_block[block.name]]
     requirements_by_block, _system_level = _requirements_by_block(requirements, set(ordered_blocks))
-    coverage = {"missing_by_block": {}, "expected_by_block": {}}
+    coverage = {"missing_by_block": {}, "expected_by_block": {
+        block.name: block.requirement_ids for block in scope.blocks
+    }}
     output.parent.mkdir(parents=True, exist_ok=True)
     blocks_dir = model_dir / "blocks"
     blocks_dir.mkdir(parents=True, exist_ok=True)
     generated_files = []
-    shared_path = model_dir / "shared_definitions.sysml"
+    shared_path = scope.shared_path
     shared_path.write_text(sysml_header(snapshot.snapshot_id, contract_fingerprint) + build_shared_model(), encoding="utf-8")
     generated_files.append(shared_path)
-    digital_subsystem_path = model_dir / "DigitalSubsystem.sysml"
+    digital_subsystem_path = scope.digital_path
     digital_subsystem_path.write_text(
         sysml_header(snapshot.snapshot_id, contract_fingerprint) + build_digital_subsystem_model(
             block_inventory,
             ports_by_block.get("Digital Subsystem", []),
             drs_requirements,
+            scope=scope,
         ),
         encoding="utf-8",
     )
     generated_files.append(digital_subsystem_path)
     expected_block_files = set()
-    for name in ordered_blocks:
-        block_path = blocks_dir / model_file_name(name)
+    for materialization in scope.blocks:
+        name = materialization.name
+        block_path = blocks_dir / materialization.path.name
         expected_block_files.add(block_path)
         block_path.write_text(sysml_header(snapshot.snapshot_id, contract_fingerprint) + build_block_model(
             name,
@@ -714,6 +690,7 @@ def main() -> int:
             requirements_by_block.get(name, []),
             ports_by_block.get(name, []),
             ipos_requirements_by_block.get(name, []),
+            scope=scope,
         ), encoding="utf-8")
         generated_files.append(block_path)
     for stale_path in blocks_dir.glob("*.sysml"):
@@ -728,6 +705,7 @@ def main() -> int:
             ports_by_block,
             srs_requirements,
             approved_ids_by_target["SRS"],
+            scope=scope,
         ),
         encoding="utf-8",
     )
@@ -737,6 +715,11 @@ def main() -> int:
         legacy_stage3_sysml.unlink()
     manifest.write_text(json.dumps({
         "snapshot_id": snapshot.snapshot_id,
+        "materialization_scope": [
+            {"name": block.name, "target": block.target, "model": block.path.relative_to(repo_root).as_posix()}
+            for block in scope.blocks
+        ],
+        "scope_diagnostics": list(scope.interaction_findings),
         "generated_at": datetime.now().isoformat(timespec="seconds"),
         "model_path": output.as_posix(),
         "model_files": {path.as_posix(): sha256(path) for path in generated_files},

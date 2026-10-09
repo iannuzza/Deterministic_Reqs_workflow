@@ -9,17 +9,17 @@
 5. Resolve or waive every critical/major ambiguity disposition with rationale; minor issues are informational.
 6. Save the approved profile at the configured Stage 2 profile path.
 7. Set `approval.status` to `approved`, provide non-empty `approved_by` and `approved_at`, copy the current evidence hashes, set `approval.reviewed_draft_profile_sha256` to:
-   `6fdfe10f46befb68302fc6471fd0c882cbeff5dfd6f88e47bf9c1c93878e720b`
+   `99408ebf35f43c6bbf86f96cc989c073d37039f4200273acb6359e96de55f2c0`
 8. Set `approval.reviewed_mapping_preview_csv_sha256` to the hash of the reviewed CSV:
-   `6de102c284254837a067973fed08275886ab84abbd366cf393f36cdd978be239`
+   `1c881387d2542440dbbe1091c041082c856fbbe9157d33e5c85737702b418933`
 9. Run Stage 2A only after approval; it will stop when this approval record is incomplete, stale, or has unresolved critical/major ambiguity items.
 
 ## Draft Evidence Summary
 
-- Stage 1 requirements analyzed: 314
+- Stage 1 requirements analyzed: 357
 - Candidate architecture terms: 37
-- Ontology link rows analyzed: 611
-- Ambiguity items requiring approval disposition: 0
+- Ontology link rows analyzed: 643
+- Ambiguity items requiring approval disposition: 1
 - Text, table, and figure extraction completeness: not enforced by this approval gate
 
 ## Mapping CSV Review Decisions
@@ -40,22 +40,22 @@
 
 ## Evidence Hashes
 
-- requirements_summary_csv: `19be065b5a11ef44aaed38641d93827249480615504756c7336c42f9aa00916c`
-- ontology_requirement_links_csv: `28dfcc98be8ceaa3b70308a6b822a98bded7d035b78c163609d2f109a32b98c1`
-- semantic_issues_md: `e269d17700ea86f63571df34e957d3d8c74b458cc54d1af786ac77b19327c4cc`
-- mapping_preview_csv: `6de102c284254837a067973fed08275886ab84abbd366cf393f36cdd978be239`
-- draft_profile_sha256: `6fdfe10f46befb68302fc6471fd0c882cbeff5dfd6f88e47bf9c1c93878e720b`
-- ADC: 36 source requirements
+- requirements_summary_csv: `3d036916a8f9baecb5d370fd548f8ce295c97eb7b08c50109088e94933a4580d`
+- ontology_requirement_links_csv: `720bf547f764dce6c361a6980f0794af3083b760f72ce4789468b351c0dcafed`
+- semantic_issues_md: `3c642564650d136fbf4432ea5e5fb13a37e301ed25e9a8b11817d1536de4ee37`
+- mapping_preview_csv: `1c881387d2542440dbbe1091c041082c856fbbe9157d33e5c85737702b418933`
+- draft_profile_sha256: `99408ebf35f43c6bbf86f96cc989c073d37039f4200273acb6359e96de55f2c0`
+- ADC: 41 source requirements
 - ADSP: 20 source requirements
 - Block: 12 source requirements
-- Buffer: 6 source requirements
+- Buffer: 7 source requirements
 - Bus: 4 source requirements
-- Channel: 40 source requirements
+- Channel: 45 source requirements
 - Chopper: 1 source requirements
 - Clamp: 1 source requirements
 - Configuration: 4 source requirements
 - Configuration Register: 2 source requirements
-- Controller: 32 source requirements
+- Controller: 33 source requirements
 - DAC: 7 source requirements
 - Destination: 4 source requirements
 - Domain: 3 source requirements
@@ -65,12 +65,12 @@
 - I2C_SPI_AHB: 15 source requirements
 - Interface: 12 source requirements
 - ISPU: 25 source requirements
-- Main Controller: 124 source requirements
+- Main Controller: 167 source requirements
 - Memory: 13 source requirements
-- Mode: 67 source requirements
+- Mode: 71 source requirements
 - OTP: 4 source requirements
 - PAD MUX: 17 source requirements
-- PGA: 1 source requirements
+- PGA: 2 source requirements
 - PMU: 12 source requirements
 - Port: 6 source requirements
 - Processor: 1 source requirements
@@ -80,5 +80,5 @@
 - Serial Interface: 1 source requirements
 - Smart FIFO: 13 source requirements
 - Source: 4 source requirements
-- State: 48 source requirements
+- State: 62 source requirements
 - System: 3 source requirements

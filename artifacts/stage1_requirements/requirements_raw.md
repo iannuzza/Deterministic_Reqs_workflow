@@ -1,6 +1,6 @@
 # Extracted Functional Requirements (Raw)
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 ## System
 - REQ_SYS-RQ-001: Added Soft Reset Procedure STBIO1_v2 1.6.2 9/1/2025 Ugo Garozzo Adde new OTP routines description, Adde Soft Reset Procedures STBIO1_v3 2 9/3/2025 Ugo Garozzo Add new output on TOP o_BDC_PPG, added Power Domain, Chanced ADSP IP ADSP_v0.3.21. (Section 0.1 N.A Marco Leo Starting point from VSM01 project, paragraph 011 (page 8))

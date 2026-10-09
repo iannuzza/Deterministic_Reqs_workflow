@@ -1,6 +1,6 @@
 # Stage 01 Report
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 ## Scope
 - Functional requirement extraction and summary table generation from full specification text.

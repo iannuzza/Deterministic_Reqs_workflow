@@ -43,7 +43,7 @@ def main() -> int:
         ),
         (
             "Final SysML structural review",
-            ["scripts/review_architecture_sysml.py", "--scope", "stage3-structural"],
+            ["scripts/review_architecture_sysml.py", "--scope", "stage3-structural", "--snapshot-id", snapshot_id],
         ),
         (
             "Final SysML central coherence validation",

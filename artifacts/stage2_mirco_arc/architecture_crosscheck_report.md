@@ -1,6 +1,6 @@
 # Architecture Crosscheck Report
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 ## Scope
 - Stage 2 micro-architecture output package crosscheck against requirement baseline
@@ -15,8 +15,8 @@ Date: 2026-10-06
 - Architecture summary: artifacts/stage2_mirco_arc/micro_architecture_report.md
 
 ## Coverage Summary
-- Total requirements: 314
-- Covered requirements: 314
+- Total requirements: 357
+- Covered requirements: 357
 - Partially covered requirements: 0
 - Uncovered requirements: 0
 

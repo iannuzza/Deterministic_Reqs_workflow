@@ -1,6 +1,250 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: 2026-10-07 - Frozen Authority-Bounded SRS Writing Rule
+## Latest checkpoint: 2026-10-09 - Clean Documents, Partial IPOS
+
+- Checkpoint and requested Git tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
+  Restore reference is the named tag, not a hardcoded self-referential commit hash.
+  User authorized local commit/tag only; no push or new branch.
+- Approved snapshot: `snap-73c872b1307b6adb5eaf843e`; STBIO357 mappings,
+  SRS0/ARS0/DRS55/Digital IPOS302/Analog IPOS0. No approval/freeze change.
+- Real SRS/ARS/DRS MD and DOCX: stage gates PASS, zero inline review markers.
+  Supported descriptive content retained, unsupported notes omitted and audited
+  separately. Approved normative text and central authority are preserved.
+- Real ADSP IPOS MD/DOCX: existing block generator and strict block gate PASS.
+  Stage6 remains partial; seven other historical blocks are not certified.
+  Remaining contexts13/72/11/2/12/3/5 total118; ADSP0.
+  Analog allocation VALID_EMPTY, Stage7 not executed in the current run.
+- Consolidated advisory JSON/MD/DOCX at
+  `artifacts/orchestrator/cross_spec_issue_report.*`: 737 review entries,
+  SRS328/ARS73/DRS190/Digital IPOS145/Analog IPOS1; run start21:08:43.
+  Review-only, not an authority or gate override; exclusions are not source damage.
+- Verification:33 focused tests PASS; latest11 report tests PASS. Actual Word
+  document retains all737 issue IDs/order, fields, references, offsets and full
+  excerpts. Eight current spec artifacts marker-free and hash-matched.
+- Shared DRS arranger classifies retained independent prose before tables;
+  the table-first ordering rejection remains. GFM literal colons are escaped
+  so source offset `31:100:` is not converted into an emoji by Pandoc.
+- Read current handoff first. No all-IPOS PASS, no automatic approved-text edits,
+  no new architecture, no source-ID exceptions and no semantic gate weakening.
+  Supplementary ingestion is closed; Main Controller bounded diagnosis NO-GO.
+
+## Previous checkpoint: 2026-10-09 12:27 - IPOS YAML Shared Core
+
+- Checkpoint ID: `2026-10-09-ipos-yaml-shared-core`; local only, no Git save or new rollback backup.
+- Separate embedded IPOS YAML over shared duplicate-safe DRS/IPOS loader;
+  strict paragraph/section/detail/gap/scope/hook obligations, no reused DRS instance.
+- Shared synthesis1.1: exact admitted clause spans, typed effects/scopes,
+  explicit responsibility bundles, unresolved-reference closure and dispositions.
+  Active composer and structural audit use the pre-prose plan, not flat prose.
+- Generator applies YAML; semantic/editorial preflight precedes block writes.
+  No Markdown-only success fallback; three independent final MD/DOCX hooks
+  run through existing stage/central boundaries. No new approval authority.
+- 185 focused tests PASS:141 descriptive,15 contract,8 DRS,19 SRS,2 source-I/O.
+  Touched Python diagnostics clean. Zero-test discovery is not counted.
+- Main Controller read-only proof:138 normative records,67 propositions,49 claims,
+  111 unresolved contexts, two proposed-prose editorial findings. Gate FAIL;
+  scoped central BLOCK_DOWNSTREAM287. DB and5218 artifacts hash-checked unchanged.
+- No generation, PDF reads, authority writes or changes to normative text/Covers/I/O.
+  Publication remains blocked; unsupported constructions and complete functional
+  explanation still need work. Do not claim full semantic/synthesis completion.
+
+## Previous checkpoint: 2026-10-09 - Common Descriptive Pre-Prose Model
+
+- Checkpoint ID: `2026-10-09-common-descriptive-pre-prose-model`. Local only;
+  no Git staging, commit, branch, push or rollback backup for this milestone.
+- User rejected the previous Main Controller descriptions as a regression and
+  authorized the common-contract implementation. Prior six-group and named-list
+  restorations below are historical, not accepted publication.
+- First opt-in milestone in the existing shared workflow module: evidence model,
+  explicit unresolved contexts, functional claim intents/bundles, conservative
+  dependency closure, complete source-span dispositions and model-only audit.
+  Existing structural validation reuses the common evidence checker.
+- Independent complete clauses survive unrelated incomplete context in the same
+  record. Claims connected to an unresolved restriction are withheld, including
+  transitive dependencies. No actor/verb-name grouping or invented dependency.
+- Three acceptance states default to UNRESOLVED. Model integrity cannot produce
+  a semantic/publication/materialization PASS; forged acceptance flags are blocked.
+  Combined verification status is not release authority or approval.
+- Fresh tests:135 descriptive +9 document-contract +19 SRS coherence =163 PASS;
+  both touched Python files have no editor diagnostics at the code checkpoint.
+  Generic model cases include all five application-policy contexts.
+- Existing structure schema1.0, profile fingerprints/activation and generators
+  unchanged; new synthesis schema1.0 is opt-in and not wired to runtime callers.
+  No source PDF read, canonical authority write or specification regeneration.
+- Section/information-gain obligations, abstraction/realization, independent
+  semantic/publication checking and artifact adapters/callers still need work.
+  Main Controller publication remains blocked; real gates and protected-artifact
+  hashes were NOT rerun. Old reports/counts below remain historical.
+- Next: central section obligations and non-redundant claim-level information
+  gain, then supported functional synthesis and independent checks. Do not resume
+  local parser/heading repairs or activate the legacy project-specific renderer.
+
+## Previous checkpoint: 2026-10-09 09:52 - Functional Description Crosscheck
+
+- Checkpoint ID: `2026-10-09-functional-description-crosscheck`. Local only; no Git save.
+- User asked to recover the earlier named functional descriptions, not only the
+  three inventory responsibilities. The recent predicate-only gate suppressed
+  complete passive control and state-sequencing relationships; the legacy path
+  also contains project-specific prose and cannot safely be reactivated wholesale.
+- Central restoration admits explicit initiation effects, complete flag lifecycles
+  and literal FSM/phase behavior. Nested guard thresholds and coordinated
+  same-subject predicates are preserved; multi-actor and incomplete sources remain gaps.
+- Actual section1.4 groups in both formats: PPG saturation flag control;
+  Elaboration FSM; Measurement initiation; Device FSM; PPG FSM; Digital ramp control.
+  Source-derived titles are counted independently of descriptions. Same entity
+  initial-case variants are grouped, and semantic-unit sections follow the profile.
+- Crosscheck of requested examples: ramp and saturation descriptions restored;
+  measurement initiation restored, not full setup synthesis; literal FSM behaviors
+  restored, not an inferred aggregate Main Controller FSM. GSR acquisition/processing
+  and ADC phases remain unresolved: existing approved records include truncated
+  clauses and unsupported projections. This is not a new-approval requirement.
+- Final generation09:52:42-09:52:56, unchanged approved snapshot. A transient DOCX
+  replacement denial on the preceding attempt cleared on one retry; no applications
+  closed or permissions changed. Real MD/DOCX overview parity PASS, six unique groups,
+  exact138 normative blocks/Covers and source I/O unchanged; canonical DB and5210
+  protected artifacts unchanged against the established baseline.
+- Tests127 descriptive +9 document-contract +19 SRS coherence =155 PASS.
+  Strict Main Controller gate remains FAIL on residual source/projection gaps.
+  Central precondition ran before regeneration and remained BLOCK_DOWNSTREAM;
+  do not reuse older438/774 counts as current acceptance totals.
+- Existing artifact backup retained; old JSON reports describe their earlier run.
+  This checkpoint does not claim complete functional synthesis or publication PASS.
+
+## Previous checkpoint: 2026-10-09 09:01 - Named Main Function List
+
+- Checkpoint ID: `2026-10-09-main-function-list`. Local only; no Git save.
+- Latest user request: explicitly list main functions with a description each;
+  placement left open. Implemented in section 1.2 through the central IPOS path.
+- Approved inventory Function yields three distinct named/described entries:
+  generate/receive Analog Domain control signals; DSP elaboration of ADC outputs;
+  write elaborated results to defined addresses. No signal names or invented FSMs.
+- Splitting preserves shared coordinated predicates and parenthetical details;
+  source checks independently reject missing, duplicate, altered or qualified entries.
+  Aggregation keeps each main-function fact separate; approved labels are audited.
+- Main Controller MD/DOCX regenerated 09:01:37-09:01:55 at unchanged snapshot;
+  three entries verified in both formats with semantic parity. Exact normative
+  blocks/history/I/O, canonical DB and 5,210 protected artifacts unchanged.
+- Fresh tests: 124 descriptive +9 document-contract +19 SRS coherence =152 PASS.
+  Three Python files diagnostics clean. Existing strict IPOS gate remains FAIL.
+- Only the requested inventory-backed function list is complete. Internal-function
+  contextual abstraction/section1.4 remains unresolved; prior 438/774 finding counts
+  are historical whole-semantic checks, not rerun acceptance counts for this edit.
+- Existing backup and JSON reports retained/updated at
+  local_memory/checkpoints/2026-10-08-main-controller-regeneration-201105/.
+
+## Previous checkpoint: 2026-10-09 - Main Controller Main Functions
+
+- Checkpoint ID: `2026-10-09-main-controller-main-functions`. Local only; no Git
+  staging, commit, branch or push. Preserve all prior dirty changes and original STBIO_AI.
+- Bounded IPOS runtime bridge and profile/application audits are now integrated in
+  the existing generator/gate. DRS/ARS remain inactive; no complete redesign claim.
+- Central presentation removes actor/signal-derived titles. Section 1.2 starts
+  with an audited literal main-functions summary from approved inventory Function;
+  boundary I/O follows as prose. Both final MD/DOCX verified.
+- Section 1.4 is ABSENT, not fixed or complete. Conservative predicate-based
+  application assessments withhold local details as unresolved functional abstraction;
+  exact facts/conditions/polarity remain in the model and original normative text.
+  This is a blocking boundary, NOT verified functional-role interpretation.
+- Regenerated Main Controller only at unchanged `snap-b2e8101b00dc6909feaed885`,
+  2026-10-09 07:36:10-07:36:27. All 138 normative blocks, Covers, history and source
+  I/O identical to original backup in both formats. Canonical DB byte-identical;
+  5,210 protected artifacts unchanged. One additional auxiliary selector report
+  relative to baseline: artifacts/traceability_reports/digital_ipos_snapshot_selection.json.
+- Tests: 123 descriptive, 9 document-contract and 19 SRS coherence PASS (151).
+  Final gate FAIL; snapshot-bound Main Controller findings 438; central
+  BLOCK_DOWNSTREAM 774. Findings overlap and include grammar/adapter gaps, not only
+  damaged source statements. Model uses full-record spans and no extracted edges.
+- Actual backup/reports: `local_memory/checkpoints/2026-10-08-main-controller-regeneration-201105/`
+  with before/, preservation_baseline.json, preservation_result.json,
+  final_validation_report.json and central_coherence_report.json.
+- Next: independently grounded functional-role/context abstraction, then final
+  section 1.4 materialization. Do not replace this with verb filtering, aliases,
+  invented composition, project-specific wording or semantic PASS from unit tests.
+
+## Previous checkpoint: 2026-10-08 19:54:30 - Top-Down Profile Application Phase 3
+
+- Checkpoint ID: `2026-10-08-top-down-profile-application-phase3`.
+- Local working files and restart documentation only; no Git staging, commit,
+  branch or push. Not a binary backup or automatic rollback. Preserve all existing
+  dirty changes and the separate reference-only original `../STBIO_AI`.
+- Existing Git base reference remains `739ec9019f0aef0092f53e86ba29f35aeff64fca`;
+  no new authority, approval, allocation, snapshot or normative text changes.
+- Phase 3 in `scripts/workflow_routing.py`: immutable central SRS/DRS/ARS/Digital
+  IPOS/Analog IPOS application policies, explicit domain/layer/role/essential-detail
+  assessments, deterministic rule-bearing decisions and versioned expected-input
+  audits. Containment is organization; IPOS requires purpose and function roles.
+- Application audits require the phase-2 shared structural validator and exact
+  proposition/dependency inventory. Missing/invalid models block even when profile
+  exclusion is proposed. Unresolved source assessments never become exclusions.
+- Selection proposals do not rewrite meaning or model dispositions. Existing
+  writing profiles/fingerprints, runtime activation, adapters and generators remain
+  unchanged. Source interpretation, actual final prose and migration are explicitly
+  `not_implemented`. No source-spec read or artifact regeneration in this phase.
+- Fresh verification: 116 descriptive + 9 document-contract + 19 SRS coherence
+  tests PASS (144); both touched Python files have no editor diagnostics.
+- Prior real IPOS state remains unrechecked: 121 distinct source gaps, central
+  BLOCK_DOWNSTREAM 251 overlapping findings; Digital FAIL, Analog valid-empty PASS.
+- Next controlled phase: artifact-only context-preserving adapters and independent
+  source assessments. No widened runtime rollout or semantic PASS from policy tests.
+
+## Previous checkpoint: 2026-10-08 19:44:36 - Top-Down Shared Model Phase 2
+
+- Checkpoint ID: `2026-10-08-top-down-shared-model-phase2`.
+- Kind: local-memory restart checkpoint of working files saved on disk. Not a
+  Git commit, staged change, binary backup, automatic rollback or approval snapshot.
+- Active clone: `C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow`.
+  Original `../STBIO_AI` remains reference-only.
+- Existing Git base, read only: `739ec9019f0aef0092f53e86ba29f35aeff64fca`.
+  Worktree is dirty across source, tests, configuration, database and artifacts;
+  preserve every existing change. No staging, commit, branch or push for this save.
+- Approved snapshot remains `snap-b2e8101b00dc6909feaed885`; historical approved
+  counts: 314 total, SRS 0, ARS 0, DRS 55, Digital IPOS 259, Analog IPOS 0.
+  No fresh authority scan or pipeline execution was performed for this save.
+
+### Current Implementation Boundary
+- User authorized controlled implementation from the top-down contract. Shared
+  integrity is common; hierarchy/context/abstraction are profile-controlled.
+  Do not restart bottom-up block-specific parser patches or use fallback.
+- Current contract and phase checkpoint are in `docs/ipos-descriptive-rendering.md`.
+  Historical plans/PASS results do not override the current contract or blockers.
+- Phase 2 implemented opt-in typed structure in `scripts/workflow_routing.py`:
+  exact source spans, Boolean contexts, meanings, propositions, dependencies,
+  claims, dispositions, unit/source linkage and coverage, dependency cycles,
+  equivalent-duplicate provenance, profile fingerprints and versioned audit.
+- New schema: `DESCRIPTIVE_STRUCTURE_VERSION = 1.0`. Reuses existing
+  `NormalizedSourceRecord`/`SemanticUnit`; does not replace existing fact flow,
+  adapters or generator calls. Audit status is `model_valid | blocked`, not a
+  source-semantic or publication PASS. Those checks are `not_implemented`.
+- Explicit unresolved dispositions block acceptance. Only equivalent duplicates
+  with a preserved representative may be excluded in this phase. Profile detail
+  exclusions and abstraction decisions are not implemented yet.
+- No new runtime activation, adapter migration, specification regeneration or
+  canonical/snapshot write during phase 2. Existing SRS/IPOS activation unchanged;
+  DRS/ARS remain inactive hooks. Earlier IPOS regeneration is separate history.
+
+### Recorded Verification And Residuals
+- Phase checkpoint records 108 descriptive + 9 document-contract + 19 SRS
+  downstream-coherence tests PASS (136 total); no new test run during this save.
+- Runtime module diagnostics clean; test imports retain known dynamic `sys.path`
+  editor warnings. No interpreter or editor configuration change.
+- Latest terminal context records clean `git diff --check` for the three phase
+  source/test/plan files. Memory-save validation is separate from runtime tests.
+- Prior real-artifact result remains Digital FAIL, Analog valid-empty PASS,
+  central BLOCK_DOWNSTREAM 251 overlapping findings, 121 distinct unresolved
+  approved source records. Original 42 stale discrepancies were removed earlier.
+  These gates were not rerun or resolved by phase 2.
+- Main Controller FSM composition must preserve its container and child FSMs,
+  not substitute the enclosing block. User's Device/Elab example defines the
+  desired content shape, not a project-specific policy or new approval.
+
+### Resume
+Read newest handoff, this checkpoint, environment and activity log first.
+Next phase is central profile roles, abstraction and essential-detail decisions
+with paired fixtures. Source-context adapters, independent source interpretation,
+actual final-prose checks, caller migration and regeneration remain later phases.
+Do not widen rollout or claim semantic blockers resolved from model tests alone.
+
+## Previous checkpoint: 2026-10-07 - Frozen Authority-Bounded SRS Writing Rule
 
 - Checkpoint ID: `2026-10-07-srs-authority-bounded-writing-rule`; working files only, no Git commit, new approval or snapshot. Scope limited to refining/freezing/centralizing introductory and terminology wording.
 - Preferred rule `srs-introductory-authority-bounded-v1` is an immutable SRS-only policy in `workflow_routing.py`, referenced by shared general rules, descriptive-policy guidance and SRS template. Avoid blanket scope/coverage/allocation/performance/implementation claims; glossary definitions are reading aids bounded by approved content. Reference listings are not applicability or approval. Shared category conventions and other document profiles unchanged.

@@ -1,7 +1,7 @@
 {
   "active_batch": {
     "batch_path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143819",
-    "candidate_count": 43,
+    "candidate_count": 44,
     "counts": {
       "conflict": 0,
       "duplication": 1,
@@ -16,7 +16,7 @@
     "staged_at": "2026-09-21T12:38:22+00:00",
     "tag_pattern": "IPOS_STBIO1_MAIN_CONTROLLER_\\d+"
   },
-  "authority_fingerprint": "2cc164b16d89e6e9897defe4ba11f01218cd7bd60b4a662477dda3ca1c4c90e6",
+  "authority_fingerprint": "aaf3670f7e5581d258e11eaafb18f00dfe5f777b320a741c74aaea48881ee975",
   "blockers": [],
   "checked_paths": [
     "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143819",
@@ -29,11 +29,11 @@
   "counts": {
     "ERROR": 0,
     "INFO": 0,
-    "WARNING": 42
+    "WARNING": 43
   },
   "discovery_assumptions": [
-    "The newest deterministically ordered supplementary source-review batch is active.",
-    "When source_kind is absent, supplementary status is determined by comparison with config/project_context.json source_spec_path.",
+    "The newest deterministically ordered source-review batch is active, whether primary or supplementary.",
+    "Merge approval and completion are checked against the active canonical staging batch, not compatibility manifests or historical snapshots.",
     "Canonical SQLite is opened through a read-only URI and is authoritative when present.",
     "The workbook is inspected read-only and the synchronized mapping CSV is compared as the machine-readable handoff.",
     "Unresolved hierarchy-parent rows are categorized from synchronized mapping CSV authority before user escalation."
@@ -289,6 +289,12 @@
       "category": "stale_state",
       "message": "Historical/superseded ingestion batch coexists with active batch",
       "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322",
+      "severity": "WARNING"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\primary_654078d5d79284621c7bd337",
       "severity": "WARNING"
     }
   ],
@@ -551,6 +557,12 @@
       "category": "stale_state",
       "message": "Historical/superseded ingestion batch coexists with active batch",
       "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143322",
+      "severity": "WARNING"
+    },
+    {
+      "category": "stale_state",
+      "message": "Historical/superseded ingestion batch coexists with active batch",
+      "path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\primary_654078d5d79284621c7bd337",
       "severity": "WARNING"
     }
   ]

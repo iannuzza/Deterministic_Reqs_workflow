@@ -42,11 +42,13 @@ Author: Alessandro Lucio IANNUZZI
 
 ### **1.1 Functionality** {#11-functionality}
 
-The PAD MUX block is designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.
+The PAD MUX block serves to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The PAD MUX accepts mode selection, register-map controls, test controls, and internal block outputs and produces pad controls, test observations, and routed internal signals.
+- The PAD MUX block accepts Mode selection, register-map controls, test controls, and internal block outputs. The PAD MUX block produces Pad controls, test observations, and routed internal signals.
+- **In function mode, the GPIO1,2,3,4 output.** In function mode, the GPIO1,2,3,4 output is i time slot irq if sel irq gpi1,2,3,4 is 0x05 and ext cap en is “0” and i error time slot if sel irq gpi1,2,3,4 is 0x04 and ext cap en is “0”.
+- **In function mode, the GPIO1,2,3,4 out.** In function mode, the GPIO1,2,3,4 out is i LED Pilot if sel irq gpi1,2,3,4 is 0x02 and ext cap en is “0”, General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext cap en is “0”, irq fifo if sel irq gpio1,2,3,4 is 0x01 and ext cap en is “0” and i DCCK irq if sel irq gpi1,2,3,4 is 0x03 and ext cap en is “0”.
 
 ## **2. Source I/O** {#2-source-io}
 

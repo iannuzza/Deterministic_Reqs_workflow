@@ -28,8 +28,8 @@ python scripts/workflow_cli.py final-sysml --snapshot-id <approved_snapshot_id>
 # Run full Stage 0 through Stage 5
 python scripts/workflow_cli.py run --from-stage 0 --to-stage 5
 
-# Approved forward shortcut from Stage 2A to Stage 5
-python scripts/workflow_cli.py drs-after-stage2a
+# Generate and validate Stage 5 from an approved snapshot
+python scripts/workflow_cli.py run --stage 5 --snapshot-id <approved_snapshot_id>
 ```
 
 Each run executes one stage or an ascending contiguous range, executes each selected stage once, validates before advancing, and stops on the first failure. Retries, loops, skipped stages, and backward transitions are not supported.

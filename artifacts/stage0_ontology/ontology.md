@@ -1,6 +1,6 @@
 # Ontology Baseline
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 ## Phase 0 - Source Baseline and Scope Lock
 - Source specification: specs/DDS_STBIO1.pdf
@@ -17,7 +17,7 @@ Date: 2026-10-06
 - Captions and references: treated as source-bearing evidence when present in extracted statements.
 
 ## Phase 2 - Concept Harvesting
-- System concepts extracted: 159
+- System concepts extracted: 189
 - Analog concepts extracted: 3
 - Digital concepts extracted: 177
 - Alias groups normalized: 0
@@ -26,7 +26,7 @@ Date: 2026-10-06
 - Comment: 0
 - Definition: 0
 - Assumption: 0
-- Requirement: 314
+- Requirement: 357
 
 ## Concepts
 - ONT_SYS_001: acquisition (attribute)
@@ -34,21 +34,21 @@ Date: 2026-10-06
 - ONT_SYS_003: ADC_CAL_CONFIG (entity)
 - ONT_SYS_004: ADC_GENERAL_DEBUG_0 (entity)
 - ONT_SYS_005: adc_phases (entity)
-- ONT_SYS_006: ADSP (attribute)
-- ONT_SYS_007: after (attribute)
-- ONT_SYS_008: AHB (attribute)
-- ONT_SYS_009: ALC (attribute)
-- ONT_SYS_010: ALC_COMP (attribute)
-- ONT_SYS_011: average (attribute)
-- ONT_SYS_012: been (attribute)
-- ONT_SYS_013: BIA (attribute)
-- ONT_SYS_014: BIO (attribute)
-- ONT_SYS_015: block (attribute)
-- ONT_SYS_016: BOOT (attribute)
-- ONT_SYS_017: calibration (attribute)
-- ONT_SYS_018: CDS (attribute)
-- ONT_SYS_019: channel (attribute)
-- ONT_SYS_020: covers (attribute)
+- ONT_SYS_006: ADC_PHGEN (entity)
+- ONT_SYS_007: ADSP (attribute)
+- ONT_SYS_008: after (attribute)
+- ONT_SYS_009: AHB (attribute)
+- ONT_SYS_010: ALC (attribute)
+- ONT_SYS_011: ALC_COARSE (attribute)
+- ONT_SYS_012: ALC_COMP (attribute)
+- ONT_SYS_013: ALC_COMPENSATION (attribute)
+- ONT_SYS_014: algorithm (attribute)
+- ONT_SYS_015: average (attribute)
+- ONT_SYS_016: been (attribute)
+- ONT_SYS_017: BIA (attribute)
+- ONT_SYS_018: BIO (attribute)
+- ONT_SYS_019: block (attribute)
+- ONT_SYS_020: BOOT (attribute)
 - ONT_ANA_001: DCC (attribute)
 - ONT_ANA_002: feature (attribute)
 - ONT_ANA_003: stages (attribute)
@@ -238,13 +238,15 @@ Date: 2026-10-06
 - ONT_SYS_003: ADC_CAL_CONFIG; function/evidence: ADC_CAL_CONFIG is a entity concept extracted from SYS requirements. Observed behavior: When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, exce...
 - ONT_SYS_004: ADC_GENERAL_DEBUG_0; function/evidence: ADC_GENERAL_DEBUG_0 is a entity concept extracted from SYS requirements. Observed behavior: When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_...
 - ONT_SYS_005: adc_phases; function/evidence: adc_phases is a entity concept extracted from SYS requirements. Observed behavior: When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay
-- ONT_SYS_061: EN_ADC_DEBUG; function/evidence: EN_ADC_DEBUG is a entity concept extracted from SYS requirements. Observed behavior: When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the samp...
-- ONT_SYS_066: FIFO; function/evidence: FIFO is a entity concept extracted from SYS requirements. Observed behavior: When in unique_fifo_mode (i_multiple_fifo set to 0), if during a time slot an operation is done, the...
-- ONT_SYS_078: i_adc_en_mc; function/evidence: i_adc_en_mc is a entity concept extracted from SYS requirements. Observed behavior: When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before
-- ONT_SYS_082: i_data_out_adc; function/evidence: i_data_out_adc is a entity concept extracted from SYS requirements. Observed behavior: When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in...
-- ONT_SYS_083: i_debug_adc_error_cap8_0_bypass; function/evidence: i_debug_adc_error_cap8_0_bypass is a entity concept extracted from SYS requirements. Observed behavior: When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_e...
-- ONT_SYS_112: o_adc_ready; function/evidence: o_adc_ready is a entity concept extracted from SYS requirements. Observed behavior: The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not
-- ONT_SYS_142: SENSOR; function/evidence: SENSOR is a entity concept extracted from SYS requirements. Observed behavior: SENSOR HUB
+- ONT_SYS_006: ADC_PHGEN; function/evidence: ADC_PHGEN is a entity concept extracted from SYS requirements. Observed behavior: The ADC_PHGEN shall work at 16 MHz clock frequency.
+- ONT_SYS_069: EN_ADC_DEBUG; function/evidence: EN_ADC_DEBUG is a entity concept extracted from SYS requirements. Observed behavior: When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the samp...
+- ONT_SYS_075: FIFO; function/evidence: FIFO is a entity concept extracted from SYS requirements. Observed behavior: When in unique_fifo_mode (i_multiple_fifo set to 0), if during a time slot an operation is done, the...
+- ONT_SYS_091: i_adc_en_mc; function/evidence: i_adc_en_mc is a entity concept extracted from SYS requirements. Observed behavior: When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before
+- ONT_SYS_095: i_data_out_adc; function/evidence: i_data_out_adc is a entity concept extracted from SYS requirements. Observed behavior: When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in...
+- ONT_SYS_096: i_data_valid_ppg_adc; function/evidence: i_data_valid_ppg_adc is a entity concept extracted from SYS requirements. Observed behavior: When a PPG Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise (i_data_valid_no...
+- ONT_SYS_097: i_debug_adc_error_cap8_0_bypass; function/evidence: i_debug_adc_error_cap8_0_bypass is a entity concept extracted from SYS requirements. Observed behavior: When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_e...
+- ONT_SYS_131: o_adc_ready; function/evidence: o_adc_ready is a entity concept extracted from SYS requirements. Observed behavior: The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not
+- ONT_SYS_169: SENSOR; function/evidence: SENSOR is a entity concept extracted from SYS requirements. Observed behavior: SENSOR HUB
 - ONT_DIG_002: ADC; function/evidence: ADC is a entity concept extracted from DIG requirements. Observed behavior: During the Configuration Phase (IDLE STATE of the Device_FSM), the user shall be able to: • Configure...
 - ONT_DIG_003: ADC_CONFIG_ECG; function/evidence: ADC_CONFIG_ECG is a entity concept extracted from DIG requirements. Observed behavior: • The user shall set the number of clocks for sampling ECG data from ADC in ADC_CONFIG_ECG...
 - ONT_DIG_057: FIFO; function/evidence: FIFO is a entity concept extracted from DIG requirements. Observed behavior: CONNECTION fifo_dpt 8 FIFO depth. Suggested val 8 / [DDS_STBIO1_9500] Requirement In case also other...
@@ -264,144 +266,168 @@ Date: 2026-10-06
 
 ## Attributes
 - ONT_SYS_001: acquisition; evidence: requirements_summary.csv
-- ONT_SYS_006: ADSP; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 018 (page 34)
-- ONT_SYS_007: after; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 014 (page 94)
-- ONT_SYS_008: AHB; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 031 (page 131)
-- ONT_SYS_009: ALC; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
-- ONT_SYS_010: ALC_COMP; evidence: requirements_summary.csv
-- ONT_SYS_011: average; evidence: requirements_summary.csv
-- ONT_SYS_012: been; evidence: requirements_summary.csv
-- ONT_SYS_013: BIA; evidence: requirements_summary.csv
-- ONT_SYS_014: BIO; evidence: requirements_summary.csv
-- ONT_SYS_015: block; evidence: requirements_summary.csv
-- ONT_SYS_016: BOOT; evidence: requirements_summary.csv
-- ONT_SYS_017: calibration; evidence: requirements_summary.csv
-- ONT_SYS_018: CDS; evidence: requirements_summary.csv
-- ONT_SYS_019: channel; evidence: requirements_summary.csv
-- ONT_SYS_020: covers; evidence: requirements_summary.csv
-- ONT_SYS_021: CURR_INJ; evidence: requirements_summary.csv
-- ONT_SYS_022: DDS; evidence: requirements_summary.csv
-- ONT_SYS_023: DDS_STBIO1_0116; evidence: requirements_summary.csv
-- ONT_SYS_024: DDS_STBIO1_0118; evidence: requirements_summary.csv
-- ONT_SYS_025: DDS_STBIO1_0119; evidence: requirements_summary.csv
-- ONT_SYS_026: DDS_STBIO1_0120; evidence: requirements_summary.csv
-- ONT_SYS_027: DDS_STBIO1_0121; evidence: requirements_summary.csv
-- ONT_SYS_028: DDS_STBIO1_0122; evidence: requirements_summary.csv
-- ONT_SYS_029: DDS_STBIO1_0123; evidence: requirements_summary.csv
-- ONT_SYS_030: DDS_STBIO1_0124; evidence: requirements_summary.csv
-- ONT_SYS_031: DDS_STBIO1_0125; evidence: requirements_summary.csv
-- ONT_SYS_032: DDS_STBIO1_0127; evidence: requirements_summary.csv
-- ONT_SYS_033: DDS_STBIO1_0128; evidence: requirements_summary.csv
-- ONT_SYS_034: DDS_STBIO1_0129; evidence: requirements_summary.csv
-- ONT_SYS_035: DDS_STBIO1_0140; evidence: requirements_summary.csv
-- ONT_SYS_036: DDS_STBIO1_0141; evidence: requirements_summary.csv
-- ONT_SYS_037: DDS_STBIO1_0142; evidence: requirements_summary.csv
-- ONT_SYS_038: DDS_STBIO1_05010; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 027 (page 131)
-- ONT_SYS_039: DDS_STBIO1_05011; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 031 (page 131)
-- ONT_SYS_040: DDS_STBIO1_0509; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 023 (page 131)
-- ONT_SYS_041: DDS_STBIO1_1114; evidence: requirements_summary.csv
-- ONT_SYS_042: debug; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 022 (page 34)
-- ONT_SYS_043: DEVICE; evidence: requirements_summary.csv
-- ONT_SYS_044: DEVICE_CONFIG_CHANNEL; evidence: requirements_summary.csv
-- ONT_SYS_045: DEVICE_CONFIG_OPERATION; evidence: requirements_summary.csv
-- ONT_SYS_046: DEVICE_FSM; evidence: requirements_summary.csv
-- ONT_SYS_049: DIGITAL_RAMP_CONFIG_PARAM_1; evidence: requirements_summary.csv
-- ONT_SYS_050: DIGITAL_RAMP_CONFIG_PARAM_3; evidence: requirements_summary.csv
-- ONT_SYS_051: DISABLE_ALC; evidence: requirements_summary.csv
-- ONT_SYS_052: EC0; evidence: requirements_summary.csv
-- ONT_SYS_053: ECG; evidence: requirements_summary.csv
-- ONT_SYS_054: ECG0; evidence: requirements_summary.csv
-- ONT_SYS_055: ECG1; evidence: requirements_summary.csv
-- ONT_SYS_056: ECG1_ECG2; evidence: requirements_summary.csv
-- ONT_SYS_057: ECG2; evidence: requirements_summary.csv
-- ONT_SYS_058: ECG_CTRL; evidence: requirements_summary.csv
-- ONT_SYS_059: ELAB; evidence: requirements_summary.csv
-- ONT_SYS_060: ELAB_FSM; evidence: requirements_summary.csv
-- ONT_SYS_062: en_gsr_cds; evidence: requirements_summary.csv
-- ONT_SYS_063: equal; evidence: requirements_summary.csv
-- ONT_SYS_064: ERROR; evidence: requirements_summary.csv
-- ONT_SYS_065: falling_ramp; evidence: requirements_summary.csv
-- ONT_SYS_067: FIRST_ALC_SAMPLES; evidence: requirements_summary.csv
-- ONT_SYS_068: FSM; evidence: requirements_summary.csv
-- ONT_SYS_069: function; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 038 (page 59)
-- ONT_SYS_070: GENERAL_PPG_PARAMETERS_3; evidence: requirements_summary.csv
-- ONT_SYS_071: GPIO1; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 038 (page 59)
-- ONT_SYS_072: GSR; evidence: requirements_summary.csv
-- ONT_SYS_073: GSR_CDS; evidence: requirements_summary.csv
-- ONT_SYS_074: GSR_CTRL; evidence: requirements_summary.csv
-- ONT_SYS_075: GSR_SNS; evidence: requirements_summary.csv
-- ONT_SYS_076: HC_EN; evidence: requirements_summary.csv
-- ONT_SYS_077: HUB; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 020 (page 34)
-- ONT_SYS_080: i_clk_hlt_en; evidence: requirements_summary.csv
-- ONT_SYS_081: i_clk_imp_en; evidence: requirements_summary.csv
-- ONT_SYS_084: i_debug_calibration; evidence: requirements_summary.csv
-- ONT_SYS_085: i_imp_curinj; evidence: requirements_summary.csv
-- ONT_SYS_086: i_m_gsr; evidence: requirements_summary.csv
-- ONT_SYS_087: i_noise; evidence: requirements_summary.csv
-- ONT_SYS_088: i_rst_async_bia; evidence: requirements_summary.csv
-- ONT_SYS_089: i_rst_async_ecg; evidence: requirements_summary.csv
-- ONT_SYS_090: i_su_hlt_dly; evidence: requirements_summary.csv
-- ONT_SYS_092: IDAC_DC_PPG_FRAME_; evidence: requirements_summary.csv
-- ONT_SYS_093: IDLE; evidence: requirements_summary.csv
-- ONT_SYS_094: IMP_CURRINJ_EN; evidence: requirements_summary.csv
-- ONT_SYS_095: IMP_EN; evidence: requirements_summary.csv
-- ONT_SYS_096: input; evidence: requirements_summary.csv
-- ONT_SYS_097: into; evidence: requirements_summary.csv
-- ONT_SYS_098: IOFF; evidence: requirements_summary.csv
-- ONT_SYS_099: IOFF_OFFSET; evidence: requirements_summary.csv
-- ONT_SYS_100: ip_version; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 040 (page 99)
-- ONT_SYS_101: IPOS_STBIO1_MAIN_CONTROLLER_1; evidence: Table 20. OTP I/O List
-- ONT_SYS_102: ISPU; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 023 (page 131)
-- ONT_SYS_103: last; evidence: requirements_summary.csv
-- ONT_SYS_104: least; evidence: requirements_summary.csv
-- ONT_SYS_105: LED; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 051 (page 59)
-- ONT_SYS_106: MASK; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
-- ONT_SYS_107: MEASUREMENT; evidence: requirements_summary.csv
-- ONT_SYS_109: MSB; evidence: requirements_summary.csv
-- ONT_SYS_110: multiple; evidence: requirements_summary.csv
-- ONT_SYS_111: N_MAX; evidence: requirements_summary.csv
-- ONT_SYS_113: O_CK_Q; evidence: requirements_summary.csv
-- ONT_SYS_114: o_en_buff; evidence: requirements_summary.csv
-- ONT_SYS_115: o_en_tia; evidence: requirements_summary.csv
-- ONT_SYS_116: o_end_cal_phases; evidence: requirements_summary.csv
-- ONT_SYS_117: o_pd_idac; evidence: requirements_summary.csv
-- ONT_SYS_118: o_pd_tia; evidence: requirements_summary.csv
-- ONT_SYS_119: OFF; evidence: requirements_summary.csv
-- ONT_SYS_120: once; evidence: requirements_summary.csv
-- ONT_SYS_121: only; evidence: requirements_summary.csv
-- ONT_SYS_122: operation; evidence: requirements_summary.csv
-- ONT_SYS_123: operations; evidence: requirements_summary.csv
-- ONT_SYS_124: OPERATIVE; evidence: requirements_summary.csv
-- ONT_SYS_125: order; evidence: requirements_summary.csv
-- ONT_SYS_126: phase; evidence: requirements_summary.csv
-- ONT_SYS_127: PPG; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
-- ONT_SYS_128: PPG_ALC_CONFIG_PARAM_2; evidence: requirements_summary.csv
-- ONT_SYS_129: PPG_ALC_STORAGE; evidence: requirements_summary.csv
-- ONT_SYS_130: PPG_FSM; evidence: requirements_summary.csv
-- ONT_SYS_131: PPG_SEL; evidence: requirements_summary.csv
-- ONT_SYS_133: preset; evidence: requirements_summary.csv
-- ONT_SYS_134: RAM; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 013 (page 97)
-- ONT_SYS_135: rd_to_max_val; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 025 (page 99)
-- ONT_SYS_136: requirement; evidence: Table 20. OTP I/O List
-- ONT_SYS_137: RES_F_R2; evidence: Table 20. OTP I/O List
-- ONT_SYS_138: RESERVED; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 033 (page 133)
-- ONT_SYS_139: RESET_PPG; evidence: requirements_summary.csv
-- ONT_SYS_140: RISING_RAMP; evidence: requirements_summary.csv
-- ONT_SYS_141: SECOND_ALC_SAMPLES; evidence: requirements_summary.csv
-- ONT_SYS_143: set_gsr_freq_h; evidence: requirements_summary.csv
-- ONT_SYS_144: shall; evidence: requirements_summary.csv
-- ONT_SYS_145: sleep; evidence: requirements_summary.csv
-- ONT_SYS_149: time; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 025 (page 99)
-- ONT_SYS_150: time_slot_data; evidence: requirements_summary.csv
-- ONT_SYS_151: TIMER; evidence: requirements_summary.csv
-- ONT_SYS_152: TX_LEDOFF_FRAME_; evidence: requirements_summary.csv
-- ONT_SYS_153: user; evidence: requirements_summary.csv
-- ONT_SYS_154: version; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 040 (page 99)
-- ONT_SYS_155: WAIT_SU; evidence: requirements_summary.csv
-- ONT_SYS_156: when; evidence: requirements_summary.csv
-- ONT_SYS_157: xc80ec; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 033 (page 133)
-- ONT_SYS_158: xc9030; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 039 (page 133)
-- ONT_SYS_159: xca144; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 049 (page 133)
+- ONT_SYS_007: ADSP; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 018 (page 34)
+- ONT_SYS_008: after; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 014 (page 94)
+- ONT_SYS_009: AHB; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 031 (page 131)
+- ONT_SYS_010: ALC; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
+- ONT_SYS_011: ALC_COARSE; evidence: requirements_summary.csv
+- ONT_SYS_012: ALC_COMP; evidence: requirements_summary.csv
+- ONT_SYS_013: ALC_COMPENSATION; evidence: requirements_summary.csv
+- ONT_SYS_014: algorithm; evidence: requirements_summary.csv
+- ONT_SYS_015: average; evidence: requirements_summary.csv
+- ONT_SYS_016: been; evidence: requirements_summary.csv
+- ONT_SYS_017: BIA; evidence: requirements_summary.csv
+- ONT_SYS_018: BIO; evidence: requirements_summary.csv
+- ONT_SYS_019: block; evidence: requirements_summary.csv
+- ONT_SYS_020: BOOT; evidence: requirements_summary.csv
+- ONT_SYS_021: calibration; evidence: requirements_summary.csv
+- ONT_SYS_022: CDS; evidence: requirements_summary.csv
+- ONT_SYS_023: channel; evidence: requirements_summary.csv
+- ONT_SYS_024: counter; evidence: requirements_summary.csv
+- ONT_SYS_025: covers; evidence: requirements_summary.csv
+- ONT_SYS_026: CURR_INJ; evidence: requirements_summary.csv
+- ONT_SYS_027: cycle; evidence: requirements_summary.csv
+- ONT_SYS_028: DDS; evidence: requirements_summary.csv
+- ONT_SYS_029: DDS_STBIO1_0116; evidence: requirements_summary.csv
+- ONT_SYS_030: DDS_STBIO1_0118; evidence: requirements_summary.csv
+- ONT_SYS_031: DDS_STBIO1_0119; evidence: requirements_summary.csv
+- ONT_SYS_032: DDS_STBIO1_0120; evidence: requirements_summary.csv
+- ONT_SYS_033: DDS_STBIO1_0121; evidence: requirements_summary.csv
+- ONT_SYS_034: DDS_STBIO1_0122; evidence: requirements_summary.csv
+- ONT_SYS_035: DDS_STBIO1_0123; evidence: requirements_summary.csv
+- ONT_SYS_036: DDS_STBIO1_0124; evidence: requirements_summary.csv
+- ONT_SYS_037: DDS_STBIO1_0125; evidence: requirements_summary.csv
+- ONT_SYS_038: DDS_STBIO1_0127; evidence: requirements_summary.csv
+- ONT_SYS_039: DDS_STBIO1_0128; evidence: requirements_summary.csv
+- ONT_SYS_040: DDS_STBIO1_0129; evidence: requirements_summary.csv
+- ONT_SYS_041: DDS_STBIO1_0140; evidence: requirements_summary.csv
+- ONT_SYS_042: DDS_STBIO1_0141; evidence: requirements_summary.csv
+- ONT_SYS_043: DDS_STBIO1_0142; evidence: requirements_summary.csv
+- ONT_SYS_044: DDS_STBIO1_05010; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 027 (page 131)
+- ONT_SYS_045: DDS_STBIO1_05011; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 031 (page 131)
+- ONT_SYS_046: DDS_STBIO1_0509; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 023 (page 131)
+- ONT_SYS_047: DDS_STBIO1_1114; evidence: requirements_summary.csv
+- ONT_SYS_048: debug; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 022 (page 34)
+- ONT_SYS_049: defines; evidence: requirements_summary.csv
+- ONT_SYS_050: DEVICE; evidence: requirements_summary.csv
+- ONT_SYS_051: DEVICE_CONFIG_CHANNEL; evidence: requirements_summary.csv
+- ONT_SYS_052: DEVICE_CONFIG_OPERATION; evidence: requirements_summary.csv
+- ONT_SYS_053: DEVICE_FSM; evidence: requirements_summary.csv
+- ONT_SYS_056: DIGITAL_RAMP_CONFIG_PARAM_1; evidence: requirements_summary.csv
+- ONT_SYS_057: DIGITAL_RAMP_CONFIG_PARAM_3; evidence: requirements_summary.csv
+- ONT_SYS_058: DISABLE_ALC; evidence: requirements_summary.csv
+- ONT_SYS_059: EC0; evidence: requirements_summary.csv
+- ONT_SYS_060: ECG; evidence: requirements_summary.csv
+- ONT_SYS_061: ECG0; evidence: requirements_summary.csv
+- ONT_SYS_062: ECG1; evidence: requirements_summary.csv
+- ONT_SYS_063: ECG1_ECG2; evidence: requirements_summary.csv
+- ONT_SYS_064: ECG2; evidence: requirements_summary.csv
+- ONT_SYS_065: ECG_CTRL; evidence: requirements_summary.csv
+- ONT_SYS_066: ELAB; evidence: requirements_summary.csv
+- ONT_SYS_067: ELAB_FSM; evidence: requirements_summary.csv
+- ONT_SYS_070: en_gsr_cds; evidence: requirements_summary.csv
+- ONT_SYS_071: equal; evidence: requirements_summary.csv
+- ONT_SYS_072: ERROR; evidence: requirements_summary.csv
+- ONT_SYS_073: falling; evidence: requirements_summary.csv
+- ONT_SYS_074: falling_ramp; evidence: requirements_summary.csv
+- ONT_SYS_076: FIRST_ALC_SAMPLES; evidence: requirements_summary.csv
+- ONT_SYS_077: frame; evidence: requirements_summary.csv
+- ONT_SYS_078: FSM; evidence: requirements_summary.csv
+- ONT_SYS_079: function; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 038 (page 59)
+- ONT_SYS_080: GAIN_MAX; evidence: requirements_summary.csv
+- ONT_SYS_082: GENERAL_PPG_PARAMETERS_3; evidence: requirements_summary.csv
+- ONT_SYS_083: GPIO1; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 038 (page 59)
+- ONT_SYS_084: GSR; evidence: requirements_summary.csv
+- ONT_SYS_085: GSR_CDS; evidence: requirements_summary.csv
+- ONT_SYS_086: GSR_CTRL; evidence: requirements_summary.csv
+- ONT_SYS_087: gsr_on; evidence: requirements_summary.csv
+- ONT_SYS_088: GSR_SNS; evidence: requirements_summary.csv
+- ONT_SYS_089: HC_EN; evidence: requirements_summary.csv
+- ONT_SYS_090: HUB; evidence: Section 11.1 XBAR Connection Matrix (under Section 11 Interconnect), paragraph 020 (page 34)
+- ONT_SYS_093: i_clk_hlt_en; evidence: requirements_summary.csv
+- ONT_SYS_094: i_clk_imp_en; evidence: requirements_summary.csv
+- ONT_SYS_098: i_debug_calibration; evidence: requirements_summary.csv
+- ONT_SYS_099: i_imp_curinj; evidence: requirements_summary.csv
+- ONT_SYS_100: i_imp_en; evidence: requirements_summary.csv
+- ONT_SYS_101: i_m_gsr; evidence: requirements_summary.csv
+- ONT_SYS_103: i_noise; evidence: requirements_summary.csv
+- ONT_SYS_104: i_reset_end_calibration; evidence: requirements_summary.csv
+- ONT_SYS_105: i_reset_ramp; evidence: requirements_summary.csv
+- ONT_SYS_106: i_rst_async_bia; evidence: requirements_summary.csv
+- ONT_SYS_107: i_rst_async_ecg; evidence: requirements_summary.csv
+- ONT_SYS_108: i_su_hlt_dly; evidence: requirements_summary.csv
+- ONT_SYS_110: IDAC_DC_PPG_FRAME_; evidence: requirements_summary.csv
+- ONT_SYS_111: IDLE; evidence: requirements_summary.csv
+- ONT_SYS_112: IMP_CURRINJ_EN; evidence: requirements_summary.csv
+- ONT_SYS_113: IMP_EN; evidence: requirements_summary.csv
+- ONT_SYS_114: input; evidence: requirements_summary.csv
+- ONT_SYS_115: into; evidence: requirements_summary.csv
+- ONT_SYS_116: IOFF; evidence: requirements_summary.csv
+- ONT_SYS_117: IOFF_OFFSET; evidence: requirements_summary.csv
+- ONT_SYS_118: ip_version; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 040 (page 99)
+- ONT_SYS_119: IPOS_STBIO1_MAIN_CONTROLLER_1; evidence: Table 20. OTP I/O List
+- ONT_SYS_120: ISPU; evidence: Section 13.3.1 Requirements (under Section 13.3 ISPU integration), paragraph 023 (page 131)
+- ONT_SYS_121: last; evidence: requirements_summary.csv
+- ONT_SYS_122: least; evidence: requirements_summary.csv
+- ONT_SYS_123: LED; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 051 (page 59)
+- ONT_SYS_124: MASK; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
+- ONT_SYS_125: MEASUREMENT; evidence: requirements_summary.csv
+- ONT_SYS_127: MSB; evidence: requirements_summary.csv
+- ONT_SYS_128: multiple; evidence: requirements_summary.csv
+- ONT_SYS_129: N_MAX; evidence: requirements_summary.csv
+- ONT_SYS_130: nmax; evidence: requirements_summary.csv
+- ONT_SYS_132: O_CK_Q; evidence: requirements_summary.csv
+- ONT_SYS_133: o_comp_rx_ck; evidence: requirements_summary.csv
+- ONT_SYS_134: o_en_buff; evidence: requirements_summary.csv
+- ONT_SYS_135: o_en_tia; evidence: requirements_summary.csv
+- ONT_SYS_136: o_end_cal_phases; evidence: requirements_summary.csv
+- ONT_SYS_137: o_pd_hc2; evidence: requirements_summary.csv
+- ONT_SYS_138: o_pd_idac; evidence: requirements_summary.csv
+- ONT_SYS_139: o_pd_tia; evidence: requirements_summary.csv
+- ONT_SYS_140: o_tx_vref; evidence: requirements_summary.csv
+- ONT_SYS_141: o_w_btia_alc; evidence: requirements_summary.csv
+- ONT_SYS_142: OFF; evidence: requirements_summary.csv
+- ONT_SYS_143: once; evidence: requirements_summary.csv
+- ONT_SYS_144: only; evidence: requirements_summary.csv
+- ONT_SYS_145: operation; evidence: requirements_summary.csv
+- ONT_SYS_146: operations; evidence: requirements_summary.csv
+- ONT_SYS_147: OPERATIVE; evidence: requirements_summary.csv
+- ONT_SYS_148: order; evidence: requirements_summary.csv
+- ONT_SYS_149: phase; evidence: requirements_summary.csv
+- ONT_SYS_150: PPG; evidence: Table 18. ADSP I/O List ................................ ................................ ................................ ............. 86
+- ONT_SYS_151: PPG_ALC_CONFIG_PARAM_1; evidence: requirements_summary.csv
+- ONT_SYS_152: PPG_ALC_CONFIG_PARAM_2; evidence: requirements_summary.csv
+- ONT_SYS_153: PPG_ALC_STORAGE; evidence: requirements_summary.csv
+- ONT_SYS_154: PPG_FSM; evidence: requirements_summary.csv
+- ONT_SYS_155: PPG_SEL; evidence: requirements_summary.csv
+- ONT_SYS_157: preset; evidence: requirements_summary.csv
+- ONT_SYS_158: RAM; evidence: Section 13.2.1.1.2 Requirements (under Section 13.2.1.1 ADSP Peculiar Requirements), paragraph 013 (page 97)
+- ONT_SYS_159: rd_to_max_val; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 025 (page 99)
+- ONT_SYS_160: requirement; evidence: Table 20. OTP I/O List
+- ONT_SYS_161: RES_F_R2; evidence: Table 20. OTP I/O List
+- ONT_SYS_162: RESERVED; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 033 (page 133)
+- ONT_SYS_163: RESET_PPG; evidence: requirements_summary.csv
+- ONT_SYS_164: result; evidence: requirements_summary.csv
+- ONT_SYS_165: rising; evidence: requirements_summary.csv
+- ONT_SYS_166: RISING_RAMP; evidence: requirements_summary.csv
+- ONT_SYS_168: SECOND_ALC_SAMPLES; evidence: requirements_summary.csv
+- ONT_SYS_170: set_gsr_freq_h; evidence: requirements_summary.csv
+- ONT_SYS_171: shall; evidence: requirements_summary.csv
+- ONT_SYS_172: sleep; evidence: requirements_summary.csv
+- ONT_SYS_176: time; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 025 (page 99)
+- ONT_SYS_177: time_slot_data; evidence: requirements_summary.csv
+- ONT_SYS_178: TIMER; evidence: requirements_summary.csv
+- ONT_SYS_179: TX_LEDOFF_FRAME_; evidence: requirements_summary.csv
+- ONT_SYS_180: TX_LEDSET_FRAME; evidence: requirements_summary.csv
+- ONT_SYS_181: user; evidence: requirements_summary.csv
+- ONT_SYS_182: velocity; evidence: requirements_summary.csv
+- ONT_SYS_183: version; evidence: Section 13.2.2 I2C_SPI_AHB integration (under Section 13.2 IPs), paragraph 040 (page 99)
+- ONT_SYS_184: WAIT_SU; evidence: requirements_summary.csv
+- ONT_SYS_185: wave; evidence: requirements_summary.csv
+- ONT_SYS_186: when; evidence: requirements_summary.csv
+- ONT_SYS_187: xc80ec; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 033 (page 133)
+- ONT_SYS_188: xc9030; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 039 (page 133)
+- ONT_SYS_189: xca144; evidence: Section 13.4.1 STBIO1 Register Map (under Section 13.4 STBIO1 Register Map), paragraph 049 (page 133)
 - ONT_ANA_001: DCC; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 033 (page 71)
 - ONT_ANA_002: feature; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 033 (page 71)
 - ONT_ANA_003: stages; evidence: Section 13.1.2.2 Requirements (under Section 13.1.2 PAD Mux), paragraph 033 (page 71)
@@ -583,13 +609,13 @@ Date: 2026-10-06
 - Primary key: requirement id
 - Required fields: requirement_statement, category, source, content_class, requirement_type
 - Category distribution:
+  - Unknown: 166
   - Digital: 161
-  - Unknown: 123
   - System: 29
   - Analog: 1
 - Requirement-type distribution:
+  - Unknown: 166
   - other: 150
-  - Unknown: 123
   - functional: 21
   - interface: 9
   - mode-behavior: 4
@@ -598,7 +624,7 @@ Date: 2026-10-06
   - configuration: 1
 - Content-class distribution:
   - Requirement: 190
-  - Unknown: 123
+  - Unknown: 166
   - Configuration: 1
 
 ## Formal Schema
@@ -622,7 +648,7 @@ Date: 2026-10-06
 - Check 3: glossary population (header + meaningful data rows)
 - Check 4: semantic issue severity sections must exist (Critical/Major/Minor)
 - Check 5: non-narrative evidence coverage (table/image/mode evidence expected)
-- Current non-narrative counters: table=4, image=3, mode=65
+- Current non-narrative counters: table=4, image=3, mode=69
 - Traceability basis: requirement source references and IDs are retained in Stage 1 summary and mapped into ontology concepts.
 - Comparison-for-completion workflow:
   - read textual description
@@ -633,7 +659,7 @@ Date: 2026-10-06
 
 ## Phase 5 - Non-Narrative Coverage Expansion
 - Table-derived ontology entries: 4
-- Mode/transition ontology entries: 65
+- Mode/transition ontology entries: 69
 - Numeric constraint ontology entries: inferred from parameter/value fields in requirement summary.
 - Image/diagram-derived ontology entries: 3
 - Table captions captured: 11

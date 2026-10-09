@@ -59,7 +59,7 @@ from validate_downstream_coherence import (
     resolve_downstream_contract,
     snapshot_architecture_context,
     srs_catalog_from_context,
-    validate as validate_downstream_coherence,
+    validate_generation_inputs,
 )
 from low_power_descriptive import (
     architecture_records_from_function_rows,
@@ -3045,7 +3045,9 @@ def _write_srs_markdown(
         if is_list_item and previous and not previous_is_list_item:
             normalized_lines.append("")
         normalized_lines.append(line)
-    lines_rendered = _terminate_authored_requirement_blocks(normalized_lines)
+    from spec_document_contract import apply_clean_document_presentation
+    lines_rendered = apply_clean_document_presentation(normalized_lines, output_path, "SRS")
+    lines_rendered = _terminate_authored_requirement_blocks(lines_rendered)
     lines_rendered = _deduplicate_authored_requirement_blocks(lines_rendered)
     final_registry = _build_heading_registry(lines_rendered)
     lines_rendered, _resolved_navigation_links, _intentional_non_links = _rewrite_internal_links(
@@ -3277,8 +3279,8 @@ def main() -> int:
         snapshot_id=args.snapshot_id,
     )
     downstream_contract = resolve_downstream_contract(repo_root, requirement_input.snapshot_id)
-    coherence = validate_downstream_coherence(repo_root, requirement_input.snapshot_id)
-    if not args.regenerate_downstream and coherence["decision"] != "PASS":
+    coherence = validate_generation_inputs(repo_root, requirement_input.snapshot_id)
+    if coherence["decision"] != "PASS":
         raise RuntimeError(f"Downstream snapshot coherence blocked SRS generation: {coherence['finding_count']} findings")
     _append_log(repo_root, script_name, f"AUTHORITATIVE_SNAPSHOT snapshot_id={selection['selected_snapshot_id']} mode={selection['selection_mode']} user={runtime_user_name()}")
     refresh_ledger(repo_root, snapshot_id=requirement_input.snapshot_id, source_rows=requirement_input.rows)

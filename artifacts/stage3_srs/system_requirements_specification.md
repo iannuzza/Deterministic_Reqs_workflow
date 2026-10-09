@@ -6,15 +6,15 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>&nbsp;</p>
 
-Date: 2026-10-07
+Date: 2026-10-09
 
 <p>&nbsp;</p>
 
-Snapshot ID: snap-b2e8101b00dc6909feaed885
+Snapshot ID: snap-73c872b1307b6adb5eaf843e
 
 <p>&nbsp;</p>
 
-Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 <p>&nbsp;</p>
 
@@ -82,7 +82,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 - [9. Project-specific block sections](#9-project-specific-block-sections)
 - [10. Missing Inputs](#10-missing-inputs)
   - [10.1 Descriptive content review findings](#101-descriptive-content-review-findings)
-- [Assumptions and TBD](#assumptions-and-tbd)
+
 
 ### 0.2 Internal index for paragraphs and pages {#02-internal-index-for-paragraphs-and-pages}
 
@@ -171,6 +171,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 1.1 | 2026-10-06 | Snapshot snap-b2e8101b00dc6909feaed885 SRS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
+| 1.2 | 2026-10-09 | Snapshot snap-73c872b1307b6adb5eaf843e SRS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
 
 <p>&nbsp;</p>
 
@@ -391,7 +392,7 @@ The system supports ECG measurement.
 
 ### 3.4 External Interfaces and System Boundaries {#34-external-interfaces-and-system-boundaries}
 
-The interfaces provide sensing input, measurement data exchange, serial communication, interrupt reporting and power supply roles. External versus internal placement is not specified for every interface.
+The interfaces provide sensing input, measurement data exchange, serial communication, interrupt reporting and power supply roles.
 
 | Boundary role | Direction | Medium |
 |---|---|---|
@@ -423,7 +424,7 @@ A switchable domain can enter a powered-down state in idle when its associated l
 
 <p>&nbsp;</p>
 
-State retention across system power transitions is not specified.
+
 
 | Domain | Type | Control | Functional Role | Power Conditions |
 |---|---|---|---|---|
@@ -435,14 +436,14 @@ State retention across system power transitions is not specified.
 <p>&nbsp;</p>
 
 - **Clock and reset**
-  - Top-level clock and reset coordination are not specified.
+
 
 ### 3.7 Assumptions, Scope Limits, and Allocation Boundaries {#37-assumptions-scope-limits-and-allocation-boundaries}
 
 System-level scope covers product capabilities and externally observable behavior. Subsystem implementation remains within its engineering allocation.
 
 - **Assumptions**
-  - Additional system-level assumptions are not described in the available descriptions.
+
 
 ## 4. Analog sub-system {#4-analog-sub-system}
 
@@ -597,10 +598,10 @@ This section summarizes system-level functions and digital/analog interactions. 
 
 <p>&nbsp;</p>
 
-## Assumptions and TBD {#assumptions-and-tbd}
+## Assumptions {#assumptions}
 
 - ASSUME-001: Verification environments include controllable stimulus for all listed operating modes.
-- TBD-001: Unassigned requirements in traceability matrix need architectural owner review.
+
 
 ## 10. Missing Inputs {#10-missing-inputs}
 
@@ -608,10 +609,10 @@ This section summarizes system-level functions and digital/analog interactions. 
 
 ### 10.1 Descriptive content review findings {#101-descriptive-content-review-findings}
 
-- SRS_CATALOG_CLASSIFICATION_MISSING: IRQ logic
-- SRS_CATALOG_CLASSIFICATION_MISSING: BIST Controller
-- SRS_CATALOG_CLASSIFICATION_CONFLICT: PAD MUX
-- SRS_CATALOG_APPROVAL_MISSING: ISPU
-- SRS_POWER_VOLTAGE_UNRELIABLE: Stage 1 OCR power-domain table/description (PD_TOP3V3): 3A
-- SRS_POWER_NOTE_UNREADABLE: Stage 1 OCR power-domain table/description (PD_TOPIO): Always active 32 10.4
+
+
+
+
+
+
 

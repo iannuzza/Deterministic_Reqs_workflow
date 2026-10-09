@@ -1,6 +1,6 @@
 # Requirements Baseline
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 ## Scope
 - Stage 2 formalization baseline generated from Stage 1 requirements summary.

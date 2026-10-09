@@ -232,9 +232,9 @@ Supplementary source review is additive after the primary source completes Stage
 
 ## Stage Progression Invariants
 - Execute the workflow as a strict forward-only pipeline: a run may execute one stage or an ascending contiguous range beginning at any stage in `0 -> 1 -> 2 -> 2A -> 3 -> 4 -> 5 -> 6 -> 7`.
-- Every `workflow_cli.py run` workflow execution must run the focused regression/retrieval test suite once before any selected stage. A failure stops the workflow before execution; results are recorded in `artifacts/orchestrator/workflow_cli_runs.jsonl`. The project retrieval benchmark remains Stage 0-specific. Validation-only commands and the Stage 2A-to-DRS shortcut do not run workflow preflight tests.
+- Every `workflow_cli.py run` workflow execution must run the focused regression/retrieval test suite once before any selected stage. A failure stops the workflow before execution; results are recorded in `artifacts/orchestrator/workflow_cli_runs.jsonl`. The project retrieval benchmark remains Stage 0-specific. Validation-only commands do not run workflow preflight tests.
 - Do not retry, loop, skip within a selected range, or return to an earlier stage during ordinary execution. The sole explicit loopback is the post-Stage-2 supplementary refresh: after accepted rows are merged, the GUI reruns Stage 0, Stage 1 OCR/tag extraction, and Stage 2 before continuing to architecture review.
-- The Stage 2A-to-DRS requirements-only shortcut is allowed because it is a forward transition; no Stage 3, 4, or 5 path may invoke an earlier stage.
+- Stage 5 uses the normal approved-snapshot workflow only. Requirement parentage follows the approved hierarchical req_id mapping, not a mandatory immediately preceding specification level; no Stage 3, 4, or 5 path may invoke an earlier stage.
 - Architecture comparison is an optional command (`workflow_cli.py arch-compare --project-to-compare <project_name>`), separate from numbered workflow stages. Numbered Stage 6 is Digital IPOS and Stage 7 is Analog IPOS; both are snapshot-backed and use the immutable ID selected at workflow start. Optional and future downstream steps must accept and propagate that same ID.
 - Never advance a stage without required artifacts and required crosscheck report.
 - A gate cannot pass with unresolved critical findings.

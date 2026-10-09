@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import argparse
 from datetime import datetime
 from pathlib import Path
 import re
@@ -79,9 +80,9 @@ def _format_coverage(covered: int, total: int) -> str:
     return f"{covered} / {total} ({percentage:.1f}%)"
 
 
-def _central_edge_statistics(repo_root: Path) -> list[dict[str, object]]:
+def _central_edge_statistics(repo_root: Path, snapshot_id: str | None = None) -> list[dict[str, object]]:
     """Return the validator-owned RM edge statistics used by all renderers."""
-    graph = approved_generated_document_dependency_graph(repo_root)
+    graph = approved_generated_document_dependency_graph(repo_root, snapshot_id) if snapshot_id else approved_generated_document_dependency_graph(repo_root)
     return [
         statistic
         for statistic in graph.get("edge_statistics", [])
@@ -89,18 +90,18 @@ def _central_edge_statistics(repo_root: Path) -> list[dict[str, object]]:
     ]
 
 
-def _central_source_spec_edges(repo_root: Path) -> list[dict[str, object]]:
+def _central_source_spec_edges(repo_root: Path, snapshot_id: str | None = None) -> list[dict[str, object]]:
     """Return reciprocal source-spec coverage from the central graph contract."""
-    graph = approved_generated_document_dependency_graph(repo_root)
+    graph = approved_generated_document_dependency_graph(repo_root, snapshot_id) if snapshot_id else approved_generated_document_dependency_graph(repo_root)
     return [
         edge for edge in graph.get("source_spec_edges", [])
         if isinstance(edge, dict)
     ]
 
 
-def _central_source_spec_relationship_edges(repo_root: Path) -> list[dict[str, object]]:
+def _central_source_spec_relationship_edges(repo_root: Path, snapshot_id: str | None = None) -> list[dict[str, object]]:
     """Return approved provenance-backed links between imported specifications."""
-    graph = approved_generated_document_dependency_graph(repo_root)
+    graph = approved_generated_document_dependency_graph(repo_root, snapshot_id) if snapshot_id else approved_generated_document_dependency_graph(repo_root)
     return [
         edge for edge in graph.get("source_spec_relationship_edges", [])
         if isinstance(edge, dict)
@@ -188,12 +189,12 @@ def _read_sysml_by_block(path: Path) -> dict[str, set[str]]:
     return result
 
 
-def write_hierarchy_coverage_report(repo_root: Path) -> Path:
+def write_hierarchy_coverage_report(repo_root: Path, snapshot_id: str | None = None) -> Path:
     """Write source-to-SRS/ARS/DRS coverage to the Stage 5 traceability artifacts."""
     context_path = repo_root / "config/project_context.json"
     context = json.loads(context_path.read_text(encoding="utf-8")) if context_path.exists() else {}
     resolved, _selection = resolve_complete_authoritative_input(
-        repo_root, "coverage-report", project_id=str(context.get("project_name") or repo_root.name)
+        repo_root, "coverage-report", project_id=str(context.get("project_name") or repo_root.name), snapshot_id=snapshot_id
     )
     ledger_path = repo_root / "artifacts/traceability_reports/requirement_allocation_ledger.csv"
     manifest_path = repo_root / "artifacts/traceability_reports/requirement_allocation_materialization.json"
@@ -254,9 +255,9 @@ def write_hierarchy_coverage_report(repo_root: Path) -> Path:
     end_to_end_covered = srs_covered & lower_level_covered
     digital_end_to_end = srs_covered & drs_covered & digital_ipos_ids
     analog_end_to_end = srs_covered & ars_covered & analog_ipos_ids
-    edge_statistics = _central_edge_statistics(repo_root)
-    source_spec_edges = _central_source_spec_edges(repo_root)
-    source_spec_relationship_edges = _central_source_spec_relationship_edges(repo_root)
+    edge_statistics = _central_edge_statistics(repo_root, resolved.snapshot_id)
+    source_spec_edges = _central_source_spec_edges(repo_root, resolved.snapshot_id)
+    source_spec_relationship_edges = _central_source_spec_relationship_edges(repo_root, resolved.snapshot_id)
 
     report_path = repo_root / "artifacts/stage5_drs/requirements_hierarchy_coverage_report.md"
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -451,5 +452,8 @@ def write_hierarchy_coverage_report(repo_root: Path) -> Path:
 
 
 if __name__ == "__main__":
-    report = write_hierarchy_coverage_report(Path(__file__).resolve().parents[1])
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--snapshot-id")
+    args = parser.parse_args()
+    report = write_hierarchy_coverage_report(Path(__file__).resolve().parents[1], args.snapshot_id)
     print(report.as_posix())

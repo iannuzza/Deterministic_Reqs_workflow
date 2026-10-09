@@ -1,6 +1,6 @@
 {
-  "docx_sha256": "f5894450dda2d5e36d86ca4db74e42dd86f6dee07741de977a98a8490527e18d",
-  "markdown_sha256": "c1b88ff5050a846921f2c78969f2f8a34db3fcdae27945f1038e687bdfbdb909",
+  "docx_sha256": "1c621babd77d3593fe860a89ef13072f3ef7c8c6af6475be597d76a546a76d37",
+  "markdown_sha256": "f3cf6ae0dc0ed7f05c0e9fac193ebd34de334625321aada5dfdddd0cafb89ae3",
   "preservation_baseline_sha256": "b9eca798e639b02f3ef4970d98f7439c77e4b38b76ae7828c8e08a54e62a5e80",
   "rules": {
     "artifact_fidelity": "PASS",
@@ -11,6 +11,6 @@
     "table_preservation": "PASS",
     "technical_prose": "PASS"
   },
-  "template_sha256": "6af0e97ec35688a43a7f6d834e7c3f39f894719e053077be79f742130a487436",
+  "template_sha256": "05569ed5bab47fef6993f21becf4f6d8b2cb5af3bd96247744a4221550dfbd0d",
   "version": 1
 }

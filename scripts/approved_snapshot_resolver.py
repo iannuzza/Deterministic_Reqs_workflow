@@ -50,8 +50,8 @@ def resolve_complete_authoritative_input(
     """Resolve one complete approved snapshot, recording deterministic selection.
 
     An explicit ``snapshot_id`` is never replaced. Without one, this function
-    explicitly evaluates all approved local candidates and selects the newest
-    complete candidate by ``approved_at``, then descending snapshot ID.
+    validates only the newest approved candidate by ``approved_at``, then
+    descending snapshot ID. It never falls back to historical snapshots.
     """
     from canonical_store import connect
 
@@ -76,12 +76,13 @@ def resolve_complete_authoritative_input(
     connection = connect(repo_root)
     try:
         candidates = connection.execute(
-            "SELECT snapshot_id, approved_at FROM snapshots WHERE project_id = ? AND status = 'approved' ORDER BY approved_at DESC, snapshot_id DESC",
+            "SELECT snapshot_id, approved_at FROM snapshots WHERE project_id = ? AND status = 'approved' ORDER BY approved_at DESC, snapshot_id DESC LIMIT 1",
             (project_id,),
         ).fetchall()
     finally:
         connection.close()
     valid: list[tuple[str, str, RequirementInput]] = []
+    candidates = sorted(candidates, key=lambda row: (str(row["approved_at"] or ""), str(row["snapshot_id"])), reverse=True)[:1]
     for candidate in candidates:
         candidate_id = str(candidate["snapshot_id"])
         try:

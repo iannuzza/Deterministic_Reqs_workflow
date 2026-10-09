@@ -1,6 +1,6 @@
 # Stage DRS Report
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 DRS generation status: pass
 DRS mode: full inputs
@@ -74,7 +74,7 @@ DRS mode: full inputs
 
 Version: 1
 
-Template SHA-256: 6af0e97ec35688a43a7f6d834e7c3f39f894719e053077be79f742130a487436
+Template SHA-256: 05569ed5bab47fef6993f21becf4f6d8b2cb5af3bd96247744a4221550dfbd0d
 
 - structure: PASS
 - conventions: PASS

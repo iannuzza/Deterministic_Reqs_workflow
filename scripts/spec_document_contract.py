@@ -23,6 +23,111 @@ DRS_RULES = frozenset({
     "structure", "conventions", "navigation", "table_preservation",
     "technical_prose", "evidence_fidelity", "artifact_fidelity",
 })
+IPOS_TEMPLATE = "templates/IPOS_document_contract.md"
+IPOS_CONTRACT_RULES = frozenset({"section_roles", "functional_claims", "information_gain", "semantic_fidelity",
+                                 "publication_quality", "materialization"})
+
+PUBLICATION_REVIEW_MARKERS = re.compile(
+    r"\b(?:need clarification|requires? clarification|not specified|not described|"
+    r"TBD(?:-\d+)?|TBC|clarification|placeholder|insufficient|unresolved|SRS_(?:CATALOG|POWER)_[A-Z_]+)\b", re.I,
+)
+
+
+def clean_descriptive_review_text(text: str) -> str:
+    if not PUBLICATION_REVIEW_MARKERS.search(text):
+        return text
+    if re.search(r"signal spelling:\s*need clarification", text, re.I):
+        return ""
+    segments = re.split(r"(?<=[.;])\s+", text)
+    retained = [segment for segment in segments if not PUBLICATION_REVIEW_MARKERS.search(segment)]
+    if retained and re.fullmatch(r"[-*+]\s*", retained[0]):
+        retained.pop(0)
+    return " ".join(retained).strip()
+
+
+def clean_publication_title(text: str) -> str:
+    return re.sub(r"\s+(?:and|&)\s+TBD\b", "", text, flags=re.I)
+
+
+def clean_publication_line(line: str) -> str:
+    if line.lstrip().startswith("#"):
+        projected = clean_publication_title(line)
+    elif line.strip().startswith("|"):
+        cells = re.split(r"(?<!\\)\|", line.strip().strip("|"))
+        projected = "| " + " | ".join(clean_descriptive_review_text(clean_publication_title(cell.strip()))
+                                        for cell in cells) + " |"
+    else:
+        projected = clean_descriptive_review_text(line)
+    return re.sub(r"(?:-and)?-tbd\b", "", projected, flags=re.I)
+
+
+def apply_clean_document_presentation(lines: list[str], output_path: Path, document_type: str) -> list[str]:
+    snapshot = next((match[1] for line in lines if (match := re.match(r"Snapshot ID:\s*(\S+)", line))), "")
+    result, omissions = [], []
+    section, normative = "Document", False
+    for number, line in enumerate(lines, 1):
+        if re.match(r"^\s*(?:\*\*)?\[[A-Z][A-Z0-9-]*-REQ-\d+\]", line):
+            normative = True
+        if line.lstrip().startswith("#"):
+            section = clean_publication_title(line.lstrip("# "))
+        if normative:
+            if PUBLICATION_REVIEW_MARKERS.search(line):
+                raise ValueError("Approved normative text contains a review marker; source review is required")
+            result.append(line)
+        else:
+            projected = clean_publication_line(line) if PUBLICATION_REVIEW_MARKERS.search(line) or re.search(r"-tbd\b", line, re.I) else line
+            if projected != line:
+                omissions.append({"location": section, "input_line": number, "original": line,
+                                  "retained": projected, "reason": "review_only_or_unsupported_presentation",
+                                  "source_references": [output_path.name + f":renderer-input-line:{number}"],
+                                  "user_review_only": True})
+            result.append(projected)
+        if "[End]" in line:
+            normative = False
+    payload = {"schema_version": 1, "document_type": document_type, "snapshot_id": snapshot,
+               "authority": False, "user_review_only": True, "omissions": omissions}
+    output_path.with_name("descriptive_publication_audit.json").write_text(
+        json.dumps(payload, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
+    return result
+
+
+def publication_text_is_accounted(original: str, markdown: str, docx_text: str, audit: dict) -> bool:
+    projected = clean_descriptive_review_text(original)
+    if projected and (projected not in markdown or projected not in docx_text):
+        return False
+    if projected != original:
+        return any(original in item["original"] for item in audit.get("omissions", []))
+    return True
+
+
+def validate_clean_document_presentation(markdown_path: Path) -> list[str]:
+    findings = []
+    audit_path = markdown_path.with_name("descriptive_publication_audit.json")
+    if not audit_path.exists():
+        return ["publication_omission_audit_missing"]
+    audit = json.loads(audit_path.read_text(encoding="utf-8"))
+    if audit.get("authority") is not False or audit.get("user_review_only") is not True:
+        findings.append("publication_omission_audit_authority_invalid")
+    text = markdown_path.read_text(encoding="utf-8")
+    snapshot = re.search(r"(?m)^Snapshot ID:\s*(\S+)", text)
+    if snapshot and audit.get("snapshot_id") != snapshot[1]:
+        findings.append("publication_omission_audit_snapshot_invalid")
+    for item in audit.get("omissions", []):
+        if item["retained"] != clean_publication_line(item["original"]) or not item.get("user_review_only"):
+            findings.append("publication_omission_projection_invalid")
+        if item["retained"].strip() and item["retained"] not in text:
+            findings.append("publication_supported_projection_missing")
+    for path in (markdown_path, markdown_path.with_suffix(".docx")):
+        if not path.exists():
+            findings.append("publication_artifact_missing:" + path.name)
+            continue
+        events = drs_document_events(path)
+        values = [event["text"] for event in events if event["kind"] != "table"]
+        values.extend(cell for event in events if event["kind"] == "table" for row in event["rows"] for cell in row)
+        if any(PUBLICATION_REVIEW_MARKERS.search(value) for value in values):
+            findings.append("publication_inline_marker:" + path.name)
+    return findings
+
 
 SHARED_CATEGORY_CONVENTIONS = (
     (
@@ -52,12 +157,12 @@ def shared_category_conventions_markdown() -> list[str]:
     return lines
 
 
-def load_drs_contract(template_path: Path) -> dict:
-    """Load the sole DRS presentation contract; reject unsupported instructions."""
+def load_embedded_document_contract(template_path: Path, document_type: str) -> dict:
     text = template_path.read_text(encoding="utf-8")
-    blocks = re.findall(r"(?ms)^```yaml drs-document-contract\s*\n(.*?)^```\s*$", text)
+    marker = re.escape(document_type.lower() + "-document-contract")
+    blocks = re.findall(r"(?ms)^```yaml " + marker + r"\s*\n(.*?)^```\s*$", text)
     if len(blocks) != 1:
-        raise ValueError("DRS requires exactly one embedded YAML document contract")
+        raise ValueError(document_type + " requires exactly one embedded YAML document contract")
 
     class UniqueLoader(yaml.SafeLoader):
         pass
@@ -67,14 +172,64 @@ def load_drs_contract(template_path: Path) -> dict:
         for key_node, value_node in node.value:
             key = loader.construct_object(key_node)
             if key in result:
-                raise ValueError(f"Duplicate DRS contract key: {key}")
+                raise ValueError(f"Duplicate {document_type} contract key: {key}")
             result[key] = loader.construct_object(value_node)
         return result
 
     UniqueLoader.add_constructor(yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG, unique_mapping)
     payload = yaml.load(blocks[0], Loader=UniqueLoader)
+    if not isinstance(payload, dict) or payload.get("document_type") != document_type or type(payload.get("version")) is not int:
+        raise ValueError("Invalid " + document_type + " contract envelope")
+    if "sha256" in payload:
+        raise ValueError("Reserved derived document contract field: sha256")
+    payload["sha256"] = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    return payload
+
+
+def load_ipos_contract(template_path: Path) -> dict:
+    payload = load_embedded_document_contract(template_path, "IPOS")
+    fields = {"version", "document_type", "profile", "mandatory_rules", "sections", "paragraph", "interpretation",
+              "synthesis", "detail_policy", "gap_policy", "rendering", "validation_hooks", "sha256"}
+    if set(payload) != fields or payload["version"] != 1 or payload["profile"] != "block_local_v1":
+        raise ValueError("Unsupported IPOS contract schema or profile")
+    for field, expected in (
+        ("interpretation", "admitted_normative_clauses_v1"), ("synthesis", "explicit_functional_claims_v1"),
+        ("detail_policy", "preserve_essential_block_detail_v1"),
+        ("gap_policy", "preserve_independent_withhold_dependent_v1"),
+        ("rendering", "scoped_explanatory_prose_v1"),
+    ):
+        if payload[field] != expected:
+            raise ValueError("IPOS rule without implementation: " + field)
+    rules = payload["mandatory_rules"]
+    if not isinstance(rules, list) or any(not isinstance(value, str) for value in rules) or set(rules) != IPOS_CONTRACT_RULES or len(rules) != len(IPOS_CONTRACT_RULES):
+        raise ValueError("IPOS mandatory rule missing or unknown")
+    hooks = payload["validation_hooks"]
+    if hooks != ["semantic_fidelity", "publication_quality", "materialization"]:
+        raise ValueError("Invalid IPOS independent validation hooks")
+    paragraph = payload["paragraph"]
+    if paragraph != {"required": ["responsibility", "supported_behavior"],
+                     "when_supported": ["condition", "effect", "result", "dependency", "exception"],
+                     "claim_scope": ["initiation", "behavior", "result", "exception", "local_interaction"]}:
+        raise ValueError("Unsupported IPOS functional paragraph obligations")
+    sections = payload["sections"]
+    expected_roles = ["purpose", "capabilities", "organization", "functions", "architecture"]
+    if not isinstance(sections, list) or len(sections) != len(expected_roles):
+        raise ValueError("Invalid IPOS section obligations")
+    for section, role, number in zip(sections, expected_roles, ("1.1", "1.2", "1.3", "1.4", "1.5")):
+        if (not isinstance(section, dict) or set(section) != {"role", "title", "required", "information_gain"}
+                or section["role"] != role or not isinstance(section["title"], str)
+                or not section["title"].startswith(number + " ") or not section["title"][len(number):].strip()
+                or section["required"] is not (role in {"purpose", "capabilities"})
+                or section["information_gain"] is not True):
+            raise ValueError("Unsupported IPOS section role or information-gain obligation")
+    return payload
+
+
+def load_drs_contract(template_path: Path) -> dict:
+    """Load the sole DRS presentation contract; reject unsupported instructions."""
+    payload = load_embedded_document_contract(template_path, "DRS")
     fields = {"version", "document_type", "mandatory_rules", "sections", "conventions", "navigation", "writing"}
-    if not isinstance(payload, dict) or set(payload) != fields:
+    if set(payload) != fields | {"sha256"}:
         raise ValueError("Invalid DRS contract fields")
     if type(payload["version"]) is not int or payload["version"] != 1 or payload["document_type"] != "DRS":
         raise ValueError("Unsupported DRS contract version or document type")
@@ -104,8 +259,41 @@ def load_drs_contract(template_path: Path) -> dict:
             raise ValueError("Invalid DRS convention order or definition")
     if payload["writing"] != "evidence_bounded_technical_prose_v1":
         raise ValueError("DRS writing rule without implementation")
-    payload["sha256"] = hashlib.sha256(text.encode("utf-8")).hexdigest()
     return payload
+
+
+def ipos_document_contract_report(repo_root: Path, markdown_path: Path, audit_path: Path, functional_input) -> dict:
+    from workflow_routing import (
+        build_ipos_normalized_records, validate_ipos_descriptive_output,
+        _ipos_final_sections, ipos_publication_quality_findings,
+    )
+    contract = load_ipos_contract(repo_root / IPOS_TEMPLATE)
+    semantic = validate_ipos_descriptive_output(markdown_path, audit_path, functional_input.block,
+               functional_input.local_requirement_evidence, functional_input.local_requirement_ids, (),
+               functional_input, include_publication=False)
+    publication = []
+    for path in (markdown_path, markdown_path.with_suffix(".docx")):
+        if not path.is_file():
+            publication.append("missing_final_artifact:" + path.name)
+            continue
+        publication.extend(path.name + ":" + finding for finding in
+                           ipos_publication_quality_findings(_ipos_final_sections(path)))
+    materialization = validate_materialization_chain(audit_path.with_name("materialization_audit.json"), "IPOS",
+                      build_ipos_normalized_records(functional_input), markdown_path, markdown_path.with_suffix(".docx"))
+    boundaries = {"semantic_fidelity": semantic, "publication_quality": publication, "materialization": materialization}
+    return {"document_type": "IPOS", "contract_sha256": contract["sha256"],
+            "status": "FAIL" if any(boundaries.values()) else "PASS",
+            "checks": {hook: {"status": "FAIL" if boundaries[hook] else "PASS", "findings": boundaries[hook]}
+                       for hook in contract["validation_hooks"]}}
+
+
+def validate_ipos_document_contract(repo_root: Path, markdown_path: Path, audit_path: Path, functional_input) -> list[str]:
+    try:
+        report = ipos_document_contract_report(repo_root, markdown_path, audit_path, functional_input)
+    except (OSError, ValueError, TypeError, KeyError, zipfile.BadZipFile, ET.ParseError) as error:
+        return ["ipos_document_contract_invalid:" + str(error)]
+    return ["ipos_contract:" + hook + ":" + finding for hook, result in report["checks"].items()
+            for finding in result["findings"]]
 
 
 def drs_conventions_markdown(contract: dict) -> list[str]:
@@ -241,13 +429,15 @@ def validate_drs_events(events: list[dict], contract: dict, baseline_tables: lis
             def normalize_navigation_row(row):
                 if row and row[0] == "3. System context for digital behavior":
                     return ["3. Top Level Overview", *row[1:]]
-                return row
+                return [clean_publication_title(value) for value in row]
             expected_rows = [normalize_navigation_row(row) for row in table["rows"]]
             actual_rows = [normalize_navigation_row(row) for row in candidates[0]["rows"]] if len(candidates) == 1 else []
             if len(candidates) != 1 or any(row not in actual_rows for row in expected_rows):
                 findings.append("navigation: existing index rows removed or changed")
             continue
-        key = stable_payload_hash(table)
+        projected_table = {"owner": clean_publication_title(table["owner"]),
+                   "rows": [[clean_descriptive_review_text(value) for value in row] for row in table["rows"]]}
+        key = stable_payload_hash(projected_table)
         if remaining[key] < 1:
             findings.append(f"table_preservation: table changed or missing under {table['owner']}")
         else:
@@ -326,7 +516,10 @@ def arrange_drs_contract_lines(lines: list[str], contract: dict) -> list[str]:
             if line.startswith("|") or line.endswith(":"):
                 tables.append(line)
             elif "need clarification" in line.casefold() or "requiring clarification" in line.casefold():
-                clarifications.append(line)
+                if clean_descriptive_review_text(line):
+                    known.append(line)
+                else:
+                    clarifications.append(line)
             else:
                 known.append(line)
         result.extend(known + [""] + tables + [""] + clarifications + [""])
@@ -352,7 +545,7 @@ def validate_drs_document_contract(repo_root: Path, *, check_metadata: bool = Tr
         contract = load_drs_contract(repo_root / DRS_TEMPLATE)
         baseline_path = root / "drs_preservation_baseline.json"
         baseline = json.loads(baseline_path.read_text(encoding="utf-8"))
-        findings = []
+        findings = validate_clean_document_presentation(root / "digital_requirements_specification.md")
         for kind, suffix in (("markdown", ".md"), ("docx", ".docx")):
             path = root / ("digital_requirements_specification" + suffix)
             events = drs_document_events(path)
@@ -556,6 +749,7 @@ def write_materialization_audit(
 
 
 def _normalized_text(value: str) -> str:
+    value = value.replace("\u2018", "'").replace("\u2019", "'").replace("\u201c", '"').replace("\u201d", '"')
     without_bold_markup = re.sub(r"\*\*([^*]+)\*\*", r"\1", value)
     return re.sub(r"\s+", " ", without_bold_markup).strip().casefold()
 

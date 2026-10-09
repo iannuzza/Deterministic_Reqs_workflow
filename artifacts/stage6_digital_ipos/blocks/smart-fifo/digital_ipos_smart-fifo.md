@@ -38,12 +38,17 @@ Author: Alessandro Lucio IANNUZZI
 
 ### **1.1 Functionality** {#11-functionality}
 
-The Smart FIFO block is designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
+The Smart FIFO block serves to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The Smart FIFO accepts digital samples, FIFO mode configuration and produces buffered samples and FIFO status flags.
-- **Memory mode entry.** Enters Memory mode when HMASTER is 0 or 1.
+- The Smart FIFO block accepts Digital samples, FIFO mode configuration. The Smart FIFO block produces Buffered samples and FIFO status flags.
+- **The user.** The user selects the Multiple FIFO mode setting to 1 the first bit into the FIFO CFG MODE and 0 for the Unique FIFO mode.
+- **The FIFO Controller.** The FIFO Controller haves a 6 i depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs and an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. The FIFO Controller can address 1.5 kbyte divided into 32-bit address. The FIFO Controller works at 16 MHz clock frequency.
+- **As default, the FIFO.** As default, the FIFO works in Unique FIFO Mode.
+- **The parameter MEM LOC.** The parameter MEM LOC defines the first Memory Location of the FIFO RAM: 0xC4000.
+- **the FIFO Controller.** If input signal HMASTER is set to 0 or 1, the FIFO Controller enters Memory mode.
+- **The FIFO register map first memory location.** The FIFO register map first memory location is defined as MEM LOC + 0x1000: 0xC5000.
 
 ## **2. Source I/O** {#2-source-io}
 

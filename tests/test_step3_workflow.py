@@ -32,16 +32,16 @@ class Step3WorkflowTests(unittest.TestCase):
         }), encoding="utf-8")
         fields = ["staged_id", "source_req_id", "requirement_statement", "source_page", "source_chunk_id"]
         self._write_csv(ingestion / "normalized_requirements.csv", fields, [{
-            "staged_id": f"{ingestion_id}:REQ-1",
-            "source_req_id": "REQ-1",
+            "staged_id": f"{ingestion_id}:REQ_1",
+            "source_req_id": "REQ_1",
             "requirement_statement": text,
             "source_page": "4",
             "source_chunk_id": "p004:l2",
         }])
         review_fields = fields + ["classification", "review_decision", "match_reason", "reviewer_notes"]
         self._write_csv(ingestion / "comparison_results.csv", review_fields, [{
-            "staged_id": f"{ingestion_id}:REQ-1",
-            "source_req_id": "REQ-1",
+            "staged_id": f"{ingestion_id}:REQ_1",
+            "source_req_id": "REQ_1",
             "requirement_statement": text,
             "source_page": "4",
             "source_chunk_id": "p004:l2",
@@ -50,6 +50,18 @@ class Step3WorkflowTests(unittest.TestCase):
             "match_reason": "test",
             "reviewer_notes": "",
         }])
+        self._write_csv(ingestion / "raw_ocr_pages.csv", ["source_spec", "page", "text"], [
+            {"source_spec": "supplement.pdf", "page": str(page), "text": "" if page < 4 else f"\n[REQ_1] REQUIREMENT: {text} [END]"}
+            for page in range(1, 5)
+        ])
+        extracts = ingestion / "ocr_extracts"
+        extracts.mkdir()
+        index = []
+        for page in range(1, 5):
+            text_path = extracts / f"supplement_p{page:03d}.txt"
+            text_path.write_text("" if page < 4 else f"\n[REQ_1] REQUIREMENT: {text} [END]", encoding="utf-8")
+            index.append({"page": str(page), "text_file": str(text_path)})
+        self._write_csv(ingestion / "ocr_index.csv", ["page", "text_file"], index)
         return ingestion
 
     def test_transitions_are_persisted_and_loopback_preserves_history(self):
@@ -78,7 +90,7 @@ class Step3WorkflowTests(unittest.TestCase):
             self.assertEqual(impact.risk, "safe")
             self.assertEqual(result["regeneration_scope"], "partial")
             self.assertIsNotNone(canonical)
-            self.assertEqual(provenance[0], "REQ-1")
+            self.assertEqual(provenance[0], "REQ_1")
 
     def test_same_id_different_text_is_conflict_and_cannot_merge_without_winner(self):
         with tempfile.TemporaryDirectory() as directory:

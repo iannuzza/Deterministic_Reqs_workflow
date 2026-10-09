@@ -167,29 +167,29 @@ The Main Controller block is designed to generate and receive Analog Domain cont
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The Main Controller accepts configuration settings, sampled data and produces control state and data routing.
-- **PPG saturation flag control.** Flags PPG saturation when at least half of the selected samples equal 0x8000 or 0x7FFF after signed conversion; clears at the start of the next frame or frame repetition.
-- **Digital ramp control.** Advances the digital ramp first step (o_Tx_Vref) to the configured start value (i_N_start) at preset time (i_T_preset), then enters Rising Ramp when averaging completes in First ALC Samples.
-  Interacts with ADC averaging completion.
-- **ELAB FSM.** Coordinates elaboration across TIMER BUFFER, PPG, BIA, ECG, and start-up paths, with PPG start-up timing.
-  Sequences TIMER BUFFER then PPG ALC STORAGE states.
-  Interacts with PPG frame sequencing, PPG operation control, ADC phase acquisition, and ADC mux, acquisition-enable, and buffer outputs.
-- **Measurement setup and initiation.** Selects GSR, ECG0, BIA, PPG, and ECG1/ECG2 channels and Data Storage Mode, then starts measurement.
-- **GSR acquisition and processing.** Enables GSR current (GSR curr on) in every time slot when CDS is disabled (GSR_CTRL bit 3), averages 16 samples for GSR, and subtracts the separately averaged GSR SNS and GSR CDS values from 16 acquisitions each when CDS is enabled.
-- **ADC phases.** Maintains ADC sampling until conversion completes.
-  Enables the ADC clock for ECG, BIA, or GSR sampling when ADC acquisition is enabled.
-- **PPG result computation.** Subtracts accumulated PPG raw data and PPG noise according to ALC Mask.
-- **Device FSM.** Controls the device lifecycle across Idle, PPG, Error, Start-Up, Boot, Operative, and Sleep states.
-  Waits for ADSP boot completion.
-  Enters Operative state when in Sleep Mode if no error occurs and all the operations are ended.
-  Interacts with Clock Generator block, ADSP boot completion, start-up delay control, PPG frame sequencing, PPG noise averaging, ALC compensation sequencing, ADC mux, acquisition-enable, and buffer outputs, Digital Top error interrupt, and device busy and status outputs.
-- **Local configuration.** Selects channels and Data Storage Mode, limits configured channel values to 1024, and sets the GSR acquisition interval in time slots; the cited expression is retained without interpreting its arithmetic.
-- **PPG FSM.** Coordinates PPG averaging, ramp timing, and ALC compensation start.
-  Waits for ADC conversion completion across FIRST ALC SAMPLES, Measurement, Rising Ramp, Falling Ramp, and SECOND ALC SAMPLES paths.
-  Waits for ALC compensation completion before PPG start-up.
-  Interacts with ADC block, ALC Compensation block, and ADC averaging completion.
-- **Frame repetition result computation.** Divides accumulated frame data by number of repetitions to produce a 20-bit result.
-- **Main Controller FSM.** Stores time-slot results in the FIFO with a dedicated tag.
+- **Generate and receive Analog Domain control signals.** The Main Controller block is designed to generate and receive Analog Domain control signals.
+
+- **Perform DSP elaboration on ADC outputs.** The Main Controller block is designed to perform DSP elaboration on ADC outputs.
+
+- **Write elaborated results to the defined addresses.** The Main Controller block is designed to write elaborated results to the defined addresses.
+
+The Main Controller block accepts Configuration register settings, sampled data. The Main Controller block produces Control state and data routing.
+
+
+### **1.4 Supported block functions** {#14-supported-block-functions}
+
+- **PPG saturation flag control.** In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold is greater or equal to 64), o saturation flag is set to 1 and goes to 0 at the start of the next frame or frame repetition.
+
+- **Elaboration FSM.** When the wave velocity mode is selected and the device FSM is in WAIT SU, the Elaboration FSM goes into the TIMER BUFFER State and then into the PPG ALC STORAGE.
+
+- **Measurement initiation.** The user starts measurement writing register DEVICE CONFIG OPERATION [0] at 1.
+
+- **Device FSM.** When DEVICE FSM FSM is in IDLE STATE (main controller status register (DEVICE STATUS REG register [2:0]) is equal to 0x02) if HC EN (ECG CTRL register [0]) is set to 1 and ECG0 SEL (DEVICE CONFIG CHANNEL [0]) is set to 1 and IMP EN (IMP CTRL register [0]) is set to 1 and BIA SEL (DEVICE CONFIG CHANNEL [2]) is set to 1, after WAIT SU, the device FSM goes in OPERATIVE (DEVICE STATUS REG register [2:0] is equal to 0x04). When in OPERATIVE (main controller status register (DEVICE STATUS REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device FSM goes into the error state (DEVICE STATUS REGISTER) and raise an interrupt (o error time slot) to the Digital Top.
+
+- **PPG FSM.** When in Rising Ramp State, the PPG FSM stays in this state until the end of the Rising Time.
+
+- **Digital ramp control.** When in FIRST ALC SAMPLES state, when i end average is set to 1, the o start digital ramp signal is set high to start the rising of the digital ramp and go into the RISING RAMP state.
+
 
 ## **2. Source I/O** {#2-source-io}
 

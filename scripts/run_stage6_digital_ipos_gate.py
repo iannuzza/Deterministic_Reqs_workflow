@@ -10,7 +10,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-from validate_downstream_coherence import validate
+from validate_downstream_coherence import validate_generation_inputs
 
 
 def _activity_start(label: str) -> datetime:
@@ -64,8 +64,7 @@ def main() -> int:
             root,
             project_id=str(context.get("project_name") or root.name),
         )
-        if args.regenerate_downstream:
-            snapshot_args = ["--snapshot-id", snapshot_id]
+    snapshot_args = ["--snapshot-id", snapshot_id]
     commands = [
         [
             sys.executable,
@@ -93,11 +92,11 @@ def main() -> int:
                 print(f"Digital IPOS descriptive regression tests: FAIL (exit={result.returncode})")
             return 1
     if args.regenerate_downstream:
-        label = "Validate downstream snapshot coherence"
+        label = "Validate Digital IPOS snapshot materialization"
         started_at = _activity_start(label)
         result = None
         try:
-            result = validate(root, snapshot_id)
+            result = validate_generation_inputs(root, snapshot_id, upstream_stages=("SRS", "DRS", "Digital IPOS"))
         finally:
             outcome = f"decision={result['decision']}" if result is not None else "exception"
             _activity_end(label, started_at, outcome)

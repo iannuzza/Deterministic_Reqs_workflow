@@ -247,8 +247,8 @@ def _require_pre_freeze_gate(repo_root: Path) -> None:
 def _require_downstream_coherence(repo_root: Path, snapshot_id: str | None) -> None:
     if not snapshot_id:
         raise RuntimeError("Downstream coherence requires one explicit approved snapshot ID.")
-    from validate_downstream_coherence import validate
-    result = validate(repo_root, snapshot_id)
+    from validate_downstream_coherence import validate_generation_inputs
+    result = validate_generation_inputs(repo_root, snapshot_id)
     if result["decision"] != "PASS":
         raise RuntimeError(
             f"Downstream snapshot coherence blocked workflow: {result['decision']} "
@@ -580,29 +580,6 @@ def cmd_arch_compare(args: argparse.Namespace, repo_root: Path) -> int:
     return EXIT_OK
 
 
-def cmd_drs_after_stage2a(args: argparse.Namespace, repo_root: Path) -> int:
-    _require_pre_freeze_gate(repo_root)
-    cmd = ["scripts/run_stage5_drs_gate.py", "--requirements-only"]
-    rc = _run_python_cmd(repo_root, cmd, args.dry_run)
-    _log_manifest(
-        repo_root,
-        {
-            "ts": _now(),
-            "stage": "5",
-            "kind": "drs_after_stage2a",
-            "script": "scripts/run_stage5_drs_gate.py",
-            "attempt": 1,
-            "exit_code": rc,
-            "requirements_only": True,
-        },
-    )
-    if rc != 0:
-        print(f"[{_now()}] Stage 5 requirements-only DRS path: FAIL (exit={rc})")
-        return EXIT_STAGE_FAIL
-    print(f"[{_now()}] Stage 5 requirements-only DRS path: PASS")
-    return EXIT_OK
-
-
 def cmd_final_sysml(args: argparse.Namespace, repo_root: Path) -> int:
     if bool(args.snapshot_id) == bool(args.use_latest_approved):
         raise ValueError("Final SysML requires exactly one of --snapshot-id or --use-latest-approved")
@@ -752,18 +729,6 @@ def build_parser() -> argparse.ArgumentParser:
     p_cmp.add_argument("--dry-run", action="store_true", help="Print the command without executing it.")
     p_cmp.epilog = "Help: python scripts/workflow_cli.py arch-compare --help"
 
-    p_drs = sub.add_parser(
-        "drs-after-stage2a",
-        help="Run Stage 5 DRS directly after Stage 2A (skip Stage 3/4 generation)",
-        description=(
-            "Execute scripts/run_stage5_drs_gate.py in requirements-only mode.\n"
-            "This path uses Stage 1 + Stage 2A artifacts and does not require running Stage 3/4."
-        ),
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    p_drs.add_argument("--dry-run", action="store_true", help="Print the command without executing it.")
-    p_drs.epilog = "Help: python scripts/workflow_cli.py drs-after-stage2a --help"
-
     p_sysml = sub.add_parser(
         "final-sysml",
         help="Generate and centrally validate the complete final SysML set",
@@ -821,8 +786,6 @@ def main() -> int:
                 return cmd_freeze_stage2b(args, repo_root)
             if args.command == "arch-compare":
                 return cmd_arch_compare(args, repo_root)
-            if args.command == "drs-after-stage2a":
-                return cmd_drs_after_stage2a(args, repo_root)
             if args.command == "final-sysml":
                 return cmd_final_sysml(args, repo_root)
             if args.command == "digital-ipos":

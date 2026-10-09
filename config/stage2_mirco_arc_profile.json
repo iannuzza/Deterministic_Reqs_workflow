@@ -1,23 +1,23 @@
 {
   "approval": {
     "status": "approved",
-    "approved_by": "aaa",
-    "approved_at": "2026-10-06T14:02:28",
+    "approved_by": "a",
+    "approved_at": "2026-10-09T16:17:50",
     "reviewer_notes": "Prior approval invalidated because the effective mapping CSV hash changed; re-review required.",
-    "reviewed_draft_profile_sha256": "6fdfe10f46befb68302fc6471fd0c882cbeff5dfd6f88e47bf9c1c93878e720b",
-    "reviewed_mapping_preview_csv_sha256": "7c760deeae568c64fa619526c1b5b57d440425969fb03c4b9c8887b0874ca4e6",
+    "reviewed_draft_profile_sha256": "99408ebf35f43c6bbf86f96cc989c073d37039f4200273acb6359e96de55f2c0",
+    "reviewed_mapping_preview_csv_sha256": "21f00e814f1d59329a84d50507987fbb5751963998464a9b78fa112371746090",
     "evidence_hashes": {
       "requirements_summary_csv": {
         "path": "artifacts/stage1_requirements/integrated_requirements.csv",
-        "sha256": "19be065b5a11ef44aaed38641d93827249480615504756c7336c42f9aa00916c"
+        "sha256": "3d036916a8f9baecb5d370fd548f8ce295c97eb7b08c50109088e94933a4580d"
       },
       "ontology_requirement_links_csv": {
         "path": "artifacts/stage0_ontology/ontology_requirement_links.csv",
-        "sha256": "28dfcc98be8ceaa3b70308a6b822a98bded7d035b78c163609d2f109a32b98c1"
+        "sha256": "720bf547f764dce6c361a6980f0794af3083b760f72ce4789468b351c0dcafed"
       },
       "semantic_issues_md": {
         "path": "artifacts/stage0_ontology/semantic_issues.md",
-        "sha256": "e269d17700ea86f63571df34e957d3d8c74b458cc54d1af786ac77b19327c4cc"
+        "sha256": "3c642564650d136fbf4432ea5e5fb13a37e301ed25e9a8b11817d1536de4ee37"
       }
     }
   },

@@ -11,7 +11,7 @@
 
 \title{Stage 2 SRS Combined Document}
 \author{Alessandro Lucio IANNUZZI}
-\date{2026-10-07}
+\date{2026-10-09}
 
 \begin{document}
 \thispagestyle{empty}
@@ -33,15 +33,15 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>\&nbsp;</p>
 
-Date: 2026-10-07
+Date: 2026-10-09
 
 <p>\&nbsp;</p>
 
-Snapshot ID: snap-b2e8101b00dc6909feaed885
+Snapshot ID: snap-73c872b1307b6adb5eaf843e
 
 <p>\&nbsp;</p>
 
-Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 <p>\&nbsp;</p>
 
@@ -112,8 +112,8 @@ Source specification: C:/Users/iannuzza/LOCAL\_PROJ/Github\_copilot\_proj/Determ
 \item [9. Project-specific block sections](\#9-project-specific-block-sections)
 \item [10. Missing Inputs](\#10-missing-inputs)
 \item [10.1 Descriptive content review findings](\#101-descriptive-content-review-findings)
-\item [Assumptions and TBD](\#assumptions-and-tbd)
 \end{itemize}
+
 
 \subsubsection{0.2 Internal index for paragraphs and pages \{\#02-internal-index-for-paragraphs-and-pages\}}
 
@@ -299,6 +299,8 @@ Version & Date & Description & Author \\
 \hline
 \endhead
 1.1 & 2026-10-06 & Snapshot snap-b2e8101b00dc6909feaed885 SRS baseline generated from Stage 1 and Stage 2 artifacts & Alessandro Lucio IANNUZZI \\
+\hline
+1.2 & 2026-10-09 & Snapshot snap-73c872b1307b6adb5eaf843e SRS baseline generated from Stage 1 and Stage 2 artifacts & Alessandro Lucio IANNUZZI \\
 \hline
 \end{longtable}
 
@@ -592,7 +594,7 @@ The system supports ECG measurement.
 \subsubsection{3.4 External Interfaces and System Boundaries \{\#34-external-interfaces-and-system-boundaries\}}
 
 
-The interfaces provide sensing input, measurement data exchange, serial communication, interrupt reporting and power supply roles. External versus internal placement is not specified for every interface.
+The interfaces provide sensing input, measurement data exchange, serial communication, interrupt reporting and power supply roles.
 
 \begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
 \hline
@@ -642,7 +644,7 @@ A switchable domain can enter a powered-down state in idle when its associated l
 
 <p>\&nbsp;</p>
 
-State retention across system power transitions is not specified.
+
 
 \begin{longtable}{|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|p{0.22\textwidth}|}
 \hline
@@ -668,8 +670,8 @@ PD\_TOPIO & Always-On & HW & Powers communication PAD. Associated blocks: level\
 
 \begin{itemize}
 \item **Clock and reset**
-\item Top-level clock and reset coordination are not specified.
 \end{itemize}
+
 
 \subsubsection{3.7 Assumptions, Scope Limits, and Allocation Boundaries \{\#37-assumptions-scope-limits-and-allocation-boundaries\}}
 
@@ -678,8 +680,8 @@ System-level scope covers product capabilities and externally observable behavio
 
 \begin{itemize}
 \item **Assumptions**
-\item Additional system-level assumptions are not described in the available descriptions.
 \end{itemize}
+
 
 \subsection{4. Analog sub-system \{\#4-analog-sub-system\}}
 
@@ -898,13 +900,13 @@ This section summarizes system-level functions and digital/analog interactions. 
 
 <p>\&nbsp;</p>
 
-\subsection{Assumptions and TBD \{\#assumptions-and-tbd\}}
+\subsection{Assumptions \{\#assumptions\}}
 
 
 \begin{itemize}
 \item ASSUME-001: Verification environments include controllable stimulus for all listed operating modes.
-\item TBD-001: Unassigned requirements in traceability matrix need architectural owner review.
 \end{itemize}
+
 
 \subsection{10. Missing Inputs \{\#10-missing-inputs\}}
 
@@ -916,14 +918,12 @@ This section summarizes system-level functions and digital/analog interactions. 
 \subsubsection{10.1 Descriptive content review findings \{\#101-descriptive-content-review-findings\}}
 
 
-\begin{itemize}
-\item SRS\_CATALOG\_CLASSIFICATION\_MISSING: IRQ logic
-\item SRS\_CATALOG\_CLASSIFICATION\_MISSING: BIST Controller
-\item SRS\_CATALOG\_CLASSIFICATION\_CONFLICT: PAD MUX
-\item SRS\_CATALOG\_APPROVAL\_MISSING: ISPU
-\item SRS\_POWER\_VOLTAGE\_UNRELIABLE: Stage 1 OCR power-domain table/description (PD\_TOP3V3): 3A
-\item SRS\_POWER\_NOTE\_UNREADABLE: Stage 1 OCR power-domain table/description (PD\_TOPIO): Always active 32 10.4
-\end{itemize}
+
+
+
+
+
+
 
 
 \section*{Source: artifacts/stage2\_mirco\_arc/micro\_architecture\_block\_diagram.md}

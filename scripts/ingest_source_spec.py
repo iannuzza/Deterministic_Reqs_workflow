@@ -23,14 +23,14 @@ from openpyxl.utils import get_column_letter
 from pypdf import PdfReader
 
 from merge_engine import merge_staging_batch, register_staged_ingestion
+from supplementary_source_integrity import (
+    TAGGED_REQUIREMENT_HEADER_RE, _normalize_tagged_lines, bounded_source_bodies,
+    validate_ingestion_batch, validate_staged_bodies as _validate_staged_bodies,
+)
 
 
 NORMATIVE_RE = re.compile(r"\b(?:shall|must|required to|is required to)\b", re.IGNORECASE)
 TAG_RE = re.compile(r"\b[A-Z][A-Z0-9]*(?:[_-][A-Z0-9]+)+\b")
-TAGGED_REQUIREMENT_HEADER_RE = re.compile(
-    r"\[\s*(?P<id>[A-Z][A-Z0-9]*(?:[_-][A-Z0-9]+)*_?\s*\d+)\s*\]\s*REQUIREMENT\s*: ?",
-    re.IGNORECASE,
-)
 TRAILING_INCOMPLETE_WORDS = {
     "and", "or", "to", "of", "for", "in", "on", "at", "with", "from",
     "that", "the", "a", "an", "be", "shall", "must",
@@ -59,37 +59,9 @@ def _similarity(left: str, right: str) -> float:
     return len(left_terms & right_terms) / len(left_terms | right_terms) if left_terms and right_terms else 0.0
 
 
-def _normalize_tagged_lines(lines: List[str]) -> List[str]:
-    """Join OCR line breaks that split a tagged header or its numeric suffix."""
-    normalized: List[str] = []
-    index = 0
-    while index < len(lines):
-        current = " ".join(lines[index].split())
-        if index + 1 < len(lines) and "[" in current and "]" not in current:
-            current = f"{current} {lines[index + 1].strip()}"
-            index += 1
-        normalized.append(current)
-        index += 1
-    return normalized
-
-
 def _is_complete_statement(statement: str) -> bool:
     words = re.findall(r"[A-Za-z0-9]+", statement)
     return len(words) >= 7 and words[-1].lower() not in TRAILING_INCOMPLETE_WORDS and not statement.rstrip().endswith((":", ",", "-", "("))
-
-
-def _validate_staged_bodies(staged: List[Dict[str, str]], page_texts: List[str]) -> None:
-    """Fail ingestion when a tagged body is not source-terminated and complete."""
-    failures = []
-    for row in staged:
-        page_text = "\n".join(_normalize_tagged_lines(page_texts[int(row["source_page"]) - 1].splitlines()))
-        header = next((match for match in TAGGED_REQUIREMENT_HEADER_RE.finditer(page_text)
-                       if re.sub(r"\s+", "", match.group("id")).upper() == row["source_req_id"].upper()), None)
-        end = page_text.upper().find("[END]", header.end()) if header else -1
-        if header is None or end < 0 or not _is_complete_statement(row["requirement_statement"]):
-            failures.append(f"{row['source_req_id']}@p{row['source_page']}")
-    if failures:
-        raise ValueError("Supplementary body preservation validation failed: " + ", ".join(failures))
 
 
 def _write_csv(path: Path, fields: Iterable[str], rows: Iterable[Dict[str, str]]) -> None:
@@ -106,7 +78,8 @@ def _read_csv(path: Path) -> List[Dict[str, str]]:
 
 def discover_tag_pattern(page_texts: List[str]) -> str:
     """Discover the tagged-header convention directly from source text."""
-    tags = [match.group("id") for text in page_texts for match in TAGGED_REQUIREMENT_HEADER_RE.finditer(text)]
+    text = "\n".join("\n".join(_normalize_tagged_lines(page.splitlines())) for page in page_texts)
+    tags = [match.group("id") for match in TAGGED_REQUIREMENT_HEADER_RE.finditer(text)]
     if not tags:
         raise ValueError("No bracketed tagged REQUIREMENT headers found in source specification.")
     normalized_tags = [re.sub(r"\s+", "", tag) for tag in tags]
@@ -189,6 +162,7 @@ def migrate_review_schema(ingestion_dir: Path) -> Path:
     rows = _read_csv(review_path)
     if not rows:
         raise ValueError(f"No review rows found: {review_path}")
+    validate_ingestion_batch(ingestion_dir)
     workbook_path = review_path.with_suffix(".xlsx")
     if "req_class" in rows[0] and workbook_path.exists():
         return _sync_saved_review_workbook(ingestion_dir)
@@ -210,6 +184,7 @@ def _sync_saved_review_workbook(ingestion_dir: Path) -> Path:
     review_path = ingestion_dir / "comparison_results.csv"
     workbook_path = review_path.with_suffix(".xlsx")
     if not workbook_path.exists():
+        validate_ingestion_batch(ingestion_dir)
         return review_path
     with review_path.open("r", encoding="utf-8-sig", newline="") as handle:
         fieldnames = csv.DictReader(handle).fieldnames or []
@@ -225,6 +200,7 @@ def _sync_saved_review_workbook(ingestion_dir: Path) -> Path:
             for row in values[1:]
             if any(value is not None and str(value).strip() for value in row)
         ]
+        validate_ingestion_batch(ingestion_dir, review_rows=rows)
         if "review_decision" in headers:
             decision_column = headers.index("review_decision") + 1
             approved_fill = PatternFill("solid", fgColor="E2F0D9")
@@ -260,7 +236,9 @@ def stage_source(repo_root: Path, source: Path, revision: str, revision_date: st
         ):
             existing_batches.append(metadata_path.parent)
     if existing_batches:
-        return max(existing_batches, key=lambda path: path.stat().st_mtime)
+        existing = max(existing_batches, key=lambda path: path.stat().st_mtime)
+        validate_ingestion_batch(existing)
+        return existing
     previous_batches = []
     for metadata_path in (repo_root / "artifacts" / "source_ingestion").glob("*/source_metadata.json"):
         try:
@@ -287,36 +265,15 @@ def stage_source(repo_root: Path, source: Path, revision: str, revision_date: st
         raw_rows.append({"source_spec": source_name, "page": page_no, "text": text})
         page_path = extracts_dir / f"{source.stem}_p{page_no:03d}.txt"
         page_path.write_text(text + "\n", encoding="utf-8")
-        lines = _normalize_tagged_lines([line for line in text.splitlines() if line.strip()])
-        for line_no, line in enumerate(lines, start=1):
-            tag = TAGGED_REQUIREMENT_HEADER_RE.search(line)
-            if tag:
-                body = [line[tag.end():].strip()]
-                terminated = False
-                for following in lines[line_no:]:
-                    if "[END]" in following.upper():
-                        before_end = following[:following.upper().find("[END]")].strip()
-                        if before_end:
-                            body.append(before_end)
-                        terminated = True
-                        break
-                    body.append(following)
-                statement = " ".join(part for part in body if part).strip()
-                if not terminated or not NORMATIVE_RE.search(statement):
-                    continue
-                source_req_id = re.sub(r"\s+", "", tag.group("id"))
-                candidate = {
-                    "staged_id": f"{ingestion_id}:{source_req_id}",
-                    "source_req_id": source_req_id, "requirement_statement": statement,
-                    "source_spec": source_name, "source_revision": revision,
-                    "source_page": str(page_no), "source_chunk_id": f"p{page_no:03d}:l{line_no}",
-                    "ingested_at": _now(), "ingestion_id": ingestion_id,
-                }
-                existing = next((item for item in staged if item["source_req_id"] == source_req_id), None)
-                if existing is None or len(_normalized(candidate["requirement_statement"])) > len(_normalized(existing["requirement_statement"])):
-                    if existing is not None:
-                        staged.remove(existing)
-                    staged.append(candidate)
+    for body in bounded_source_bodies(texts):
+        if not NORMATIVE_RE.search(body["requirement_statement"]):
+            continue
+        source_req_id = body["source_req_id"]
+        if any(item["source_req_id"] == source_req_id for item in staged):
+            raise ValueError(f"Ambiguous supplementary source requirement ID: {source_req_id}")
+        staged.append({"staged_id": f"{ingestion_id}:{source_req_id}", **body,
+                       "source_spec": source_name, "source_revision": revision,
+                       "ingested_at": _now(), "ingestion_id": ingestion_id})
     _validate_staged_bodies(staged, texts)
     canonical_path = repo_root / "artifacts" / "stage1_requirements" / "requirements_summary.csv"
     with canonical_path.open("r", encoding="utf-8-sig", newline="") as handle:
@@ -333,8 +290,8 @@ def stage_source(repo_root: Path, source: Path, revision: str, revision_date: st
         else:
             req_class, matched, reason = "new", "", "no deterministic overlap"
         previous = previous_reviews.get(candidate["source_req_id"], {})
-        unchanged = bool(previous and _normalized(previous.get("requirement_statement", "")) == _normalized(candidate["requirement_statement"]))
-        review_decision = previous.get("review_decision", "") if unchanged else ("pending" if req_class == "new" else "approved")
+        unchanged = bool(previous and " ".join(previous.get("requirement_statement", "").split()) == candidate["requirement_statement"])
+        review_decision = previous.get("review_decision", "") if unchanged else "pending"
         review.append({
             **candidate,
             "req_class": req_class,

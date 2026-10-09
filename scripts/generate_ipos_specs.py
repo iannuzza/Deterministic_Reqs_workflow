@@ -16,11 +16,14 @@ from pathlib import Path
 from approved_snapshot_resolver import resolve_complete_authoritative_input
 from workflow_routing import (
     approved_snapshot_candidate_rows,
+    build_ipos_claim_plan,
     build_ipos_functional_input,
     build_ipos_normalized_records,
     build_ipos_semantic_units,
     compose_ipos_overview,
     write_ipos_descriptive_audit,
+    write_ipos_structural_audit,
+    ipos_claim_preflight_findings,
     apply_shared_spec_markdown_formatting,
     apply_unique_spec_heading_anchors,
     spec_anchor_slug,
@@ -32,13 +35,15 @@ from workflow_routing import (
     document_version_for_snapshot,
     document_version_history_markdown,
 )
-from spec_document_contract import write_materialization_audit
+from spec_document_contract import (
+    write_materialization_audit, IPOS_TEMPLATE, load_ipos_contract, ipos_document_contract_report,
+)
 from allocation_ledger import read_csv, refresh_ledger
 from requirement_allocation_policy import BLOCK_LOCAL_ANALOG, BLOCK_LOCAL_DIGITAL
 from validate_downstream_coherence import (
     ipos_authored_requirement_id,
     resolve_downstream_contract,
-    validate as validate_downstream_coherence,
+    validate_generation_inputs,
 )
 
 
@@ -146,6 +151,36 @@ def _block_inventory_record(repo_root: Path, block_name: str) -> dict[str, str]:
     return next((row for row in _read_csv(path) if row.get("Block", "").strip() == block_name), {})
 
 
+def _require_ipos_claim_preflights(
+    repo_root: Path,
+    kind: str,
+    block_names: list[str],
+    rows: list[dict[str, str]],
+    candidate_rows: list[dict[str, str]],
+) -> None:
+    failures = []
+    for block_name in block_names:
+        local_rows = [row for row in rows if row["mapped_block"] == block_name]
+        functional_input = build_ipos_functional_input(
+            block_name, _block_inventory_record(repo_root, block_name), local_rows,
+            domain=kind, materialized=bool(local_rows),
+            provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
+            candidate_requirement_rows=candidate_rows,
+        )
+        findings = ipos_claim_preflight_findings(functional_input)
+        if findings:
+            plan = build_ipos_claim_plan(functional_input)
+            unresolved_records = sorted({span.record_id for disposition in plan.dispositions
+                                         if disposition.decision == "unresolved" for span in disposition.spans})
+            failures.append(block_name + ": " + "; ".join(findings)
+                            + "\n  Unresolved source records: " + ", ".join(unresolved_records))
+    if failures:
+        raise RuntimeError(
+            f"IPOS claim preflight blocked {len(failures)}/{len(block_names)} {kind} blocks before IPOS output writes:\n"
+            + "\n".join(failures)
+        )
+
+
 def _write_ipos_document(
     repo_root: Path,
     config: dict[str, str],
@@ -158,7 +193,7 @@ def _write_ipos_document(
     require_docx: bool = True,
     candidate_requirement_rows: list[dict[str, str]] | None = None,
 ) -> None:
-    output_dir.mkdir(parents=True, exist_ok=True)
+    document_contract = load_ipos_contract(repo_root / IPOS_TEMPLATE)
     source_port_path = repo_root / "artifacts/stage2_mirco_arc/source_port_catalog.csv"
     source_ports = []
     if source_port_path.exists():
@@ -182,10 +217,21 @@ def _write_ipos_document(
         ),
         candidate_requirement_rows=candidate_requirement_rows,
     )
+    preflight_findings = ipos_claim_preflight_findings(functional_input)
+    if preflight_findings:
+        raise RuntimeError("IPOS claim preflight blocked materialization: " + "; ".join(preflight_findings[:10]))
+    template_path = repo_root / DOCX_REFERENCE_TEMPLATE
+    if not template_path.is_file():
+        raise RuntimeError(f"IPOS DOCX reference template is missing: {template_path}")
+    if shutil.which("pandoc") is None:
+        raise RuntimeError("pandoc is required for IPOS DOCX generation but is not available on PATH")
+    output_dir.mkdir(parents=True, exist_ok=True)
     overview_sections, ipos_audit = compose_ipos_overview(
         functional_input,
+        document_contract=document_contract,
     )
     write_ipos_descriptive_audit(output_dir / "descriptive_summary_audit.csv", ipos_audit)
+    write_ipos_structural_audit(output_dir / "descriptive_structure_audit.json", functional_input)
     markdown_path = output_dir / _block_markdown_name(kind, block_name)
     document_version = document_version_for_snapshot(markdown_path, snapshot_id)
     document_author = document_author_name()
@@ -221,24 +267,12 @@ def _write_ipos_document(
         "## 1. Block overview",
         "",
     ]
-    lines.extend(["### 1.1 Functionality", ""])
-    lines.extend(overview_sections["functionality"])
-    lines.append("")
-    lines.extend(["### 1.2 Supported functions and scope", ""])
-    lines.extend(f"- {entry}" for entry in overview_sections["scope"])
-    lines.append("")
-    if overview_sections["internal_structure"]:
-        lines.extend(["### 1.3 Internal structure", ""])
-        lines.extend(f"- {entry}" for entry in overview_sections["internal_structure"])
-        lines.append("")
-    if overview_sections["internal_functions"]:
-        lines.extend(["### 1.4 Internal blocks or functions", ""])
-        lines.extend(f"- {entry}" for entry in overview_sections["internal_functions"])
-        lines.append("")
-    if overview_sections["general_architecture"]:
-        lines.extend(["### 1.5 General architecture", ""])
-        lines.extend(f"- {entry}" for entry in overview_sections["general_architecture"])
-        lines.append("")
+    for section, key in zip(document_contract["sections"], overview_sections):
+        entries = overview_sections[key]
+        if section["required"] or entries:
+            lines.extend(["### " + section["title"], ""])
+            for entry in entries:
+                lines.extend([entry, ""])
     lines.extend(["## 2. Source I/O", ""])
     if source_ports:
         lines.extend([
@@ -286,13 +320,6 @@ def _write_ipos_document(
         apply_shared_spec_markdown_formatting(lines, preserve_authored_text=True)
     )
     markdown_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    template_path = repo_root / DOCX_REFERENCE_TEMPLATE
-    if not require_docx and not template_path.exists():
-        return
-    if not template_path.exists():
-        raise RuntimeError(f"IPOS DOCX reference template is missing: {template_path}")
-    if shutil.which("pandoc") is None:
-        raise RuntimeError("pandoc is required for IPOS DOCX generation but is not available on PATH")
     docx_path = output_dir / config["docx"]
     _convert_ipos_markdown_to_docx(markdown_path, template_path, docx_path, repo_root)
     apply_docx_authored_requirement_formatting(docx_path, ("IPOS",))
@@ -306,6 +333,10 @@ def _write_ipos_document(
         markdown_path,
         docx_path,
     )
+    report = ipos_document_contract_report(repo_root, markdown_path, output_dir / "descriptive_summary_audit.csv", functional_input)
+    (output_dir / "document_contract_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if report["status"] != "PASS":
+        raise RuntimeError("IPOS document contract blocked publication; see " + str(output_dir / "document_contract_report.json"))
 
 
 def _convert_ipos_markdown_to_docx(markdown_path: Path, template_path: Path, docx_path: Path, repo_root: Path) -> None:
@@ -357,14 +388,15 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
         snapshot_id=snapshot_id,
     )
     downstream_contract = resolve_downstream_contract(repo_root, snapshot.snapshot_id)
-    coherence = validate_downstream_coherence(repo_root, snapshot.snapshot_id)
-    if not regenerate_downstream and coherence["decision"] != "PASS":
+    coherence = validate_generation_inputs(repo_root, snapshot.snapshot_id, upstream_stages=(config["upstream"],))
+    if coherence["decision"] != "PASS":
         raise RuntimeError(f"Downstream snapshot coherence blocked {kind} IPOS generation: {coherence['finding_count']} findings")
     (repo_root / "artifacts" / "traceability_reports").mkdir(parents=True, exist_ok=True)
     (repo_root / "artifacts" / "traceability_reports" / f"{kind}_ipos_snapshot_selection.json").write_text(
         json.dumps(selection, indent=2, sort_keys=True) + "\n", encoding="utf-8"
     )
-    refresh_ledger(repo_root, snapshot_id=snapshot.snapshot_id, source_rows=snapshot.rows)
+    if not block:
+        refresh_ledger(repo_root, snapshot_id=snapshot.snapshot_id, source_rows=snapshot.rows)
     source_ids = {
         (row.get("source_req_id") or row.get("id") or "").strip()
         for row in snapshot.rows
@@ -452,25 +484,6 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
             "owning_domain": metadata.get("owning_domain", ""),
         })
 
-    output_dir = repo_root / config["output_dir"]
-    output_dir.mkdir(parents=True, exist_ok=True)
-    legacy_root_docx = output_dir / config["docx"]
-    if not block and legacy_root_docx.exists():
-        legacy_root_docx.unlink()
-    block_root = output_dir / "blocks"
-    block_root.mkdir(parents=True, exist_ok=True)
-    trace_path = output_dir / "ipos_traceability_matrix.csv"
-    fields = [
-        "ipos_req_id", "source_req_id", "canonical_id", "covers_upstream_req_id",
-        "mapped_block", "requirement_statement", "snapshot_id", "source_artifact", "allocation_class",
-        "owning_target", "lineage_mode", "source_origin_req_ids", "hierarchy_parent_req_ids", "owning_domain",
-    ]
-    if not block:
-        with trace_path.open("w", encoding="utf-8", newline="") as handle:
-            writer = csv.DictWriter(handle, fieldnames=fields)
-            writer.writeheader()
-            writer.writerows(records)
-
     mapped_blocks = {
         row["mapped_block"] for row in records if row["mapped_block"] != "Unassigned"
     }
@@ -489,7 +502,28 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
         if not selected_block:
             raise RuntimeError(f"Requested IPOS generation block is not materialized by the approved snapshot: {block}")
         block_names = [selected_block]
-    else:
+    candidate_rows = approved_snapshot_candidate_rows(snapshot, downstream_contract, domain=kind)
+    _require_ipos_claim_preflights(repo_root, kind, block_names, records, candidate_rows)
+
+    output_dir = repo_root / config["output_dir"]
+    output_dir.mkdir(parents=True, exist_ok=True)
+    legacy_root_docx = output_dir / config["docx"]
+    if not block and legacy_root_docx.exists():
+        legacy_root_docx.unlink()
+    block_root = output_dir / "blocks"
+    block_root.mkdir(parents=True, exist_ok=True)
+    trace_path = output_dir / "ipos_traceability_matrix.csv"
+    fields = [
+        "ipos_req_id", "source_req_id", "canonical_id", "covers_upstream_req_id",
+        "mapped_block", "requirement_statement", "snapshot_id", "source_artifact", "allocation_class",
+        "owning_target", "lineage_mode", "source_origin_req_ids", "hierarchy_parent_req_ids", "owning_domain",
+    ]
+    if not block:
+        with trace_path.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(handle, fieldnames=fields)
+            writer.writeheader()
+            writer.writerows(records)
+    if not block:
         desired_block_dirs = {_block_slug(block_name) for block_name in block_names}
         for existing_dir in block_root.iterdir():
             if existing_dir.is_dir() and existing_dir.name not in desired_block_dirs:
@@ -523,7 +557,7 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
                 block_rows,
                 snapshot.snapshot_id,
                 require_docx=not legacy,
-                candidate_requirement_rows=approved_snapshot_candidate_rows(snapshot, downstream_contract),
+                candidate_requirement_rows=candidate_rows,
             )
             outcome = "complete"
         finally:

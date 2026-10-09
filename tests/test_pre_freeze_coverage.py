@@ -4,11 +4,13 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from canonical_store import connect
 from pre_freeze_coverage import validate_pre_freeze_coverage
+import validate_source_to_stage2b_coherence as source_coherence
 
 
 class PreFreezeCoverageTests(unittest.TestCase):
@@ -19,7 +21,7 @@ class PreFreezeCoverageTests(unittest.TestCase):
     def _write_review(self, root, rows):
         path = root / "artifacts/stage1_specs/architecture_mapping_preview.csv"
         path.parent.mkdir(parents=True, exist_ok=True)
-        fields = ["requirement_id", "review_decision", "supplementary_source_spec"]
+        fields = ["requirement_id", "review_decision", "supplementary_source_spec", "supplementary_staged_id"]
         with path.open("w", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields)
             writer.writeheader()
@@ -152,6 +154,85 @@ class PreFreezeCoverageTests(unittest.TestCase):
         self.assertEqual(manifest["status"], "pass")
         self.assertEqual(manifest["explicit_approved_exclusions"], ["DDS-1"])
         self.assertEqual(manifest["expected_in_scope_source_specs"], [])
+
+    def _assert_pre_freeze_uses_current_source_without_snapshot_reads(self, source_kind, *, merge_approved=True):
+        source_name = "current-source.pdf"
+        requirement_id = "CURRENT-REQ-1"
+        root = self._setup(
+            [{"requirement_id": requirement_id, "review_decision": "approved",
+                            "supplementary_source_spec": source_name if source_kind == "supplementary" else "",
+                            "supplementary_staged_id": "other-approved-source" if source_kind == "primary" else ""}],
+            [(source_name if source_kind == "supplementary" else self.primary_source,
+              source_kind, "spec-current", [requirement_id], True)],
+        )
+        active_path = root / "artifacts/source_ingestion/spec-current"
+        active_path.mkdir(parents=True)
+        metadata = {
+            "ingestion_id": "spec-current", "source_kind": source_kind,
+            "source_spec": source_name if source_kind == "supplementary" else self.primary_source,
+            "source_revision": "1", "source_revision_date": "2026-01-01",
+            "staged_at": "2026-01-01T00:00:00+00:00",
+        }
+        if source_kind == "primary":
+            del metadata["source_revision_date"]
+            del metadata["staged_at"]
+        (active_path / "source_metadata.json").write_text(json.dumps(metadata), encoding="utf-8")
+        connection = connect(root)
+        connection.execute(
+            "INSERT INTO staged_requirements(staged_id, staging_batch_id, source_revision_id, source_req_id, requirement_text, content_fingerprint) VALUES (?, ?, ?, ?, ?, ?)",
+            ("staged-current", "staging-spec-current", "rev-spec-current", requirement_id,
+             "The system shall satisfy " + requirement_id, "hash-current"),
+        )
+        if not merge_approved:
+            connection.execute("UPDATE merge_operations SET decision = 'pending', completed_at = NULL")
+            (active_path / "merge_manifest.json").write_text(json.dumps({"status": "completed"}), encoding="utf-8")
+        connection.commit()
+        connection.close()
+        read_rows = source_coherence._rows
+        queries = []
+
+        def current_authority_only(connection, query, parameters=()):
+            self.assertNotIn("snapshots", query.casefold())
+            queries.append(query)
+            return read_rows(connection, query, parameters)
+
+        with patch.object(source_coherence, "_rows", side_effect=current_authority_only):
+            report = source_coherence.validate(root)
+        self.assertTrue(any("canonical_requirements" in query for query in queries))
+        self.assertTrue(any("merge_operations" in query for query in queries))
+        self.assertFalse(any(finding["category"] == "stage2b" for finding in report["findings"]))
+        self.assertFalse(any(finding["category"] in {"revision", "stale_state", "active_batch"} and finding["severity"] == "ERROR" for finding in report["findings"]))
+        merge_findings = [finding for finding in report["findings"] if finding["category"] == "merge_readiness"]
+        if merge_approved:
+            self.assertEqual(merge_findings, [])
+            self.assertEqual(validate_pre_freeze_coverage(root, project_id=self.project_id)["status"], "pass")
+        else:
+            self.assertTrue(any(finding["severity"] == "ERROR" for finding in merge_findings))
+
+    def test_new_primary_pre_freeze_does_not_read_previous_snapshots(self):
+        self._assert_pre_freeze_uses_current_source_without_snapshot_reads("primary")
+
+    def test_new_supplementary_pre_freeze_does_not_read_previous_snapshots(self):
+        self._assert_pre_freeze_uses_current_source_without_snapshot_reads("supplementary")
+
+    def test_manifest_cannot_approve_an_incomplete_canonical_merge(self):
+        self._assert_pre_freeze_uses_current_source_without_snapshot_reads("supplementary", merge_approved=False)
+
+    def test_new_primary_is_not_shadowed_by_old_supplementary_batch(self):
+        root = Path(self.directory)
+        for batch_id, kind, staged_at in (
+            ("old-supplementary", "supplementary", "2026-01-01T00:00:00+00:00"),
+            ("new-primary", "primary", "2026-01-02T00:00:00+00:00"),
+        ):
+            batch = root / "artifacts/source_ingestion" / batch_id
+            batch.mkdir(parents=True)
+            (batch / "source_metadata.json").write_text(json.dumps({
+                "ingestion_id": batch_id, "source_kind": kind, "staged_at": staged_at,
+                "source_revision": "1", "source_revision_date": "2026-01-01",
+            }), encoding="utf-8")
+        active_path, metadata = source_coherence._discover_batches(root, [])
+        self.assertEqual(active_path.name, "new-primary")
+        self.assertEqual(metadata["source_kind"], "primary")
 
 
 if __name__ == "__main__":

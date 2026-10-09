@@ -3,10 +3,10 @@
     {
       "accepted": true,
       "reason": "complete approved canonical requirements and mappings",
-      "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+      "snapshot_id": "snap-73c872b1307b6adb5eaf843e"
     }
   ],
   "completeness_criteria": "approved status; project match; non-empty canonical and mapping sets; one approved mapping per requirement; resolver hash validation",
-  "selected_snapshot_id": "snap-b2e8101b00dc6909feaed885",
+  "selected_snapshot_id": "snap-73c872b1307b6adb5eaf843e",
   "selection_mode": "explicit"
 }

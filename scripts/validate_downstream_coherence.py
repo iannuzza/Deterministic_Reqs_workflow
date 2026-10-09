@@ -14,6 +14,7 @@ import hashlib
 import json
 import re
 import zipfile
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree
@@ -30,7 +31,7 @@ from workflow_routing import (
     build_ipos_normalized_records,
     extract_ipos_structural_function_name,
 )
-from spec_document_contract import validate_materialization_chain, validate_drs_document_contract
+from spec_document_contract import validate_materialization_chain, validate_drs_document_contract, validate_ipos_document_contract
 
 TRACE_ARTIFACTS = {
     "SRS": Path("artifacts/stage3_srs/srs_traceability_matrix.csv"),
@@ -191,13 +192,276 @@ def resolve_downstream_contract(repo_root: Path, snapshot_id: str | None = None)
 
 def approved_sysml_block_scope(repo_root: Path, snapshot_id: str | None = None) -> set[str]:
     """Return concrete SysML blocks with approved IPOS requirement scope."""
-    contract = resolve_downstream_contract(repo_root, snapshot_id)
-    return {
-        canonical_human_label(str(allocation.get("approved_block") or "").strip())
-        for allocation in contract.expected.values()
-        if str(allocation.get("owning_target") or "").strip() in {"Digital IPOS", "Analog IPOS"}
-        and str(allocation.get("approved_block") or "").strip()
-    }
+    return {block.name for block in resolve_sysml_materialization_scope(repo_root, snapshot_id).require_valid().blocks}
+
+
+def sysml_identifier(value: str) -> str:
+    words = re.findall(r"[A-Za-z0-9]+", value or "")
+    name = "".join(word[:1].upper() + word[1:] for word in words) or "Unnamed"
+    return "Block_" + name if name[0].isdigit() else name
+
+
+@dataclass(frozen=True)
+class SysMLBlockMaterialization:
+    key: str
+    name: str
+    target: str
+    path: Path
+    definition: str
+    package: str
+    node: str
+    requirement_ids: frozenset[str]
+
+
+@dataclass(frozen=True)
+class SysMLMaterializationScope:
+    snapshot_id: str
+    fingerprint: str
+    blocks: tuple[SysMLBlockMaterialization, ...]
+    findings: tuple[str, ...]
+    system_path: Path
+    digital_path: Path
+    shared_path: Path
+    repo_root: Path
+    manifest_path: Path
+    interactions: tuple[dict[str, str], ...] = ()
+    interaction_findings: tuple[str, ...] = ()
+
+    def require_valid(self) -> SysMLMaterializationScope:
+        if self.findings:
+            raise DownstreamCoherenceError("; ".join(self.findings))
+        return self
+
+    def block_for_label(self, label: str) -> SysMLBlockMaterialization | None:
+        key = human_label_key(label)
+        return next((block for block in self.blocks if block.key == key), None)
+
+    def block_for_path(self, path: Path) -> SysMLBlockMaterialization | None:
+        return next((block for block in self.blocks if block.path.resolve() == path.resolve()), None)
+
+    def block_for_node(self, node: str) -> SysMLBlockMaterialization | None:
+        return next((block for block in self.blocks if block.node == node), None)
+
+    @property
+    def system_definition(self) -> str:
+        return sysml_identifier(self.system_path.stem)
+
+    def structural_paths(self) -> tuple[Path, ...]:
+        return self.system_path, self.digital_path, self.shared_path
+
+    @property
+    def review_path(self) -> Path:
+        return self.manifest_path.with_name(self.manifest_path.stem.removesuffix("_manifest") + "_review.md")
+
+    def existing_model_paths(self, repo_root: Path) -> tuple[list[Path], list[str]]:
+        findings = sysml_materialization_findings(repo_root, self)
+        return [block.path for block in self.blocks if block.path.is_file()], findings
+
+    def connection_rows(self, rows: list[dict[str, str]], source_field: str, target_field: str):
+        admitted, findings = [], []
+        for row in rows:
+            source = self.block_for_label(row.get(source_field, ""))
+            target = self.block_for_label(row.get(target_field, ""))
+            if source is None or target is None:
+                findings.append(f"SYSML_INTERACTION_OUTSIDE_SCOPE: {row.get(source_field)} -> {row.get(target_field)}")
+            else:
+                admitted.append({**row, source_field: source.name, target_field: target.name})
+        return admitted, findings
+
+    def inventory_metadata(self, rows: list[dict[str, str]]) -> dict[str, dict[str, str]]:
+        self.require_valid()
+        result = {}
+        for block in self.blocks:
+            matches = [row for row in rows if human_label_key(row.get("Block")) == block.key]
+            if len(matches) != 1 or matches[0].get("Entity kind", "concrete_block") != "concrete_block":
+                raise DownstreamCoherenceError(f"SYSML_SCOPE_METADATA_UNRESOLVED: {block.name}")
+            result[block.name] = matches[0]
+        return result
+
+    def ipos_rows(self, repo_root: Path) -> dict[str, list[dict[str, str]]]:
+        self.require_valid()
+        rows = {target: _read_csv(repo_root / TRACE_ARTIFACTS[target])[1]
+                for target in ("Digital IPOS", "Analog IPOS")}
+        return {block.name: [row for row in rows[block.target]
+                             if row.get("source_req_id") in block.requirement_ids]
+                for block in self.blocks}
+
+
+def resolve_sysml_materialization_scope(
+    repo_root: Path, snapshot_id: str | None = None,
+    *, contract: DownstreamContract | None = None,
+) -> SysMLMaterializationScope:
+    contract = contract or resolve_downstream_contract(repo_root, snapshot_id)
+    findings: list[str] = []
+    if snapshot_id and snapshot_id != contract.snapshot_id:
+        findings.append("SYSML_SCOPE_SNAPSHOT_MISMATCH")
+    approved: dict[str, dict[str, Any]] = {}
+    for source_id, allocation in contract.expected.items():
+        target = str(allocation.get("owning_target") or "").strip()
+        if target not in {"Digital IPOS", "Analog IPOS"}:
+            continue
+        name = canonical_human_label(allocation.get("approved_block"))
+        key = human_label_key(name)
+        if not key:
+            findings.append(f"SYSML_SCOPE_OWNER_UNRESOLVED: {source_id}")
+            continue
+        entry = approved.setdefault(key, {"name": name, "target": target, "ids": set()})
+        if entry["target"] != target:
+            findings.append(f"SYSML_SCOPE_TARGET_CONFLICT: {name}")
+        entry["ids"].add(source_id)
+    materialized: set[str] = set()
+    for target in ("Digital IPOS", "Analog IPOS"):
+        rows = _read_csv(repo_root / TRACE_ARTIFACTS[target])[1]
+        for slug in created_ipos_block_directories(repo_root, target):
+            key = human_label_key(slug)
+            entry = approved.get(key)
+            if key in materialized:
+                findings.append(f"SYSML_SCOPE_DUPLICATE_DOCUMENT: {slug}")
+            materialized.add(key)
+            if entry is None or entry["target"] != target:
+                findings.append(f"SYSML_SCOPE_OUT_OF_SCOPE_IPOS: {target}: {slug}")
+                continue
+            local_rows = [row for row in rows if human_label_key(row.get("mapped_block") or row.get("owning_block")) == key]
+            if any(row.get("snapshot_id") != contract.snapshot_id for row in local_rows):
+                findings.append(f"SYSML_SCOPE_STALE_IPOS: {slug}")
+            if {str(row.get("source_req_id") or "") for row in local_rows} != entry["ids"]:
+                findings.append(f"SYSML_SCOPE_IPOS_ROWS_MISMATCH: {slug}")
+        for row in rows:
+            source_id = str(row.get("source_req_id") or "")
+            allocation = contract.expected.get(source_id, {})
+            if (allocation.get("owning_target") != target
+                    or human_label_key(allocation.get("approved_block")) != human_label_key(row.get("mapped_block") or row.get("owning_block"))):
+                findings.append(f"SYSML_SCOPE_UNAPPROVED_TRACE_ROW: {source_id}")
+    for key in sorted(set(approved) - materialized):
+        findings.append(f"SYSML_SCOPE_IPOS_DOCUMENT_MISSING: {approved[key]['name']}")
+    blocks: list[SysMLBlockMaterialization] = []
+    used_files: set[str] = set()
+    used_definitions: set[str] = set()
+    for key, entry in sorted(approved.items()):
+        name = entry["name"]
+        filename = _sysml_model_file_name(name)
+        definition = sysml_identifier(name)
+        if filename in used_files or definition in used_definitions:
+            findings.append(f"SYSML_SCOPE_IDENTITY_COLLISION: {name}")
+        used_files.add(filename)
+        used_definitions.add(definition)
+        usage = definition[:1].lower() + definition[1:]
+        parent = "topDigital" if entry["target"] == "Digital IPOS" else "topAnalog.analogSubsystem"
+        blocks.append(SysMLBlockMaterialization(
+            key, name, entry["target"],
+            repo_root / "artifacts/stage2_mirco_arc/sysml/blocks" / filename,
+            definition, f"Block_{definition}", f"{parent}.{usage}", frozenset(entry["ids"]),
+        ))
+    model_dir = repo_root / "artifacts/stage2_mirco_arc/sysml"
+    manifests = sorted(model_dir.parent.glob("*architecture_model_manifest.json"))
+    manifest_path = manifests[0] if len(manifests) == 1 else model_dir.parent / "architecture_model_manifest.json"
+    if len(manifests) > 1:
+        findings.append("SYSML_MANIFEST_ADDRESS_AMBIGUOUS: " + ", ".join(path.name for path in manifests))
+    system_path = model_dir / "SystemArchitecture.sysml"
+    if manifest_path.exists():
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        address = manifest.get("model_path")
+        if not address:
+            findings.append("SYSML_SYSTEM_MODEL_ADDRESS_UNRESOLVED")
+        else:
+            candidate = Path(address)
+            system_path = candidate if candidate.is_absolute() else repo_root / candidate
+            if system_path.parent.resolve() != model_dir.resolve():
+                findings.append("SYSML_SYSTEM_MODEL_ADDRESS_OUTSIDE_OUTPUT")
+    scope = SysMLMaterializationScope(contract.snapshot_id, downstream_contract_fingerprint(contract), tuple(blocks), tuple(findings),
+                                     system_path, model_dir / "DigitalSubsystem.sysml", model_dir / "shared_definitions.sysml", repo_root, manifest_path)
+    interactions, interaction_findings = scope.connection_rows(
+        _read_csv(model_dir.parent / "interaction_matrix.csv")[1], "From block", "To block")
+    return SysMLMaterializationScope(scope.snapshot_id, scope.fingerprint, scope.blocks, scope.findings,
+                                     scope.system_path, scope.digital_path, scope.shared_path, repo_root, manifest_path,
+                                     tuple(interactions), tuple(interaction_findings))
+
+
+def sysml_materialization_findings(repo_root: Path, scope: SysMLMaterializationScope) -> list[str]:
+    findings = list(scope.findings)
+    model_dir = scope.system_path.parent
+    actual = set((model_dir / "blocks").glob("*.sysml"))
+    expected = {block.path for block in scope.blocks}
+    for path in sorted(expected - actual):
+        findings.append(f"SYSML_CREATED_IPOS_BLOCK_MISSING: {path.name}")
+    for path in sorted(actual - expected):
+        findings.append(f"SYSML_STALE_IPOS_BLOCK_FILE: {path.name}")
+    texts = {path: path.read_text(encoding="utf-8", errors="replace")
+             for path in model_dir.glob("*.sysml")}
+    texts.update({path: path.read_text(encoding="utf-8", errors="replace") for path in actual})
+    if scope.blocks or texts:
+        for path in scope.structural_paths():
+            if path not in texts:
+                findings.append(f"SYSML_STRUCTURAL_MODEL_MISSING: {path.name}")
+    structural_texts = {path: re.sub(r'/\*.*?\*/|//[^\n]*|"(?:\\.|[^"\\])*"', "", text, flags=re.S)
+                        for path, text in texts.items()}
+    allowed_definitions = {scope.system_definition, "AnalogSubsystem", "TopAnalogArchitecture", "DigitalSubsystem"}
+    allowed_definitions.update(block.definition for block in scope.blocks)
+    allowed_parts = {(scope.system_path, "TopAnalogArchitecture", "analogSubsystem", "AnalogSubsystem"),
+                     (scope.system_path, scope.system_definition, "topAnalog", "TopAnalogArchitecture"),
+                     (scope.system_path, scope.system_definition, "topDigital", "DigitalSubsystem")}
+    allowed_parts.update((scope.digital_path if block.target == "Digital IPOS" else scope.system_path,
+                          "DigitalSubsystem" if block.target == "Digital IPOS" else "AnalogSubsystem",
+                          block.node.rsplit(".", 1)[-1], block.definition) for block in scope.blocks)
+    definition_counts = {}
+    part_counts = {}
+    for path, text in structural_texts.items():
+        for definition in re.findall(r"\bpart\s+def\s+(\w+)", text):
+            definition_counts[definition] = definition_counts.get(definition, 0) + 1
+            if definition not in allowed_definitions:
+                findings.append(f"SYSML_OUT_OF_SCOPE_PART_DEFINITION: {path.name}: {definition}")
+        parents = []
+        tokens = re.finditer(r"\bpart\s+def\s+(\w+)\s*\{|\bpart\s+(?!def\b)(\w+)\s*:\s*(\w+)\s*;|[{}]", text)
+        for token in tokens:
+            if token.group(1):
+                parents.append(token.group(1))
+            elif token.group(2):
+                usage, definition = token.group(2), token.group(3)
+                parent = next((parent for parent in reversed(parents) if parent), "")
+                key = path, parent, usage, definition
+                part_counts[key] = part_counts.get(key, 0) + 1
+                if key not in allowed_parts:
+                    findings.append(f"SYSML_OUT_OF_SCOPE_PART: {path.name}: {parent}.{usage}: {definition}")
+            elif token.group() == "{":
+                parents.append(None)
+            elif parents:
+                parents.pop()
+    for definition, count in definition_counts.items():
+        if count != 1:
+            findings.append(f"SYSML_DUPLICATE_PART_DEFINITION: {definition}")
+    definitions = {name for text in texts.values()
+                   for name in re.findall(r"\bpart\s+def\s+(\w+)\b", text)}
+    packages = {name for text in texts.values() for name in re.findall(r"\bpackage\s+(\w+)\b", text)}
+    for path, text in structural_texts.items():
+        for package in re.findall(r"\bimport\s+(\w+)::", text):
+            if package not in packages:
+                findings.append(f"SYSML_UNRESOLVED_IMPORT: {path.name}: {package}")
+        for usage, definition in re.findall(r"\bpart\s+(?!def\b)(\w+)\s*:\s*(\w+)\s*;", text):
+            if definition not in definitions:
+                findings.append(f"SYSML_UNRESOLVED_PART: {path.name}: {usage}: {definition}")
+    for block in scope.blocks:
+        text = texts.get(block.path, "")
+        if not text:
+            continue
+        labels = re.findall(r'\battribute\s+displayName\s*:\s*String\s*=\s*"([^"]+)"', text)
+        if len(labels) != 1 or scope.block_for_label(labels[0]) != block:
+            findings.append(f"SYSML_BLOCK_LABEL_MISMATCH: {block.path.name}")
+        if not re.search(rf"\bpart\s+def\s+{re.escape(block.definition)}\s*\{{", text):
+            findings.append(f"SYSML_BLOCK_DEFINITION_MISSING: {block.name}")
+        if not re.search(rf"\bpackage\s+{re.escape(block.package)}\s*\{{", text):
+            findings.append(f"SYSML_BLOCK_PACKAGE_MISMATCH: {block.name}")
+        if f"// Snapshot ID: {scope.snapshot_id}" not in text or f"// Downstream contract fingerprint: {scope.fingerprint}" not in text:
+            findings.append(f"SYSML_BLOCK_STALE: {block.name}")
+        hierarchy_path = scope.digital_path if block.target == "Digital IPOS" else scope.system_path
+        usage = block.node.rsplit(".", 1)[-1]
+        parent = "DigitalSubsystem" if block.target == "Digital IPOS" else "AnalogSubsystem"
+        if part_counts.get((hierarchy_path, parent, usage, block.definition), 0) != 1:
+            findings.append(f"SYSML_BLOCK_PART_MISSING_OR_DUPLICATE: {block.name}")
+        for importing_path in {scope.system_path, hierarchy_path}:
+            imports = re.findall(r"\bimport\s+(\w+)::", structural_texts.get(importing_path, ""))
+            if imports.count(block.package) != 1:
+                findings.append(f"SYSML_BLOCK_IMPORT_MISSING_OR_DUPLICATE: {importing_path.name}: {block.name}")
+    return findings
 
 
 def snapshot_architecture_context(repo_root: Path, contract: DownstreamContract) -> dict:
@@ -744,7 +1008,7 @@ def _primary_to_supplementary_coverage(
     return None
 
 
-def approved_generated_document_dependency_graph(repo_root: Path) -> dict[str, object]:
+def approved_generated_document_dependency_graph(repo_root: Path, snapshot_id: str | None = None) -> dict[str, object]:
     """Return only generated-document Covers dependencies for the RM view.
 
     Architectural structure is intentionally excluded here.  SysML parsers own
@@ -804,7 +1068,7 @@ def approved_generated_document_dependency_graph(repo_root: Path) -> dict[str, o
         })
 
     stage_rows = {stage: rows_for(stage) for stage in matrix_paths}
-    approved_contract = resolve_downstream_contract(repo_root)
+    approved_contract = resolve_downstream_contract(repo_root, snapshot_id)
     primary_source_name = approved_primary_source_name(repo_root)
     ledger_ids = {
         str(row.get("req_id") or row.get("source_req_id") or "").strip()
@@ -1255,10 +1519,10 @@ def _check_ipos_descriptive_policy(
         for row in inventory_rows
         if row.get("Block", "").strip()
     }
-    candidate_rows = approved_snapshot_candidate_rows(contract.requirement_input, contract)
     for stage, kind in (("Digital IPOS", "digital"), ("Analog IPOS", "analog")):
         if ipos_kind and kind != ipos_kind:
             continue
+        candidate_rows = approved_snapshot_candidate_rows(contract.requirement_input, contract, domain=kind)
         matrix_path = TRACE_ARTIFACTS[stage]
         _fields, rows = _read_csv(repo_root / matrix_path)
         topic_specs = IPOS_LOCAL_DIGITAL_TOPIC_SPECS if kind == "digital" else IPOS_LOCAL_ANALOG_TOPIC_SPECS
@@ -1308,6 +1572,8 @@ def _check_ipos_descriptive_policy(
                 )
             )
             docx_path = next(block_dir.glob("*.docx"), None)
+            findings.extend(_check_prefix(validate_ipos_document_contract(repo_root, markdown_path, audit_path, functional_input),
+                            f"{stage}:{block_dir.name}: "))
             if docx_path is None:
                 findings.append(f"{stage}: {block_dir.name}: final DOCX is missing")
             else:
@@ -1417,16 +1683,27 @@ def _check_approved_function_coverage(
             audit_path = block_dir / "descriptive_summary_audit.csv"
             markdown = markdown_path.read_text(encoding="utf-8", errors="replace") if markdown_path else ""
             audit_rows = _read_csv(audit_path)[1] if audit_path.exists() else []
-            rendered_keys = {
-                _structural_function_key(extract_ipos_structural_function_name(row.get("candidate_evidence_statement") or ""))
-                for row in audit_rows
-                if row.get("decision") == "accepted_candidate"
-            }
-            rendered_keys.discard("")
-            normalized_markdown = _structural_function_key(markdown)
+            from workflow_routing import _ipos_final_sections
+            overview = " ".join(_ipos_final_sections(markdown_path).values()).casefold() if markdown_path else ""
             for entity_key, item in functions.items():
                 summary["expected"] += 1
-                present = entity_key in rendered_keys or entity_key in normalized_markdown
+                present = False
+                for row in audit_rows:
+                    if row.get("decision") != "selected":
+                        continue
+                    try:
+                        fact = json.loads(row["fact_json"])
+                        unit = json.loads(row["semantic_unit_json"])
+                        identity = row.get("source_record_id", "").rsplit(":", 1)[-1]
+                        if identity in item["source_req_ids"] and " ".join(unit["text"].split()).casefold() in overview:
+                            endpoints = [fact.get("subject", ""), *fact.get("objects", [])]
+                            present = bool(fact.get("action") and fact.get("objects") and any(
+                                entity_key in _structural_function_key(endpoint) for endpoint in endpoints
+                            ))
+                    except (KeyError, ValueError, TypeError):
+                        continue
+                    if present:
+                        break
                 if present:
                     summary["present"] += 1
                     continue
@@ -1732,34 +2009,17 @@ def _check_sysml_requirement_coverage(
     repo_root: Path,
     contract: DownstreamContract,
     expected: dict[str, dict[str, str]],
+    scope: SysMLMaterializationScope | None = None,
 ) -> list[str]:
     """Check emitted SysML requirement coverage against the selected contract."""
-    findings: list[str] = []
+    scope = scope or resolve_sysml_materialization_scope(repo_root, contract=contract)
+    findings = sysml_materialization_findings(repo_root, scope)
     sysml_roots = [
         repo_root / "artifacts/stage2_mirco_arc/sysml",
         repo_root / "artifacts/stage3_srs",
     ]
     files = sorted({path for root in sysml_roots if root.exists() for path in root.rglob("*.sysml")})
-    sysml_block_paths = {path for path in files if path.parent.name == "blocks"}
-    compact = lambda value: re.sub(r"[^a-z0-9]", "", value.casefold())
-    created_ipos_names = {
-        compact(name)
-        for stage in ("Digital IPOS", "Analog IPOS")
-        for name in created_ipos_block_directories(repo_root, stage)
-    }
-    for path in sorted(sysml_block_paths):
-        if compact(path.stem) not in created_ipos_names:
-            findings.append(f"SYSML_STALE_IPOS_BLOCK_FILE: {path.relative_to(repo_root).as_posix()}")
-    generated_sysml_names = {compact(path.stem) for path in sysml_block_paths}
-    for ipos_name in sorted(created_ipos_names - generated_sysml_names):
-        findings.append(f"SYSML_CREATED_IPOS_BLOCK_MISSING: {ipos_name}")
     expected_keys: set[tuple[str, str, str]] = set()
-    owner_by_file = {
-        _sysml_model_file_name(str(metadata.get("approved_block") or "")): human_label_key(str(metadata.get("approved_block") or ""))
-        for metadata in expected.values()
-        if str(metadata.get("owning_target") or "").strip() in {"Digital IPOS", "Analog IPOS"}
-        and str(metadata.get("approved_block") or "").strip()
-    }
     for source_id, metadata in expected.items():
         target = str(metadata.get("owning_target") or "").strip()
         if target not in {"SRS", "DRS", "Digital IPOS", "Analog IPOS"}:
@@ -1772,19 +2032,21 @@ def _check_sysml_requirement_coverage(
     fingerprints: set[str] = set()
     for path in files:
         name = path.name
-        if name == "STBIOSystem.sysml" or path.parent.name == "stage3_srs":
+        if path == scope.system_path or path.parent.name == "stage3_srs":
             target, owner = "SRS", ""
-        elif name == "DigitalSubsystem.sysml":
+        elif path == scope.digital_path:
             target, owner = "DRS", ""
         elif path.parent.name == "blocks":
-            target = "Digital IPOS"
-            owner = owner_by_file.get(name, "")
+            block = scope.block_for_path(path)
+            if block is None:
+                continue
+            target, owner = block.target, block.key
         else:
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
         snapshots.update(re.findall(r"^//\s*Snapshot ID:\s*([^\s]+)", text, flags=re.M | re.I))
         fingerprints.update(re.findall(r"^//\s*Downstream contract fingerprint:\s*([0-9a-f]{64})", text, flags=re.M | re.I))
-        for source_id in re.findall(r'attribute\s+sourceReqId\s*=\s*"([A-Z][A-Z0-9]+(?:_[A-Z0-9]+)+)"', text):
+        for source_id in re.findall(r'attribute\s+sourceReqId\s*=\s*"([^"\\]+)"', text):
             emitted.add((source_id, target, owner))
 
     unsupported = emitted - expected_keys
@@ -1801,14 +2063,16 @@ def _check_sysml_requirement_coverage(
     return findings
 
 
-def _check_sysml_artifacts(repo_root: Path, expected: dict[str, dict[str, str]]) -> tuple[list[str], dict[str, Any]]:
+def _check_sysml_artifacts(repo_root: Path, expected: dict[str, dict[str, str]],
+                           scope: SysMLMaterializationScope | None = None) -> tuple[list[str], dict[str, Any]]:
     """Check generated SysML against the approved downstream trace artifacts."""
-    findings: list[str] = []
+    scope = scope or resolve_sysml_materialization_scope(repo_root)
+    findings = list(scope.findings)
     summary: dict[str, Any] = {}
 
     targets = {
-        "SRS": (repo_root / "artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml", "srs_req_id"),
-        "DRS": (repo_root / "artifacts/stage2_mirco_arc/sysml/DigitalSubsystem.sysml", "drs_req_id"),
+        "SRS": (scope.system_path, "srs_req_id"),
+        "DRS": (scope.digital_path, "drs_req_id"),
     }
     for target, (path, authored_field) in targets.items():
         rows = _read_trace_rows(
@@ -1853,8 +2117,11 @@ def _check_sysml_artifacts(repo_root: Path, expected: dict[str, dict[str, str]])
         ipos_rows = _read_trace_rows(repo_root, matrix_relative)
         stage_summary = {"approved_count": len(ipos_rows), "blocks": {}}
         for row in ipos_rows:
-            owner = canonical_human_label(row.get("mapped_block") or row.get("owning_block") or "")
-            block_path = repo_root / "artifacts/stage2_mirco_arc/sysml/blocks" / _sysml_model_file_name(owner)
+            block = scope.block_for_label(row.get("mapped_block") or row.get("owning_block") or "")
+            if block is None or block.target != ipos_stage:
+                findings.append(f"SYSML_SCOPE_UNRESOLVED_TRACE_OWNER: {_source_id(row)}")
+                continue
+            owner, block_path = block.name, block.path
             block_summary = stage_summary["blocks"].setdefault(owner, {"path": block_path.relative_to(repo_root).as_posix(), "count": 0})
             block_summary["count"] += 1
             if not block_path.exists():
@@ -1871,23 +2138,19 @@ def _check_sysml_artifacts(repo_root: Path, expected: dict[str, dict[str, str]])
 
     port_rows = _read_trace_rows(repo_root, "artifacts/stage2_mirco_arc/source_port_catalog.csv")
     checked_ports = 0
-    created_sysml_names = {
-        re.sub(r"[^a-z0-9]", "", name.casefold())
-        for stage in ("Digital IPOS", "Analog IPOS")
-        for name in created_ipos_block_directories(repo_root, stage)
-    }
     for row in port_rows:
         if str(row.get("Ownership status") or "").strip().casefold() != "approved":
             continue
         owner = canonical_human_label(row.get("Owner") or "")
-        if owner == "STBIOSystem":
-            path = repo_root / "artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml"
+        if human_label_key(owner) == human_label_key(scope.system_definition):
+            path = scope.system_path
         elif owner == "Digital Subsystem":
-            path = repo_root / "artifacts/stage2_mirco_arc/sysml/DigitalSubsystem.sysml"
+            path = scope.digital_path
         else:
-            if re.sub(r"[^a-z0-9]", "", owner.casefold()) not in created_sysml_names:
+            block = scope.block_for_label(owner)
+            if block is None:
                 continue
-            path = repo_root / "artifacts/stage2_mirco_arc/sysml/blocks" / _sysml_model_file_name(owner)
+            path = block.path
         checked_ports += 1
         if not path.exists():
             findings.append(f"SYSML_PORT_OWNER_FILE_MISSING: {owner}")
@@ -1898,6 +2161,62 @@ def _check_sysml_artifacts(repo_root: Path, expected: dict[str, dict[str, str]])
             findings.append(f"SYSML_PORT_MISSING: {owner}: {port_name}")
     summary["approved_port_rows_checked"] = checked_ports
     return findings, summary
+
+
+def validate_generation_inputs(
+    repo_root: Path, snapshot_id: str, *, upstream_stages: tuple[str, ...] = (),
+) -> dict[str, Any]:
+    if not snapshot_id:
+        raise ValueError("Generation preflight requires one explicit approved snapshot ID.")
+    contract = resolve_downstream_contract(repo_root, snapshot_id)
+    findings = _check_snapshot_and_allocations(repo_root, contract.snapshot_id, contract.requirement_input)
+    findings.extend(_check_ledger(repo_root, contract.snapshot_id, contract.expected))
+    findings.extend(_check_generator_inference(repo_root))
+    for stage in upstream_stages:
+        relative = TRACE_ARTIFACTS[stage]
+        path = repo_root / relative
+        if not path.exists():
+            findings.append(f"{stage}_TRACE_MISSING: {relative.as_posix()}")
+            continue
+        fields, rows = _read_csv(path)
+        findings.extend(_check_trace_artifact(stage, path, rows, fields, contract.snapshot_id, contract.expected))
+    return {
+        "validator": "validate_downstream_coherence",
+        "mode": "read_only_local_deterministic",
+        "validation_scope": "generation_inputs",
+        "explicit_snapshot_id": snapshot_id,
+        "selected_snapshot_id": contract.snapshot_id,
+        "snapshot_selection": contract.selection,
+        "upstream_stages": list(upstream_stages),
+        "finding_count": len(findings),
+        "findings": findings,
+        "decision": "PASS" if not findings else "BLOCK_DOWNSTREAM",
+        "generation_allowed": not findings,
+    }
+
+
+def validate_generated_drs(repo_root: Path, snapshot_id: str) -> dict[str, Any]:
+    result = validate_generation_inputs(repo_root, snapshot_id)
+    contract = resolve_downstream_contract(repo_root, snapshot_id)
+    findings = result["findings"]
+    findings.extend(_check_srs_artifact_coherence(repo_root, contract, contract.expected))
+    path = repo_root / TRACE_ARTIFACTS["DRS"]
+    fields, rows = _read_csv(path)
+    if not path.exists():
+        findings.append(f"DRS_TRACE_MISSING: {TRACE_ARTIFACTS['DRS'].as_posix()}")
+    else:
+        findings.extend(_check_trace_artifact("DRS", path, rows, fields, snapshot_id, contract.expected))
+    findings.extend(f"DRS_CONTRACT: {finding}" for finding in validate_drs_document_contract(repo_root))
+    from run_drs_gen_spec_agent import validate_drs_descriptive_artifacts
+    findings.extend(f"DRS: {finding}" for finding in validate_drs_descriptive_artifacts(repo_root))
+    findings.extend(validate_document_author_fields(repo_root / "artifacts/stage5_drs/digital_requirements_specification.md"))
+    result.update({
+        "validation_scope": "generated_drs_and_srs_dependency",
+        "finding_count": len(findings),
+        "decision": "PASS" if not findings else "BLOCK_DOWNSTREAM",
+        "generation_allowed": not findings,
+    })
+    return result
 
 
 def validate(
@@ -1914,6 +2233,7 @@ def validate(
     selection = contract.selection
     selected_snapshot_id = contract.snapshot_id
     expected = contract.expected
+    sysml_scope = resolve_sysml_materialization_scope(repo_root, contract=contract)
     findings = _check_snapshot_and_allocations(repo_root, selected_snapshot_id, requirement_input)
     findings.extend(_check_ledger(repo_root, selected_snapshot_id, expected))
     findings.extend(_check_srs_artifact_coherence(repo_root, contract, expected))
@@ -1948,7 +2268,7 @@ def validate(
     spec_documents.extend((repo_root / "artifacts/stage7_analog_ipos/blocks").glob("*/*.md"))
     for markdown_path in spec_documents:
         findings.extend(validate_document_author_fields(markdown_path))
-    findings.extend(_check_sysml_requirement_coverage(repo_root, contract, expected))
+    findings.extend(_check_sysml_requirement_coverage(repo_root, contract, expected, sysml_scope))
     artifact_summary: dict[str, dict[str, Any]] = {}
     for stage, relative in TRACE_ARTIFACTS.items():
         path = repo_root / relative
@@ -1978,7 +2298,7 @@ def validate(
     findings.extend(function_coverage_findings)
     source_port_findings, source_port_summary = _check_ipos_source_port_coverage(repo_root)
     findings.extend(source_port_findings)
-    sysml_findings, sysml_summary = _check_sysml_artifacts(repo_root, expected)
+    sysml_findings, sysml_summary = _check_sysml_artifacts(repo_root, expected, sysml_scope)
     findings.extend(sysml_findings)
     sysml_summary["ipos_source_port_coverage"] = source_port_summary
     return {

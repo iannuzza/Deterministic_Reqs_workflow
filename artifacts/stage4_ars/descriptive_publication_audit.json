@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "document_type": "ARS",
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "authority": false,
+  "user_review_only": true,
+  "omissions": [
+    {
+      "location": "0.1 Table of contents {#01-table-of-contents}",
+      "input_line": 76,
+      "original": "- [8. Assumptions and TBD](#8-assumptions-and-tbd)",
+      "retained": "- [8.",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "analog_requirements_specification.md:renderer-input-line:76"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "Table 3. Section navigation index {#table-3-section-navigation-index}",
+      "input_line": 136,
+      "original": "| 8. Assumptions and TBD | 8 | [Jump](#8-assumptions-and-tbd) | Auto |",
+      "retained": "| 8. Assumptions | 8 |  | Auto |",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "analog_requirements_specification.md:renderer-input-line:136"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "8. Assumptions {#8-assumptions-and-tbd}",
+      "input_line": 402,
+      "original": "## 8. Assumptions and TBD {#8-assumptions-and-tbd}",
+      "retained": "## 8. Assumptions {#8-assumptions}",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "analog_requirements_specification.md:renderer-input-line:402"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "8. Assumptions {#8-assumptions-and-tbd}",
+      "input_line": 405,
+      "original": "- TBD-001: Unassigned requirements in ARS traceability matrix require architectural owner review.",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "analog_requirements_specification.md:renderer-input-line:405"
+      ],
+      "user_review_only": true
+    }
+  ]
+}

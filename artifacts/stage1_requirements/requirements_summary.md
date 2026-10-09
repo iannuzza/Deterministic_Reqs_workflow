@@ -1,6 +1,6 @@
 # Functional Requirements Summary
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 | id | source_req_id | covered_source_req_id | id_policy | requirement_statement | category | source | source_section_owner | derivation_kind | evidence_type | notes | rationale | content_class | test_trace_required | requirement_type | operating_mode | parameter_signal_register | value_range_condition |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

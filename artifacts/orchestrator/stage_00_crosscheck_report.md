@@ -1,12 +1,12 @@
 # Stage 00 Crosscheck Report
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 Status: pass
 
 ## Quality Counters
-- Ontology concept IDs: 349
-- Glossary data rows: 339
+- Ontology concept IDs: 375
+- Glossary data rows: 369
 - Requirements total: 271
 - Table-derived requirements: 61
 - Image/diagram-derived requirements: 7

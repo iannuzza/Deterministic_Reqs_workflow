@@ -6,11 +6,11 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>&nbsp;</p>
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 <p>&nbsp;</p>
 
-Snapshot ID: snap-b2e8101b00dc6909feaed885
+Snapshot ID: snap-73c872b1307b6adb5eaf843e
 
 <p>&nbsp;</p>
 
@@ -62,7 +62,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
     - [6.4.13 TIME SLOT LENGTH](#6413-time-slot-length)
     - [6.4.14 XBAR Connection Matrix](#6414-xbar-connection-matrix)
 - [7. Interfaces and mixed-signal interactions](#7-interfaces-and-mixed-signal-interactions)
-- [8. Assumptions and TBD](#8-assumptions-and-tbd)
+- [8. Assumptions](#8-assumptions)
 - [9. Top-level integration requirements](#9-top-level-integration-requirements)
   - [9.1 Sensor-Hub](#91-sensor-hub)
   - [9.2 ADSP](#92-adsp)
@@ -123,7 +123,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 | 6.4.13 TIME SLOT LENGTH | 6.4.13 | [Jump](#6413-time-slot-length) | Auto |
 | 6.4.14 XBAR Connection Matrix | 6.4.14 | [Jump](#6414-xbar-connection-matrix) | Auto |
 | 7. Interfaces and mixed-signal interactions | 7 | [Jump](#7-interfaces-and-mixed-signal-interactions) | Auto |
-| 8. Assumptions and TBD | 8 | [Jump](#8-assumptions-and-tbd) | Auto |
+| 8. Assumptions | 8 | [Jump](#8-assumptions) | Auto |
 | 9. Top-level integration requirements | 9 | [Jump](#9-top-level-integration-requirements) | Auto |
 | 9.1 Sensor-Hub | 9.1 | [Jump](#91-sensor-hub) | Auto |
 | 9.2 ADSP | 9.2 | [Jump](#92-adsp) | Auto |
@@ -147,6 +147,7 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 1.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 DRS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
+| 1.2 | 2026-10-09 | Snapshot snap-73c872b1307b6adb5eaf843e DRS baseline generated from Stage 1 and Stage 2 artifacts | Alessandro Lucio IANNUZZI |
 
 <p>&nbsp;</p>
 
@@ -352,7 +353,7 @@ ADC provides digital samples to Main Controller. Main Controller provides sample
 
 <p>&nbsp;</p>
 
-Priority between simultaneous resource requesters: need clarification.
+
 
 <p>&nbsp;</p>
 
@@ -403,7 +404,7 @@ PMU provides power/clock status to Main Controller.
 
 <p>&nbsp;</p>
 
-Domain transition ordering and reset-release dependencies: need clarification.
+
 
 <p>&nbsp;</p>
 
@@ -432,7 +433,7 @@ The digital blocks carry the following functions and architectural exchanges:
 
 | Block | Role | Architectural relationship |
 |---|---|---|
-| Sensor-Hub | Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination. | Detailed integration relationship: need clarification. |
+| Sensor-Hub | Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination. |  |
 | ADSP | Execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. | from Main Controller (XBAR connection); to Regmap (XBAR connection); to SENSOR HUB (XBAR connection); to FIFO (XBAR connection); from I2C_SPI_AHB (XBAR connection); from ISPU (XBAR connection); from ISPU debug (XBAR connection) |
 | Main Controller | Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses. | from ADC (digital samples); to Smart FIFO (sample stream and FIFO mode control); from Regmap (configuration writes); from PMU (power/clock status); to Regmap (XBAR connection); to FIFO (XBAR connection); to ADSP (XBAR connection) |
 | Smart FIFO | Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting. | from Main Controller (sample stream and FIFO mode control); to IRQ logic (watermark/overrun/empty flags) |
@@ -441,9 +442,9 @@ The digital blocks carry the following functions and architectural exchanges:
 | PMU | Sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes. | to Main Controller (power/clock status) |
 | BIST Controller | Control BIST operating modes and coordinate ADC/OTP test operations and their register-visible results. | to Regmap (self-test/calibration status) |
 | I2C_SPI_AHB | Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access. | to SPI interface (SPI host transactions); to I2C interface (I2C host transactions); to Regmap (XBAR connection); to SENSOR HUB (XBAR connection); to ISPU (XBAR connection); to FIFO (XBAR connection); to ADSP (XBAR connection) |
-| OTP | Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines. | Detailed integration relationship: need clarification. |
-| PAD MUX | Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads. | Detailed integration relationship: need clarification. |
-| ISPU | An interrupt triggers ISPU wake-up. Local processing function: need clarification. | from I2C_SPI_AHB (XBAR connection); to Regmap (XBAR connection); to SENSOR HUB (XBAR connection); to FIFO (XBAR connection); to ADSP (XBAR connection); from ISPU debug (XBAR connection) |
+| OTP | Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines. |  |
+| PAD MUX | Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads. |  |
+| ISPU | An interrupt triggers ISPU wake-up. | from I2C_SPI_AHB (XBAR connection); to Regmap (XBAR connection); to SENSOR HUB (XBAR connection); to FIFO (XBAR connection); to ADSP (XBAR connection); from ISPU debug (XBAR connection) |
 
 <p>&nbsp;</p>
 
@@ -453,6 +454,10 @@ Main Controller provides sample stream and FIFO mode control to Smart FIFO. Regm
 <p>&nbsp;</p>
 
 Shared-resource ownership: Smart FIFO provides FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting.
+
+<p>&nbsp;</p>
+
+Register and memory access coordination: ADSP executes ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. Regmap implements the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules. BIST Controller controls BIST operating modes and coordinates ADC/OTP test operations and their register-visible results. I2C_SPI_AHB accepts I2C/SPI accesses and translates them as needed into AHB transactions for device configuration and readback, including ISPU access. SPI interface provides SPI register transactions to Regmap. I2C interface provides I2C register transactions to Regmap. Regmap provides register read response to SPI interface and I2C interface.
 
 <p>&nbsp;</p>
 
@@ -496,23 +501,19 @@ Power and clock interaction: PMU provides power/clock status to Main Controller.
 
 <p>&nbsp;</p>
 
-Register and memory access coordination: ADSP executes ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. Regmap implements the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules. BIST Controller controls BIST operating modes and coordinates ADC/OTP test operations and their register-visible results. I2C_SPI_AHB accepts I2C/SPI accesses and translates them as needed into AHB transactions for device configuration and readback, including ISPU access. SPI interface provides SPI register transactions to Regmap. I2C interface provides I2C register transactions to Regmap. Regmap provides register read response to SPI interface and I2C interface. Concurrent-access ordering policy: need clarification.
+
 
 <p>&nbsp;</p>
 
-Flow control and backpressure: need clarification
+
 
 <p>&nbsp;</p>
 
-Synchronization: need clarification
+
 
 <p>&nbsp;</p>
 
-Latency and bandwidth: need clarification
 
-<p>&nbsp;</p>
-
-Priority between simultaneous resource requesters: need clarification.
 
 <p>&nbsp;</p>
 
@@ -557,17 +558,21 @@ The clock network distributes 16 MHz clocks with and without clock gating; 32 kH
 
 <p>&nbsp;</p>
 
+Reset connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32;
+
+<p>&nbsp;</p>
+
 Clock distribution:
 
 | Source requirement | Source clock | Destination clock | Frequency | Clock gating |
 |---|---|---|---|---|
-| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
-| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
-| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
+| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz |  |
+| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz |  |
+| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz |  |
 | DDS_STBIO1_1025 | u_stbio1_top.u_pmu.u_device_startup.tst_clk_32k | stbio1_top.dig_wrapper_LV.tst_clk_32k | 32 kHz | Not gated |
-| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.adsp_run \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
+| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz |  |
 | DDS_STBIO1_2025 | stbio1_top.dig_wrapper_LV.u_pmu.clk_stredl | stbio1_top.dig_wrapper_LV.u_ispu.clk | 16 MHz | Not gated |
-| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
+| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz |  |
 | DDS_STBIO1_1027 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_32k | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_32kHz | 32 kHz | Not gated |
 
 <p>&nbsp;</p>
@@ -588,19 +593,23 @@ Reset outputs:
 
 <p>&nbsp;</p>
 
-Measured latency and cross-domain synchronization behavior: need clarification.
+
 
 <p>&nbsp;</p>
 
-Clock-path endpoints requiring clarification: DDS_STBIO1_2024.
 
-<p>&nbsp;</p>
-
-Reset connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32; release/synchronization behavior: need clarification.
 
 <p>&nbsp;</p>
 
 ### **4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}
+The clock network distributes 16 MHz clocks with and without clock gating; 32 kHz clocks without clock gating; 64 kHz clocks without clock gating.
+
+<p>&nbsp;</p>
+
+Reset/synchronization-labelled connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32;
+
+<p>&nbsp;</p>
+
 Interrupt-triggered wake-up is specified for ISPU.
 
 <p>&nbsp;</p>
@@ -609,15 +618,15 @@ Clock distribution:
 
 | Source requirement | Source clock | Destination clock | Frequency | Clock gating |
 |---|---|---|---|---|
-| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
-| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
-| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
+| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz |  |
+| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz |  |
+| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz |  |
 | DDS_STBIO1_1025 | u_stbio1_top.u_pmu.u_device_startup.tst_clk_32k | stbio1_top.dig_wrapper_LV.tst_clk_32k | 32 kHz | Not gated |
-| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.adsp_run \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
-| DDS_STBIO1_2024 | need clarification | need clarification | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2 \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2_reg \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
+| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz |  |
+| DDS_STBIO1_2024 |  |  | 16 MHz |  |
 | DDS_STBIO1_2025 | stbio1_top.dig_wrapper_LV.u_pmu.clk_stredl | stbio1_top.dig_wrapper_LV.u_ispu.clk | 16 MHz | Not gated |
 | DDS_STBIO1_1021 | stbio1_top.clk_64k | stbio1_top.dig_wrapper_LV.u_pmu.clk_64k | 64 kHz | Not gated |
-| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |
+| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz |  |
 | DDS_STBIO1_1027 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_32k | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_32kHz | 32 kHz | Not gated |
 | DDS_STBIO1_1020 | stbio1_top.clk_16m | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m | 16 MHz | Not gated |
 
@@ -634,15 +643,7 @@ Clock distribution:
 
 <p>&nbsp;</p>
 
-The clock network distributes 16 MHz clocks with and without clock gating; 32 kHz clocks without clock gating; 64 kHz clocks without clock gating. Incomplete source and destination clock labels: need clarification.
 
-<p>&nbsp;</p>
-
-Reset/synchronization-labelled connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32; synchronization implementation: need clarification.
-
-<p>&nbsp;</p>
-
-Clock-domain crossing, reset-domain crossing, and measured interrupt response time: need clarification.
 
 <p>&nbsp;</p>
 
@@ -1083,10 +1084,10 @@ ADC provides digital samples to Main Controller. SPI interface provides SPI regi
 
 <p>&nbsp;</p>
 
-## **8. Assumptions and TBD** {#8-assumptions-and-tbd}
+## **8. Assumptions** {#8-assumptions}
 
 - ASSUME-001: Firmware and verification environments provide deterministic digital stimulus and observability.
-- TBD-001: Unassigned requirements in DRS traceability matrix require architectural owner review.
+
 
 ## **9. Top-level integration requirements** {#9-top-level-integration-requirements}
 

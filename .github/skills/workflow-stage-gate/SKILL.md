@@ -240,7 +240,7 @@ Use this skill as the canonical execution contract for stage orchestration.
 - Before Stage 2A approval and Stage 2B freeze, require allocation class, matching target, rationale, lineage mode, source-origin lineage, and applicable hierarchy/domain metadata. Persist these fields in canonical SQLite and consume them from the approved snapshot downstream.
 - Execute strict forward-only runs: one stage or an ascending contiguous range may begin at any stage; each selected stage runs once.
 - For each selected stage, execute its runner once, require the runner's crosschecks, then execute its gate validator once. Stop immediately on any non-zero result; retries and loops are prohibited.
-- Before every `workflow_cli.py run` execution, run the focused regression/retrieval test suite once. A failure stops the workflow before its first runner; record the result in `artifacts/orchestrator/workflow_cli_runs.jsonl`. Run the project retrieval benchmark in addition when Stage 0 is selected. Do not run workflow preflight tests for validation-only commands or the Stage 2A-to-DRS shortcut.
+- Before every `workflow_cli.py run` execution, run the focused regression/retrieval test suite once. A failure stops the workflow before its first runner; record the result in `artifacts/orchestrator/workflow_cli_runs.jsonl`. Run the project retrieval benchmark in addition when Stage 0 is selected. Do not run workflow preflight tests for validation-only commands.
 - Keep retrieval and benchmark logic project-agnostic. Generated benchmark reports identify the active project from `config/project_context.json` `project_name`; reusable code must not hardcode project names.
 - Trigger one optional semantic recovery when legacy retrieval is empty or configured evidence-gap signals indicate uncertainty: no common lexical/normalized top candidate, a low top-1/top-2 margin within either channel, no exact normalized-term hit, too many unmatched query tokens, or a natural-language/paraphrase query profile. Treat the two candidate-overlap checks as one condition and never compare raw scores across channels.
 - Record the trigger and recovery result; keep recovery one-shot and evidence-only. Exact IDs, protocol names, and reviewed evidence remain protected, and unresolved or failed selection falls back to legacy `hybrid`.
@@ -506,7 +506,7 @@ Execution rule:
 - Step 2: Validate each stage before advancing.
 - Step 3: On runner or gate failure, stop immediately and record the blocker.
 - Step 4: Correct the owning stage, then rerun that stage or an ascending range from it; never execute backward.
-- Step 5: The Stage 2A-to-DRS requirements-only path is permitted because it moves forward; no later stage may invoke an earlier stage.
+- Step 5: Stage 5 uses the normal approved-snapshot workflow. Requirement parentage follows the approved hierarchical req_id mapping, not a mandatory immediately preceding specification level; no later stage may invoke an earlier stage.
 
 ## Stage-Specific Compliance Checks
 
@@ -665,8 +665,8 @@ Use the local Python CLI when the workflow is stable and you want script-only ex
   - `python scripts/run_taxonomy_crosscheck_update.py --index-csv artifacts/stage1_requirements/ocr_extracts/index.csv`
 - Run the top-down pipeline (example Stage 0 through Stage 3):
   - `python scripts/workflow_cli.py run --from-stage 0 --to-stage 3`
-- Run the approved forward requirements-only shortcut:
-  - `python scripts/workflow_cli.py drs-after-stage2a`
+- Run Stage 5 from an approved snapshot:
+  - `python scripts/workflow_cli.py run --stage 5 --snapshot-id <approved_snapshot_id>`
 - Validate all gates:
   - `python scripts/workflow_cli.py validate --all`
 

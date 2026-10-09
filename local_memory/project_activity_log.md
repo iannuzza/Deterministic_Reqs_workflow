@@ -1,5 +1,168 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-09 - Clean Documents, Partial IPOS Milestone
+- Checkpoint/tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
+  User requested local memory save plus Git commit/tag; no push or new branch.
+- At approved snapshot `snap-73c872b1307b6adb5eaf843e`, actual SRS/ARS/DRS
+  regenerated and strict stage gates PASS. Existing presentation projection
+  retains independent supported text and moves unsupported/review-only notes
+  into external audits/report, never changes approved normative text.
+- DRS order failure fixed in existing arranger: mixed paragraphs with retained
+  supported meaning belong before tables. Original ordering gate remains strict.
+- Only supported ADSP IPOS regenerated; existing `--block` gate PASS.
+  Stage6 NOT complete; other seven blocks remain blocked,118 contexts total.
+  Analog allocation VALID_EMPTY; Stage7 not run. Historical files preserved.
+- Consolidated report JSON/MD/DOCX regenerated for run21:08:43:737 entries
+  (SRS328, ARS73, DRS190, Digital IPOS145, Analog IPOS1). Review-only/non-authority;
+  includes intentional exclusions, omissions and gaps, not737 source defects.
+- Actual DOCX parity check exposed Pandoc GFM emoji expansion of `:100:` in
+  numeric source offsets. Escaped literal colons and added real Word regression.
+  Final all737 IDs/fields/refs/offsets/full excerpts verified in identical order;
+  eight current spec files marker-free/hash-matched, report JSON unchanged.
+- Focused33 tests PASS; latest11 report tests PASS. No authority/approval change,
+  no weakening of semantic/publication/materialization gates, no new backbone.
+- Main Controller remains NO-GO for one-small-fix proving case; no semantic
+  repairs made. Closed supplementary ingestion stays closed. Review report
+  before any new interpretation changes or controlled block regeneration.
+
+## 2026-10-09 12:27 - IPOS YAML Shared Core
+- Checkpoint ID: `2026-10-09-ipos-yaml-shared-core`; local only/no Git save.
+- Shared safe loader with distinct IPOS block-local YAML, explicit obligations
+  and registered bounded policies; DRS instance and frozen SRS remain unchanged.
+- Shared synthesis1.1 and active claim-only renderer/audit: exact clause spans,
+  effects, scope, explicit responsibility grouping, dependency-aware partial
+  preservation. No label/FSM keyword grouping or legacy rendering fallback.
+- Generator preflight prevents block writes on essential gaps; DOCX prerequisites
+  are mandatory. Independent actual-document semantic/publication/materialization
+  hooks run through existing gates and central authority.
+- 185 tests PASS (141+15+8+19+2), clean Python diagnostics. Fixed an effect extraction
+  completeness regression in the same slice; the same focused tests then passed.
+  A discovery command with zero matching tests is not validation; corrected pattern
+  ran the actual19 SRS tests. New audit schemas require updating fixtures, not gates.
+- Read-only Main Controller:67 propositions/49 claims,111 unresolved contexts,
+  two editorial findings. Strict FAIL; central BLOCK_DOWNSTREAM287. Canonical DB
+  and5218 artifacts unchanged by hashes. No PDF reads, generation or authority edits.
+- Publication remains unresolved; parser gaps are not all source damage. Continue
+  bounded interpretation and coherent functional synthesis without inferred completion.
+
+## 2026-10-09 - Common Descriptive Pre-Prose Model
+- Checkpoint ID: `2026-10-09-common-descriptive-pre-prose-model`; local only, no Git save.
+- User rejected the bounded IPOS rendering and authorized the revised common plan.
+  Implemented its first opt-in model milestone, not another local parser repair.
+- Shared evidence validation is reused by old structural checks and the new
+  pre-prose claim planner. Typed incomplete contexts, conservative dependency
+  closure and complete dispositions permit independent clause preservation while
+  withholding misleading dependent fragments.
+- Claims cannot combine disconnected propositions based on names alone, change
+  model meanings/provenance or silently drop dependencies. Separate bound inputs
+  validate derived plans; this is structural verification, not source-semantic proof.
+- Model-only audits keep three acceptance states UNRESOLVED and block uncertified
+  PASS promotion. Verification status is not canonical approval or release authority.
+- Fresh tests135 descriptive +9 document-contract +19 SRS coherence =163 PASS;
+  Python diagnostics clean. All five application-policy contexts tested generically.
+- New synthesis schema1.0 is opt-in; old schema/profile fingerprints/activation
+  and generator callers unchanged. No PDF reads, canonical writes or regeneration.
+- Next: section/information-gain obligations, functional abstraction/realization,
+  independent semantic and publication checks, then artifact-only caller migration.
+  Prior IPOS publication remains rejected; real gates/hashes were not rerun here.
+
+## 2026-10-09 09:52 - Functional Description Crosscheck
+- Checkpoint ID: `2026-10-09-functional-description-crosscheck`; local only, no Git save.
+- User reported lost named descriptions. Root cause: the conservative predicate-only
+  application gate plus removal of the old bespoke synthesis; inventory list alone
+  did not restore local functions. Legacy code contains project-specific claims,
+  so it was inspected but not reactivated.
+- Central parser/profile/composer now retain complete passive initiation, guarded
+  flag set/clear lifecycles and literal FSM/phase sequencing; titles derive from
+  supported facts, not a project capability catalogue. Conditions, thresholds,
+  clearing, state transitions and exact normative sources remain preserved.
+- New mutation and unrelated-module tests cover these paths. Initial infinitive
+  inflection probe failed; narrowed finite set/clear inflection passes, leaving
+  coordinated infinitive ramp effects unchanged. Entity case grouping and semantic
+  section metadata fixed through the existing central application contract.
+- Final Main Controller generation09:52:42-09:52:56 produces six section1.4 groups
+  in both formats. A preceding transient DOCX replace denial cleared on one retry.
+  Real paired parity,138 normative blocks/Covers, source I/O, canonical DB and5210
+  protected artifacts verified; tests127+9+19=155 PASS, strict gate still FAIL.
+- Crosscheck remains partial for GSR/ADC, complete measurement setup and an aggregate
+  Main Controller FSM. Unsupported adapters are not evidence of missing approval;
+  truncated clauses must not be completed using the legacy prose.
+
+## 2026-10-09 09:01 - Named Main Function List
+- Checkpoint ID: `2026-10-09-main-function-list`. No Git save.
+- User wanted an explicit main-function list, each with a description, and allowed
+  placement choice. Central IPOS section1.2 now enumerates three approved inventory
+  responsibilities rather than repeating the entire Function field in one sentence.
+- Literal function clauses become separate semantic units with exact-source labels
+  and descriptions. No project-name catalogue, single-signal titles or invented FSMs.
+- Shared-object coordination and bracketed details preserved; independent raw-source
+  reconstruction rejects omitted/duplicated functions, conjunction changes and
+  invented qualifiers. Actual final checks admit only these source-backed labels.
+- Main Controller MD/DOCX regenerated09:01:37-09:01:55; three entries and parity
+  verified. Normative/history/I/O, canonical DB and5,210 protected artifacts unchanged.
+- Tests124+9+19=152 PASS; diagnostics clean. Gate remains FAIL. Internal-function
+  abstraction is still separate unfinished work; prior438/774 counts not rerun here.
+- Existing backup/reports refreshed; four restart notes and manifest updated locally.
+
+## 2026-10-09 - Main Controller Main Functions Local Checkpoint
+- Checkpoint ID: `2026-10-09-main-controller-main-functions`. No Git save; prior
+  history retained. Existing artifact backup and three verification reports updated.
+- Integrated bounded typed IPOS bridge, central policy output roles, independent
+  source/model/final checks and structural audit into existing generator/gate.
+- User rejected partial prose, actor-derived headings and signal-centric overview.
+  Controlled grammar now rejects adverbs as verbs, flattened tables and incomplete
+  objects/continuations. Records with unresolved clauses do not publish fragments.
+- Common prose inflects have as has; source-preservation checks independently
+  reject malformed predicates and content mutations. Final checks reject extra labels.
+- 1.2 now states exact inventory-backed main functions before I/O. 1.4 is absent:
+  conservative predicate-based profile blocking is not functional abstraction.
+  Facts/conditions/polarity remain in model and normative text; no silent exclusion.
+- Regenerated only Main Controller at unchanged approved snapshot. 138 normative
+  blocks, Covers/history/I/O and canonical DB unchanged; 5,210 protected files
+  unchanged. One auxiliary snapshot-selection report is additional to baseline.
+- Tests 123 descriptive +9 document-contract +19 SRS coherence PASS. Repaired
+  section-aware mutation fixture without weakening loss/invention checks.
+- Gate FAIL; Main Controller 438 overlapping findings; central BLOCK_DOWNSTREAM
+  774. Source/grammar/abstraction blockers must be distinguished; no completion claim.
+- Lesson: token parity and audit/model agreement cannot prove good functional prose.
+  Moving signal fragments or merely filtering verbs does not deliver section 1.4.
+
+## 2026-10-08 19:54:30 - Top-Down Profile Application Phase 3 Local Checkpoint
+- Checkpoint ID: `2026-10-08-top-down-profile-application-phase3`. Saved source,
+  tests, plan and four local-memory documents plus manifest locally, without Git
+  staging/commit/branch/push or rollback backup. Previous checkpoint/history retained.
+- Added five central immutable application profiles, canonical role mapping,
+  explicit hierarchy/domain/essential-detail assessment, deterministic selection
+  and versioned expected-input audit in `workflow_routing.py`.
+- Essential guarded/qualified/dependent meaning survives detail omissions;
+  unresolved source assessments never fall back to exclusion. Composition cannot
+  masquerade as a capability. IPOS requires supported purpose/functions.
+- Application audit uses unchanged shared structural checks, exact inventory and
+  expected-payload comparison. Policy-valid is not semantic/publication PASS;
+  profile exclusions are proposals, not new model dispositions or rendered text.
+- Fresh focused tests: 116 descriptive, 9 document-contract, 19 SRS coherence PASS
+  (144 total); both Python files have no diagnostics. Existing writing profiles,
+  runtime activation, adapters/generators, authority and artifacts unchanged.
+- Source interpretation, final prose and migration remain explicitly unimplemented.
+  Prior IPOS121 source gaps/central251 blockers unrechecked. Next phase4 adapters.
+
+## 2026-10-08 19:44:36 - Top-Down Shared Model Phase 2 Local Checkpoint
+- Saved current handoff/checkpoint/environment and updated synchronization manifest.
+  ID: `2026-10-08-top-down-shared-model-phase2`. Working files remain on disk;
+  no staging, commit, branch, push, rollback backup or pipeline execution.
+- Current centralized contract is documented in `docs/ipos-descriptive-rendering.md`.
+  Phase 2 adds immutable typed structural model, exact-span/context/dependency
+  coverage, dispositions and versioned model-only audits to `workflow_routing.py`.
+- Recorded tests: 108 descriptive, 9 document-contract, 19 SRS coherence PASS.
+  Existing runtime paths/activation untouched; no regeneration or authority write.
+- Model equality/provenance is not source-semantic or final-prose proof. Audits
+  explicitly mark those later checks unimplemented; unresolved evidence stays blocked.
+- Original42 stale IPOS findings were repaired earlier, but 121 distinct semantic
+  source gaps and central251 overlapping findings remain; no new gate run in phase2.
+- Next: profile-controlled abstraction/essential detail/roles with paired fixtures.
+  Keep common integrity invariant and do not promote test success into runtime rollout.
+- Earlier history below remains preserved and does not override this boundary.
+
 ## 2026-10-06 16:35:30 - Local Restart Checkpoint Saved
 - Updated local chat handoff, checkpoint, environment and synchronization
   manifest in the active Git clone. Older original-project history is retained

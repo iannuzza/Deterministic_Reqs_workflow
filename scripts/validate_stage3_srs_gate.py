@@ -195,6 +195,8 @@ def main() -> int:
                 findings.append(f"Crosscheck report not pass: {rel.as_posix()}")
 
     srs_md = repo_root / "artifacts/stage3_srs/system_requirements_specification.md"
+    from spec_document_contract import validate_clean_document_presentation
+    findings.extend(validate_clean_document_presentation(srs_md))
     findings.extend(f"SRS overview: {finding}" for finding in validate_srs_system_overview(srs_md))
     traceability_path = repo_root / "artifacts/stage3_srs/srs_traceability_matrix.csv"
     selected_ids = {

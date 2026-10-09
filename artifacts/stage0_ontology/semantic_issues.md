@@ -1,6 +1,6 @@
 # Semantic Issues
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 Legend:
 - critical: blocks Stage 1 handoff until resolved or explicitly waived.
@@ -8,7 +8,7 @@ Legend:
 - minor: does not block Gate 0; track for downstream clarification.
 
 ## Critical
-- None
+- ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_132: placeholder token detected in requirement statement
 
 ## Major
 - None
@@ -36,5 +36,5 @@ Legend:
 ## Blocker Traceability
 - Related ontology concept IDs: derived via requirement IDs referenced above
 - Affected source references: see requirement source fields in requirements summary
-- Affected Stage 1 requirement areas: none
-- Gate recommendation impact: go
+- Affected Stage 1 requirement areas: blocked areas exist
+- Gate recommendation impact: no-go

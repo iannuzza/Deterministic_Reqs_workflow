@@ -43,12 +43,24 @@ Author: Alessandro Lucio IANNUZZI
 
 ### **1.1 Functionality** {#11-functionality}
 
-The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
+The Sensor-Hub block serves to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The Sensor-Hub accepts primary sensing input and produces analog input signal.
-- **Register reset on operation start.** Resets SENSOR_HUB_x registers whenever a new I2C operation starts.
+- The Sensor-Hub block accepts Primary sensing input. The Sensor-Hub block produces Analog input signal.
+- **The last 8-bits of the data stored in FIFO.** The last 8-bits of the data stored in FIFO contains the TAG field.
+- **SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers.** SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers defines how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12).
+- **The output port sleep master.** The output port sleep master is set to 1 when an I2C operation is not on-going.
+- **Only I2C target addressed through SLAVE0 DEV ADD register.** Only I2C target addressed through SLAVE0 DEV ADD register is the destination of an I2C Write Operation.
+- **Each data stored in FIFO.** Each data stored in FIFO is composed by 4 words (16bytes).
+- **All the SENSOR HUB x registers.** All the SENSOR HUB x registers is reset every time a new I2C operation starts.
+- **3 words (12bytes) of the data stored in FIFO.** 3 words (12bytes) of the data stored in FIFO contains the data from each I2C slave.
+- **24-bits of the data stored in FIFO.** 24-bits of the data stored in FIFO is reserved at '0'.
+- **any dvalid triggered (HW or SW).** When Quokka MasterBlaze µP runs (sleep master signal = 0), any dvalid triggered (HW or SW) is ignored.
+- **The trigger of sensor hub.** The trigger of sensor hub is possible in both ways, HW via dvalid masterblaze ext signal or SW using DVALID REGISTER.
+- **SLAVE0 NUMOP bitfield.** SLAVE0 NUMOP bitfield is ignored if an I2C Write operation is issued to the I2C Slave 0.
+- **All the values from 1 to 12.** All the values from 1 to 12 is valid for SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers.
+- **The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value.** The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value is not updated.
 
 ## **2. Source I/O** {#2-source-io}
 

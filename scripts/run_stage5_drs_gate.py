@@ -37,17 +37,7 @@ def _run(repo_root: Path, label: str, args: list[str]) -> int:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(
-        description=(
-            "Run Stage 5 DRS full flow. Optional requirements-only mode supports running "
-            "Stage 5 directly after Stage 2A without Stage 3/4 generation."
-        )
-    )
-    parser.add_argument(
-        "--requirements-only",
-        action="store_true",
-        help="Generate DRS from Stage 1 + Stage 2A artifacts and omit Stage 4 ARS references.",
-    )
+    parser = argparse.ArgumentParser(description="Run Stage 5 DRS full flow from an approved snapshot.")
     selector = parser.add_mutually_exclusive_group(required=True)
     selector.add_argument("--snapshot-id")
     selector.add_argument("--use-latest-approved", action="store_true")
@@ -73,8 +63,6 @@ def main() -> int:
 
     # Step 1 generates DRS markdown/CSV/stage report and runs the DRS crosscheck.
     drs_gen_cmd = ["scripts/run_drs_gen_spec_agent.py"]
-    if args.requirements_only:
-        drs_gen_cmd.append("--requirements-only")
     drs_gen_cmd += ["--snapshot-id", snapshot_id]
 
     rc = _run(repo_root, "Stage 5 DRS.1 Generate + crosscheck", drs_gen_cmd)

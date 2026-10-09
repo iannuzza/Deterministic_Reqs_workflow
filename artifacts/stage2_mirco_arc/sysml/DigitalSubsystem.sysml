@@ -1,22 +1,18 @@
 // Snapshot ID: snap-b2e8101b00dc6909feaed885
 // Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
 
-package STBIO_DigitalSubsystem {
+package DigitalArchitecture {
 
-    private import STBIO_Shared::*;
+    private import ArchitectureShared::*;
 
-    private import STBIO_Block_ADSP::*;
-    private import STBIO_Block_BISTController::*;
-    private import STBIO_Block_I2CSPIAHB::*;
-    private import STBIO_Block_IRQLogic::*;
-    private import STBIO_Block_ISPU::*;
-    private import STBIO_Block_MainController::*;
-    private import STBIO_Block_OTP::*;
-    private import STBIO_Block_PMU::*;
-    private import STBIO_Block_PadMux::*;
-    private import STBIO_Block_Regmap::*;
-    private import STBIO_Block_SensorHub::*;
-    private import STBIO_Block_SmartFIFO::*;
+    private import Block_ADSP::*;
+    private import Block_I2CSPIAHB::*;
+    private import Block_MainController::*;
+    private import Block_PadMux::*;
+    private import Block_PMU::*;
+    private import Block_Regmap::*;
+    private import Block_SensorHub::*;
+    private import Block_SmartFIFO::*;
 
     part def DigitalSubsystem {
         attribute displayName : String = "Digital Subsystem";
@@ -1915,14 +1911,10 @@ package STBIO_DigitalSubsystem {
             attribute sourcePage = "31";
         }
         part aDSP : ADSP;
-        part bISTController : BISTController;
         part i2CSPIAHB : I2CSPIAHB;
-        part iRQLogic : IRQLogic;
-        part iSPU : ISPU;
         part mainController : MainController;
-        part oTP : OTP;
-        part pMU : PMU;
         part padMux : PadMux;
+        part pMU : PMU;
         part regmap : Regmap;
         part sensorHub : SensorHub;
         part smartFIFO : SmartFIFO;

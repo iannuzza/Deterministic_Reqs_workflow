@@ -29,7 +29,7 @@ Source-fidelity and routing policy:
 - Tagged source requirements are extracted in source order through the configured tag terminator or the next tagged requirement ID; OCR-wrapped physical lines are joined with spaces and text from adjacent requirements is excluded.
 - A requirement with an explicit source parent is retained under that local source paragraph before block mapping. Equivalent local labels for one requirement family may be normalized into one child paragraph beneath the parent, while source titles, wording, IDs, and Stage 2A ownership remain traceable. This rule applies consistently to SRS, ARS, and DRS generation.
 - Reset/clock table rows, interaction-matrix edges, and dedicated lifecycle or configuration paragraphs retain their specialized routing precedence.
-- Each source requirement ID is emitted once. SRS uses the source ID in `Covers:`; ARS and DRS use the corresponding authored SRS ID.
+- Each source requirement ID is emitted once. Normative `Covers:` parentage follows the approved hierarchical req_id mapping, including approved direct-source lineage; source provenance is retained separately.
 
 Stage 0 execution policy:
 - `scripts/run_stage0_gate0.py` executes init, ontology output generation, Stage 0 report generation, ontology crosscheck, and gate validation.
@@ -49,7 +49,7 @@ DOCX-ready text-formatting policy:
 - Keep continuation text indented beneath its owning list item or paragraph; do not promote wrapped continuation text to a new heading, list, or paragraph.
 - Insert a blank line before each independent list or paragraph so Markdown and Pandoc preserve DOCX paragraph and list boundaries.
 - Keep headings separated from surrounding paragraphs by blank lines and preserve their hierarchy; do not create headings from ordinary numbered requirement prose.
-- Keep source IDs in the appropriate `Covers:` field only: source IDs for SRS and authored SRS IDs for ARS/DRS.
+- Keep the approved parent req_id in `Covers:` without forcing an immediately preceding specification level; retain source IDs in provenance and traceability.
 - Render source images and figures as actual image assets when available, preserving figure order, caption text, and source references; do not replace an image with a textual placeholder or invented description.
 - Preserve image aspect ratio and use stable width constraints suitable for DOCX; keep captions directly below their images and separate captions from surrounding paragraphs with blank lines.
 - When an image asset is unavailable, retain its exact caption and provenance as reference evidence and report the missing asset rather than fabricating visual content.
@@ -87,16 +87,16 @@ Architecture Map Review approval gate:
 CLI execution mode (deterministic, script-only):
 - Primary entrypoint: `python scripts/workflow_cli.py`
 - `taxonomy-update`: deterministic Stage 1 taxonomy refresh from OCR index
-- `arch-compare`: Stage 6 mixed-signal architecture comparison against another workspace project
+- `arch-compare`: optional architecture comparison against another workspace project
 - `run`: strict forward pipeline; one stage or an ascending range from any stage, one attempt per stage, validation after each stage
-- `drs-after-stage2a`: approved forward-only requirements path from Stage 2A to Stage 5
+- Stage 5 runs through `run --stage 5 --snapshot-id <approved_snapshot_id>`; requirement parentage follows the approved hierarchical req_id mapping.
 - `validate`: complete gate validation (`--all`)
 - `status`: runner/validator map and lock state
-- Range order is canonical and inclusive: `0 -> 1 -> 2 -> 2a -> 3 -> 4 -> 5`
+- Range order is canonical and inclusive: `0 -> 1 -> 2 -> 2a -> 3 -> 4 -> 5 -> 6 -> 7`
 - Stage `2a` is mandatory before Stage `3`
 - Any runner or gate failure stops execution; corrections rerun the affected stage or an ascending range.
-- Retries, loops, and backward transitions are prohibited; single-stage runs are allowed. Stage 4 is the sole conditional skip when its runner and validator both confirm zero Analog-category source requirement IDs.
-- Stage 6 comparison runs as a standalone command after Stage 5
+- Retries, loops, and backward transitions are prohibited; single-stage runs are allowed. Stage 4 always generates and validates the approved ARS allocation, including an approved-empty result when applicable; source categories do not decide stage skipping.
+- Stage 6 is Digital IPOS and Stage 7 is Analog IPOS. Architecture comparison is a standalone optional command after Stage 5.
 
 ```mermaid
 %%{init: {"flowchart": {"htmlLabels": true}}}%%
@@ -107,7 +107,7 @@ flowchart TD
 
     S1["Stage 1<br>Requirements Extraction + Taxonomy Update<br>Source-fidelity boundaries<br>Agent: requirements-extraction.agent.md<br>Runner: run_stage1_requirements_gate1.py<br>Cross-check: requirements-coverage-crosscheck.agent.md"] --> G1{"Gate 1"}
     G1 -->|PASS| S2
-    G1 -->|FAIL| STOP1[STOP<br>Correct blocker, restart from Stage 0]
+    G1 -->|FAIL| STOP1[STOP<br>Correct blocker, rerun Stage 1]
 
     S2["Stage 2<br>Requirements Specs + Mapping Preview<br>Agent: specs.agent.md<br>Runner: run_stage1_specs_gate2.py<br>Cross-check: specs-crosscheck.agent.md"] --> G2{"Gate 2"}
     G2 -->|PASS| MAPREV["Architecture Map Review<br>Reviewer approves or changes req-ID-to-block mapping,<br>classification, decision, and notes<br>GUI: Architecture Map Review / Excel CSV"]
@@ -116,29 +116,33 @@ flowchart TD
     MAPREV --> MAPG{"Reviewed mapping approved?<br>All rows approved/reassigned;<br>hash, approver, evidence match"}
     MAPG -->|APPROVED| S2A
     MAPG -->|CHANGE REQUIRED| MAPREV
-    G2 -->|FAIL| STOP2[STOP<br>Correct blocker, restart from Stage 0]
+    G2 -->|FAIL| STOP2[STOP<br>Correct blocker, rerun Stage 2]
 
     S2A["Stage 2 Micro-Architecture<br>Agent: micro-architectural-analysis.agent.md<br>Runner: run_stage2_micro_arc_gate.py<br>Cross-check: architectural-crosscheck.agent.md"] --> G2A{"Micro-Architecture Gate"}
-    G2A -->|PASS| S3
-    G2A -->|FAIL| STOP2A[STOP<br>Correct blocker, restart from Stage 0]
-    S2A -.->|approved forward shortcut| S5
+    G2A -->|PASS| FREEZE["Stage 2B Immutable Snapshot<br>Explicit reviewer approval and freeze<br>CLI: freeze-stage2b"]
+    FREEZE --> BIND["Select approved snapshot<br>One explicit immutable ID for all downstream stages<br>Parentage follows approved hierarchical req_id mapping"]
+    BIND --> S3
+    G2A -->|FAIL| STOP2A[STOP<br>Correct blocker, rerun Stage 2A]
 
     S3["Stage 3<br>SRS Generation<br>Source-parent precedence<br>Agent: srs_gen_spec.agent.md<br>Runner: run_stage3_srs_gate.py<br>Cross-checks: srs-crosscheck + srs-latex-crosscheck"] --> G3{"Stage 3 Gate"}
     G3 -->|PASS| S4
-    G3 -->|FAIL| STOP3[STOP<br>Correct blocker, restart from Stage 0]
+    G3 -->|FAIL| STOP3[STOP<br>Correct blocker, rerun Stage 3]
 
     S4["Stage 4<br>ARS Generation<br>Source-parent precedence<br>Agent: ars_gen_spec.agent.md<br>Runner: run_stage4_ars_gate.py<br>Cross-check: ars-crosscheck.agent.md"] --> G4{"Stage 4 Gate"}
     G4 -->|PASS| S5
-    S4 -->|No Analog source req IDs| SKIP4["Stage 4 skipped<br>Runner and validator confirm zero eligible Analog IDs"] --> S5
-    G4 -->|FAIL| STOP4[STOP<br>Correct blocker, restart from Stage 0]
+    G4 -->|FAIL| STOP4[STOP<br>Correct blocker, rerun Stage 4]
 
     S5["Stage 5<br>DRS Generation<br>Source-parent precedence<br>Agent: drs_gen_spec.agent.md<br>Runner: run_stage5_drs_gate.py<br>Cross-check: drs-crosscheck.agent.md"] --> G5{"Stage 5 Gate"}
     G5 -->|PASS| S6
-    G5 -->|FAIL| STOP5[STOP<br>Correct blocker, restart from Stage 0]
+    G5 -->|FAIL| STOP5[STOP<br>Correct blocker, rerun Stage 5]
 
-    S6["Stage 6<br>Mixed-Signal Architecture Comparison<br>Agent: architecture-comparison.agent.md<br>Runner: run_stage6_architecture_comparison.py<br>CLI: workflow_cli.py arch-compare"] --> NEXT["Optional continuation to later stages"]
-
-    NEXT --> S7["Stage 7+<br>Vectors / RTL / Synthesis / Optimization"]
+    S6["Stage 6<br>Digital IPOS<br>Runner: run_stage6_digital_ipos_gate.py"] --> G6{"Stage 6 Gate"}
+    G6 -->|PASS| S7
+    G6 -->|FAIL| STOP6[STOP<br>Correct blocker, rerun Stage 6]
+    S7["Stage 7<br>Analog IPOS<br>Runner: run_stage7_analog_ipos_gate.py"] --> G7{"Stage 7 Gate"}
+    G7 -->|PASS| SYSML["Final SysML<br>Snapshot-bound generation and central validation<br>CLI: final-sysml"]
+    G7 -->|FAIL| STOP7[STOP<br>Correct blocker, rerun Stage 7]
+    G5 -.->|optional| COMPARE["Architecture Comparison<br>Runner: run_stage6_architecture_comparison.py<br>CLI: arch-compare"]
 ```
 
 ## Stage 0 Phases And Gate 0 Criteria

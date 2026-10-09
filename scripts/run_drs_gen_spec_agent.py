@@ -67,7 +67,8 @@ from spec_document_contract import (
 from validate_downstream_coherence import (
     canonical_human_label,
     resolve_downstream_contract,
-    validate as validate_downstream_coherence,
+    validate_generated_drs,
+    validate_generation_inputs,
 )
 from low_power_descriptive import (
     assemble_low_power_descriptive,
@@ -1961,6 +1962,13 @@ def validate_drs_descriptive_artifacts(repo_root: Path) -> List[str]:
     expected = _drs_intro_rows([record.get("statement", "") for record in matrix_records],
                                {block.name for block in blocks})
     markdown = markdown_path.read_text(encoding="utf-8")
+    from spec_document_contract import (
+        clean_descriptive_review_text, clean_publication_line,
+        publication_text_is_accounted, validate_clean_document_presentation,
+    )
+    presentation_audit_path = markdown_path.with_name("descriptive_publication_audit.json")
+    presentation_audit = json.loads(presentation_audit_path.read_text(encoding="utf-8")) if presentation_audit_path.exists() else {}
+    findings.extend(validate_clean_document_presentation(markdown_path))
     intro_audit = [row for row in audit_rows if row.get("section") == "DRS introductory architecture"]
     docx_rows: Set[Tuple[str, str, str]] = set()
     docx_tables: List[List[str]] = []
@@ -2039,7 +2047,11 @@ def validate_drs_descriptive_artifacts(repo_root: Path) -> List[str]:
         role = (_drs_function_summary(block, drs_statements)
             if re.search(r"\b(?:represent|described by .* evidence)\b", block.function, re.I)
             else block.function)
-        if not block_section or f"| {block.name} | {role} | {relationship} |" not in block_section.group(1) or [block.name, role, relationship] not in docx_tables:
+        expected_row = f"| {block.name} | {role} | {relationship} |"
+        projected_row = clean_publication_line(expected_row)
+        if (not block_section or projected_row not in block_section.group(1)
+            or [block.name, clean_descriptive_review_text(role), clean_descriptive_review_text(relationship)] not in docx_tables
+            or (projected_row != expected_row and not any(expected_row in item["original"] for item in presentation_audit.get("omissions", [])))):
             findings.append(f"drs_block_role_or_relationship_missing:{block.name}")
     selected_topics = organize_descriptive_topics(matrix_records, DESCRIPTIVE_DIGITAL_TOPIC_SPECS)
     combined_entries = list(dict.fromkeys(
@@ -2067,9 +2079,9 @@ def validate_drs_descriptive_artifacts(repo_root: Path) -> List[str]:
             narrative = _drs_clock_section_summary(_drs_power_clock_routes(snapshot_clock_paths, blocks))
         if narrative is None:
             continue
-        if narrative not in body or narrative not in docx_text:
+        if not publication_text_is_accounted(narrative, body, docx_text, presentation_audit):
             findings.append(f"drs_digital_topic_narrative_missing:{topic}")
-    if functions_section and "Priority between simultaneous resource requesters: need clarification." not in functions_section.group(1):
+    if functions_section and not publication_text_is_accounted("Priority between simultaneous resource requesters: need clarification.", functions_section.group(1), docx_text, presentation_audit):
         findings.append("drs_arbitration_boundary_missing")
     shared_section = re.search(r"(?ms)^### (?:\*\*)?4\.2 Arbitration, control, and shared resources[^\n]*\n(.*?)(?=^### (?:\*\*)?4\.3 )", markdown)
     shared_narrative = _drs_section_interaction_summary(expected[DRS_INTRO_TOPICS[0][0]])
@@ -2078,7 +2090,7 @@ def validate_drs_descriptive_artifacts(repo_root: Path) -> List[str]:
     shared_rows = _drs_shared_facet_rows(blocks, expected[DRS_INTRO_TOPICS[0][0]])
     for facet, evidence in shared_rows:
         statement = f"{facet}: {evidence}"
-        if not shared_section or statement not in shared_section.group(1) or statement not in docx_text:
+        if not shared_section or not publication_text_is_accounted(statement, shared_section.group(1), docx_text, presentation_audit):
             findings.append(f"drs_shared_facet_missing:{facet}")
     performance_section = re.search(r"(?ms)^### (?:\*\*)?4\.6 Digital performance requirements[^\n]*\n(.*?)(?=^### (?:\*\*)?4\.7 )", markdown)
     reset_outputs = _drs_power_reset_outputs(port_rows, blocks)
@@ -2094,47 +2106,54 @@ def validate_drs_descriptive_artifacts(repo_root: Path) -> List[str]:
         snapshot_rows = load_sqlite_snapshot_input(repo_root, "DRS", snapshot_id=snapshot_match.group(1)).rows
         clock_paths = _drs_clock_path_rows(snapshot_rows)
         clock_narrative = _drs_clock_section_summary(clock_paths)
-        if (not timing_section or clock_narrative not in timing_section.group(1)
-            or clock_narrative not in docx_text):
+        if not timing_section or not publication_text_is_accounted(clock_narrative, timing_section.group(1), docx_text, presentation_audit):
             findings.append("drs_clock_section_summary_missing")
         pmu_routes = _drs_power_clock_routes(clock_paths, blocks)
         if pmu_routes:
             if not performance_section or "| Source requirement | Source clock | Destination clock | Frequency | Clock gating |" not in performance_section.group(1):
                 findings.append("drs_power_clock_table_missing")
             for path in pmu_routes:
-                if not performance_section or _drs_clock_path_markdown_row(path) not in performance_section.group(1) or list(path) not in docx_tables:
+                expected_row = _drs_clock_path_markdown_row(path)
+                projected_row = clean_publication_line(expected_row)
+                if (not performance_section or projected_row not in performance_section.group(1)
+                        or [clean_descriptive_review_text(value) for value in path] not in docx_tables
+                        or (projected_row != expected_row and not any(expected_row in item["original"] for item in presentation_audit.get("omissions", [])))):
                     findings.append(f"drs_power_clock_route_missing:{path[0]}")
-        elif not performance_section or "Power/clock destination coverage: need clarification." not in performance_section.group(1):
+        elif not performance_section or not publication_text_is_accounted("Power/clock destination coverage: need clarification.", performance_section.group(1), docx_text, presentation_audit):
             findings.append("drs_power_clock_coverage_missing")
         unresolved_routes = [path[0] for path in clock_paths if path[1] == "need clarification"]
         if unresolved_routes:
             boundary = "Clock-path endpoints requiring clarification: " + ", ".join(unresolved_routes) + "."
-            if not performance_section or boundary not in performance_section.group(1) or boundary not in docx_text:
+            if not performance_section or not publication_text_is_accounted(boundary, performance_section.group(1), docx_text, presentation_audit):
                 findings.append("drs_power_clock_endpoint_boundary_missing")
         for source_id, source, target in _drs_sync_connection_rows(snapshot_rows, port_rows):
             if not any(source.startswith(block.name + ".") for block in blocks if "clock" in block.function.casefold()):
                 continue
             statement = f"Reset connection {source_id}: {source} -> {target}; release/synchronization behavior: need clarification."
-            if not performance_section or statement not in performance_section.group(1) or statement not in docx_text:
+            if not performance_section or not publication_text_is_accounted(statement, performance_section.group(1), docx_text, presentation_audit):
                 findings.append(f"drs_power_reset_route_missing:{source_id}")
         if clock_paths:
             header = "| Source requirement | Source clock | Destination clock | Frequency | Clock gating |"
             if not timing_section or header not in timing_section.group(1) or ["Source requirement", "Source clock", "Destination clock", "Frequency", "Clock gating"] not in docx_tables:
                 findings.append("drs_clock_path_table_missing")
             for path in clock_paths:
-                if not timing_section or _drs_clock_path_markdown_row(path) not in timing_section.group(1) or list(path) not in docx_tables:
+                expected_row = _drs_clock_path_markdown_row(path)
+                projected_row = clean_publication_line(expected_row)
+                if (not timing_section or projected_row not in timing_section.group(1)
+                        or [clean_descriptive_review_text(value) for value in path] not in docx_tables
+                        or (projected_row != expected_row and not any(expected_row in item["original"] for item in presentation_audit.get("omissions", [])))):
                     findings.append(f"drs_clock_path_missing:{path[0]}")
-        elif not timing_section or "Clock distribution paths and clock-gating behavior: need clarification." not in timing_section.group(1):
+        elif not timing_section or not publication_text_is_accounted("Clock distribution paths and clock-gating behavior: need clarification.", timing_section.group(1), docx_text, presentation_audit):
             findings.append("drs_clock_path_boundary_missing")
         for source_id, source, target in _drs_sync_connection_rows(snapshot_rows, port_rows):
             boundary = (f"Reset/synchronization-labelled connection {source_id}: {source} -> {target}; "
                         "synchronization implementation: need clarification.")
-            if not timing_section or boundary not in timing_section.group(1) or boundary not in docx_text:
+            if not timing_section or not publication_text_is_accounted(boundary, timing_section.group(1), docx_text, presentation_audit):
                 findings.append(f"drs_sync_connection_boundary_missing:{source_id}")
     else:
         findings.append("drs_clock_path_snapshot_missing")
     if not timing_section or (not _drs_has_synchronization_evidence(drs_statements)
-                              and "Clock-domain crossing, reset-domain crossing, and measured interrupt response time: need clarification." not in timing_section.group(1)):
+                              and not publication_text_is_accounted("Clock-domain crossing, reset-domain crossing, and measured interrupt response time: need clarification.", timing_section.group(1), docx_text, presentation_audit)):
         findings.append("drs_synchronization_boundary_missing")
     if "This DRS covers digital subsystem behavior" in markdown or "System context is summarized to scope" in markdown:
         findings.append("drs_intro_generic_placeholder")
@@ -2781,7 +2800,6 @@ def _write_drs_markdown(
     non_block_context_rows: List[Dict[str, str]],
     crosscheck_decision: str,
     missing_inputs: List[Path],
-    requirements_only_mode: bool,
     connection_matrix_upstream: Dict[str, Tuple[str, str]],
     source_requirement_ids: Set[str],
     srs_upstream_map: Dict[str, str],
@@ -2866,8 +2884,7 @@ def _write_drs_markdown(
     lines.append("#### Table 2. Reference documents")
     lines.append("| Doc name | Version | Author |")
     lines.append("|---|---|---|")
-    if not requirements_only_mode:
-        lines.append(f"| artifacts/stage4_ars/analog_requirements_specification.md | {GENERATED_SPEC_VERSION} | ARS Gen Spec Agent |")
+    lines.append(f"| artifacts/stage4_ars/analog_requirements_specification.md | {GENERATED_SPEC_VERSION} | ARS Gen Spec Agent |")
     lines.append(f"| artifacts/stage1_requirements/requirements_summary.csv | {GENERATED_SPEC_VERSION} | Requirements Extraction Agent |")
     lines.append(f"| artifacts/stage2_mirco_arc/micro_architecture_report.md | {GENERATED_SPEC_VERSION} | Micro-Architectural Analysis Agent |")
     lines.append(f"| artifacts/stage2_mirco_arc/requirement_to_block_traceability.csv | {GENERATED_SPEC_VERSION} | Micro-Architectural Analysis Agent |")
@@ -3480,6 +3497,8 @@ def _write_drs_markdown(
     lines_rendered = _ensure_table_block_spacing(lines_rendered)
     lines_rendered = _insert_visible_paragraph_spacers(lines_rendered)
     lines_rendered = _terminate_authored_requirement_blocks(lines_rendered)
+    from spec_document_contract import apply_clean_document_presentation
+    lines_rendered = apply_clean_document_presentation(lines_rendered, output_path, "DRS")
     output_path.write_text("\n".join(lines_rendered) + "\n", encoding="utf-8")
 
 
@@ -3492,7 +3511,6 @@ def _write_stage_report(
     full_traceability_count: int,
     unassigned_count: int,
     crosscheck_decision: str,
-    requirements_only_mode: bool,
 ) -> str:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     today = datetime.now().strftime("%Y-%m-%d")
@@ -3519,7 +3537,7 @@ def _write_stage_report(
         f"Date: {today}",
         "",
         f"DRS generation status: {status}",
-        f"DRS mode: {'requirements-only (Stage1 + Stage2A)' if requirements_only_mode else 'full inputs'}",
+        "DRS mode: full inputs",
         "",
         "## Input artifact coverage summary",
         f"- Present inputs: {len(present_inputs)}",
@@ -3671,11 +3689,6 @@ def main() -> int:
     parser.add_argument("--out-traceability-csv", default="artifacts/stage5_drs/drs_traceability_matrix.csv", help="Output DRS traceability CSV path")
     parser.add_argument("--out-stage-report", default="artifacts/orchestrator/stage_drs_report.md", help="Output Stage DRS report path")
     parser.add_argument("--docx-reference-template", default=DOCX_REFERENCE_TEMPLATE, help="DOCX reference template path for pandoc conversion")
-    parser.add_argument(
-        "--requirements-only",
-        action="store_true",
-        help="Generate DRS from Stage 1 + Stage 2A artifacts only and omit Stage 4 ARS references.",
-    )
     parser.add_argument("--snapshot-id", help="Explicit approved canonical snapshot ID")
     parser.add_argument("--use-latest-approved", action="store_true", help="Explicitly select the latest approved snapshot")
     parser.add_argument("--regenerate-downstream", action="store_true", help="Regenerate from the explicit approved snapshot before coherence validation passes")
@@ -3720,11 +3733,10 @@ def main() -> int:
         snapshot_id=args.snapshot_id,
     )
     downstream_contract = resolve_downstream_contract(repo_root, requirement_input.snapshot_id)
-    coherence = validate_downstream_coherence(repo_root, requirement_input.snapshot_id)
-    blocking = [finding for finding in coherence["findings"] if not (
-        args.regenerate_downstream and finding.startswith(("DRS_CONTRACT:", "DRS: "))
-    )]
-    if blocking:
+    coherence = validate_generation_inputs(
+        repo_root, requirement_input.snapshot_id, upstream_stages=("SRS",),
+    )
+    if coherence["decision"] != "PASS":
         raise RuntimeError(f"Downstream snapshot coherence blocked DRS generation: {coherence['finding_count']} findings")
     _append_log(repo_root, script_name, f"AUTHORITATIVE_SNAPSHOT snapshot_id={selection['selected_snapshot_id']} mode={selection['selection_mode']} user={runtime_user_name()}")
     summary_csv = requirement_input.source_path
@@ -3940,7 +3952,6 @@ def main() -> int:
             non_block_context_rows,
             crosscheck_decision,
             missing_inputs,
-            args.requirements_only,
             connection_matrix_upstream,
             {requirement.source_req_id for requirement in all_requirements},
             srs_upstream_map,
@@ -3985,7 +3996,6 @@ def main() -> int:
             full_traceability_count,
             unassigned_count,
             crosscheck_decision,
-            args.requirements_only,
         )
 
         with out_stage_report.open("a", encoding="utf-8") as handle:
@@ -4000,7 +4010,7 @@ def main() -> int:
         drs_crosscheck_rc = subprocess.run(drs_crosscheck_cmd, cwd=repo_root).returncode
         if drs_crosscheck_rc != 0:
             raise RuntimeError(f"DRS crosscheck failed with exit code {drs_crosscheck_rc}")
-        final_coherence = validate_downstream_coherence(repo_root, requirement_input.snapshot_id)
+        final_coherence = validate_generated_drs(repo_root, requirement_input.snapshot_id)
         if final_coherence["decision"] != "PASS":
             raise RuntimeError("Final downstream coherence failed: " + "\n".join(final_coherence["findings"]))
     except Exception as exc:

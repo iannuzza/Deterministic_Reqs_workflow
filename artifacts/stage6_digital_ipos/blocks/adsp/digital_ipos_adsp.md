@@ -1,6 +1,6 @@
 # **Digital IPOS - ADSP** {#digital-ipos---adsp}
 
-- Snapshot: `snap-b2e8101b00dc6909feaed885`
+- Snapshot: `snap-73c872b1307b6adb5eaf843e`
 
 Author: Alessandro Lucio IANNUZZI
 
@@ -16,6 +16,7 @@ Author: Alessandro Lucio IANNUZZI
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 0.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 digital IPOS block baseline | Alessandro Lucio IANNUZZI |
+| 0.2 | 2026-10-09 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
 | Requirement | Internal link |
@@ -48,9 +49,47 @@ The ADSP block is designed to execute ADSP firmware for OTP boot/write/test and 
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The ADSP accepts acquired samples and configuration data and produces elaborated signal data and metadata.
-- **Operation start conditions.** Starts a new operation only when quokka_run is low and one of OTP_TEST, OTP_WRITE, or OTP_BOOT is set to 1; OTP_BOOT initiates the BOOT routine while quokka_run is low.
-- **OTP memory transfer.** Copies data from OTP memory to OTP registers and OTP regmap to OTP memory.
+The ADSP block accepts Acquired samples and configuration data and produces Elaborated signal data and metadata.
+
+### **1.4 Supported block functions** {#14-supported-block-functions}
+
+OTP_WRITE, OTP_BOOT and OTP_TEST bits are cleared by ADSP at the end of their respective operation.
+
+OTP_IREF_WAKEUP is set to one by an external I2C/SPI to AHB write before initiating a new OTP_TEST or OTP_WRITE operation and is setted to zero by an external I2C/SPI to AHB write at the end of OTP_TEST or OTP_WRITE operation.
+
+During WRITE routine, ADSP allows copying all OTP Registers into the OTP Memory only if the location 0x24 of OTP Memory (OTP[24] in the following diagram) is not set to 0xFF and copies the content of the OTP regmap into the OTP memory, following the procedure to burn the fuses as expressed in the OTP datasheet.
+
+A new operation starts only when quokka_run is low, and one between OTP_TEST bit, OTP_WRITE bit or OTP_BOOT bit is written to 1.
+
+After startup phase, once started with an operation, the IP ignores any further start incoming transactions.
+
+During the Soft Reset routine, ADSP writes the ADSP RAM with the value 0.
+
+Only the first 3.5Kbyte of ADSP RAM is cleared, from address 0x000 to address 0xDFF.
+
+During OTP boot operation, the ADSP copies the content of the OTP memory into the OTP registers, following the procedure to access OTP memory.
+
+The BOOT routine starts when the OTP_BOOT bit rises and completes when quokka_boot_end rises.
+
+During the WRITE routine and after copying all OTP Registers into the OTP Memory, ADSP compares each value inside the OTP memory with the corresponding value in OTP Registers to check if the WRITE routine has been succesfull. If the WRITE routine has been succesfull, ADSP writes 0xFF into the last location of the OTP memory.
+
+During BOOT routine, ADSP first reads the last location of the OTP memory, at address 0x7F.
+
+If the content is 0xFF, called “lifecycle” byte, then the READ operation proceeds from address 0 to address 0x2F; otherwise, ADSP does not perform any further reads.
+
+The WRITE routine starts when OTP Write Bit rises and completes when quokka_run falls.
+
+If during the start of a new operation, more than one bit is written into CONTROL_A reg in the same write operation, ADSP executes only the routine at higher priority and discard the others. The priority order is 1: SOFT RESET routine, 2: OTP WRITE routine, 3: OTP TEST routine and 4: OTP BOOT routine , from higher to lower priority.
+
+To move OTP signal, ADSP writes a new value in a regbank by AHB protocol.
+
+The TEST routine starts when OTP Test Bit rises and completes when quokka_run falls.
+
+The Soft Reset routine starts when SOFT_RESET Bit (in CONTROL_A register) rises and completes when quokka_run falls.
+
+The TEST routines allows reading an 8-bit word on OTP of a specific address written in OTP_A register, and write this value in OTP_D_TEST register.
+
+To perform a BOOT routine, OTP_BOOT bit is written when quokka_run is low.
 
 ## **2. Source I/O** {#2-source-io}
 

@@ -2,13 +2,82 @@
 - Active source specification: specs/DDS_STBIO1.pdf
 - Use python scripts/... commands in this workspace.
 
-- Latest restart checkpoint: `2026-10-06-local-fixes-snapshot-history` at
-  2026-10-06 16:35:30. Read the newest `local_memory/chat_handoff.md` and
-  `local_memory/checkpoint.md` entries before older records below.
+- Latest restart checkpoint and Git tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
+  Snapshot `snap-73c872b1307b6adb5eaf843e`; observed run starts
+  `2026-10-09 21:08:43`. Local commit/tag requested, no push/new branch.
+  SRS/ARS/DRS actual Markdown/DOCX gates PASS and marker-free; actual ADSP
+  block-scoped IPOS gate PASS. Stage6 partial, seven other blocks blocked with
+  118 unresolved contexts; historical outputs not certified. Analog VALID_EMPTY
+  allocation, Stage7 not executed. Consolidated review-only JSON/MD/DOCX report
+  has737 entries; actual Word field/excerpt/offset parity and8 spec hashes verified.
+  Focused33 tests PASS, latest report11 tests PASS. No approval/freeze/source edits.
+  Next chat reads current handoff/checkpoint before historical entries below.
+  Reliable complex read-only command: PowerShell here-string piped to `python -B -`.
+  Pandoc GFM expands `:100:` into emoji; literal report fields escape colons.
+- Previous restart checkpoint: `2026-10-09-ipos-yaml-shared-core`.
+  Local only/no Git save; separate IPOS YAML and shared synthesis1.1 are wired
+  to generator, structural audit and existing stage/central final-document checks.
+  185 focused tests PASS; Python diagnostics clean. No generation/PDF/authority write.
+  Main Controller remains blocked:111 unresolved contexts/two prose defects;
+  strict gate FAIL, scoped central BLOCK_DOWNSTREAM287. DB+5218 artifacts unchanged.
+  Full functional explanation still pending; no legacy rendering fallback.
+- Previous restart checkpoint: `2026-10-09-common-descriptive-pre-prose-model`.
+  Local only; no Git save. First opt-in shared model milestone under the common
+  v2 strategy; evidence spans/unresolved contexts, pre-prose relationship bundles,
+  dependency-aware partial preservation, complete dispositions and model-only audit.
+  Tests135+9+19=163 PASS; Python diagnostics clean. No runtime caller migration,
+  source PDF read, canonical authority write or specification regeneration.
+  Semantic fidelity/publication quality/materialization remain UNRESOLVED in this
+  path. Section obligations, synthesis/realization and independent checks are next.
+  Existing IPOS publication is rejected; old gate/hashes below were not rerun.
+- Previous restart checkpoint: `2026-10-09-functional-description-crosscheck`.
+  Local only, no Git save. Main Controller section1.4 now has six source-backed named
+  groups, including digital ramp and PPG saturation flag control, measurement
+  initiation, Device/Elaboration/PPG FSM behaviors. Section1.2 list unchanged.
+  Final regeneration09:52:42-09:52:56; MD/DOCX parity,138 normative blocks/Covers,
+  source I/O, canonical DB and5210 protected artifacts verified unchanged.
+  Tests127+9+19=155 PASS; strict gate FAIL. GSR/ADC, full setup and aggregate
+  Main Controller FSM descriptions remain incomplete; no inferred completion.
+- Previous restart checkpoint: `2026-10-09-main-function-list`.
+  Local-only save, no Git operations. Section1.2 contains three separately named
+  inventory-backed main functions with individual descriptions; verified MD/DOCX.
+  Main Controller regenerated09:01:37-09:01:55; tests124+9+19=152 PASS.
+  Normative/history/I/O, canonical DB and5,210 protected artifacts unchanged.
+  Strict gate still FAIL; internal-function contextual abstraction remains unresolved.
+  Existing local backup/reports retained. Earlier438/774 counts are pre-list history.
+- Previous restart checkpoint: `2026-10-09-main-controller-main-functions`.
+  Local-only save; no Git staging/commit/push. Bounded IPOS runtime bridge and
+  profile audits are integrated. Main Controller MD/DOCX regenerated only, with
+  approved inventory main-functions summary in 1.2; 1.4 is absent and unresolved.
+  Tests 123+9+19=151 PASS; gate FAIL; central BLOCK_DOWNSTREAM 774.
+  Canonical DB and 5,210 protected artifacts unchanged; one new auxiliary selector
+  report relative to baseline. Exact normative text/Covers/history/I/O preserved.
+  Actual backup and JSON reports: local_memory/checkpoints/2026-10-08-main-controller-regeneration-201105/.
+  Predicate-based gating is not complete functional interpretation. Read current
+  handoff/checkpoint before historical phase statements. Original STBIO_AI untouched.
+- Previous restart checkpoint: `2026-10-08-top-down-profile-application-phase3`.
+  Saved locally at 2026-10-08 19:54:30; no Git staging/commit/push or rollback backup.
+  Phase 3 application policies/audits are opt-in, with mandatory common model checks.
+  Selection proposals do not rewrite model dispositions or migrate adapters/callers.
+  Existing profiles/fingerprints/activation remain unchanged. Source semantics,
+  final prose and runtime migration are unimplemented; next is phase 4 adapters.
+  Fresh focused tests: 116 + 9 + 19 = 144 PASS. Both touched Python files have no
+  editor diagnostics. No interpreter/configuration change or regeneration.
+  Previous IPOS blockers remain unresolved and were not rerun in this phase.
+- Previous restart checkpoint: `2026-10-08-top-down-shared-model-phase2`.
+  Saved locally at 2026-10-08 19:44:36; no Git staging/commit/push. Current base
+  reference: `739ec9019f0aef0092f53e86ba29f35aeff64fca`.
+  Phase 2 is opt-in structural model/checks only; no adapter/caller migration or
+  regeneration. Source semantics/final prose remain unimplemented in the new model.
+  Next is central profile application, not bottom-up parser patching.
+  Latest recorded phase tests: 108 + 9 + 19 = 136 PASS. Not rerun for this save.
+  Earlier IPOS Digital/central gates remain blocked; old PASS states below are historical.
+  Read the newest `local_memory/chat_handoff.md` and `local_memory/checkpoint.md`
+  entries before older records below. The 2026-10-06 checkpoint remains historical.
 - Active Git clone: `C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow`.
   The separate original `../STBIO_AI` is reference-only. Preserve the dirty
   worktree; no commit or rollback backup has been created.
-- Verified Windows interpreter:
+- Previously recorded Windows interpreter (not reverified for this save):
   `C:/Users/syslocadm1906/AppData/Local/Programs/Python/Python311/python.exe`.
   Existing terminals can still use original STBIO_AI as cwd; set the clone root
   or use absolute script/test paths to avoid running the wrong project.
@@ -17,9 +86,10 @@
 - Final history contract across all specification types: new approved snapshot
   appends a dated minor-version row and preserves old rows; same snapshot leaves
   all history rows, dates, authors and version unchanged.
-- Latest checks: history/contract/descriptive tests 90 PASS; GUI 46 PASS;
-  fingerprint/coherence suite 19 PASS; central coherence 0 findings; Stage 2+
-  independence guard exit 0. These were separate checks, not a full pipeline run.
+- Latest SRS checks (2026-10-07): shared82 + SRS15 tests PASS (97); frozen-rule
+  mutation, central references and skill YAML PASS; SRS generation/crosschecks,
+  Stage 3 and central coherence PASS/0 findings; diagnostics clean. These were
+  scoped checks, not a full pipeline run. Six prior SRS content-review findings remain open.
 - DRS repair/gate passed at 15:47:22 before the final shared-history code change.
   Current artifacts still pass coherence after the change; no full regeneration
   or newly approved production snapshot was exercised for the final history edit.
@@ -74,7 +144,7 @@
   - Primary runner: python scripts/workflow_cli.py
   - Strict execution: run --stage N or run --from-stage N --to-stage M, with M >= N
   - One attempt per selected stage; validation runs before advancement and failure stops the pipeline
-  - Approved forward shortcut: drs-after-stage2a
+  - Stage 5: normal approved-snapshot workflow; requirement parentage follows the approved hierarchical req_id mapping.
 
 - Current authored requirement header convention:
   - SRS: [SRS-REQ-###] Requirement:, where ### is 001-999

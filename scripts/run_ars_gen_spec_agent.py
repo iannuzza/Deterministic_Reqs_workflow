@@ -49,7 +49,7 @@ from allocation_ledger import refresh_ledger
 from validate_downstream_coherence import (
     canonical_human_label,
     resolve_downstream_contract,
-    validate as validate_downstream_coherence,
+    validate_generation_inputs,
 )
 from low_power_descriptive import assemble_low_power_descriptive, render_low_power_topics, write_low_power_audit
 
@@ -1641,6 +1641,8 @@ def _write_ars_markdown(
     lines_rendered = _ensure_table_block_spacing(lines_rendered)
     lines_rendered = _insert_visible_paragraph_spacers(lines_rendered)
     lines_rendered = _terminate_authored_requirement_blocks(lines_rendered)
+    from spec_document_contract import apply_clean_document_presentation
+    lines_rendered = apply_clean_document_presentation(lines_rendered, output_path, "ARS")
     output_path.write_text("\n".join(item.replace("•", "-").replace("●", "-") for item in lines_rendered) + "\n", encoding="utf-8")
 
 
@@ -1804,8 +1806,8 @@ def main() -> int:
         snapshot_id=args.snapshot_id,
     )
     downstream_contract = resolve_downstream_contract(repo_root, requirement_input.snapshot_id)
-    coherence = validate_downstream_coherence(repo_root, requirement_input.snapshot_id)
-    if not args.regenerate_downstream and coherence["decision"] != "PASS":
+    coherence = validate_generation_inputs(repo_root, requirement_input.snapshot_id, upstream_stages=("SRS",))
+    if coherence["decision"] != "PASS":
         raise RuntimeError(f"Downstream snapshot coherence blocked ARS generation: {coherence['finding_count']} findings")
     _append_log(repo_root, script_name, f"AUTHORITATIVE_SNAPSHOT snapshot_id={selection['selected_snapshot_id']} mode={selection['selection_mode']} user={runtime_user_name()}")
     summary_csv = requirement_input.source_path

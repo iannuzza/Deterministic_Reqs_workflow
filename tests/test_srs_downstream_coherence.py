@@ -31,6 +31,7 @@ from generate_snapshot_reports import (
 from run_srs_gen_spec_agent import _filter_mode_rows_to_srs_allocations, _write_stage_report
 from report_generation_service import generate_snapshot_report
 from workflow_gui import WorkflowGUI, tk
+import generate_snapshot_reports
 
 
 class EmptySrsContract:
@@ -42,6 +43,35 @@ class EmptySrsContract:
 
 
 class SrsDownstreamCoherenceTests(unittest.TestCase):
+    def test_snapshot_reports_refresh_ledger_before_reports_and_pin_selection(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            resolved = SimpleNamespace(snapshot_id="new-approved", rows=())
+            events = []
+
+            def resolve(*args, **kwargs):
+                events.append(("resolve", kwargs.get("snapshot_id")))
+                return resolved, {}
+
+            def refresh(repo_root, *, snapshot_id):
+                self.assertEqual(repo_root, root)
+                events.append(("ledger", snapshot_id))
+
+            def report(*args, **kwargs):
+                events.append(("report", kwargs["snapshot_id"]))
+
+            with patch("generate_snapshot_reports.Path") as path, \
+                    patch("generate_snapshot_reports.resolve_complete_authoritative_input", side_effect=resolve), \
+                    patch("generate_snapshot_reports.refresh_ledger", side_effect=refresh), \
+                    patch("generate_snapshot_reports._read_csv", return_value=[]), \
+                    patch("generate_snapshot_reports.generate_snapshot_report", side_effect=report), \
+                    patch.object(sys, "argv", ["generate_snapshot_reports.py", "--use-latest-approved", "--report", "drs"]), \
+                    patch("builtins.print"):
+                path.return_value.resolve.return_value.parents.__getitem__.return_value = root
+                self.assertEqual(generate_snapshot_reports.main(), 0)
+            self.assertEqual(events, [("resolve", None), ("ledger", "new-approved"),
+                                      ("resolve", "new-approved"), ("report", "new-approved")])
+
     def test_traceability_boxes_contain_wrapped_text_at_every_zoom(self):
         root = tk.Tk()
         root.withdraw()
@@ -560,6 +590,12 @@ class OperationalFingerprintTests(unittest.TestCase):
             'attribute sourceReqId = "SOURCE_001";\n',
             encoding="utf-8",
         )
+        for filename in ("SystemArchitecture.sysml", "shared_definitions.sysml"):
+            (sysml_root / filename).write_text(
+                f"// Snapshot ID: {self.contract.snapshot_id}\n"
+                f"// Downstream contract fingerprint: {self.fingerprint}\n",
+                encoding="utf-8",
+            )
 
     def findings(self):
         with patch("validate_downstream_coherence.created_ipos_block_directories", return_value={}):

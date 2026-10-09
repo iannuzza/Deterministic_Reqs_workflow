@@ -9,39 +9,39 @@
     "evidence_hashes": {
       "requirements_summary_csv": {
         "path": "artifacts/stage1_requirements/integrated_requirements.csv",
-        "sha256": "19be065b5a11ef44aaed38641d93827249480615504756c7336c42f9aa00916c"
+        "sha256": "3d036916a8f9baecb5d370fd548f8ce295c97eb7b08c50109088e94933a4580d"
       },
       "ontology_requirement_links_csv": {
         "path": "artifacts/stage0_ontology/ontology_requirement_links.csv",
-        "sha256": "28dfcc98be8ceaa3b70308a6b822a98bded7d035b78c163609d2f109a32b98c1"
+        "sha256": "720bf547f764dce6c361a6980f0794af3083b760f72ce4789468b351c0dcafed"
       },
       "semantic_issues_md": {
         "path": "artifacts/stage0_ontology/semantic_issues.md",
-        "sha256": "e269d17700ea86f63571df34e957d3d8c74b458cc54d1af786ac77b19327c4cc"
+        "sha256": "3c642564650d136fbf4432ea5e5fb13a37e301ed25e9a8b11817d1536de4ee37"
       }
     }
   },
   "review_package": {
-    "generated_at": "2026-10-06T13:56:31",
+    "generated_at": "2026-10-09T16:08:59",
     "source_artifact_hashes": {
       "requirements_summary_csv": {
         "path": "artifacts/stage1_requirements/integrated_requirements.csv",
-        "sha256": "19be065b5a11ef44aaed38641d93827249480615504756c7336c42f9aa00916c"
+        "sha256": "3d036916a8f9baecb5d370fd548f8ce295c97eb7b08c50109088e94933a4580d"
       },
       "ontology_requirement_links_csv": {
         "path": "artifacts/stage0_ontology/ontology_requirement_links.csv",
-        "sha256": "28dfcc98be8ceaa3b70308a6b822a98bded7d035b78c163609d2f109a32b98c1"
+        "sha256": "720bf547f764dce6c361a6980f0794af3083b760f72ce4789468b351c0dcafed"
       },
       "semantic_issues_md": {
         "path": "artifacts/stage0_ontology/semantic_issues.md",
-        "sha256": "e269d17700ea86f63571df34e957d3d8c74b458cc54d1af786ac77b19327c4cc"
+        "sha256": "3c642564650d136fbf4432ea5e5fb13a37e301ed25e9a8b11817d1536de4ee37"
       }
     },
     "mapping_preview_csv": {
       "path": "artifacts/stage1_specs/architecture_mapping_preview.csv",
-      "sha256": "6de102c284254837a067973fed08275886ab84abbd366cf393f36cdd978be239"
+      "sha256": "1c881387d2542440dbbe1091c041082c856fbbe9157d33e5c85737702b418933"
     },
-    "draft_profile_sha256": "6fdfe10f46befb68302fc6471fd0c882cbeff5dfd6f88e47bf9c1c93878e720b",
+    "draft_profile_sha256": "99408ebf35f43c6bbf86f96cc989c073d37039f4200273acb6359e96de55f2c0",
     "required_approval_checks": [
       "approval.status is approved",
       "approved_by and approved_at are non-empty",
@@ -59,10 +59,10 @@
       "function": "During the Configuration Phase (IDLE STATE of the Device_FSM), the user shall be able to: \u2022 Configure Bio-Channel or Optical Channel, the ADC Calibration and then Start a measurement cycle. \u2022 Put the device in Debug-Mode. [TO: IPOS_MAIN_CTRL]; \u2022 The user shall set the number of clocks for sampling ECG data from ADC in ADC_CONFIG_ECG register. [TO: IPOS_MAIN_CTRL]",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 36,
+      "candidate_requirement_count": 41,
       "candidate_relations": {
-        "related:supports": 37,
-        "supports": 36
+        "related:supports": 40,
+        "supports": 41
       }
     },
     "ADSP": {
@@ -90,12 +90,12 @@
       "function": "Output scl_master_out of sensor hub shall be connected to enable of output buffer of sensor hub's SCL PAD in case it is a bi-directional PAD). [Vpriority High] [TO: IPOS_Senshub_MB_i2c]",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 6,
+      "candidate_requirement_count": 7,
       "candidate_relations": {
         "related:connected-to": 16,
         "connected-to": 8,
-        "related:supports": 8,
-        "supports": 4
+        "related:supports": 10,
+        "supports": 6
       }
     },
     "Bus": {
@@ -116,12 +116,12 @@
       "function": "The u_stbio1_top.dig_wrapper_LV.u_p signal shall be connected to the mu.resetn_fifou_stbio1_top.dig_wrapper_LV.u_multi_channel_fifo_top.HRESETn signal.; During the Configuration Phase (IDLE STATE of the Device_FSM), the user shall be able to: \u2022 Configure Bio-Channel or Optical Channel, the ADC Calibration and then Start a measurement cycle. \u2022 Put the device in Debug-Mode. [TO: IPOS_MAIN_CTRL]",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 40,
+      "candidate_requirement_count": 45,
       "candidate_relations": {
         "connected-to": 1,
         "related:connected-to": 2,
-        "related:supports": 43,
-        "supports": 39
+        "related:supports": 49,
+        "supports": 44
       }
     },
     "Chopper": {
@@ -171,10 +171,10 @@
       "function": "11.1. XBAR Connection Matrix Destination Source Regmap SENSOR HUB ISPU FIFO ADSP Main Controller",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 32,
+      "candidate_requirement_count": 33,
       "candidate_relations": {
-        "related:supports": 82,
-        "supports": 25,
+        "related:supports": 84,
+        "supports": 26,
         "connected-to": 5,
         "related:connected-to": 7,
         "constrains": 1,
@@ -292,7 +292,7 @@
       "function": "To perform a SOFT Reset procedure, the user shall perform the following steps: 1. If Mode Operation has been set to 1, shall be reset to 0 2. Set the Soft Reset Main Controller Bit (SW_RESETN_REG[0]) to 0 for at least 1 ms 3. Set the Soft Reset Main Controller Bit (SW_RESETN_REG[0]) to 1 4. Wait for the DEVICE_STATUS_REGISTER to reach the IDLE Value; The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 124,
+      "candidate_requirement_count": 167,
       "candidate_relations": {}
     },
     "Memory": {
@@ -315,10 +315,10 @@
       "function": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1.; The stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft signal shall be connected to the stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk signal, with frequency 16 MHz and with clock gating stbio1_top.dig_wrapper_LV.u_pm u.adsp_run | stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode | ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable.",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 67,
+      "candidate_requirement_count": 71,
       "candidate_relations": {
-        "related:supports": 115,
-        "supports": 57,
+        "related:supports": 117,
+        "supports": 61,
         "connected-to": 10,
         "related:connected-to": 18
       }
@@ -338,13 +338,13 @@
       "candidate_relations": {}
     },
     "PGA": {
-      "function": "The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac",
+      "function": "The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac; When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0.",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 1,
+      "candidate_requirement_count": 2,
       "candidate_relations": {
-        "supports": 1,
-        "related:supports": 1
+        "supports": 2,
+        "related:supports": 2
       }
     },
     "PMU": {
@@ -446,10 +446,10 @@
       "function": "During the Configuration Phase (IDLE STATE of the Device_FSM), the user shall be able to: \u2022 Configure Bio-Channel or Optical Channel, the ADC Calibration and then Start a measurement cycle. \u2022 Put the device in Debug-Mode. [TO: IPOS_MAIN_CTRL]; [Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS",
       "inputs": "User review required: confirm source-backed inputs.",
       "outputs": "User review required: confirm source-backed outputs.",
-      "candidate_requirement_count": 48,
+      "candidate_requirement_count": 62,
       "candidate_relations": {
-        "related:supports": 66,
-        "supports": 45,
+        "related:supports": 78,
+        "supports": 59,
         "constrains": 2,
         "related:constrains": 1,
         "related:depends-on": 1,
@@ -5973,11 +5973,739 @@
         "Controller",
         "Main Controller"
       ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_015",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_015",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_015",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the user selects the ECG, BIA, the wave velocity mode or the ppg ioff calibration, the device Shall go to WAIT_SU state.",
+      "ontology_roles": "State; Mode",
+      "ontology_related_roles": "Mode; State",
+      "candidate_blocks": [
+        "Main Controller",
+        "Mode",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_020",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_020",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_020",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 15ms after the falling of O_PD_IMP, the O_RST_IMP shall go low.",
+      "ontology_roles": "Channel; State",
+      "ontology_related_roles": "State; Channel",
+      "candidate_blocks": [
+        "Channel",
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_022",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_022",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_022",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 30ms after the falling of O_RST_IMP, O_RSTI_IMP shall go low.",
+      "ontology_roles": "Channel; State",
+      "ontology_related_roles": "State; Channel",
+      "candidate_blocks": [
+        "Channel",
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_027",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_027",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_027",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).",
+      "ontology_roles": "Controller; Channel; State",
+      "ontology_related_roles": "Channel; State; Controller; State; Controller; Channel",
+      "candidate_blocks": [
+        "Channel",
+        "Controller",
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_4034",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_4034",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_4034",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "Every Time a new measurement cycle starts (DEVICE FSM goes in OPERATIVE from another state), the o_irq_start_measurement shall be set to 1 for at least 1 clock cycle",
+      "ontology_roles": "State",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_040",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_040",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_040",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the ELAB_FSM is in BIA State (Check ELAB_STATUS_REG), the ADC_Mux (o_adc_mux_biochannel on digital top) output shall be set equal to 011, 100, 101 or 110.",
+      "ontology_roles": "Channel; State; ADC",
+      "ontology_related_roles": "State; ADC; Channel; ADC; Channel; State",
+      "candidate_blocks": [
+        "ADC",
+        "Channel",
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_3130",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_3130",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_3130",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the wave velocity mode and the ppg ioff calibration are selected, the wave velocity mode shall be performed first.",
+      "ontology_roles": "Mode",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller",
+        "Mode"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_3131",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_3131",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_3131",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the ppg ioff calibration is selected and device fsm is in WAIT_SU State, the Elab FSM shall go into the Timer Buffer state and then PPG IOFF CALIB state.",
+      "ontology_roles": "Buffer; State",
+      "ontology_related_roles": "State; Buffer; Buffer",
+      "candidate_blocks": [
+        "Buffer",
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_043",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_043",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_043",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "The ADC_PHGEN shall work at 16 MHz clock frequency.",
+      "ontology_roles": "ADC",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "ADC",
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_048",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_048",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_048",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the i_reset_end_calibration , i_do_calibration and i_mode_operation are set to 1, the o_end_cal_phase shall be set to 0.",
+      "ontology_roles": "Mode",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller",
+        "Mode"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_6059",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_6059",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_6059",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "I_noise shall be set to 0 during the ADC calibration.",
+      "ontology_roles": "ADC",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "ADC",
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_072",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_072",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_072",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the i_hc_en is set to 1 and i_imp_en is set to 0 and i_n_ecg_channel is equal to 1, ECG0 shall be active so the o_pd_hc2 shall go low and counter shall be work.",
+      "ontology_roles": "Channel",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Channel",
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_075",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_075",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_075",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "The counter that defines the timing during the start-up phase shall work at 32KHz.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_076",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_076",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_076",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "15ms after that the o_pd_hc2 is gone low, the o_rst_hc2 shall go low.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_5080",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_5080",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_5080",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "i_rst_async_ecg Shall be used only when the Device FSM is in SLEEP or Operative State.",
+      "ontology_roles": "State",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_081",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_081",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_081",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When i_imp_en signal is equal to 1, the o_pd_imp_from_bia shall be go low.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_084",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_084",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_084",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "At least 15ms after the falling of o_pd_imp_from_bia, the o_rst_imp shall go low.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_086",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_086",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_086",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "30ms after the falling of o_rst_imp, o_rsti_imp shall go low.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_5091",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_5091",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_5091",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "i_rst_async_bia shall be used only when Device FSM is in OPERATIVE or SLEEP state.",
+      "ontology_roles": "State",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_090",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_090",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_090",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "The gsr_on shall set high at least 300us before the start of the sampling.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_300",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_300",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_300",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the rstn_i is asserted low, the PPG FSM shall return in Reset state immediately.",
+      "ontology_roles": "State",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_097",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_097",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_097",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When in Reset state, if the rstn_i is de-asserted , i_wave_velocity_mode is and the i_start_ppg_fsm is high, if i_ID_Frame is equal to 0 or two successively frame have two different i_rx_ch_frame , then the PPG FSM shall go to ALC Compensation state.",
+      "ontology_roles": "State; Mode",
+      "ontology_related_roles": "Mode; State",
+      "candidate_blocks": [
+        "Main Controller",
+        "Mode",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1105",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1105",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_1105",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "If no multiple frame is selected (i_frame_repetition in ppg_fsm set to 0), when Tx Preset falls from 1 to 0, also the en_tx shall pass from 1 to 0.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_107",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_107",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_107",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When in Measurement state, after the wait at least of the TX_ledset time related to the frame that is being executed. (TX_LEDSET_FRAME {n}]), the o_start_adc signal shall be set high.",
+      "ontology_roles": "State; ADC",
+      "ontology_related_roles": "ADC; State",
+      "candidate_blocks": [
+        "ADC",
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1118",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1118",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_1118",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "Nm0 shall be the result of average on 8 acquired samples.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1119",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1119",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_1119",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "Nm1 shall be the result of average on 8 acquired samples.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_8116",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_8116",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_8116",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "i_n_start_case shall be lesser or equal than i_Nmax_to_reg.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_2117",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_2117",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_2117",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0.",
+      "ontology_roles": "State; PGA",
+      "ontology_related_roles": "PGA; State",
+      "candidate_blocks": [
+        "Main Controller",
+        "PGA",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_121",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_121",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_121",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "Nmax shall be a value between 1 and 15 configurable by user.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_122",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_122",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_122",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When o_ TX_Vref is equal to i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0])), o_rising_ramp_end shall go high.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_123",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_123",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_123",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When o_Tx_Vref is equal to 0 during the falling and the rising ramp is ended (o_rising_ramp_end ==0), o_falling_ramp_end shall go high.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_124",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_124",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_124",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When the rising ramp reaches half its value, o_half_rising_ramp shall go high.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_125",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_125",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_125",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When i_reset_ramp is high all output shall be down.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_127",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_127",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_127",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "ALC cycle algorithm shall be done until the set of the last o_w_BTIA_ALC bit.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_129",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_129",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_129",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When i_ALC_comp_start is set to 1 and the o_BTIA_ALC (ALC Compensation) change is value, after a configurable time T1 (PPG_ALC_CONFIG_PARAM_1 register [3:0]), o_comp_rx_ck shall be high.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_132",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_132",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_132",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "After T1+T2 (PPG_ALC_CONFIG_PARAM_2 register [1:0]), if o_BTIA_gain (2:0) < i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), during ALC_COMPENSATION state of PPG fsm with o_end_compensation set to 0, o_BTIA_gain increase its value of 1. Instead, if o_BTIA_gain 2:0) >= i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), o_BTIA_gain shall remain at its old value.",
+      "ontology_roles": "State",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller",
+        "State"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_133",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_133",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_133",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "Once is set to 1, o_comp_rx_ck shall be set to 0 after a T2+1 clock cycle.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_9116",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_9116",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_9116",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "GAIN_START shall be lesser or equal than GAIN_MAX.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_7135",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_7135",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_7135",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "If the ALC_COARSE (o_w_BTIA_ALC) result is equal to zero, it shall be brought to 1",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1136",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_1136",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_1136",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "After the assertion of i_end_of_conversion a number of times equals to i_n_average_ecg_bia_gsr (in case of ECG, BIA and GSR) or i_n_average_ppg (in case of PPG without frame repetitions) , after at least one clock cycle o_data_result shall be computed and o_write_enable shall rise",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_139",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_139",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_139",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When a PPG Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise (i_data_valid_noise_ppg_adc set to 1) data is sampled (i_end_of_conversion set to 1) the data shall be accumulated until i_n_average_ppg is not reached.",
+      "ontology_roles": "ADC",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "ADC",
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_9139",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_9139",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_9139",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "If during the PPG Frame computation, the i_alc_mask (ALC Disabled) is enabled, the final result shall be only the ppg acquisition and the subtraction of the alc data shall not be performed.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
+    },
+    {
+      "req_id": "IPOS_STBIO1_MAIN_CONTROLLER_143",
+      "source_req_id": "IPOS_STBIO1_MAIN_CONTROLLER_143",
+      "generated_id": "ipos_main_ctrl_20260921_143819:IPOS_STBIO1_MAIN_CONTROLLER_143",
+      "id_policy": "",
+      "category": "Digital",
+      "requirement_type": "",
+      "source_section_owner": "Main Controller",
+      "source": "",
+      "normalized_statement": "When i_end_of_conversion is set to 1 and i_n_average_ecg_bia_gsr (average ecg,bia and gsr) or i_n_average_ppg (Frame_X_Parameter_1) is equal to their limit values, an average operation shall be done and o_write_enable shall be set to 1.",
+      "ontology_roles": "",
+      "ontology_related_roles": "",
+      "candidate_blocks": [
+        "Main Controller"
+      ]
     }
   ],
   "ambiguity_dispositions": [
     {
       "issue_id": "SEM-001",
+      "severity": "critical",
+      "requirement_id": "ipos_main_ctrl_20260921_143819",
+      "description": "IPOS_STBIO1_MAIN_CONTROLLER_132: placeholder token detected in requirement statement",
+      "required_for_approval": "yes",
+      "disposition": "pending",
+      "rationale": ""
+    },
+    {
+      "issue_id": "SEM-002",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0203",
       "description": "very short statement may be semantically incomplete",
@@ -5986,7 +6714,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-002",
+      "issue_id": "SEM-003",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0204",
       "description": "very short statement may be semantically incomplete",
@@ -5995,7 +6723,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-003",
+      "issue_id": "SEM-004",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0206",
       "description": "very short statement may be semantically incomplete",
@@ -6004,7 +6732,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-004",
+      "issue_id": "SEM-005",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0207",
       "description": "very short statement may be semantically incomplete",
@@ -6013,7 +6741,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-005",
+      "issue_id": "SEM-006",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0208",
       "description": "very short statement may be semantically incomplete",
@@ -6022,7 +6750,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-006",
+      "issue_id": "SEM-007",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0209",
       "description": "very short statement may be semantically incomplete",
@@ -6031,7 +6759,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-007",
+      "issue_id": "SEM-008",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0210",
       "description": "very short statement may be semantically incomplete",
@@ -6040,7 +6768,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-008",
+      "issue_id": "SEM-009",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0221",
       "description": "very short statement may be semantically incomplete",
@@ -6049,7 +6777,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-009",
+      "issue_id": "SEM-010",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0211",
       "description": "very short statement may be semantically incomplete",
@@ -6058,7 +6786,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-010",
+      "issue_id": "SEM-011",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0212",
       "description": "very short statement may be semantically incomplete",
@@ -6067,7 +6795,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-011",
+      "issue_id": "SEM-012",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0213",
       "description": "very short statement may be semantically incomplete",
@@ -6076,7 +6804,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-012",
+      "issue_id": "SEM-013",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0215",
       "description": "very short statement may be semantically incomplete",
@@ -6085,7 +6813,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-013",
+      "issue_id": "SEM-014",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0222",
       "description": "very short statement may be semantically incomplete",
@@ -6094,7 +6822,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-014",
+      "issue_id": "SEM-015",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0216",
       "description": "very short statement may be semantically incomplete",
@@ -6103,7 +6831,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-015",
+      "issue_id": "SEM-016",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0217",
       "description": "very short statement may be semantically incomplete",
@@ -6112,7 +6840,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-016",
+      "issue_id": "SEM-017",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0218",
       "description": "very short statement may be semantically incomplete",
@@ -6121,7 +6849,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-017",
+      "issue_id": "SEM-018",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0220",
       "description": "very short statement may be semantically incomplete",
@@ -6130,7 +6858,7 @@
       "rationale": ""
     },
     {
-      "issue_id": "SEM-018",
+      "issue_id": "SEM-019",
       "severity": "minor",
       "requirement_id": "DDS_STBIO1_0223",
       "description": "very short statement may be semantically incomplete",
@@ -6153,6 +6881,8 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_030",
       "IPOS_STBIO1_MAIN_CONTROLLER_031",
       "IPOS_STBIO1_MAIN_CONTROLLER_038",
+      "IPOS_STBIO1_MAIN_CONTROLLER_040",
+      "IPOS_STBIO1_MAIN_CONTROLLER_043",
       "IPOS_STBIO1_MAIN_CONTROLLER_045",
       "IPOS_STBIO1_MAIN_CONTROLLER_049",
       "IPOS_STBIO1_MAIN_CONTROLLER_052",
@@ -6167,16 +6897,19 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_064",
       "IPOS_STBIO1_MAIN_CONTROLLER_095",
       "IPOS_STBIO1_MAIN_CONTROLLER_102",
+      "IPOS_STBIO1_MAIN_CONTROLLER_107",
       "IPOS_STBIO1_MAIN_CONTROLLER_108",
       "IPOS_STBIO1_MAIN_CONTROLLER_112",
       "IPOS_STBIO1_MAIN_CONTROLLER_113",
       "IPOS_STBIO1_MAIN_CONTROLLER_128",
+      "IPOS_STBIO1_MAIN_CONTROLLER_139",
       "IPOS_STBIO1_MAIN_CONTROLLER_2143",
       "IPOS_STBIO1_MAIN_CONTROLLER_3124",
       "IPOS_STBIO1_MAIN_CONTROLLER_3125",
       "IPOS_STBIO1_MAIN_CONTROLLER_3126",
       "IPOS_STBIO1_MAIN_CONTROLLER_3127",
-      "IPOS_STBIO1_MAIN_CONTROLLER_3129"
+      "IPOS_STBIO1_MAIN_CONTROLLER_3129",
+      "IPOS_STBIO1_MAIN_CONTROLLER_6059"
     ],
     "ADSP": [
       "DDS_STBIO1_0013",
@@ -6220,7 +6953,8 @@
       "DDS_STBIO1_9013",
       "DDS_STBIO1_9014",
       "IPOS_STBIO1_MAIN_CONTROLLER_039",
-      "IPOS_STBIO1_MAIN_CONTROLLER_3128"
+      "IPOS_STBIO1_MAIN_CONTROLLER_3128",
+      "IPOS_STBIO1_MAIN_CONTROLLER_3131"
     ],
     "Bus": [
       "DDS_STBIO1_8002",
@@ -6244,15 +6978,20 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_016",
       "IPOS_STBIO1_MAIN_CONTROLLER_017",
       "IPOS_STBIO1_MAIN_CONTROLLER_018",
+      "IPOS_STBIO1_MAIN_CONTROLLER_020",
       "IPOS_STBIO1_MAIN_CONTROLLER_021",
+      "IPOS_STBIO1_MAIN_CONTROLLER_022",
       "IPOS_STBIO1_MAIN_CONTROLLER_023",
       "IPOS_STBIO1_MAIN_CONTROLLER_024",
       "IPOS_STBIO1_MAIN_CONTROLLER_026",
+      "IPOS_STBIO1_MAIN_CONTROLLER_027",
       "IPOS_STBIO1_MAIN_CONTROLLER_028",
       "IPOS_STBIO1_MAIN_CONTROLLER_029",
       "IPOS_STBIO1_MAIN_CONTROLLER_036",
       "IPOS_STBIO1_MAIN_CONTROLLER_037",
       "IPOS_STBIO1_MAIN_CONTROLLER_038",
+      "IPOS_STBIO1_MAIN_CONTROLLER_040",
+      "IPOS_STBIO1_MAIN_CONTROLLER_072",
       "IPOS_STBIO1_MAIN_CONTROLLER_073",
       "IPOS_STBIO1_MAIN_CONTROLLER_074",
       "IPOS_STBIO1_MAIN_CONTROLLER_080",
@@ -6309,6 +7048,7 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_011",
       "IPOS_STBIO1_MAIN_CONTROLLER_024",
       "IPOS_STBIO1_MAIN_CONTROLLER_026",
+      "IPOS_STBIO1_MAIN_CONTROLLER_027",
       "IPOS_STBIO1_MAIN_CONTROLLER_028",
       "IPOS_STBIO1_MAIN_CONTROLLER_029",
       "IPOS_STBIO1_MAIN_CONTROLLER_030",
@@ -6483,15 +7223,19 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_009",
       "IPOS_STBIO1_MAIN_CONTROLLER_010",
       "IPOS_STBIO1_MAIN_CONTROLLER_011",
+      "IPOS_STBIO1_MAIN_CONTROLLER_015",
       "IPOS_STBIO1_MAIN_CONTROLLER_0152",
       "IPOS_STBIO1_MAIN_CONTROLLER_016",
       "IPOS_STBIO1_MAIN_CONTROLLER_017",
       "IPOS_STBIO1_MAIN_CONTROLLER_018",
       "IPOS_STBIO1_MAIN_CONTROLLER_019",
+      "IPOS_STBIO1_MAIN_CONTROLLER_020",
       "IPOS_STBIO1_MAIN_CONTROLLER_021",
+      "IPOS_STBIO1_MAIN_CONTROLLER_022",
       "IPOS_STBIO1_MAIN_CONTROLLER_023",
       "IPOS_STBIO1_MAIN_CONTROLLER_024",
       "IPOS_STBIO1_MAIN_CONTROLLER_026",
+      "IPOS_STBIO1_MAIN_CONTROLLER_027",
       "IPOS_STBIO1_MAIN_CONTROLLER_028",
       "IPOS_STBIO1_MAIN_CONTROLLER_029",
       "IPOS_STBIO1_MAIN_CONTROLLER_030",
@@ -6504,9 +7248,12 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_037",
       "IPOS_STBIO1_MAIN_CONTROLLER_038",
       "IPOS_STBIO1_MAIN_CONTROLLER_039",
+      "IPOS_STBIO1_MAIN_CONTROLLER_040",
+      "IPOS_STBIO1_MAIN_CONTROLLER_043",
       "IPOS_STBIO1_MAIN_CONTROLLER_044",
       "IPOS_STBIO1_MAIN_CONTROLLER_045",
       "IPOS_STBIO1_MAIN_CONTROLLER_047",
+      "IPOS_STBIO1_MAIN_CONTROLLER_048",
       "IPOS_STBIO1_MAIN_CONTROLLER_049",
       "IPOS_STBIO1_MAIN_CONTROLLER_051",
       "IPOS_STBIO1_MAIN_CONTROLLER_052",
@@ -6520,22 +7267,30 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_062",
       "IPOS_STBIO1_MAIN_CONTROLLER_063",
       "IPOS_STBIO1_MAIN_CONTROLLER_064",
+      "IPOS_STBIO1_MAIN_CONTROLLER_072",
       "IPOS_STBIO1_MAIN_CONTROLLER_073",
       "IPOS_STBIO1_MAIN_CONTROLLER_074",
+      "IPOS_STBIO1_MAIN_CONTROLLER_075",
+      "IPOS_STBIO1_MAIN_CONTROLLER_076",
       "IPOS_STBIO1_MAIN_CONTROLLER_077",
       "IPOS_STBIO1_MAIN_CONTROLLER_078",
       "IPOS_STBIO1_MAIN_CONTROLLER_080",
+      "IPOS_STBIO1_MAIN_CONTROLLER_081",
       "IPOS_STBIO1_MAIN_CONTROLLER_082",
       "IPOS_STBIO1_MAIN_CONTROLLER_083",
+      "IPOS_STBIO1_MAIN_CONTROLLER_084",
       "IPOS_STBIO1_MAIN_CONTROLLER_085",
+      "IPOS_STBIO1_MAIN_CONTROLLER_086",
       "IPOS_STBIO1_MAIN_CONTROLLER_087",
       "IPOS_STBIO1_MAIN_CONTROLLER_088",
       "IPOS_STBIO1_MAIN_CONTROLLER_089",
+      "IPOS_STBIO1_MAIN_CONTROLLER_090",
       "IPOS_STBIO1_MAIN_CONTROLLER_092",
       "IPOS_STBIO1_MAIN_CONTROLLER_093",
       "IPOS_STBIO1_MAIN_CONTROLLER_094",
       "IPOS_STBIO1_MAIN_CONTROLLER_095",
       "IPOS_STBIO1_MAIN_CONTROLLER_096",
+      "IPOS_STBIO1_MAIN_CONTROLLER_097",
       "IPOS_STBIO1_MAIN_CONTROLLER_098",
       "IPOS_STBIO1_MAIN_CONTROLLER_099",
       "IPOS_STBIO1_MAIN_CONTROLLER_100",
@@ -6553,37 +7308,58 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_104",
       "IPOS_STBIO1_MAIN_CONTROLLER_105",
       "IPOS_STBIO1_MAIN_CONTROLLER_106",
+      "IPOS_STBIO1_MAIN_CONTROLLER_107",
       "IPOS_STBIO1_MAIN_CONTROLLER_108",
       "IPOS_STBIO1_MAIN_CONTROLLER_109",
       "IPOS_STBIO1_MAIN_CONTROLLER_1095",
       "IPOS_STBIO1_MAIN_CONTROLLER_110",
       "IPOS_STBIO1_MAIN_CONTROLLER_1102",
       "IPOS_STBIO1_MAIN_CONTROLLER_1104",
+      "IPOS_STBIO1_MAIN_CONTROLLER_1105",
       "IPOS_STBIO1_MAIN_CONTROLLER_111",
       "IPOS_STBIO1_MAIN_CONTROLLER_1116",
+      "IPOS_STBIO1_MAIN_CONTROLLER_1118",
+      "IPOS_STBIO1_MAIN_CONTROLLER_1119",
       "IPOS_STBIO1_MAIN_CONTROLLER_112",
       "IPOS_STBIO1_MAIN_CONTROLLER_113",
+      "IPOS_STBIO1_MAIN_CONTROLLER_1136",
       "IPOS_STBIO1_MAIN_CONTROLLER_1139",
       "IPOS_STBIO1_MAIN_CONTROLLER_1143",
       "IPOS_STBIO1_MAIN_CONTROLLER_115",
       "IPOS_STBIO1_MAIN_CONTROLLER_118",
       "IPOS_STBIO1_MAIN_CONTROLLER_120",
+      "IPOS_STBIO1_MAIN_CONTROLLER_121",
+      "IPOS_STBIO1_MAIN_CONTROLLER_122",
+      "IPOS_STBIO1_MAIN_CONTROLLER_123",
+      "IPOS_STBIO1_MAIN_CONTROLLER_124",
+      "IPOS_STBIO1_MAIN_CONTROLLER_125",
       "IPOS_STBIO1_MAIN_CONTROLLER_126",
+      "IPOS_STBIO1_MAIN_CONTROLLER_127",
       "IPOS_STBIO1_MAIN_CONTROLLER_128",
+      "IPOS_STBIO1_MAIN_CONTROLLER_129",
+      "IPOS_STBIO1_MAIN_CONTROLLER_132",
+      "IPOS_STBIO1_MAIN_CONTROLLER_133",
       "IPOS_STBIO1_MAIN_CONTROLLER_134",
       "IPOS_STBIO1_MAIN_CONTROLLER_137",
       "IPOS_STBIO1_MAIN_CONTROLLER_138",
+      "IPOS_STBIO1_MAIN_CONTROLLER_139",
       "IPOS_STBIO1_MAIN_CONTROLLER_140",
+      "IPOS_STBIO1_MAIN_CONTROLLER_143",
+      "IPOS_STBIO1_MAIN_CONTROLLER_2117",
       "IPOS_STBIO1_MAIN_CONTROLLER_2143",
       "IPOS_STBIO1_MAIN_CONTROLLER_2144",
       "IPOS_STBIO1_MAIN_CONTROLLER_2145",
       "IPOS_STBIO1_MAIN_CONTROLLER_2146",
+      "IPOS_STBIO1_MAIN_CONTROLLER_300",
       "IPOS_STBIO1_MAIN_CONTROLLER_3124",
       "IPOS_STBIO1_MAIN_CONTROLLER_3125",
       "IPOS_STBIO1_MAIN_CONTROLLER_3126",
       "IPOS_STBIO1_MAIN_CONTROLLER_3127",
       "IPOS_STBIO1_MAIN_CONTROLLER_3128",
       "IPOS_STBIO1_MAIN_CONTROLLER_3129",
+      "IPOS_STBIO1_MAIN_CONTROLLER_3130",
+      "IPOS_STBIO1_MAIN_CONTROLLER_3131",
+      "IPOS_STBIO1_MAIN_CONTROLLER_4034",
       "IPOS_STBIO1_MAIN_CONTROLLER_4079",
       "IPOS_STBIO1_MAIN_CONTROLLER_4080",
       "IPOS_STBIO1_MAIN_CONTROLLER_4090",
@@ -6593,13 +7369,20 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_5005",
       "IPOS_STBIO1_MAIN_CONTROLLER_5015",
       "IPOS_STBIO1_MAIN_CONTROLLER_5016",
+      "IPOS_STBIO1_MAIN_CONTROLLER_5080",
+      "IPOS_STBIO1_MAIN_CONTROLLER_5091",
       "IPOS_STBIO1_MAIN_CONTROLLER_5092",
+      "IPOS_STBIO1_MAIN_CONTROLLER_6059",
       "IPOS_STBIO1_MAIN_CONTROLLER_6070",
       "IPOS_STBIO1_MAIN_CONTROLLER_6098",
       "IPOS_STBIO1_MAIN_CONTROLLER_6129",
       "IPOS_STBIO1_MAIN_CONTROLLER_7095",
+      "IPOS_STBIO1_MAIN_CONTROLLER_7135",
       "IPOS_STBIO1_MAIN_CONTROLLER_728",
-      "IPOS_STBIO1_MAIN_CONTROLLER_8106"
+      "IPOS_STBIO1_MAIN_CONTROLLER_8106",
+      "IPOS_STBIO1_MAIN_CONTROLLER_8116",
+      "IPOS_STBIO1_MAIN_CONTROLLER_9116",
+      "IPOS_STBIO1_MAIN_CONTROLLER_9139"
     ],
     "Memory": [
       "DDS_STBIO1_00000008",
@@ -6671,16 +7454,20 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_009",
       "IPOS_STBIO1_MAIN_CONTROLLER_010",
       "IPOS_STBIO1_MAIN_CONTROLLER_011",
+      "IPOS_STBIO1_MAIN_CONTROLLER_015",
       "IPOS_STBIO1_MAIN_CONTROLLER_024",
       "IPOS_STBIO1_MAIN_CONTROLLER_029",
       "IPOS_STBIO1_MAIN_CONTROLLER_036",
+      "IPOS_STBIO1_MAIN_CONTROLLER_048",
       "IPOS_STBIO1_MAIN_CONTROLLER_062",
       "IPOS_STBIO1_MAIN_CONTROLLER_064",
       "IPOS_STBIO1_MAIN_CONTROLLER_080",
+      "IPOS_STBIO1_MAIN_CONTROLLER_097",
       "IPOS_STBIO1_MAIN_CONTROLLER_1005",
       "IPOS_STBIO1_MAIN_CONTROLLER_1034",
       "IPOS_STBIO1_MAIN_CONTROLLER_138",
       "IPOS_STBIO1_MAIN_CONTROLLER_3128",
+      "IPOS_STBIO1_MAIN_CONTROLLER_3130",
       "IPOS_STBIO1_MAIN_CONTROLLER_436",
       "IPOS_STBIO1_MAIN_CONTROLLER_6070",
       "IPOS_STBIO1_MAIN_CONTROLLER_6098"
@@ -6711,7 +7498,8 @@
       "DDS_STBIO1_395"
     ],
     "PGA": [
-      "IPOS_STBIO1_MAIN_CONTROLLER_1095"
+      "IPOS_STBIO1_MAIN_CONTROLLER_1095",
+      "IPOS_STBIO1_MAIN_CONTROLLER_2117"
     ],
     "PMU": [
       "DDS_STBIO1_0104",
@@ -6854,10 +7642,14 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_009",
       "IPOS_STBIO1_MAIN_CONTROLLER_010",
       "IPOS_STBIO1_MAIN_CONTROLLER_011",
+      "IPOS_STBIO1_MAIN_CONTROLLER_015",
+      "IPOS_STBIO1_MAIN_CONTROLLER_020",
       "IPOS_STBIO1_MAIN_CONTROLLER_021",
+      "IPOS_STBIO1_MAIN_CONTROLLER_022",
       "IPOS_STBIO1_MAIN_CONTROLLER_023",
       "IPOS_STBIO1_MAIN_CONTROLLER_024",
       "IPOS_STBIO1_MAIN_CONTROLLER_026",
+      "IPOS_STBIO1_MAIN_CONTROLLER_027",
       "IPOS_STBIO1_MAIN_CONTROLLER_028",
       "IPOS_STBIO1_MAIN_CONTROLLER_029",
       "IPOS_STBIO1_MAIN_CONTROLLER_030",
@@ -6869,9 +7661,11 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_036",
       "IPOS_STBIO1_MAIN_CONTROLLER_038",
       "IPOS_STBIO1_MAIN_CONTROLLER_039",
+      "IPOS_STBIO1_MAIN_CONTROLLER_040",
       "IPOS_STBIO1_MAIN_CONTROLLER_059",
       "IPOS_STBIO1_MAIN_CONTROLLER_094",
       "IPOS_STBIO1_MAIN_CONTROLLER_096",
+      "IPOS_STBIO1_MAIN_CONTROLLER_097",
       "IPOS_STBIO1_MAIN_CONTROLLER_099",
       "IPOS_STBIO1_MAIN_CONTROLLER_100",
       "IPOS_STBIO1_MAIN_CONTROLLER_101",
@@ -6881,6 +7675,7 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_104",
       "IPOS_STBIO1_MAIN_CONTROLLER_105",
       "IPOS_STBIO1_MAIN_CONTROLLER_106",
+      "IPOS_STBIO1_MAIN_CONTROLLER_107",
       "IPOS_STBIO1_MAIN_CONTROLLER_108",
       "IPOS_STBIO1_MAIN_CONTROLLER_109",
       "IPOS_STBIO1_MAIN_CONTROLLER_110",
@@ -6888,13 +7683,20 @@
       "IPOS_STBIO1_MAIN_CONTROLLER_112",
       "IPOS_STBIO1_MAIN_CONTROLLER_113",
       "IPOS_STBIO1_MAIN_CONTROLLER_1139",
+      "IPOS_STBIO1_MAIN_CONTROLLER_132",
       "IPOS_STBIO1_MAIN_CONTROLLER_134",
+      "IPOS_STBIO1_MAIN_CONTROLLER_2117",
+      "IPOS_STBIO1_MAIN_CONTROLLER_300",
       "IPOS_STBIO1_MAIN_CONTROLLER_3124",
       "IPOS_STBIO1_MAIN_CONTROLLER_3125",
       "IPOS_STBIO1_MAIN_CONTROLLER_3126",
       "IPOS_STBIO1_MAIN_CONTROLLER_3127",
       "IPOS_STBIO1_MAIN_CONTROLLER_3128",
+      "IPOS_STBIO1_MAIN_CONTROLLER_3131",
+      "IPOS_STBIO1_MAIN_CONTROLLER_4034",
       "IPOS_STBIO1_MAIN_CONTROLLER_5015",
+      "IPOS_STBIO1_MAIN_CONTROLLER_5080",
+      "IPOS_STBIO1_MAIN_CONTROLLER_5091",
       "IPOS_STBIO1_MAIN_CONTROLLER_6070",
       "IPOS_STBIO1_MAIN_CONTROLLER_7095"
     ],

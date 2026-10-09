@@ -1,28 +1,28 @@
 {
-  "corpus_hash": "b2e8101b00dc6909feaed8858c8391a595fd7fe52538e9b17b233477d99c8a6d",
+  "corpus_hash": "0c71eaa9e10d8478c2ac3726113d42cead2cf039a4bd64b4fab7e6c9dc116eac",
   "materialized": true,
-  "row_count": 314,
+  "row_count": 357,
   "selection": {
     "attempted_snapshots": [
       {
         "accepted": true,
         "reason": "complete approved canonical requirements and mappings",
-        "snapshot_id": "snap-b2e8101b00dc6909feaed885"
+        "snapshot_id": "snap-73c872b1307b6adb5eaf843e"
       }
     ],
     "completeness_criteria": "approved status; project match; non-empty canonical and mapping sets; one approved mapping per requirement; resolver hash validation",
-    "selected_snapshot_id": "snap-b2e8101b00dc6909feaed885",
+    "selected_snapshot_id": "snap-73c872b1307b6adb5eaf843e",
     "selection_mode": "explicit"
   },
-  "snapshot_hash": "b2e8101b00dc6909feaed8858c8391a595fd7fe52538e9b17b233477d99c8a6d",
-  "snapshot_id": "snap-b2e8101b00dc6909feaed885",
+  "snapshot_hash": "0c71eaa9e10d8478c2ac3726113d42cead2cf039a4bd64b4fab7e6c9dc116eac",
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
   "source_path": "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
   "source_type": "primary",
   "source_type_counts": {
-    "primary": 314
+    "primary": 357
   },
   "spec_level_counts": {
     "DRS": 55,
-    "Digital IPOS": 259
+    "Digital IPOS": 302
   }
 }

@@ -22,7 +22,7 @@ from urllib.parse import unquote
 from urllib import request, error
 
 from canonical_store import connect
-from approved_snapshot_resolver import resolve_complete_authoritative_input, ApprovedResolverError
+from approved_snapshot_resolver import resolve_complete_authoritative_input, resolve_complete_snapshot_id, ApprovedResolverError
 from allocation_ledger import read_csv
 from mapping_review_sync import sync_mapping_workbook_to_csv
 from generate_stage2_specs import _write_mapping_workbook
@@ -33,6 +33,8 @@ from validate_downstream_coherence import (
     approved_primary_source_name,
     approved_traceability_hierarchy,
     created_ipos_block_directories,
+    resolve_sysml_materialization_scope,
+    DownstreamCoherenceError,
 )
 from workflow_routing import runtime_user_name
 from workflow_cli import STAGE_ORDER
@@ -408,7 +410,7 @@ class WorkflowDiagramRenderer:
             ttk.Label(legend, text=label).pack(side=tk.LEFT, padx=(0, 12))
 
 
-def build_gui_review_context(repo_root: Path) -> dict[str, str]:
+def build_gui_review_context(repo_root: Path, snapshot_id: str | None = None) -> dict[str, str]:
     """Return read-only workflow context for GUI display and deterministic tests."""
     context: dict[str, str] = {
         "revision": "unknown",
@@ -445,7 +447,7 @@ def build_gui_review_context(repo_root: Path) -> dict[str, str]:
         pass
     try:
         project_id = str(project_context.get("project_name") or repo_root.name)
-        resolved, selection = resolve_complete_authoritative_input(repo_root, "gui", project_id=project_id)
+        resolved, selection = resolve_complete_authoritative_input(repo_root, "gui", project_id=project_id, snapshot_id=snapshot_id)
         context["snapshot_id"] = resolved.snapshot_id
         context["impact_status"] = "approved"
         context["vocabulary_taxonomy"] = f"snapshot_hash={resolved.snapshot_hash}"
@@ -467,8 +469,11 @@ def build_gui_review_context(repo_root: Path) -> dict[str, str]:
             if context["approved_req_prefix"] == "not recorded":
                 context["approved_req_prefix"] = str(payload.get("approved_prefix") or payload.get("proposed_prefix") or "not recorded")
     except (OSError, ValueError, TypeError, KeyError, ApprovedResolverError):
-        context["snapshot_id"] = "unavailable"
-        context["impact_status"] = "blocked: no complete approved snapshot/materialization"
+        if context["snapshot_id"] != "none":
+            context["impact_status"] = "approved; derived materialization pending"
+        else:
+            context["snapshot_id"] = "unavailable"
+            context["impact_status"] = "blocked: no complete approved snapshot/materialization"
     if (repo_root / "artifacts/stage1_requirements/integrated_requirements.csv").exists():
         context["source_context"] = "primary + approved supplementary baseline"
     scan_path = repo_root / "artifacts/validation/authority_consistency_scan.json"
@@ -999,7 +1004,7 @@ class WorkflowGUI:
         window = getattr(self, "traceability_window", None)
         if tree is None or window is None or not window.winfo_exists():
             return
-        graph = approved_generated_document_dependency_graph(REPO_ROOT)
+        graph = approved_generated_document_dependency_graph(REPO_ROOT, getattr(self, "workflow_snapshot_id", None))
         tree.delete(*tree.get_children())
         for index, node in enumerate(graph.get("nodes") or []):
             if not isinstance(node, dict):
@@ -1162,7 +1167,7 @@ class WorkflowGUI:
     def _draw_generated_dependency_graph(self, canvas: tk.Canvas) -> None:
         """Render only central generated-document dependency edges."""
         canvas.delete("all")
-        graph = approved_generated_document_dependency_graph(REPO_ROOT)
+        graph = approved_generated_document_dependency_graph(REPO_ROOT, getattr(self, "workflow_snapshot_id", None))
         node_list = list(graph.get("nodes") or [])
         edge_list = [
             edge for edge in graph.get("edges") or []
@@ -2223,18 +2228,6 @@ class WorkflowGUI:
             "Open the Stage 1 table-row review CSV in Excel at any time.",
         )
 
-        drs_req_only_btn = ttk.Button(
-            cli_secondary_row2,
-            text="S5 after S2a (Req-only)",
-            command=self.run_stage5_after_stage2a,
-            width=22,
-        )
-        drs_req_only_btn.pack(side=tk.LEFT, padx=(8, 0))
-        self._bind_button_help(
-            drs_req_only_btn,
-            "Run Stage 5 directly after Stage 2A using Stage 1 + Stage 2A artifacts only.",
-        )
-
         sysml_menu = tk.Menu(self.root, tearoff=False)
         sysml_menu.add_command(label="Generate from approved snapshot", command=self.regenerate_sysml)
         sysml_menu.add_command(label="Open SysML Architecture", command=lambda: self.work_tabs.select(self.sysml_architecture_tab))
@@ -2844,7 +2837,7 @@ class WorkflowGUI:
         self.root.after(0, lambda: self.status_var.set(text))
 
     def _refresh_review_context(self) -> None:
-        text = format_gui_review_context(build_gui_review_context(REPO_ROOT))
+        text = format_gui_review_context(build_gui_review_context(REPO_ROOT, getattr(self, "workflow_snapshot_id", None)))
         self.root.after(0, lambda: self.review_context_var.set(text))
 
     def _refresh_review_context_viewer(self) -> None:
@@ -2856,7 +2849,7 @@ class WorkflowGUI:
         viewer.see("1.0")
 
     def _show_review_context(self) -> None:
-        context = build_gui_review_context(REPO_ROOT)
+        context = build_gui_review_context(REPO_ROOT, getattr(self, "workflow_snapshot_id", None))
         self.review_context_var.set(format_gui_review_context(context))
         dialog = tk.Toplevel(self.root)
         dialog.title("Workflow Review Context")
@@ -3359,7 +3352,6 @@ class WorkflowGUI:
     def _show_s5_context_menu(self, event) -> str:
         menu = tk.Menu(self.root, tearoff=False)
         menu.add_command(label="S5 flow run", command=lambda: self.run_stage_cli("5"))
-        menu.add_command(label="S5 after S2a run", command=self.run_stage5_after_stage2a)
         return self._show_popup_menu(menu, event)
 
     def _on_stage_hover_enter(self, event, stage: str) -> None:
@@ -3743,9 +3735,9 @@ class WorkflowGUI:
         if self.is_running:
             messagebox.showwarning("Busy", "Another command is already running.")
             return
+        self.is_running = True
 
         def worker():
-            self.is_running = True
             self._set_status(f"Running: {label}")
             self.clear_stage_failure(stage)
             self.set_active_stage(stage)
@@ -3797,7 +3789,8 @@ class WorkflowGUI:
                     success_callback = on_success
                 if code == 0 and stage in {"3", "4", "5", "6", "7"}:
                     prior_callback = success_callback
-                    success_callback = lambda prior_callback=prior_callback: self._refresh_traceability_after_generation(prior_callback)
+                    bound_snapshot = str(cmd[cmd.index("--snapshot-id") + 1]) if "--snapshot-id" in cmd else None
+                    success_callback = lambda prior_callback=prior_callback, bound_snapshot=bound_snapshot: self._refresh_traceability_after_generation(prior_callback, snapshot_id=bound_snapshot)
                 if code != 0:
                     stopped_stage = re.search(
                         r"^\[[^\]]+\]\s+STOP at stage\s+(2a|[0-7])\b",
@@ -3839,12 +3832,16 @@ class WorkflowGUI:
 
         threading.Thread(target=worker, daemon=True).start()
 
-    def _refresh_traceability_after_generation(self, prior_callback=None) -> None:
+    def _refresh_traceability_after_generation(self, prior_callback=None, *, snapshot_id=None) -> None:
         """Refresh derived hierarchy reports before updating the GUI after generation."""
+        snapshot_id = snapshot_id or getattr(self, "workflow_snapshot_id", None) or self._latest_approved_snapshot_id()
+        if snapshot_id is None:
+            self.append_chat("GUI: No approved snapshot is available for derived report refresh.")
+            return
         report_command = [
             PYTHON_EXE,
             str(SCRIPTS_DIR / "generate_snapshot_reports.py"),
-            "--use-latest-approved",
+            "--snapshot-id", snapshot_id,
             "--report",
             "all",
         ]
@@ -3852,7 +3849,7 @@ class WorkflowGUI:
             report_command,
             "Refresh snapshot traceability reports",
             on_success=lambda: self._run_command_async(
-                [PYTHON_EXE, str(SCRIPTS_DIR / "traceability_hierarchy_coverage.py")],
+                [PYTHON_EXE, str(SCRIPTS_DIR / "traceability_hierarchy_coverage.py"), "--snapshot-id", snapshot_id],
                 "Refresh hierarchy coverage report",
                 on_success=prior_callback,
             ),
@@ -3860,6 +3857,12 @@ class WorkflowGUI:
 
     def run_stage_script(self, stage: str) -> None:
         cmd = [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "run", "--stage", stage]
+        if stage in {"3", "4", "5", "6", "7"}:
+            snapshot_id = getattr(self, "workflow_snapshot_id", None) or self._latest_approved_snapshot_id()
+            if snapshot_id is None:
+                self.append_chat("GUI: An approved snapshot is required for downstream generation.")
+                return
+            cmd.extend(["--snapshot-id", snapshot_id])
         self._run_command_async(
             cmd,
             f"CLI run stage {stage}",
@@ -3883,6 +3886,12 @@ class WorkflowGUI:
 
     def run_stage_script_after(self, stage: str, on_success) -> None:
         cmd = [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "run", "--stage", stage]
+        if stage in {"3", "4", "5", "6", "7"}:
+            snapshot_id = getattr(self, "workflow_snapshot_id", None) or self._latest_approved_snapshot_id()
+            if snapshot_id is None:
+                self.append_chat("GUI: An approved snapshot is required for downstream generation.")
+                return
+            cmd.extend(["--snapshot-id", snapshot_id])
         self._run_command_async(
             cmd,
             f"CLI run stage {stage}",
@@ -4545,18 +4554,21 @@ class WorkflowGUI:
 
     @staticmethod
     def _sysml_review_is_current(snapshot_id: str) -> bool:
-        manifest_path = REPO_ROOT / "artifacts/stage2_mirco_arc/stbio_architecture_model_manifest.json"
-        review_path = REPO_ROOT / "artifacts/stage2_mirco_arc/stbio_architecture_model_review.md"
         try:
+            scope = resolve_sysml_materialization_scope(REPO_ROOT, snapshot_id).require_valid()
+            manifest_path, review_path = scope.manifest_path, scope.review_path
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             review = review_path.read_text(encoding="utf-8")
             return manifest.get("snapshot_id") == snapshot_id and "- Status: approved" in review and review_path.stat().st_mtime >= manifest_path.stat().st_mtime
-        except (OSError, ValueError, TypeError):
+        except (OSError, ValueError, TypeError, DownstreamCoherenceError, ApprovedResolverError):
             return False
 
-    def _run_stage3_from_latest_snapshot(self) -> None:
+    def _run_stage3_from_latest_snapshot(self, snapshot_id=None) -> None:
+        selector = ["--snapshot-id", snapshot_id] if snapshot_id else self._snapshot_selector_args()
+        if selector is None:
+            return
         self._run_command_async(
-            [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "run", "--stage", "3", "--use-latest-approved"],
+            [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "run", "--stage", "3", *selector],
             "CLI run stage 3",
             stage="3",
         )
@@ -4568,7 +4580,7 @@ class WorkflowGUI:
             on_success=lambda: self._run_command_async(
                 [PYTHON_EXE, str(SCRIPTS_DIR / "review_architecture_sysml.py"), "--scope", "stage3-structural"],
                 "Stage 3 SysML structural review",
-                on_success=self._run_stage3_from_latest_snapshot,
+                on_success=lambda: self._run_stage3_from_latest_snapshot(snapshot_id),
             ),
         )
 
@@ -4586,7 +4598,7 @@ class WorkflowGUI:
         self._run_command_async(
             [PYTHON_EXE, str(SCRIPTS_DIR / "freeze_stage2b_snapshot.py"), "--reviewer", reviewer.strip()],
             "Freeze approved mapping snapshot for Stage 3",
-            on_success=self._prepare_stage3_run,
+            on_success=lambda: self._after_snapshot_freeze(self._prepare_stage3_run),
         )
 
     def _run_stale_stage3_prefix(self, first_stale_stage: str) -> None:
@@ -4625,7 +4637,7 @@ class WorkflowGUI:
             self.append_chat("GUI: Stage 3 preflight requires current Architecture Map Review approval.")
             self._show_architecture_profile_approval_dialog()
             return
-        snapshot_id = self._latest_approved_snapshot_id()
+        snapshot_id = getattr(self, "workflow_snapshot_id", None) or self._latest_approved_snapshot_id()
         if snapshot_id is None:
             self.append_chat("GUI: Architecture Map Review is current; Stage 3 requires only an approved immutable snapshot.")
             self._show_stage3_snapshot_required()
@@ -4634,7 +4646,7 @@ class WorkflowGUI:
             self.append_chat("GUI: Stage 3 preflight is generating and reviewing SysML for the current approved snapshot.")
             self._generate_sysml_then_run_stage3(snapshot_id)
             return
-        self._run_stage3_from_latest_snapshot()
+        self._run_stage3_from_latest_snapshot(snapshot_id)
 
     def run_selected_stage_cli(self) -> None:
         stage = self._resolve_gui_stage(self.stage_var.get())
@@ -5372,6 +5384,9 @@ WScript.Quit 0
                 self._open_mapping_workbook(reference_path, dialog)
 
         def run_stage2a_after_approval() -> None:
+            if self.is_running:
+                messagebox.showwarning("Busy", "Another command is already running.", parent=dialog)
+                return
             try:
                 self._sync_mapping_workbook_to_csv(mapping_workbook, mapping_preview)
             except Exception as exc:
@@ -5399,6 +5414,9 @@ WScript.Quit 0
             self.run_stage_cli("2a")
 
         def freeze_stage2b_snapshot() -> None:
+            if self.is_running:
+                messagebox.showwarning("Busy", "Another command is already running.", parent=dialog)
+                return
             try:
                 self._sync_mapping_workbook_to_csv(mapping_workbook, mapping_preview)
                 project_context = json.loads(PROJECT_CONTEXT_PATH.read_text(encoding="utf-8"))
@@ -5423,7 +5441,7 @@ WScript.Quit 0
             self._run_command_async(
                 command,
                 "Freeze Stage 2B approved mapping snapshot",
-                on_success=lambda: self.append_chat("GUI: Stage 2B approved mapping snapshot frozen."),
+                on_success=self._after_snapshot_freeze,
             )
 
         def approve_all_mapping_rows() -> None:
@@ -5790,6 +5808,21 @@ WScript.Quit 0
     def _refresh_all_derived_views(self) -> None:
         """Refresh reports first, then reload traceability, SysML, and workflow diagrams."""
         self._refresh_traceability_after_generation(self._refresh_work_area_and_traceability)
+
+    def _after_snapshot_freeze(self, on_ready=None) -> None:
+        snapshot_id = self._latest_approved_snapshot_id()
+        self.workflow_snapshot_id = snapshot_id
+        self._refresh_review_context()
+        self._refresh_work_area_and_traceability()
+        self.append_chat(f"GUI: Stage 2B approved mapping snapshot frozen: {snapshot_id}.")
+
+        def refresh_views():
+            self._refresh_review_context()
+            self._refresh_work_area_and_traceability()
+            if on_ready is not None:
+                on_ready()
+
+        self._refresh_traceability_after_generation(refresh_views, snapshot_id=snapshot_id)
 
     def _build_sysml_architecture_tab(self) -> None:
         controls = ttk.Frame(self.sysml_architecture_tab)
@@ -6210,8 +6243,11 @@ WScript.Quit 0
         if canvas is None or not canvas.winfo_exists():
             return
         canvas.delete("all")
-        top_path = SYSML_ROOT / "sysml" / "STBIOSystem.sysml"
-        digital_path = SYSML_ROOT / "sysml" / "DigitalSubsystem.sysml"
+        scope = self._get_sysml_materialization_scope()
+        if scope is None:
+            canvas.create_text(24, 24, anchor="nw", text=self.sysml_scope_diagnostic, fill="#a32626", width=900)
+            return
+        top_path, digital_path = scope.system_path, scope.digital_path
         source_paths = self._concrete_sysml_block_paths()
         if hasattr(self, "sysml_hierarchy_source_choice"):
             self.sysml_hierarchy_source_paths = {
@@ -6222,7 +6258,7 @@ WScript.Quit 0
             if selected_path in source_paths:
                 self.sysml_hierarchy_source_var.set(selected_path.relative_to(REPO_ROOT).as_posix())
         if not source_paths:
-            canvas.create_text(24, 24, anchor="nw", text="No generated SysML files were found.", fill="#52606d", font=("Segoe UI", 11))
+            canvas.create_text(24, 24, anchor="nw", text=self.sysml_scope_diagnostic or "No materialized IPOS block models.", fill="#52606d", font=("Segoe UI", 11))
             canvas.configure(scrollregion=(0, 0, 700, 120))
             return
 
@@ -6230,15 +6266,12 @@ WScript.Quit 0
         node_width, node_height = 220 * zoom, 48 * zoom
         nodes = []
         if top_path.exists():
-            nodes.append(("STBIOSystem", top_path, 440 * zoom, 30 * zoom, "root"))
+            nodes.append((scope.system_definition, top_path, 440 * zoom, 30 * zoom, "root"))
         if digital_path.exists():
             nodes.append(("DigitalSubsystem", digital_path, 150 * zoom, 150 * zoom, "subsystem"))
-        analog_path = SYSML_BLOCKS_ROOT / "adc.sysml"
-        if analog_path.exists():
-            nodes.append(("AnalogSubsystem", analog_path, 730 * zoom, 150 * zoom, "subsystem"))
         block_paths = list(source_paths)
         hierarchy_ports = {}
-        for path in block_paths + ([analog_path] if analog_path.exists() else []):
+        for path in block_paths:
             source = path.read_text(encoding="utf-8", errors="replace")
             hierarchy_ports[path] = re.findall(
                 r"\b(?:(in|out|inout)\s+)?port\s+([A-Za-z_][A-Za-z0-9_]*)\s*:",
@@ -6263,11 +6296,12 @@ WScript.Quit 0
             for _label, path, _x, _y, _kind in nodes
         }
         node_sizes.update({path: (220 * zoom, 48 * zoom) for _label, path, _x, _y, kind in nodes if kind != "block"})
-        root_path = top_path if top_path.exists() else source_paths[0]
+        root_path = top_path
         for label, path, x, y, kind in nodes:
             if path == root_path:
                 continue
-            parent_path = digital_path if kind == "block" and digital_path.exists() else root_path
+            block = self.sysml_materialization_scope.block_for_path(path) if kind == "block" else None
+            parent_path = digital_path if block and block.target == "Digital IPOS" else root_path
             if parent_path in positions:
                 px, py = positions[parent_path]
                 parent_width, parent_height = node_sizes.get(parent_path, (node_width, node_height))
@@ -6301,6 +6335,9 @@ WScript.Quit 0
                 max(390 * zoom, block_y + 40 * zoom),
             )
         )
+        if self.sysml_scope_diagnostic:
+            canvas.create_text(24, block_y + 20, anchor="nw", text=self.sysml_scope_diagnostic, fill="#a32626", width=900)
+            canvas.configure(scrollregion=canvas.bbox("all"))
 
         def open_node(event) -> None:
             current = canvas.find_withtag("current")
@@ -6403,13 +6440,16 @@ WScript.Quit 0
             return
         canvas = self.sysml_graph_canvas
         canvas.delete("all")
-        top_path = SYSML_ROOT / "sysml" / "STBIOSystem.sysml"
-        digital_path = SYSML_ROOT / "sysml" / "DigitalSubsystem.sysml"
+        scope = self._get_sysml_materialization_scope()
+        if scope is None:
+            canvas.create_text(20, 20, anchor="nw", text=self.sysml_scope_diagnostic, fill="#a32626", width=900)
+            return
+        top_path, digital_path = scope.system_path, scope.digital_path
         if not top_path.exists() or not digital_path.exists():
             canvas.create_text(20, 20, anchor="nw", text="Generate the SysML architecture to display the graph.", fill="#52606d", font=("Segoe UI", 11))
             canvas.configure(scrollregion=(0, 0, 600, 100))
             return
-        source_paths = [top_path, digital_path, SYSML_ROOT / "sysml" / "shared_definitions.sysml"]
+        source_paths = list(scope.structural_paths())
         source_paths.extend(self._concrete_sysml_block_paths())
         source_text = {
             path: path.read_text(encoding="utf-8", errors="replace")
@@ -6421,40 +6461,10 @@ WScript.Quit 0
         self.sysml_connection_details = {}
 
         node_width, node_height = 170, 42
-        positions = {"STBIOSystem": (520, 18), "topAnalog": (150, 92), "topDigital": (890, 92)}
-        block_def_paths = {
-            block_type: path
-            for path in source_paths
-            for block_type in re.findall(
-                r"\bpart\s+def\s+([A-Za-z_][A-Za-z0-9_]*)\b",
-                path.read_text(encoding="utf-8", errors="replace"),
-            )
-        }
-        blocks = [
-            (usage, block_type)
-            for usage, block_type in re.findall(
-                r"\bpart\s+(?!def\b)(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*)\s*;",
-                digital_text,
-            )
-            if block_type in block_def_paths and self._sysml_block_file_is_concrete(block_def_paths[block_type])
-        ]
-        if not blocks:
-            canvas.create_text(
-                20,
-                20,
-                anchor="nw",
-                text="No SysML part declarations were found in DigitalSubsystem.sysml.",
-                fill="#52606d",
-                font=("Segoe UI", 11),
-            )
-            canvas.configure(scrollregion=(0, 0, 600, 100))
-            return
-        for index, (usage, block_type) in enumerate(blocks):
-            positions[f"topDigital.{usage}"] = (650 + (index % 4) * 190, 175 + (index // 4) * 72)
-        analog_match = re.search(r"part def AnalogSubsystem\s*\{(.*?)\n\s*\}", top_text, flags=re.S)
-        if analog_match:
-            for usage, block_type in re.findall(r"\s+part\s+(\w+)\s*:\s*(\w+)\s*;", analog_match.group(1)):
-                positions[f"topAnalog.analogSubsystem.{usage}"] = (70, 175)
+        positions = {scope.system_definition: (520, 18), "topAnalog": (150, 92), "topDigital": (890, 92)}
+        blocks = scope.blocks
+        for index, block in enumerate(blocks):
+            positions[block.node] = (70 + (index % 4) * 320, 175 + (index // 4) * 72)
 
         def node_label(path: str) -> str:
             return path.rsplit(".", 1)[-1]
@@ -6499,37 +6509,32 @@ WScript.Quit 0
 
         for path, (x, y) in positions.items():
             is_selected = path == self.sysml_selected_block
-            fill = "#cfe8ff" if is_selected else "#dceef7" if path == "STBIOSystem" else "#e9f2e8" if path == "analogSubsystem" else "#fff0d6" if path == "digitalSubsystem" else "#ffffff"
-            outline = "#1976d2" if is_selected else "#236477" if path == "STBIOSystem" else "#527a50" if path == "analogSubsystem" else "#a66a00" if path == "digitalSubsystem" else "#8493a1"
+            fill = "#cfe8ff" if is_selected else "#dceef7" if path == scope.system_definition else "#e9f2e8" if path == "topAnalog" else "#fff0d6" if path == "topDigital" else "#ffffff"
+            outline = "#1976d2" if is_selected else "#236477" if path == scope.system_definition else "#527a50" if path == "topAnalog" else "#a66a00" if path == "topDigital" else "#8493a1"
             canvas.create_rectangle(x, y, x + node_width, y + node_height, fill=fill, outline=outline, width=3 if is_selected else 2, tags=("sysml_node", path))
-            canvas.create_text(x + node_width / 2, y + node_height / 2, text=node_label(path), fill="#0b4f8a" if is_selected else "#263238", font=("Segoe UI", 10, "bold" if is_selected or path in {"STBIOSystem", "analogSubsystem", "digitalSubsystem"} else "normal"), tags=("sysml_node", path))
+            canvas.create_text(x + node_width / 2, y + node_height / 2, text=node_label(path), fill="#0b4f8a" if is_selected else "#263238", font=("Segoe UI", 10, "bold" if is_selected or path in {scope.system_definition, "topAnalog", "topDigital"} else "normal"), tags=("sysml_node", path))
         canvas.configure(scrollregion=(0, 0, 1450, max(260, 250 + ((len(blocks) + 3) // 4) * 72)))
+        if self.sysml_scope_diagnostic:
+            canvas.create_text(20, 270 + ((len(blocks) + 3) // 4) * 72, anchor="nw",
+                               text=self.sysml_scope_diagnostic, fill="#a32626", width=1200)
+            canvas.configure(scrollregion=canvas.bbox("all"))
 
         def open_node(event) -> None:
             current = canvas.find_withtag("current")
             if not current:
                 return
             tags = canvas.gettags(current[0])
-            path = next((tag for tag in tags if "." in tag and tag.startswith("digitalSubsystem.")), None)
+            path = next((tag for tag in tags if scope.block_for_node(tag) is not None), None)
             if path is None:
-                return
-            usage = path.rsplit(".", 1)[-1]
-            block_type = next((candidate_type for candidate_usage, candidate_type in blocks if candidate_usage == usage), None)
-            if block_type is None:
                 return
             self.sysml_selected_block = path
             self._draw_sysml_architecture()
-            block_file = next(
-                (candidate for candidate in self._concrete_sysml_block_paths()
-                 if re.search(
-                     rf"\bpart\s+def\s+{re.escape(block_type)}\b",
-                     candidate.read_text(encoding="utf-8", errors="replace"),
-                 )),
-                None,
-            )
-            if block_file is not None:
+            block_file = scope.block_for_node(path).path
+            if block_file.is_file():
                 self.work_tabs.select(self.sysml_architecture_tab)
                 self._select_sysml_file(block_file)
+            else:
+                messagebox.showerror("SysML model missing", str(block_file))
 
         canvas.tag_bind("sysml_node", "<Button-1>", open_node)
         canvas.tag_bind("sysml_node", "<Double-1>", open_node)
@@ -6609,64 +6614,29 @@ WScript.Quit 0
         if values and Path(values[0]).is_file():
             self._select_sysml_file(Path(values[0]))
 
-    @staticmethod
-    def _sysml_concrete_block_names() -> set[str]:
-        inventory_path = REPO_ROOT / "artifacts/stage2_mirco_arc/block_inventory.csv"
-        if not inventory_path.exists():
-            return set()
-        try:
-            with inventory_path.open("r", encoding="utf-8-sig", newline="") as handle:
-                rows = list(csv.DictReader(handle))
-            interface_catalog_path = REPO_ROOT / "artifacts/stage2_mirco_arc/interface_catalog.csv"
-            interface_owners = set()
-            if interface_catalog_path.exists():
-                with interface_catalog_path.open("r", encoding="utf-8-sig", newline="") as handle:
-                    interface_owners = {
-                        (row.get("Owner") or "").strip().casefold()
-                        for row in csv.DictReader(handle)
-                        if (row.get("Owner") or "").strip()
-                        and re.search(r"\b(?:interface|port|pin|endpoint)\b", (row.get("Owner") or ""), re.IGNORECASE)
-                    }
-            return {
-                name
-                for row in rows
-                for name in [(row.get("Block") or "").strip()]
-                if name
-                and name.casefold() != "unassigned"
-                and name.casefold() not in interface_owners
-                and "described by stage 2 interaction evidence" not in (row.get("Function") or "").casefold()
-                and (row.get("Entity kind") or "concrete_block").strip().lower() == "concrete_block"
-            }
-        except OSError:
-            return set()
+    def _get_sysml_materialization_scope(self):
+        snapshot_id = getattr(self, "workflow_snapshot_id", None) or self._latest_approved_snapshot_id()
+        if not hasattr(self, "sysml_materialization_scope") or getattr(self, "sysml_scope_snapshot_id", None) != snapshot_id:
+            self.sysml_scope_snapshot_id = snapshot_id
+            try:
+                self.sysml_materialization_scope = resolve_sysml_materialization_scope(REPO_ROOT, snapshot_id).require_valid()
+                self.sysml_scope_diagnostic = ""
+            except (DownstreamCoherenceError, ApprovedResolverError, OSError, ValueError) as exc:
+                self.sysml_materialization_scope = None
+                self.sysml_scope_diagnostic = str(exc)
+        return self.sysml_materialization_scope
 
-    @classmethod
-    def _sysml_block_file_is_concrete(cls, path: Path) -> bool:
-        concrete_names = cls._sysml_concrete_block_names()
-        if not concrete_names or path.parent.resolve() != SYSML_BLOCKS_ROOT.resolve():
-            return False
-        try:
-            source = path.read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            return False
-        display_match = re.search(r'attribute\s+displayName\s*:\s*String\s*=\s*"([^"]+)"', source)
-        return bool(display_match and display_match.group(1).strip() in concrete_names)
+    def _sysml_block_file_is_concrete(self, path: Path) -> bool:
+        scope = self._get_sysml_materialization_scope()
+        return scope is not None and scope.block_for_path(path) is not None
 
-    @classmethod
-    def _concrete_sysml_block_paths(cls) -> list[Path]:
-        if not SYSML_BLOCKS_ROOT.is_dir():
+    def _concrete_sysml_block_paths(self) -> list[Path]:
+        scope = self._get_sysml_materialization_scope()
+        if scope is None:
             return []
-        created_ipos_names = {
-            re.sub(r"[^a-z0-9]", "", name.casefold())
-            for stage in ("Digital IPOS", "Analog IPOS")
-            for name in created_ipos_block_directories(REPO_ROOT, stage)
-        }
-        return [
-            path
-            for path in sorted(SYSML_BLOCKS_ROOT.glob("*.sysml"), key=lambda item: item.name.lower())
-            if cls._sysml_block_file_is_concrete(path)
-            and re.sub(r"[^a-z0-9]", "", path.stem.casefold()) in created_ipos_names
-        ]
+        paths, findings = scope.existing_model_paths(REPO_ROOT)
+        self.sysml_scope_diagnostic = "\n".join(findings)
+        return paths
 
     def _refresh_sysml_hierarchy_window(self) -> None:
         self._refresh_sysml_architecture()
@@ -6675,56 +6645,36 @@ WScript.Quit 0
     def _populate_sysml_hierarchy(self, source_paths: list[Path]) -> None:
         for item in self.sysml_hierarchy_tree.get_children():
             self.sysml_hierarchy_tree.delete(item)
-        path_by_name = {path.name: path for path in source_paths}
-        top_path = path_by_name.get("STBIOSystem.sysml") or (source_paths[0] if source_paths else None)
-        if top_path is None:
+        scope = self._get_sysml_materialization_scope()
+        if scope is None:
+            self.sysml_hierarchy_tree.insert("", tk.END, text=self.sysml_scope_diagnostic)
+            return
+        top_path = scope.system_path
+        if top_path not in source_paths:
+            self.sysml_hierarchy_tree.insert("", tk.END, text="System SysML model missing")
             return
         root = self.sysml_hierarchy_tree.insert("", tk.END, text=top_path.stem, values=(top_path.as_posix(),), open=True)
-        top_text = top_path.read_text(encoding="utf-8", errors="replace")
-        subsystem_nodes = {}
-        for usage, block_type in re.findall(r"\bpart\s+(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*)\s*;", top_text):
-            match = next((path for path in source_paths if re.search(rf"\bpart\s+def\s+{re.escape(block_type)}\b", path.read_text(encoding="utf-8", errors="replace"))), None)
-            parent = root
-            node = self.sysml_hierarchy_tree.insert(parent, tk.END, text=usage, values=((match or top_path).as_posix(),), open=True)
-            subsystem_nodes[usage] = node
-        for path in source_paths:
-            if path == top_path:
-                continue
-            if path.name in {"shared_definitions.sysml", "DigitalSubsystem.sysml"}:
-                self.sysml_hierarchy_tree.insert(root, tk.END, text=path.stem, values=(path.as_posix(),))
-        digital_node = subsystem_nodes.get("topDigital")
-        if digital_node is not None:
-            digital_path = path_by_name.get("DigitalSubsystem.sysml")
-            if digital_path is not None:
-                digital_text = digital_path.read_text(encoding="utf-8", errors="replace")
-                concrete_names = self._sysml_concrete_block_names()
-                for usage, block_type in re.findall(r"\bpart\s+(?!def\b)(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*)\s*;", digital_text):
-                    block_path = next((path for path in source_paths if re.search(rf"\bpart\s+def\s+{re.escape(block_type)}\b", path.read_text(encoding="utf-8", errors="replace"))), digital_path)
-                    if concrete_names:
-                        display_match = re.search(r'attribute\s+displayName\s*:\s*String\s*=\s*"([^"]+)"', block_path.read_text(encoding="utf-8", errors="replace"))
-                        if not display_match or display_match.group(1).strip() not in concrete_names:
-                            continue
-                    self.sysml_hierarchy_tree.insert(digital_node, tk.END, text=usage, values=(block_path.as_posix(),))
-        analog_node = subsystem_nodes.get("topAnalog")
-        if analog_node is not None:
-            analog_match = re.search(r"\bpart\s+def\s+AnalogSubsystem\s*\{(.*?)\n\s*\}", top_text, flags=re.S)
-            if analog_match:
-                for usage, block_type in re.findall(r"\bpart\s+(?!def\b)(\w+)\s*:\s*([A-Za-z_][A-Za-z0-9_]*)\s*;", analog_match.group(1)):
-                    block_path = next(
-                        (path for path in source_paths if re.search(rf"\bpart\s+def\s+{re.escape(block_type)}\b", path.read_text(encoding="utf-8", errors="replace"))),
-                        top_path,
-                    )
-                    self.sysml_hierarchy_tree.insert(analog_node, tk.END, text=usage, values=(block_path.as_posix(),))
+        parents = {}
+        for target, path in (("Digital IPOS", scope.digital_path), ("Analog IPOS", top_path)):
+            parents[target] = self.sysml_hierarchy_tree.insert(root, tk.END, text=target,
+                                                            values=(path.as_posix(),) if path else (), open=True)
+        for block in scope.blocks:
+            if block.path in source_paths:
+                self.sysml_hierarchy_tree.insert(parents[block.target], tk.END, text=block.name, values=(block.path.as_posix(),))
+        if self.sysml_scope_diagnostic:
+            self.sysml_hierarchy_tree.insert(root, tk.END, text=self.sysml_scope_diagnostic)
 
     def _refresh_sysml_architecture(self) -> None:
         if not hasattr(self, "sysml_tree"):
             return
+        if hasattr(self, "sysml_materialization_scope"):
+            del self.sysml_materialization_scope
         for item in self.sysml_tree.get_children():
             self.sysml_tree.delete(item)
-        top_path = SYSML_ROOT / "sysml" / "STBIOSystem.sysml"
+        scope = self._get_sysml_materialization_scope()
         model_paths = [
             path
-            for path in [top_path, SYSML_ROOT / "sysml" / "DigitalSubsystem.sysml", SYSML_ROOT / "sysml" / "shared_definitions.sysml"]
+            for path in (scope.structural_paths() if scope else ())
             if path.exists()
         ]
         concrete_paths = self._concrete_sysml_block_paths()
@@ -6847,7 +6797,7 @@ WScript.Quit 0
             if match:
                 values[label] = match.group(1)
         try:
-            edge_statistics = approved_generated_document_dependency_graph(REPO_ROOT).get("edge_statistics", [])
+            edge_statistics = approved_generated_document_dependency_graph(REPO_ROOT, getattr(self, "workflow_snapshot_id", None)).get("edge_statistics", [])
             edge_lookup = {
                 (str(item.get("upstream_node")), str(item.get("derived_node"))): item
                 for item in edge_statistics
@@ -6969,10 +6919,11 @@ WScript.Quit 0
             "Digital IPOS": (ipos_x, drs_y),
             "SysML": (srs_x, 18),
         }
+        sysml_scope = self._get_sysml_materialization_scope()
         generated_paths = {
             "Analog IPOS": REPO_ROOT / "artifacts/stage7_analog_ipos",
             "Digital IPOS": REPO_ROOT / "artifacts/stage6_digital_ipos",
-            "SysML": SYSML_ROOT / "sysml" / "STBIOSystem.sysml",
+            "SysML": sysml_scope.system_path if sysml_scope else None,
         }
         def node_metric(document: str) -> str:
             value = values[document]
@@ -6986,6 +6937,8 @@ WScript.Quit 0
 
         def generated_metric(document: str) -> str:
             path = generated_paths[document]
+            if path is None:
+                return "Scope unresolved"
             exists = path.exists() if path.suffix else path.is_dir()
             return "Generated" if exists else "Not generated"
 
@@ -7768,10 +7721,9 @@ WScript.Quit 0
             connection = connect(REPO_ROOT)
             try:
                 rows = connection.execute(
-                    """SELECT snapshot_id, approved_by, approved_at
-                         FROM snapshots
-                        WHERE project_id = ? AND status = 'approved'
-                        ORDER BY approved_at DESC, snapshot_id DESC LIMIT 5""",
+                    """SELECT snapshot_id, approved_by, approved_at, status FROM snapshots
+                        WHERE project_id = ?
+                        ORDER BY approved_at DESC, snapshot_id DESC LIMIT 10""",
                     (project_id,),
                 ).fetchall()
             finally:
@@ -7782,7 +7734,6 @@ WScript.Quit 0
         if not rows:
             messagebox.showinfo("Approved Snapshot", "No approved snapshot is available. Create an immutable approved snapshot first.", parent=owner)
             return None
-
         dialog = tk.Toplevel(owner)
         dialog.title("Select Approved Snapshot")
         dialog.transient(owner)
@@ -7792,21 +7743,36 @@ WScript.Quit 0
         frame = ttk.Frame(dialog, padding=16)
         frame.pack(fill=tk.BOTH, expand=True)
         ttk.Label(frame, text="Approved Snapshot", font=("Segoe UI", 13, "bold")).pack(anchor=tk.W)
-        ttk.Label(frame, text="Choose Latest approved or one of the five most recently approved snapshots.", wraplength=540).pack(anchor=tk.W, pady=(4, 10))
-        choices = ["Latest approved"]
-        choice_to_selector = {"Latest approved": ["--use-latest-approved"]}
+        choices = []
+        choice_to_snapshot = {}
+        bound_snapshot = getattr(self, "workflow_snapshot_id", None)
+        if bound_snapshot:
+            choices.append("Current workflow snapshot")
+            choice_to_snapshot[choices[-1]] = bound_snapshot
+        choices.append("Latest approved")
+        choice_to_snapshot[choices[-1]] = None
         for row in rows:
             snapshot_id = str(row["snapshot_id"])
-            label = f"{snapshot_id} | {row['approved_at'] or 'unknown date'} | {row['approved_by'] or 'unknown reviewer'}"
+            status = str(row["status"])
+            state_label = status if status == "approved" else f"{status} (history only)"
+            label = f"{snapshot_id} | {row['approved_at'] or 'unknown date'} | {row['approved_by'] or 'unknown reviewer'} | {state_label}"
             choices.append(label)
-            choice_to_selector[label] = ["--snapshot-id", snapshot_id]
+            choice_to_snapshot[label] = snapshot_id
         selected = tk.StringVar(value=choices[0])
-        combo = ttk.Combobox(frame, textvariable=selected, values=choices, state="readonly", width=78)
+        combo = ttk.Combobox(frame, textvariable=selected, values=choices, state="readonly", width=96, height=12)
         combo.pack(fill=tk.X, pady=(0, 14))
         result: List[str] = []
 
         def choose() -> None:
-            result.extend(choice_to_selector[selected.get()])
+            try:
+                snapshot_id = resolve_complete_snapshot_id(
+                    REPO_ROOT, project_id=project_id, snapshot_id=choice_to_snapshot[selected.get()],
+                )
+            except (ApprovedResolverError, OSError, ValueError) as exc:
+                messagebox.showerror("Approved Snapshot", str(exc), parent=dialog)
+                return
+            self.workflow_snapshot_id = snapshot_id
+            result.extend(["--snapshot-id", snapshot_id])
             dialog.destroy()
 
         buttons = ttk.Frame(frame)
@@ -7864,7 +7830,8 @@ WScript.Quit 0
         ttk.Separator(frame, orient=tk.HORIZONTAL).pack(fill=tk.X, pady=12)
         ttk.Label(frame, text="Approved snapshot:").pack(anchor=tk.W)
         snapshot_choices = ["Latest approved"] + [str(row["snapshot_id"]) for row in snapshot_rows]
-        snapshot_var = tk.StringVar(value=snapshot_choices[0])
+        bound_snapshot = getattr(self, "workflow_snapshot_id", None)
+        snapshot_var = tk.StringVar(value=bound_snapshot if bound_snapshot in snapshot_choices else snapshot_choices[0])
         snapshot_combo = ttk.Combobox(frame, textvariable=snapshot_var, values=snapshot_choices, state="readonly", width=66)
         snapshot_combo.pack(fill=tk.X, pady=(4, 14))
 
@@ -7929,21 +7896,6 @@ WScript.Quit 0
             return
         cmd = [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "taxonomy-update"]
         self._run_command_async(cmd, "CLI taxonomy-update")
-
-    def run_stage5_after_stage2a(self) -> None:
-        confirm = messagebox.askyesno(
-            "Run S5 after S2a",
-            (
-                "Run Stage 5 in requirements-only mode?\n\n"
-                "This path skips Stage 3 (SRS) and Stage 4 (ARS) generation, and builds DRS "
-                "from Stage 1 + Stage 2A artifacts only."
-            ),
-            parent=self.root,
-        )
-        if not confirm:
-            return
-        cmd = [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "drs-after-stage2a"]
-        self._run_command_async(cmd, "CLI drs-after-stage2a", stage="5")
 
     def _show_taxonomy_update_guidance(self) -> bool:
         manual_file = str(PROJECT_CONTEXT_PATH)

@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "document_type": "SRS",
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "authority": false,
+  "user_review_only": true,
+  "omissions": [
+    {
+      "location": "0.1 Table of contents {#01-table-of-contents}",
+      "input_line": 85,
+      "original": "- [Assumptions and TBD](#assumptions-and-tbd)",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:85"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "3.4 External Interfaces and System Boundaries {#34-external-interfaces-and-system-boundaries}",
+      "input_line": 395,
+      "original": "The interfaces provide sensing input, measurement data exchange, serial communication, interrupt reporting and power supply roles. External versus internal placement is not specified for every interface.",
+      "retained": "The interfaces provide sensing input, measurement data exchange, serial communication, interrupt reporting and power supply roles.",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:395"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "3.6 Power, Clock, and Reset Overview {#36-power-clock-and-reset-overview}",
+      "input_line": 427,
+      "original": "State retention across system power transitions is not specified.",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:427"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "3.6 Power, Clock, and Reset Overview {#36-power-clock-and-reset-overview}",
+      "input_line": 439,
+      "original": "  - Top-level clock and reset coordination are not specified.",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:439"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "3.7 Assumptions, Scope Limits, and Allocation Boundaries {#37-assumptions-scope-limits-and-allocation-boundaries}",
+      "input_line": 446,
+      "original": "  - Additional system-level assumptions are not described in the available descriptions.",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:446"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "Assumptions {#assumptions-and-tbd}",
+      "input_line": 601,
+      "original": "## Assumptions and TBD {#assumptions-and-tbd}",
+      "retained": "## Assumptions {#assumptions}",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:601"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "Assumptions {#assumptions-and-tbd}",
+      "input_line": 604,
+      "original": "- TBD-001: Unassigned requirements in traceability matrix need architectural owner review.",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:604"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "10.1 Descriptive content review findings {#101-descriptive-content-review-findings}",
+      "input_line": 612,
+      "original": "- SRS_CATALOG_CLASSIFICATION_MISSING: IRQ logic",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:612"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "10.1 Descriptive content review findings {#101-descriptive-content-review-findings}",
+      "input_line": 613,
+      "original": "- SRS_CATALOG_CLASSIFICATION_MISSING: BIST Controller",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:613"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "10.1 Descriptive content review findings {#101-descriptive-content-review-findings}",
+      "input_line": 614,
+      "original": "- SRS_CATALOG_CLASSIFICATION_CONFLICT: PAD MUX",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:614"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "10.1 Descriptive content review findings {#101-descriptive-content-review-findings}",
+      "input_line": 615,
+      "original": "- SRS_CATALOG_APPROVAL_MISSING: ISPU",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:615"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "10.1 Descriptive content review findings {#101-descriptive-content-review-findings}",
+      "input_line": 616,
+      "original": "- SRS_POWER_VOLTAGE_UNRELIABLE: Stage 1 OCR power-domain table/description (PD_TOP3V3): 3A",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:616"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "10.1 Descriptive content review findings {#101-descriptive-content-review-findings}",
+      "input_line": 617,
+      "original": "- SRS_POWER_NOTE_UNREADABLE: Stage 1 OCR power-domain table/description (PD_TOPIO): Always active 32 10.4",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "system_requirements_specification.md:renderer-input-line:617"
+      ],
+      "user_review_only": true
+    }
+  ]
+}

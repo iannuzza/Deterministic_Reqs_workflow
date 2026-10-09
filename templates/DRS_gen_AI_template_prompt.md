@@ -15,7 +15,7 @@ and contract version are recorded separately from snapshot identity. This pilot 
 version: 1
 document_type: DRS
 mandatory_rules: [structure, conventions, navigation, table_preservation, technical_prose, evidence_fidelity, artifact_fidelity]
-sections: ["1. Introduction", "2. Definitions and terminology", "3. Top Level Overview", "4. Digital requirements", "5. Validation and qualification requirements", "6. Requirement identification and traceability", "7. Interfaces and mixed-signal interactions", "8. Assumptions and TBD", "9. Top-level integration requirements", "10. Missing Inputs"]
+sections: ["1. Introduction", "2. Definitions and terminology", "3. Top Level Overview", "4. Digital requirements", "5. Validation and qualification requirements", "6. Requirement identification and traceability", "7. Interfaces and mixed-signal interactions", "8. Assumptions", "9. Top-level integration requirements", "10. Missing Inputs"]
 navigation: ["0. Document Navigation", "0.1 Table of contents", "0.2 Internal index for paragraphs and pages", "0.3 Document control", "Table 1. Version history", "Table 2. Reference documents", "Table 6. Category convention", "0.4 Table of tables"]
 conventions: {
 heading: "2.1 Conventions",
@@ -82,7 +82,7 @@ supporting inputs explicitly; continue only where the existing snapshot-bound ga
 3. Keep facts and assumptions separated:
 - Mark assumptions as ASSUME-<NNN>.
 4. Do not invent unsupported behavior:
-- If evidence is weak, mark as TBD with rationale.
+- Omit unsupported descriptive content and record its rationale in the separate user-review report. Preserve approved normative text and all authority gates.
 5. Provide verification hooks:
 - Each requirement must include verification method and acceptance criteria.
 6. Keep terminology consistent with project artifacts.
@@ -259,7 +259,7 @@ topic labels, authored statements and Covers links, including mode, test/debug a
 Explain digital/mixed-signal exchanges, analog configuration/readout, status, calibration and
 power-mode coordination where approved. Preserve all existing supporting interface tables.
 
-### 8. Assumptions and TBD
+### 8. Assumptions
 
 Keep unresolved assumptions and evidence gaps distinct from approved requirements.
 
@@ -308,7 +308,7 @@ stage_drs_report.md must contain:
 - input artifact coverage summary
 - count of generated DRS requirements by domain
 - count of requirements with full traceability
-- open TBD and assumptions list
+- supported assumptions and a separate user-review issue report (not specification content)
 - blocking issues list
 
 ## Final quality checklist

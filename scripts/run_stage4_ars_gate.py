@@ -10,7 +10,7 @@ import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
-from approved_snapshot_resolver import resolve_authoritative_input, resolve_complete_snapshot_id
+from approved_snapshot_resolver import resolve_complete_snapshot_id
 
 
 def _run(repo_root: Path, label: str, args: list[str]) -> int:
@@ -78,12 +78,6 @@ def main() -> int:
     context = json.loads((repo_root / "config" / "project_context.json").read_text(encoding="utf-8"))
     project_id = str(context.get("project_name") or repo_root.name)
     snapshot_id = resolve_complete_snapshot_id(repo_root, project_id=project_id, snapshot_id=args.snapshot_id)
-    requirement_input = resolve_authoritative_input(repo_root, "5", project_id=project_id, snapshot_id=snapshot_id)
-    routing_csv = repo_root / "artifacts/stage2_mirco_arc/unmapped_requirement_routing.csv"
-    if not _has_analog_requirement_id(requirement_input.rows) and not _has_retained_context(routing_csv):
-        _write_skip_reports(repo_root)
-        print("Stage 4 ARS full flow: SKIPPED (no Analog-category source requirement IDs or retained Source Function Context rows)")
-        return 0
 
     print("Stage 4 ARS full flow")
     print("This run will generate and validate:")

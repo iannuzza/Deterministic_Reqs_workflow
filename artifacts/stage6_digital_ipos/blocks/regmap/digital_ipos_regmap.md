@@ -33,11 +33,12 @@ Author: Alessandro Lucio IANNUZZI
 
 ### **1.1 Functionality** {#11-functionality}
 
-The Regmap block is designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.
+The Regmap block serves to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The Regmap accepts host read/write transactions and produces register data and status fields.
+- The Regmap block accepts Host read/write transactions. The Regmap block produces Register data and status fields.
+- **Write enable for each OTP REGISTER.** Write enable for each OTP REGISTER is 0, in functional mode, if bit 31 of OTP PRG10 is set 1.
 
 ## **2. Source I/O** {#2-source-io}
 

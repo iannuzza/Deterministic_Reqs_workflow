@@ -1,6 +1,6 @@
 # Stage 00 Report
 
-Date: 2026-10-06
+Date: 2026-10-09
 
 ## Executive Summary
 - Ontology study definition: identifying and formalizing key concepts, properties, and relationships so the system is unambiguous and consistently modeled.
@@ -9,8 +9,8 @@ Date: 2026-10-06
 - OCR provenance index: artifacts/stage1_requirements/ocr_extracts/index.csv
 - Requirements analyzed (from Stage 1 summary): 271
 - Category coverage: System=117, Analog=0, Digital=154
-- Semantic issues: critical=0, major=0, minor=18
-- Gate 0 recommendation: go
+- Semantic issues: critical=1, major=0, minor=18
+- Gate 0 recommendation: no-go
 
 ## Stage 0 Artifacts Health
 - ontology.md exists: yes
@@ -18,7 +18,7 @@ Date: 2026-10-06
 - semantic_issues.md exists: yes
 - ontology.md contains template placeholders: no
 - glossary.csv contains template placeholders: no
-- Glossary entries (excluding header): 339
+- Glossary entries (excluding header): 369
 
 ## Ontology-Study Deliverables
 - Glossary of terms: yes
@@ -63,15 +63,15 @@ Date: 2026-10-06
 - derived-from-structure: 24
 
 ## Semantic Issues And Blockers
-- Critical: 0
+- Critical: 1
 - Major: 0
 - Minor: 18
-- Stage 1 handoff impact: not blocked
+- Stage 1 handoff impact: blocked
 
 ## Notes
 - This report is generated automatically from current Stage 0/Stage 1 artifacts.
 - If ontology/glossary placeholders are still present, run the ontology authoring step before Gate 0 sign-off.
 
 ## Status
-- Gate 0: pass
-- Stage 1 handoff recommendation: go
+- Gate 0: fail
+- Stage 1 handoff recommendation: no-go

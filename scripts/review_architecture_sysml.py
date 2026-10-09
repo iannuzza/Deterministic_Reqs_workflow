@@ -14,8 +14,8 @@ from pathlib import Path
 import re
 from typing import Dict, List, Optional, Set
 
-from generate_architecture_sysml import block_name, model_file_name, read_csv, sha256, subsystem_for_block, sysml_name, usage_name
-from validate_downstream_coherence import approved_sysml_block_scope
+from generate_architecture_sysml import block_name, read_csv, sha256
+from validate_downstream_coherence import resolve_sysml_materialization_scope, sysml_materialization_findings, SysMLMaterializationScope
 
 
 def _review(
@@ -31,23 +31,26 @@ def _review(
     source_path: Optional[Path] = None,
     approved_blocks: Optional[Set[str]] = None,
     structural_only: bool = True,
+    scope: Optional[SysMLMaterializationScope] = None,
 ) -> List[Dict[str, str]]:
-    model = model_path.read_text(encoding="utf-8")
-    shared_path = model_dir / "shared_definitions.sysml"
-    shared_model = shared_path.read_text(encoding="utf-8") if shared_path.exists() else ""
-    digital_path = model_dir / "DigitalSubsystem.sysml"
-    digital_model = digital_path.read_text(encoding="utf-8") if digital_path.exists() else ""
-    interactions = read_csv(interactions_path)
-    blocks: Set[str] = set(approved_blocks or set())
+    if scope is None:
+        raise ValueError("Structural review requires the central SysML materialization scope.")
+    scope.require_valid()
+    if model_path.resolve() != scope.system_path.resolve() or model_dir.resolve() != scope.system_path.parent.resolve():
+        raise ValueError("SYSML_SCOPE_REVIEW_ADDRESS_MISMATCH")
+    model = scope.system_path.read_text(encoding="utf-8")
+    shared_model = scope.shared_path.read_text(encoding="utf-8") if scope.shared_path.exists() else ""
+    blocks = {block.name for block in scope.blocks}
+    interactions = list(scope.interactions)
     findings: List[Dict[str, str]] = []
 
     block_models: Dict[str, str] = {}
     missing_blocks = []
-    for name in sorted(blocks):
-        block_path = model_dir / "blocks" / model_file_name(name)
+    for block in scope.blocks:
+        name, block_path = block.name, block.path
         block_text = block_path.read_text(encoding="utf-8") if block_path.exists() else ""
         block_models[name] = block_text
-        if f"part def {sysml_name(name)}" not in block_text:
+        if f"part def {block.definition}" not in block_text:
             missing_blocks.append(name)
     model_set_ok = bool(shared_model) and not missing_blocks
     model_set_details = f"shared definitions and {len(blocks)} per-block models are present"
@@ -56,15 +59,18 @@ def _review(
     if missing_blocks:
         model_set_details += "; missing block models: " + ", ".join(missing_blocks)
     findings.append({"check": "model_set_completeness", "status": "PASS" if model_set_ok else "FAIL", "details": model_set_details})
+    scope_findings = sysml_materialization_findings(scope.repo_root, scope)
+    findings.append({"check": "central_materialization_scope", "status": "FAIL" if scope_findings else "PASS",
+                     "details": "; ".join(scope_findings) if scope_findings else "Exact approved IPOS/SysML scope parity; all imports and parts resolve."})
+    findings.append({"check": "out_of_scope_interaction_context", "status": "PASS",
+                     "details": "; ".join(scope.interaction_findings) if scope.interaction_findings else "None"})
 
     missing_connections = []
     for row in interactions:
-        source = block_name(row.get("From block", ""))
-        target = block_name(row.get("To block", ""))
-        if source not in blocks or target not in blocks:
-            continue
-        source_path = f"topDigital.{usage_name(source)}" if subsystem_for_block(source) == "Digital Subsystem" else f"topAnalog.{usage_name(subsystem_for_block(source))}.{usage_name(source)}"
-        target_path = f"topDigital.{usage_name(target)}" if subsystem_for_block(target) == "Digital Subsystem" else f"topAnalog.{usage_name(subsystem_for_block(target))}.{usage_name(target)}"
+        source = row["From block"]
+        target = row["To block"]
+        source_path = scope.block_for_label(source).node
+        target_path = scope.block_for_label(target).node
         expected = f"connect {source_path} to {target_path}"
         if expected not in model:
             missing_connections.append(f"{source}->{target}")
@@ -73,11 +79,9 @@ def _review(
     missing_source_edges = []
     extra_source_edges = []
     source_edges = read_csv(edge_path) if edge_path and edge_path.exists() else []
-    source_edges = [
-        edge for edge in source_edges
-        if block_name(edge.get("from_block", "")) in blocks
-        and block_name(edge.get("to_block", "")) in blocks
-    ]
+    source_edges, excluded_edges = scope.connection_rows(source_edges, "from_block", "to_block")
+    if excluded_edges:
+        findings.append({"check": "out_of_scope_source_edge_context", "status": "PASS", "details": "; ".join(excluded_edges)})
     interaction_by_id = {
         req_id: row
         for row in interactions
@@ -110,7 +114,7 @@ def _review(
         source_edge_details += "; extra XBAR IDs: " + ", ".join(extra_source_edges)
     findings.append({"check": "source_connection_crosscheck", "status": "PASS" if source_edges_ok else "FAIL", "details": source_edge_details})
 
-    names = [sysml_name(name) for name in blocks]
+    names = [block.definition for block in scope.blocks]
     duplicate_names = sorted({name for name in names if names.count(name) > 1})
     invalid_names = sorted(name for name in names if not re.match(r"^[A-Za-z_][A-Za-z0-9_]*$", name))
     naming_ok = not duplicate_names and not invalid_names
@@ -126,7 +130,7 @@ def _review(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run the stage-local structural SysML review")
-    parser.add_argument("--model", default="artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml")
+    parser.add_argument("--model", default=None)
     parser.add_argument("--model-dir", default="artifacts/stage2_mirco_arc/sysml")
     parser.add_argument("--traceability", default="artifacts/stage2_mirco_arc/requirement_to_block_traceability.csv")
     parser.add_argument("--mapping-preview", default="artifacts/stage1_specs/architecture_mapping_preview.csv")
@@ -136,8 +140,8 @@ def main() -> int:
     parser.add_argument("--interactions", default="artifacts/stage2_mirco_arc/interaction_matrix.csv")
     parser.add_argument("--ports", default="artifacts/stage2_mirco_arc/source_port_catalog.csv")
     parser.add_argument("--io-coverage", default="artifacts/stage2_mirco_arc/source_io_table_coverage.csv")
-    parser.add_argument("--output", default="artifacts/stage2_mirco_arc/stbio_architecture_model_review.md")
-    parser.add_argument("--csv-output", default="artifacts/stage2_mirco_arc/stbio_architecture_model_review.csv")
+    parser.add_argument("--output", default=None)
+    parser.add_argument("--csv-output", default=None)
     parser.add_argument("--snapshot-id", help="Explicit approved snapshot ID; omitted uses the resolver's approved snapshot.")
     parser.add_argument(
         "--scope",
@@ -148,8 +152,10 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_root = Path(__file__).resolve().parents[1]
-    approved_blocks = approved_sysml_block_scope(repo_root, args.snapshot_id)
-    model = Path(args.model)
+    scope = resolve_sysml_materialization_scope(repo_root, args.snapshot_id).require_valid()
+    if args.model and Path(args.model).resolve() != scope.system_path.resolve():
+        parser.error("--model does not match the central materialization scope")
+    model = scope.system_path
     traceability = Path(args.traceability)
     inventory = Path(args.inventory)
     interactions = Path(args.interactions)
@@ -157,20 +163,21 @@ def main() -> int:
         model, Path(args.model_dir), traceability, inventory, interactions,
         Path(args.ports), Path(args.io_coverage), Path(args.mapping_preview),
         Path(args.source_edges), Path(args.requirements),
-        approved_blocks,
+        None,
         structural_only=args.scope == "stage3-structural",
+        scope=scope,
     )
     status = "approved" if all(row["status"] == "PASS" for row in findings) else "rejected"
     timestamp = datetime.now().isoformat(timespec="seconds")
 
-    csv_output = Path(args.csv_output)
+    csv_output = Path(args.csv_output) if args.csv_output else scope.review_path.with_suffix(".csv")
     csv_output.parent.mkdir(parents=True, exist_ok=True)
     with csv_output.open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=["check", "status", "details"])
         writer.writeheader()
         writer.writerows(findings)
 
-    output = Path(args.output)
+    output = Path(args.output) if args.output else scope.review_path
     output.write_text("\n".join([
         "# SysML Architecture Model Review",
         "",

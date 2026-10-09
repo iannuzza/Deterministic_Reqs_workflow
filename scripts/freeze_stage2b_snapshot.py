@@ -16,6 +16,7 @@ from requirement_corpus import authoritative_corpus_path, write_approved_snapsho
 from snapshot_manager import create_approved_snapshot
 from pre_freeze_coverage import validate_pre_freeze_coverage
 from pre_freeze_coherence_gate import evaluate as evaluate_pre_freeze_gate
+from validate_source_to_stage2b_coherence import validate as validate_source_coherence
 from validate_stage2_profile import validate_approval_evidence
 
 
@@ -79,9 +80,18 @@ def freeze(repo_root: Path, reviewer: str) -> Path:
     project_id = str(context.get("project_name") or repo_root.name)
     retrieval_path = repo_root / str(context.get("retrieval_config_path") or "config/retrieval_config.json")
     retrieval_payload = json.loads(retrieval_path.read_text(encoding="utf-8")) if retrieval_path.exists() else {}
-    gate = evaluate_pre_freeze_gate(repo_root, repo_root / "artifacts/validation/source_to_stage2b_coherence.json")
+    phase1_path = repo_root / "artifacts/validation/source_to_stage2b_coherence.json"
+    phase1 = validate_source_coherence(repo_root)
+    phase1_path.parent.mkdir(parents=True, exist_ok=True)
+    phase1_path.write_text(json.dumps(phase1, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    gate = evaluate_pre_freeze_gate(repo_root, phase1_path)
+    gate_path = phase1_path.with_name("pre_freeze_coherence_gate.json")
+    gate_path.write_text(json.dumps(gate, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     if gate["decision"] != "GO_ON":
-        raise RuntimeError(f"Pre-freeze coherence gate blocked Stage 2B freeze: {gate['decision']}")
+        raise RuntimeError(
+            f"Pre-freeze coherence gate blocked Stage 2B freeze: {gate['decision']}. "
+            f"Phase 1 was revalidated automatically; inspect {phase1_path} and {gate_path}."
+        )
     approval_findings = validate_approval_evidence(
         repo_root / "config/stage2_mirco_arc_profile.json",
         repo_root / "artifacts/stage1_specs/architecture_profile_draft.json",

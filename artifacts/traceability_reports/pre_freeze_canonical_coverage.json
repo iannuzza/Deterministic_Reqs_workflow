@@ -1,7 +1,7 @@
 {
   "canonical_counts_by_source": {
     "DDS_STBIO1.pdf": 191,
-    "IPOS_MAIN_CTRL.pdf": 123
+    "IPOS_MAIN_CTRL.pdf": 166
   },
   "expected_in_scope_source_specs": [
     "DDS_STBIO1.pdf",
@@ -22,8 +22,8 @@
   "rejection_reasons": [],
   "review_counts_by_source": {
     "DDS_STBIO1.pdf": 191,
-    "IPOS_MAIN_CTRL.pdf": 123
+    "IPOS_MAIN_CTRL.pdf": 166
   },
-  "review_row_count": 314,
+  "review_row_count": 357,
   "status": "pass"
 }
