@@ -113,6 +113,354 @@ from run_drs_gen_spec_agent import (
 
 
 class DescriptiveSummaryTests(unittest.TestCase):
+    def test_drs_dedicated_connection_tables_preserve_approved_fields(self):
+        from run_drs_gen_spec_agent import _drs_reset_connection_rows, _drs_connection_table_findings
+        from workflow_routing import render_connection_table_sections
+        from spec_document_contract import drs_document_events
+        row = {"source_req_id": "RESET", "approved_classification": "Digital", "lifecycle_state": "approved",
+               "requirement_statement": "The top.reset_n signal shall be connected to the top.unit.reset_n signal."}
+        incomplete = {**row, "source_req_id": "INCOMPLETE",
+                      "requirement_statement": "The top.controller. signal shall be connected to the top.unit.other_reset_n signal."}
+        self.assertEqual(_drs_reset_connection_rows([row, incomplete]), [
+            ("RESET", "top.reset_n", "top.unit.reset_n"), ("INCOMPLETE", "", "top.unit.other_reset_n")])
+        self.assertEqual(_drs_reset_connection_rows([{**row, "lifecycle_state": "staged"},
+                                                   {**row, "approved_classification": "Analog"},
+                                                   {**row, "source_req_id": ""}]), [])
+        conditional = {**row, "requirement_statement": "When enabled, " + row["requirement_statement"]}
+        self.assertEqual(_drs_reset_connection_rows([conditional]), [])
+        clock = {**row, "source_req_id": "CLOCK", "requirement_statement":
+                 "The top.clk signal shall be connected to the top.unit.clk signal, with frequency 8 MHz and with clock gating top.enable | top.test."}
+        self.assertEqual(_drs_clock_path_rows([clock], preserve_source_fields=True), [
+            ("CLOCK", "top.clk", "top.unit.clk", "8 MHz", "top.enable | top.test")])
+        sections = render_connection_table_sections("4.7", {
+            "clock": ["| CLOCK | top.clk | top.unit.clk |  |  |"],
+            "reset": ["| RESET | top.reset_n | top.unit.reset_n |"]}, first_table_number=8)
+        text = "\n".join(sections)
+        self.assertIn("#### 4.7.1 Clock connections", text)
+        self.assertIn("##### Table 8. Clock connections", text)
+        self.assertIn("#### 4.7.2 Reset connections", text)
+        self.assertIn("##### Table 9. Reset connections", text)
+        self.assertIn("| Source requirement | Source | Destination | Clock frequency | Clock gate condition |", text)
+        self.assertIn("| Source requirement | Source | Destination |", text)
+        rows = {"clock": [("CLOCK", "top.clk", "top.unit.clk", "", "")],
+            "reset": [("RESET", "top.reset_n", "top.unit.reset_n")]}
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "tables.md"
+            path.write_text(text, encoding="utf-8")
+            self.assertEqual(_drs_connection_table_findings(drs_document_events(path), rows), [])
+            for altered in (text.replace("top.unit.reset_n", "top.other.reset_n"),
+                    text.replace("| CLOCK |", "| UNKNOWN |"), text.replace("Table 8.", "Table 99."),
+                    text.replace("4.7.2 Reset connections", "4.8.2 Reset connections"),
+                    text + text.splitlines()[-1] + "\n"):
+                path.write_text(altered, encoding="utf-8")
+                self.assertTrue(_drs_connection_table_findings(drs_document_events(path), rows))
+
+    def test_docx_navigation_keeps_toc_entries_before_navigation(self):
+        from workflow_routing import _reorder_docx_navigation
+        namespace = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+        entries = [("Heading1", "Specification"), ("Heading2", "0. Document Navigation"),
+                   ("Heading3", "0.1 Table of contents"), ("", "1. Block overview"),
+                   ("", "1.5.1 Clock connections"), ("", "1.5.2 Reset connections"),
+                   ("Heading3", "0.2 Document control"), ("Heading2", "1. Block overview")]
+        paragraphs = ["<w:p>" + ("<w:pPr><w:pStyle w:val='" + style + "'/></w:pPr>" if style else "")
+                      + "<w:r><w:t>" + text + "</w:t></w:r></w:p>" for style, text in entries]
+        document = "<w:document xmlns:w='" + namespace[1:-1] + "'><w:body>" + "".join(paragraphs) + "</w:body></w:document>"
+        root = ET.fromstring(_reorder_docx_navigation(document))
+        texts = ["".join(node.text or "" for node in paragraph.iter(namespace + "t"))
+                 for paragraph in root.iter(namespace + "p")]
+        navigation = texts.index("0. Document Navigation")
+        self.assertLess(texts.index("1.5.1 Clock connections"), navigation)
+        self.assertLess(texts.index("1.5.2 Reset connections"), navigation)
+        self.assertLess(navigation, texts.index("0.2 Document control"))
+        self.assertGreater(len(texts) - 1, navigation)
+
+    def test_ipos_numbered_connection_navigation(self):
+        from workflow_routing import apply_ipos_document_navigation
+        lines = ["# Specification", "", "## 0. Document Navigation", "### 0.1 Table of contents",
+                 "- [old](#old)", "", "### 0.2 Document control", "#### Table 1. Version history",
+                 "| Version |", "|---|", "| 0.1 |", "", "### 0.3 Requirement navigation",
+                 "#### Table. Requirement navigation", "| Requirement |", "|---|", "| ITEM |", "",
+                 "## 1. Block overview", "### 1.5 General architecture",
+                 "#### 1.5.1 Clock connections", "##### Table. Clock connections",
+                 "| Source |", "|---|", "| clk |", "",
+                 "#### 1.5.2 Reset connections", "##### Table. Reset connections",
+                 "| Source |", "|---|", "| rst |", "", "## 2. Source I/O",
+                 "#### Table. Source I/O", "| Port |", "|---|", "| input |", "", "## 3. Block requirements"]
+        output = apply_ipos_document_navigation(lines)
+        self.assertEqual(output[:3], ["# Specification", "", "## 0. Document Navigation"])
+        text = "\n".join(output)
+        self.assertIn("##### Table 3. Clock connections", text)
+        self.assertIn("##### Table 4. Reset connections", text)
+        toc = text.split("### 0.1 Table of contents", 1)[1].split("### 0.2 Document control", 1)[0]
+        self.assertIn("[1.5.1 Clock connections](#151-clock-connections)", toc)
+        self.assertIn("[1.5.2 Reset connections](#152-reset-connections)", toc)
+        index = text.split("### 0.4 Table index", 1)[1].split("## 1. Block overview", 1)[0]
+        self.assertIn("[Table 3. Clock connections](#table-3-clock-connections)", index)
+        self.assertIn("[Table 4. Reset connections](#table-4-reset-connections)", index)
+        self.assertEqual(index.count("- [Table "), 5)
+        self.assertEqual(apply_ipos_document_navigation(output), output)
+
+    def test_ipos_connection_tables_keep_functional_prose_and_supported_fields(self):
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Control clock and reset sequencing", "Inputs": "requests", "Outputs": "status"},
+            [{"source_req_id": "CLOCK", "statement": "The top.source_clk signal shall be connected to the top.dest_clk signal, with frequency 8 MHz and with clock gating top.enable | top.test."},
+             {"source_req_id": "RESET", "statement": "The top.reset_n signal shall be connected to the top.unit.reset_n signal."},
+             {"source_req_id": "BEHAVIOR", "statement": "When request is high, status shall be high."}], domain="digital")
+        sections, audit = compose_shared_ipos_overview(functional)
+        prose = " ".join(sections["internal_functions"])
+        self.assertIn("When request is high, status is high.", prose)
+        self.assertNotIn("connected to", prose)
+        tables = "\n".join(sections["general_architecture"])
+        self.assertIn("| Source requirement | Source | Destination | Clock frequency | Clock gate condition |", tables)
+        self.assertIn("| CLOCK | top.source_clk | top.dest_clk | 8 MHz | top.enable \\| top.test |", tables)
+        self.assertIn("| Source requirement | Source | Destination |", tables)
+        self.assertIn("| RESET | top.reset_n | top.unit.reset_n |", tables)
+        self.assertEqual(sum(row["decision"] == "selected" for row in audit), 5)
+
+    def test_ipos_connection_tables_leave_unattested_fields_empty(self):
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Control clocks", "Inputs": "requests", "Outputs": "status"},
+            [{"source_req_id": "CLOCK", "statement": "The top.source_clk signal shall be connected to the top.dest_clk signal."},
+             {"source_req_id": "RESET", "statement": "signal shall be connected to the top.unit.reset_n signal."},
+             {"source_req_id": "INCOMPLETE", "statement": "The top.controller. signal shall be connected to the top.unit.other_reset_n signal."}], domain="digital")
+        sections, audit = compose_shared_ipos_overview(functional)
+        tables = "\n".join(sections["general_architecture"])
+        self.assertIn("| CLOCK | top.source_clk | top.dest_clk |  |  |", tables)
+        self.assertIn("| RESET |  | top.unit.reset_n |", tables)
+        self.assertIn("| INCOMPLETE |  | top.unit.other_reset_n |", tables)
+        omitted = next(row for row in audit if row.get("candidate_evidence_requirement_id") == "INCOMPLETE"
+                   and row["decision"] == "omitted")
+        self.assertEqual(json.loads(omitted["span_json"])["text"], "The top.controller.")
+        self.assertFalse(sections["internal_functions"])
+
+    def test_ipos_connection_fidelity_rejects_missing_changed_duplicate_or_misplaced_rows(self):
+        from workflow_routing import build_ipos_claim_plan, _ipos_connection_table_findings, _ipos_connection_audit_findings, apply_ipos_document_navigation
+        from spec_document_contract import drs_document_events
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Control clocks", "Inputs": "requests", "Outputs": "status"},
+            [{"source_req_id": "CLOCK", "statement": "The top.source_clk signal shall be connected to the top.dest_clk signal, with frequency 8 MHz and without clock gating."}], domain="digital")
+        sections, audit = compose_shared_ipos_overview(functional)
+        plan = build_ipos_claim_plan(functional)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "test.md"
+            text = "\n".join(apply_ipos_document_navigation([
+                "### 1.5 General architecture", "", *sections["general_architecture"]])) + "\n"
+            path.write_text(text, encoding="utf-8")
+            events = drs_document_events(path)
+            self.assertEqual(_ipos_connection_table_findings(events, plan.claims), [])
+            for altered in (text.replace("8 MHz", "9 MHz"), text.replace("top.dest_clk", "top.other_clk"),
+                            text.replace("Not gated", "top.enable"), text.replace("| CLOCK |", "| UNKNOWN |"),
+                            text.replace("Table 1. Clock connections", "Table 9. Clock connections"),
+                            text.replace("1.5.1 Clock connections", "1.5.9 Clock connections"),
+                            text.replace("Clock frequency", "Frequency"), text.replace("1.5 General architecture", "1.4 Supported block functions"),
+                            text + text.splitlines()[-1] + "\n", text.rsplit("\n", 2)[0] + "\n"):
+                path.write_text(altered, encoding="utf-8")
+                self.assertTrue(_ipos_connection_table_findings(drs_document_events(path), plan.claims))
+        selected = next(row for row in audit if row.get("candidate_evidence_requirement_id") == "CLOCK")
+        claim = next(value for value in plan.claims if value.claim_id == selected["unit_id"])
+        unit = json.loads(selected["semantic_unit_json"])
+        self.assertEqual(_ipos_connection_audit_findings(unit["text"], claim), [])
+        self.assertTrue(_ipos_connection_audit_findings(unit["text"].replace("8 MHz", "9 MHz"), claim))
+
+    def test_ipos_materialization_dispositions_keep_exact_omitted_inputs_without_false_retention(self):
+        from workflow_routing import build_ipos_normalized_records, build_ipos_semantic_units
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Process samples", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "structured", "statement": "0xA000 CONTROL_REG 32 0xA040 reset_n"},
+             {"source_req_id": "optional", "statement": "This signal governs the operation as previously explained."}], domain="digital")
+        sections, audit = compose_shared_ipos_overview(functional)
+        records = build_ipos_normalized_records(functional)
+        units = build_ipos_semantic_units(functional, sections, audit)
+        represented = {identity for unit in units for identity in unit.source_record_ids}
+        self.assertTrue({record.record_id for record in records if record.decision == "retained"}.issubset(represented))
+        excluded = [record for record in records if record.record_id.startswith("requirement:")]
+        self.assertEqual(len(excluded), 2)
+        self.assertTrue(all(record.decision == "excluded" and record.provenance for record in excluded))
+        self.assertEqual(excluded[0].text, "0xA000 CONTROL_REG 32 0xA040 reset_n")
+        self.assertEqual(excluded[1].text, "This signal governs the operation as previously explained.")
+        self.assertIn("nonprose_output_path:register", excluded[0].rationale)
+        self.assertIn("omitted_nonessential:", excluded[1].rationale)
+
+    def test_ipos_required_section_policy_omits_unsupported_independent_detail(self):
+        from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings
+        inventory = {"Function": "Control sampling", "Inputs": "configuration", "Outputs": "samples"}
+        functional = build_ipos_functional_input("Module", inventory,
+            [{"source_req_id": "detail", "statement": "This signal governs the operation as previously explained."}], domain="digital")
+        plan = build_ipos_claim_plan(functional)
+        self.assertEqual(ipos_claim_preflight_findings(functional), [])
+        omitted = [value for value in plan.dispositions if value.reason.startswith("omitted_nonessential:")]
+        self.assertEqual(len(omitted), 1)
+        sections, audit = compose_shared_ipos_overview(functional)
+        self.assertNotIn("previously explained", str(sections))
+        self.assertTrue(any(value["decision"] == "omitted" for value in audit))
+        missing = replace(functional, function="")
+        self.assertTrue(ipos_claim_preflight_findings(missing))
+
+    def test_ipos_same_record_signal_reference_preserves_range_output_and_dependency(self):
+        from workflow_routing import build_ipos_claim_plan, _ipos_evidence_semantic_findings
+        inventory = {"Function": "Control sampling", "Inputs": "configuration", "Outputs": "samples"}
+        text = "The sampling phase shall be configurable by the user with i_CYCLES values from 0 up to 15. This signal indicates the number of clock that o_START shall stay high."
+        functional = build_ipos_functional_input("Module", inventory,
+            [{"source_req_id": "duration", "statement": text}], domain="digital")
+        plan = build_ipos_claim_plan(functional)
+        self.assertFalse(plan.evidence.unresolved_contexts)
+        self.assertEqual(_ipos_evidence_semantic_findings(plan.evidence), [])
+        reference = next(value for value in plan.evidence.propositions if value.meaning.subject == "i_CYCLES")
+        self.assertEqual(len(reference.spans), 2)
+        self.assertIn("o_START stays high", reference.meaning.objects[0])
+        self.assertIn("from 0 up to 15", reference.spans[0].text)
+        self.assertTrue(_ipos_evidence_semantic_findings(replace(plan.evidence, dependencies=())))
+        altered = replace(reference, meaning=replace(reference.meaning, subject="i_OTHER"))
+        self.assertTrue(_ipos_evidence_semantic_findings(replace(plan.evidence,
+            propositions=tuple(altered if value == reference else value for value in plan.evidence.propositions))))
+        ambiguous = build_ipos_functional_input("Module", inventory,
+            [{"source_req_id": "ambiguous", "statement": text.replace("the user with", "i_MODE with")}], domain="digital")
+        self.assertTrue(build_ipos_claim_plan(ambiguous).evidence.unresolved_contexts)
+
+    def test_ipos_structured_rows_do_not_hide_functional_behavior(self):
+        from workflow_routing import descriptive_nonprose_output_path
+        for text, expected in (
+            ("0xA000 CONTROL_REG 32 0xA040 reset_n, software_reset_n", "register"),
+            ("0xA044 RESERVED 0xAFFF reset_n", "register"),
+            ("bus_mode 1'b0 To activate the serial interface", "configuration"),
+            ("device_address 7'h5f Device address", "configuration"),
+            ('interface_mode "serial" To choose if the interface is serial only or both.', "configuration"),
+            ("Suggested val. 1200", "configuration"),
+            ("Controller 32 processes samples", ""),
+            ("When enabled, the result shall be computed using Table 3", ""),
+            ("timeout 6000 If the timer expires the transaction is aborted", ""),
+        ):
+            with self.subTest(text=text):
+                record = NormalizedSourceRecord("field", text, "approved_normative", "block_local",
+                                                ("approved snapshot",), "retained", "approved same-block evidence")
+                span = DescriptiveSourceSpan("field", 0, len(text), text)
+                self.assertEqual(descriptive_nonprose_output_path(span, record, profile=IPOS_DESCRIPTIVE_PROFILE), expected)
+                self.assertEqual(descriptive_nonprose_output_path(span, replace(record, decision="rejected"),
+                                                                 profile=IPOS_DESCRIPTIVE_PROFILE), "")
+                self.assertEqual(descriptive_nonprose_output_path(span, record, profile=SRS_DESCRIPTIVE_PROFILE), "")
+
+    def test_register_catalog_headers_do_not_create_prose_obligations(self):
+        from workflow_routing import descriptive_nonprose_output_path
+        rows = (
+            "Device Register Map 2.3.4.",
+            "Device Register Map Here is described the list of registers in the register map.",
+            "20 **Update-IR** Run-Test/Idle Select-DR-Scan 2.3.",
+            "BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRESS RESET REQ_ID 0xA000 CONTROL_REG 32 0xA040 reset_n",
+            "The control registers are accessible by the serial interface, while the others are only accessible by the host bus.",
+        )
+        text = " ".join(rows)
+        record = NormalizedSourceRecord("catalog", text, "approved_normative", "block_local",
+                                        ("approved snapshot",), "retained", "approved register catalog")
+        for index, row in enumerate(rows):
+            start = text.index(row)
+            span = DescriptiveSourceSpan("catalog", start, start + len(row), row)
+            self.assertEqual(descriptive_nonprose_output_path(span, record, profile=IPOS_DESCRIPTIVE_PROFILE),
+                             "register" if index < 4 else "")
+
+    def test_data_format_tables_route_without_exempting_computation_or_behavior(self):
+        from workflow_routing import descriptive_nonprose_output_path
+        for text, expected in (
+            ("The stored data shall have the following tag: DATA TYPE BIT: 7 - 0 SAMPLE DATA Table 4: Data Tags", "table"),
+            ("The stored data shall have the following tag: DATA TYPE BIT: 7 - 0 SAMPLE DATA", "table"),
+            ("When in segmented mode, the offsets shall coincide with the following table: OFFSET DATA TYPE 0 SAMPLE Table 5: Offset Data Table", "table"),
+            ("Example: Memory Base Address = 0xA000, then: Buffer 0 memory location 0xA000 Buffer 1 memory location 0xA100 Table 6: Memory Address", "table"),
+            ("The result shall be computed as follows: INPUT OUTPUT 1 2 Table 7: Result Computation", ""),
+            ("The stored data shall have the following tag: DATA TYPE BIT: 7 - 0 SAMPLE DATA Table 4: Data Tags and Module shall start sampling", ""),
+            ("The stored data shall have the following tag: DATA TYPE BIT: 7 - 0 SAMPLE DATA Table 4: Data Tags and start sampling", ""),
+        ):
+            with self.subTest(text=text):
+                record = NormalizedSourceRecord("structured", text, "approved_normative", "block_local",
+                                                ("approved snapshot",), "retained", "approved structured evidence")
+                span = DescriptiveSourceSpan("structured", 0, len(text), text)
+                self.assertEqual(descriptive_nonprose_output_path(span, record, profile=IPOS_DESCRIPTIVE_PROFILE), expected)
+
+    def test_guarded_format_table_routes_as_one_contiguous_structured_obligation(self):
+        from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Store samples", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "format", "statement":
+              "When in segmented mode, the offsets shall coincide with the following table: OFFSET DATA TYPE 0 SAMPLE Table 5: Offset Data Table"}],
+            domain="digital")
+        plan = build_ipos_claim_plan(functional)
+        self.assertEqual(ipos_claim_preflight_findings(functional), [])
+        disposition = next(value for value in plan.dispositions if value.reason == "nonprose_output_path:table")
+        self.assertEqual(len(disposition.spans), 2)
+        self.assertIn("When in segmented mode,", disposition.spans[0].text)
+
+    def test_identifier_retrieval_is_bounded_approved_scoped_and_exact_first(self):
+        from workflow_routing import retrieve_descriptive_identifier_support, _ipos_admitted_records
+        functional = build_ipos_functional_input("Module Core",
+            {"Function": "Acquire samples", "Inputs": "sample ready: Ready indication", "Outputs": "results"},
+            [{"mapped_block": "Module Core", "source_req_id": "local", "statement": "When sample_ready is high, Module Core shall acquire samples."}],
+            domain="digital", candidate_requirement_rows=[
+                {"mapped_block": "Other", "source_req_id": "foreign", "statement": "sample_ready controls unrelated behavior."},
+                {"mapped_block": "Module Core", "source_req_id": "local", "statement": "When sample_ready is high, Module Core shall acquire samples."}])
+        records = _ipos_admitted_records(functional)
+        matches = retrieve_descriptive_identifier_support("sample_ready", records, profile=IPOS_DESCRIPTIVE_PROFILE)
+        self.assertEqual([value["match"] for value in matches], ["exact", "normalized_variant"])
+        self.assertEqual(matches[1]["record_id"], "inventory:inputs")
+        self.assertFalse(any("Other" in value["record_id"] for value in matches))
+        self.assertEqual(retrieve_descriptive_identifier_support("sample_rdy", records, profile=IPOS_DESCRIPTIVE_PROFILE), ())
+        self.assertEqual(retrieve_descriptive_identifier_support("o_sample_ready", records, profile=IPOS_DESCRIPTIVE_PROFILE), ())
+        self.assertEqual(retrieve_descriptive_identifier_support("sample_ready",
+            tuple(replace(record, decision="rejected") for record in records), profile=IPOS_DESCRIPTIVE_PROFILE), ())
+        with self.assertRaises(ValueError):
+            retrieve_descriptive_identifier_support("sample_ready", records, profile=IPOS_DESCRIPTIVE_PROFILE, max_candidates=1)
+
+    def test_normalized_guard_actor_preserves_authored_spelling_and_authority(self):
+        from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings
+        functional = build_ipos_functional_input("Module Core",
+            {"Function": "Acquire samples", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "guard", "statement": "During startup MODULE_CORE shall acquire samples."}], domain="digital")
+        plan = build_ipos_claim_plan(functional)
+        self.assertEqual(ipos_claim_preflight_findings(functional), [])
+        proposition = next(value for value in plan.evidence.propositions if value.meaning.predicate == "acquire")
+        self.assertEqual(proposition.meaning.subject, "MODULE_CORE")
+        self.assertEqual(proposition.owner, "Module Core")
+
+    def test_ipos_normalized_io_actor_requires_a_unique_approved_description(self):
+        from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings, _ipos_evidence_semantic_findings
+        inventory = {"Function": "Acquire samples", "Inputs": "samples", "Outputs": "o_sample_ready: Completion indication"}
+        statement = "When acquisition finishes O-SAMPLE-READY shall be set high."
+        functional = build_ipos_functional_input("Module", inventory,
+            [{"source_req_id": "guard", "statement": statement}], domain="digital")
+        plan = build_ipos_claim_plan(functional)
+        self.assertEqual(ipos_claim_preflight_findings(functional), [])
+        proposition = next(value for value in plan.evidence.propositions if value.meaning.subject == "O-SAMPLE-READY")
+        self.assertEqual(proposition.meaning.contexts[0].text, "When acquisition finishes")
+        changed = replace(proposition, meaning=replace(proposition.meaning, subject="OTHER-SIGNAL"))
+        self.assertTrue(_ipos_evidence_semantic_findings(replace(plan.evidence,
+            propositions=tuple(changed if value == proposition else value for value in plan.evidence.propositions))))
+        for outputs in ("o_sample_ready", "o_sample_ready: Completion indication; o-sample-ready: Error indication"):
+            with self.subTest(outputs=outputs):
+                unsupported = build_ipos_functional_input("Module", dict(inventory, Outputs=outputs),
+                    [{"source_req_id": "guard", "statement": statement}], domain="digital")
+                self.assertTrue(ipos_claim_preflight_findings(unsupported))
+
+    def test_ipos_formula_tail_is_structured_not_a_descriptive_obligation(self):
+        from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings, ipos_descriptive_structural_audit
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Acquire samples", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "interval", "statement":
+              "The interval shall define how many slots pass between acquisitions following this formula: interval = slots * scale"}],
+            domain="digital")
+        plan = build_ipos_claim_plan(functional)
+        self.assertEqual(ipos_claim_preflight_findings(functional), [])
+        self.assertTrue(any(value.reason == "nonprose_output_path:parameter" and value.decision == "excluded"
+                            for value in plan.dispositions))
+        self.assertTrue(any(value.meaning.predicate == "define" for value in plan.evidence.propositions))
+        self.assertIn("interval = slots * scale", plan.evidence.records[-1].text)
+        self.assertEqual(ipos_descriptive_structural_audit(functional)["source_findings"], [])
+
+    def test_ipos_formula_tail_with_behavior_remains_blocking(self):
+        from workflow_routing import ipos_claim_preflight_findings
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Acquire samples", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "interval", "statement":
+              "The interval shall define how many slots pass between acquisitions following this formula: interval = slots * scale and then sampling starts"}],
+            domain="digital")
+        self.assertTrue(ipos_claim_preflight_findings(functional))
+
     def test_ipos_priority_list_preserves_ranks_order_and_direction(self):
         from workflow_routing import (
             build_ipos_claim_plan, ipos_claim_preflight_findings, _ipos_evidence_semantic_findings,

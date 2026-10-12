@@ -189,18 +189,21 @@ def load_embedded_document_contract(template_path: Path, document_type: str) -> 
 def load_ipos_contract(template_path: Path) -> dict:
     payload = load_embedded_document_contract(template_path, "IPOS")
     fields = {"version", "document_type", "profile", "mandatory_rules", "sections", "paragraph", "interpretation",
-              "synthesis", "detail_policy", "gap_policy", "rendering", "validation_hooks", "sha256"}
+              "synthesis", "detail_policy", "gap_policy", "essential_sources", "rendering", "validation_hooks", "sha256"}
     if set(payload) != fields or payload["version"] != 1 or payload["profile"] != "block_local_v1":
         raise ValueError("Unsupported IPOS contract schema or profile")
     for field, expected in (
         ("interpretation", "admitted_normative_clauses_v1"), ("synthesis", "explicit_functional_claims_v1"),
         ("detail_policy", "preserve_essential_block_detail_v1"),
-        ("gap_policy", "preserve_independent_withhold_dependent_v1"),
+        ("gap_policy", "required_sections_with_audited_omissions_v1"),
         ("rendering", "scoped_explanatory_prose_v1"),
     ):
         if payload[field] != expected:
             raise ValueError("IPOS rule without implementation: " + field)
     rules = payload["mandatory_rules"]
+    if payload["essential_sources"] != {"purpose": ["inventory:function"],
+            "capabilities": ["inventory:main_functions", "inventory:inputs", "inventory:outputs"]}:
+        raise ValueError("Unsupported IPOS essential source obligations")
     if not isinstance(rules, list) or any(not isinstance(value, str) for value in rules) or set(rules) != IPOS_CONTRACT_RULES or len(rules) != len(IPOS_CONTRACT_RULES):
         raise ValueError("IPOS mandatory rule missing or unknown")
     hooks = payload["validation_hooks"]
@@ -309,6 +312,11 @@ def _drs_text(value: str) -> str:
     return " ".join(value.split())
 
 
+def markdown_table_cells(line: str) -> list[str]:
+    return [_drs_text(cell.replace(r"\|", "|"))
+            for cell in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+
+
 def drs_document_events(path: Path) -> list[dict]:
     """Read actual headings, paragraphs and editable tables, in document order."""
     events = []
@@ -324,7 +332,7 @@ def drs_document_events(path: Path) -> list[dict]:
             elif line.startswith("|"):
                 if re.fullmatch(r"[| :\-]+", line):
                     continue
-                cells = [_drs_text(cell.replace(r"\|", "|")) for cell in re.split(r"(?<!\\)\|", line.strip().strip("|"))]
+                cells = markdown_table_cells(line)
                 if not in_table:
                     events.append({"kind": "table", "rows": []})
                 events[-1]["rows"].append(cells)
@@ -419,6 +427,22 @@ def validate_drs_events(events: list[dict], contract: dict, baseline_tables: lis
     actual_tables = drs_table_inventory(events)
     remaining = Counter(stable_payload_hash(table) for table in actual_tables)
     for table in baseline_tables:
+        if table["owner"] == "0.4 Table of tables":
+            candidates = [item for item in actual_tables if item["owner"] == table["owner"]]
+            expected_rows = table["rows"]
+            known = {row[0] for row in expected_rows[1:]}
+            known.update(match[1] for item in baseline_tables
+                         if (match := re.match(r"^(Table \d+)\. ", item["owner"])))
+            additions = []
+            for title in headings:
+                caption = re.fullmatch(r"(Table \d+)\. (.+)", title)
+                if caption and caption[1] not in known:
+                    additions.append([caption[1], caption[2], "Go to " + caption[1]])
+            actual_rows = candidates[0]["rows"] if len(candidates) == 1 else []
+            if (len(candidates) != 1 or actual_rows != expected_rows + additions
+                    or len({row[0] for row in additions}) != len(additions)):
+                findings.append("navigation: table index rows changed or additions lack unique actual captions")
+            continue
         if table["owner"] == "Table 1. Version history":
             candidates = [item for item in actual_tables if item["owner"] == table["owner"]]
             if len(candidates) != 1 or candidates[0]["rows"][:len(table["rows"])] != table["rows"]:
@@ -820,11 +844,20 @@ def validate_materialization_chain(
         )
     markdown = _normalized_text(markdown_path.read_text(encoding="utf-8", errors="replace"))
     docx = _normalized_text(docx_body_text(docx_path))
+    markdown_units = markdown
+    if document_type == "IPOS":
+        markdown_units = _normalized_text(" ".join(
+            cell for event in drs_document_events(markdown_path)
+            for cell in ([cell for row in event["rows"] for cell in row]
+                         if event["kind"] == "table" else [event["text"]])))
     markdown_position = -1
     docx_position = -1
     for unit in units:
         unit_id = str(unit.get("unit_id") or "").strip()
-        unit_text = _normalized_text(str(unit.get("text") or ""))
+        text = str(unit.get("text") or "")
+        if document_type == "IPOS" and text.startswith("|"):
+            text = " ".join(cell for line in text.splitlines() for cell in markdown_table_cells(line))
+        unit_text = _normalized_text(text)
         source_ids = tuple(unit.get("source_record_ids") or ())
         if not unit_id or not unit_text or not source_ids:
             findings.append(f"{audit_path.name}: semantic unit lacks identity, text, or provenance")
@@ -833,7 +866,7 @@ def validate_materialization_chain(
             findings.append(f"{audit_path.name}: semantic unit references an unknown source record")
         if any(record_by_id[source_id].decision == "suppressed" for source_id in source_ids if source_id in record_by_id):
             findings.append(f"{audit_path.name}: semantic unit promotes a suppressed source record")
-        next_markdown_position = markdown.find(unit_text, markdown_position + 1)
+        next_markdown_position = markdown_units.find(unit_text, markdown_position + 1)
         next_docx_position = docx.find(unit_text, docx_position + 1)
         if next_markdown_position < 0:
             findings.append(f"{markdown_path.name}: selected semantic unit missing or reordered: {unit_id}")

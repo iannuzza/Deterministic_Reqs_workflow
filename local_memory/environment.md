@@ -2,7 +2,19 @@
 - Active source specification: specs/DDS_STBIO1.pdf
 - Use python scripts/... commands in this workspace.
 
-- Latest restart checkpoint and Git tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
+- Latest frozen baseline and Git tag: `freeze-ipos-6-pass-2-blocked`,
+  2026-10-12. User authorized milestone commit and tag push to origin only.
+  Snapshot snap-73c872b1307b6adb5eaf843e unchanged. SRS/ARS/DRS PASS;
+  ADSP/I2C_SPI_AHB/PAD MUX/PMU/Regmap/Smart FIFO regenerated and PASS;
+  Main Controller/Sensor-Hub BLOCKED, historical outputs not certified.
+  All18 published MD/DOCX marker-free; Stage6 PARTIAL, Analog VALID_EMPTY
+  not run. No new semantic/architecture/contract/gate/approval work.
+  Reports/appendices remain review-only and not authority. Next bounded
+  Sensor-Hub evidence review is recommended only, not started.
+  Terminal Python3.11 has unittest but no pytest; do not infer editor interpreter.
+  DRS gate and10 focused unittest regressions PASS. SQLite ledger refresh
+  changes only requirement_allocations.created_at; compare logical records.
+- Previous restart checkpoint and Git tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
   Snapshot `snap-73c872b1307b6adb5eaf843e`; observed run starts
   `2026-10-09 21:08:43`. Local commit/tag requested, no push/new branch.
   SRS/ARS/DRS actual Markdown/DOCX gates PASS and marker-free; actual ADSP

@@ -1,0 +1,551 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "authority": false,
+  "gate_override": false,
+  "observed_at": "2026-10-12T15:06:42.815342+02:00",
+  "blocks": [
+    {
+      "document_type": "Digital IPOS",
+      "block": "ADSP",
+      "generation_status": "PASS",
+      "previous_selected_claim_ids": [
+        "ipos-claim-dd1dc0be6df5657cec14",
+        "ipos-claim-50393e407aa6af68ba96",
+        "ipos-claim-53a2094f89ec8559f124",
+        "ipos-claim-9e1006dfba11302119e3",
+        "ipos-claim-aecd5bcc426bf27421ee",
+        "ipos-claim-2e22347bcc1a73f4702a",
+        "ipos-claim-077e8f684b20f25310a8",
+        "ipos-claim-2df6ac5cbc3833a9808d",
+        "ipos-claim-9f9120a896f2fe77ffbd",
+        "ipos-claim-5596b557a8252624dec0",
+        "ipos-claim-776269afd85e09a5de62",
+        "ipos-claim-b5d46eb6003c11cc0332",
+        "ipos-claim-7d48618351971c46aa5e",
+        "ipos-claim-14fcdf7c7530b73e5f20",
+        "ipos-claim-3a874f8db5342b611850",
+        "ipos-claim-d4ee533fe349e817eda9",
+        "ipos-claim-9a6518eec56a3744a31b",
+        "ipos-claim-f848c225b26e54b3def4",
+        "ipos-claim-6d085d95192c54d7604d",
+        "ipos-claim-0e2113f97bb15f9a45af",
+        "ipos-claim-f98b34bb4156d8c2bbea"
+      ],
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      },
+      "probe_status": "PASS",
+      "generation_exit_code": 0,
+      "generation_output": "[IPOS_ACTIVITY] START | 2026-10-12T15:04:12+02:00 | Generate IPOS document 1/1: ADSP\n[IPOS_ACTIVITY] END | 2026-10-12T15:04:30+02:00 | Generate IPOS document 1/1: ADSP | complete | elapsed=0:00:17\nGenerated C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\stage6_digital_ipos\\ipos_traceability_matrix.csv\n",
+      "actual_gate_exit_code": 0,
+      "actual_gate_output": "IPOS digital gate: PASS (302 requirements, 8 blocks, descriptive block=ADSP)\n",
+      "actual_contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      }
+    },
+    {
+      "document_type": "Digital IPOS",
+      "block": "I2C_SPI_AHB",
+      "generation_status": "PASS",
+      "previous_selected_claim_ids": [
+        "desc-unit-4b54b6bb35783f96c986",
+        "desc-unit-bb741fdd617ba6ce6dcd",
+        "desc-unit-f35b4340ed9a5a5c2064",
+        "desc-unit-b3a2bc7c2d4a46c54b71",
+        "desc-unit-aac767b2477790139b9f",
+        "desc-unit-5602cdeb1e90317ab03a",
+        "desc-unit-93c10db2ef2247218b14",
+        "desc-unit-3315fb83f1de40bc38fd",
+        "desc-unit-8efd8944bfbc7ade4cf5",
+        "desc-unit-7f7960596237ae56faa8"
+      ],
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      },
+      "probe_status": "PASS",
+      "generation_exit_code": 0,
+      "generation_output": "[IPOS_ACTIVITY] START | 2026-10-12T15:04:38+02:00 | Generate IPOS document 1/1: I2C_SPI_AHB\n[IPOS_ACTIVITY] END | 2026-10-12T15:04:58+02:00 | Generate IPOS document 1/1: I2C_SPI_AHB | complete | elapsed=0:00:19\nGenerated C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\stage6_digital_ipos\\ipos_traceability_matrix.csv\n",
+      "actual_gate_exit_code": 0,
+      "actual_gate_output": "IPOS digital gate: PASS (302 requirements, 8 blocks, descriptive block=I2C_SPI_AHB)\n",
+      "actual_contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      }
+    },
+    {
+      "document_type": "Digital IPOS",
+      "block": "Main Controller",
+      "generation_status": "NOT_GENERABLE_NOT_REGENERATED",
+      "previous_selected_claim_ids": [
+        "desc-unit-99fb28001343405e8f38",
+        "desc-unit-d886642e0e9986ebd96b",
+        "desc-unit-e308aea9eeae769dc5a8",
+        "desc-unit-e6816dd963e43ffca14e",
+        "desc-unit-7dcdb0d6227d81fc72f8",
+        "desc-unit-eec79b2c6d29a5cd1ae2",
+        "desc-unit-eec79b2c6d29a5cd1ae2",
+        "desc-unit-f8e58098ca4fc343b9bf",
+        "desc-unit-5f1ab3078a90095e627b",
+        "desc-unit-9459ccf53e7c6020e0d5",
+        "desc-unit-ba1e52b1ea5efaceee7f",
+        "desc-unit-83c6e4a52f747d791859",
+        "desc-unit-83c6e4a52f747d791859",
+        "desc-unit-83c6e4a52f747d791859",
+        "desc-unit-83c6e4a52f747d791859",
+        "desc-unit-83c6e4a52f747d791859",
+        "desc-unit-08bcaea5cb4a61bc0395",
+        "desc-unit-6b48570bec40f09a37bc",
+        "desc-unit-75f828fe4fc6c3da12df",
+        "desc-unit-ca85113308af00939553",
+        "desc-unit-975c247d497713e95b21",
+        "desc-unit-4358ccb4ca18af534399",
+        "desc-unit-7f168d5970da1bff5b81",
+        "desc-unit-e52421ce33d0b4795577",
+        "desc-unit-084661248f321ae19747",
+        "desc-unit-084661248f321ae19747",
+        "desc-unit-084661248f321ae19747",
+        "desc-unit-084661248f321ae19747",
+        "desc-unit-f24e2023ceb4bf251535",
+        "desc-unit-9814e2c86f6097feefdf",
+        "desc-unit-ce993e94dda722017eb2",
+        "desc-unit-21e619e4ce02cf2da806",
+        "desc-unit-2678ac244c9597f70264",
+        "desc-unit-1ba8232ff837277df0ef",
+        "desc-unit-03fb576c0c72848b5446",
+        "desc-unit-f7ba62af0d46bab1a10a",
+        "desc-unit-fd5f2d66a5794b158543",
+        "desc-unit-a48a7895f3295323f296",
+        "desc-unit-0354ff7230a27194cd6e",
+        "desc-unit-a81f32d199037f6c51ef",
+        "desc-unit-a81f32d199037f6c51ef",
+        "desc-unit-a81f32d199037f6c51ef",
+        "desc-unit-6bed10d1f1bce049984f",
+        "desc-unit-6d81144571c4f63f9357",
+        "desc-unit-18fdc38b977c62748c45",
+        "desc-unit-e4f9a7a2e2c846408630",
+        "desc-unit-619066ddc8e53e8ac9af",
+        "desc-unit-f5d54bcc4d4846f35a80",
+        "desc-unit-340b9663114ad0d51dcf"
+      ],
+      "probe_status": "BLOCKED",
+      "failure_type": "RuntimeError",
+      "failure": "IPOS document contract blocked publication; see C:\\Users\\iannuzza\\AppData\\Local\\Temp\\ipos-clean-probe-8w9nlf3b\\main-controller\\document_contract_report.json",
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [
+              "ipos_final_unmodeled_content:audit:ipos-claim-9c25738c07441aa210ee",
+              "ipos_final_claim_missing_or_changed:audit:ipos-claim-9c25738c07441aa210ee",
+              "ipos_final_unmodeled_content:audit:ipos-claim-f0c78d46fc31b242434a",
+              "ipos_final_claim_missing_or_changed:audit:ipos-claim-f0c78d46fc31b242434a",
+              "ipos_final_unmodeled_content:audit:ipos-claim-261db2527251ce7dbf24",
+              "ipos_final_claim_missing_or_changed:audit:ipos-claim-261db2527251ce7dbf24",
+              "ipos_final_unmodeled_content:audit:ipos-claim-0a9310231692fed3ec50",
+              "ipos_final_claim_missing_or_changed:audit:ipos-claim-0a9310231692fed3ec50",
+              "ipos_final_unmodeled_content:audit:ipos-claim-55072f2368f9b50465fc",
+              "ipos_final_claim_missing_or_changed:audit:ipos-claim-55072f2368f9b50465fc",
+              "ipos_final_unmodeled_content:digital_ipos_main-controller.md:1.4",
+              "ipos_final_claim_missing_or_changed:digital_ipos_main-controller.md:1.4",
+              "ipos_final_unmodeled_content:digital_ipos_main-controller.docx:1.4",
+              "ipos_final_claim_missing_or_changed:digital_ipos_main-controller.docx:1.4"
+            ],
+            "status": "FAIL"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "FAIL"
+      }
+    },
+    {
+      "document_type": "Digital IPOS",
+      "block": "PAD MUX",
+      "generation_status": "PASS",
+      "previous_selected_claim_ids": [
+        "desc-unit-b53d9b340a33d509dad3",
+        "desc-unit-e99a1422eab69c42cf43",
+        "desc-unit-25c8eee93363f2cf5f30",
+        "desc-unit-f47b51867b9c47921153",
+        "desc-unit-f47b51867b9c47921153",
+        "desc-unit-b9b4a5bb4ffe4da750a0",
+        "desc-unit-b9b4a5bb4ffe4da750a0",
+        "desc-unit-b9b4a5bb4ffe4da750a0",
+        "desc-unit-b9b4a5bb4ffe4da750a0"
+      ],
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      },
+      "probe_status": "PASS",
+      "generation_exit_code": 0,
+      "generation_output": "[IPOS_ACTIVITY] START | 2026-10-12T15:05:04+02:00 | Generate IPOS document 1/1: PAD MUX\n[IPOS_ACTIVITY] END | 2026-10-12T15:05:22+02:00 | Generate IPOS document 1/1: PAD MUX | complete | elapsed=0:00:17\nGenerated C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\stage6_digital_ipos\\ipos_traceability_matrix.csv\n",
+      "actual_gate_exit_code": 0,
+      "actual_gate_output": "IPOS digital gate: PASS (302 requirements, 8 blocks, descriptive block=PAD MUX)\n",
+      "actual_contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      }
+    },
+    {
+      "document_type": "Digital IPOS",
+      "block": "PMU",
+      "generation_status": "PASS",
+      "previous_selected_claim_ids": [
+        "desc-unit-2f0ec0d005ea8a8c7327",
+        "desc-unit-609c6df69b279a24f173",
+        "desc-unit-f9e9415e4b1fb4a98c75",
+        "desc-unit-89541cc076ec1078a0d2",
+        "desc-unit-35d07ca80c4ceb2d1b20",
+        "desc-unit-35d07ca80c4ceb2d1b20",
+        "desc-unit-35d07ca80c4ceb2d1b20",
+        "desc-unit-35d07ca80c4ceb2d1b20",
+        "desc-unit-35d07ca80c4ceb2d1b20",
+        "desc-unit-35d07ca80c4ceb2d1b20",
+        "desc-unit-35d07ca80c4ceb2d1b20",
+        "desc-unit-fe632142d1289bb45f57",
+        "desc-unit-fe632142d1289bb45f57",
+        "desc-unit-48a4db8b9364003db4e6",
+        "desc-unit-02230370e8aa2530260d",
+        "desc-unit-d7402ff3bbe6fccc134b",
+        "desc-unit-b16395e7322bcdc2d64f",
+        "desc-unit-68c84c9e7df516fb0349",
+        "desc-unit-3c08ae13220db5b3d3d9",
+        "desc-unit-8f9f69455cc6ef305719",
+        "desc-unit-61dda3392dd691378ddb",
+        "desc-unit-acc90afc2f086840236b",
+        "desc-unit-e6d3d51d776b182b5c70",
+        "desc-unit-1750db586103853a61e6",
+        "desc-unit-e69ed574f18524025e64",
+        "desc-unit-f81d15b7a1bf0df9938b",
+        "desc-unit-41e31084bd99e4ab419c",
+        "desc-unit-42855db89c9d1fc1e574",
+        "desc-unit-aa16e9ed1fba12dd87f9",
+        "desc-unit-426d373839d30dd9e4c1",
+        "desc-unit-30c6873f70de322f62f7",
+        "desc-unit-0300d6cc7cfd1881e965",
+        "desc-unit-099f4b83da8d008aa02c"
+      ],
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      },
+      "probe_status": "PASS",
+      "generation_exit_code": 0,
+      "generation_output": "[IPOS_ACTIVITY] START | 2026-10-12T15:05:31+02:00 | Generate IPOS document 1/1: PMU\n[IPOS_ACTIVITY] END | 2026-10-12T15:05:52+02:00 | Generate IPOS document 1/1: PMU | complete | elapsed=0:00:20\nGenerated C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\stage6_digital_ipos\\ipos_traceability_matrix.csv\n",
+      "actual_gate_exit_code": 0,
+      "actual_gate_output": "IPOS digital gate: PASS (302 requirements, 8 blocks, descriptive block=PMU)\n",
+      "actual_contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      }
+    },
+    {
+      "document_type": "Digital IPOS",
+      "block": "Regmap",
+      "generation_status": "PASS",
+      "previous_selected_claim_ids": [
+        "desc-unit-125cb09ff19268319b9a",
+        "desc-unit-9ea7dc5ab5ad5b890c58",
+        "desc-unit-5e748c1c9f027c9c8872",
+        "desc-unit-40f9faa203275ff432fd"
+      ],
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      },
+      "probe_status": "PASS",
+      "generation_exit_code": 0,
+      "generation_output": "[IPOS_ACTIVITY] START | 2026-10-12T15:05:58+02:00 | Generate IPOS document 1/1: Regmap\n[IPOS_ACTIVITY] END | 2026-10-12T15:06:10+02:00 | Generate IPOS document 1/1: Regmap | complete | elapsed=0:00:11\nGenerated C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\stage6_digital_ipos\\ipos_traceability_matrix.csv\n",
+      "actual_gate_exit_code": 0,
+      "actual_gate_output": "IPOS digital gate: PASS (302 requirements, 8 blocks, descriptive block=Regmap)\n",
+      "actual_contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      }
+    },
+    {
+      "document_type": "Digital IPOS",
+      "block": "Sensor-Hub",
+      "generation_status": "NOT_GENERABLE_NOT_REGENERATED",
+      "previous_selected_claim_ids": [
+        "desc-unit-9daae2d25b5a1253fccf",
+        "desc-unit-8433474f2828abfae972",
+        "desc-unit-ae73837927e79a43b6e0",
+        "desc-unit-cbb61e8de36c4cd41260",
+        "desc-unit-ae14bc8ac99249abf48a",
+        "desc-unit-83fd12d2434d00fcaad7",
+        "desc-unit-55903148966a6e410b24",
+        "desc-unit-b3c78b3ca99ee681dbaa",
+        "desc-unit-93204c7ddffd9ba396d6",
+        "desc-unit-ab92972aabfa8f206966",
+        "desc-unit-695e0b85014dd2451c15",
+        "desc-unit-58d7701133e91c778fea",
+        "desc-unit-6e5e896ccc3551d60bad",
+        "desc-unit-a7dddc6bdfcc69d53992",
+        "desc-unit-5316e91c3922088d9e75",
+        "desc-unit-6f2d15524c864ef575a7"
+      ],
+      "probe_status": "BLOCKED",
+      "failure_type": "RuntimeError",
+      "failure": "IPOS document contract blocked publication; see C:\\Users\\iannuzza\\AppData\\Local\\Temp\\ipos-clean-probe-d5869b77\\sensor-hub\\document_contract_report.json",
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [
+              "ipos_final_unmodeled_content:digital_ipos_sensor-hub.md:1.3",
+              "ipos_final_claim_missing_or_changed:digital_ipos_sensor-hub.md:1.3",
+              "ipos_final_unmodeled_content:digital_ipos_sensor-hub.md:1.4",
+              "ipos_final_claim_missing_or_changed:digital_ipos_sensor-hub.md:1.4",
+              "ipos_final_unmodeled_content:digital_ipos_sensor-hub.docx:1.3",
+              "ipos_final_claim_missing_or_changed:digital_ipos_sensor-hub.docx:1.3",
+              "ipos_final_unmodeled_content:digital_ipos_sensor-hub.docx:1.4",
+              "ipos_final_claim_missing_or_changed:digital_ipos_sensor-hub.docx:1.4"
+            ],
+            "status": "FAIL"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "FAIL"
+      }
+    },
+    {
+      "document_type": "Digital IPOS",
+      "block": "Smart FIFO",
+      "generation_status": "PASS",
+      "previous_selected_claim_ids": [
+        "desc-unit-d7659040d05c068bef52",
+        "desc-unit-83196dd0af4410176804",
+        "desc-unit-38e008ca3893e8acfee5",
+        "desc-unit-3c15693f30a1298e2481",
+        "desc-unit-05ca4a48516edf32c866",
+        "desc-unit-05ca4a48516edf32c866",
+        "desc-unit-0e0114642ff56e06fb97",
+        "desc-unit-a06802a8912573efe92c",
+        "desc-unit-9c994c7f6f04e14f0a57",
+        "desc-unit-9c994c7f6f04e14f0a57",
+        "desc-unit-9ab68e1722f62ec65398",
+        "desc-unit-5d5414fb71c2e787a090",
+        "desc-unit-89e53e7d44b97604eb16"
+      ],
+      "contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      },
+      "probe_status": "PASS",
+      "generation_exit_code": 0,
+      "generation_output": "[IPOS_ACTIVITY] START | 2026-10-12T15:06:16+02:00 | Generate IPOS document 1/1: Smart FIFO\n[IPOS_ACTIVITY] END | 2026-10-12T15:06:28+02:00 | Generate IPOS document 1/1: Smart FIFO | complete | elapsed=0:00:12\nGenerated C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\stage6_digital_ipos\\ipos_traceability_matrix.csv\n",
+      "actual_gate_exit_code": 0,
+      "actual_gate_output": "IPOS digital gate: PASS (302 requirements, 8 blocks, descriptive block=Smart FIFO)\n",
+      "actual_contract_report": {
+        "checks": {
+          "materialization": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "publication_quality": {
+            "findings": [],
+            "status": "PASS"
+          },
+          "semantic_fidelity": {
+            "findings": [],
+            "status": "PASS"
+          }
+        },
+        "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+        "document_type": "IPOS",
+        "status": "PASS"
+      }
+    }
+  ],
+  "protection": {
+    "probe_protected_artifacts_unchanged": 5191,
+    "published_outputs_modified_by_probe": false,
+    "non_ipos_artifacts_and_authority_unchanged": 5151,
+    "aggregate_ipos_matrix_sha256": "4621c54ca0ba87cefd9e926e30b5a857108f2eeedc6d3bfa0d11007df258f179"
+  }
+}

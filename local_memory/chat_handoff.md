@@ -1,6 +1,33 @@
 ﻿# Chat Handoff - Deterministic_Reqs_workflow
 
-## CURRENT HANDOFF - 2026-10-09 - Clean Documents, Partial IPOS
+## CURRENT HANDOFF - 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS
+
+- Stable baseline/tag: `freeze-ipos-6-pass-2-blocked`; milestone commit and
+  tag push authorized. No branch push, new branch or continued repair work.
+- Approved snapshot unchanged: `snap-73c872b1307b6adb5eaf843e`.
+- Final published MD/DOCX: SRS PASS, ARS PASS, DRS PASS; Digital IPOS ADSP,
+  I2C_SPI_AHB, PAD MUX, PMU, Regmap and Smart FIFO regenerated and PASS.
+- Main Controller BLOCKED; Sensor-Hub BLOCKED. Neither regenerated nor
+  certified; historical outputs preserved. Stage 6 is PARTIAL (6/8), not PASS.
+  Analog IPOS VALID_EMPTY allocation; Stage 7 not executed.
+- All 18 published specification MD/DOCX outputs have zero inline review
+  markers. This does not certify either historical blocked block.
+- Contracts, gates, approvals, immutable snapshot and centralized architecture
+  are unchanged by freeze. No canonical text, allocation or ownership change.
+- Reports, reviewer annotations and appendices are review-only, non-authority
+  and non-gate-override. Earlier report counts/prose observations are historical
+  where preceding PMU/DRS presentation; do not present them as new acceptance.
+- Closed now: three top-level specifications and six block publications;
+  PMU/DRS clock/reset presentation and linked navigation. DRS gate/ten focused
+  tests PASS;55 normative blocks, exact traceability and baseline unchanged.
+- Still open: two blocked publications and final complete downstream/SysML
+  certification. Do not reopen semantic, architecture, contract or gate work.
+- Recommended next step only: review existing Sensor-Hub blocker evidence,
+  select one bounded claim for separately authorized diagnosis. Not started.
+- Read checkpoint and sync manifest first. Use the tag as restore reference;
+  preserve excluded GUI state, drafts, backups and unrelated images locally.
+
+## PREVIOUS HANDOFF - 2026-10-09 - Clean Documents, Partial IPOS
 
 - Checkpoint and Git tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
   User requested a local commit and tag; no push or new branch requested.

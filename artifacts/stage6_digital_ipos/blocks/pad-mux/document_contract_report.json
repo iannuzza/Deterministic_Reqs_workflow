@@ -1,0 +1,19 @@
+{
+  "checks": {
+    "materialization": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "publication_quality": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "semantic_fidelity": {
+      "findings": [],
+      "status": "PASS"
+    }
+  },
+  "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+  "document_type": "IPOS",
+  "status": "PASS"
+}

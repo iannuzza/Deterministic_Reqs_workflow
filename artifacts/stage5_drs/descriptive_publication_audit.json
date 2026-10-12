@@ -7,185 +7,141 @@
   "omissions": [
     {
       "location": "**Arbitration, control, and shared resources** {#arbitration-control-and-shared-resources}",
-      "input_line": 354,
+      "input_line": 360,
       "original": "Priority between simultaneous resource requesters: need clarification.",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:354"
+        "digital_requirements_specification.md:renderer-input-line:360"
       ],
       "user_review_only": true
     },
     {
       "location": "**Sequencing and domain control** {#sequencing-and-domain-control}",
-      "input_line": 405,
+      "input_line": 411,
       "original": "Domain transition ordering and reset-release dependencies: need clarification.",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:405"
+        "digital_requirements_specification.md:renderer-input-line:411"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.1 Digital block list** {#41-digital-block-list}",
-      "input_line": 434,
+      "input_line": 440,
       "original": "| Sensor-Hub | Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination. | Detailed integration relationship: need clarification. |",
       "retained": "| Sensor-Hub | Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination. |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:434"
+        "digital_requirements_specification.md:renderer-input-line:440"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.1 Digital block list** {#41-digital-block-list}",
-      "input_line": 443,
+      "input_line": 449,
       "original": "| OTP | Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines. | Detailed integration relationship: need clarification. |",
       "retained": "| OTP | Provide the source-specified one-time-programmable memory interface used by ADSP boot, programming, and test routines. |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:443"
+        "digital_requirements_specification.md:renderer-input-line:449"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.1 Digital block list** {#41-digital-block-list}",
-      "input_line": 444,
+      "input_line": 450,
       "original": "| PAD MUX | Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads. | Detailed integration relationship: need clarification. |",
       "retained": "| PAD MUX | Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads. |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:444"
+        "digital_requirements_specification.md:renderer-input-line:450"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.1 Digital block list** {#41-digital-block-list}",
-      "input_line": 445,
+      "input_line": 451,
       "original": "| ISPU | An interrupt triggers ISPU wake-up. Local processing function: need clarification. | from I2C_SPI_AHB (XBAR connection); to Regmap (XBAR connection); to SENSOR HUB (XBAR connection); to FIFO (XBAR connection); to ADSP (XBAR connection); from ISPU debug (XBAR connection) |",
       "retained": "| ISPU | An interrupt triggers ISPU wake-up. | from I2C_SPI_AHB (XBAR connection); to Regmap (XBAR connection); to SENSOR HUB (XBAR connection); to FIFO (XBAR connection); to ADSP (XBAR connection); from ISPU debug (XBAR connection) |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:445"
+        "digital_requirements_specification.md:renderer-input-line:451"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.2 Arbitration, control, and shared resources** {#42-arbitration-control-and-shared-resources}",
-      "input_line": 458,
+      "input_line": 464,
       "original": "Register and memory access coordination: ADSP executes ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. Regmap implements the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules. BIST Controller controls BIST operating modes and coordinates ADC/OTP test operations and their register-visible results. I2C_SPI_AHB accepts I2C/SPI accesses and translates them as needed into AHB transactions for device configuration and readback, including ISPU access. SPI interface provides SPI register transactions to Regmap. I2C interface provides I2C register transactions to Regmap. Regmap provides register read response to SPI interface and I2C interface. Concurrent-access ordering policy: need clarification.",
       "retained": "Register and memory access coordination: ADSP executes ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. Regmap implements the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules. BIST Controller controls BIST operating modes and coordinates ADC/OTP test operations and their register-visible results. I2C_SPI_AHB accepts I2C/SPI accesses and translates them as needed into AHB transactions for device configuration and readback, including ISPU access. SPI interface provides SPI register transactions to Regmap. I2C interface provides I2C register transactions to Regmap. Regmap provides register read response to SPI interface and I2C interface.",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:458"
+        "digital_requirements_specification.md:renderer-input-line:464"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.2 Arbitration, control, and shared resources** {#42-arbitration-control-and-shared-resources}",
-      "input_line": 502,
+      "input_line": 508,
       "original": "Flow control and backpressure: need clarification",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:502"
+        "digital_requirements_specification.md:renderer-input-line:508"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.2 Arbitration, control, and shared resources** {#42-arbitration-control-and-shared-resources}",
-      "input_line": 506,
+      "input_line": 512,
       "original": "Synchronization: need clarification",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:506"
+        "digital_requirements_specification.md:renderer-input-line:512"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.2 Arbitration, control, and shared resources** {#42-arbitration-control-and-shared-resources}",
-      "input_line": 510,
+      "input_line": 516,
       "original": "Latency and bandwidth: need clarification",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:510"
+        "digital_requirements_specification.md:renderer-input-line:516"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.2 Arbitration, control, and shared resources** {#42-arbitration-control-and-shared-resources}",
-      "input_line": 514,
+      "input_line": 520,
       "original": "Priority between simultaneous resource requesters: need clarification.",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:514"
+        "digital_requirements_specification.md:renderer-input-line:520"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
-      "input_line": 559,
+      "input_line": 565,
       "original": "Reset connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32; release/synchronization behavior: need clarification.",
       "retained": "Reset connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32;",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:559"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
-      "input_line": 567,
-      "original": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz |  |",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:567"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
-      "input_line": 568,
-      "original": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz |  |",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:568"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
-      "input_line": 569,
-      "original": "| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz |  |",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:569"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
-      "input_line": 571,
-      "original": "| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.adsp_run \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz |  |",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:571"
+        "digital_requirements_specification.md:renderer-input-line:565"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
       "input_line": 573,
-      "original": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \\| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz |  |",
+      "original": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
         "digital_requirements_specification.md:renderer-input-line:573"
@@ -194,108 +150,119 @@
     },
     {
       "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
-      "input_line": 594,
-      "original": "Measured latency and cross-domain synchronization behavior: need clarification.",
-      "retained": "",
+      "input_line": 574,
+      "original": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:594"
+        "digital_requirements_specification.md:renderer-input-line:574"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
-      "input_line": 598,
-      "original": "Clock-path endpoints requiring clarification: DDS_STBIO1_2024.",
-      "retained": "",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:598"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 603,
-      "original": "The clock network distributes 16 MHz clocks with and without clock gating; 32 kHz clocks without clock gating; 64 kHz clocks without clock gating. Incomplete source and destination clock labels: need clarification.",
-      "retained": "The clock network distributes 16 MHz clocks with and without clock gating; 32 kHz clocks without clock gating; 64 kHz clocks without clock gating.",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:603"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 607,
-      "original": "Reset/synchronization-labelled connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32; synchronization implementation: need clarification.",
-      "retained": "Reset/synchronization-labelled connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32;",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:607"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 619,
-      "original": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz |  |",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:619"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 620,
-      "original": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz |  |",
-      "reason": "review_only_or_unsupported_presentation",
-      "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:620"
-      ],
-      "user_review_only": true
-    },
-    {
-      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 621,
+      "input_line": 575,
       "original": "| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
       "retained": "| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:621"
+        "digital_requirements_specification.md:renderer-input-line:575"
       ],
       "user_review_only": true
     },
     {
-      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 623,
+      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
+      "input_line": 577,
       "original": "| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.adsp_run \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
       "retained": "| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:623"
+        "digital_requirements_specification.md:renderer-input-line:577"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
+      "input_line": 579,
+      "original": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \\| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz |  |",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:579"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
+      "input_line": 600,
+      "original": "Measured latency and cross-domain synchronization behavior: need clarification.",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:600"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.6 Digital performance requirements** {#46-digital-performance-requirements}",
+      "input_line": 604,
+      "original": "Clock-path endpoints requiring clarification: DDS_STBIO1_2024.",
+      "retained": "",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:604"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 624,
-      "original": "| DDS_STBIO1_2024 | need clarification | need clarification | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2 \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2_reg \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_2024 |  |  | 16 MHz |  |",
+      "input_line": 609,
+      "original": "The clock network distributes 16 MHz clocks with and without clock gating; 32 kHz clocks without clock gating; 64 kHz clocks without clock gating. Incomplete source and destination clock labels: need clarification.",
+      "retained": "The clock network distributes 16 MHz clocks with and without clock gating; 32 kHz clocks without clock gating; 64 kHz clocks without clock gating.",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:624"
+        "digital_requirements_specification.md:renderer-input-line:609"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
+      "input_line": 613,
+      "original": "Reset/synchronization-labelled connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32; synchronization implementation: need clarification.",
+      "retained": "Reset/synchronization-labelled connection DDS_STBIO1_2054: PMU.resetn_32k_main_ctrl -> Main Controller.i_rstn_sync_32;",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:613"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
+      "input_line": 625,
+      "original": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz |  |",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:625"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
+      "input_line": 626,
+      "original": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz |  |",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:626"
       ],
       "user_review_only": true
     },
     {
       "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
       "input_line": 627,
-      "original": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \\| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
-      "retained": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz |  |",
+      "original": "| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz |  |",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
         "digital_requirements_specification.md:renderer-input-line:627"
@@ -304,23 +271,56 @@
     },
     {
       "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
-      "input_line": 644,
+      "input_line": 629,
+      "original": "| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.adsp_run \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz |  |",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:629"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
+      "input_line": 630,
+      "original": "| DDS_STBIO1_2024 | need clarification | need clarification | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2 \\| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \\| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2_reg \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_2024 |  |  | 16 MHz |  |",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:630"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
+      "input_line": 633,
+      "original": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | Gated; control expression: stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \\| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \\| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable; signal spelling: need clarification |",
+      "retained": "| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz |  |",
+      "reason": "review_only_or_unsupported_presentation",
+      "source_references": [
+        "digital_requirements_specification.md:renderer-input-line:633"
+      ],
+      "user_review_only": true
+    },
+    {
+      "location": "**4.7 Clock and synchronization across domains** {#47-clock-and-synchronization-across-domains}",
+      "input_line": 650,
       "original": "Clock-domain crossing, reset-domain crossing, and measured interrupt response time: need clarification.",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:644"
+        "digital_requirements_specification.md:renderer-input-line:650"
       ],
       "user_review_only": true
     },
     {
       "location": "**8. Assumptions** {#8-assumptions}",
-      "input_line": 1088,
+      "input_line": 1131,
       "original": "- TBD-001: Unassigned requirements in DRS traceability matrix require architectural owner review.",
       "retained": "",
       "reason": "review_only_or_unsupported_presentation",
       "source_references": [
-        "digital_requirements_specification.md:renderer-input-line:1088"
+        "digital_requirements_specification.md:renderer-input-line:1131"
       ],
       "user_review_only": true
     }

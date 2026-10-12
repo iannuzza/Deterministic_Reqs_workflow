@@ -1,6 +1,41 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: 2026-10-09 - Clean Documents, Partial IPOS
+## Latest checkpoint: 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS
+
+- Frozen baseline/tag: `freeze-ipos-6-pass-2-blocked`; user authorized a
+  milestone commit and tag push to `origin`, not a branch push or new branch.
+- Approved snapshot remains `snap-73c872b1307b6adb5eaf843e`; 357 approved
+  mappings, SRS0/ARS0/DRS55/Digital IPOS302/Analog IPOS0.
+- Published SRS, ARS and DRS: PASS in Markdown and DOCX.
+- Regenerated Digital IPOS: ADSP, I2C_SPI_AHB, PAD MUX, PMU, Regmap and
+  Smart FIFO PASS in Markdown and DOCX through existing strict block gates.
+- Main Controller and Sensor-Hub: BLOCKED, not regenerated or certified;
+  historical files remain preserved. Digital IPOS overall remains PARTIAL,
+  not all-block PASS. Analog IPOS is VALID_EMPTY; Stage 7 not run.
+- All 18 published specification MD/DOCX files have zero inline review
+  markers. Marker-free historical files do not acquire publication authority.
+- This freeze changes no executable contracts, gates, approvals, snapshot,
+  canonical requirement semantics, allocation or centralized architecture.
+  The existing current implementation and derived artifacts are preserved.
+- Review reports, annotated copies and appendices remain review-only:
+  authority=false, gate_override=false; observations never confer approval.
+- Closed: publication of SRS/ARS/DRS and six Digital IPOS blocks; PMU/DRS
+  clock/reset tables, numbered captions and working navigation; DRS55 exact
+  normative requirements and traceability preserved. DRS gate and ten focused
+  connection/navigation regressions PASS.
+- Open: Main Controller and Sensor-Hub descriptive/contract publication
+  blockers and consequent complete Stage 6/final end-to-end certification.
+  No broad semantic, architecture, contract or gate work is started here.
+- Narrow next step: review the existing Sensor-Hub blocker evidence and
+  select one bounded claim for a separately authorized diagnosis; do not
+  regenerate blocks, infer source meaning or change authority during freeze.
+- SQLite binary hashes are not semantic authority comparisons: ledger refresh
+  rewrites only derived requirement_allocations.created_at. Verify schema and
+  every record while isolating only that timestamp, never the whole database.
+- Restore using the tag, not a self-referential commit hash. Personal GUI
+  state, source drafts, local backups and unrelated images remain outside it.
+
+## Previous checkpoint: 2026-10-09 - Clean Documents, Partial IPOS
 
 - Checkpoint and requested Git tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
   Restore reference is the named tag, not a hardcoded self-referential commit hash.

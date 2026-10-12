@@ -1,6 +1,6 @@
 {
-  "docx_sha256": "1c621babd77d3593fe860a89ef13072f3ef7c8c6af6475be597d76a546a76d37",
-  "markdown_sha256": "f3cf6ae0dc0ed7f05c0e9fac193ebd34de334625321aada5dfdddd0cafb89ae3",
+  "docx_sha256": "45789dd0151188cfcd1835da679b804899ba77a94f65ad1089084ebc11c763d7",
+  "markdown_sha256": "247c4ea1f7c7d99e588d38e481fed7cec4c7b90188936f2bf9e0d0a593d6b2bc",
   "preservation_baseline_sha256": "b9eca798e639b02f3ef4970d98f7439c77e4b38b76ae7828c8e08a54e62a5e80",
   "rules": {
     "artifact_fidelity": "PASS",
@@ -11,6 +11,6 @@
     "table_preservation": "PASS",
     "technical_prose": "PASS"
   },
-  "template_sha256": "05569ed5bab47fef6993f21becf4f6d8b2cb5af3bd96247744a4221550dfbd0d",
+  "template_sha256": "d29845a446fe2904d00dccc15c48559f924e038f035c4469e81be43644e32a4c",
   "version": 1
 }

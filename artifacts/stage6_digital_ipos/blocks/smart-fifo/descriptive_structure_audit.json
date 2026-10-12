@@ -1,0 +1,3828 @@
+{
+  "application": {
+    "decisions": [
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:function:clause:1:meaning:1",
+        "role": "purpose",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:inputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:outputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1",
+        "role": "limits",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1",
+        "role": "limits",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      }
+    ],
+    "findings": [],
+    "policy": {
+      "abstraction": "block",
+      "domains": [
+        "digital"
+      ],
+      "functional_actions": [
+        "accept",
+        "acquire",
+        "accumulate",
+        "average",
+        "calculate",
+        "compute",
+        "control",
+        "convert",
+        "copy",
+        "divide",
+        "filter",
+        "generate",
+        "monitor",
+        "perform",
+        "process",
+        "produce",
+        "provide",
+        "read",
+        "receive",
+        "route",
+        "sample",
+        "send",
+        "store",
+        "subtract",
+        "support",
+        "transfer",
+        "write"
+      ],
+      "layers": [
+        "block"
+      ],
+      "name": "digital-ipos-structure-v1",
+      "omitted_details": [
+        "example",
+        "procedure"
+      ],
+      "output_sections": [
+        [
+          "purpose",
+          "functionality"
+        ],
+        [
+          "main_functions",
+          "scope"
+        ],
+        [
+          "functions",
+          "internal_functions"
+        ],
+        [
+          "boundaries",
+          "scope"
+        ],
+        [
+          "organization",
+          "internal_structure"
+        ],
+        [
+          "limits",
+          "scope"
+        ],
+        [
+          "operating_concept",
+          "internal_functions"
+        ],
+        [
+          "power",
+          "internal_functions"
+        ]
+      ],
+      "presentation_order": [
+        "behavior",
+        "support",
+        "clarification"
+      ],
+      "required_roles": [
+        "purpose",
+        "functions"
+      ],
+      "role_sections": [
+        [
+          "purpose",
+          "function"
+        ],
+        [
+          "main_functions",
+          "function"
+        ],
+        [
+          "functions",
+          "function"
+        ],
+        [
+          "boundaries",
+          "interfaces"
+        ],
+        [
+          "organization",
+          "function"
+        ],
+        [
+          "limits",
+          "function"
+        ],
+        [
+          "operating_concept",
+          "operating_concept"
+        ],
+        [
+          "power",
+          "power"
+        ]
+      ],
+      "version": 1,
+      "writing_profile": "ipos-structural-integrity-v1"
+    },
+    "profile_status": "policy_valid"
+  },
+  "contract_version": "1.1",
+  "descriptive_obligation_policy": {
+    "nonprose_paths": [
+      "requirement",
+      "parameter",
+      "configuration",
+      "register",
+      "io_list",
+      "table"
+    ],
+    "version": "descriptive-obligations-v1"
+  },
+  "document_contract": {
+    "detail_policy": "preserve_essential_block_detail_v1",
+    "document_type": "IPOS",
+    "essential_sources": {
+      "capabilities": [
+        "inventory:main_functions",
+        "inventory:inputs",
+        "inventory:outputs"
+      ],
+      "purpose": [
+        "inventory:function"
+      ]
+    },
+    "gap_policy": "required_sections_with_audited_omissions_v1",
+    "interpretation": "admitted_normative_clauses_v1",
+    "mandatory_rules": [
+      "section_roles",
+      "functional_claims",
+      "information_gain",
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "paragraph": {
+      "claim_scope": [
+        "initiation",
+        "behavior",
+        "result",
+        "exception",
+        "local_interaction"
+      ],
+      "required": [
+        "responsibility",
+        "supported_behavior"
+      ],
+      "when_supported": [
+        "condition",
+        "effect",
+        "result",
+        "dependency",
+        "exception"
+      ]
+    },
+    "profile": "block_local_v1",
+    "rendering": "scoped_explanatory_prose_v1",
+    "sections": [
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "purpose",
+        "title": "1.1 Functionality"
+      },
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "capabilities",
+        "title": "1.2 Supported functions and scope"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "organization",
+        "title": "1.3 Internal structure"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "functions",
+        "title": "1.4 Supported block functions"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "architecture",
+        "title": "1.5 General architecture"
+      }
+    ],
+    "sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+    "synthesis": "explicit_functional_claims_v1",
+    "validation_hooks": [
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "version": 1
+  },
+  "functional_claim_findings": [],
+  "functional_claim_plan": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "claims": [
+      {
+        "claim_id": "ipos-claim-84680133f992e6dbaeec",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Smart FIFO block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "role": "purpose",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 165,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-32c3fc0af531256bf9ce",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Digital samples, FIFO mode configuration"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Smart FIFO block"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Buffered samples and FIFO status flags"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Smart FIFO block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "role": "boundaries",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 40,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Digital samples, FIFO mode configuration"
+          },
+          {
+            "end": 38,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Buffered samples and FIFO status flags"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-bc4bf0a52ec9b300e038",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode"
+            ],
+            "predicate": "select",
+            "qualifiers": [],
+            "relation": "configuration",
+            "results": [],
+            "subject": "The user"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1"
+        ],
+        "role": "limits",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 156,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+            "start": 0,
+            "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-1d33707c4dbaa1e2b151",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs"
+            ],
+            "predicate": "have",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory"
+            ],
+            "predicate": "have",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "two working modes: Multiple FIFO and Unique FIFO"
+            ],
+            "predicate": "have",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "at 16 MHz clock frequency"
+            ],
+            "predicate": "work",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 158,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+            "start": 0,
+            "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+          },
+          {
+            "end": 172,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+            "start": 0,
+            "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+          },
+          {
+            "end": 80,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+            "start": 0,
+            "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO."
+          },
+          {
+            "end": 87,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+            "start": 0,
+            "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-8cc2792abed09ed68a5f",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "in Unique FIFO Mode"
+            ],
+            "predicate": "work",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "As default, the FIFO"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 82,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+            "start": 0,
+            "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-f323bc5b0fe14a7aa418",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the first Memory Location of the FIFO RAM: 0xC4000"
+            ],
+            "predicate": "define",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The parameter MEM_LOC"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1"
+        ],
+        "role": "limits",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 116,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+            "start": 0,
+            "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-00f5aa9e75148fb4da26",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "If input signal HMASTER is set to 0 or 1"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Memory mode"
+            ],
+            "predicate": "enter",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "the FIFO Controller"
+          },
+          {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "If input signal HMASTER is set to 0 or 1"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Memory mode"
+            ],
+            "predicate": "enter",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "the FIFO Controller"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 116,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+            "start": 0,
+            "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+          },
+          {
+            "end": 116,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+            "start": 0,
+            "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+          }
+        ],
+        "synthesis_rule": "shared_context_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-639c134da69dc27d39ff",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "defined as MEM_LOC + 0x1000: 0xC5000"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO register map first memory location"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 120,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+            "start": 0,
+            "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "decisions": [
+      {
+        "claim_id": "ipos-claim-84680133f992e6dbaeec",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-32c3fc0af531256bf9ce",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-bc4bf0a52ec9b300e038",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-1d33707c4dbaa1e2b151",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-8cc2792abed09ed68a5f",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-f323bc5b0fe14a7aa418",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-00f5aa9e75148fb4da26",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-639c134da69dc27d39ff",
+        "decision": "preserved",
+        "findings": []
+      }
+    ],
+    "dispositions": [
+      {
+        "claim_ids": [
+          "ipos-claim-84680133f992e6dbaeec"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 165,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-32c3fc0af531256bf9ce"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 40,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Digital samples, FIFO mode configuration"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-32c3fc0af531256bf9ce"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 38,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Buffered samples and FIFO status flags"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-bc4bf0a52ec9b300e038"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 156,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+            "start": 0,
+            "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-1d33707c4dbaa1e2b151"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 158,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+            "start": 0,
+            "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-8cc2792abed09ed68a5f"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 82,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+            "start": 0,
+            "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-f323bc5b0fe14a7aa418"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 116,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+            "start": 0,
+            "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-00f5aa9e75148fb4da26"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 116,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+            "start": 0,
+            "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-1d33707c4dbaa1e2b151"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 172,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+            "start": 0,
+            "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-1d33707c4dbaa1e2b151"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 80,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+            "start": 0,
+            "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-00f5aa9e75148fb4da26"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 116,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+            "start": 0,
+            "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-639c134da69dc27d39ff"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 120,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+            "start": 0,
+            "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-1d33707c4dbaa1e2b151"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 87,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+            "start": 0,
+            "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:table",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 22,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+            "start": 0,
+            "text": "When in Multiple Fifo,"
+          },
+          {
+            "end": 306,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+            "start": 22,
+            "text": " the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG0_DC BIA FIFO OFFSET BIA_AC_P, BIA_DC_P, BIA_AC_Q, BIA_DC_Q, ECG1_AC, ECG2_DC GSR FIFO OFFSET GSR, ECG1_DC, ECG2_AC PPG FIFO OFFSET PPG Table 31 : FIFO Offset Data Table"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 150,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+            "start": 81,
+            "text": "These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 113,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456557",
+            "start": 0,
+            "text": "The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address. [TO: IPOS_FIFO_CTRL_89456557]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 133,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+            "start": 0,
+            "text": "The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:table",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 434,
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+            "start": 134,
+            "text": "Example: FIFO Memory Base Address = 0xC4000, then: FIFO 0 memory location 0xC4000 FIFO 1 memory location 0xC4100 FIFO 2 memory location 0xC4200 FIFO 3 memory location 0xC4300 FIFO 4 memory location 0xC4400 FIFO 5 memory location 0xC4500 Table 29: SUB FIFO Memory Address [TO: IPOS_FIFO_CTRL_89457790]"
+          }
+        ]
+      }
+    ],
+    "evidence": {
+      "dependencies": [],
+      "propositions": [
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Smart FIFO block"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "inventory:function:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 165,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Digital samples, FIFO mode configuration"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Smart FIFO block"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "inventory:inputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 40,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Digital samples, FIFO mode configuration"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Buffered samples and FIFO status flags"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Smart FIFO block"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "inventory:outputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 38,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Buffered samples and FIFO status flags"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode"
+            ],
+            "predicate": "select",
+            "qualifiers": [],
+            "relation": "configuration",
+            "results": [],
+            "subject": "The user"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 156,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+              "start": 0,
+              "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs"
+            ],
+            "predicate": "have",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 158,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+              "start": 0,
+              "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "in Unique FIFO Mode"
+            ],
+            "predicate": "work",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "As default, the FIFO"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 82,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+              "start": 0,
+              "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the first Memory Location of the FIFO RAM: 0xC4000"
+            ],
+            "predicate": "define",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The parameter MEM_LOC"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+              "start": 0,
+              "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "If input signal HMASTER is set to 0 or 1"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Memory mode"
+            ],
+            "predicate": "enter",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "the FIFO Controller"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+              "start": 0,
+              "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory"
+            ],
+            "predicate": "have",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 172,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+              "start": 0,
+              "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "two working modes: Multiple FIFO and Unique FIFO"
+            ],
+            "predicate": "have",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 80,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+              "start": 0,
+              "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "If input signal HMASTER is set to 0 or 1"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Memory mode"
+            ],
+            "predicate": "enter",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "the FIFO Controller"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+              "start": 0,
+              "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "defined as MEM_LOC + 0x1000: 0xC5000"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO register map first memory location"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 120,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+              "start": 0,
+              "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "at 16 MHz clock frequency"
+            ],
+            "predicate": "work",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The FIFO Controller"
+          },
+          "owner": "Smart FIFO",
+          "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 87,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+              "start": 0,
+              "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:function",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:function",
+          "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:inputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:inputs",
+          "text": "Digital samples, FIFO mode configuration"
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:outputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:outputs",
+          "text": "Buffered samples and FIFO status flags"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89456975",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+          "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89457435",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+          "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89455232",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+          "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_00000102",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+          "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_00000008",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+          "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_00001199",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+          "text": "When in Multiple Fifo, the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG0_DC BIA FIFO OFFSET BIA_AC_P, BIA_DC_P, BIA_AC_Q, BIA_DC_Q, ECG1_AC, ECG2_DC GSR FIFO OFFSET GSR, ECG1_DC, ECG2_AC PPG FIFO OFFSET PPG Table 31 : FIFO Offset Data Table"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89455261",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+          "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89455449",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+          "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO. These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89456557",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456557",
+          "text": "The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address. [TO: IPOS_FIFO_CTRL_89456557]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_00000199",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+          "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_00000202",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+          "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89459082",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+          "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_89457790",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+          "text": "The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address. Example: FIFO Memory Base Address = 0xC4000, then: FIFO 0 memory location 0xC4000 FIFO 1 memory location 0xC4100 FIFO 2 memory location 0xC4200 FIFO 3 memory location 0xC4300 FIFO 4 memory location 0xC4400 FIFO 5 memory location 0xC4500 Table 29: SUB FIFO Memory Address [TO: IPOS_FIFO_CTRL_89457790]"
+        }
+      ],
+      "unresolved_contexts": [
+        {
+          "context_id": "requirement:Smart FIFO:DDS_STBIO1_00001199:clause:1:unresolved",
+          "reason": "unsupported structured/table/procedure evidence; full source retained",
+          "spans": [
+            {
+              "end": 22,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+              "start": 0,
+              "text": "When in Multiple Fifo,"
+            },
+            {
+              "end": 306,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+              "start": 22,
+              "text": " the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG0_DC BIA FIFO OFFSET BIA_AC_P, BIA_DC_P, BIA_AC_Q, BIA_DC_Q, ECG1_AC, ECG2_DC GSR FIFO OFFSET GSR, ECG1_DC, ECG2_AC PPG FIFO OFFSET PPG Table 31 : FIFO Offset Data Table"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:2:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 150,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+              "start": 81,
+              "text": "These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Smart FIFO:DDS_STBIO1_89456557:clause:1:unresolved",
+          "reason": "unsupported predicate grammar; full source retained",
+          "spans": [
+            {
+              "end": 113,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456557",
+              "start": 0,
+              "text": "The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address. [TO: IPOS_FIFO_CTRL_89456557]"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Smart FIFO:DDS_STBIO1_89457790:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 133,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+              "start": 0,
+              "text": "The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Smart FIFO:DDS_STBIO1_89457790:clause:2:unresolved",
+          "reason": "unsupported structured/table/procedure evidence; full source retained",
+          "spans": [
+            {
+              "end": 434,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+              "start": 134,
+              "text": "Example: FIFO Memory Base Address = 0xC4000, then: FIFO 0 memory location 0xC4000 FIFO 1 memory location 0xC4100 FIFO 2 memory location 0xC4200 FIFO 3 memory location 0xC4300 FIFO 4 memory location 0xC4400 FIFO 5 memory location 0xC4500 Table 29: SUB FIFO Memory Address [TO: IPOS_FIFO_CTRL_89457790]"
+            }
+          ]
+        }
+      ]
+    },
+    "findings": [],
+    "intents": [
+      {
+        "claim_id": "ipos-claim-84680133f992e6dbaeec",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "purpose",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-32c3fc0af531256bf9ce",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "boundaries",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-bc4bf0a52ec9b300e038",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "limits",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-1d33707c4dbaa1e2b151",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-8cc2792abed09ed68a5f",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-f323bc5b0fe14a7aa418",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "limits",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-00f5aa9e75148fb4da26",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1",
+          "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_context_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-639c134da69dc27d39ff",
+        "proposition_ids": [
+          "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+    "version": "1.1"
+  },
+  "model": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "contract_version": "1.1",
+    "final_prose_validation": "not_implemented",
+    "findings": [],
+    "phase": "pre_prose_model_only",
+    "plan": {
+      "acceptance": {
+        "materialization": "UNRESOLVED",
+        "materialization_findings": [],
+        "publication_findings": [],
+        "publication_quality": "UNRESOLVED",
+        "semantic_fidelity": "UNRESOLVED",
+        "semantic_findings": []
+      },
+      "claims": [
+        {
+          "claim_id": "ipos-claim-84680133f992e6dbaeec",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Smart FIFO block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "role": "purpose",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 165,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-32c3fc0af531256bf9ce",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Digital samples, FIFO mode configuration"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Smart FIFO block"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Buffered samples and FIFO status flags"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Smart FIFO block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "role": "boundaries",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 40,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Digital samples, FIFO mode configuration"
+            },
+            {
+              "end": 38,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Buffered samples and FIFO status flags"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-bc4bf0a52ec9b300e038",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode"
+              ],
+              "predicate": "select",
+              "qualifiers": [],
+              "relation": "configuration",
+              "results": [],
+              "subject": "The user"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1"
+          ],
+          "role": "limits",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 156,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+              "start": 0,
+              "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-1d33707c4dbaa1e2b151",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs"
+              ],
+              "predicate": "have",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory"
+              ],
+              "predicate": "have",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "two working modes: Multiple FIFO and Unique FIFO"
+              ],
+              "predicate": "have",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "at 16 MHz clock frequency"
+              ],
+              "predicate": "work",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 158,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+              "start": 0,
+              "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+            },
+            {
+              "end": 172,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+              "start": 0,
+              "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+            },
+            {
+              "end": 80,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+              "start": 0,
+              "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO."
+            },
+            {
+              "end": 87,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+              "start": 0,
+              "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-8cc2792abed09ed68a5f",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "in Unique FIFO Mode"
+              ],
+              "predicate": "work",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "As default, the FIFO"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 82,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+              "start": 0,
+              "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-f323bc5b0fe14a7aa418",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the first Memory Location of the FIFO RAM: 0xC4000"
+              ],
+              "predicate": "define",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The parameter MEM_LOC"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1"
+          ],
+          "role": "limits",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+              "start": 0,
+              "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-00f5aa9e75148fb4da26",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "If input signal HMASTER is set to 0 or 1"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Memory mode"
+              ],
+              "predicate": "enter",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "the FIFO Controller"
+            },
+            {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "If input signal HMASTER is set to 0 or 1"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Memory mode"
+              ],
+              "predicate": "enter",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "the FIFO Controller"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+              "start": 0,
+              "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+            },
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+              "start": 0,
+              "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+            }
+          ],
+          "synthesis_rule": "shared_context_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-639c134da69dc27d39ff",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "defined as MEM_LOC + 0x1000: 0xC5000"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO register map first memory location"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 120,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+              "start": 0,
+              "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "decisions": [
+        {
+          "claim_id": "ipos-claim-84680133f992e6dbaeec",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-32c3fc0af531256bf9ce",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-bc4bf0a52ec9b300e038",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-1d33707c4dbaa1e2b151",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-8cc2792abed09ed68a5f",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-f323bc5b0fe14a7aa418",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-00f5aa9e75148fb4da26",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-639c134da69dc27d39ff",
+          "decision": "preserved",
+          "findings": []
+        }
+      ],
+      "dispositions": [
+        {
+          "claim_ids": [
+            "ipos-claim-84680133f992e6dbaeec"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 165,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-32c3fc0af531256bf9ce"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 40,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Digital samples, FIFO mode configuration"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-32c3fc0af531256bf9ce"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 38,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Buffered samples and FIFO status flags"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-bc4bf0a52ec9b300e038"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 156,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+              "start": 0,
+              "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-1d33707c4dbaa1e2b151"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 158,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+              "start": 0,
+              "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-8cc2792abed09ed68a5f"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 82,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+              "start": 0,
+              "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-f323bc5b0fe14a7aa418"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+              "start": 0,
+              "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-00f5aa9e75148fb4da26"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+              "start": 0,
+              "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-1d33707c4dbaa1e2b151"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 172,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+              "start": 0,
+              "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-1d33707c4dbaa1e2b151"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 80,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+              "start": 0,
+              "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-00f5aa9e75148fb4da26"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 116,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+              "start": 0,
+              "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-639c134da69dc27d39ff"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 120,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+              "start": 0,
+              "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-1d33707c4dbaa1e2b151"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 87,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+              "start": 0,
+              "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:table",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 22,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+              "start": 0,
+              "text": "When in Multiple Fifo,"
+            },
+            {
+              "end": 306,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+              "start": 22,
+              "text": " the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG0_DC BIA FIFO OFFSET BIA_AC_P, BIA_DC_P, BIA_AC_Q, BIA_DC_Q, ECG1_AC, ECG2_DC GSR FIFO OFFSET GSR, ECG1_DC, ECG2_AC PPG FIFO OFFSET PPG Table 31 : FIFO Offset Data Table"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 150,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+              "start": 81,
+              "text": "These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 113,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456557",
+              "start": 0,
+              "text": "The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address. [TO: IPOS_FIFO_CTRL_89456557]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 133,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+              "start": 0,
+              "text": "The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:table",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 434,
+              "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+              "start": 134,
+              "text": "Example: FIFO Memory Base Address = 0xC4000, then: FIFO 0 memory location 0xC4000 FIFO 1 memory location 0xC4100 FIFO 2 memory location 0xC4200 FIFO 3 memory location 0xC4300 FIFO 4 memory location 0xC4400 FIFO 5 memory location 0xC4500 Table 29: SUB FIFO Memory Address [TO: IPOS_FIFO_CTRL_89457790]"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "dependencies": [],
+        "propositions": [
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Smart FIFO block"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "inventory:function:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 165,
+                "record_id": "inventory:function",
+                "start": 0,
+                "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Digital samples, FIFO mode configuration"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Smart FIFO block"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "inventory:inputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 40,
+                "record_id": "inventory:inputs",
+                "start": 0,
+                "text": "Digital samples, FIFO mode configuration"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Buffered samples and FIFO status flags"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Smart FIFO block"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "inventory:outputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 38,
+                "record_id": "inventory:outputs",
+                "start": 0,
+                "text": "Buffered samples and FIFO status flags"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode"
+              ],
+              "predicate": "select",
+              "qualifiers": [],
+              "relation": "configuration",
+              "results": [],
+              "subject": "The user"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 156,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+                "start": 0,
+                "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs"
+              ],
+              "predicate": "have",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 158,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+                "start": 0,
+                "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "in Unique FIFO Mode"
+              ],
+              "predicate": "work",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "As default, the FIFO"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 82,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+                "start": 0,
+                "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the first Memory Location of the FIFO RAM: 0xC4000"
+              ],
+              "predicate": "define",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The parameter MEM_LOC"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 116,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+                "start": 0,
+                "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "If input signal HMASTER is set to 0 or 1"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Memory mode"
+              ],
+              "predicate": "enter",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "the FIFO Controller"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 116,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+                "start": 0,
+                "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory"
+              ],
+              "predicate": "have",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 172,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+                "start": 0,
+                "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "two working modes: Multiple FIFO and Unique FIFO"
+              ],
+              "predicate": "have",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 80,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+                "start": 0,
+                "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "If input signal HMASTER is set to 0 or 1"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Memory mode"
+              ],
+              "predicate": "enter",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "the FIFO Controller"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 116,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+                "start": 0,
+                "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "defined as MEM_LOC + 0x1000: 0xC5000"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO register map first memory location"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 120,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+                "start": 0,
+                "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "at 16 MHz clock frequency"
+              ],
+              "predicate": "work",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The FIFO Controller"
+            },
+            "owner": "Smart FIFO",
+            "proposition_id": "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 87,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+                "start": 0,
+                "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+              }
+            ]
+          }
+        ],
+        "records": [
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:function",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:function",
+            "text": "Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting."
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:inputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:inputs",
+            "text": "Digital samples, FIFO mode configuration"
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:outputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:outputs",
+            "text": "Buffered samples and FIFO status flags"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89456975",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
+            "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89457435",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
+            "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89455232",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455232",
+            "text": "As default, the FIFO shall work in Unique FIFO Mode. [TO: IPOS_FIFO_CTRL_89455232]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_00000102",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
+            "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_00000008",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000008",
+            "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_00001199",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+            "text": "When in Multiple Fifo, the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG0_DC BIA FIFO OFFSET BIA_AC_P, BIA_DC_P, BIA_AC_Q, BIA_DC_Q, ECG1_AC, ECG2_DC GSR FIFO OFFSET GSR, ECG1_DC, ECG2_AC PPG FIFO OFFSET PPG Table 31 : FIFO Offset Data Table"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89455261",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
+            "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89455449",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+            "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO. These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89456557",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456557",
+            "text": "The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address. [TO: IPOS_FIFO_CTRL_89456557]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_00000199",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000199",
+            "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller shall enter Memory mode. [TO: IPOS_FIFO_CTRL_00000008]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_00000202",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
+            "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89459082",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
+            "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_89457790",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+            "text": "The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address. Example: FIFO Memory Base Address = 0xC4000, then: FIFO 0 memory location 0xC4000 FIFO 1 memory location 0xC4100 FIFO 2 memory location 0xC4200 FIFO 3 memory location 0xC4300 FIFO 4 memory location 0xC4400 FIFO 5 memory location 0xC4500 Table 29: SUB FIFO Memory Address [TO: IPOS_FIFO_CTRL_89457790]"
+          }
+        ],
+        "unresolved_contexts": [
+          {
+            "context_id": "requirement:Smart FIFO:DDS_STBIO1_00001199:clause:1:unresolved",
+            "reason": "unsupported structured/table/procedure evidence; full source retained",
+            "spans": [
+              {
+                "end": 22,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+                "start": 0,
+                "text": "When in Multiple Fifo,"
+              },
+              {
+                "end": 306,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_00001199",
+                "start": 22,
+                "text": " the 6 sub-FIFO offset shall coincide with the following table : FIFO OFFSET DATA TYPE ECG FIFO OFFSET ECG0_AC, ECG0_DC BIA FIFO OFFSET BIA_AC_P, BIA_DC_P, BIA_AC_Q, BIA_DC_Q, ECG1_AC, ECG2_DC GSR FIFO OFFSET GSR, ECG1_DC, ECG2_AC PPG FIFO OFFSET PPG Table 31 : FIFO Offset Data Table"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:2:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 150,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
+                "start": 81,
+                "text": "These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Smart FIFO:DDS_STBIO1_89456557:clause:1:unresolved",
+            "reason": "unsupported predicate grammar; full source retained",
+            "spans": [
+              {
+                "end": 113,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456557",
+                "start": 0,
+                "text": "The FIFO Controller shall be able to address 1.5 kbyte divided into 32-bit address. [TO: IPOS_FIFO_CTRL_89456557]"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Smart FIFO:DDS_STBIO1_89457790:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 133,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+                "start": 0,
+                "text": "The FIFO 6 memory locations to access each sub-FIFO in Multiple mode are obtained adding multiples of 256 to the memory base address."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Smart FIFO:DDS_STBIO1_89457790:clause:2:unresolved",
+            "reason": "unsupported structured/table/procedure evidence; full source retained",
+            "spans": [
+              {
+                "end": 434,
+                "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457790",
+                "start": 134,
+                "text": "Example: FIFO Memory Base Address = 0xC4000, then: FIFO 0 memory location 0xC4000 FIFO 1 memory location 0xC4100 FIFO 2 memory location 0xC4200 FIFO 3 memory location 0xC4300 FIFO 4 memory location 0xC4400 FIFO 5 memory location 0xC4500 Table 29: SUB FIFO Memory Address [TO: IPOS_FIFO_CTRL_89457790]"
+              }
+            ]
+          }
+        ]
+      },
+      "findings": [],
+      "intents": [
+        {
+          "claim_id": "ipos-claim-84680133f992e6dbaeec",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "purpose",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-32c3fc0af531256bf9ce",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "boundaries",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-bc4bf0a52ec9b300e038",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89456975:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "limits",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-1d33707c4dbaa1e2b151",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89457435:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_89455261:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_89455449:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_89459082:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-8cc2792abed09ed68a5f",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_89455232:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-f323bc5b0fe14a7aa418",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000102:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "limits",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-00f5aa9e75148fb4da26",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000008:clause:1:meaning:1",
+            "requirement:Smart FIFO:DDS_STBIO1_00000199:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_context_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-639c134da69dc27d39ff",
+          "proposition_ids": [
+            "requirement:Smart FIFO:DDS_STBIO1_00000202:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+      "version": "1.1"
+    },
+    "profile": {
+      "allowed_domains": [],
+      "allowed_layers": [
+        "block"
+      ],
+      "allowed_scopes": [
+        "block_local"
+      ],
+      "authority_tiers": [
+        "admitted_context",
+        "approved_normative"
+      ],
+      "document_type": "IPOS",
+      "evidence_kinds": [
+        "descriptive",
+        "approved_normative"
+      ],
+      "excluded_terms": [],
+      "name": "ipos-structural-integrity-v1",
+      "owner_policy": "same_owner",
+      "projection_adapters": [
+        "ipos-local"
+      ],
+      "runtime_enabled": true,
+      "topic_roles": [
+        "function",
+        "interfaces",
+        "operating_concept",
+        "power"
+      ],
+      "version": 1
+    },
+    "source_semantic_validation": "not_implemented",
+    "typed_model_status": "model_valid"
+  },
+  "phase": "ipos_functional_claim_materialization",
+  "publication_status": "requires_independent_final_artifact_checks",
+  "section_plan": [
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Smart FIFO block"
+        }
+      ],
+      "claim_id": "ipos-claim-84680133f992e6dbaeec",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "purpose"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Digital samples, FIFO mode configuration"
+          ],
+          "predicate": "accept",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Smart FIFO block"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Buffered samples and FIFO status flags"
+          ],
+          "predicate": "produce",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Smart FIFO block"
+        }
+      ],
+      "claim_id": "ipos-claim-32c3fc0af531256bf9ce",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "boundaries"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode"
+          ],
+          "predicate": "select",
+          "qualifiers": [],
+          "relation": "configuration",
+          "results": [],
+          "subject": "The user"
+        }
+      ],
+      "claim_id": "ipos-claim-bc4bf0a52ec9b300e038",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "limits"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs"
+          ],
+          "predicate": "have",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The FIFO Controller"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory"
+          ],
+          "predicate": "have",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The FIFO Controller"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "two working modes: Multiple FIFO and Unique FIFO"
+          ],
+          "predicate": "have",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The FIFO Controller"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "at 16 MHz clock frequency"
+          ],
+          "predicate": "work",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The FIFO Controller"
+        }
+      ],
+      "claim_id": "ipos-claim-1d33707c4dbaa1e2b151",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "in Unique FIFO Mode"
+          ],
+          "predicate": "work",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "As default, the FIFO"
+        }
+      ],
+      "claim_id": "ipos-claim-8cc2792abed09ed68a5f",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "the first Memory Location of the FIFO RAM: 0xC4000"
+          ],
+          "predicate": "define",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The parameter MEM_LOC"
+        }
+      ],
+      "claim_id": "ipos-claim-f323bc5b0fe14a7aa418",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "limits"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [
+            {
+              "operands": [],
+              "operator": "atom",
+              "text": "If input signal HMASTER is set to 0 or 1"
+            }
+          ],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Memory mode"
+          ],
+          "predicate": "enter",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "the FIFO Controller"
+        },
+        {
+          "contexts": [
+            {
+              "operands": [],
+              "operator": "atom",
+              "text": "If input signal HMASTER is set to 0 or 1"
+            }
+          ],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Memory mode"
+          ],
+          "predicate": "enter",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "the FIFO Controller"
+        }
+      ],
+      "claim_id": "ipos-claim-00f5aa9e75148fb4da26",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "defined as MEM_LOC + 0x1000: 0xC5000"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The FIFO register map first memory location"
+        }
+      ],
+      "claim_id": "ipos-claim-639c134da69dc27d39ff",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    }
+  ],
+  "source_findings": [],
+  "source_semantic_status": "controlled_constructions_valid",
+  "source_validation_scope": "controlled_normative_constructions_and_literal_inventory"
+}

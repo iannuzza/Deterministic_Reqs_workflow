@@ -1,0 +1,3317 @@
+{
+  "application": {
+    "decisions": [
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:function:clause:1:meaning:1",
+        "role": "purpose",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:inputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:outputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      }
+    ],
+    "findings": [],
+    "policy": {
+      "abstraction": "block",
+      "domains": [
+        "digital"
+      ],
+      "functional_actions": [
+        "accept",
+        "acquire",
+        "accumulate",
+        "average",
+        "calculate",
+        "compute",
+        "control",
+        "convert",
+        "copy",
+        "divide",
+        "filter",
+        "generate",
+        "monitor",
+        "perform",
+        "process",
+        "produce",
+        "provide",
+        "read",
+        "receive",
+        "route",
+        "sample",
+        "send",
+        "store",
+        "subtract",
+        "support",
+        "transfer",
+        "write"
+      ],
+      "layers": [
+        "block"
+      ],
+      "name": "digital-ipos-structure-v1",
+      "omitted_details": [
+        "example",
+        "procedure"
+      ],
+      "output_sections": [
+        [
+          "purpose",
+          "functionality"
+        ],
+        [
+          "main_functions",
+          "scope"
+        ],
+        [
+          "functions",
+          "internal_functions"
+        ],
+        [
+          "boundaries",
+          "scope"
+        ],
+        [
+          "organization",
+          "internal_structure"
+        ],
+        [
+          "limits",
+          "scope"
+        ],
+        [
+          "operating_concept",
+          "internal_functions"
+        ],
+        [
+          "power",
+          "internal_functions"
+        ]
+      ],
+      "presentation_order": [
+        "behavior",
+        "support",
+        "clarification"
+      ],
+      "required_roles": [
+        "purpose",
+        "functions"
+      ],
+      "role_sections": [
+        [
+          "purpose",
+          "function"
+        ],
+        [
+          "main_functions",
+          "function"
+        ],
+        [
+          "functions",
+          "function"
+        ],
+        [
+          "boundaries",
+          "interfaces"
+        ],
+        [
+          "organization",
+          "function"
+        ],
+        [
+          "limits",
+          "function"
+        ],
+        [
+          "operating_concept",
+          "operating_concept"
+        ],
+        [
+          "power",
+          "power"
+        ]
+      ],
+      "version": 1,
+      "writing_profile": "ipos-structural-integrity-v1"
+    },
+    "profile_status": "policy_valid"
+  },
+  "contract_version": "1.1",
+  "document_contract": {
+    "detail_policy": "preserve_essential_block_detail_v1",
+    "document_type": "IPOS",
+    "essential_sources": {
+      "capabilities": [
+        "inventory:main_functions",
+        "inventory:inputs",
+        "inventory:outputs"
+      ],
+      "purpose": [
+        "inventory:function"
+      ]
+    },
+    "gap_policy": "required_sections_with_audited_omissions_v1",
+    "interpretation": "admitted_normative_clauses_v1",
+    "mandatory_rules": [
+      "section_roles",
+      "functional_claims",
+      "information_gain",
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "paragraph": {
+      "claim_scope": [
+        "initiation",
+        "behavior",
+        "result",
+        "exception",
+        "local_interaction"
+      ],
+      "required": [
+        "responsibility",
+        "supported_behavior"
+      ],
+      "when_supported": [
+        "condition",
+        "effect",
+        "result",
+        "dependency",
+        "exception"
+      ]
+    },
+    "profile": "block_local_v1",
+    "rendering": "scoped_explanatory_prose_v1",
+    "sections": [
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "purpose",
+        "title": "1.1 Functionality"
+      },
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "capabilities",
+        "title": "1.2 Supported functions and scope"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "organization",
+        "title": "1.3 Internal structure"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "functions",
+        "title": "1.4 Supported block functions"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "architecture",
+        "title": "1.5 General architecture"
+      }
+    ],
+    "sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+    "synthesis": "explicit_functional_claims_v1",
+    "validation_hooks": [
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "version": 1
+  },
+  "functional_claim_findings": [],
+  "functional_claim_plan": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "claims": [
+      {
+        "claim_id": "ipos-claim-b528e7dffec47338e38b",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The PAD MUX block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "role": "purpose",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 101,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-4016d075af5aa6f897b8",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Mode selection, register-map controls, test controls, and internal block outputs"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The PAD MUX block"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Pad controls, test observations, and routed internal signals"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The PAD MUX block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "role": "boundaries",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 80,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+          },
+          {
+            "end": 60,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Pad controls, test observations, and routed internal signals"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-e919c1caa14b274f8ec2",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4 output"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4 output"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 134,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "end": 136,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-db2f05003e65783cfc4c",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 127,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "end": 131,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "end": 125,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "end": 126,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "decisions": [
+      {
+        "claim_id": "ipos-claim-b528e7dffec47338e38b",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-4016d075af5aa6f897b8",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-e919c1caa14b274f8ec2",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-db2f05003e65783cfc4c",
+        "decision": "preserved",
+        "findings": []
+      }
+    ],
+    "dispositions": [
+      {
+        "claim_ids": [
+          "ipos-claim-b528e7dffec47338e38b"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 101,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-4016d075af5aa6f897b8"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 80,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-4016d075af5aa6f897b8"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 60,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Pad controls, test observations, and routed internal signals"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-e919c1caa14b274f8ec2"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 134,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-e919c1caa14b274f8ec2"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 136,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-db2f05003e65783cfc4c"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 127,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-db2f05003e65783cfc4c"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 131,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-db2f05003e65783cfc4c"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 125,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-db2f05003e65783cfc4c"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 126,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+            "start": 0,
+            "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 100,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
+            "start": 0,
+            "text": "[DDS_STBIO1_302] Requirement If MODE_CONFIG register is 0x00 the operative mode shall be functional."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 126,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+            "start": 0,
+            "text": "If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+          },
+          {
+            "end": 146,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+            "start": 126,
+            "text": " shall be set to '1'"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 126,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+            "start": 0,
+            "text": "If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+          },
+          {
+            "end": 146,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+            "start": 126,
+            "text": " shall be set to '1'"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 228,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
+            "start": 0,
+            "text": "The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 100,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
+            "start": 0,
+            "text": "[DDS_STBIO1_306] Requirement If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 106,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
+            "start": 0,
+            "text": "[DDS_STBIO1_308] Requirement If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 107,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
+            "start": 0,
+            "text": "[DDS_STBIO1_307] Requirement If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 94,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
+            "start": 0,
+            "text": "[DDS_STBIO1_303] Requirement If MODE_CONFIG register is 0x01 the operative mode shall be SCAN."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 95,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
+            "start": 0,
+            "text": "[DDS_STBIO1_305] Requirement If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 126,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+            "start": 0,
+            "text": "If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+          },
+          {
+            "end": 146,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+            "start": 126,
+            "text": " shall be set to '1'"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 94,
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
+            "start": 0,
+            "text": "[DDS_STBIO1_304] Requirement If MODE_CONFIG register is 0x04 the operative mode shall be BIST."
+          }
+        ]
+      }
+    ],
+    "evidence": {
+      "dependencies": [],
+      "propositions": [
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The PAD MUX block"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "inventory:function:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 101,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Mode selection, register-map controls, test controls, and internal block outputs"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The PAD MUX block"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "inventory:inputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 80,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Pad controls, test observations, and routed internal signals"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The PAD MUX block"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "inventory:outputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 60,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Pad controls, test observations, and routed internal signals"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4 output"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 134,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4 output"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 127,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 131,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 125,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "In function mode, the GPIO1,2,3,4_out"
+          },
+          "owner": "PAD MUX",
+          "proposition_id": "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:function",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:function",
+          "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:inputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:inputs",
+          "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:outputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:outputs",
+          "text": "Pad controls, test observations, and routed internal signals"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_302",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
+          "text": "[DDS_STBIO1_302] Requirement If MODE_CONFIG register is 0x00 the operative mode shall be functional."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_394",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+          "text": "If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_393",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+          "text": "If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_313",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+          "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_395",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
+          "text": "The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_306",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
+          "text": "[DDS_STBIO1_306] Requirement If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_312",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+          "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_310",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+          "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_308",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
+          "text": "[DDS_STBIO1_308] Requirement If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_314",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+          "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_309",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+          "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_307",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
+          "text": "[DDS_STBIO1_307] Requirement If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_303",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
+          "text": "[DDS_STBIO1_303] Requirement If MODE_CONFIG register is 0x01 the operative mode shall be SCAN."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_305",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
+          "text": "[DDS_STBIO1_305] Requirement If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_392",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+          "text": "If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_304",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
+          "text": "[DDS_STBIO1_304] Requirement If MODE_CONFIG register is 0x04 the operative mode shall be BIST."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_311",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+          "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+        }
+      ],
+      "unresolved_contexts": [
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_302:clause:1:unresolved",
+          "reason": "ambiguous guard boundary; full source retained",
+          "spans": [
+            {
+              "end": 100,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
+              "start": 0,
+              "text": "[DDS_STBIO1_302] Requirement If MODE_CONFIG register is 0x00 the operative mode shall be functional."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_394:clause:1:unresolved",
+          "reason": "unsupported or incomplete predicate; full source retained",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+              "start": 0,
+              "text": "If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+            },
+            {
+              "end": 146,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+              "start": 126,
+              "text": " shall be set to '1'"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_393:clause:1:unresolved",
+          "reason": "unsupported or incomplete predicate; full source retained",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+              "start": 0,
+              "text": "If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+            },
+            {
+              "end": 146,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+              "start": 126,
+              "text": " shall be set to '1'"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_395:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 228,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
+              "start": 0,
+              "text": "The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_306:clause:1:unresolved",
+          "reason": "ambiguous guard boundary; full source retained",
+          "spans": [
+            {
+              "end": 100,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
+              "start": 0,
+              "text": "[DDS_STBIO1_306] Requirement If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_308:clause:1:unresolved",
+          "reason": "ambiguous guard boundary; full source retained",
+          "spans": [
+            {
+              "end": 106,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
+              "start": 0,
+              "text": "[DDS_STBIO1_308] Requirement If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_307:clause:1:unresolved",
+          "reason": "ambiguous guard boundary; full source retained",
+          "spans": [
+            {
+              "end": 107,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
+              "start": 0,
+              "text": "[DDS_STBIO1_307] Requirement If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_303:clause:1:unresolved",
+          "reason": "ambiguous guard boundary; full source retained",
+          "spans": [
+            {
+              "end": 94,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
+              "start": 0,
+              "text": "[DDS_STBIO1_303] Requirement If MODE_CONFIG register is 0x01 the operative mode shall be SCAN."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_305:clause:1:unresolved",
+          "reason": "ambiguous guard boundary; full source retained",
+          "spans": [
+            {
+              "end": 95,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
+              "start": 0,
+              "text": "[DDS_STBIO1_305] Requirement If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_392:clause:1:unresolved",
+          "reason": "unsupported or incomplete predicate; full source retained",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+              "start": 0,
+              "text": "If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+            },
+            {
+              "end": 146,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+              "start": 126,
+              "text": " shall be set to '1'"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:PAD MUX:DDS_STBIO1_304:clause:1:unresolved",
+          "reason": "ambiguous guard boundary; full source retained",
+          "spans": [
+            {
+              "end": 94,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
+              "start": 0,
+              "text": "[DDS_STBIO1_304] Requirement If MODE_CONFIG register is 0x04 the operative mode shall be BIST."
+            }
+          ]
+        }
+      ]
+    },
+    "findings": [],
+    "intents": [
+      {
+        "claim_id": "ipos-claim-b528e7dffec47338e38b",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "purpose",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-4016d075af5aa6f897b8",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "boundaries",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-e919c1caa14b274f8ec2",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-db2f05003e65783cfc4c",
+        "proposition_ids": [
+          "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1",
+          "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+    "version": "1.1"
+  },
+  "model": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "contract_version": "1.1",
+    "final_prose_validation": "not_implemented",
+    "findings": [],
+    "phase": "pre_prose_model_only",
+    "plan": {
+      "acceptance": {
+        "materialization": "UNRESOLVED",
+        "materialization_findings": [],
+        "publication_findings": [],
+        "publication_quality": "UNRESOLVED",
+        "semantic_fidelity": "UNRESOLVED",
+        "semantic_findings": []
+      },
+      "claims": [
+        {
+          "claim_id": "ipos-claim-b528e7dffec47338e38b",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The PAD MUX block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "role": "purpose",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 101,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-4016d075af5aa6f897b8",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Mode selection, register-map controls, test controls, and internal block outputs"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The PAD MUX block"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Pad controls, test observations, and routed internal signals"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The PAD MUX block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "role": "boundaries",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 80,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+            },
+            {
+              "end": 60,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Pad controls, test observations, and routed internal signals"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-e919c1caa14b274f8ec2",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4 output"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4 output"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 134,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            },
+            {
+              "end": 136,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-db2f05003e65783cfc4c",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 127,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            },
+            {
+              "end": 131,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            },
+            {
+              "end": 125,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            },
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "decisions": [
+        {
+          "claim_id": "ipos-claim-b528e7dffec47338e38b",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-4016d075af5aa6f897b8",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-e919c1caa14b274f8ec2",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-db2f05003e65783cfc4c",
+          "decision": "preserved",
+          "findings": []
+        }
+      ],
+      "dispositions": [
+        {
+          "claim_ids": [
+            "ipos-claim-b528e7dffec47338e38b"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 101,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-4016d075af5aa6f897b8"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 80,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-4016d075af5aa6f897b8"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 60,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Pad controls, test observations, and routed internal signals"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-e919c1caa14b274f8ec2"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 134,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-e919c1caa14b274f8ec2"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-db2f05003e65783cfc4c"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 127,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-db2f05003e65783cfc4c"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 131,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-db2f05003e65783cfc4c"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 125,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-db2f05003e65783cfc4c"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+              "start": 0,
+              "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 100,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
+              "start": 0,
+              "text": "[DDS_STBIO1_302] Requirement If MODE_CONFIG register is 0x00 the operative mode shall be functional."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+              "start": 0,
+              "text": "If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+            },
+            {
+              "end": 146,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+              "start": 126,
+              "text": " shall be set to '1'"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+              "start": 0,
+              "text": "If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+            },
+            {
+              "end": 146,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+              "start": 126,
+              "text": " shall be set to '1'"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 228,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
+              "start": 0,
+              "text": "The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 100,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
+              "start": 0,
+              "text": "[DDS_STBIO1_306] Requirement If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 106,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
+              "start": 0,
+              "text": "[DDS_STBIO1_308] Requirement If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 107,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
+              "start": 0,
+              "text": "[DDS_STBIO1_307] Requirement If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 94,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
+              "start": 0,
+              "text": "[DDS_STBIO1_303] Requirement If MODE_CONFIG register is 0x01 the operative mode shall be SCAN."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 95,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
+              "start": 0,
+              "text": "[DDS_STBIO1_305] Requirement If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 126,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+              "start": 0,
+              "text": "If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+            },
+            {
+              "end": 146,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+              "start": 126,
+              "text": " shall be set to '1'"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 94,
+              "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
+              "start": 0,
+              "text": "[DDS_STBIO1_304] Requirement If MODE_CONFIG register is 0x04 the operative mode shall be BIST."
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "dependencies": [],
+        "propositions": [
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The PAD MUX block"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "inventory:function:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 101,
+                "record_id": "inventory:function",
+                "start": 0,
+                "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Mode selection, register-map controls, test controls, and internal block outputs"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The PAD MUX block"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "inventory:inputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 80,
+                "record_id": "inventory:inputs",
+                "start": 0,
+                "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Pad controls, test observations, and routed internal signals"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The PAD MUX block"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "inventory:outputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 60,
+                "record_id": "inventory:outputs",
+                "start": 0,
+                "text": "Pad controls, test observations, and routed internal signals"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4 output"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 134,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+                "start": 0,
+                "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4 output"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 136,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+                "start": 0,
+                "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 127,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+                "start": 0,
+                "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 131,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+                "start": 0,
+                "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 125,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+                "start": 0,
+                "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "In function mode, the GPIO1,2,3,4_out"
+            },
+            "owner": "PAD MUX",
+            "proposition_id": "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 126,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+                "start": 0,
+                "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+              }
+            ]
+          }
+        ],
+        "records": [
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:function",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:function",
+            "text": "Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads."
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:inputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:inputs",
+            "text": "Mode selection, register-map controls, test controls, and internal block outputs"
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:outputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:outputs",
+            "text": "Pad controls, test observations, and routed internal signals"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_302",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
+            "text": "[DDS_STBIO1_302] Requirement If MODE_CONFIG register is 0x00 the operative mode shall be functional."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_394",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+            "text": "If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_393",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+            "text": "If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_313",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
+            "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_395",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
+            "text": "The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_306",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
+            "text": "[DDS_STBIO1_306] Requirement If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_312",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
+            "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_310",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
+            "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_308",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
+            "text": "[DDS_STBIO1_308] Requirement If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_314",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
+            "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_309",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
+            "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_307",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
+            "text": "[DDS_STBIO1_307] Requirement If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_303",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
+            "text": "[DDS_STBIO1_303] Requirement If MODE_CONFIG register is 0x01 the operative mode shall be SCAN."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_305",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
+            "text": "[DDS_STBIO1_305] Requirement If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_392",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+            "text": "If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_304",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
+            "text": "[DDS_STBIO1_304] Requirement If MODE_CONFIG register is 0x04 the operative mode shall be BIST."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_311",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
+            "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
+          }
+        ],
+        "unresolved_contexts": [
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_302:clause:1:unresolved",
+            "reason": "ambiguous guard boundary; full source retained",
+            "spans": [
+              {
+                "end": 100,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
+                "start": 0,
+                "text": "[DDS_STBIO1_302] Requirement If MODE_CONFIG register is 0x00 the operative mode shall be functional."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_394:clause:1:unresolved",
+            "reason": "unsupported or incomplete predicate; full source retained",
+            "spans": [
+              {
+                "end": 126,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+                "start": 0,
+                "text": "If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+              },
+              {
+                "end": 146,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
+                "start": 126,
+                "text": " shall be set to '1'"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_393:clause:1:unresolved",
+            "reason": "unsupported or incomplete predicate; full source retained",
+            "spans": [
+              {
+                "end": 126,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+                "start": 0,
+                "text": "If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+              },
+              {
+                "end": 146,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
+                "start": 126,
+                "text": " shall be set to '1'"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_395:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 228,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
+                "start": 0,
+                "text": "The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_306:clause:1:unresolved",
+            "reason": "ambiguous guard boundary; full source retained",
+            "spans": [
+              {
+                "end": 100,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
+                "start": 0,
+                "text": "[DDS_STBIO1_306] Requirement If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_308:clause:1:unresolved",
+            "reason": "ambiguous guard boundary; full source retained",
+            "spans": [
+              {
+                "end": 106,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
+                "start": 0,
+                "text": "[DDS_STBIO1_308] Requirement If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_307:clause:1:unresolved",
+            "reason": "ambiguous guard boundary; full source retained",
+            "spans": [
+              {
+                "end": 107,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
+                "start": 0,
+                "text": "[DDS_STBIO1_307] Requirement If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_303:clause:1:unresolved",
+            "reason": "ambiguous guard boundary; full source retained",
+            "spans": [
+              {
+                "end": 94,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
+                "start": 0,
+                "text": "[DDS_STBIO1_303] Requirement If MODE_CONFIG register is 0x01 the operative mode shall be SCAN."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_305:clause:1:unresolved",
+            "reason": "ambiguous guard boundary; full source retained",
+            "spans": [
+              {
+                "end": 95,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
+                "start": 0,
+                "text": "[DDS_STBIO1_305] Requirement If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_392:clause:1:unresolved",
+            "reason": "unsupported or incomplete predicate; full source retained",
+            "spans": [
+              {
+                "end": 126,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+                "start": 0,
+                "text": "If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp,"
+              },
+              {
+                "end": 146,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
+                "start": 126,
+                "text": " shall be set to '1'"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:PAD MUX:DDS_STBIO1_304:clause:1:unresolved",
+            "reason": "ambiguous guard boundary; full source retained",
+            "spans": [
+              {
+                "end": 94,
+                "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
+                "start": 0,
+                "text": "[DDS_STBIO1_304] Requirement If MODE_CONFIG register is 0x04 the operative mode shall be BIST."
+              }
+            ]
+          }
+        ]
+      },
+      "findings": [],
+      "intents": [
+        {
+          "claim_id": "ipos-claim-b528e7dffec47338e38b",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "purpose",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-4016d075af5aa6f897b8",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "boundaries",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-e919c1caa14b274f8ec2",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_313:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_312:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-db2f05003e65783cfc4c",
+          "proposition_ids": [
+            "requirement:PAD MUX:DDS_STBIO1_310:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_314:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_309:clause:1:meaning:1",
+            "requirement:PAD MUX:DDS_STBIO1_311:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+      "version": "1.1"
+    },
+    "profile": {
+      "allowed_domains": [],
+      "allowed_layers": [
+        "block"
+      ],
+      "allowed_scopes": [
+        "block_local"
+      ],
+      "authority_tiers": [
+        "admitted_context",
+        "approved_normative"
+      ],
+      "document_type": "IPOS",
+      "evidence_kinds": [
+        "descriptive",
+        "approved_normative"
+      ],
+      "excluded_terms": [],
+      "name": "ipos-structural-integrity-v1",
+      "owner_policy": "same_owner",
+      "projection_adapters": [
+        "ipos-local"
+      ],
+      "runtime_enabled": true,
+      "topic_roles": [
+        "function",
+        "interfaces",
+        "operating_concept",
+        "power"
+      ],
+      "version": 1
+    },
+    "source_semantic_validation": "not_implemented",
+    "typed_model_status": "model_valid"
+  },
+  "phase": "ipos_functional_claim_materialization",
+  "publication_status": "requires_independent_final_artifact_checks",
+  "section_plan": [
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The PAD MUX block"
+        }
+      ],
+      "claim_id": "ipos-claim-b528e7dffec47338e38b",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "purpose"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Mode selection, register-map controls, test controls, and internal block outputs"
+          ],
+          "predicate": "accept",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The PAD MUX block"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Pad controls, test observations, and routed internal signals"
+          ],
+          "predicate": "produce",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The PAD MUX block"
+        }
+      ],
+      "claim_id": "ipos-claim-4016d075af5aa6f897b8",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "boundaries"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "In function mode, the GPIO1,2,3,4 output"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "In function mode, the GPIO1,2,3,4 output"
+        }
+      ],
+      "claim_id": "ipos-claim-e919c1caa14b274f8ec2",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "In function mode, the GPIO1,2,3,4_out"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "In function mode, the GPIO1,2,3,4_out"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "In function mode, the GPIO1,2,3,4_out"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "In function mode, the GPIO1,2,3,4_out"
+        }
+      ],
+      "claim_id": "ipos-claim-db2f05003e65783cfc4c",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    }
+  ],
+  "source_findings": [],
+  "source_semantic_status": "controlled_constructions_valid",
+  "source_validation_scope": "controlled_normative_constructions_and_literal_inventory"
+}

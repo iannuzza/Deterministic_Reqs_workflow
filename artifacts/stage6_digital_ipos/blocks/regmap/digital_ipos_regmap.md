@@ -1,6 +1,6 @@
 # **Digital IPOS - Regmap** {#digital-ipos---regmap}
 
-- Snapshot: `snap-b2e8101b00dc6909feaed885`
+- Snapshot: `snap-73c872b1307b6adb5eaf843e`
 
 Author: Alessandro Lucio IANNUZZI
 
@@ -16,6 +16,7 @@ Author: Alessandro Lucio IANNUZZI
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 0.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 digital IPOS block baseline | Alessandro Lucio IANNUZZI |
+| 0.2 | 2026-10-12 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
 | Requirement | Internal link |
@@ -33,12 +34,15 @@ Author: Alessandro Lucio IANNUZZI
 
 ### **1.1 Functionality** {#11-functionality}
 
-The Regmap block serves to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.
+The Regmap block is designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The Regmap block accepts Host read/write transactions. The Regmap block produces Register data and status fields.
-- **Write enable for each OTP REGISTER.** Write enable for each OTP REGISTER is 0, in functional mode, if bit 31 of OTP PRG10 is set 1.
+The Regmap block accepts Host read/write transactions and produces Register data and status fields.
+
+### **1.4 Supported block functions** {#14-supported-block-functions}
+
+Write enable for each OTP REGISTER is 0, in functional mode, if bit 31 of OTP_PRG10 is set 1.
 
 ## **2. Source I/O** {#2-source-io}
 

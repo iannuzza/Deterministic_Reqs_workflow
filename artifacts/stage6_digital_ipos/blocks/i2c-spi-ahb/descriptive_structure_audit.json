@@ -1,0 +1,3560 @@
+{
+  "application": {
+    "decisions": [
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:function:clause:1:meaning:1",
+        "role": "purpose",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:inputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:outputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      }
+    ],
+    "findings": [],
+    "policy": {
+      "abstraction": "block",
+      "domains": [
+        "digital"
+      ],
+      "functional_actions": [
+        "accept",
+        "acquire",
+        "accumulate",
+        "average",
+        "calculate",
+        "compute",
+        "control",
+        "convert",
+        "copy",
+        "divide",
+        "filter",
+        "generate",
+        "monitor",
+        "perform",
+        "process",
+        "produce",
+        "provide",
+        "read",
+        "receive",
+        "route",
+        "sample",
+        "send",
+        "store",
+        "subtract",
+        "support",
+        "transfer",
+        "write"
+      ],
+      "layers": [
+        "block"
+      ],
+      "name": "digital-ipos-structure-v1",
+      "omitted_details": [
+        "example",
+        "procedure"
+      ],
+      "output_sections": [
+        [
+          "purpose",
+          "functionality"
+        ],
+        [
+          "main_functions",
+          "scope"
+        ],
+        [
+          "functions",
+          "internal_functions"
+        ],
+        [
+          "boundaries",
+          "scope"
+        ],
+        [
+          "organization",
+          "internal_structure"
+        ],
+        [
+          "limits",
+          "scope"
+        ],
+        [
+          "operating_concept",
+          "internal_functions"
+        ],
+        [
+          "power",
+          "internal_functions"
+        ]
+      ],
+      "presentation_order": [
+        "behavior",
+        "support",
+        "clarification"
+      ],
+      "required_roles": [
+        "purpose",
+        "functions"
+      ],
+      "role_sections": [
+        [
+          "purpose",
+          "function"
+        ],
+        [
+          "main_functions",
+          "function"
+        ],
+        [
+          "functions",
+          "function"
+        ],
+        [
+          "boundaries",
+          "interfaces"
+        ],
+        [
+          "organization",
+          "function"
+        ],
+        [
+          "limits",
+          "function"
+        ],
+        [
+          "operating_concept",
+          "operating_concept"
+        ],
+        [
+          "power",
+          "power"
+        ]
+      ],
+      "version": 1,
+      "writing_profile": "ipos-structural-integrity-v1"
+    },
+    "profile_status": "policy_valid"
+  },
+  "contract_version": "1.1",
+  "descriptive_obligation_policy": {
+    "nonprose_paths": [
+      "requirement",
+      "parameter",
+      "configuration",
+      "register",
+      "io_list",
+      "table"
+    ],
+    "version": "descriptive-obligations-v1"
+  },
+  "document_contract": {
+    "detail_policy": "preserve_essential_block_detail_v1",
+    "document_type": "IPOS",
+    "essential_sources": {
+      "capabilities": [
+        "inventory:main_functions",
+        "inventory:inputs",
+        "inventory:outputs"
+      ],
+      "purpose": [
+        "inventory:function"
+      ]
+    },
+    "gap_policy": "required_sections_with_audited_omissions_v1",
+    "interpretation": "admitted_normative_clauses_v1",
+    "mandatory_rules": [
+      "section_roles",
+      "functional_claims",
+      "information_gain",
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "paragraph": {
+      "claim_scope": [
+        "initiation",
+        "behavior",
+        "result",
+        "exception",
+        "local_interaction"
+      ],
+      "required": [
+        "responsibility",
+        "supported_behavior"
+      ],
+      "when_supported": [
+        "condition",
+        "effect",
+        "result",
+        "dependency",
+        "exception"
+      ]
+    },
+    "profile": "block_local_v1",
+    "rendering": "scoped_explanatory_prose_v1",
+    "sections": [
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "purpose",
+        "title": "1.1 Functionality"
+      },
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "capabilities",
+        "title": "1.2 Supported functions and scope"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "organization",
+        "title": "1.3 Internal structure"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "functions",
+        "title": "1.4 Supported block functions"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "architecture",
+        "title": "1.5 General architecture"
+      }
+    ],
+    "sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+    "synthesis": "explicit_functional_claims_v1",
+    "validation_hooks": [
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "version": 1
+  },
+  "functional_claim_findings": [],
+  "functional_claim_plan": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "claims": [
+      {
+        "claim_id": "ipos-claim-4e84cf0e9fd83c6ef14a",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The I2C_SPI_AHB block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "role": "purpose",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 136,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-abaa8ff2e35f53b3c0c5",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Host bus transactions"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The I2C_SPI_AHB block"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Protocol-compliant responses"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The I2C_SPI_AHB block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "role": "boundaries",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 21,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Host bus transactions"
+          },
+          {
+            "end": 28,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Protocol-compliant responses"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-f046450e580214094151",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "An I2C/SPI write access to the address 0x60-0x67"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 242,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+            "start": 0,
+            "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-7b6e4a67fa9b242b2e60",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": true,
+            "objects": [
+              "supported as well as LOCKED transfers"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "On AHB interface, BURST"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 103,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+            "start": 0,
+            "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-dd95545e272201224260",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "An I2C/SPI read access to the address 0x70-0x7f"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 240,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+            "start": 0,
+            "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-b0b30b0adf01f7bb9071",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported"
+            ],
+            "predicate": "support",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "I2C interface"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 149,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+            "start": 0,
+            "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-598248448eb9a8c7d300",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "at least 2 times"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 145,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+            "start": 0,
+            "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-6c5dce6521e7c7fad62e",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "limited to BYTE and WORD"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "On AHB interface, data size"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 90,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+            "start": 0,
+            "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "decisions": [
+      {
+        "claim_id": "ipos-claim-4e84cf0e9fd83c6ef14a",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-abaa8ff2e35f53b3c0c5",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-f046450e580214094151",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-7b6e4a67fa9b242b2e60",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-dd95545e272201224260",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-b0b30b0adf01f7bb9071",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-598248448eb9a8c7d300",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-6c5dce6521e7c7fad62e",
+        "decision": "preserved",
+        "findings": []
+      }
+    ],
+    "dispositions": [
+      {
+        "claim_ids": [
+          "ipos-claim-4e84cf0e9fd83c6ef14a"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 136,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-abaa8ff2e35f53b3c0c5"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 21,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Host bus transactions"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-abaa8ff2e35f53b3c0c5"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 28,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Protocol-compliant responses"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-f046450e580214094151"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 242,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+            "start": 0,
+            "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-7b6e4a67fa9b242b2e60"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 103,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+            "start": 0,
+            "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-dd95545e272201224260"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 240,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+            "start": 0,
+            "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-b0b30b0adf01f7bb9071"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 149,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+            "start": 0,
+            "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-598248448eb9a8c7d300"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 145,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+            "start": 0,
+            "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-6c5dce6521e7c7fad62e"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 90,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+            "start": 0,
+            "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 76,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+            "start": 0,
+            "text": "ser_mode \"i2c_spi\" To choose if the interface is SPI only, I2C only or both."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 96,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+            "start": 77,
+            "text": "Suggested : i2c_spi"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 35,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
+            "start": 0,
+            "text": "i2c_hs_mode 1'b0 To activate HS I2C"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported relative-clause subject; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 299,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
+            "start": 0,
+            "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 44,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
+            "start": 0,
+            "text": "i2c_master_code 8'h00 Master code for HS I2C"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 33,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+            "start": 0,
+            "text": "CONNECTION fifo_dpt 8 FIFO depth."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 49,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+            "start": 34,
+            "text": "Suggested val 8"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 27,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
+            "start": 0,
+            "text": "ip_version 8'haa IP version"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 129,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+            "start": 0,
+            "text": "rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 201,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+            "start": 130,
+            "text": "If timer expires the operation is aborted and proper flag is activated."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 221,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+            "start": 202,
+            "text": "Suggested val. 1200"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:configuration",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 35,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
+            "start": 0,
+            "text": "i2c_dev_id 7'h5f I2C device address"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 104,
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
+            "start": 0,
+            "text": "The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]"
+          }
+        ]
+      }
+    ],
+    "evidence": {
+      "dependencies": [],
+      "propositions": [
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The I2C_SPI_AHB block"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "inventory:function:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Host bus transactions"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The I2C_SPI_AHB block"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "inventory:inputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 21,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Host bus transactions"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Protocol-compliant responses"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The I2C_SPI_AHB block"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "inventory:outputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 28,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Protocol-compliant responses"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "An I2C/SPI write access to the address 0x60-0x67"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 242,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+              "start": 0,
+              "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": true,
+            "objects": [
+              "supported as well as LOCKED transfers"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "On AHB interface, BURST"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 103,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+              "start": 0,
+              "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "An I2C/SPI read access to the address 0x70-0x7f"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 240,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+              "start": 0,
+              "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported"
+            ],
+            "predicate": "support",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "I2C interface"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 149,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+              "start": 0,
+              "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "at least 2 times"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 145,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+              "start": 0,
+              "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "limited to BYTE and WORD"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "On AHB interface, data size"
+          },
+          "owner": "I2C_SPI_AHB",
+          "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 90,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+              "start": 0,
+              "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:function",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:function",
+          "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:inputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:inputs",
+          "text": "Host bus transactions"
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:outputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:outputs",
+          "text": "Protocol-compliant responses"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8003",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+          "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8104",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+          "text": "ser_mode \"i2c_spi\" To choose if the interface is SPI only, I2C only or both. Suggested : i2c_spi"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8102",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
+          "text": "i2c_hs_mode 1'b0 To activate HS I2C"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8007",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+          "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8004",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
+          "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8005",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+          "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8103",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
+          "text": "i2c_master_code 8'h00 Master code for HS I2C"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8000",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+          "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8100",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+          "text": "CONNECTION fifo_dpt 8 FIFO depth. Suggested val 8"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8105",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
+          "text": "ip_version 8'haa IP version"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8001",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+          "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8101",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+          "text": "rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read. If timer expires the operation is aborted and proper flag is activated. Suggested val. 1200"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8106",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
+          "text": "i2c_dev_id 7'h5f I2C device address"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8002",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
+          "text": "The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_8006",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+          "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+        }
+      ],
+      "unresolved_contexts": [
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 76,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+              "start": 0,
+              "text": "ser_mode \"i2c_spi\" To choose if the interface is SPI only, I2C only or both."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104:clause:2:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 96,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+              "start": 77,
+              "text": "Suggested : i2c_spi"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 35,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
+              "start": 0,
+              "text": "i2c_hs_mode 1'b0 To activate HS I2C"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004:clause:1:unresolved",
+          "reason": "unsupported relative-clause subject; full source retained",
+          "spans": [
+            {
+              "end": 299,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
+              "start": 0,
+              "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 44,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
+              "start": 0,
+              "text": "i2c_master_code 8'h00 Master code for HS I2C"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 33,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+              "start": 0,
+              "text": "CONNECTION fifo_dpt 8 FIFO depth."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100:clause:2:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 49,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+              "start": 34,
+              "text": "Suggested val 8"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 27,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
+              "start": 0,
+              "text": "ip_version 8'haa IP version"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 129,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+              "start": 0,
+              "text": "rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101:clause:2:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 201,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+              "start": 130,
+              "text": "If timer expires the operation is aborted and proper flag is activated."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101:clause:3:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 221,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+              "start": 202,
+              "text": "Suggested val. 1200"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 35,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
+              "start": 0,
+              "text": "i2c_dev_id 7'h5f I2C device address"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 104,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
+              "start": 0,
+              "text": "The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]"
+            }
+          ]
+        }
+      ]
+    },
+    "findings": [],
+    "intents": [
+      {
+        "claim_id": "ipos-claim-4e84cf0e9fd83c6ef14a",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "purpose",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-abaa8ff2e35f53b3c0c5",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "boundaries",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-f046450e580214094151",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-7b6e4a67fa9b242b2e60",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-dd95545e272201224260",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-b0b30b0adf01f7bb9071",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-598248448eb9a8c7d300",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-6c5dce6521e7c7fad62e",
+        "proposition_ids": [
+          "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+    "version": "1.1"
+  },
+  "model": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "contract_version": "1.1",
+    "final_prose_validation": "not_implemented",
+    "findings": [],
+    "phase": "pre_prose_model_only",
+    "plan": {
+      "acceptance": {
+        "materialization": "UNRESOLVED",
+        "materialization_findings": [],
+        "publication_findings": [],
+        "publication_quality": "UNRESOLVED",
+        "semantic_fidelity": "UNRESOLVED",
+        "semantic_findings": []
+      },
+      "claims": [
+        {
+          "claim_id": "ipos-claim-4e84cf0e9fd83c6ef14a",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The I2C_SPI_AHB block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "role": "purpose",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-abaa8ff2e35f53b3c0c5",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Host bus transactions"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The I2C_SPI_AHB block"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Protocol-compliant responses"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The I2C_SPI_AHB block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "role": "boundaries",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 21,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Host bus transactions"
+            },
+            {
+              "end": 28,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Protocol-compliant responses"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-f046450e580214094151",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "An I2C/SPI write access to the address 0x60-0x67"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 242,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+              "start": 0,
+              "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-7b6e4a67fa9b242b2e60",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": true,
+              "objects": [
+                "supported as well as LOCKED transfers"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "On AHB interface, BURST"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 103,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+              "start": 0,
+              "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-dd95545e272201224260",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "An I2C/SPI read access to the address 0x70-0x7f"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 240,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+              "start": 0,
+              "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-b0b30b0adf01f7bb9071",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported"
+              ],
+              "predicate": "support",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "I2C interface"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 149,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+              "start": 0,
+              "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-598248448eb9a8c7d300",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "at least 2 times"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 145,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+              "start": 0,
+              "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-6c5dce6521e7c7fad62e",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "limited to BYTE and WORD"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "On AHB interface, data size"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 90,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+              "start": 0,
+              "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "decisions": [
+        {
+          "claim_id": "ipos-claim-4e84cf0e9fd83c6ef14a",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-abaa8ff2e35f53b3c0c5",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-f046450e580214094151",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-7b6e4a67fa9b242b2e60",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-dd95545e272201224260",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-b0b30b0adf01f7bb9071",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-598248448eb9a8c7d300",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-6c5dce6521e7c7fad62e",
+          "decision": "preserved",
+          "findings": []
+        }
+      ],
+      "dispositions": [
+        {
+          "claim_ids": [
+            "ipos-claim-4e84cf0e9fd83c6ef14a"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-abaa8ff2e35f53b3c0c5"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 21,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Host bus transactions"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-abaa8ff2e35f53b3c0c5"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 28,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Protocol-compliant responses"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-f046450e580214094151"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 242,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+              "start": 0,
+              "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-7b6e4a67fa9b242b2e60"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 103,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+              "start": 0,
+              "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-dd95545e272201224260"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 240,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+              "start": 0,
+              "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-b0b30b0adf01f7bb9071"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 149,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+              "start": 0,
+              "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-598248448eb9a8c7d300"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 145,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+              "start": 0,
+              "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-6c5dce6521e7c7fad62e"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 90,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+              "start": 0,
+              "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 76,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+              "start": 0,
+              "text": "ser_mode \"i2c_spi\" To choose if the interface is SPI only, I2C only or both."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 96,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+              "start": 77,
+              "text": "Suggested : i2c_spi"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 35,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
+              "start": 0,
+              "text": "i2c_hs_mode 1'b0 To activate HS I2C"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported relative-clause subject; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 299,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
+              "start": 0,
+              "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 44,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
+              "start": 0,
+              "text": "i2c_master_code 8'h00 Master code for HS I2C"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 33,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+              "start": 0,
+              "text": "CONNECTION fifo_dpt 8 FIFO depth."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 49,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+              "start": 34,
+              "text": "Suggested val 8"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 27,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
+              "start": 0,
+              "text": "ip_version 8'haa IP version"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 129,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+              "start": 0,
+              "text": "rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 201,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+              "start": 130,
+              "text": "If timer expires the operation is aborted and proper flag is activated."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 221,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+              "start": 202,
+              "text": "Suggested val. 1200"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:configuration",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 35,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
+              "start": 0,
+              "text": "i2c_dev_id 7'h5f I2C device address"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 104,
+              "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
+              "start": 0,
+              "text": "The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "dependencies": [],
+        "propositions": [
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The I2C_SPI_AHB block"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "inventory:function:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 136,
+                "record_id": "inventory:function",
+                "start": 0,
+                "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Host bus transactions"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The I2C_SPI_AHB block"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "inventory:inputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 21,
+                "record_id": "inventory:inputs",
+                "start": 0,
+                "text": "Host bus transactions"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Protocol-compliant responses"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The I2C_SPI_AHB block"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "inventory:outputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 28,
+                "record_id": "inventory:outputs",
+                "start": 0,
+                "text": "Protocol-compliant responses"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "An I2C/SPI write access to the address 0x60-0x67"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 242,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+                "start": 0,
+                "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": true,
+              "objects": [
+                "supported as well as LOCKED transfers"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "On AHB interface, BURST"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 103,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+                "start": 0,
+                "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "An I2C/SPI read access to the address 0x70-0x7f"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 240,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+                "start": 0,
+                "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported"
+              ],
+              "predicate": "support",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "I2C interface"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 149,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+                "start": 0,
+                "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "at least 2 times"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 145,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+                "start": 0,
+                "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "limited to BYTE and WORD"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "On AHB interface, data size"
+            },
+            "owner": "I2C_SPI_AHB",
+            "proposition_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 90,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+                "start": 0,
+                "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+              }
+            ]
+          }
+        ],
+        "records": [
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:function",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:function",
+            "text": "Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access."
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:inputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:inputs",
+            "text": "Host bus transactions"
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:outputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:outputs",
+            "text": "Protocol-compliant responses"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8003",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
+            "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8104",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+            "text": "ser_mode \"i2c_spi\" To choose if the interface is SPI only, I2C only or both. Suggested : i2c_spi"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8102",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
+            "text": "i2c_hs_mode 1'b0 To activate HS I2C"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8007",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8007",
+            "text": "On AHB interface, BURST shall not be supported as well as LOCKED transfers. [TO: IPOS_I2C_SPI_AHB_0362]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8004",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
+            "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8005",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
+            "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8103",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
+            "text": "i2c_master_code 8'h00 Master code for HS I2C"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8000",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8000",
+            "text": "[DDS_STBIO1_8000] Requirement: I2C interface shall support all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8100",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+            "text": "CONNECTION fifo_dpt 8 FIFO depth. Suggested val 8"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8105",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
+            "text": "ip_version 8'haa IP version"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8001",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8001",
+            "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains shall be at least 2 times. [TO: IPOS_I2C_SPI_AHB_0006] [Vpriority High]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8101",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+            "text": "rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read. If timer expires the operation is aborted and proper flag is activated. Suggested val. 1200"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8106",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
+            "text": "i2c_dev_id 7'h5f I2C device address"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8002",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
+            "text": "The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_8006",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8006",
+            "text": "On AHB interface, data size shall be limited to BYTE and WORD. [TO: IPOS_I2C_SPI_AHB_0361]"
+          }
+        ],
+        "unresolved_contexts": [
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 76,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+                "start": 0,
+                "text": "ser_mode \"i2c_spi\" To choose if the interface is SPI only, I2C only or both."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104:clause:2:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 96,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
+                "start": 77,
+                "text": "Suggested : i2c_spi"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 35,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
+                "start": 0,
+                "text": "i2c_hs_mode 1'b0 To activate HS I2C"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004:clause:1:unresolved",
+            "reason": "unsupported relative-clause subject; full source retained",
+            "spans": [
+              {
+                "end": 299,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
+                "start": 0,
+                "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 44,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
+                "start": 0,
+                "text": "i2c_master_code 8'h00 Master code for HS I2C"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 33,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+                "start": 0,
+                "text": "CONNECTION fifo_dpt 8 FIFO depth."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100:clause:2:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 49,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
+                "start": 34,
+                "text": "Suggested val 8"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 27,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
+                "start": 0,
+                "text": "ip_version 8'haa IP version"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 129,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+                "start": 0,
+                "text": "rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101:clause:2:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 201,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+                "start": 130,
+                "text": "If timer expires the operation is aborted and proper flag is activated."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101:clause:3:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 221,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
+                "start": 202,
+                "text": "Suggested val. 1200"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 35,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
+                "start": 0,
+                "text": "i2c_dev_id 7'h5f I2C device address"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 104,
+                "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
+                "start": 0,
+                "text": "The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]"
+              }
+            ]
+          }
+        ]
+      },
+      "findings": [],
+      "intents": [
+        {
+          "claim_id": "ipos-claim-4e84cf0e9fd83c6ef14a",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "purpose",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-abaa8ff2e35f53b3c0c5",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "boundaries",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-f046450e580214094151",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8003:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-7b6e4a67fa9b242b2e60",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8007:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-dd95545e272201224260",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8005:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-b0b30b0adf01f7bb9071",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8000:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-598248448eb9a8c7d300",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8001:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-6c5dce6521e7c7fad62e",
+          "proposition_ids": [
+            "requirement:I2C_SPI_AHB:DDS_STBIO1_8006:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+      "version": "1.1"
+    },
+    "profile": {
+      "allowed_domains": [],
+      "allowed_layers": [
+        "block"
+      ],
+      "allowed_scopes": [
+        "block_local"
+      ],
+      "authority_tiers": [
+        "admitted_context",
+        "approved_normative"
+      ],
+      "document_type": "IPOS",
+      "evidence_kinds": [
+        "descriptive",
+        "approved_normative"
+      ],
+      "excluded_terms": [],
+      "name": "ipos-structural-integrity-v1",
+      "owner_policy": "same_owner",
+      "projection_adapters": [
+        "ipos-local"
+      ],
+      "runtime_enabled": true,
+      "topic_roles": [
+        "function",
+        "interfaces",
+        "operating_concept",
+        "power"
+      ],
+      "version": 1
+    },
+    "source_semantic_validation": "not_implemented",
+    "typed_model_status": "model_valid"
+  },
+  "phase": "ipos_functional_claim_materialization",
+  "publication_status": "requires_independent_final_artifact_checks",
+  "section_plan": [
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The I2C_SPI_AHB block"
+        }
+      ],
+      "claim_id": "ipos-claim-4e84cf0e9fd83c6ef14a",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "purpose"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Host bus transactions"
+          ],
+          "predicate": "accept",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The I2C_SPI_AHB block"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Protocol-compliant responses"
+          ],
+          "predicate": "produce",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The I2C_SPI_AHB block"
+        }
+      ],
+      "claim_id": "ipos-claim-abaa8ff2e35f53b3c0c5",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "boundaries"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "An I2C/SPI write access to the address 0x60-0x67"
+        }
+      ],
+      "claim_id": "ipos-claim-f046450e580214094151",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": true,
+          "objects": [
+            "supported as well as LOCKED transfers"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "On AHB interface, BURST"
+        }
+      ],
+      "claim_id": "ipos-claim-7b6e4a67fa9b242b2e60",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53)"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "An I2C/SPI read access to the address 0x70-0x7f"
+        }
+      ],
+      "claim_id": "ipos-claim-dd95545e272201224260",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported"
+          ],
+          "predicate": "support",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "I2C interface"
+        }
+      ],
+      "claim_id": "ipos-claim-b0b30b0adf01f7bb9071",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "at least 2 times"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains"
+        }
+      ],
+      "claim_id": "ipos-claim-598248448eb9a8c7d300",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "limited to BYTE and WORD"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "On AHB interface, data size"
+        }
+      ],
+      "claim_id": "ipos-claim-6c5dce6521e7c7fad62e",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    }
+  ],
+  "source_findings": [],
+  "source_semantic_status": "controlled_constructions_valid",
+  "source_validation_scope": "controlled_normative_constructions_and_literal_inventory"
+}

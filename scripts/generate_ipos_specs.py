@@ -25,6 +25,7 @@ from workflow_routing import (
     write_ipos_structural_audit,
     ipos_claim_preflight_findings,
     apply_shared_spec_markdown_formatting,
+    apply_ipos_document_navigation,
     apply_unique_spec_heading_anchors,
     spec_anchor_slug,
     apply_docx_common_spec_formatting,
@@ -257,6 +258,7 @@ def _write_ipos_document(
         ),
         "",
         "### 0.3 Requirement navigation",
+        "#### Table. Requirement navigation",
         "| Requirement | Internal link |",
         "|---|---|",
         *[
@@ -278,6 +280,7 @@ def _write_ipos_document(
         lines.extend([
             "The following approved source I/O entries are owned by this block.",
             "",
+            "#### Table. Source I/O",
             "| Port name | Direction | Type / details | Table | Source page |",
             "|---|---|---|---|---|",
         ])
@@ -317,7 +320,7 @@ def _write_ipos_document(
         ])
 
     lines = apply_unique_spec_heading_anchors(
-        apply_shared_spec_markdown_formatting(lines, preserve_authored_text=True)
+        apply_shared_spec_markdown_formatting(apply_ipos_document_navigation(lines), preserve_authored_text=True)
     )
     markdown_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     docx_path = output_dir / config["docx"]

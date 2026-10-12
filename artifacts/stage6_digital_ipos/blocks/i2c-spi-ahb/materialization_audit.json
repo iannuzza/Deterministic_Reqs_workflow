@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_i2c-spi-ahb.docx",
-    "sha256": "a4adcd4e31935955ea2534d9e85f9fbef298ce94fbdbf4250faed9f99154b603"
+    "sha256": "a4fab834bd8c729f0ce4afd45ba59566495471f07b66445d410f094ad68f577b"
   },
   "markdown": {
     "path": "digital_ipos_i2c-spi-ahb.md",
-    "sha256": "ed931b30abedac6cea9fce91a7e143bcfe67f46a61124eec6af0f17e33a59c2c"
+    "sha256": "67fa00629cfaff1b9130093ada46f11a10d0f11db39c51d2bffb83a8adc90124"
   },
-  "normalized_input_sha256": "5e045580804c7463c040cdb4334d2f83bf950a8ee4ad8cc349af461886c2a68a",
+  "normalized_input_sha256": "218c880e8ebf1cb1b063709d0c90dde2d0b6bda1bea5287003c3a8ee3817ccdf",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -86,7 +86,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8104",
@@ -94,13 +94,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:configuration",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8104",
       "text": "ser_mode \"i2c_spi\" To choose if the interface is SPI only, I2C only or both. Suggested : i2c_spi"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8102",
@@ -108,7 +108,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:configuration",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8102",
       "text": "i2c_hs_mode 1'b0 To activate HS I2C"
     },
@@ -128,7 +128,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8004",
@@ -136,7 +136,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported relative-clause subject; full source retained",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8004",
       "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) shall start the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master. [TO: IPOS_I2C_SPI_AHB_0010] [Vpriority High]"
     },
@@ -156,7 +156,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8103",
@@ -164,7 +164,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:configuration",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8103",
       "text": "i2c_master_code 8'h00 Master code for HS I2C"
     },
@@ -184,7 +184,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8100",
@@ -192,13 +192,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:configuration",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8100",
       "text": "CONNECTION fifo_dpt 8 FIFO depth. Suggested val 8"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8105",
@@ -206,7 +206,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:configuration",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8105",
       "text": "ip_version 8'haa IP version"
     },
@@ -226,7 +226,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8101",
@@ -234,13 +234,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:configuration; omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8101",
       "text": "rd_to_max_val 6000 Time available between double byte write to communicate the number of bytes to be read and the following read. If timer expires the operation is aborted and proper flag is activated. Suggested val. 1200"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8106",
@@ -248,13 +248,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:configuration",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8106",
       "text": "i2c_dev_id 7'h5f I2C device address"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8002",
@@ -262,7 +262,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8002",
       "text": "The IP has a serial interface (I2C or SPI) and a parallel bus interface AHB. [TO: IPOS_I2C_SPI_AHB_0007]"
     },
@@ -288,89 +288,72 @@
       "source_record_ids": [
         "inventory:function"
       ],
-      "text": "The I2C_SPI_AHB block serves to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.",
-      "unit_id": "desc-unit-4b54b6bb35783f96c986"
+      "text": "The I2C_SPI_AHB block is designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access.",
+      "unit_id": "ipos-claim-4e84cf0e9fd83c6ef14a"
     },
     {
       "output_order": 2,
       "section": "1.2 Supported functions and scope",
       "source_record_ids": [
-        "inventory:inputs"
+        "inventory:inputs",
+        "inventory:outputs"
       ],
-      "text": "The I2C_SPI_AHB block accepts Host bus transactions.",
-      "unit_id": "desc-unit-bb741fdd617ba6ce6dcd"
+      "text": "The I2C_SPI_AHB block accepts Host bus transactions and produces Protocol-compliant responses.",
+      "unit_id": "ipos-claim-abaa8ff2e35f53b3c0c5"
     },
     {
       "output_order": 3,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "inventory:outputs"
-      ],
-      "text": "The I2C_SPI_AHB block produces Protocol-compliant responses.",
-      "unit_id": "desc-unit-f35b4340ed9a5a5c2064"
-    },
-    {
-      "output_order": 4,
-      "section": "1.2 Supported functions and scope",
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8003"
       ],
-      "text": "An I2C/SPI write access to the address 0x60-0x67 is translated in an AHB write access to the configured AHB address (contained in registers SAM ADDR BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).",
-      "unit_id": "desc-unit-b3a2bc7c2d4a46c54b71"
+      "text": "An I2C/SPI write access to the address 0x60-0x67 is translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).",
+      "unit_id": "ipos-claim-f046450e580214094151"
     },
     {
-      "output_order": 5,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 4,
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8007"
       ],
       "text": "On AHB interface, BURST is not supported as well as LOCKED transfers.",
-      "unit_id": "desc-unit-aac767b2477790139b9f"
+      "unit_id": "ipos-claim-7b6e4a67fa9b242b2e60"
     },
     {
-      "output_order": 6,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:I2C_SPI_AHB:DDS_STBIO1_8004"
-      ],
-      "text": "A double byte write access to the address 0x68-0x6f (with data that is the number of bytes that the master wants to read) starts the data preload from AHB in order to have the internal fifo not empty when the read request will be done by the master.",
-      "unit_id": "desc-unit-5602cdeb1e90317ab03a"
-    },
-    {
-      "output_order": 7,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 5,
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8005"
       ],
-      "text": "An I2C/SPI read access to the address 0x70-0x7f is translated in an AHB read access to the configured AHB address (contained in registers SAM ADDR BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).",
-      "unit_id": "desc-unit-93c10db2ef2247218b14"
+      "text": "An I2C/SPI read access to the address 0x70-0x7f is translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).",
+      "unit_id": "ipos-claim-dd95545e272201224260"
     },
     {
-      "output_order": 8,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 6,
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8000"
       ],
       "text": "I2C interface supports all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported.",
-      "unit_id": "desc-unit-3315fb83f1de40bc38fd"
+      "unit_id": "ipos-claim-b0b30b0adf01f7bb9071"
     },
     {
-      "output_order": 9,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 7,
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8001"
       ],
       "text": "Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains are at least 2 times.",
-      "unit_id": "desc-unit-8efd8944bfbc7ade4cf5"
+      "unit_id": "ipos-claim-598248448eb9a8c7d300"
     },
     {
-      "output_order": 10,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 8,
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8006"
       ],
       "text": "On AHB interface, data size is limited to BYTE and WORD.",
-      "unit_id": "desc-unit-7f7960596237ae56faa8"
+      "unit_id": "ipos-claim-6c5dce6521e7c7fad62e"
     }
   ]
 }

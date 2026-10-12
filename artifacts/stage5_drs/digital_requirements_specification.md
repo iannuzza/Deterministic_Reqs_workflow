@@ -6,7 +6,7 @@ Author: Alessandro Lucio IANNUZZI
 
 <p>&nbsp;</p>
 
-Date: 2026-10-09
+Date: 2026-10-12
 
 <p>&nbsp;</p>
 
@@ -41,6 +41,8 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
   - [4.5 Data-path and buffering requirements](#45-data-path-and-buffering-requirements)
   - [4.6 Digital performance requirements](#46-digital-performance-requirements)
   - [4.7 Clock and synchronization across domains](#47-clock-and-synchronization-across-domains)
+    - [4.7.1 Clock connections](#471-clock-connections)
+    - [4.7.2 Reset connections](#472-reset-connections)
 - [5. Validation and qualification requirements](#5-validation-and-qualification-requirements)
 - [6. Requirement identification and traceability](#6-requirement-identification-and-traceability)
   - [6.1 Numbering convention](#61-numbering-convention)
@@ -102,6 +104,8 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 | 4.5 Data-path and buffering requirements | 4.5 | [Jump](#45-data-path-and-buffering-requirements) | Auto |
 | 4.6 Digital performance requirements | 4.6 | [Jump](#46-digital-performance-requirements) | Auto |
 | 4.7 Clock and synchronization across domains | 4.7 | [Jump](#47-clock-and-synchronization-across-domains) | Auto |
+| 4.7.1 Clock connections | 4.7.1 | [Jump](#471-clock-connections) | Auto |
+| 4.7.2 Reset connections | 4.7.2 | [Jump](#472-reset-connections) | Auto |
 | 5. Validation and qualification requirements | 5 | [Jump](#5-validation-and-qualification-requirements) | Auto |
 | 6. Requirement identification and traceability | 6 | [Jump](#6-requirement-identification-and-traceability) | Auto |
 | 6.1 Numbering convention | 6.1 | [Jump](#61-numbering-convention) | Auto |
@@ -181,6 +185,8 @@ Source specification: C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Determini
 | Table 2 | Reference documents | [Go to Table 2](#table-2-reference-documents) |
 | Table 3 | Section navigation index | [Go to Table 3](#table-3-section-navigation-index) |
 | Table 6 | Category convention | [Go to Table 6](#table-6-category-convention) |
+| Table 8 | Clock connections | [Go to Table 8](#table-8-clock-connections) |
+| Table 9 | Reset connections | [Go to Table 9](#table-9-reset-connections) |
 
 <p>&nbsp;</p>
 
@@ -644,6 +650,43 @@ Clock distribution:
 <p>&nbsp;</p>
 
 
+
+<p>&nbsp;</p>
+
+#### **4.7.1 Clock connections** {#471-clock-connections}
+
+##### **Table 8. Clock connections** {#table-8-clock-connections}
+
+| Source requirement | Source | Destination | Clock frequency | Clock gate condition |
+|---|---|---|---|---|
+| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_1025 | u_stbio1_top.u_pmu.u_device_startup.tst_clk_32k | stbio1_top.dig_wrapper_LV.tst_clk_32k | 32 kHz | Not gated |
+| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.adsp_run \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_2024 | stbio1_top.dig_wrapper_LV.u_pmuclk_xbar | stbio1_top.dig_wrapper_LV.u.fifo.HCLK | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2 \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2_reg \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_2025 | stbio1_top.dig_wrapper_LV.u_pmu.clk_stredl | stbio1_top.dig_wrapper_LV.u_ispu.clk | 16 MHz | Not gated |
+| DDS_STBIO1_1021 | stbio1_top.clk_64k | stbio1_top.dig_wrapper_LV.u_pmu.clk_64k | 64 kHz | Not gated |
+| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_1027 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_32k | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_32kHz | 32 kHz | Not gated |
+| DDS_STBIO1_1020 | stbio1_top.clk_16m | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m | 16 MHz | Not gated |
+
+<p>&nbsp;</p>
+
+#### **4.7.2 Reset connections** {#472-reset-connections}
+
+##### **Table 9. Reset connections** {#table-9-reset-connections}
+
+| Source requirement | Source | Destination |
+|---|---|---|
+| DDS_STBIO1_2054 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_32k_main_ctrlu_stbio1_top.dig_wrapper_LV.u_main_controller_top.i_rstn_sync_32 |
+| DDS_STBIO1_2052 |  | u_device_startup.u_por_main_resetn.RST_N_FF[0]u_stbio1_top.dig_wrapper_LV.u_xbar_afe.hresetn |
+| DDS_STBIO1_1053 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_fifou_stbio1_top.dig_wrapper_LV.u_multi_channel_fifo_top.HRESETn |
+| DDS_STBIO1_1052 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_regmapu_stbio1_top.dig_wrapper_LV.u_regmap_otp.hresetn |
+| DDS_STBIO1_1050 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_stmcu_stbio1_top.dig_wrapper_LV.u_ADSP.HRESETn |
+| DDS_STBIO1_1051 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_masterblazeu_stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.HRESETn |
+| DDS_STBIO1_1054 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_main_ctrlu_stbio1_top.dig_wrapper_LV.u_main_controller_top.i_rstn |
+| DDS_STBIO1_2053 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_regmapu_stbio1_top.dig_wrapper_LV.u_ispu.main_rst_n |
 
 <p>&nbsp;</p>
 

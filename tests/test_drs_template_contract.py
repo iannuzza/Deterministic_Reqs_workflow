@@ -115,6 +115,32 @@ class DrsTemplateContractTests(unittest.TestCase):
                     events.extend(copy.deepcopy(events[table_index - 1:table_index + 1]))
                 self.assertTrue(any("version history" in finding for finding in validate_drs_events(events, self.contract, baseline)))
 
+    def test_table_index_allows_only_caption_backed_additions(self):
+        original = self.fixture_events()
+        position = next(index + 1 for index, event in enumerate(original) if event.get("text") == "0.4 Table of tables")
+        original.insert(position, {"kind": "table", "rows": [
+            ["Table", "Title", "Link"], ["Table 1", "Version history", "Go to Table 1"]]})
+        baseline = drs_table_inventory(original)
+        appended = copy.deepcopy(original)
+        appended[position]["rows"].append(["Table 8", "Clock connections", "Go to Table 8"])
+        appended.extend([{"kind": "heading", "level": 5, "text": "Table 8. Clock connections"},
+                         {"kind": "table", "rows": [["Source", "Destination"], ["clock", "sink"]]}])
+        self.assertEqual(validate_drs_events(appended, self.contract, baseline), [])
+        for mutation in ("remove", "rewrite", "unregistered", "duplicate", "caption_removed"):
+            with self.subTest(mutation=mutation):
+                events = copy.deepcopy(appended)
+                if mutation == "remove":
+                    events[position]["rows"].pop(1)
+                elif mutation == "rewrite":
+                    events[position]["rows"][1][1] = "Changed title"
+                elif mutation == "unregistered":
+                    events[position]["rows"].append(["Table 99", "Invented", "Go to Table 99"])
+                elif mutation == "duplicate":
+                    events[position]["rows"].append(events[position]["rows"][-1])
+                else:
+                    del events[-2]
+                self.assertTrue(any("table index" in finding for finding in validate_drs_events(events, self.contract, baseline)))
+
     def test_docx_only_definition_divergence(self):
         events = self.fixture_events()
         with tempfile.TemporaryDirectory() as folder:

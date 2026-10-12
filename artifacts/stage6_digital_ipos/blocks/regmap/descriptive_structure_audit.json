@@ -1,0 +1,2155 @@
+{
+  "application": {
+    "decisions": [
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:function:clause:1:meaning:1",
+        "role": "purpose",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:inputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:outputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      }
+    ],
+    "findings": [],
+    "policy": {
+      "abstraction": "block",
+      "domains": [
+        "digital"
+      ],
+      "functional_actions": [
+        "accept",
+        "acquire",
+        "accumulate",
+        "average",
+        "calculate",
+        "compute",
+        "control",
+        "convert",
+        "copy",
+        "divide",
+        "filter",
+        "generate",
+        "monitor",
+        "perform",
+        "process",
+        "produce",
+        "provide",
+        "read",
+        "receive",
+        "route",
+        "sample",
+        "send",
+        "store",
+        "subtract",
+        "support",
+        "transfer",
+        "write"
+      ],
+      "layers": [
+        "block"
+      ],
+      "name": "digital-ipos-structure-v1",
+      "omitted_details": [
+        "example",
+        "procedure"
+      ],
+      "output_sections": [
+        [
+          "purpose",
+          "functionality"
+        ],
+        [
+          "main_functions",
+          "scope"
+        ],
+        [
+          "functions",
+          "internal_functions"
+        ],
+        [
+          "boundaries",
+          "scope"
+        ],
+        [
+          "organization",
+          "internal_structure"
+        ],
+        [
+          "limits",
+          "scope"
+        ],
+        [
+          "operating_concept",
+          "internal_functions"
+        ],
+        [
+          "power",
+          "internal_functions"
+        ]
+      ],
+      "presentation_order": [
+        "behavior",
+        "support",
+        "clarification"
+      ],
+      "required_roles": [
+        "purpose",
+        "functions"
+      ],
+      "role_sections": [
+        [
+          "purpose",
+          "function"
+        ],
+        [
+          "main_functions",
+          "function"
+        ],
+        [
+          "functions",
+          "function"
+        ],
+        [
+          "boundaries",
+          "interfaces"
+        ],
+        [
+          "organization",
+          "function"
+        ],
+        [
+          "limits",
+          "function"
+        ],
+        [
+          "operating_concept",
+          "operating_concept"
+        ],
+        [
+          "power",
+          "power"
+        ]
+      ],
+      "version": 1,
+      "writing_profile": "ipos-structural-integrity-v1"
+    },
+    "profile_status": "policy_valid"
+  },
+  "contract_version": "1.1",
+  "descriptive_obligation_policy": {
+    "nonprose_paths": [
+      "requirement",
+      "parameter",
+      "configuration",
+      "register",
+      "io_list",
+      "table"
+    ],
+    "version": "descriptive-obligations-v1"
+  },
+  "document_contract": {
+    "detail_policy": "preserve_essential_block_detail_v1",
+    "document_type": "IPOS",
+    "essential_sources": {
+      "capabilities": [
+        "inventory:main_functions",
+        "inventory:inputs",
+        "inventory:outputs"
+      ],
+      "purpose": [
+        "inventory:function"
+      ]
+    },
+    "gap_policy": "required_sections_with_audited_omissions_v1",
+    "interpretation": "admitted_normative_clauses_v1",
+    "mandatory_rules": [
+      "section_roles",
+      "functional_claims",
+      "information_gain",
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "paragraph": {
+      "claim_scope": [
+        "initiation",
+        "behavior",
+        "result",
+        "exception",
+        "local_interaction"
+      ],
+      "required": [
+        "responsibility",
+        "supported_behavior"
+      ],
+      "when_supported": [
+        "condition",
+        "effect",
+        "result",
+        "dependency",
+        "exception"
+      ]
+    },
+    "profile": "block_local_v1",
+    "rendering": "scoped_explanatory_prose_v1",
+    "sections": [
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "purpose",
+        "title": "1.1 Functionality"
+      },
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "capabilities",
+        "title": "1.2 Supported functions and scope"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "organization",
+        "title": "1.3 Internal structure"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "functions",
+        "title": "1.4 Supported block functions"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "architecture",
+        "title": "1.5 General architecture"
+      }
+    ],
+    "sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+    "synthesis": "explicit_functional_claims_v1",
+    "validation_hooks": [
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "version": 1
+  },
+  "functional_claim_findings": [],
+  "functional_claim_plan": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "claims": [
+      {
+        "claim_id": "ipos-claim-35e58e295781cee38632",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Regmap block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "role": "purpose",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 136,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-2cec935c21d8dddad3f7",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Host read/write transactions"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Regmap block"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Register data and status fields"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Regmap block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "role": "boundaries",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 28,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Host read/write transactions"
+          },
+          {
+            "end": 31,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Register data and status fields"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-81732bdff035c13d398e",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "0, in functional mode, if bit 31 of OTP_PRG10 is set 1"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Write enable for each OTP REGISTER"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 130,
+            "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+            "start": 0,
+            "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "decisions": [
+      {
+        "claim_id": "ipos-claim-35e58e295781cee38632",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-2cec935c21d8dddad3f7",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-81732bdff035c13d398e",
+        "decision": "preserved",
+        "findings": []
+      }
+    ],
+    "dispositions": [
+      {
+        "claim_ids": [
+          "ipos-claim-35e58e295781cee38632"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 136,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-2cec935c21d8dddad3f7"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 28,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Host read/write transactions"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-2cec935c21d8dddad3f7"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 31,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Register data and status fields"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-81732bdff035c13d398e"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 130,
+            "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+            "start": 0,
+            "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 69,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3004",
+            "start": 0,
+            "text": "0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 70,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3006",
+            "start": 0,
+            "text": "0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 47,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3002",
+            "start": 0,
+            "text": "0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 59,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3001",
+            "start": 0,
+            "text": "0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 59,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3005",
+            "start": 0,
+            "text": "0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 59,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3003",
+            "start": 0,
+            "text": "0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn"
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 52,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+            "start": 0,
+            "text": "132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 80,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+            "start": 53,
+            "text": "STBIO1 Register Map 13.4.1."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 161,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+            "start": 81,
+            "text": "STBIO1 Register Map Here is described the list of registers in the register map."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 278,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+            "start": 162,
+            "text": "The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 437,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+            "start": 279,
+            "text": "The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "nonprose_output_path:register",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 589,
+            "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+            "start": 438,
+            "text": "BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn"
+          }
+        ]
+      }
+    ],
+    "evidence": {
+      "dependencies": [],
+      "propositions": [
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Regmap block"
+          },
+          "owner": "Regmap",
+          "proposition_id": "inventory:function:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Host read/write transactions"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Regmap block"
+          },
+          "owner": "Regmap",
+          "proposition_id": "inventory:inputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 28,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Host read/write transactions"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Register data and status fields"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Regmap block"
+          },
+          "owner": "Regmap",
+          "proposition_id": "inventory:outputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 31,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Register data and status fields"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "0, in functional mode, if bit 31 of OTP_PRG10 is set 1"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Write enable for each OTP REGISTER"
+          },
+          "owner": "Regmap",
+          "proposition_id": "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 130,
+              "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+              "start": 0,
+              "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:function",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:function",
+          "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:inputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:inputs",
+          "text": "Host read/write transactions"
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:outputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:outputs",
+          "text": "Register data and status fields"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_3004",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_3004",
+          "text": "0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_3006",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_3006",
+          "text": "0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_3002",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_3002",
+          "text": "0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_3001",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_3001",
+          "text": "0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_3005",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_3005",
+          "text": "0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_3003",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_3003",
+          "text": "0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_4000",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+          "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_3000",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+          "text": "132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4. STBIO1 Register Map 13.4.1. STBIO1 Register Map Here is described the list of registers in the register map. The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB. The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers. BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn"
+        }
+      ],
+      "unresolved_contexts": [
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3004:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 69,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3004",
+              "start": 0,
+              "text": "0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3006:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 70,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3006",
+              "start": 0,
+              "text": "0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3002:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 47,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3002",
+              "start": 0,
+              "text": "0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3001:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 59,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3001",
+              "start": 0,
+              "text": "0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3005:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 59,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3005",
+              "start": 0,
+              "text": "0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3003:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 59,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3003",
+              "start": 0,
+              "text": "0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 52,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 0,
+              "text": "132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:2:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 80,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 53,
+              "text": "STBIO1 Register Map 13.4.1."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:3:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 161,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 81,
+              "text": "STBIO1 Register Map Here is described the list of registers in the register map."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:4:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 278,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 162,
+              "text": "The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:5:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 437,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 279,
+              "text": "The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:6:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 589,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 438,
+              "text": "BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        }
+      ]
+    },
+    "findings": [],
+    "intents": [
+      {
+        "claim_id": "ipos-claim-35e58e295781cee38632",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "purpose",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-2cec935c21d8dddad3f7",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "boundaries",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-81732bdff035c13d398e",
+        "proposition_ids": [
+          "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+    "version": "1.1"
+  },
+  "model": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "contract_version": "1.1",
+    "final_prose_validation": "not_implemented",
+    "findings": [],
+    "phase": "pre_prose_model_only",
+    "plan": {
+      "acceptance": {
+        "materialization": "UNRESOLVED",
+        "materialization_findings": [],
+        "publication_findings": [],
+        "publication_quality": "UNRESOLVED",
+        "semantic_fidelity": "UNRESOLVED",
+        "semantic_findings": []
+      },
+      "claims": [
+        {
+          "claim_id": "ipos-claim-35e58e295781cee38632",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Regmap block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "role": "purpose",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-2cec935c21d8dddad3f7",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Host read/write transactions"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Regmap block"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Register data and status fields"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Regmap block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "role": "boundaries",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 28,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Host read/write transactions"
+            },
+            {
+              "end": 31,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Register data and status fields"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-81732bdff035c13d398e",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "0, in functional mode, if bit 31 of OTP_PRG10 is set 1"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Write enable for each OTP REGISTER"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 130,
+              "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+              "start": 0,
+              "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "decisions": [
+        {
+          "claim_id": "ipos-claim-35e58e295781cee38632",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-2cec935c21d8dddad3f7",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-81732bdff035c13d398e",
+          "decision": "preserved",
+          "findings": []
+        }
+      ],
+      "dispositions": [
+        {
+          "claim_ids": [
+            "ipos-claim-35e58e295781cee38632"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 136,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-2cec935c21d8dddad3f7"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 28,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Host read/write transactions"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-2cec935c21d8dddad3f7"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 31,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Register data and status fields"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-81732bdff035c13d398e"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 130,
+              "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+              "start": 0,
+              "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 69,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3004",
+              "start": 0,
+              "text": "0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 70,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3006",
+              "start": 0,
+              "text": "0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 47,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3002",
+              "start": 0,
+              "text": "0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 59,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3001",
+              "start": 0,
+              "text": "0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 59,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3005",
+              "start": 0,
+              "text": "0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 59,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3003",
+              "start": 0,
+              "text": "0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 52,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 0,
+              "text": "132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 80,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 53,
+              "text": "STBIO1 Register Map 13.4.1."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 161,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 81,
+              "text": "STBIO1 Register Map Here is described the list of registers in the register map."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 278,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 162,
+              "text": "The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 437,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 279,
+              "text": "The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "nonprose_output_path:register",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 589,
+              "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+              "start": 438,
+              "text": "BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "dependencies": [],
+        "propositions": [
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Regmap block"
+            },
+            "owner": "Regmap",
+            "proposition_id": "inventory:function:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 136,
+                "record_id": "inventory:function",
+                "start": 0,
+                "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Host read/write transactions"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Regmap block"
+            },
+            "owner": "Regmap",
+            "proposition_id": "inventory:inputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 28,
+                "record_id": "inventory:inputs",
+                "start": 0,
+                "text": "Host read/write transactions"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Register data and status fields"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Regmap block"
+            },
+            "owner": "Regmap",
+            "proposition_id": "inventory:outputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 31,
+                "record_id": "inventory:outputs",
+                "start": 0,
+                "text": "Register data and status fields"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "0, in functional mode, if bit 31 of OTP_PRG10 is set 1"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Write enable for each OTP REGISTER"
+            },
+            "owner": "Regmap",
+            "proposition_id": "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 130,
+                "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+                "start": 0,
+                "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+              }
+            ]
+          }
+        ],
+        "records": [
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:function",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:function",
+            "text": "Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules."
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:inputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:inputs",
+            "text": "Host read/write transactions"
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:outputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:outputs",
+            "text": "Register data and status fields"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_3004",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_3004",
+            "text": "0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_3006",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_3006",
+            "text": "0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_3002",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_3002",
+            "text": "0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_3001",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_3001",
+            "text": "0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_3005",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_3005",
+            "text": "0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_3003",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_3003",
+            "text": "0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_4000",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_4000",
+            "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_3000",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+            "text": "132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4. STBIO1 Register Map 13.4.1. STBIO1 Register Map Here is described the list of registers in the register map. The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB. The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers. BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn"
+          }
+        ],
+        "unresolved_contexts": [
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3004:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 69,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3004",
+                "start": 0,
+                "text": "0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3006:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 70,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3006",
+                "start": 0,
+                "text": "0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3002:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 47,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3002",
+                "start": 0,
+                "text": "0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3001:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 59,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3001",
+                "start": 0,
+                "text": "0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3005:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 59,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3005",
+                "start": 0,
+                "text": "0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3003:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 59,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3003",
+                "start": 0,
+                "text": "0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn"
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 52,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+                "start": 0,
+                "text": "132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:2:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 80,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+                "start": 53,
+                "text": "STBIO1 Register Map 13.4.1."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:3:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 161,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+                "start": 81,
+                "text": "STBIO1 Register Map Here is described the list of registers in the register map."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:4:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 278,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+                "start": 162,
+                "text": "The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:5:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 437,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+                "start": 279,
+                "text": "The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Regmap:DDS_STBIO1_3000:clause:6:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 589,
+                "record_id": "requirement:Regmap:DDS_STBIO1_3000",
+                "start": 438,
+                "text": "BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn"
+              }
+            ]
+          }
+        ]
+      },
+      "findings": [],
+      "intents": [
+        {
+          "claim_id": "ipos-claim-35e58e295781cee38632",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "purpose",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-2cec935c21d8dddad3f7",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "boundaries",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-81732bdff035c13d398e",
+          "proposition_ids": [
+            "requirement:Regmap:DDS_STBIO1_4000:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+      "version": "1.1"
+    },
+    "profile": {
+      "allowed_domains": [],
+      "allowed_layers": [
+        "block"
+      ],
+      "allowed_scopes": [
+        "block_local"
+      ],
+      "authority_tiers": [
+        "admitted_context",
+        "approved_normative"
+      ],
+      "document_type": "IPOS",
+      "evidence_kinds": [
+        "descriptive",
+        "approved_normative"
+      ],
+      "excluded_terms": [],
+      "name": "ipos-structural-integrity-v1",
+      "owner_policy": "same_owner",
+      "projection_adapters": [
+        "ipos-local"
+      ],
+      "runtime_enabled": true,
+      "topic_roles": [
+        "function",
+        "interfaces",
+        "operating_concept",
+        "power"
+      ],
+      "version": 1
+    },
+    "source_semantic_validation": "not_implemented",
+    "typed_model_status": "model_valid"
+  },
+  "phase": "ipos_functional_claim_materialization",
+  "publication_status": "requires_independent_final_artifact_checks",
+  "section_plan": [
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Regmap block"
+        }
+      ],
+      "claim_id": "ipos-claim-35e58e295781cee38632",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "purpose"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Host read/write transactions"
+          ],
+          "predicate": "accept",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Regmap block"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Register data and status fields"
+          ],
+          "predicate": "produce",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Regmap block"
+        }
+      ],
+      "claim_id": "ipos-claim-2cec935c21d8dddad3f7",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "boundaries"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "0, in functional mode, if bit 31 of OTP_PRG10 is set 1"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "Write enable for each OTP REGISTER"
+        }
+      ],
+      "claim_id": "ipos-claim-81732bdff035c13d398e",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    }
+  ],
+  "source_findings": [],
+  "source_semantic_status": "controlled_constructions_valid",
+  "source_validation_scope": "controlled_normative_constructions_and_literal_inventory"
+}

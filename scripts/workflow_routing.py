@@ -149,6 +149,36 @@ def apply_shared_spec_markdown_formatting(
     return formatted
 
 
+def apply_ipos_document_navigation(lines: Iterable[str]) -> List[str]:
+    output = [line for value in lines for line in (str(value).splitlines() or [""])]
+    captions = []
+    for index, line in enumerate(output):
+        match = re.fullmatch(r"(#{4,6})\s+Table(?:\s+\d+)?\.\s+(.+)", line)
+        if match:
+            title = "Table " + str(len(captions) + 1) + ". " + match[2]
+            captions.append(title)
+            output[index] = match[1] + " " + title
+    headings = [match[1] for line in output
+                if (match := re.fullmatch(r"#{2,4}\s+([1-9]\d*(?:\.\d+)*\.?\s+.+)", line))]
+    toc_start = next((index for index, line in enumerate(output) if line == "### 0.1 Table of contents"), None)
+    if toc_start is not None:
+        toc_end = next((index for index in range(toc_start + 1, len(output))
+                        if re.match(r"^#{1,3}\s", output[index])), len(output))
+        output[toc_start + 1:toc_end] = ["", *[
+            "- [" + title + "](#" + spec_anchor_slug(title) + ")" for title in headings], ""]
+        index_lines = ["### 0.4 Table index", "", *[
+            "- [" + title + "](#" + spec_anchor_slug(title) + ")" for title in captions], ""]
+        index_start = next((index for index, line in enumerate(output) if line == "### 0.4 Table index"), None)
+        if index_start is not None:
+            index_end = next((index for index in range(index_start + 1, len(output))
+                              if re.match(r"^#{1,3}\s", output[index])), len(output))
+            output[index_start:index_end] = index_lines
+        else:
+            overview_start = next(index for index, line in enumerate(output) if line == "## 1. Block overview")
+            output[overview_start:overview_start] = index_lines
+    return output
+
+
 def spec_anchor_slug(text: str) -> str:
     """Return a stable Markdown fragment for generated specification headings."""
     slug = re.sub(r"[^a-z0-9\s-]", "", (text or "").casefold())
@@ -1183,6 +1213,146 @@ class DescriptiveSynthesisPlan:
     acceptance: DescriptiveAcceptance = DescriptiveAcceptance()
 
 
+DESCRIPTIVE_OBLIGATION_POLICY_VERSION = "descriptive-obligations-v1"
+DESCRIPTIVE_NONPROSE_PATHS = MappingProxyType({
+    "IPOS": ("requirement", "parameter", "configuration", "register", "io_list", "table"),
+})
+
+
+def descriptive_nonprose_output_path(
+    span: DescriptiveSourceSpan, record: NormalizedSourceRecord, *, profile: DescriptiveWritingProfile,
+) -> str:
+    if descriptive_evidence_findings(record, profile=profile):
+        return ""
+    paths = DESCRIPTIVE_NONPROSE_PATHS.get(profile.document_type, ())
+    text = span.text.strip()
+    if "table" in paths:
+        modals = tuple(re.finditer(r"\b(?:shall|must)\b", text, re.I))
+        format_binding = re.search(r"\bshall\s+(?:have\s+the\s+following\s+tag|coincide\s+with\s+the\s+following\s+table)\s*:", text, re.I)
+        columns = re.search(r"\bDATA\s+TYPE\s+BIT\s*:|\bOFFSET\s+DATA\s+TYPE\b", text, re.I)
+        actions = "|".join(sorted(set(DESCRIPTIVE_NORMATIVE_ACTIONS) | set(DESCRIPTIVE_FINITE_ACTION_BASES)))
+        additional_behavior = re.search(r"\band\s+(?:" + actions + r")\b", text, re.I)
+        if len(modals) == 1 and format_binding and columns and not additional_behavior:
+            return "table"
+        example_addresses = (re.match(r"Example\s*:", text, re.I)
+                     and re.search(r"\bBase\s+Address\s*=", text, re.I)
+                     and re.search(r"\bTable\s+\d+\s*:", text, re.I))
+        if (not modals and example_addresses and not additional_behavior
+                and not re.search(r"\b(?:if|when|unless|is|are|has|have)\b", text, re.I)
+                and len(set(re.findall(r"\b0x[0-9a-f]+\b", text, re.I))) >= 2):
+            return "table"
+    if re.search(r"\b(?:shall|must)\b", text, re.I):
+        return ""
+    descriptive_text = re.sub(r"\bTo choose if\s+(.+?)\s+is\b", r"To choose whether \1 equals", text, flags=re.I)
+    behavioral = re.search(r"\b(?:if|when|unless|then|after|before|until|while|is|are|has|have)\b", descriptive_text, re.I)
+    if "register" in paths and re.search(r"\bRegister\s+Map\b", record.text, re.I):
+        caption = r"(?:[\w-]+\s+)?Register\s+Map"
+        if re.fullmatch(caption + r"(?:\s+\d+(?:\.\d+)+[.]?)?", text, re.I):
+            return "register"
+        if re.fullmatch(caption + r"\s+Here\s+is\s+described\s+the\s+list\s+of\s+registers\s+in\s+the\s+register\s+map[.]?", text, re.I):
+            return "register"
+        if re.fullmatch(r"\d+\s+\*\*[\w-]+\*\*\s+[\w/-]+(?:\s+[\w/-]+)+\s+\d+(?:\.\d+)+[.]?", text):
+            return "register"
+        header_row = re.fullmatch(r"([A-Z_ ]+)\s+(0x[0-9a-f]+\s+.+)", text, re.I)
+        if header_row and re.search(r"\bADDRESS\b", header_row[1]) and re.search(r"\bREGISTER\s+WIDTH\b", header_row[1]):
+            row_span = replace(span, start=span.start + header_row.start(2), text=header_row[2])
+            if descriptive_nonprose_output_path(row_span, record, profile=profile) == "register":
+                return "register"
+    if not behavioral:
+        identifier = r"[A-Za-z][A-Za-z0-9_]*"
+        literal = r"(?:\d+'[bhd][0-9a-fxz]+|0x[0-9a-f]+|\d+|\"[^\"]+\")"
+        if "register" in paths and re.fullmatch(
+                r"0x[0-9a-f]+\s+[A-Z][A-Z0-9_ ]*(?:\([A-Z0-9_ ]+\))?\s+(?:\d+\s+)?"
+                r"0x[0-9a-f]+\s+" + identifier + r"(?:\s*,\s*" + identifier + r")*", text, re.I):
+            return "register"
+        if ("configuration" in paths and re.match(r"(?:CONNECTION\s+|[A-Za-z][A-Za-z0-9]*_)", text, re.I)
+            and re.fullmatch(
+            r"(?:CONNECTION\s+)?" + identifier + r"\s+" + literal + r"\s+[^.!?]+[.]?", text, re.I)):
+            return "configuration"
+        if "configuration" in paths and re.fullmatch(r"Suggested\s*(?:val(?:ue)?[.]?\s*)?:?\s*[^.!?]+", text, re.I):
+            return "configuration"
+    formula = re.fullmatch(r"following\s+this\s+formula\s*:\s*(.+)", text, re.I | re.S)
+    if formula and "parameter" in paths:
+        expression = formula[1].strip().rstrip(".")
+        actions = "|".join(sorted(DESCRIPTIVE_NORMATIVE_ACTIONS))
+        if (re.search(r"[=+*/\u2217\u00d7]", expression)
+                and not re.search(r"\b(?:" + actions + r"|when|if|unless|then|and|or)\b", expression, re.I)
+                and re.fullmatch(r"[\w\s=+*/().,\[\]^<>\u2217\u00d7-]+", expression)):
+            return "parameter"
+    if "table" in paths and re.fullmatch(r"Table\s+\d+(?:[.:]\s*[^.!?]+)?[.]?", text, re.I):
+        return "table"
+    if "table" in paths:
+        lines = tuple(line.strip() for line in text.splitlines() if line.strip())
+        if (len(lines) >= 3 and all(line.startswith("|") and line.endswith("|") for line in lines)
+                and re.fullmatch(r"\|[\s:|\-]+\|", lines[1])):
+            return "table"
+    return ""
+
+
+def retrieve_descriptive_identifier_support(
+    identifier: str, records: Sequence[NormalizedSourceRecord], *,
+    profile: DescriptiveWritingProfile, max_candidates: int = 32,
+) -> Tuple[dict, ...]:
+    from validate_downstream_coherence import normalize_human_label
+
+    if not 1 <= max_candidates <= 128:
+        raise ValueError("Identifier retrieval requires a bounded candidate budget")
+    tokens = normalize_human_label(identifier).split()
+    if not tokens or any(not re.fullmatch(r"[a-z0-9]+", token) for token in tokens):
+        return ()
+    pattern = r"(?<![\w-])" + r"[-_\s]+".join(re.escape(token) for token in tokens) + r"(?![\w-])"
+    matches = []
+    for order, record in enumerate(records):
+        if descriptive_evidence_findings(record, profile=profile):
+            continue
+        occurrences = tuple(dict.fromkeys(match[0] for match in re.finditer(pattern, record.text, re.I)))
+        for spelling in occurrences:
+            exact = spelling == identifier
+            io_description = record.record_id in {"inventory:inputs", "inventory:outputs"}
+            rank = (0 if exact else 1, 0 if io_description else 1, order)
+            matches.append({"record_id": record.record_id, "identifier": spelling,
+                            "match": "exact" if exact else "normalized_variant", "rank": rank,
+                            "scope": record.ownership_scope, "provenance": record.provenance,
+                            "text": record.text, "supports_equivalence_only": True})
+    if len(matches) > max_candidates:
+        raise ValueError("Identifier support exceeds bounded candidate budget; refine approved scope")
+    return tuple(sorted(matches, key=lambda value: value["rank"]))
+
+
+def descriptive_essential_members(evidence: DescriptiveEvidenceModel, *, profile: DescriptiveWritingProfile) -> Set[str]:
+    if profile.document_type != "IPOS":
+        return {value.proposition_id for value in evidence.propositions} | {value.context_id for value in evidence.unresolved_contexts}
+    contract = _ipos_document_contract()
+    required_roles = {section["role"] for section in contract["sections"] if section["required"]}
+    records = {identity for role, identities in contract["essential_sources"].items()
+               if role in required_roles for identity in identities}
+    members = {value.proposition_id for value in evidence.propositions if any(span.record_id in records for span in value.spans)}
+    members.update(value.context_id for value in evidence.unresolved_contexts if any(span.record_id in records for span in value.spans))
+    changed = True
+    while changed:
+        changed = False
+        for edge in evidence.dependencies:
+            endpoints = {edge.source_id, edge.target_id}
+            if members & endpoints and not endpoints.issubset(members):
+                members.update(endpoints)
+                changed = True
+    return members
+
+
+def descriptive_disposition_is_essential(disposition: DescriptiveDisposition, evidence: DescriptiveEvidenceModel,
+                                         *, profile: DescriptiveWritingProfile) -> bool:
+    if profile.document_type != "IPOS":
+        return True
+    members = descriptive_essential_members(evidence, profile=profile)
+    if members.intersection(disposition.proposition_ids):
+        return True
+    contract = _ipos_document_contract()
+    records = {identity for identities in contract["essential_sources"].values() for identity in identities}
+    spans = {span for value in evidence.propositions if value.proposition_id in members for span in value.spans}
+    spans.update(span for value in evidence.unresolved_contexts if value.context_id in members for span in value.spans)
+    return any(span.record_id in records or span in spans for span in disposition.spans)
+
+
 def build_descriptive_synthesis_plan(
     evidence: DescriptiveEvidenceModel, intents: Sequence[DescriptiveClaimIntent], *,
     profile: DescriptiveWritingProfile, owner: str = "",
@@ -1270,8 +1440,21 @@ def build_descriptive_synthesis_plan(
         dispositions.append(DescriptiveDisposition(proposition.spans, (proposition.proposition_id,),
                             "preserved" if linked else "unresolved",
                             "explicit_relationship_bundle" if linked else "no_supported_claim", linked))
+    records = {record.record_id: record for record in evidence.records}
+    dependency_members = {identity for edge in evidence.dependencies for identity in (edge.source_id, edge.target_id)}
     for context in evidence.unresolved_contexts:
-        dispositions.append(DescriptiveDisposition(context.spans, (), "unresolved", context.reason))
+        paths = tuple(descriptive_nonprose_output_path(span, records[span.record_id], profile=profile)
+                      for span in context.spans) if context.context_id not in dependency_members else ()
+        if (paths and not all(paths) and len({span.record_id for span in context.spans}) == 1
+                and all(left.end == right.start for left, right in zip(context.spans, context.spans[1:]))):
+            first, last = context.spans[0], context.spans[-1]
+            record = records[first.record_id]
+            combined = DescriptiveSourceSpan(first.record_id, first.start, last.end, record.text[first.start:last.end])
+            if descriptive_nonprose_output_path(combined, record, profile=profile) == "table":
+                paths = ("table",)
+        routed = bool(paths) and all(paths)
+        dispositions.append(DescriptiveDisposition(context.spans, (), "excluded" if routed else "unresolved",
+                            "nonprose_output_path:" + ",".join(dict.fromkeys(paths)) if routed else context.reason))
     for edge in evidence.dependencies:
         linked = tuple(claim.claim_id for claim in claims if edge in claim.dependencies)
         dispositions.append(DescriptiveDisposition(edge.spans, (edge.source_id, edge.target_id),
@@ -1292,6 +1475,10 @@ def build_descriptive_synthesis_plan(
                     span = DescriptiveSourceSpan(record.record_id, start, offset, text)
                     dispositions.append(DescriptiveDisposition((span,), (), "unresolved", "unmodeled_source_span"))
                 start = None
+    if profile.document_type == "IPOS":
+        dispositions = [replace(value, decision="excluded", reason="omitted_nonessential:" + value.reason)
+                        if value.decision == "unresolved" and not descriptive_disposition_is_essential(value, evidence, profile=profile)
+                        else value for value in dispositions]
     return DescriptiveSynthesisPlan(DESCRIPTIVE_SYNTHESIS_VERSION, stable_payload_hash(asdict(profile)), evidence,
                                    intents, tuple(claims), tuple(decisions), tuple(dispositions), tuple(findings))
 
@@ -1306,6 +1493,10 @@ def validate_descriptive_synthesis_plan(
     if replace(plan, acceptance=DescriptiveAcceptance()) != expected:
         findings.append("descriptive_synthesis_plan_changed")
     for decision in expected.decisions:
+        intent = next(value for value in expected.intents if value.claim_id == decision.claim_id)
+        if (profile.document_type == "IPOS" and not descriptive_essential_members(expected_evidence, profile=profile).intersection(intent.proposition_ids)
+                and all(value.startswith("unresolved_dependency:") for value in decision.findings)):
+            continue
         findings.extend("descriptive_claim_unresolved:" + decision.claim_id + ":" + finding
                         for finding in decision.findings)
     for disposition in expected.dispositions:
@@ -2978,9 +3169,11 @@ def build_ipos_functional_input(
     candidate_requirement_rows: Sequence[Mapping[str, object]] | None = None,
 ) -> IPOSFunctionalInput:
     """Normalize approved inventory fields and same-block local evidence only."""
+    from validate_downstream_coherence import human_label_key
+
     local_rows = [
         row for row in requirement_rows
-        if csv_cell_text(row.get("mapped_block") or row.get("owning_block") or block_name).strip() == block_name
+        if human_label_key(csv_cell_text(row.get("mapped_block") or row.get("owning_block") or block_name)) == human_label_key(block_name)
     ]
     local_records = tuple(dict.fromkeys(
         (
@@ -3278,7 +3471,7 @@ def _ipos_lower_prose_initial(value: str) -> str:
 
 
 def _ipos_admitted_records(functional_input: IPOSFunctionalInput) -> Tuple[NormalizedSourceRecord, ...]:
-    from validate_downstream_coherence import canonical_human_label
+    from validate_downstream_coherence import human_label_key
 
     records = [NormalizedSourceRecord(
         "inventory:" + field, value, "admitted_context", "block_local",
@@ -3292,7 +3485,7 @@ def _ipos_admitted_records(functional_input: IPOSFunctionalInput) -> Tuple[Norma
     )
     seen: Dict[str, str] = {}
     for block, identity, statement, source in candidates:
-        if canonical_human_label(block) != canonical_human_label(functional_input.block):
+        if human_label_key(block) != human_label_key(functional_input.block):
             continue
         if not identity or not statement.strip():
             raise ValueError("Incomplete IPOS approved evidence identity/text")
@@ -3412,11 +3605,39 @@ def _project_ipos_record(
     return (() if gaps else tuple(projected)), "; ".join(gaps)
 
 
-def _ipos_comma_less_guard_boundary(prefix: str, owner: str) -> Tuple[str, str]:
+def _ipos_comma_less_guard_boundary(
+    prefix: str, owner: str, identifier_records: Sequence[NormalizedSourceRecord] = (),
+) -> Tuple[str, str]:
     if not owner:
         return "", ""
-    match = re.fullmatch(r"(.+\s+\S+)\s+((?:the\s+)?" + re.escape(owner) + r"(?:\s+block)?)", prefix, re.I)
-    return (match[1].strip(), match[2].strip()) if match else ("", "")
+    from validate_downstream_coherence import normalize_human_label
+
+    tokens = normalize_human_label(owner).split()
+    actor = r"[-_\s]+".join(re.escape(token) for token in tokens)
+    match = re.fullmatch(r"(.+\s+\S+)\s+((?:the\s+)?" + actor + r"(?:\s+block)?)", prefix, re.I)
+    if match:
+        return match[1].strip(), match[2].strip()
+    definitions = {}
+    for record in identifier_records:
+        if (record.record_id not in {"inventory:inputs", "inventory:outputs"}
+                or descriptive_evidence_findings(record, profile=IPOS_DESCRIPTIVE_PROFILE)):
+            continue
+        for definition in re.finditer(r"(?:^|[;\n])\s*([A-Za-z][\w-]*)\s*:\s*([^;\n]+)", record.text):
+            definitions.setdefault(normalize_human_label(definition[1]), []).append(definition[2].strip())
+    boundaries = []
+    for identifier, descriptions in definitions.items():
+        if len(set(descriptions)) != 1:
+            continue
+        actor = r"[-_\s]+".join(re.escape(token) for token in identifier.split())
+        match = re.fullmatch(r"(.+\s+\S+)\s+((?:the\s+)?" + actor + r"(?:\s+signal)?)", prefix, re.I)
+        if match:
+            try:
+                support = retrieve_descriptive_identifier_support(identifier, identifier_records, profile=IPOS_DESCRIPTIVE_PROFILE)
+            except ValueError:
+                continue
+            if any(value["record_id"] in {"inventory:inputs", "inventory:outputs"} for value in support):
+                boundaries.append((match[1].strip(), match[2].strip()))
+    return boundaries[0] if len(boundaries) == 1 else ("", "")
 
 
 def _project_ipos_normative_clause(
@@ -3441,7 +3662,8 @@ def _project_ipos_normative_clause(
         guard_prefix = prefix
         condition, separator, prefix = guard_prefix.rpartition(",")
         if not separator:
-            condition, prefix = _ipos_comma_less_guard_boundary(guard_prefix, functional_input.block)
+            condition, prefix = _ipos_comma_less_guard_boundary(guard_prefix, functional_input.block,
+                                                               _ipos_admitted_records(functional_input))
             if not prefix:
                 return (), "ambiguous guard boundary; full source retained"
         condition = re.sub(r"\b(?:shall|must)\s+be\b", "is", condition.strip(), flags=re.I)
@@ -3531,9 +3753,23 @@ def _ipos_explicit_case_reference(antecedent: str, consequent: str) -> str:
     return "If " + condition + ", " + reference[1]
 
 
+def _ipos_explicit_signal_reference(antecedent: str, consequent: str) -> str:
+    antecedent = _ipos_source_text(antecedent).strip().rstrip(".")
+    consequent = _ipos_source_text(consequent).strip().rstrip(".")
+    identifiers = tuple(dict.fromkeys(re.findall(IPOS_TECHNICAL_IDENTIFIER_PATTERN, antecedent)))
+    binding = re.search(r"\bwith\s+([A-Za-z][\w]*_[\w]+)\s+values\s+from\s+\d+\s+(?:up\s+)?to\s+\d+$", antecedent, re.I)
+    relationship = re.fullmatch(r"This\s+signal\s+indicates\s+the\s+number\s+of\s+clocks?\s+that\s+"
+                                r"([A-Za-z][\w]*_[\w]+)\s+(?:shall|must)\s+(stay|remain)\s+(high|low)", consequent, re.I)
+    if (not binding or not relationship or identifiers != (binding[1],)
+            or not re.search(r"\b(?:shall|must)\s+be\s+configurable\b", antecedent, re.I)):
+        return ""
+    return binding[1] + " shall define the number of clock cycles for which " + relationship[1] + " " + relationship[2].lower() + "s " + relationship[3].lower()
+
+
 def _ipos_recomposition_text(spans: Sequence[DescriptiveSourceSpan]) -> str:
     if len(spans) == 2:
-        reference = _ipos_explicit_case_reference(spans[0].text, spans[1].text)
+        reference = (_ipos_explicit_case_reference(spans[0].text, spans[1].text)
+                     or _ipos_explicit_signal_reference(spans[0].text, spans[1].text))
         if reference:
             return reference
     values = []
@@ -3650,7 +3886,8 @@ def build_ipos_evidence_model(functional_input: IPOSFunctionalInput) -> Descript
             if not facts and len(previous_ids) == 1:
                 previous = next((value for value in propositions if value.proposition_id == previous_ids[0]), None)
                 if previous is not None and len(previous.spans) == 1:
-                    reference = _ipos_explicit_case_reference(previous.spans[0].text, span.text)
+                    reference = (_ipos_explicit_case_reference(previous.spans[0].text, span.text)
+                                 or _ipos_explicit_signal_reference(previous.spans[0].text, span.text))
                     if reference:
                         facts, _ = _project_ipos_normative_clause(record, functional_input, reference)
                         if facts:
@@ -3725,7 +3962,21 @@ def build_ipos_claim_plan(functional_input: IPOSFunctionalInput) -> DescriptiveS
             for identity in members:
                 components[identity] = members
     dependency_members = {identity for edge in evidence.dependencies for identity in (edge.source_id, edge.target_id)}
+    source_findings = _ipos_evidence_semantic_findings(evidence)
+    unsafe = {value.proposition_id for value in evidence.propositions if any(
+              finding.endswith(":" + span.record_id) or value.proposition_id in finding
+              for span in value.spans for finding in source_findings)}
+    changed = True
+    while changed:
+        changed = False
+        for edge in evidence.dependencies:
+            endpoints = {edge.source_id, edge.target_id}
+            if unsafe & endpoints and not endpoints.issubset(unsafe):
+                unsafe.update(endpoints)
+                changed = True
     for proposition in evidence.propositions:
+        if proposition.proposition_id in unsafe:
+            continue
         record_id = proposition.spans[0].record_id
         meaning = proposition.meaning
         role = ("purpose" if record_id == "inventory:function" else
@@ -3762,6 +4013,128 @@ def _ipos_document_contract() -> dict:
 def _ipos_claim_output_role(role: str) -> str:
     return {"purpose": "purpose", "main_functions": "capabilities", "boundaries": "capabilities",
             "limits": "capabilities", "organization": "organization", "functions": "functions"}[role]
+
+
+IPOS_CONNECTION_TABLES = MappingProxyType({
+    "clock": ("Clock connections", ("Source requirement", "Source", "Destination", "Clock frequency", "Clock gate condition")),
+    "reset": ("Reset connections", ("Source requirement", "Source", "Destination")),
+})
+
+
+def render_connection_table_sections(
+    parent_section: str, rows: Mapping[str, Sequence[str]], *, first_table_number: int | None = None,
+) -> List[str]:
+    if set(rows) - set(IPOS_CONNECTION_TABLES) or not re.fullmatch(r"\d+(?:\.\d+)+", parent_section):
+        raise ValueError("Unsupported connection table presentation")
+    sections = []
+    for kind, (title, header) in IPOS_CONNECTION_TABLES.items():
+        entries = rows.get(kind, ())
+        if not entries:
+            continue
+        number = len(sections) + 1
+        caption = "Table" + (" " + str(first_table_number + number - 1) if first_table_number is not None else "")
+        sections.append("#### " + parent_section + "." + str(number) + " " + title
+                        + "\n\n##### " + caption + ". " + title + "\n\n" + "\n".join((
+                            _ipos_connection_markdown_row(header), "|" + "---|" * len(header), *entries)))
+    return sections
+
+
+def _ipos_connection_rows(claim: DescriptiveFunctionalClaim) -> Tuple[Tuple[str, Tuple[str, ...]], ...]:
+    if claim.role != "functions" or len(claim.meanings) != len(claim.spans):
+        return ()
+    rows = []
+    for meaning, span in zip(claim.meanings, claim.spans):
+        if (meaning.predicate != "be" or len(meaning.objects) != 1 or meaning.contexts
+                or meaning.mode or meaning.modality or meaning.negative or meaning.qualifiers
+                or meaning.results or meaning.effects or not span.record_id.startswith("requirement:")):
+            return ()
+        subject = re.fullmatch(r"(?:The\s+)?(?:(.*?)\s+)?signal", meaning.subject, re.I)
+        connection = re.fullmatch(r"connected to the (.*?) signal(?:, with frequency (.+?)"
+                                  r"(?: and (with|without) clock gating(?:\s+(.+))?)?)?", meaning.objects[0], re.I)
+        if not subject or not connection:
+            return ()
+        source = subject[1] or ""
+        destination, frequency, gating, control = connection.groups()
+        identifiers = source + " " + destination
+        kind = ("clock" if frequency or re.search(r"(?:^|[._\s])(?:clk|clock)", identifiers, re.I)
+                else "reset" if re.search(r"(?:^|[._\s])(?:reset|rst|hreset)", identifiers, re.I) else "")
+        if not kind:
+            return ()
+        cells = (span.record_id.rsplit(":", 1)[1], source, destination)
+        if kind == "clock":
+            cells += (frequency or "", "Not gated" if gating and gating.casefold() == "without"
+                      else control or "Gated" if gating else "")
+        rows.append((kind, cells))
+    return tuple(rows) if len({kind for kind, _cells in rows}) == 1 else ()
+
+
+def _ipos_claim_presentation_role(claim: DescriptiveFunctionalClaim) -> str:
+    return "architecture" if _ipos_connection_rows(claim) else _ipos_claim_output_role(claim.role)
+
+
+def _ipos_connection_markdown_row(cells: Sequence[str]) -> str:
+    return "| " + " | ".join(value.replace("|", r"\|") for value in cells) + " |"
+
+
+def _ipos_connection_audit_findings(text: str, claim: DescriptiveFunctionalClaim) -> List[str]:
+    from spec_document_contract import markdown_table_cells
+    expected = [cells for _kind, cells in _ipos_connection_rows(claim)]
+    actual = [tuple(markdown_table_cells(line)) for line in text.splitlines() if line.startswith("|")]
+    return [] if actual == expected and len(actual) == len(text.splitlines()) else ["ipos_connection_audit_changed"]
+
+
+def _ipos_connection_table_findings(events: Sequence[Mapping], claims: Sequence[DescriptiveFunctionalClaim]) -> List[str]:
+    from collections import Counter
+    expected = {kind: [] for kind in IPOS_CONNECTION_TABLES}
+    actual = {kind: [] for kind in IPOS_CONNECTION_TABLES}
+    for claim in claims:
+        for kind, cells in _ipos_connection_rows(claim):
+            expected[kind].append(cells)
+    active = ""
+    caption = ""
+    subsection = ""
+    subsection_titles = {kind: "1.5." + str(index) + " " + IPOS_CONNECTION_TABLES[kind][0]
+                         for index, kind in enumerate((kind for kind in expected if expected[kind]), start=1)}
+    caption_count = 0
+    counts = Counter()
+    findings = []
+    for event in events:
+        if event["kind"] == "heading":
+            title = event["text"]
+            if event["level"] <= 3:
+                active = title.split(" ", 1)[0]
+                subsection = ""
+                caption = ""
+            elif event["level"] == 4:
+                subsection = title
+                caption = ""
+            match = re.fullmatch(r"Table (\d+)\. (.+)", title)
+            if match:
+                caption_count += 1
+                caption = match[2]
+                if int(match[1]) != caption_count:
+                    findings.append("ipos_connection_caption_number_changed")
+        elif event["kind"] == "paragraph":
+            caption = event["text"]
+        elif event["kind"] == "table":
+            for kind, (title, header) in IPOS_CONNECTION_TABLES.items():
+                if tuple(event["rows"][0]) != header:
+                    continue
+                counts[kind] += 1
+                if active != "1.5" or caption != title or subsection != subsection_titles.get(kind):
+                    findings.append("ipos_connection_table_placement_changed:" + kind)
+                actual[kind].extend(tuple(row) for row in event["rows"][1:])
+    for kind in expected:
+        if Counter(actual[kind]) != Counter(expected[kind]) or counts[kind] != bool(expected[kind]):
+            findings.append("ipos_connection_table_content_changed:" + kind)
+    return findings
+
+
+def ipos_retained_evidence(plan: DescriptiveSynthesisPlan) -> DescriptiveEvidenceModel:
+    members = {identity for claim in plan.claims for identity in claim.proposition_ids}
+    return replace(plan.evidence, propositions=tuple(value for value in plan.evidence.propositions if value.proposition_id in members),
+                   dependencies=tuple(value for value in plan.evidence.dependencies
+                                      if {value.source_id, value.target_id}.issubset(members)))
 
 
 IPOS_PROSE_GRAMMAR_VERSION = "finite_clause_agreement_v1"
@@ -4024,9 +4397,11 @@ def ipos_descriptive_structural_audit(
     policy = DESCRIPTIVE_APPLICATION_PROFILES[names[functional_input.domain]]
     model = descriptive_synthesis_plan_audit(plan, expected_evidence=plan.evidence,
             expected_intents=plan.intents, profile=IPOS_DESCRIPTIVE_PROFILE, owner=functional_input.block)
-    source_findings = _ipos_evidence_semantic_findings(plan.evidence)
+    source_findings = _ipos_evidence_semantic_findings(ipos_retained_evidence(plan))
     source_findings.extend("ipos_source_projection_unresolved:" + context.context_id
-                           for context in plan.evidence.unresolved_contexts)
+                           for context in plan.evidence.unresolved_contexts
+                           if any(value.decision == "unresolved" and value.spans == context.spans
+                                  for value in plan.dispositions))
     claim_findings = validate_descriptive_synthesis_plan(plan, expected_evidence=plan.evidence,
                      expected_intents=plan.intents, profile=IPOS_DESCRIPTIVE_PROFILE, owner=functional_input.block)
     roles = {identity: intent.role for intent in plan.intents for identity in intent.proposition_ids}
@@ -4035,7 +4410,7 @@ def ipos_descriptive_structural_audit(
         "policy": json.loads(json.dumps(asdict(policy))),
         "decisions": [{"proposition_id": proposition.proposition_id,
                        "decision": "retained" if proposition.proposition_id in preserved else "unresolved",
-                       "role": roles[proposition.proposition_id], "rule": "explicit_functional_claim"}
+                       "role": roles.get(proposition.proposition_id, "unclaimed"), "rule": "explicit_functional_claim"}
                       for proposition in plan.evidence.propositions],
         "profile_status": "blocked" if claim_findings else "policy_valid", "findings": claim_findings,
     }
@@ -4049,6 +4424,10 @@ def ipos_descriptive_structural_audit(
         "publication_status": "requires_independent_final_artifact_checks",
         "functional_claim_plan": json.loads(json.dumps(asdict(plan))),
         "functional_claim_findings": claim_findings,
+        **({"descriptive_obligation_policy": {
+            "version": DESCRIPTIVE_OBLIGATION_POLICY_VERSION,
+            "nonprose_paths": list(DESCRIPTIVE_NONPROSE_PATHS.get(IPOS_DESCRIPTIVE_PROFILE.document_type, ())),
+        }} if any(value.reason.startswith("nonprose_output_path:") for value in plan.dispositions) else {}),
         "document_contract": _ipos_document_contract(),
     }
 
@@ -4138,18 +4517,25 @@ def compose_ipos_overview(
     titles = {section["role"]: section["title"] for section in contract["sections"]}
     audit = []
     records = {record.record_id: record for record in plan.evidence.records}
+    connection_tables = {kind: [] for kind in IPOS_CONNECTION_TABLES}
     for claim in plan.claims:
         decision = decisions[claim.claim_id]
         text = ""
         reason = decision.reason
+        connections = _ipos_connection_rows(claim)
         if decision.decision == "retained":
             try:
-                text = realize_descriptive_functional_claim(claim)
+                text = ("\n".join(_ipos_connection_markdown_row(cells) for _kind, cells in connections)
+                        if connections else realize_descriptive_functional_claim(claim))
             except ValueError as error:
                 reason = str(error)
-        role = _ipos_claim_output_role(claim.role)
+        role = _ipos_claim_presentation_role(claim)
         if text:
-            sections[by_role[role]].append(text)
+            if connections:
+                for kind, cells in connections:
+                    connection_tables[kind].append(_ipos_connection_markdown_row(cells))
+            else:
+                sections[by_role[role]].append(text)
         unit = SemanticUnit(claim.claim_id, titles[role], text,
                             tuple(dict.fromkeys(span.record_id for span in claim.spans)), len(audit) + 1)
         audit.append({"block": functional_input.block, "domain": functional_input.domain,
@@ -4168,15 +4554,16 @@ def compose_ipos_overview(
                       "semantic_unit_json": json.dumps(asdict(unit), sort_keys=True),
                       "provenance_references": "; ".join(dict.fromkeys(reference for identity in unit.source_record_ids
                                                 for reference in records[identity].provenance))})
+    sections["general_architecture"].extend(render_connection_table_sections("1.5", connection_tables))
     for disposition in plan.dispositions:
-        if disposition.decision == "unresolved":
+        if disposition.decision == "unresolved" or disposition.reason.startswith("omitted_nonessential:"):
             for span in disposition.spans:
                 audit.append({"block": functional_input.block, "domain": functional_input.domain,
                               "candidate_evidence_requirement_id": span.record_id.rsplit(":", 1)[-1]
                                   if span.record_id.startswith("requirement:") else "",
                               "candidate_evidence_statement": records[span.record_id].text,
                               "profile": contract["profile"],
-                              "decision": "projection_gap", "source_record_id": span.record_id,
+                              "decision": "omitted" if disposition.decision == "excluded" else "projection_gap", "source_record_id": span.record_id,
                               "reason": disposition.reason, "span_json": json.dumps(asdict(span), sort_keys=True)})
     return sections, audit
 
@@ -4263,7 +4650,17 @@ def _legacy_compose_ipos_overview(
 
 
 def build_ipos_normalized_records(functional_input: IPOSFunctionalInput) -> Tuple[NormalizedSourceRecord, ...]:
-    return build_ipos_evidence_model(functional_input).records
+    plan = build_ipos_claim_plan(functional_input)
+    decisions = {value.claim_id: value.decision for value in ipos_claim_section_plan(plan)}
+    represented = {span.record_id for claim in plan.claims if decisions[claim.claim_id] == "retained" for span in claim.spans}
+    records = []
+    for record in plan.evidence.records:
+        dispositions = [value for value in plan.dispositions if any(span.record_id == record.record_id for span in value.spans)]
+        if record.record_id not in represented and dispositions and not any(value.decision == "unresolved" for value in dispositions):
+            record = replace(record, decision="excluded", rationale="audited unpublished descriptive input: " +
+                             "; ".join(dict.fromkeys(value.reason for value in dispositions)))
+        records.append(record)
+    return tuple(records)
 
 
 def build_ipos_semantic_units(
@@ -5734,6 +6131,7 @@ def _ipos_integrity_tokens(value: str) -> List[str]:
 
 def ipos_source_preservation_findings(
     records: Sequence[NormalizedSourceRecord], facts: Sequence[DescriptiveFact],
+    *, identifier_records: Sequence[NormalizedSourceRecord] = (),
 ) -> List[str]:
     from collections import Counter
 
@@ -5794,7 +6192,7 @@ def ipos_source_preservation_findings(
             if re.match(r"^(?:(?:When|If|Unless|After|Before|Once|In case|In order to|During|At|To)\b|(?:At least\s+)?\d+(?:\.\d+)?\s*(?:ns|us|ms|s)\s+after\b)", prefix, re.I):
                 guard, separator, subject = prefix.rpartition(",")
                 if not separator:
-                    guard, subject = _ipos_comma_less_guard_boundary(prefix, linked[0].owner)
+                    guard, subject = _ipos_comma_less_guard_boundary(prefix, linked[0].owner, identifier_records)
                     if not subject:
                         invalid = True
                         continue
@@ -5881,9 +6279,11 @@ def _ipos_final_sections(path: Path) -> Dict[str, str]:
             elif re.match(r"^(?:0|1|2|3)\. ", title):
                 active = ""
         elif active and event["kind"] == "paragraph":
-            sections[active].append(event["text"])
+            if active != "1.5" or event["text"] not in {title for title, _header in IPOS_CONNECTION_TABLES.values()}:
+                sections[active].append(event["text"])
         elif active and event["kind"] == "table":
-            sections[active].extend(cell for row in event["rows"] for cell in row)
+            if tuple(event["rows"][0]) not in {header for _title, header in IPOS_CONNECTION_TABLES.values()}:
+                sections[active].extend(cell for row in event["rows"] for cell in row)
     return {name: " ".join(values) for name, values in sections.items()}
 
 
@@ -6039,7 +6439,8 @@ def _ipos_evidence_semantic_findings(evidence: DescriptiveEvidenceModel) -> List
             if len(propositions) != 1 or propositions[0].meaning != expected:
                 findings.append("ipos_source_priority_order_changed:" + spans[0].record_id)
             continue
-        if len(spans) == 2 and _ipos_explicit_case_reference(spans[0].text, spans[1].text):
+        if len(spans) == 2 and (_ipos_explicit_case_reference(spans[0].text, spans[1].text)
+                       or _ipos_explicit_signal_reference(spans[0].text, spans[1].text)):
             for proposition in propositions:
                 antecedents = {value.proposition_id for value in evidence.propositions if value.spans == (spans[0],)}
                 references = [edge for edge in evidence.dependencies if edge.relation == "referenced_context"
@@ -6062,7 +6463,7 @@ def _ipos_evidence_semantic_findings(evidence: DescriptiveEvidenceModel) -> List
                          evidence_kind="approved_normative" if record.authority_tier == "approved_normative" else "descriptive",
                          owner=proposition.owner, domain=proposition.domain, layer=proposition.layer,
                          plural_subject=bool(re.search(r"\band\b", meaning.subject, re.I))))
-        findings.extend(ipos_source_preservation_findings((record,), facts))
+        findings.extend(ipos_source_preservation_findings((record,), facts, identifier_records=evidence.records))
     for index, proposition in enumerate(evidence.propositions):
         for other in evidence.propositions[index + 1:]:
             if (proposition.owner == other.owner and proposition.meaning.negative != other.meaning.negative
@@ -6075,7 +6476,10 @@ def ipos_claim_preflight_findings(functional_input: IPOSFunctionalInput) -> List
     plan = build_ipos_claim_plan(functional_input)
     findings = validate_descriptive_synthesis_plan(plan, expected_evidence=plan.evidence,
                expected_intents=plan.intents, profile=IPOS_DESCRIPTIVE_PROFILE, owner=functional_input.block)
-    findings.extend(_ipos_evidence_semantic_findings(plan.evidence))
+    findings.extend(_ipos_evidence_semantic_findings(ipos_retained_evidence(plan)))
+    supported_roles = {_ipos_claim_presentation_role(claim) for claim in plan.claims}
+    findings.extend("ipos_required_section_missing:" + section["role"] for section in _ipos_document_contract()["sections"]
+                    if section["required"] and section["role"] not in supported_roles)
     by_id = {claim.claim_id: claim for claim in plan.claims}
     for contribution in ipos_claim_section_plan(plan):
         if contribution.decision == "unresolved":
@@ -6192,7 +6596,7 @@ def validate_ipos_descriptive_output(
     plan = build_ipos_claim_plan(functional_input)
     findings = validate_descriptive_synthesis_plan(plan, expected_evidence=plan.evidence,
                expected_intents=plan.intents, profile=IPOS_DESCRIPTIVE_PROFILE, owner=block_name)
-    findings.extend(_ipos_evidence_semantic_findings(plan.evidence))
+    findings.extend(_ipos_evidence_semantic_findings(ipos_retained_evidence(plan)))
     decisions = {value.claim_id: value for value in ipos_claim_section_plan(plan)}
     published = {claim.claim_id: claim for claim in plan.claims if decisions[claim.claim_id].decision == "retained"}
     findings.extend("ipos_projection_gap:" + value.claim_id + ":" + value.reason
@@ -6200,6 +6604,19 @@ def validate_ipos_descriptive_output(
     titles = {section["role"]: section["title"] for section in contract["sections"]}
     with audit_path.open(encoding="utf-8", newline="") as handle:
         audit = tuple(csv.DictReader(handle))
+    expected_omissions = sorted((span.record_id, value.reason, json.dumps(asdict(span), sort_keys=True))
+                               for value in plan.dispositions if value.reason.startswith("omitted_nonessential:")
+                               for span in value.spans)
+    actual_omissions = []
+    for row in audit:
+        if row.get("decision") == "omitted":
+            try:
+                actual_omissions.append((row.get("source_record_id", ""), row.get("reason", ""),
+                                        json.dumps(json.loads(row["span_json"]), sort_keys=True)))
+            except (KeyError, TypeError, ValueError):
+                findings.append("ipos_omission_audit_invalid")
+    if sorted(actual_omissions) != expected_omissions:
+        findings.append("ipos_omission_audit_coverage_invalid")
     actual_ids = []
     for row in audit:
         if row.get("decision") != "selected":
@@ -6213,9 +6630,11 @@ def validate_ipos_descriptive_output(
                     or json.loads(row["contributor_ids"]) != list(claim.proposition_ids)
                     or row["profile_fingerprint"] != contract["sha256"]
                     or unit["source_record_ids"] != list(dict.fromkeys(span.record_id for span in claim.spans))
-                    or unit["unit_id"] != identity or unit["section"] != titles[_ipos_claim_output_role(claim.role)]):
+                    or unit["unit_id"] != identity or unit["section"] != titles[_ipos_claim_presentation_role(claim)]):
                 raise ValueError("Changed admitted claim linkage")
-            findings.extend(finding + ":audit:" + identity for finding in _ipos_readback_section_findings(unit["text"], (claim,)))
+            audit_findings = (_ipos_connection_audit_findings(unit["text"], claim) if _ipos_connection_rows(claim)
+                              else _ipos_readback_section_findings(unit["text"], (claim,)))
+            findings.extend(finding + ":audit:" + identity for finding in audit_findings)
         except (KeyError, TypeError, ValueError):
             findings.append("ipos_descriptive_audit_invalid_or_changed:" + identity)
     if set(actual_ids) != set(published) or len(actual_ids) != len(set(actual_ids)):
@@ -6225,18 +6644,23 @@ def validate_ipos_descriptive_output(
             findings.append("ipos_final_artifact_missing:" + path.name)
             continue
         sections = _ipos_final_sections(path)
+        events = drs_document_events(path)
+        findings.extend(finding + ":" + path.name for finding in _ipos_connection_table_findings(events, tuple(published.values())))
         if include_publication:
             findings.extend(path.name + ":publication:" + finding for finding in ipos_publication_quality_findings(sections))
         for section in contract["sections"]:
             number = section["title"].split(" ", 1)[0]
-            expected = tuple(claim for claim in published.values() if _ipos_claim_output_role(claim.role) == section["role"])
+            expected = tuple(claim for claim in published.values() if _ipos_claim_presentation_role(claim) == section["role"]
+                             and not _ipos_connection_rows(claim))
             if section["required"] and not sections.get(number):
                 findings.append("ipos_required_overview_section_missing:" + path.name + ":" + number)
             findings.extend(finding + ":" + path.name + ":" + number for finding in
                             _ipos_readback_section_findings(sections.get(number, ""), expected))
-        events = drs_document_events(path)
         actual_titles = []
         in_overview = False
+        connection_kinds = {kind for claim in published.values() for kind, _cells in _ipos_connection_rows(claim)}
+        connection_subsections = {"1.5." + str(index) + " " + IPOS_CONNECTION_TABLES[kind][0]
+                      for index, kind in enumerate((kind for kind in IPOS_CONNECTION_TABLES if kind in connection_kinds), start=1)}
         for event in events:
             if event["kind"] != "heading":
                 continue
@@ -6246,13 +6670,18 @@ def validate_ipos_descriptive_output(
             elif re.match(r"^[023]\.\s", title):
                 in_overview = False
             elif in_overview:
+                caption = re.fullmatch(r"Table \d+\. (.+)", title)
+                if title in connection_subsections or (caption and caption[1] in {
+                        IPOS_CONNECTION_TABLES[kind][0] for kind in connection_kinds}):
+                    continue
                 actual_titles.append(title)
         allowed_titles = [section["title"] for section in contract["sections"]]
         if actual_titles != [title for title in allowed_titles if title in actual_titles]:
             findings.append("ipos_section_contract_changed:" + path.name)
         for title in actual_titles:
             number = title.split(" ", 1)[0]
-            if title in allowed_titles and not sections.get(number):
+            table_information = number == "1.5" and any(_ipos_connection_rows(claim) for claim in published.values())
+            if title in allowed_titles and not sections.get(number) and not table_information:
                 findings.append("ipos_section_without_information_gain:" + path.name + ":" + number)
     return list(dict.fromkeys(findings))
 
@@ -6888,6 +7317,8 @@ def _reorder_docx_navigation(document_xml: str) -> str:
             index
             for index, element in enumerate(children)
             if element.tag == f"{word_namespace}p"
+            and (style := element.find(f"{word_namespace}pPr/{word_namespace}pStyle")) is not None
+            and re.fullmatch(r"Heading[1-6]", style.get(f"{word_namespace}val", ""))
             and re.match(
                 r"^1(?:\.\d+)*\.?\s+",
                 _docx_element_text(element, word_namespace).strip(),

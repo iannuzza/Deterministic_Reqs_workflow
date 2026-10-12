@@ -287,7 +287,17 @@
   "document_contract": {
     "detail_policy": "preserve_essential_block_detail_v1",
     "document_type": "IPOS",
-    "gap_policy": "preserve_independent_withhold_dependent_v1",
+    "essential_sources": {
+      "capabilities": [
+        "inventory:main_functions",
+        "inventory:inputs",
+        "inventory:outputs"
+      ],
+      "purpose": [
+        "inventory:function"
+      ]
+    },
+    "gap_policy": "required_sections_with_audited_omissions_v1",
     "interpretation": "admitted_normative_clauses_v1",
     "mandatory_rules": [
       "section_roles",
@@ -351,7 +361,7 @@
         "title": "1.5 General architecture"
       }
     ],
-    "sha256": "c000263c739899749f530c5915a1f2f5c3d4354084226adb48fc41478ab97361",
+    "sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
     "synthesis": "explicit_functional_claims_v1",
     "validation_hooks": [
       "semantic_fidelity",

@@ -55,6 +55,8 @@ from workflow_routing import (
     compose_drs_clock_summary,
     compose_drs_role_summary,
     drs_section_prose_findings,
+    IPOS_CONNECTION_TABLES,
+    render_connection_table_sections,
 )
 from approved_snapshot_resolver import resolve_complete_authoritative_input
 from requirement_corpus import load_sqlite_snapshot_input
@@ -1861,7 +1863,7 @@ def _drs_has_synchronization_evidence(requirement_statements: List[str]) -> bool
                for statement in requirement_statements)
 
 
-def _drs_clock_path_rows(snapshot_rows: List[Dict[str, str]]) -> List[Tuple[str, str, str, str, str]]:
+def _drs_clock_path_rows(snapshot_rows: List[Dict[str, str]], *, preserve_source_fields: bool = False) -> List[Tuple[str, str, str, str, str]]:
     paths = []
     pattern = re.compile(
         r"^The (\S+) signal shall be connected to the (\S+) signal, "
@@ -1873,6 +1875,10 @@ def _drs_clock_path_rows(snapshot_rows: List[Dict[str, str]]) -> List[Tuple[str,
         match = pattern.match(row.get("requirement_statement", ""))
         if match and row.get("source_req_id"):
             source, target, frequency, gating, control = match.groups()
+            if preserve_source_fields:
+                paths.append((row["source_req_id"], source, target, frequency,
+                              (control or "").strip() if gating.casefold() == "with" else "Not gated"))
+                continue
             if re.search(r"(?:^|\.)u\.", source) or re.search(r"(?:^|\.)u\.", target):
                 source = target = "need clarification"
             if gating == "with":
@@ -1889,6 +1895,25 @@ def _drs_clock_path_rows(snapshot_rows: List[Dict[str, str]]) -> List[Tuple[str,
 
 def _drs_clock_path_markdown_row(path: Tuple[str, str, str, str, str]) -> str:
     return "| " + " | ".join((*path[:4], path[4].replace("|", r"\|"))) + " |"
+
+
+def _drs_reset_connection_rows(snapshot_rows: List[Dict[str, str]]) -> List[Tuple[str, str, str]]:
+    connections = []
+    pattern = re.compile(r"^(?:The\s+)?(?:(\S+)\s+)?signal shall be connected to the (\S+) signal\.\s*$", re.I)
+    for row in snapshot_rows:
+        if (row.get("approved_classification") != "Digital" or row.get("lifecycle_state") != "approved"
+                or not row.get("source_req_id")):
+            continue
+        match = pattern.fullmatch(row.get("requirement_statement", ""))
+        if not match:
+            continue
+        source, destination = match.groups()
+        if not re.search(r"(?:^|[._\s])(?:reset|rst|hreset)", (source or "") + " " + destination, re.I):
+            continue
+        if source and source.endswith("."):
+            source = ""
+        connections.append((row["source_req_id"], source or "", destination))
+    return connections
 
 
 def _drs_sync_connection_rows(snapshot_rows: List[Dict[str, str]], port_rows: List[Dict[str, str]]) -> List[Tuple[str, str, str]]:
@@ -1937,6 +1962,35 @@ def _append_drs_intro_audit(path: Path, records: List[Dict[str, str]], block_nam
                     "source_evidence": evidence.get("statement", ""),
                     "scope": "top_digital",
                 })
+def _drs_connection_table_findings(events: List[dict], rows: Dict[str, List[Tuple[str, ...]]]) -> List[str]:
+    from collections import Counter
+    expected_sections = {kind: ("4.7." + str(index) + " " + IPOS_CONNECTION_TABLES[kind][0],
+                               "Table " + str(7 + index) + ". " + IPOS_CONNECTION_TABLES[kind][0])
+                         for index, kind in enumerate((kind for kind in IPOS_CONNECTION_TABLES if rows[kind]), start=1)}
+    subsection = caption = ""
+    actual = {kind: [] for kind in IPOS_CONNECTION_TABLES}
+    counts = Counter()
+    findings = []
+    for event in events:
+        if event["kind"] == "heading":
+            if event["level"] <= 4:
+                subsection, caption = event["text"], ""
+            elif event["level"] == 5:
+                caption = event["text"]
+        elif event["kind"] == "table":
+            for kind, (_title, header) in IPOS_CONNECTION_TABLES.items():
+                if tuple(event["rows"][0]) != header:
+                    continue
+                counts[kind] += 1
+                if (subsection, caption) != expected_sections.get(kind):
+                    findings.append("drs_connection_table_placement_changed:" + kind)
+                actual[kind].extend(tuple(row) for row in event["rows"][1:])
+    for kind in rows:
+        if Counter(actual[kind]) != Counter(rows[kind]) or counts[kind] != bool(rows[kind]):
+            findings.append("drs_connection_table_content_changed:" + kind)
+    return findings
+
+
 def validate_drs_descriptive_artifacts(repo_root: Path) -> List[str]:
     """Apply the shared descriptive contract to existing DRS artifacts."""
     markdown_path = repo_root / "artifacts/stage5_drs/digital_requirements_specification.md"
@@ -2104,6 +2158,12 @@ def validate_drs_descriptive_artifacts(repo_root: Path) -> List[str]:
     snapshot_match = re.search(r"(?m)^Snapshot ID: (\S+)$", markdown)
     if snapshot_match:
         snapshot_rows = load_sqlite_snapshot_input(repo_root, "DRS", snapshot_id=snapshot_match.group(1)).rows
+        from spec_document_contract import drs_document_events
+        connection_rows = {"clock": _drs_clock_path_rows(snapshot_rows, preserve_source_fields=True),
+                           "reset": _drs_reset_connection_rows(snapshot_rows)}
+        for path in (markdown_path, markdown_path.with_suffix(".docx")):
+            findings.extend(path.name + ":" + finding for finding in
+                            _drs_connection_table_findings(drs_document_events(path), connection_rows))
         clock_paths = _drs_clock_path_rows(snapshot_rows)
         clock_narrative = _drs_clock_section_summary(clock_paths)
         if not timing_section or not publication_text_is_accounted(clock_narrative, timing_section.group(1), docx_text, presentation_audit):
@@ -2806,6 +2866,7 @@ def _write_drs_markdown(
     clock_path_rows: List[Tuple[str, str, str, str, str]],
     sync_connection_rows: List[Tuple[str, str, str]],
     document_contract: dict,
+    connection_table_rows: Optional[Dict[str, List[Tuple[str, ...]]]] = None,
 ) -> None:
     output_path.parent.mkdir(parents=True, exist_ok=True)
     today = datetime.now().strftime("%Y-%m-%d")
@@ -2906,6 +2967,12 @@ def _write_drs_markdown(
     lines.append("| Table 2 | Reference documents | [Go to Table 2](#table-2-reference-documents) |")
     lines.append("| Table 3 | Section navigation index | [Go to Table 3](#table-3-section-navigation-index) |")
     lines.append("| Table 6 | Category convention | [Go to Table 6](#table-6-category-convention) |")
+    connection_sections = render_connection_table_sections("4.7", {
+        kind: ["| " + " | ".join(value.replace("|", r"\|") for value in row) + " |" for row in rows]
+        for kind, rows in (connection_table_rows or {}).items()}, first_table_number=8)
+    for index, section in enumerate(connection_sections, start=8):
+        title = section.splitlines()[0].split(" ", 2)[2]
+        lines.append(f"| Table {index} | {title} | [Go to Table {index}](#table-{index}-{_anchor_slug(title)}) |")
     lines.append("")
 
     lines.append("## 1. Introduction")
@@ -3168,6 +3235,9 @@ def _write_drs_markdown(
             lines.append(f"| {focus} | {requirement.source_req_id} | {_upstream_id(requirement.source_req_id, srs_upstream_map)} |")
         lines.append("")
     lines.append("")
+
+    for section in connection_sections:
+        lines.extend([*section.splitlines(), ""])
 
     lines.append("## 5. Validation and qualification requirements")
     lines.append("- Verification shall combine inspection, analysis, and test with measurable acceptance criteria.")
@@ -3958,6 +4028,8 @@ def main() -> int:
             _drs_clock_path_rows(requirement_input.rows),
             _drs_sync_connection_rows(requirement_input.rows, source_port_rows),
             document_contract,
+            connection_table_rows={"clock": _drs_clock_path_rows(requirement_input.rows, preserve_source_fields=True),
+                                   "reset": _drs_reset_connection_rows(requirement_input.rows)},
         )
         _append_drs_block_description_audit(
             out_drs_md.with_name("descriptive_summary_audit.csv"),

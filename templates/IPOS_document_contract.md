@@ -14,7 +14,8 @@ mandatory_rules: [section_roles, functional_claims, information_gain, semantic_f
 interpretation: admitted_normative_clauses_v1
 synthesis: explicit_functional_claims_v1
 detail_policy: preserve_essential_block_detail_v1
-gap_policy: preserve_independent_withhold_dependent_v1
+gap_policy: required_sections_with_audited_omissions_v1
+essential_sources: {purpose: ["inventory:function"], capabilities: ["inventory:main_functions", "inventory:inputs", "inventory:outputs"]}
 rendering: scoped_explanatory_prose_v1
 paragraph: {
 required: [responsibility, supported_behavior],
@@ -42,7 +43,12 @@ explicit local interactions rather than co-occurring signals or labels.
 Every admitted span has a preserved, justified-excluded or unresolved
 disposition. Independent complete meaning is retained; dependent meaning with
 an unresolved essential restriction is withheld. Gaps remain in derived audits
-and block clean acceptance. No rule authorizes inferred completion of sources.
+and block clean acceptance only when they prevent a required section or affect
+an explicit dependency of its essential sources. Unsupported independent detail
+is withheld and reported, never completed or printed with uncertainty markers.
+Essential sources are declared above; their dependency closure is mandatory.
+Every retained claim still requires independent source-fidelity verification.
+No rule authorizes inferred completion of sources.
 Exact normative statements, IDs, Covers and source I/O remain unchanged.
 
 The renderer consumes structured claims, never raw source fragments. Its bounded

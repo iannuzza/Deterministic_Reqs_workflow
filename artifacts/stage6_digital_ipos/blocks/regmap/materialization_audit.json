@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_regmap.docx",
-    "sha256": "f527361027c101f4466da27ba894cbba8b46590d8abad429772beff1526dc56c"
+    "sha256": "e967971eb0a7927540191dad63cf36652e52c9bdba79170e06f2c53469781ae0"
   },
   "markdown": {
     "path": "digital_ipos_regmap.md",
-    "sha256": "fee8e436eb057f4c002004bc906360fd50e686001d7340262f06f8fc9364eede"
+    "sha256": "9d0c63521af4ed9855bf3450312a0ecc506d68f86f336e2e6342aac9a7283214"
   },
-  "normalized_input_sha256": "41553f804ac7646db8ae28de96a934ce41535c4d950580e5cfa14955e1bf6264",
+  "normalized_input_sha256": "26cad2ece4800d11416d6b84e461f7d3648cdf4fafc81dd0a62a4b6203900f97",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -72,7 +72,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_3004",
@@ -80,13 +80,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:register",
       "record_id": "requirement:Regmap:DDS_STBIO1_3004",
       "text": "0xCA000 SYSTEM_REGISTER 32 0xCA140 tst_main_reset_n, regmap_sw_resetn"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_3006",
@@ -94,13 +94,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:register",
       "record_id": "requirement:Regmap:DDS_STBIO1_3006",
       "text": "0xCD000 OTP (TRIMM REGS) 32 0xCD02F tst_main_reset_n, regmap_sw_resetn"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_3002",
@@ -108,13 +108,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:register",
       "record_id": "requirement:Regmap:DDS_STBIO1_3002",
       "text": "0xC9000 OTP REGISTER 8 0xC902C tst_main_reset_n"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_3001",
@@ -122,13 +122,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:register",
       "record_id": "requirement:Regmap:DDS_STBIO1_3001",
       "text": "0xC80EC RESERVED 0xC8FFF tst_main_reset_n, regmap_sw_resetn"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_3005",
@@ -136,13 +136,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:register",
       "record_id": "requirement:Regmap:DDS_STBIO1_3005",
       "text": "0xCA144 RESERVED 0xCCFFF tst_main_reset_n, regmap_sw_resetn"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_3003",
@@ -150,7 +150,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:register",
       "record_id": "requirement:Regmap:DDS_STBIO1_3003",
       "text": "0xC9030 RESERVED 0xC9FFF tst_main_reset_n, regmap_sw_resetn"
     },
@@ -170,7 +170,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_3000",
@@ -178,7 +178,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: nonprose_output_path:register; omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
       "record_id": "requirement:Regmap:DDS_STBIO1_3000",
       "text": "132 **Update-IR** Run-Test/Idle Select-DR-Scan 13.4. STBIO1 Register Map 13.4.1. STBIO1 Register Map Here is described the list of registers in the register map. The AFE_BLOCK registers are accessible by I2C/SPI direct access and AHB interface, while the others are only by AHB. The I2C/SPI direct access mode is done by the HOST INTF port (I2C/SPI AHB) and the address of the AFE_BLOCK registers are arranged in 4 pages of 64 registers. BASE START ADDRESS ADDRESS BLOCK REGISTER WIDTH BASE END ADDRE VREF_TRIM SS RESET REQ_ID 0xC8000 AFE_BLOCK 8 0xC80EB tst_main_reset_n, regmap_sw_resetn"
     }
@@ -190,35 +190,27 @@
       "source_record_ids": [
         "inventory:function"
       ],
-      "text": "The Regmap block serves to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.",
-      "unit_id": "desc-unit-125cb09ff19268319b9a"
+      "text": "The Regmap block is designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules.",
+      "unit_id": "ipos-claim-35e58e295781cee38632"
     },
     {
       "output_order": 2,
       "section": "1.2 Supported functions and scope",
       "source_record_ids": [
-        "inventory:inputs"
+        "inventory:inputs",
+        "inventory:outputs"
       ],
-      "text": "The Regmap block accepts Host read/write transactions.",
-      "unit_id": "desc-unit-9ea7dc5ab5ad5b890c58"
+      "text": "The Regmap block accepts Host read/write transactions and produces Register data and status fields.",
+      "unit_id": "ipos-claim-2cec935c21d8dddad3f7"
     },
     {
       "output_order": 3,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "inventory:outputs"
-      ],
-      "text": "The Regmap block produces Register data and status fields.",
-      "unit_id": "desc-unit-5e748c1c9f027c9c8872"
-    },
-    {
-      "output_order": 4,
-      "section": "1.2 Supported functions and scope",
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:Regmap:DDS_STBIO1_4000"
       ],
-      "text": "Write enable for each OTP REGISTER is 0, in functional mode, if bit 31 of OTP PRG10 is set 1.",
-      "unit_id": "desc-unit-40f9faa203275ff432fd"
+      "text": "Write enable for each OTP REGISTER is 0, in functional mode, if bit 31 of OTP_PRG10 is set 1.",
+      "unit_id": "ipos-claim-81732bdff035c13d398e"
     }
   ]
 }

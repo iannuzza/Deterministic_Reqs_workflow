@@ -1,5 +1,53 @@
 # IPOS Descriptive Rendering
 
+## Clock and reset connection presentation (2026-10-12)
+
+The shared IPOS presentation path renders admitted, connection-only clock and
+reset claims as dedicated tables within the existing General architecture
+section. Supported block functions retains descriptive behavior, including
+sequencing and conditional signal actions, not static connection lists.
+Clock rows contain Source requirement, Source, Destination, Clock frequency and
+Clock gate condition; reset rows contain Source requirement, Source and Destination.
+Only retained same-owner approved spans supply cells. Unsupported fields remain
+empty; explicit absence of clock gating is rendered as Not gated. Incomplete
+source fragments remain preserved in omission audits, never completed by inference.
+Existing fidelity and materialization checks cover exact cells, contributors,
+table placement and actual Markdown/DOCX. Authority, allocation, executable
+contract and gate entrypoints are unchanged; this is not a semantic-model migration.
+
+## Descriptive obligation boundary (2026-10-12)
+
+The centralized `descriptive-obligations-v1` policy separates source admission,
+textual obligations, and output representation. Only unresolved textual
+obligations of the current document/profile contract block descriptive synthesis.
+Explicit configuration rows, register catalogs, table-only spans and formula
+payloads remain exact in their existing structured/normative path and auditable
+as `nonprose_output_path` dispositions. Register catalogs are never copied into
+I/O or interface tables. Mixed behavior/table/procedure evidence is not exempted
+as a whole; complete functional relationships and dependent contexts remain
+subject to the existing fidelity and publication checks.
+
+Approved requirement and structured content can support description only when
+already admitted within the selected snapshot, owner scope and document profile.
+For IPOS, inventory bounds macro-purpose; same-owner requirements and admitted
+I/O descriptions may refine local detail. Neither a table, an identifier hit nor
+a profile creates approval, a capability or an architectural responsibility.
+SRS and the integration profiles retain their existing admission and detail
+controls; this policy does not activate a disabled profile or migrate a renderer.
+
+Identifier support retrieval is bounded and deterministic: exact spelling first,
+then case/whitespace/hyphen/underscore variants, with admitted I/O descriptions
+before same-scope requirement evidence at equal lexical rank. Guard actors may
+use the approved owner or a uniquely described admitted I/O identifier. Preserve
+authored spelling and exact authoritative IDs. Conflicting descriptions, budget
+overflow, prefix changes, inferred abbreviations and fuzzy equivalence remain
+unresolved. Independent source checks consume the same scoped support, and all
+semantic, publication and materialization gates remain mandatory.
+
+The five-category read-only review is produced by the existing report generator
+with `--render-only --descriptive-review`. It does not regenerate specifications,
+modify the original cross-specification report or certify publication.
+
 ## Current direction: common descriptive contract (2026-10-09)
 
 Contract identity: `shared-descriptive-contract-v2` (planned contract revision,
@@ -34,7 +82,8 @@ condition, effect, scope and provenance before prose. Explicit shared
 responsibility is a registered grouping rule, not a dependency inferred from
 labels. Unresolved references create conservative dependency edges; independent
 complete meaning survives while dependent claims remain withheld. Dependencies
-retain their direction. All unresolved spans remain auditable and block acceptance.
+retain their direction. All unresolved spans remain auditable; unresolved textual
+obligations block acceptance, while explicitly routed non-prose stays separate.
 
 The sole active composer and structural audit consume this claim plan. The
 renderer does not concatenate precomposed fact paragraphs or infer FSM titles.

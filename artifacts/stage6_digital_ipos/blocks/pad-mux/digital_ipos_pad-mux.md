@@ -1,6 +1,6 @@
 # **Digital IPOS - PAD MUX** {#digital-ipos---pad-mux}
 
-- Snapshot: `snap-b2e8101b00dc6909feaed885`
+- Snapshot: `snap-73c872b1307b6adb5eaf843e`
 
 Author: Alessandro Lucio IANNUZZI
 
@@ -16,6 +16,7 @@ Author: Alessandro Lucio IANNUZZI
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 0.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 digital IPOS block baseline | Alessandro Lucio IANNUZZI |
+| 0.2 | 2026-10-12 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
 | Requirement | Internal link |
@@ -42,13 +43,17 @@ Author: Alessandro Lucio IANNUZZI
 
 ### **1.1 Functionality** {#11-functionality}
 
-The PAD MUX block serves to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.
+The PAD MUX block is designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The PAD MUX block accepts Mode selection, register-map controls, test controls, and internal block outputs. The PAD MUX block produces Pad controls, test observations, and routed internal signals.
-- **In function mode, the GPIO1,2,3,4 output.** In function mode, the GPIO1,2,3,4 output is i time slot irq if sel irq gpi1,2,3,4 is 0x05 and ext cap en is “0” and i error time slot if sel irq gpi1,2,3,4 is 0x04 and ext cap en is “0”.
-- **In function mode, the GPIO1,2,3,4 out.** In function mode, the GPIO1,2,3,4 out is i LED Pilot if sel irq gpi1,2,3,4 is 0x02 and ext cap en is “0”, General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext cap en is “0”, irq fifo if sel irq gpio1,2,3,4 is 0x01 and ext cap en is “0” and i DCCK irq if sel irq gpi1,2,3,4 is 0x03 and ext cap en is “0”.
+The PAD MUX block accepts Mode selection, register-map controls, test controls, and internal block outputs and produces Pad controls, test observations, and routed internal signals.
+
+### **1.4 Supported block functions** {#14-supported-block-functions}
+
+In function mode, the GPIO1,2,3,4 output is i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is “0” and is i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is “0”.
+
+In function mode, the GPIO1,2,3,4_out is i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is “0” and is General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is “0” and is irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is “0” and is i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is “0”.
 
 ## **2. Source I/O** {#2-source-io}
 

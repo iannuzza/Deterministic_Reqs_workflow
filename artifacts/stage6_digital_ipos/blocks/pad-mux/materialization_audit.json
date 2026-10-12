@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_pad-mux.docx",
-    "sha256": "dccc12ea886051b604125a85f3c455def47a0d3880586c91e6b1cd8fa574e6d6"
+    "sha256": "f8a5ecf47ba906f9634ba47a8e0630e2ee23d7d5fb2954f7de189d6cc48603af"
   },
   "markdown": {
     "path": "digital_ipos_pad-mux.md",
-    "sha256": "448802ee99b6af48a4fadec3fc72a3f9b6ecf057069d5fef6a56cccfc82b493c"
+    "sha256": "da0a781aff200fc1b7e65be0b41f1664feaadd91e1c3f5ed9021d9550ddcb8af"
   },
-  "normalized_input_sha256": "4a1591fcca58e76378c138b0b3b783139c712b58b93a253e23b27cdc4e391fb7",
+  "normalized_input_sha256": "073d5ce8b77af4585c1f998951461f048f08297bb3c54e0d086f3411a807c57a",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -72,7 +72,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_302",
@@ -80,13 +80,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:ambiguous guard boundary; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_302",
       "text": "[DDS_STBIO1_302] Requirement If MODE_CONFIG register is 0x00 the operative mode shall be functional."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_394",
@@ -94,13 +94,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported or incomplete predicate; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_394",
       "text": "If O_DCCK_P_i changes its value from '1' to '0' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_393",
@@ -108,7 +108,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported or incomplete predicate; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_393",
       "text": "If O_DCCK_N_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
     },
@@ -128,7 +128,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_395",
@@ -136,13 +136,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_395",
       "text": "The DCC feature consists of two stages that detect whether one of six electrode inputs is in the range 0 to 1.5V; thresholds have a 100mV step, and continuous current from 25nA to 200nA flows from the stages into the electrodes."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_306",
@@ -150,7 +150,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:ambiguous guard boundary; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_306",
       "text": "[DDS_STBIO1_306] Requirement If MODE_CONFIG register is 0x10 the operative mode shall be ISPU_DEBUG."
     },
@@ -184,7 +184,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_308",
@@ -192,7 +192,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:ambiguous guard boundary; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_308",
       "text": "[DDS_STBIO1_308] Requirement If MODE_CONFIG register is 0x40 the operative mode shall be Bist Bypass mode."
     },
@@ -226,7 +226,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_307",
@@ -234,13 +234,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:ambiguous guard boundary; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_307",
       "text": "[DDS_STBIO1_307] Requirement If MODE_CONFIG register is 0x20 the operative mode shall be Bist MEMSAFE mode."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_303",
@@ -248,13 +248,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:ambiguous guard boundary; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_303",
       "text": "[DDS_STBIO1_303] Requirement If MODE_CONFIG register is 0x01 the operative mode shall be SCAN."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_305",
@@ -262,13 +262,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:ambiguous guard boundary; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_305",
       "text": "[DDS_STBIO1_305] Requirement If MODE_CONFIG register is 0x08 the operative mode shall be DEBUG."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_392",
@@ -276,13 +276,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported or incomplete predicate; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_392",
       "text": "If O_DCCK_P_i changes its value from '0' to '1' and DCCK_IRQ_MASK is set to '1', then irq_DCCK_IRQ_ST, output of u_regmap_otp, shall be set to '1'"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_304",
@@ -290,7 +290,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:ambiguous guard boundary; full source retained",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_304",
       "text": "[DDS_STBIO1_304] Requirement If MODE_CONFIG register is 0x04 the operative mode shall be BIST."
     },
@@ -316,48 +316,40 @@
       "source_record_ids": [
         "inventory:function"
       ],
-      "text": "The PAD MUX block serves to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.",
-      "unit_id": "desc-unit-b53d9b340a33d509dad3"
+      "text": "The PAD MUX block is designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads.",
+      "unit_id": "ipos-claim-b528e7dffec47338e38b"
     },
     {
       "output_order": 2,
       "section": "1.2 Supported functions and scope",
       "source_record_ids": [
-        "inventory:inputs"
+        "inventory:inputs",
+        "inventory:outputs"
       ],
-      "text": "The PAD MUX block accepts Mode selection, register-map controls, test controls, and internal block outputs.",
-      "unit_id": "desc-unit-e99a1422eab69c42cf43"
+      "text": "The PAD MUX block accepts Mode selection, register-map controls, test controls, and internal block outputs and produces Pad controls, test observations, and routed internal signals.",
+      "unit_id": "ipos-claim-4016d075af5aa6f897b8"
     },
     {
       "output_order": 3,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "inventory:outputs"
-      ],
-      "text": "The PAD MUX block produces Pad controls, test observations, and routed internal signals.",
-      "unit_id": "desc-unit-25c8eee93363f2cf5f30"
-    },
-    {
-      "output_order": 4,
-      "section": "1.2 Supported functions and scope",
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:PAD MUX:DDS_STBIO1_313",
         "requirement:PAD MUX:DDS_STBIO1_312"
       ],
-      "text": "In function mode, the GPIO1,2,3,4 output is i time slot irq if sel irq gpi1,2,3,4 is 0x05 and ext cap en is \u201c0\u201d and i error time slot if sel irq gpi1,2,3,4 is 0x04 and ext cap en is \u201c0\u201d.",
-      "unit_id": "desc-unit-f47b51867b9c47921153"
+      "text": "In function mode, the GPIO1,2,3,4 output is i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d and is i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d.",
+      "unit_id": "ipos-claim-e919c1caa14b274f8ec2"
     },
     {
-      "output_order": 5,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 4,
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:PAD MUX:DDS_STBIO1_310",
         "requirement:PAD MUX:DDS_STBIO1_314",
         "requirement:PAD MUX:DDS_STBIO1_309",
         "requirement:PAD MUX:DDS_STBIO1_311"
       ],
-      "text": "In function mode, the GPIO1,2,3,4 out is i LED Pilot if sel irq gpi1,2,3,4 is 0x02 and ext cap en is \u201c0\u201d, General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext cap en is \u201c0\u201d, irq fifo if sel irq gpio1,2,3,4 is 0x01 and ext cap en is \u201c0\u201d and i DCCK irq if sel irq gpi1,2,3,4 is 0x03 and ext cap en is \u201c0\u201d.",
-      "unit_id": "desc-unit-b9b4a5bb4ffe4da750a0"
+      "text": "In function mode, the GPIO1,2,3,4_out is i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d and is General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d and is irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d and is i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d.",
+      "unit_id": "ipos-claim-db2f05003e65783cfc4c"
     }
   ]
 }

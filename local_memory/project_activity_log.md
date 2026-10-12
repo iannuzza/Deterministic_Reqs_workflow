@@ -1,5 +1,28 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS Milestone
+- Baseline/tag: freeze-ipos-6-pass-2-blocked. User requested stable preservation,
+  milestone commit and tag push; no branch push and no new implementation work.
+- At unchanged snap-73c872b1307b6adb5eaf843e: SRS/ARS/DRS PASS;
+  ADSP, I2C_SPI_AHB, PAD MUX, PMU, Regmap, Smart FIFO regenerated and PASS.
+  Main Controller and Sensor-Hub remain BLOCKED, not regenerated/certified.
+  Digital IPOS overall PARTIAL6/8; Analog allocation VALID_EMPTY, Stage7 not run.
+- Eighteen published specification MD/DOCX outputs have zero inline markers.
+  Review reports, reviewer copies and appendices remain review-only and never
+  requirement, approval, allocation, architecture or gate-override authority.
+- Existing contracts/gates/approvals/snapshot/central architecture preserved;
+  freeze adds checkpoint records only, not semantic or runtime changes.
+- Closed: three top-level specs and six block publications; PMU/DRS dedicated
+  clock/reset tables, numbered captions and working links. DRS gate and10
+  focused regressions PASS;55 exact normative blocks/traceability/baseline intact.
+- Open: two remaining block publications and complete downstream certification.
+  Narrow next step is a separately authorized review of one existing Sensor-Hub
+  blocker claim. No repair, regeneration or broad semantic work started here.
+- Extra DRS rollback was a false binary-SQLite-hash assertion: only derived
+  requirement_allocations.created_at changed. Production comparison verified
+  exact schema/all other fields and5280 protected artifacts unchanged; never
+  weaken the real gate or ignore database semantics to accommodate timestamps.
+
 ## 2026-10-09 - Clean Documents, Partial IPOS Milestone
 - Checkpoint/tag: `milestone-clean-docs-srs-drs-ars-ipos-partial`.
   User requested local memory save plus Git commit/tag; no push or new branch.

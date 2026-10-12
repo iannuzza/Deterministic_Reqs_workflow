@@ -1,13 +1,20 @@
 # **Digital IPOS - PMU** {#digital-ipos---pmu}
 
-- Snapshot: `snap-b2e8101b00dc6909feaed885`
+- Snapshot: `snap-73c872b1307b6adb5eaf843e`
 
 Author: Alessandro Lucio IANNUZZI
 
 ## **0. Document Navigation** {#0-document-navigation}
 
 ### **0.1 Table of contents** {#01-table-of-contents}
+
 - [1. Block overview](#1-block-overview)
+- [1.1 Functionality](#11-functionality)
+- [1.2 Supported functions and scope](#12-supported-functions-and-scope)
+- [1.4 Supported block functions](#14-supported-block-functions)
+- [1.5 General architecture](#15-general-architecture)
+- [1.5.1 Clock connections](#151-clock-connections)
+- [1.5.2 Reset connections](#152-reset-connections)
 - [2. Source I/O](#2-source-io)
 - [3. Block requirements](#3-block-requirements)
 
@@ -16,8 +23,10 @@ Author: Alessandro Lucio IANNUZZI
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 0.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 digital IPOS block baseline | Alessandro Lucio IANNUZZI |
+| 0.2 | 2026-10-12 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
+#### **Table 2. Requirement navigation** {#table-2-requirement-navigation}
 | Requirement | Internal link |
 |---|---|
 | IPOS-PMU-001 | [Go to requirement](#ipos-pmu-001) |
@@ -52,39 +61,84 @@ Author: Alessandro Lucio IANNUZZI
 | IPOS-PMU-030 | [Go to requirement](#ipos-pmu-030) |
 | IPOS-PMU-031 | [Go to requirement](#ipos-pmu-031) |
 
+### **0.4 Table index** {#04-table-index}
+
+- [Table 1. Version history](#table-1-version-history)
+- [Table 2. Requirement navigation](#table-2-requirement-navigation)
+- [Table 3. Clock connections](#table-3-clock-connections)
+- [Table 4. Reset connections](#table-4-reset-connections)
+- [Table 5. Source I/O](#table-5-source-io)
+
 ## **1. Block overview** {#1-block-overview}
 
 ### **1.1 Functionality** {#11-functionality}
 
-The PMU block serves to sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.
+The PMU block is designed to sequence POR-driven LDO1V8 enable, 64/32 kHz and 16 MHz clocks, clock-ready signaling, and digital-reset release for boot and power modes.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The PMU block accepts VDD/VDD IO, power-on reset, clock references, clock-start requests, power-mode configuration. The PMU block produces LDO and power-domain controls, clock enable/gating and ready status, reset-release signals, power-state status.
-- **o main resetn.** When i START CLK 16M is high for the first time, after at least 20 cycles of i clk 16M (16MHz), o main resetn is high.
-- **The u stbio1 top.dig wrapper LV.u p signal.** The u stbio1 top.dig wrapper LV.u p signal is connected to the mu.resetn 32k main ctrlu stbio1 top.dig wrapper LV.u main controller top.i rstn sync 32 signal, connected to the mu.resetn fifou stbio1 top.dig wrapper LV.u multi channel fifo top.HRESETn signal, connected to the mu.resetn regmapu stbio1 top.dig wrapper LV.u regmap otp.hresetn signal, connected to the mu.resetn stmcu stbio1 top.dig wrapper LV.u ADSP.HRESETn signal, connected to the mu.resetn masterblazeu stbio1 top.dig wrapper LV.u masterblaze ahb.HRESETn signal, connected to the mu.resetn main ctrlu stbio1 top.dig wrapper LV.u main controller top.i rstn signal and connected to the mu.resetn regmapu stbio1 top.dig wrapper LV.u ispu.main rst n signal.
-- **The stbio1 top.dig wrapper LV.u pmu.clk 16m dft signal.** The stbio1 top.dig wrapper LV.u pmu.clk 16m dft signal is connected to the stbio1 top.dig wrapper LV.u xbar afe.hclk signal, with frequency 16 MHz and with clock gating stbio1 top.dig wrapper LV.u pm u.clk xbar en | stbio1 top.dig wrapper LV.u pm u.all test mode | ~stbio1 top.dig wrapper LV.u p ad mux.scan enable and connected to the stbio1 top.dig wrapper LV.u ADSP.stmc clk signal, with frequency 16 MHz and with clock gating stbio1 top.dig wrapper LV.u pm u.adsp run | stbio1 top.dig wrapper LV.u pm u.all test mode | ~stbio1 top.dig wrapper LV.u p ad mux.scan enable.
-- **The stbio1 top.dig wrapper LV.u pmu.w sh clk signal.** The stbio1 top.dig wrapper LV.u pmu.w sh clk signal is connected to the stbio1 top.dig wrapper LV.u masterblaze ahb.sys clk signal, with frequency 16 MHz and with clock gating stbio1 top.dig wrapper LV.u pm u.i en sh clk | stbio1 top.dig wrapper LV.u pm u.all test mode | ~stbio1 top.dig wrapper LV.u p ad mux.scan enable.
-- **o PD CLKF.** When i POR1V2 1V2 is low, o PD CLKF is high. When i mask en ldo pdclkf reg and o EN LDO1V8 are set to 1, o PD CLKF is low after at least 40 cycles of the clk 64k divided.
-- **o DIS RC VIREF.** When clk 64k divided is stable, after at least 352 cycles of clk 64k divided (32kHz), o DIS RC VIREF is low. When i POR1V2 1V2 is low, o DIS RC VIREF is high.
-- **The stbio1 top.dig wrapper LV.u pmu.clk xbar signal.** The stbio1 top.dig wrapper LV.u pmu.clk xbar signal is connected to the stbio1 top.dig wrapper LV.u regmap otp.hclk signal, with frequency 16 MHz and with clock gating stbio1 top.dig wrapper LV.u pm u.clk en m3 | stbio1 top.dig wrapper LV.u pm u.all test mode | stbio1 top.dig wrapper LV.u pm u.clk en m3 reg | stbio1 top.dig wrapper LV.u pm u.clk en s3 | ~stbio1 top.dig wrapper LV.u p ad mux.scan enable.
-- **The u stbio1 top.u pmu.u device startup.tst clk 32k signal.** The u stbio1 top.u pmu.u device startup.tst clk 32k signal is connected to the stbio1 top.dig wrapper LV.tst clk 32k signal, with frequency 32 kHz and without clock gating.
-- **The stbio1 top.dig wrapper LV.u pmu. signal.** The stbio1 top.dig wrapper LV.u pmu. signal is connected to the u device startup.u por main resetn.RST N FF[0]u stbio1 top.dig wrapper LV.u xbar afe.hresetn signal.
-- **o CLK 16M READY.** When i POR1V2 1V2 is low, o CLK 16M READY is low. When i START CLK 16M is high, after at least 20 cycles of i clk 16M (16MHz), o CLK 16M READY is high.
-- **The stbio1 top.dig wrapper LV.u pmuclk xbar signal.** The stbio1 top.dig wrapper LV.u pmuclk xbar signal is connected to the stbio1 top.dig wrapper LV.u.fifo.HCLK signal, with frequency 16 MHz and with clock gating stbio1 top.dig wrapper LV.u pm u.clk en m2 | stbio1 top.dig wrapper LV.u pm u.all test mode | stbio1 top.dig wrapper LV.u pm u.clk en m2 reg | ~stbio1 top.dig wrapper LV.u p ad mux.scan enable.
-- **the PMU.** At the release of the POR signal from the analog domain, the PMU manages the turn-on of the LDO1V8 and starts clocks Start-Up Sequence (reported in PMU IPOS).
-- **The stbio1 top.dig wrapper LV.u pmu.clk stredl signal.** The stbio1 top.dig wrapper LV.u pmu.clk stredl signal is connected to the stbio1 top.dig wrapper LV.u ispu.clk signal, with frequency 16 MHz and without clock gating.
-- **The stbio1 top.clk 64k signal.** The stbio1 top.clk 64k signal is connected to the stbio1 top.dig wrapper LV.u pmu.clk 64k signal, with frequency 64 kHz and without clock gating.
-- **o EN LDO1V8.** When i POR1V2 1V2 is low, o EN LDO1V8 is low. When i POR1V2 1V2 rises, after at least 10 cycles of i clk 64k (64kHz), o EN LDO1V8 is high and the clk 64k divided is considered stable.
-- **The stbio1 top.dig wrapper LV.u pmu.tst clk 16m signal.** The stbio1 top.dig wrapper LV.u pmu.tst clk 16m signal is connected to the stbio1 top.dig wrapper LV.u main controller top.i clk 16MHz signal, with frequency 16 MHz and with clock gating stbio1 top.dig wrapper LV.u pm u.i en clk 16MHz sleep | stbio1 top.dig wrapper LV.u pm u.scan mode | ~stbio1 top.dig wrapper LV.u p ad mux.scan enable.
-- **The stbio1 top.dig wrapper LV.u pmu.tst clk 32k signal.** The stbio1 top.dig wrapper LV.u pmu.tst clk 32k signal is connected to the stbio1 top.dig wrapper LV.u main controller top.i clk 32kHz signal, with frequency 32 kHz and without clock gating.
-- **The stbio1 top.clk 16m signal.** The stbio1 top.clk 16m signal is connected to the stbio1 top.dig wrapper LV.u pmu.clk 16m signal, with frequency 16 MHz and without clock gating.
-- **i POR1V2 1V2.** When the device is turned on, i POR1V2 1V2 is high.
+The PMU block accepts VDD/VDD_IO, power-on reset, clock references, clock-start requests, power-mode configuration and produces LDO and power-domain controls, clock enable/gating and ready status, reset-release signals, power-state status.
+
+### **1.4 Supported block functions** {#14-supported-block-functions}
+
+After At least 2 ms from the Release of the POR, the reset of the digital domain is de- asserted (an overlook on this part is described in the PMU IPOS).
+
+After At least 2 ms from the Release of the POR, the device starts the Boot Phase.
+
+When i_START_CLK_16M is high for the first time, after at least 20 cycles of i_clk_16M (16MHz), o_main_resetn is high.
+
+When i_POR1V2_1V2 is low, o_PD_CLKF is high. When i_POR1V2_1V2 is low, o_DIS_RC_VIREF is high. When i_POR1V2_1V2 is low, o_CLK_16M_READY is low. When i_POR1V2_1V2 is low, o_ EN_LDO1V8 is low.
+
+When clk_64k_divided is stable, after at least 352 cycles of clk_64k_divided (32kHz), o_DIS_RC_VIREF is low.
+
+When i_mask_en_ldo_pdclkf_reg and o_EN_LDO1V8 are set to 1, o_PD_CLKF is low after at least 40 cycles of the clk_64k_divided.
+
+When i_START_CLK_16M is high, after at least 20 cycles of i_clk_16M (16MHz), o_CLK_16M_READY is high.
+
+When i_POR1V2_1V2 rises, after at least 10 cycles of i_clk_64k (64kHz), o_ EN_LDO1V8 is high and the clk_64k_divided is considered stable.
+
+When the device is turned on, i_POR1V2_1V2 is high.
+
+### **1.5 General architecture** {#15-general-architecture}
+
+#### **1.5.1 Clock connections** {#151-clock-connections}
+
+##### **Table 3. Clock connections** {#table-3-clock-connections}
+
+| Source requirement | Source | Destination | Clock frequency | Clock gate condition |
+|---|---|---|---|---|
+| DDS_STBIO1_1024 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_xbar_afe.hclk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.clk_xbar_en \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_1022 | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m_dft | stbio1_top.dig_wrapper_LV.u_ADSP.stmc_clk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.adsp_run \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_1023 | stbio1_top.dig_wrapper_LV.u_pmu.w_sh_clk | stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.sys_clk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.i_en_sh_clk \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_2026 | stbio1_top.dig_wrapper_LV.u_pmu.clk_xbar | stbio1_top.dig_wrapper_LV.u_regmap_otp.hclk | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3 \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m3_reg \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_s3 \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_1025 | u_stbio1_top.u_pmu.u_device_startup.tst_clk_32k | stbio1_top.dig_wrapper_LV.tst_clk_32k | 32 kHz | Not gated |
+| DDS_STBIO1_2024 | stbio1_top.dig_wrapper_LV.u_pmuclk_xbar | stbio1_top.dig_wrapper_LV.u.fifo.HCLK | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2 \| stbio1_top.dig_wrapper_LV.u_pm u.all_test_mode \| stbio1_top.dig_wrapper_LV.u_pm u.clk_en_m2_reg \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_2025 | stbio1_top.dig_wrapper_LV.u_pmu.clk_stredl | stbio1_top.dig_wrapper_LV.u_ispu.clk | 16 MHz | Not gated |
+| DDS_STBIO1_1021 | stbio1_top.clk_64k | stbio1_top.dig_wrapper_LV.u_pmu.clk_64k | 64 kHz | Not gated |
+| DDS_STBIO1_1026 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_16m | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_16MHz | 16 MHz | stbio1_top.dig_wrapper_LV.u_pm u.i_en_clk_16MHz_sleep \| stbio1_top.dig_wrapper_LV.u_pm u.scan_mode \| ~stbio1_top.dig_wrapper_LV.u_p ad_mux.scan_enable |
+| DDS_STBIO1_1027 | stbio1_top.dig_wrapper_LV.u_pmu.tst_clk_32k | stbio1_top.dig_wrapper_LV.u_main_controller_top.i_clk_32kHz | 32 kHz | Not gated |
+| DDS_STBIO1_1020 | stbio1_top.clk_16m | stbio1_top.dig_wrapper_LV.u_pmu.clk_16m | 16 MHz | Not gated |
+
+#### **1.5.2 Reset connections** {#152-reset-connections}
+
+##### **Table 4. Reset connections** {#table-4-reset-connections}
+
+| Source requirement | Source | Destination |
+|---|---|---|
+| DDS_STBIO1_2054 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_32k_main_ctrlu_stbio1_top.dig_wrapper_LV.u_main_controller_top.i_rstn_sync_32 |
+| DDS_STBIO1_1053 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_fifou_stbio1_top.dig_wrapper_LV.u_multi_channel_fifo_top.HRESETn |
+| DDS_STBIO1_1052 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_regmapu_stbio1_top.dig_wrapper_LV.u_regmap_otp.hresetn |
+| DDS_STBIO1_1050 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_stmcu_stbio1_top.dig_wrapper_LV.u_ADSP.HRESETn |
+| DDS_STBIO1_1051 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_masterblazeu_stbio1_top.dig_wrapper_LV.u_masterblaze_ahb.HRESETn |
+| DDS_STBIO1_1054 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_main_ctrlu_stbio1_top.dig_wrapper_LV.u_main_controller_top.i_rstn |
+| DDS_STBIO1_2053 | u_stbio1_top.dig_wrapper_LV.u_p | mu.resetn_regmapu_stbio1_top.dig_wrapper_LV.u_ispu.main_rst_n |
+| DDS_STBIO1_2052 |  | u_device_startup.u_por_main_resetn.RST_N_FF[0]u_stbio1_top.dig_wrapper_LV.u_xbar_afe.hresetn |
 
 ## **2. Source I/O** {#2-source-io}
 
 The following approved source I/O entries are owned by this block.
 
+#### **Table 5. Source I/O** {#table-5-source-io}
 | Port name | Direction | Type / details | Table | Source page |
 |---|---|---|---|---|
 | clk_16m | input | wire Clock 16 MHz from analog ring oscillators | PMU I/O List | 37 |
