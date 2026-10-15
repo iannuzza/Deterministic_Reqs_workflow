@@ -854,6 +854,81 @@ class FinalPolishTests(unittest.TestCase):
         gui.run_stage_cli("7")
         self.assertEqual(gui._run_command_async.call_args.kwargs["stage"], "7")
 
+    def test_final_sysml_run_sets_diagram_stage(self):
+        gui = object.__new__(WorkflowGUI)
+        gui._snapshot_selector_args = MagicMock(return_value=["--snapshot-id", "snapshot-test"])
+        gui._run_command_async = MagicMock()
+        gui.regenerate_sysml()
+        self.assertEqual(gui._run_command_async.call_args.kwargs.get("stage"), "sysml")
+
+    def test_final_sysml_compact_boxes_track_run_result_after_redraw(self):
+        root = tk.Tk()
+        root.withdraw()
+        try:
+            gui = object.__new__(WorkflowGUI)
+            gui.root = MagicMock()
+            gui.root.after.side_effect = lambda delay, callback, *args: callback(*args)
+            gui.diagram_canvas = tk.Canvas(root)
+            gui.compact_workflow_zoom = 1.0
+            gui.active_stage = None
+            gui.hover_stage = None
+            gui.stage_failure_reasons = {}
+            gui.diagram_hint_var = tk.StringVar(master=root)
+            gui._refresh_generated_sysml = MagicMock()
+            for method in ("_set_status", "append_log", "append_chat"):
+                setattr(gui, method, MagicMock())
+            gui._snapshot_selector_args = MagicMock(return_value=["--snapshot-id", "snapshot-test"])
+            gui._draw_compact_workflow_graph()
+            for result in (0, 1, "exception", 0):
+                with self.subTest(result=result):
+                    gui.is_running = False
+                    process = MagicMock()
+                    process.stdout = ["Final SysML phase: PASS; implementation readiness: NOT_READY\n"] if result == 0 else ["Generation failed\n"]
+                    process.wait.return_value = result
+
+                    def start_process(*args, **kwargs):
+                        self.assertEqual(gui.active_stage, "sysml")
+                        self.assertFalse(getattr(gui, "sysml_generation_succeeded", False))
+                        for key in ("sysml", "sysml_readiness"):
+                            self.assertEqual(gui.diagram_canvas.itemcget(gui.stage_rects[key], "fill"), WorkflowDiagramRenderer.COLORS["active"]["fill"])
+                        if result == "exception":
+                            raise OSError("Cannot start SysML generation")
+                        return process
+
+                    with patch("workflow_gui.threading.Thread") as thread, \
+                            patch("workflow_gui.subprocess.Popen", side_effect=start_process) as popen:
+                        thread.side_effect = lambda **kwargs: SimpleNamespace(start=kwargs["target"])
+                        gui.regenerate_sysml()
+                    popen.assert_called_once()
+                    self.assertIsNone(gui.active_stage)
+                    self.assertEqual(gui.sysml_generation_succeeded, result == 0)
+                    self.assertEqual("sysml" in gui.stage_failure_reasons, result != 0)
+                    gui._draw_compact_workflow_graph()
+                    expected = "active" if result == 0 else "failed"
+                    for key in ("sysml", "sysml_readiness"):
+                        self.assertEqual(gui.diagram_canvas.itemcget(gui.stage_rects[key], "fill"), WorkflowDiagramRenderer.COLORS[expected]["fill"])
+            gui._snapshot_selector_args.return_value = None
+            with patch.object(gui, "_run_command_async") as run:
+                gui.regenerate_sysml()
+            run.assert_not_called()
+        finally:
+            root.update_idletasks()
+            root.destroy()
+
+    def test_saved_pane_reapplication_does_not_log(self):
+        gui = object.__new__(WorkflowGUI)
+        gui.root = MagicMock()
+        gui.gui_state = {"layout_saved_by_user": True, "last_user_layout": {"sashes": {}}}
+        gui.layout_scale = 1.0
+        gui._gui_pane_names = MagicMock(return_value=("work_pane",))
+        gui.work_pane = MagicMock()
+        gui.work_pane.panes.return_value = ("left", "right")
+        gui._apply_saved_pane_layout = MagicMock(return_value=True)
+        gui._reapply_saved_gui_sashes()
+        gui._apply_saved_pane_layout.assert_called_once_with("work_pane", gui.work_pane, gui.gui_state["last_user_layout"])
+        gui.root.update_idletasks.assert_called_once_with()
+        gui.root.after.assert_not_called()
+
     def test_gui_layout_scales_to_screen_and_preserves_saved_position(self):
         self.assertEqual(responsive_layout_scale(1024, 600), 0.72)
         self.assertEqual(responsive_layout_scale(1440, 900), 1.0)

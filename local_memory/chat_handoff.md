@@ -1,6 +1,34 @@
 ﻿# Chat Handoff - Deterministic_Reqs_workflow
 
-## CURRENT HANDOFF - 2026-10-15 - Selected-Snapshot IPOS PASS and Reporting Fix
+## CURRENT HANDOFF - 2026-10-15 - Full Flow PASS, Final SysML PASS
+
+- Start with checkpoint `2026-10-15-full-flow-final-sysml-pass`, its README and
+  hash manifest. Requested annotated tag: `full-flow-PASS-Final-SysML-PASS`;
+  exact label `full flow PASS, Final SysML PASS`. Commit/tag/push authorized;
+  Git refs are the transaction receipt. Earlier milestone `d3160a3` was pushed.
+- Selected snapshot remains `snap-73c872b1307b6adb5eaf843e`. User final phase
+  completed23:09:11+02:00, exit0 after central coherence/declaration PASS.
+  Earlier stages/digital documents passed; Analog scope valid-empty. No separate
+  Stage7 execution or native compiler acceptance implied. Publication ELIGIBLE,
+  implementation NOT_READY, never READY/MVP-complete because generation passed.
+- Repaired final-phase ordering (fresh central stamp before coherence) and false
+  persisted/fresh assessment mismatch (nested qualifier lists versus tuples).
+  Comparison uses exact JSON representation; mutations remain failures.
+- Compact final SysML/readiness boxes now share real combined command outcome;
+  exit0 persists green, failure red, retry clears prior success. Pane restore
+  logging noise removed without changing layout restore/save. Workbook reference
+  copied to docs; operational checklist remains under config.
+-75 GUI and17 readiness tests PASS;3 focused runner tests PASS. Broader four
+  GUI scope/navigation failures reproduce on committed baseline, not fixed here.
+  Tk teardown warning persists. No whole-workspace/native acceptance claim.
+- Delta archive includes canonical working database and official changed evidence,
+  excluding personal state/caches/drafts/experimental backups. Previous checkpoint
+  remains immutable. This save does not generate, approve or select another snapshot.
+- Next: retain NOT_READY findings for governed implementation-readiness work.
+  Automatic Office reopening, Tk cleanup, four baseline test issues and newer
+  snapshot Main descriptive enrichment remain separate; do not auto-run stages.
+
+## PREVIOUS HANDOFF - 2026-10-15 - Selected-Snapshot IPOS PASS and Reporting Fix
 
 - Checkpoint: `2026-10-15-selected-snapshot-ipos-reporting-pass`, local only.
   Read `checkpoint.md` and its checkpoint-directory README/manifest first.

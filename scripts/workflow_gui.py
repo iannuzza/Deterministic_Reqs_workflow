@@ -833,12 +833,6 @@ class WorkflowGUI:
                 applied[name] = [pane.sashpos(index) for index in range(max(0, len(pane.panes()) - 1))]
             except (AttributeError, tk.TclError, TypeError, ValueError):
                 continue
-        self.root.after(
-            0,
-            self._append_log_ui,
-            f"[{datetime.now().astimezone().isoformat(timespec='seconds')}] [LAYOUT] "
-            f"Reapplied saved pane layout from {GUI_STATE_PATH.as_posix()} sashes={applied}",
-        )
 
     def _restore_collapsed_panes(self) -> None:
         """Recover any persisted pane whose sash was restored at an unusable edge."""
@@ -3553,6 +3547,7 @@ class WorkflowGUI:
             "s0": "0", "s1": "1", "s2": "2", "s2a": "2a",
             "stage3": "3", "stage4": "4", "stage5": "5",
             "stage6": "6", "stage7": "7",
+            "sysml": "sysml", "sysml_readiness": "sysml_readiness",
         }
         for node in WORKFLOW_DIAGRAM_NODES:
             x = (node["x"] + 10) * zoom
@@ -3612,7 +3607,11 @@ class WorkflowGUI:
             if stage:
                 self.stage_rects[stage] = rect
                 self.stage_labels[stage] = label
-                self._bind_stage_click(tag, stage)
+                if stage in {"sysml", "sysml_readiness"}:
+                    c.tag_bind(tag, "<Enter>", lambda event, node_id=stage: self._on_workflow_node_hover(event, node_id))
+                    c.tag_bind(tag, "<Leave>", lambda event, node_id=stage: self._on_workflow_node_leave(event, node_id))
+                else:
+                    self._bind_stage_click(tag, stage)
             elif node["id"] == "supp_import":
                 self.stage_rects["supp"] = rect
                 self.stage_labels["supp"] = label
@@ -3727,11 +3726,12 @@ class WorkflowGUI:
         if renderer is not None:
             renderer.set_stage_failures(self.stage_failure_reasons)
         for key, rect in self.stage_rects.items():
-            if key in self.stage_failure_reasons:
+            status_key = "sysml" if key == "sysml_readiness" else key
+            if status_key in self.stage_failure_reasons:
                 failed_style = WorkflowDiagramRenderer.COLORS["failed"]
                 self.diagram_canvas.itemconfig(rect, fill=failed_style["fill"], outline=failed_style["outline"], width=3)
                 self.diagram_canvas.itemconfig(self.stage_labels[key], fill="#7f1510")
-            elif key == self.active_stage:
+            elif status_key == self.active_stage or (status_key == "sysml" and getattr(self, "sysml_generation_succeeded", False)):
                 active_style = WorkflowDiagramRenderer.COLORS["active"]
                 self.diagram_canvas.itemconfig(rect, fill=active_style["fill"], outline=active_style["outline"], width=3)
                 self.diagram_canvas.itemconfig(self.stage_labels[key], fill="#1f2d3d")
@@ -3757,6 +3757,12 @@ class WorkflowGUI:
 
     def _clear_stage_failure_ui(self, stage: str) -> None:
         self.stage_failure_reasons.pop(stage, None)
+        if stage == "sysml":
+            self.sysml_generation_succeeded = False
+        self._refresh_stage_styles()
+
+    def _set_sysml_generation_success_ui(self) -> None:
+        self.sysml_generation_succeeded = True
         self._refresh_stage_styles()
 
     def set_stage_failure(self, stage: Optional[str], reason: str) -> None:
@@ -4183,6 +4189,8 @@ class WorkflowGUI:
                     self._append_retrieval_evidence(output_lines)
                     self._append_workflow_manifest_summary()
                 self.append_chat(f"GUI: Completed {label} with exit={code}")
+                if code == 0 and stage == "sysml":
+                    self.root.after(0, self._set_sysml_generation_success_ui)
                 if code == 0 and approval_after_success:
                     self.root.after(0, self._show_architecture_profile_approval_dialog)
                 if code == 0 and on_success is not None:
@@ -8608,7 +8616,7 @@ WScript.Quit 0
         if selector is None:
             return
         cmd = [PYTHON_EXE, str(SCRIPTS_DIR / "run_final_sysml_phase.py"), *selector]
-        self._run_command_async(cmd, "Final SysML generation, readiness checklist and Excel reports", on_success=self._refresh_generated_sysml)
+        self._run_command_async(cmd, "Final SysML generation, readiness checklist and Excel reports", stage="sysml", on_success=self._refresh_generated_sysml)
 
     def _review_regenerated_sysml(self) -> None:
         self._run_command_async(

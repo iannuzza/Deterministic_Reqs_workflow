@@ -1,0 +1,235 @@
+{
+  "checkpoint_id": "2026-10-15-full-flow-final-sysml-pass",
+  "created_at": "2026-10-15T23:16:58+02:00",
+  "base_commit": "d3160a3d4f4e37ced61ec304a2414afd4081fdf7",
+  "tag": "full-flow-PASS-Final-SysML-PASS",
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "flow_execution_status": "PASS",
+  "final_sysml_phase_status": "PASS",
+  "publication_status": "ELIGIBLE",
+  "implementation_readiness": "NOT_READY",
+  "restore_mode": "Apply delta to recorded parent commit or restore milestone Git tag; not standalone repository backup",
+  "archive": "implementation_evidence_backup.zip",
+  "archive_sha256": "7b1f688ae2a6486f5e4a82a2226e96acb00a535c7b49902c89a307bce38edb34",
+  "file_count": 42,
+  "files": [
+    {
+      "path": "artifacts/audit/events.jsonl",
+      "sha256": "1962a2a3dfe058db431e56c229d8e7fb0a36607809e0104e3fbec4484940dc88",
+      "size": 451428
+    },
+    {
+      "path": "artifacts/stage2_mirco_arc/stbio_architecture_model_manifest.json",
+      "sha256": "f66e0b71ed13362371407c3c1a159e0a2ac4b76718c0bcf498489a47d378180f",
+      "size": 2055081
+    },
+    {
+      "path": "artifacts/stage2_mirco_arc/stbio_architecture_model_review.md",
+      "sha256": "840d5506672ad471c88a68afb5502717df91918c7da11bf54307516ab13171e4",
+      "size": 3180
+    },
+    {
+      "path": "artifacts/validation/final_readiness.json",
+      "sha256": "afbe0ea02d70d4b2dda7dd44dde70f47b8427d62ca6828cfa3a92988d6ead5ea",
+      "size": 4529521
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/DigitalSubsystem.sysml.951ec8db113b.readiness.json",
+      "sha256": "96be718639322637d6b3227f97cb1c249cca41679b64b36340e77d8e14715510",
+      "size": 113066
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/DigitalSubsystem.sysml.951ec8db113b.readiness.xlsx",
+      "sha256": "6d95fe7d7f437392e23ec4fcb20e9d2b102847a671d405e0829215cf6b563e19",
+      "size": 20553
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/STBIOSystem.sysml.98f9dbb4fa34.readiness.json",
+      "sha256": "dd2a6bb266ce58944c39113b4aa36f1185af3cc8ad162479d7e8b0e552d04b32",
+      "size": 108961
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/STBIOSystem.sysml.98f9dbb4fa34.readiness.xlsx",
+      "sha256": "dd2baf7714a893539a0645f1fbdcae0ccc44e8be045970fea1b44e7f1695ac2a",
+      "size": 20441
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/adsp.sysml.559a67080c03.readiness.json",
+      "sha256": "0151dfc4f1b339a0c673be2128c15b54aeb01593bcfc09bd9271f43475f3b267",
+      "size": 139954
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/adsp.sysml.559a67080c03.readiness.xlsx",
+      "sha256": "0aeb33b36707e7de71b2bf6d5b909ce794ef26a760f57c68d78597187ad21dca",
+      "size": 24006
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/i2c_spi_ahb.sysml.7a3d3575ecea.readiness.json",
+      "sha256": "69f359125d093f59282ee422031e4a501acff331ea66381034a7ece412e45ec2",
+      "size": 131618
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/i2c_spi_ahb.sysml.7a3d3575ecea.readiness.xlsx",
+      "sha256": "40366093b1bb3c66e96fb98624808ade02c7b3eea22ff15e33deb837d5de7ece",
+      "size": 24081
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/main_controller.sysml.1eeffde83513.readiness.json",
+      "sha256": "a196d4b94f8023f82a5fbfebe767592d23b09ff54982dd4d61c7d08ea38f4318",
+      "size": 920244
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/main_controller.sysml.1eeffde83513.readiness.xlsx",
+      "sha256": "22a5bbad51095a8b1b9de7111770682f12a14af1fde5098f262b2fa44367f8a2",
+      "size": 48334
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/pad_mux.sysml.31d5a94e26a6.readiness.json",
+      "sha256": "84f7547a658385ea7c832f14f243f68cf3915a441b0c66f5770f58e43690b4ab",
+      "size": 250763
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/pad_mux.sysml.31d5a94e26a6.readiness.xlsx",
+      "sha256": "b18ed2d06f53330768ac805f9a0334b548c91ce23ebf4f43788857372c50d773",
+      "size": 34131
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/pmu.sysml.d05bff96bed8.readiness.json",
+      "sha256": "a14de19ef90a534825f2f9c823eba199a59515409233f5aacf9a6dc4de527ae3",
+      "size": 212914
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/pmu.sysml.d05bff96bed8.readiness.xlsx",
+      "sha256": "163caeee9caec8edbd042f98c8a005653ba5b1223a0b519d0414a196bd02235a",
+      "size": 29601
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/readiness_summary.json",
+      "sha256": "13498cca016ddf9159728355586ad600e3f3b86a27ae1d162a95c2757296fd7b",
+      "size": 21008
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/readiness_summary.xlsx",
+      "sha256": "ac481d32df6b48772d1e932d21d2c79cd12038d4a3e975734b4d8ad08d9e0295",
+      "size": 11395
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/regmap.sysml.1035668db860.readiness.json",
+      "sha256": "89c0259ce120b9d663d37331a8f9f29be66ec1517700478315e98ba173fa5af6",
+      "size": 94151
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/regmap.sysml.1035668db860.readiness.xlsx",
+      "sha256": "cb9d5a00232a220102a2e0392e41e5027c792fb88f0a6e82f6d11a827554bd43",
+      "size": 20876
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/sensor_hub.sysml.bdef6bf87d01.readiness.json",
+      "sha256": "b244de7dbdadc29b544f496105c8ffce8bb7e5fe0b53b7647da1bdf2d197fe44",
+      "size": 149493
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/sensor_hub.sysml.bdef6bf87d01.readiness.xlsx",
+      "sha256": "807d10ff970ce690ac4ba51e0f88d7e7aa88abf271eaced56f7ebd5d5195c7db",
+      "size": 24694
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/shared_definitions.sysml.44cd5dbaf88d.readiness.json",
+      "sha256": "ace250f0e05ab268e4b2cd6d78495fab08a97d1237ea0ec4cda2d953e6f4fe68",
+      "size": 117490
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/shared_definitions.sysml.44cd5dbaf88d.readiness.xlsx",
+      "sha256": "a2b082ba7f8f17138897f561b6005baf66776b3e54784285fc89154741b672cd",
+      "size": 20628
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/smart_fifo.sysml.1b8d8f8b780b.readiness.json",
+      "sha256": "dc51ba82e750fab30db0fe1743a2befb627a3d7b021beb1f378289ffb8d3b5b8",
+      "size": 116675
+    },
+    {
+      "path": "artifacts/validation/readiness_checklists/smart_fifo.sysml.1b8d8f8b780b.readiness.xlsx",
+      "sha256": "f51b206c1f6f34f7e0a35fa639adea946f22d80eea16822b0e068a1baa13caa8",
+      "size": 22735
+    },
+    {
+      "path": "artifacts/validation/sysml_relations/relation_summary.xlsx",
+      "sha256": "e76c113ea7dca7e4311679f231f67f123597d55f01edea1ee622cce300d6c20e",
+      "size": 150263
+    },
+    {
+      "path": "data/canonical/canonical_store.sqlite",
+      "sha256": "3a2eb96e997ee4e4794b3e35bd7626a770e678dab18f51bfa10bd9c3b37adca1",
+      "size": 11935744
+    },
+    {
+      "path": "docs/readiness-checklist.xlsx",
+      "sha256": "15d5c65f87ed6eaf62b215d57d1d00b63344bcdc922676c19b69b6c20f11103b",
+      "size": 12746
+    },
+    {
+      "path": "local_memory/chat_handoff.md",
+      "sha256": "40c344b42f8c0c8dd71816c2547b0da2aa0b38140663cf05bab2cf63eea94550",
+      "size": 177760
+    },
+    {
+      "path": "local_memory/checkpoint.md",
+      "sha256": "7e63f076d144bf56137168cbf314030ebff4bf9c33b8b78bfcf876cf14fd07e2",
+      "size": 81987
+    },
+    {
+      "path": "local_memory/checkpoints/2026-10-15-full-flow-final-sysml-pass/README.md",
+      "sha256": "890283d41e04de41cd32e741d534a99f75db45eb1c5bd2f2cf0ca6c52cd18312",
+      "size": 2299
+    },
+    {
+      "path": "local_memory/environment.md",
+      "sha256": "bbbc132f2152cce15f160ba926f4e79eced9abb8df04c26d6bbf0afcda94543b",
+      "size": 18408
+    },
+    {
+      "path": "local_memory/project_activity_log.md",
+      "sha256": "7c8fadd6803ff5d5c6b147b60daaa18b7e6da77d7ff0a50eaa390e022323d0a4",
+      "size": 117539
+    },
+    {
+      "path": "local_memory/sync_manifest.json",
+      "sha256": "633b3d38df3571ca4c10bc0b1f4e71df0e09472cdfbfb72d06bb70f865fcfb16",
+      "size": 5428
+    },
+    {
+      "path": "scripts/run_final_sysml_phase.py",
+      "sha256": "754f4677d057f7b1979d3212a7cbbff613deb2d9640134eaffcdb3210f365fdd",
+      "size": 5102
+    },
+    {
+      "path": "scripts/validate_downstream_coherence.py",
+      "sha256": "cd4079e1eddb28247452978616c37c809dc25662f1874d1e4209de55987ec564",
+      "size": 153331
+    },
+    {
+      "path": "scripts/workflow_gui.py",
+      "sha256": "d3acdae571281759ced25d8d53447e92a09e14c3f0f5fa1a60b7a6fedc56f9b1",
+      "size": 452386
+    },
+    {
+      "path": "tests/test_final_polish.py",
+      "sha256": "972ae31ee0f9f08ad482f3dc5c3ea0058666de52a9bef9eae8c27e4edbfe3f68",
+      "size": 95742
+    },
+    {
+      "path": "tests/test_stage2_sysml_role.py",
+      "sha256": "a6d5f67a4f91f1489bbd123c5e556112f3b7afccd46067546b3acba1b74a7ff9",
+      "size": 110070
+    }
+  ],
+  "exclusions": [
+    "personal GUI/retrieval settings",
+    "source drafts",
+    "experimental proof/pilot directories",
+    "SQLite WAL/SHM",
+    "Office lockfiles",
+    "older checkpoint backup ZIPs"
+  ]
+}

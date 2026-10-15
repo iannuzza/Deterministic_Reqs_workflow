@@ -641,6 +641,42 @@ class Stage2SysmlRoleTests(unittest.TestCase):
             self.assertIn("readiness_summary.xlsx", output.getvalue())
             stamp.assert_not_called()
 
+    def test_final_sysml_refreshes_readiness_before_coherence_without_waiving_failures(self):
+        import run_final_sysml_phase as phase
+        import readiness_checklist as policy
+        import validate_downstream_coherence as central
+        import io
+        from contextlib import redirect_stdout
+
+        for coherence_exit in (0, 1):
+            with self.subTest(coherence_exit=coherence_exit):
+                events = []
+                assessment = {"binding": {"snapshot_id": "selected"}, "status": "NOT_READY", "publication_status": "BLOCKED", "models": {}}
+
+                def run(root, label, command):
+                    events.append(label)
+                    self.assertIn("selected", command)
+                    return coherence_exit if label == "Final SysML central coherence validation" else 0
+
+                with patch.object(sys, "argv", ["run_final_sysml_phase.py", "--snapshot-id", "selected"]), \
+                        patch.object(phase, "resolve_complete_snapshot_id", return_value="selected"), \
+                        patch.object(policy, "sync_checklist_from_excel", return_value=False), \
+                        patch.object(phase, "_run", side_effect=run), \
+                        patch.object(phase, "_log_readiness_reports"), \
+                        patch.object(central, "assess_final_readiness", side_effect=lambda *args: events.append("assess") or assessment), \
+                        patch.object(central, "write_readiness_reports"), \
+                        patch.object(central, "stamp_final_readiness", side_effect=lambda *args: events.append("stamp")) as stamp:
+                    output = io.StringIO()
+                    with redirect_stdout(output):
+                        self.assertEqual(phase.main(), coherence_exit)
+                    stamp.assert_called_once()
+                    self.assertLess(events.index("Final SysML structural review"), events.index("stamp"))
+                    self.assertLess(events.index("stamp"), events.index("Final SysML central coherence validation"))
+                    self.assertEqual("Final SysML readiness declaration validation" in events, coherence_exit == 0)
+                    self.assertEqual("Final SysML phase: PASS" in output.getvalue(), coherence_exit == 0)
+                    if coherence_exit == 0:
+                        self.assertIn("implementation readiness: NOT_READY", output.getvalue())
+
     def test_readiness_rule_workbook_matches_json_without_changing_policy(self):
         from readiness_checklist import CHECKLIST_PATH, checklist_definition, checklist_fingerprint
         from report_generation_service import write_readiness_rule_workbook
@@ -1052,6 +1088,49 @@ class Stage2SysmlRoleTests(unittest.TestCase):
                 review_path.parent.mkdir(parents=True)
                 review_path.write_bytes(b"changed residual review")
                 self.assertTrue(central.check_sysml_readiness_declarations(root, contract, scope))
+
+    def test_readiness_json_round_trip_preserves_qualifiers_and_rejects_real_changes(self):
+        import validate_downstream_coherence as central
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            contract, scope, model = self.readiness_fixture(root)
+            with patch.object(central, "resolve_downstream_contract", return_value=contract), \
+                    patch.object(central, "validate", return_value={"decision": "PASS", "findings": []}), \
+                    patch("sysml_generation_service.resolve_sysml_descriptive_model", return_value=model):
+                assessment = central.assess_final_readiness(root, "selected")
+            assessment["relation_report"] = {"gaps": [{"qualifiers": (("condition", "enabled"), ("direction", "input")), "evidence": ["source-1"]}]}
+            self.assertEqual(assessment["status"], "NOT_READY")
+            self.assertEqual(assessment["publication_status"], "ELIGIBLE")
+            report_path = root / "artifacts/validation/final_readiness.json"
+            report_path.parent.mkdir(parents=True, exist_ok=True)
+            report_path.write_text(json.dumps(assessment), encoding="utf-8")
+            for key, result in assessment["models"].items():
+                path = central.readiness_model_report_path(root, key)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(json.dumps({"validator": "validate_downstream_coherence", "authority": False,
+                                           "policy_version": assessment["policy_version"], "model": key,
+                                           "binding": assessment["binding"], **result}), encoding="utf-8")
+            with patch.object(central, "assess_final_readiness", return_value=assessment):
+                self.assertEqual(central.check_sysml_readiness_declarations(root, contract, scope), [])
+                for change in ("qualifier", "evidence", "status", "publication", "snapshot", "binding"):
+                    with self.subTest(change=change):
+                        modified = json.loads(json.dumps(assessment))
+                        if change == "qualifier":
+                            modified["relation_report"]["gaps"][0]["qualifiers"][0][1] = "disabled"
+                        elif change == "evidence":
+                            modified["relation_report"]["gaps"][0]["evidence"] = ["source-2"]
+                        elif change == "status":
+                            modified["status"] = "READY"
+                        elif change == "publication":
+                            modified["publication_status"] = "BLOCKED"
+                        elif change == "snapshot":
+                            modified["binding"]["snapshot_id"] = "other-snapshot"
+                        else:
+                            modified["binding"]["contract_fingerprint"] = "changed-contract"
+                        report_path.write_text(json.dumps(modified), encoding="utf-8")
+                        expected = "SYSML_READINESS_ASSESSMENT_STALE" if change in {"snapshot", "binding"} else "SYSML_READINESS_ASSESSMENT_CHANGED"
+                        self.assertIn(expected, central.check_sysml_readiness_declarations(root, contract, scope))
 
     def test_nonstandard_io_and_standard_local_deviations_deny_readiness_not_publication(self):
         import validate_downstream_coherence as central

@@ -1,6 +1,49 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: 2026-10-15 - Selected-Snapshot IPOS PASS and Reporting Fix
+## Latest checkpoint: 2026-10-15 - Full Flow PASS, Final SysML PASS
+
+- Checkpoint ID: `2026-10-15-full-flow-final-sysml-pass`.
+  Directory: `local_memory/checkpoints/2026-10-15-full-flow-final-sysml-pass/`.
+  Delta source/evidence archive with SHA256 manifest, plus requested Git milestone.
+  Restore the recorded parent commit before applying the delta; not a standalone
+  full-repository/source-specification backup. Previous checkpoints stay unchanged.
+- Requested tag label: `full flow PASS, Final SysML PASS`.
+  Valid annotated Git tag: `full-flow-PASS-Final-SysML-PASS`.
+  User authorized commit/tag/push; consult Git refs for the completed transaction.
+- Selected snapshot: `snap-73c872b1307b6adb5eaf843e`. Earlier SRS/ARS/DRS and
+  all eight digital IPOS document checks passed; user Stage6 completed exit0.
+  Analog scope is valid-empty, not a claim of a separately observed Stage7 rerun.
+  User final SysML run started22:58:32 and completed23:09:11+02:00, exit0.
+  Final central coherence and declaration validation PASS; final phase PASS.
+  Full flow PASS describes execution/artifact acceptance, not implementation READY.
+- Current central assessment: generation GENERATED, publication ELIGIBLE,
+  implementation NOT_READY. All readiness findings, residuals and governed
+  omissions remain intact. Newer approved snapshot remains separate/unselected.
+- Final-phase fixes: recompute/stamp central readiness after structural review
+  and before central coherence consumes it; normalize only JSON representation
+  when comparing fresh assessment with persisted report. Nested qualifier tuples
+  become JSON lists; changed qualifiers/evidence/status/publication/snapshot/input
+  bindings still fail. No gates waived or source authority changed.
+- GUI fixes: both compact final SysML and automatic readiness/Excel boxes track
+  the combined command, retain green exit0/red failure after redraw and clear
+  prior success on retry. Green is task success, not implementation readiness.
+  Removed repeated pane-reapplication log only; layout restore/save unchanged.
+  Added byte-identical reference workbook `docs/readiness-checklist.xlsx`;
+  operational editable checklist remains `config/readiness_checklist.xlsx`.
+- Verification:75 GUI tests PASS;17 readiness tests PASS, including real JSON
+  round-trip and mutation checks;3 focused final-phase runner tests PASS.
+  Broader128-test run had124 PASS and four old scope/navigation failures, all
+  reproduced with committed GUI loaded in memory. Not a clean whole-workspace
+  test claim. Tk ThemeChanged teardown warning remains; no stderr suppression.
+- Checkpoint includes changed implementation/tests, local memories, generated
+  official readiness/model evidence and canonical SQLite delta. Excludes personal
+  GUI/retrieval settings, WAL/SHM, source drafts, experimental proof directories,
+  Office locks and older local backup ZIPs. No production generation by this save.
+- Remaining separate work: implementation-readiness gaps, native compiler/RTL
+  verification, four scope/navigation test issues, Tk teardown warning, automatic
+  Word/Excel reopening, ADSP prose quality and newer-snapshot Main enrichment.
+
+## Previous checkpoint: 2026-10-15 - Selected-Snapshot IPOS PASS and Reporting Fix
 
 - Checkpoint ID: `2026-10-15-selected-snapshot-ipos-reporting-pass`.
   Local source/test/configuration backup and memory checkpoint, not a Git commit,

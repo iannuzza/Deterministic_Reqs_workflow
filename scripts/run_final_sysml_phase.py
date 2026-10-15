@@ -80,6 +80,10 @@ def main() -> int:
             ["scripts/validate_downstream_coherence.py", "--snapshot-id", snapshot_id],
         ),
     ):
+        if label == "Final SysML central coherence validation":
+            assessment = assess_final_readiness(root, snapshot_id)
+            stamp_final_readiness(root, assessment)
+            _log_readiness_reports(root, assessment)
         code = _run(root, label, command)
         if label == "Final SysML generation" or code:
             try:
@@ -95,9 +99,6 @@ def main() -> int:
         if code:
             return 1
     import json
-    assessment = assess_final_readiness(root, snapshot_id)
-    stamp_final_readiness(root, assessment)
-    _log_readiness_reports(root, assessment)
     if _run(root, "Final SysML readiness declaration validation",
             ["scripts/validate_downstream_coherence.py", "--snapshot-id", snapshot_id]):
         return 1

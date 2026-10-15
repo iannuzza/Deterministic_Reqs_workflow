@@ -2,6 +2,20 @@
 - Active source specification: specs/DDS_STBIO1.pdf
 - Use python scripts/... commands in this workspace.
 
+- Current checkpoint: `2026-10-15-full-flow-final-sysml-pass`.
+  Requested annotated tag `full-flow-PASS-Final-SysML-PASS`; commit/tag/push
+  authorized. Previous pushed milestone d3160a3. Selected immutable snapshot
+  snap-73c872b1307b6adb5eaf843e; user final phase exit0 at23:09:11+02:00.
+  Full flow execution PASS / final SysML PASS; publication ELIGIBLE and
+  implementation NOT_READY remain distinct. Analog scope valid-empty.
+  Delta ZIP/SHA256 manifest under matching local_memory/checkpoints directory;
+  restore over recorded parent commit, not a standalone source-spec backup.
+ 75 GUI and17 readiness tests PASS; broader4 baseline scope/navigation issues
+  remain. No new generation/approval/snapshot mutation by checkpoint save.
+  Operational checklist is config/readiness_checklist.xlsx; docs workbook is a
+  byte-identical reference copy, not an additional runtime authority.
+
+- Historical selected-snapshot reporting checkpoint context follows.
 - Current local checkpoint: `2026-10-15-selected-snapshot-ipos-reporting-pass`.
   Selected snapshot snap-73c872b1307b6adb5eaf843e; newer approved snap-1c746489707c8d22fc8ce3d7
   is not selected/certified. Eight current digital document artifact checks PASS;

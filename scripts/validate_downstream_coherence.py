@@ -2776,7 +2776,7 @@ def check_sysml_readiness_declarations(repo_root: Path, contract, scope) -> list
     report_path = repo_root / "artifacts/validation/final_readiness.json"
     report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else None
     binding = readiness_input_binding(repo_root, contract, scope)
-    fresh = assess_final_readiness(repo_root, contract.snapshot_id) if report and report.get("binding") == binding else None
+    fresh = json.loads(json.dumps(assess_final_readiness(repo_root, contract.snapshot_id))) if report and report.get("binding") == binding else None
     findings = []
     if report and report.get("binding") != binding:
         findings.append("SYSML_READINESS_ASSESSMENT_STALE")

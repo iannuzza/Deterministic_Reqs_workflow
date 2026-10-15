@@ -1,5 +1,37 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-15 - Full Flow PASS, Final SysML PASS Checkpoint
+- User final phase on snap-73c872b1307b6adb5eaf843e completed23:09:11+02:00,
+  exit0. Central coherence and declaration validation PASS. Earlier stage/IPOS
+  evidence retained; Analog valid-empty, no separate Stage7 run asserted.
+  Execution PASS is not implementation readiness: GENERATED / ELIGIBLE /
+  NOT_READY is the verified central assessment. Residuals and omissions retained.
+- First failure STALE: saved readiness bound earlier DOCX/audit/manifest bytes.
+  Runner previously validated stale saved assessment before reaching refresh/stamp.
+  Moved existing central reassessment/stamp after structural review, before
+  coherence; all coherence and declaration gates remain enforced.
+- Next failure CHANGED: binding identical, publication ELIGIBLE, readiness
+  NOT_READY; only relation qualifier tuple/list JSON differences remained.
+  Normalize fresh assessment at persisted comparison boundary only. Real changed
+  qualifiers/evidence/status/publication/snapshot/contract bindings still rejected.
+- Both compact final boxes now track combined command exit; retain success green
+  and failure red across redraw, reset before retry. Removed noisy Reapplied saved
+  pane layout message only; explicit layout save and close-save/restore unchanged.
+  Added docs/readiness-checklist.xlsx reference copy, original config bytes intact.
+-75 GUI tests and17 readiness tests PASS;3 focused final runner tests PASS.
+  Broader128 tests yielded124 PASS/four baseline scope-navigation failures;
+  reproduced all4 on committed GUI in memory without reverting working files.
+  Existing Tk ThemeChanged teardown warning and test-module import diagnostics
+  remain; no whole-workspace/native compiler/RTL acceptance claim.
+- User requested local-memory save, checkpoint and commit/tag/push. Checkpoint
+  2026-10-15-full-flow-final-sysml-pass; tag full-flow-PASS-Final-SysML-PASS,
+  exact annotation title full flow PASS, Final SysML PASS. Git refs record final
+  transaction. Delta archive/manifest includes current canonical DB/evidence,
+  not personal settings, draft source copies, caches, Office locks or experiments.
+- Lesson: after JSON persistence, compare JSON-equivalent structures, not raw
+  Python tuple/list equality. Recompute bound assessments when checker source
+  changes; do not mutate archived report labels or weaken binding to force PASS.
+
 ## 2026-10-15 - Selected-Snapshot IPOS PASS, Reporting Repair and Local Checkpoint
 - Current checkpoint:2026-10-15-selected-snapshot-ipos-reporting-pass. Current
   snapshot snap-73c872b1307b6adb5eaf843e; newer snap-1c746489707c8d22fc8ce3d7

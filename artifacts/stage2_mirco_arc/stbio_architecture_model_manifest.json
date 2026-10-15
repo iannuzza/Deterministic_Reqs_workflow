@@ -38226,7 +38226,7 @@
     "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU debug -> FIFO",
     "SYSML_INTERACTION_OUTSIDE_SCOPE: ISPU debug -> ADSP"
   ],
-  "generated_at": "2026-10-15T21:01:40",
+  "generated_at": "2026-10-15T22:59:04",
   "model_path": "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/artifacts/stage2_mirco_arc/sysml/STBIOSystem.sysml",
   "model_files": {
     "C:/Users/iannuzza/LOCAL_PROJ/Github_copilot_proj/Deterministic_Reqs_workflow/artifacts/stage2_mirco_arc/sysml/shared_definitions.sysml": "65ad12d8d80b904a8f5fcef445639154a2c87611462f05355634f66580dc9bd4",
