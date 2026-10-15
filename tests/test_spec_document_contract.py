@@ -47,6 +47,183 @@ def _write_docx(path: Path, paragraphs: list[str]) -> None:
 
 
 class SpecificationDocumentContractTests(unittest.TestCase):
+    def test_absent_descriptions_leave_normative_evidence_and_record_residuals(self):
+        from validate_downstream_coherence import classify_descriptive_findings
+        from workflow_routing import ipos_claim_preflight_findings, ipos_derivative_residuals
+        for domain in ("digital", "analog"):
+            functional = build_ipos_functional_input("Core", {}, [{"source_req_id": "one", "statement": "The user shall select MODE."}], domain=domain)
+            self.assertEqual(classify_descriptive_findings(ipos_claim_preflight_findings(functional))["hard_findings"], [])
+            sections, audit = compose_ipos_overview(functional)
+            self.assertFalse(any(sections.values()))
+            self.assertTrue(ipos_derivative_residuals(functional))
+            self.assertIn("one", functional.local_requirement_ids)
+            self.assertTrue(audit)
+
+    def test_admitted_description_preservation_rejects_semantic_mutations(self):
+        from workflow_routing import _ipos_evidence_semantic_findings, build_ipos_evidence_model
+        functional = build_ipos_functional_input("Core", {"Function": "perform measurement", "Inputs": "samples", "Outputs": "results"},
+            domain="digital", descriptive_source_records=[{
+                "record_id": "negative", "statement": "The Acquisition domain is not a hardware block.",
+                "mapped_block": "Core", "domain": "digital", "snapshot_id": "selected", "admission_state": "admitted"}])
+        record = next(value for value in _ipos_admitted_records(functional) if value.record_id == "source-context:negative")
+        evidence = build_ipos_evidence_model(functional)
+        propositions = [value for value in evidence.propositions if value.spans[0].record_id == record.record_id]
+        self.assertEqual(len(propositions), 1)
+        proposition = propositions[0]
+        fact = proposition.meaning
+        self.assertTrue(fact.negative)
+        self.assertEqual(_ipos_evidence_semantic_findings(evidence), [])
+        for changed in (replace(fact, negative=False), replace(fact, subject="Another domain"),
+                replace(fact, objects=("a physical connector",)), replace(fact, mode="reset")):
+            altered_propositions = tuple(replace(value, meaning=changed) if value == proposition else value for value in evidence.propositions)
+            altered = replace(evidence, propositions=altered_propositions)
+            self.assertIn("ipos_source_relationship_changed:source-context:negative", _ipos_evidence_semantic_findings(altered))
+
+    def test_snapshot_admitted_narrative_uses_shared_input_without_inferred_fsm(self):
+        from workflow_routing import build_ipos_functional_input, build_ipos_evidence_model, compose_ipos_overview, ipos_claim_preflight_findings
+        for domain in ("digital", "analog"):
+            records = [{"record_id": "paragraph-1", "statement": "The Acquisition domain performs measurement.",
+                        "mapped_block": "Core", "domain": domain, "snapshot_id": "selected",
+                        "admission_state": "admitted"},
+                       {"record_id": "paragraph-2", "statement": "It coordinates another domain.",
+                        "mapped_block": "Core", "domain": domain, "snapshot_id": "selected",
+                        "admission_state": "admitted"}]
+            functional = build_ipos_functional_input("Core", {"Function": "perform measurement", "Inputs": "samples", "Outputs": "results"},
+                domain=domain, descriptive_source_records=records)
+            evidence = build_ipos_evidence_model(functional)
+            supported = [value for value in evidence.propositions if value.spans[0].record_id.startswith("source-context:")]
+            self.assertEqual(len(supported), 1)
+            self.assertEqual(supported[0].meaning.subject, "The Acquisition domain")
+            self.assertNotIn("FSM", supported[0].meaning.subject)
+            self.assertTrue(any(value.spans[0].record_id == "source-context:paragraph-2" for value in evidence.unresolved_contexts))
+            self.assertEqual(ipos_claim_preflight_findings(functional), [])
+            sections, audit = compose_ipos_overview(functional)
+            self.assertIn("Acquisition domain", " ".join(text for values in sections.values() for text in values))
+            self.assertTrue(any(row.get("decision") == "selected" and "paragraph-1" in row.get("source_record_id", "") for row in audit))
+            paragraphs = ["# 1. Block overview"]
+            for key, title in (("functionality", "1.1 Functionality"), ("scope", "1.2 Supported functions and scope"), ("internal_functions", "1.4 Supported block functions")):
+                if sections[key]:
+                    paragraphs.extend(["# " + title, *sections[key]])
+            with tempfile.TemporaryDirectory() as directory:
+                path = Path(directory) / "ipos.md"
+                audit_path = path.with_name("descriptive_summary_audit.csv")
+                original = "\n\n".join(paragraphs) + "\n"
+                path.write_text(original, encoding="utf-8")
+                _write_docx(path.with_suffix(".docx"), paragraphs)
+                write_ipos_descriptive_audit(audit_path, audit)
+                self.assertEqual(validate_ipos_descriptive_output(path, audit_path, "Core", (), (), (), functional), [])
+                path.write_text(original.replace("Acquisition domain", "Routing domain"), encoding="utf-8")
+                self.assertTrue(validate_ipos_descriptive_output(path, audit_path, "Core", (), (), (), functional))
+                path.write_text(original, encoding="utf-8")
+                _write_docx(path.with_suffix(".docx"), [text.replace("Acquisition domain", "Routing domain") for text in paragraphs])
+                self.assertTrue(validate_ipos_descriptive_output(path, audit_path, "Core", (), (), (), functional))
+
+    def test_ipos_functional_architecture_summary_uses_supported_domains_not_setup(self):
+        for domain in ("digital", "analog"):
+            functional = build_ipos_functional_input("Module",
+                {"Function": "Acquire samples and process data", "Inputs": "samples", "Outputs": "results"},
+                [{"source_req_id": "acquire", "statement": "The Acquisition FSM shall perform acquisition."},
+                 {"source_req_id": "process", "statement": "The Elaboration FSM shall process samples."},
+                 {"source_req_id": "flow", "statement": "The Acquisition FSM shall transfer samples to the Elaboration FSM."},
+                 {"source_req_id": "setup", "statement": "The user shall select CHANNEL_MODE."}],
+                domain=domain)
+            sections, audit = compose_ipos_overview(functional)
+            self.assertIn("Acquisition FSM", " ".join(sections["scope"]))
+            self.assertIn("Elaboration FSM", " ".join(sections["scope"]))
+            self.assertIn("transfers samples to the Elaboration FSM", " ".join(sections["internal_functions"]))
+            self.assertNotIn("CHANNEL_MODE", " ".join(value for values in sections.values() for value in values))
+            self.assertTrue(any(row["candidate_evidence_requirement_id"] == "setup"
+                                and row["decision"] == "demoted" for row in audit))
+            records = build_ipos_normalized_records(functional)
+            self.assertEqual(next(record.decision for record in records if record.record_id.endswith(":setup")), "excluded")
+            units = build_ipos_semantic_units(functional, sections, audit)
+            self.assertTrue(all(unit.text in " ".join(value for values in sections.values() for value in values) for unit in units))
+            self.assertEqual([unit.output_order for unit in units], list(range(1, len(units) + 1)))
+
+    def test_ipos_main_summary_demotes_configuration_without_losing_functional_evidence(self):
+        from workflow_routing import compose_drs_role_summary, compose_functional_role_summary
+        roles = (("Unit", "Generate commands, receive samples, and write results"),)
+        self.assertEqual(compose_drs_role_summary(roles, ()),
+                         "Unit generates commands. Unit receives samples. Unit writes results.")
+        self.assertEqual(compose_drs_role_summary(roles, ()), compose_functional_role_summary(roles, ()))
+        for domain in ("digital", "analog"):
+            with self.subTest(domain=domain):
+                functional = build_ipos_functional_input("Unit",
+                    {"Function": "Acquire samples, process data, and store results",
+                     "Inputs": "samples", "Outputs": "results"},
+                    [{"source_req_id": "configuration", "statement": "The user shall select CHANNEL_MODE."},
+                     {"source_req_id": "timing", "statement": "The interval shall define the time between acquisitions."}],
+                    domain=domain)
+                sections, audit = compose_ipos_overview(functional)
+                main_summary = " ".join((*sections["functionality"], *sections["scope"]))
+                self.assertIn("acquire samples, process data, and store results", main_summary)
+                self.assertNotIn("CHANNEL_MODE", main_summary)
+                self.assertNotIn("interval", main_summary)
+                detail = " ".join(sections["internal_functions"])
+                self.assertNotIn("CHANNEL_MODE", detail)
+                self.assertNotIn("interval", detail)
+                selected = [row for row in audit if row["decision"] == "demoted"
+                            and row["source_record_id"].startswith("requirement:")]
+                self.assertEqual({row["candidate_evidence_requirement_id"] for row in selected},
+                                 {"configuration", "timing"})
+                self.assertTrue(all(row["reason"] == "functional_detail_in_normative_requirements" for row in selected))
+
+    def test_ipos_architecture_readback_rejects_invented_flow_and_lost_conditions(self):
+        from workflow_routing import build_ipos_claim_plan, _ipos_functional_presentation, _ipos_readback_section_findings
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Acquire samples and process data", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "process", "statement": "When enabled, the Elaboration FSM shall process samples."},
+             {"source_req_id": "setup", "statement": "The user shall select CHANNEL_MODE."}], domain="digital")
+        presentation, demoted = _ipos_functional_presentation(build_ipos_claim_plan(functional), functional)
+        claims = tuple(claim for values in presentation.values() for claim in values
+                       if any("Elaboration FSM" in meaning.subject for meaning in claim.meanings))
+        self.assertEqual(_ipos_readback_section_findings("When enabled, the Elaboration FSM processes samples.", claims), [])
+        self.assertTrue(_ipos_readback_section_findings("The Elaboration FSM processes samples.", claims))
+        self.assertTrue(_ipos_readback_section_findings("When enabled, the Elaboration FSM processes samples and transfers results to a Routing FSM.", claims))
+        self.assertEqual(len(demoted), 1)
+
+    def test_ipos_interval_function_preserves_units_and_endpoints_without_parameter_walkthrough(self):
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Acquire samples, process data, and store results", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "interval", "statement": "The SAMPLE_INTERVAL register shall define how many time slots pass between two acquisitions."}],
+            domain="digital")
+        sections, audit = compose_ipos_overview(functional)
+        self.assertEqual(sections["internal_functions"], ["The interval between two acquisitions is defined in time slots."])
+        self.assertNotIn("SAMPLE_INTERVAL", " ".join(value for values in sections.values() for value in values))
+        self.assertIn("store results", " ".join(sections["scope"]))
+        self.assertTrue(any(row["decision"] == "selected" and row["candidate_evidence_requirement_id"] == "interval" for row in audit))
+
+    def test_ipos_final_architecture_validator_rejects_setup_invented_flow_and_changed_demotion(self):
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Acquire samples, process data, and store results", "Inputs": "samples", "Outputs": "results"},
+            [{"source_req_id": "process", "statement": "When enabled, the Elaboration FSM shall process samples."},
+             {"source_req_id": "setup", "statement": "The user shall select CHANNEL_MODE."}], domain="digital")
+        sections, audit = compose_ipos_overview(functional)
+        titles = {"functionality": "1.1 Functionality", "scope": "1.2 Supported functions and scope",
+                  "internal_functions": "1.4 Supported block functions"}
+        paragraphs = ["# 1. Block overview"]
+        for key, title in titles.items():
+            if sections[key]:
+                paragraphs.extend(["# " + title, *sections[key]])
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "ipos.md"
+            audit_path = path.with_name("descriptive_summary_audit.csv")
+            original = "\n\n".join(paragraphs) + "\n"
+            path.write_text(original, encoding="utf-8")
+            _write_docx(path.with_suffix(".docx"), paragraphs)
+            write_ipos_descriptive_audit(audit_path, audit)
+            validate = lambda: validate_ipos_descriptive_output(path, audit_path, "Module", (), (), (), functional)
+            self.assertEqual(validate(), [])
+            path.write_text(original + "\nThe user selects CHANNEL_MODE.\n", encoding="utf-8")
+            self.assertTrue(validate())
+            path.write_text(original + "\nThe Elaboration FSM transfers results to the Routing FSM.\n", encoding="utf-8")
+            self.assertTrue(validate())
+            path.write_text(original, encoding="utf-8")
+            changed = [dict(row) for row in audit]
+            next(row for row in changed if row["decision"] == "demoted")["decision"] = "selected"
+            write_ipos_descriptive_audit(audit_path, changed)
+            self.assertTrue(validate())
+
     def test_all_block_claim_preflight_reports_every_failure_without_output_writes(self):
         from unittest.mock import patch
         from generate_ipos_specs import _require_ipos_claim_preflights
@@ -445,6 +622,38 @@ class SpecificationDocumentContractTests(unittest.TestCase):
                         actual.replace("writes", "write"), actual.replace("samples", "results"),
                         actual.replace(" when READY is active", "")):
             self.assertTrue(_ipos_readback_section_findings(changed, (claim,)), changed)
+
+    def test_ipos_readback_accepts_numeric_sentence_boundaries_without_losing_facts(self):
+        from workflow_routing import build_ipos_claim_plan, realize_descriptive_functional_claim, _ipos_readback_section_findings, _ipos_final_sections
+        functional = build_ipos_functional_input("Module",
+            {"Function": "Collect samples", "Inputs": "samples", "Outputs": "records"},
+            [{"source_req_id": "tag", "statement": "The final 8 bits of each record shall contain the tag field."},
+             {"source_req_id": "data", "statement": "3 words (12 bytes) of each record shall contain sample data."}],
+            domain="digital")
+        claims = tuple(claim for claim in build_ipos_claim_plan(functional).claims
+                       if any(span.record_id.startswith("requirement:") for span in claim.spans))
+        self.assertEqual(len(claims), 2)
+        paragraphs = sorted((realize_descriptive_functional_claim(claim) for claim in claims),
+                            key=lambda text: text[0].isdigit())
+        content = " ".join(paragraphs)
+        self.assertEqual(_ipos_readback_section_findings(content, claims), [])
+        for changed in (content.replace("12 bytes", "16 bytes"), content.replace("3 words", "2 words"),
+                        content.replace("sample data", "other data"), paragraphs[0],
+                        content + " Additional output is produced."):
+            self.assertTrue(_ipos_readback_section_findings(changed, claims), changed)
+        with tempfile.TemporaryDirectory() as directory:
+            markdown = Path(directory) / "overview.md"
+            docx = markdown.with_suffix(".docx")
+            for number in ("1.3", "1.4"):
+                lines = ["## 1. Block overview", "### " + number + " Supported description", *paragraphs,
+                         "## 2. Source I/O"]
+                markdown.write_text("\n\n".join(lines), encoding="utf-8")
+                _write_docx(docx, lines)
+                for path in (markdown, docx):
+                    with self.subTest(section=number, format=path.suffix):
+                        actual = _ipos_final_sections(path)[number]
+                        self.assertEqual(_ipos_readback_section_findings(actual, claims), [])
+                        self.assertTrue(_ipos_readback_section_findings(actual.replace("12 bytes", "16 bytes"), claims))
 
     def test_ipos_semantic_checks_reject_approved_conflict_and_grammatical_subject_mutation(self):
         from workflow_routing import build_ipos_evidence_model, _ipos_evidence_semantic_findings, _ipos_readback_section_findings, build_ipos_claim_plan

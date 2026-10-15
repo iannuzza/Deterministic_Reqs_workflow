@@ -7,7 +7,11 @@ Author: Alessandro Lucio IANNUZZI
 ## **0. Document Navigation** {#0-document-navigation}
 
 ### **0.1 Table of contents** {#01-table-of-contents}
+
 - [1. Block overview](#1-block-overview)
+- [1.1 Functionality](#11-functionality)
+- [1.2 Supported functions and scope](#12-supported-functions-and-scope)
+- [1.4 Supported block functions](#14-supported-block-functions)
 - [2. Source I/O](#2-source-io)
 - [3. Block requirements](#3-block-requirements)
 
@@ -19,6 +23,7 @@ Author: Alessandro Lucio IANNUZZI
 | 0.2 | 2026-10-12 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
+#### **Table 2. Requirement navigation** {#table-2-requirement-navigation}
 | Requirement | Internal link |
 |---|---|
 | IPOS-I2C-SPI-AHB-001 | [Go to requirement](#ipos-i2c-spi-ahb-001) |
@@ -37,6 +42,12 @@ Author: Alessandro Lucio IANNUZZI
 | IPOS-I2C-SPI-AHB-014 | [Go to requirement](#ipos-i2c-spi-ahb-014) |
 | IPOS-I2C-SPI-AHB-015 | [Go to requirement](#ipos-i2c-spi-ahb-015) |
 
+### **0.4 Table index** {#04-table-index}
+
+- [Table 1. Version history](#table-1-version-history)
+- [Table 2. Requirement navigation](#table-2-requirement-navigation)
+- [Table 3. Source I/O](#table-3-source-io)
+
 ## **1. Block overview** {#1-block-overview}
 
 ### **1.1 Functionality** {#11-functionality}
@@ -49,11 +60,7 @@ The I2C_SPI_AHB block accepts Host bus transactions and produces Protocol-compli
 
 ### **1.4 Supported block functions** {#14-supported-block-functions}
 
-An I2C/SPI write access to the address 0x60-0x67 is translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).
-
 On AHB interface, BURST is not supported as well as LOCKED transfers.
-
-An I2C/SPI read access to the address 0x70-0x7f is translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).
 
 I2C interface supports all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported.
 
@@ -65,6 +72,7 @@ On AHB interface, data size is limited to BYTE and WORD.
 
 The following approved source I/O entries are owned by this block.
 
+#### **Table 3. Source I/O** {#table-3-source-io}
 | Port name | Direction | Type / details | Table | Source page |
 |---|---|---|---|---|
 | rst_n | input | POR | I2C/SPI AHB I/O List | 99 |

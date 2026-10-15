@@ -1,5 +1,6 @@
-// Snapshot ID: snap-b2e8101b00dc6909feaed885
-// Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+// NOT READY for RTL or high-level model generation
+// Snapshot ID: snap-73c872b1307b6adb5eaf843e
+// Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 package Block_SensorHub {
 
@@ -14,6 +15,10 @@ package Block_SensorHub {
         attribute approvedPortCount : Integer = 44;
         attribute linkedRequirementCount : Integer = 18;
         doc /* block=Sensor-Hub | description=Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination. */;
+        doc /* governedOverview:functionality | The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination. */;
+        doc /* governedOverview:scope | The Sensor-Hub block accepts Primary sensing input and produces Analog input signal. */;
+        doc /* governedOverview:internal_structure | The last 8-bits of the data stored in FIFO contains the TAG field. 3 words (12bytes) of the data stored in FIFO contains the data from each I2C slave. */;
+        doc /* governedOverview:internal_functions | If the sensor hub IP is not enabled, the SCL and SDA pad do not toggle. All the values is tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. Each data stored in FIFO is composed by 4 words (16bytes). 24-bits of the data stored in FIFO is reserved at '0'. */;
         in port scan_mode : ArchitecturePort {
             attribute sourceName = "scan_mode";
             attribute sourceDetails = "";

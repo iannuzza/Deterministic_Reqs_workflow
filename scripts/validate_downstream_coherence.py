@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import Any
 from xml.etree import ElementTree
 
-from approved_snapshot_resolver import resolve_complete_authoritative_input
+from approved_snapshot_resolver import ApprovedResolverError, resolve_complete_authoritative_input, resolve_governed_descriptive_context
 from requirement_allocation_policy import requires_hierarchy_parent
 from workflow_routing import (
     validate_document_author_fields,
@@ -119,6 +119,20 @@ def canonical_human_label(value: object) -> str:
     return APPROVED_LABEL_CANONICALS.get(normalized, str(value or "").strip())
 
 
+def connection_instance_block_keys(instance_path: str, block_names) -> tuple[str, ...]:
+    """Match complete normalized block labels in the immediate instance segment."""
+    segment = normalize_human_label(instance_path.rsplit(".", 1)[-1])
+    candidates = []
+    for name in block_names:
+        key = human_label_key(name)
+        labels = {key, normalize_human_label(name)}
+        labels.update(alias for alias in APPROVED_LABEL_CANONICALS if human_label_key(alias) == key)
+        if any(label and " " + label + " " in " " + segment + " " for label in labels):
+            if key not in candidates:
+                candidates.append(key)
+    return tuple(sorted(candidates))
+
+
 def ipos_authored_requirement_id(block_name: object, sequence: int) -> str:
     """Build the sole stable authored-ID format for Digital and Analog IPOS."""
     approved_block = canonical_human_label(block_name)
@@ -164,6 +178,59 @@ class DownstreamContract:
 
     def valid_empty(self, target: str, rows: list[dict[str, str]]) -> bool:
         return not self.source_ids_for_target(target) and not rows
+
+    def descriptive_context(self, repo_root: Path, *, block: str = "", domain: str = "") -> tuple[dict, ...]:
+        records = resolve_governed_descriptive_context(
+            repo_root, snapshot_id=self.snapshot_id, project_id=_project_id(repo_root),
+        )
+        scoped = []
+        for record in records:
+            owners = [value for value in self.expected.values()
+                      if human_label_key(value.get("approved_block", "")) == human_label_key(record["mapped_block"])]
+            owner_domains = {value.get("owning_domain", "") for value in owners if value.get("owning_domain")}
+            if owner_domains and record["domain"] not in owner_domains:
+                raise DownstreamCoherenceError("Admitted descriptive domain conflicts with approved ownership: " + record["record_id"])
+            if block and human_label_key(record["mapped_block"]) != human_label_key(block):
+                continue
+            if domain and record["domain"] != domain:
+                continue
+            if owners:
+                scoped.append(record)
+        return tuple(scoped)
+
+    def ipos_descriptive_input(self, repo_root: Path, *, block: str, domain: str):
+        from workflow_routing import build_ipos_functional_input
+        from ipos_blocker_review import apply_descriptive_omissions
+
+        target = {"digital": "Digital IPOS", "analog": "Analog IPOS"}[domain]
+        allowed = [value for value in self.expected.values() if value.get("owning_target") == target
+                   and human_label_key(value.get("approved_block", "")) == human_label_key(block)]
+        if not allowed:
+            raise ValueError("Descriptive owner/domain is outside the selected IPOS scope: " + block)
+        inventory = next((row for row in _read_csv(repo_root / "artifacts/stage2_mirco_arc/block_inventory.csv")[1]
+                          if human_label_key(row.get("Block", "")) == human_label_key(block)), {})
+        rows = [row for row in _read_csv(repo_root / TRACE_ARTIFACTS[target])[1]
+                if human_label_key(row.get("mapped_block", "")) == human_label_key(block)]
+        if any(row.get("snapshot_id") != self.snapshot_id for row in rows):
+            raise ValueError("Descriptive traceability is bound to a different snapshot")
+        functional = build_ipos_functional_input(block, inventory, rows, domain=domain, materialized=True,
+                     provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
+                     candidate_requirement_rows=approved_snapshot_candidate_rows(self.requirement_input, self, domain=domain),
+                     descriptive_source_records=self.descriptive_context(repo_root, block=block, domain=domain))
+        return apply_descriptive_omissions(repo_root, snapshot_id=self.snapshot_id, functional_input=functional)
+
+    def relation_endpoint_bindings(self, repo_root: Path) -> tuple[dict, ...]:
+        bindings = snapshot_architecture_context(repo_root, self)["payload"].get("relation_endpoint_bindings", [])
+        if not isinstance(bindings, list) or any(not isinstance(row, dict) or not row.get("endpoint") or not row.get("block")
+                                               or set(row) - {"endpoint", "block", "port"} for row in bindings):
+            raise DownstreamCoherenceError("SYSML_RELATION_ENDPOINT_BINDINGS_INVALID")
+        return tuple(bindings)
+
+    def governed_interaction_rows(self, repo_root: Path) -> tuple[dict, ...]:
+        rows = snapshot_architecture_context(repo_root, self)["payload"].get("interaction_rows", [])
+        if not isinstance(rows, list) or any(not isinstance(row, dict) for row in rows):
+            raise DownstreamCoherenceError("SYSML_GOVERNED_INTERACTIONS_INVALID")
+        return tuple(rows)
 
 
 def downstream_contract_fingerprint(contract: DownstreamContract) -> str:
@@ -226,6 +293,7 @@ class SysMLMaterializationScope:
     manifest_path: Path
     interactions: tuple[dict[str, str], ...] = ()
     interaction_findings: tuple[str, ...] = ()
+    relation_inventory: Any = None
 
     def require_valid(self) -> SysMLMaterializationScope:
         if self.findings:
@@ -372,9 +440,15 @@ def resolve_sysml_materialization_scope(
                                      system_path, model_dir / "DigitalSubsystem.sysml", model_dir / "shared_definitions.sysml", repo_root, manifest_path)
     interactions, interaction_findings = scope.connection_rows(
         _read_csv(model_dir.parent / "interaction_matrix.csv")[1], "From block", "To block")
+    from sysml_relations import build_relation_inventory
+    relations = build_relation_inventory(scope, contract,
+        _read_csv(model_dir.parent / "source_port_catalog.csv")[1],
+        _read_csv(model_dir.parent / "interaction_matrix.csv")[1],
+        endpoint_bindings=contract.relation_endpoint_bindings(repo_root) if isinstance(contract, DownstreamContract) else (),
+        governed_interaction_rows=contract.governed_interaction_rows(repo_root) if isinstance(contract, DownstreamContract) else ())
     return SysMLMaterializationScope(scope.snapshot_id, scope.fingerprint, scope.blocks, scope.findings,
                                      scope.system_path, scope.digital_path, scope.shared_path, repo_root, manifest_path,
-                                     tuple(interactions), tuple(interaction_findings))
+                                     tuple(interactions), tuple(interaction_findings), relations)
 
 
 def sysml_materialization_findings(repo_root: Path, scope: SysMLMaterializationScope) -> list[str]:
@@ -429,6 +503,9 @@ def sysml_materialization_findings(repo_root: Path, scope: SysMLMaterializationS
     for definition, count in definition_counts.items():
         if count != 1:
             findings.append(f"SYSML_DUPLICATE_PART_DEFINITION: {definition}")
+    for (path, parent, usage, definition), count in part_counts.items():
+        if count != 1:
+            findings.append(f"SYSML_DUPLICATE_PART: {path.name}: {parent}.{usage}: {definition}")
     definitions = {name for text in texts.values()
                    for name in re.findall(r"\bpart\s+def\s+(\w+)\b", text)}
     packages = {name for text in texts.values() for name in re.findall(r"\bpackage\s+(\w+)\b", text)}
@@ -1008,7 +1085,7 @@ def _primary_to_supplementary_coverage(
     return None
 
 
-def approved_generated_document_dependency_graph(repo_root: Path, snapshot_id: str | None = None) -> dict[str, object]:
+def approved_generated_document_dependency_graph(repo_root: Path, snapshot_id: str | None = None, *, include_empty_edges: bool = False) -> dict[str, object]:
     """Return only generated-document Covers dependencies for the RM view.
 
     Architectural structure is intentionally excluded here.  SysML parsers own
@@ -1487,13 +1564,13 @@ def approved_generated_document_dependency_graph(repo_root: Path, snapshot_id: s
 
     edges = [
         edge for edge in edges
-        if int(((edge.get("coverage") or {}).get("covered")) or 0) > 0
-        and int(((edge.get("coverage") or {}).get("total")) or 0) > 0
+        if include_empty_edges or (int(((edge.get("coverage") or {}).get("covered")) or 0) > 0
+        and int(((edge.get("coverage") or {}).get("total")) or 0) > 0)
     ]
     edge_statistics = [
         statistic for statistic in edge_statistics
-        if int(statistic.get("covered") or 0) > 0
-        and int(statistic.get("total") or 0) > 0
+        if include_empty_edges or (int(statistic.get("covered") or 0) > 0
+        and int(statistic.get("total") or 0) > 0)
     ]
 
     return {
@@ -1556,7 +1633,10 @@ def _check_ipos_descriptive_policy(
                 materialized=True,
                 provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
                 candidate_requirement_rows=candidate_rows,
+                descriptive_source_records=contract.descriptive_context(repo_root, block=block_name, domain=kind),
             )
+            from ipos_blocker_review import apply_descriptive_omissions
+            functional_input = apply_descriptive_omissions(repo_root, snapshot_id=contract.snapshot_id, functional_input=functional_input)
             findings.extend(
                 _check_prefix(
                     validate_ipos_descriptive_output(
@@ -1588,6 +1668,30 @@ def _check_ipos_descriptive_policy(
                     f"{stage}:{block_dir.name}: ",
                 ))
     return findings
+
+
+def classify_descriptive_findings(findings: Iterable[str]) -> dict:
+    residual_kinds = {
+        "ipos_required_section_missing": "unsupported_section",
+        "ipos_descriptive_section_unsupported": "unsupported_section",
+        "ipos_projection_gap": "projection_gap",
+        "ipos_realization_unresolved": "projection_gap",
+        "APPROVED_FUNCTION_MISSING_FROM_GENERATED_SPEC": "function_description_gap",
+    }
+    hard = []
+    residuals = []
+    for finding in dict.fromkeys(str(value) for value in findings):
+        scoped = re.sub(r"^(?:Digital IPOS|Analog IPOS):[^:]+:\s*", "", finding)
+        scoped = re.sub(r"^ipos_contract:semantic_fidelity:", "", scoped)
+        kind = residual_kinds.get(scoped.partition(":")[0], "")
+        if scoped == "descriptive_synthesis_unresolved:no_supported_claim" or scoped.startswith("descriptive_synthesis_unresolved:missing approved inventory "):
+            kind = "unsupported_section"
+        if kind:
+            residuals.append({"finding": finding, "kind": kind,
+                              "readiness_impact": "requires_assessment", "authority": False})
+        else:
+            hard.append(finding)
+    return {"hard_findings": hard, "residuals": residuals}
 
 
 def _check_ipos_cross_document_description_reuse(repo_root: Path) -> list[str]:
@@ -2224,6 +2328,7 @@ def validate(
     snapshot_id: str | None = None,
     ipos_kind: str | None = None,
     ipos_block: str | None = None,
+    *, check_readiness: bool = True,
 ) -> dict[str, Any]:
     if bool(ipos_kind) != bool(ipos_block):
         raise ValueError("IPOS descriptive validation scope requires both kind and block.")
@@ -2300,7 +2405,17 @@ def validate(
     findings.extend(source_port_findings)
     sysml_findings, sysml_summary = _check_sysml_artifacts(repo_root, expected, sysml_scope)
     findings.extend(sysml_findings)
+    if sysml_scope.relation_inventory is not None:
+        from sysml_relations import validate_serialized_relations
+        relation_report = validate_serialized_relations(sysml_scope, sysml_scope.relation_inventory)
+        findings.extend(relation_report["findings"])
+        sysml_summary["relations"] = relation_report
+    findings.extend(check_sysml_governed_overviews(repo_root, contract, sysml_scope))
+    if check_readiness:
+        findings.extend(check_sysml_readiness_declarations(repo_root, contract, sysml_scope))
     sysml_summary["ipos_source_port_coverage"] = source_port_summary
+    classified = classify_descriptive_findings(findings)
+    findings = classified["hard_findings"]
     return {
         "validator": "validate_downstream_coherence",
         "mode": "read_only_local_deterministic",
@@ -2318,6 +2433,8 @@ def validate(
         "artifacts": artifact_summary,
         "approved_function_coverage": function_coverage_summary,
         "sysml": sysml_summary,
+        "residuals": classified["residuals"],
+        "readiness_status": "NOT_ASSESSED",
         "finding_count": len(findings),
         "findings": findings,
         "decision": "PASS" if not findings else "BLOCK_DOWNSTREAM",
@@ -2325,15 +2442,411 @@ def validate(
     }
 
 
+READINESS_POLICY_VERSION = "governed-final-readiness-v2"
+READINESS_READY = "READY for RTL or high-level model generation"
+READINESS_NOT_READY = "NOT READY for RTL or high-level model generation"
+
+
+def check_sysml_governed_overviews(repo_root: Path, contract, scope) -> list[str]:
+    from sysml_generation_service import resolve_sysml_descriptive_model
+
+    if not scope.manifest_path.exists():
+        return []
+    manifest = json.loads(scope.manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("descriptive_model_version") != "governed-ipos-shared-v1":
+        return []
+    findings = []
+    for block in scope.blocks:
+        if not block.path.exists():
+            continue
+        domain = "digital" if block.target == "Digital IPOS" else "analog"
+        model = resolve_sysml_descriptive_model(repo_root, contract, block=block.name, domain=domain)
+        expected = {role: " ".join(" ".join(entry.split()) for entry in entries).replace("*/", "* /")
+                    for role, entries in model["sections"].items() if entries}
+        actual = re.findall(r"doc /\* governedOverview:([^|\s]+) \| (.*?) \*/;", block.path.read_text(encoding="utf-8"), re.S)
+        if dict(actual) != expected or len(actual) != len(expected):
+            findings.append("SYSML_GOVERNED_DESCRIPTION_CHANGED:" + block.name)
+        if manifest.get("descriptive_models", {}).get(block.name) != model:
+            findings.append("SYSML_GOVERNED_DESCRIPTION_AUDIT_CHANGED:" + block.name)
+    return findings
+
+
+def sysml_semantic_body(text: str) -> str:
+    declarations = {"// " + READINESS_READY, "// " + READINESS_NOT_READY}
+    return "\n".join(line for line in text.splitlines() if line.strip() not in declarations) + "\n"
+
+
+def interface_readiness_findings(port: dict, source_records: Iterable[dict]) -> list[str]:
+    name = str(port.get("Port name") or "").strip()
+    direction = str(port.get("Direction") or "").strip().lower()
+    details = str(port.get("Type / details") or "").strip()
+    findings = []
+    if not name or direction not in {"input", "output", "inout", "bidirectional"}:
+        findings.append("interface_identity_or_direction_undefined")
+    if not re.search(r"\b\d+\s*(?:bits?|bit-wide)\b|\[\s*\d+\s*:\s*\d+\s*\]", details, re.I):
+        findings.append("interface_width_undefined")
+    token = r"(?<!\w)" + re.escape(name) + r"(?!\w)"
+    statements = [str(record.get("statement") or record.get("requirement_statement") or "")
+                  for record in source_records]
+    relevant = [text for text in statements if name and re.search(token, text)]
+    role = token + r"\s+(?:(?:input|output|signal|port)\s+)?(?:(?:shall|must)\s+)?(?:carry|carries|indicate|indicates|represent|represents|receive|receives|transmit|transmits)\s+\S"
+    if not any(re.search(role, text, re.I) for text in relevant):
+        findings.append("interface_meaning_undefined")
+    if not any(re.search(r"\binterpreted as\s+\S", text, re.I) for text in relevant):
+        findings.append("interface_interpretation_undefined")
+    timed = any(re.search(r"\b(?:on|at)\s+(?:the\s+)?(?:rising|falling)\s+(?:clock\s+)?edge\s+of\s+\w+", text, re.I)
+                and re.search(r"\b(?:until|before|after|hold|held|assert|asserted|deassert|deasserted|sample|sampled|stable)\b", text, re.I)
+                for text in relevant)
+    standard = any(re.search(r'\b(?:protocol|standard) specification\s+"[^"\n]{15,}"', text, re.I)
+                   and re.search(r'\bstandard (?:protocol )?specification\s+"[^"\n]*(?:revision|version|release)\s+\d[^"\n]*"', text, re.I)
+                   and re.search(r"\bwithout local (?:timing|handshake|timing and handshake) deviations\b", text, re.I)
+                   and not re.search(r"\b(?:except|exception|additional|deviates|deviation from|unless)\b", text, re.I)
+                   for text in relevant)
+    if not timed and not standard:
+        findings.append("interface_timing_or_handshake_undefined")
+    if timed and not standard and not any(re.search(r"\b(?:during|on|under)\s+(?:\w+\s+)?reset\b", text, re.I)
+                                         and re.search(r"\b(?:hold|held|clear|cleared|assert|asserted|deassert|deasserted|inactive|ignored)\b", text, re.I)
+                                         for text in relevant):
+        findings.append("interface_reset_semantics_undefined")
+    return findings
+
+
+def readiness_input_binding(repo_root: Path, contract, scope) -> dict:
+    from readiness_checklist import checklist_fingerprint
+
+    paths = set()
+    for stage in TRACE_ARTIFACTS:
+        paths.add(repo_root / TRACE_ARTIFACTS[stage])
+        for directory in created_ipos_block_directories(repo_root, stage).values() if stage in {"Digital IPOS", "Analog IPOS"} else ():
+            paths.update(path for path in directory.iterdir() if path.is_file() and path.suffix in {".md", ".docx", ".csv", ".json"})
+    paths.update(repo_root / "artifacts/stage2_mirco_arc" / name for name in
+                 ("block_inventory.csv", "source_port_catalog.csv", "interaction_matrix.csv"))
+    review_root = repo_root / "artifacts/orchestrator"
+    if review_root.exists():
+        paths.update(path for path in review_root.rglob("*") if path.is_file()
+                     and (path.name in {"blocker_review.xlsx", "blocker_review.json", "descriptive_omissions.json"}
+                         or path.name.startswith(("~$", ".~lock."))))
+    models = [scope.system_path, scope.digital_path, scope.shared_path, *(block.path for block in scope.blocks)]
+    model_dir = (repo_root / "artifacts/stage2_mirco_arc/sysml").resolve()
+    bodies = {path.relative_to(repo_root).as_posix(): hashlib.sha256(sysml_semantic_body(path.read_text(encoding="utf-8")).encode("utf-8")).hexdigest()
+              for path in models if path.exists() and path.resolve().is_relative_to(model_dir)}
+    inputs = {path.relative_to(repo_root).as_posix(): hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else "MISSING"
+              for path in sorted(paths)}
+    manifest = json.loads(scope.manifest_path.read_text(encoding="utf-8")) if scope.manifest_path.exists() else {}
+    inputs[scope.manifest_path.relative_to(repo_root).as_posix()] = hashlib.sha256(json.dumps(
+        {key: value for key, value in manifest.items() if key != "model_files"}, sort_keys=True).encode("utf-8")).hexdigest()
+    return {"snapshot_id": contract.snapshot_id, "contract_fingerprint": downstream_contract_fingerprint(contract),
+            "policy_version": READINESS_POLICY_VERSION, "checklist_fingerprint": checklist_fingerprint(),
+            "assessor_implementations": {name: hashlib.sha256(Path(__file__).with_name(name).read_bytes()).hexdigest()
+                         for name in ("readiness_checklist.py", "validate_downstream_coherence.py", "sysml_generation_service.py", "sysml_relations.py")},
+            "relation_inventory_fingerprint": scope.relation_inventory.fingerprint if scope.relation_inventory else "MISSING",
+            "model_bodies": bodies, "inputs": inputs}
+
+
+def readiness_declaration(assessment: dict | None, binding: dict | None, model: str) -> str:
+    from readiness_checklist import checklist_decision, checklist_fingerprint
+
+    if not isinstance(assessment, dict) or not isinstance(binding, dict) or assessment.get("binding") != binding:
+        return READINESS_NOT_READY
+    if assessment.get("policy_version") != READINESS_POLICY_VERSION or assessment.get("authority") is not False:
+        return READINESS_NOT_READY
+    if binding.get("checklist_fingerprint") != checklist_fingerprint():
+        return READINESS_NOT_READY
+    models = assessment.get("models")
+    if not isinstance(models, dict) or model not in binding.get("model_bodies", {}):
+        return READINESS_NOT_READY
+    result = models.get(model, {})
+    if not isinstance(result, dict) or assessment.get("publication_status") != "ELIGIBLE":
+        return READINESS_NOT_READY
+    return READINESS_READY if (result.get("status") == "READY" and result.get("findings") == []
+                               and checklist_decision(result.get("checklist")) == "READY") else READINESS_NOT_READY
+
+
+def _readiness_model_result(checks, findings, residuals, evidence_refs):
+    from readiness_checklist import blocking_items, build_checklist, checklist_decision
+
+    rows = build_checklist(checks, candidate_evidence_refs=evidence_refs)
+    if findings:
+        decision = next(row for row in rows if row["Checklist ID"] == "readiness.decision")
+        decision.update({"Assessment result": "fail", "Evidence status": "contradictory", "Evidence references": [],
+                         "Reason": "Central scope, coherence, dependency or residual gates prevent READY: " + "; ".join(findings)})
+    blocking = blocking_items(rows)
+    all_findings = list(dict.fromkeys([*findings, *("READINESS_CHECKLIST:" + row["Checklist ID"] for row in blocking)]))
+    status = "READY" if not all_findings and checklist_decision(rows) == "READY" else "NOT_READY"
+    return {"status": status, "overall_decision": READINESS_READY if status == "READY" else READINESS_NOT_READY,
+            "findings": all_findings, "residuals": residuals, "checklist": rows,
+            "blocking_items_summary": [{"Checklist ID": row["Checklist ID"], "Reason": row["Reason"]} for row in blocking],
+            "residual_gaps_preventing_READY": [*all_findings, *residuals]}
+
+
+def _readiness_check(result, reason, references):
+    return {"Assessment result": "pass" if result else "uncertain",
+            "Evidence status": "supported" if result else "partially_supported" if references else "missing",
+            "Reason": reason, "Readiness impact": "blocking", "Evidence references": list(references) if result else []}
+
+
+def assess_final_readiness(repo_root: Path, snapshot_id: str) -> dict:
+    from sysml_generation_service import resolve_sysml_descriptive_model
+    from ipos_blocker_review import read_blocker_review, review_paths
+
+    contract = resolve_downstream_contract(repo_root, snapshot_id)
+    scope = resolve_sysml_materialization_scope(repo_root, contract=contract)
+    try:
+        coherence = validate(repo_root, snapshot_id, check_readiness=False)
+    except (ApprovedResolverError, DownstreamCoherenceError, OSError, ValueError, KeyError) as error:
+        coherence = {"decision": "BLOCK_DOWNSTREAM", "findings": ["READINESS_COHERENCE_UNAVAILABLE:" + str(error)]}
+    ports = _read_csv(repo_root / "artifacts/stage2_mirco_arc/source_port_catalog.csv")[1]
+    manifest_data = json.loads(scope.manifest_path.read_text(encoding="utf-8")) if scope.manifest_path.exists() else {}
+    models = {}
+    for block in scope.blocks:
+        domain = "digital" if block.target == "Digital IPOS" else "analog"
+        findings = [*scope.findings, *coherence["findings"]]
+        try:
+            descriptive = resolve_sysml_descriptive_model(repo_root, contract, block=block.name, domain=domain)
+        except (ApprovedResolverError, DownstreamCoherenceError, OSError, ValueError, KeyError) as error:
+            findings.append("governed_descriptive_model_unavailable:" + str(error))
+            descriptive = {"sections": {"functionality": [], "scope": []}, "residuals": []}
+        if any(residual.get("kind") == "function_description_gap" and
+               f": {block.target}: {_ipos_block_slug(block.name)}:" in residual.get("finding", "")
+               for residual in coherence.get("residuals", [])):
+            findings.append("approved_function_description_gap")
+        if manifest_data.get("descriptive_model_version") != "governed-ipos-shared-v1":
+            findings.append("governed_descriptive_model_unavailable")
+        if not descriptive["sections"]["functionality"] or not descriptive["sections"]["scope"]:
+            findings.append("necessary_function_scope_undefined")
+        for residual in descriptive["residuals"]:
+            critical_omission = residual.get("kind") == "intentional_omission" and residual.get("role") not in {"organization", "architecture"}
+            if residual.get("kind") == "projection_gap" or critical_omission:
+                findings.append("descriptive_residual_requires_resolution")
+        records = [dict(row) for row in contract.requirement_input.rows
+                   if human_label_key(contract.allocation(str(row.get("source_req_id") or "")).get("approved_block", "")) == human_label_key(block.name)]
+        try:
+            records.extend(contract.descriptive_context(repo_root, block=block.name, domain=domain))
+        except (ApprovedResolverError, DownstreamCoherenceError, OSError, ValueError, KeyError) as error:
+            findings.append("governed_descriptive_evidence_unavailable:" + str(error))
+        owned_ports = [row for row in ports if human_label_key(row.get("Owner", "")) == human_label_key(block.name)
+                       and row.get("Ownership status", "").lower() == "approved"]
+        if not owned_ports:
+            findings.append("interface_scope_undefined")
+        port_findings = [(port, interface_readiness_findings(port, records)) for port in owned_ports]
+        for port, issues in port_findings:
+            findings.extend(port.get("Port name", "") + ":" + finding for finding in issues)
+        workbook, manifest, _companion = review_paths(repo_root, block.name)
+        if manifest.exists():
+            try:
+                review = read_blocker_review(repo_root, snapshot_id=snapshot_id, block=block.name, require_saved=False)
+                if review["future_source_updates"]:
+                    findings.append("source_spec_update_residual")
+                if review["notes"] and any(value.get("kind") == "projection_gap" for value in descriptive["residuals"]):
+                    findings.append("clarification_requires_governed_reevaluation")
+            except (ValueError, OSError, KeyError) as error:
+                findings.append("residual_review_unavailable:" + str(error))
+        key = block.path.relative_to(repo_root).as_posix()
+        references = [str(row.get("source_req_id") or row.get("record_id")) for row in records
+                      if row.get("source_req_id") or row.get("record_id")]
+        coherent = not scope.findings and coherence["decision"] == "PASS"
+        checks = {"consistency.snapshot": _readiness_check(coherent, "Central snapshot/scope/coherence validation " + ("passed." if coherent else "failed or is unavailable; no production override."),
+                                                          ["snapshot:" + contract.snapshot_id]),
+                  "structure.support": _readiness_check(coherent, "Central derived-structure checks " + ("passed." if coherent else "did not establish supported structure."),
+                                                        [key, "snapshot:" + contract.snapshot_id])}
+        if scope.findings:
+            checks["consistency.snapshot"].update({"Assessment result": "fail", "Evidence status": "contradictory",
+                                                   "Reason": "; ".join(scope.findings)})
+        for identity, issue in (("io.names", "interface_identity_or_direction_undefined"),
+                                ("io.direction", "interface_identity_or_direction_undefined"),
+                                ("io.width", "interface_width_undefined")):
+            supported = coherent and bool(owned_ports) and all(issue not in issues for _port, issues in port_findings)
+            checks[identity] = _readiness_check(supported, "Owner-scoped approved IO catalog checked against central coherence; " +
+                                                ("all applicable entries satisfy this structural item." if supported else "coverage or explicit information is not established."),
+                                                ["artifacts/stage2_mirco_arc/source_port_catalog.csv", "snapshot:" + contract.snapshot_id])
+        for identity, issue in (("io.meaning", "interface_meaning_undefined"),
+                                ("io.interpretation", "interface_interpretation_undefined"),
+                                ("io.handshake", "interface_timing_or_handshake_undefined")):
+            matched = bool(owned_ports) and all(issue not in issues for _port, issues in port_findings)
+            checks[identity] = _readiness_check(False, "Legacy interface patterns " + ("matched, but do not prove complete, unambiguous semantics for every IO." if matched else "could not establish this item; missing matches are not proof of source absence.") + " Governed standard-defined coverage may satisfy this item under io.standard without restating the standard; local applicability and integration checks remain required.", references)
+        if findings:
+            checks["residual.material"] = _readiness_check(False, "Unresolved coherence, projection, interface or review findings prevent a trustworthy implementation assessment.", references)
+        models[key] = _readiness_model_result(checks, findings, descriptive["residuals"], references)
+        models[key].update({"block_name": block.name, "model_role": "block"})
+    dependencies_ready = bool(models) and all(value["status"] == "READY" for value in models.values())
+    for path in (scope.system_path, scope.digital_path, scope.shared_path):
+        if not path.resolve().is_relative_to((repo_root / "artifacts/stage2_mirco_arc/sysml").resolve()):
+            continue
+        models[path.relative_to(repo_root).as_posix()] = _readiness_model_result(
+            {"consistency.snapshot": _readiness_check(not scope.findings and coherence["decision"] == "PASS",
+                                                      "Central snapshot and coherence validation applies to this structural model.", ["snapshot:" + contract.snapshot_id])},
+            [] if dependencies_ready else ["implementation_scope_or_dependency_not_ready"], [], list(models))
+        models[path.relative_to(repo_root).as_posix()].update({"block_name": path.stem, "model_role": "structural"})
+    all_models_ready = bool(models) and all(value["status"] == "READY" for value in models.values())
+    from sysml_relations import signal_description_projection, validate_serialized_relations
+    relation_report = validate_serialized_relations(scope, scope.relation_inventory) if scope.relation_inventory else None
+    if relation_report is not None:
+        relation_report["signal_status_crosscheck"] = signal_description_projection(scope)["rows"]
+    return {"validator": "validate_downstream_coherence", "policy_version": READINESS_POLICY_VERSION,
+            "authority": False, "binding": readiness_input_binding(repo_root, contract, scope), "models": models,
+            "relation_report": relation_report,
+            "relation_inventory": scope.relation_inventory.payload() if scope.relation_inventory else None,
+            "status": "READY" if all_models_ready else "NOT_READY",
+            "generation_status": "GENERATED" if all(path.exists() for path in (scope.system_path, scope.digital_path, scope.shared_path, *(block.path for block in scope.blocks))) else "INCOMPLETE",
+            "publication_status": "ELIGIBLE" if not scope.findings and coherence["decision"] == "PASS" else "BLOCKED"}
+
+
+def readiness_model_report_path(repo_root: Path, model: str) -> Path:
+    identity = hashlib.sha256(model.encode("utf-8")).hexdigest()[:12]
+    return repo_root / "artifacts/validation/readiness_checklists" / (Path(model).name + "." + identity + ".readiness.json")
+
+
+def write_readiness_reports(repo_root: Path, assessment: dict) -> None:
+    from report_generation_service import write_readiness_workbooks
+
+    if assess_final_readiness(repo_root, assessment["binding"]["snapshot_id"]) != assessment:
+        raise ValueError("Cannot write stale or inconsistent readiness reports")
+    reports = {}
+    for key, model in assessment["models"].items():
+        report = {"validator": "validate_downstream_coherence", "authority": False,
+                  "policy_version": assessment["policy_version"], "model": key,
+                  "binding": assessment["binding"], **model}
+        path = readiness_model_report_path(repo_root, key)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        reports[path] = report
+    write_readiness_summary(repo_root, assessment)
+    write_readiness_workbooks(repo_root / "artifacts/validation/readiness_checklists", readiness_summary(assessment), reports)
+    if assessment.get("relation_report"):
+        from report_generation_service import write_relation_reports
+        write_relation_reports(repo_root / "artifacts/validation/sysml_relations", assessment["relation_report"], assessment["relation_inventory"])
+
+
+def readiness_summary(assessment: dict) -> dict:
+    from readiness_checklist import checklist_reference
+
+    rows = []
+    for key, model in assessment["models"].items():
+        counts = {result: sum(row["Assessment result"] == result for row in model["checklist"])
+                  for result in ("pass", "fail", "not_applicable", "uncertain")}
+        rows.append({"block": model["block_name"], "model_role": model["model_role"], "model": key,
+                     "readiness": model["overall_decision"], "status": model["status"],
+                     "checklist_results": counts, "blocking_items": len(model["blocking_items_summary"]),
+                     "main_blockers": ("Snapshot/coherence or dependency failures; " if model["findings"] else "")
+                                      + str(sum(row["Assessment result"] == "uncertain" and row["Readiness impact"] == "blocking"
+                                                for row in model["checklist"])) + " unresolved required checklist obligations; see detailed report",
+                     "report": readiness_model_report_path(Path("."), key).name})
+    return {"validator": "validate_downstream_coherence", "authority": False,
+            "policy_version": assessment["policy_version"], "binding": assessment["binding"],
+            "checklist_reference": checklist_reference(),
+            "status": assessment["status"], "publication_status": assessment["publication_status"],
+            "sysml_stamped": False, "scope": "Official central materialization scope; not isolated demo exports",
+            "blocks": [row for row in rows if row["model_role"] == "block"],
+            "structural_models": [row for row in rows if row["model_role"] == "structural"]}
+
+
+def write_readiness_summary(repo_root: Path, assessment: dict) -> None:
+    summary = readiness_summary(assessment)
+    directory = repo_root / "artifacts/validation/readiness_checklists"
+    directory.mkdir(parents=True, exist_ok=True)
+    (directory / "readiness_summary.json").write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    lines = ["# Official SysML Readiness Summary", "",
+             "Assessment snapshot: `" + assessment["binding"]["snapshot_id"] + "`", "",
+             "Overall implementation readiness: **" + assessment["status"] + "**. Publication status: **" + assessment["publication_status"] + "**.", "",
+             "These are non-authoritative derived reports, not source approval or production certification. Report-only assessment does not regenerate or stamp SysML. Existing stickers may differ from this assessment.", "",
+             "Checklist reference to be satisfied for every hierarchy-level model and block: [readiness_checklist.xlsx](../../../config/readiness_checklist.xlsx).", "",
+             summary["checklist_reference"]["editing"], "",
+             "For report-only assessment, first synchronize with `" + summary["checklist_reference"]["sync_command"] + "`. " + summary["checklist_reference"]["safety"], "",
+             "Missing evidence projection is not proof of source absence. Uncertain implementation-critical semantics block READY; no inference or gate override is permitted.", ""]
+    for title, rows in (("Blocks", summary["blocks"]), ("System And Shared Models", summary["structural_models"])):
+        lines.extend(["## " + title, "", "| Block/model | Readiness | Pass | Fail | N/A | Uncertain | Blocking | Main blockers | Report |",
+                      "| --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |"])
+        for row in rows:
+            counts = row["checklist_results"]
+            label = row["block"].replace("|", "\\|").replace("\n", " ")
+            lines.append(f"| {label} | {row['status']} | {counts['pass']} | {counts['fail']} | {counts['not_applicable']} | {counts['uncertain']} | {row['blocking_items']} | {row['main_blockers']} | [JSON]({row['report']}) |")
+        lines.append("")
+    lines.extend(["## Important Limits", "",
+                  "Legacy IO patterns are diagnostics, not proof of complete meaning, interpretation, protocol or reset behavior. Required checklist obligations without a completeness-capable central adapter remain blocking uncertain. Conditional items are not silently marked not applicable. DFT/DFX and diagnostics are informational unless required by governed policy. Validly referenced standard behavior is cross-checked by applicability and local constraints rather than redundant restatement.", "",
+                  "Official file identities and exact per-item evidence references, reasons, residuals and freshness bindings are recorded in the linked reports and readiness_summary.json.", ""])
+    (directory / "readiness_summary.md").write_text("\n".join(lines), encoding="utf-8")
+
+
+def check_sysml_readiness_declarations(repo_root: Path, contract, scope) -> list[str]:
+    if not scope.manifest_path.exists():
+        return []
+    manifest = json.loads(scope.manifest_path.read_text(encoding="utf-8"))
+    if manifest.get("descriptive_model_version") != "governed-ipos-shared-v1":
+        return []
+    report_path = repo_root / "artifacts/validation/final_readiness.json"
+    report = json.loads(report_path.read_text(encoding="utf-8")) if report_path.exists() else None
+    binding = readiness_input_binding(repo_root, contract, scope)
+    fresh = assess_final_readiness(repo_root, contract.snapshot_id) if report and report.get("binding") == binding else None
+    findings = []
+    if report and report.get("binding") != binding:
+        findings.append("SYSML_READINESS_ASSESSMENT_STALE")
+    if fresh is not None and report != fresh:
+        findings.append("SYSML_READINESS_ASSESSMENT_CHANGED")
+    for path in (scope.system_path, scope.digital_path, scope.shared_path, *(block.path for block in scope.blocks)):
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        key = path.relative_to(repo_root).as_posix()
+        expected = "// " + readiness_declaration(fresh if fresh == report else None, binding, key)
+        declarations = [line for line in text.splitlines() if line.strip() in {"// " + READINESS_READY, "// " + READINESS_NOT_READY}]
+        if declarations != [expected] or not text.startswith(expected + "\n"):
+            findings.append("SYSML_READINESS_DECLARATION_INVALID:" + key)
+        if fresh is not None and report == fresh:
+            if key not in report["models"]:
+                findings.append("SYSML_READINESS_MODEL_ASSESSMENT_MISSING:" + key)
+                continue
+            per_model_path = readiness_model_report_path(repo_root, key)
+            expected_report = {"validator": "validate_downstream_coherence", "authority": False,
+                               "policy_version": report["policy_version"], "model": key,
+                               "binding": report["binding"], **report["models"][key]}
+            try:
+                actual_report = json.loads(per_model_path.read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                actual_report = None
+            if actual_report != expected_report:
+                findings.append("SYSML_READINESS_CHECKLIST_REPORT_CHANGED:" + key)
+    return findings
+
+
+def stamp_final_readiness(repo_root: Path, assessment: dict) -> None:
+    contract = resolve_downstream_contract(repo_root, assessment["binding"]["snapshot_id"])
+    scope = resolve_sysml_materialization_scope(repo_root, contract=contract).require_valid()
+    binding = readiness_input_binding(repo_root, contract, scope)
+    if binding != assessment["binding"] or assess_final_readiness(repo_root, contract.snapshot_id) != assessment:
+        raise ValueError("Final readiness assessment is stale or inconsistent")
+    write_readiness_reports(repo_root, assessment)
+    manifest = json.loads(scope.manifest_path.read_text(encoding="utf-8"))
+    for path in (scope.system_path, scope.digital_path, scope.shared_path, *(block.path for block in scope.blocks)):
+        key = path.relative_to(repo_root).as_posix()
+        declaration = readiness_declaration(assessment, binding, key)
+        path.write_text("// " + declaration + "\n" + sysml_semantic_body(path.read_text(encoding="utf-8")), encoding="utf-8")
+        manifest["model_files"][path.as_posix()] = hashlib.sha256(path.read_bytes()).hexdigest()
+    scope.manifest_path.write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
+    report_path = repo_root / "artifacts/validation/final_readiness.json"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(json.dumps(assessment, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Read-only downstream snapshot-to-output coherence validator")
     parser.add_argument("--snapshot-id", help="Optional diagnostic override; normal use selects the approved workflow snapshot.")
     parser.add_argument("--ipos-kind", choices=("digital", "analog"), help="Limit IPOS descriptive checks to the selected document kind.")
     parser.add_argument("--ipos-block", help="Limit IPOS descriptive checks to one approved concrete block.")
+    parser.add_argument("--readiness-report", action="store_true", help="Write centrally recomputed per-model readiness checklists only; never generate or stamp SysML.")
     args = parser.parse_args()
     if bool(args.ipos_kind) != bool(args.ipos_block):
         parser.error("--ipos-kind and --ipos-block must be provided together.")
+    if args.readiness_report and (not args.snapshot_id or args.ipos_kind):
+        parser.error("--readiness-report requires one explicit --snapshot-id and evaluates the complete central model scope.")
     repo_root = Path(__file__).resolve().parents[1]
+    if args.readiness_report:
+        assessment = assess_final_readiness(repo_root, args.snapshot_id)
+        write_readiness_reports(repo_root, assessment)
+        print(json.dumps({"status": assessment["status"], "publication_status": assessment["publication_status"],
+                          "snapshot_id": args.snapshot_id, "authority": False, "sysml_stamped": False,
+                          "reports": {key: readiness_model_report_path(repo_root, key).relative_to(repo_root).as_posix()
+                                      for key in assessment["models"]}}, indent=2, sort_keys=True))
+        return 0 if assessment["status"] == "READY" else 1
     try:
         result = validate(repo_root, args.snapshot_id, args.ipos_kind, args.ipos_block)
     except Exception as exc:

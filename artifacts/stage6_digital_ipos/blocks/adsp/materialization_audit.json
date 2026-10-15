@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_adsp.docx",
-    "sha256": "450c469ba0e9bb237bbe7327d9c29dd4e97997e00a724d5727e3add5f3bcafca"
+    "sha256": "589341bc744df74ca645b3aab671950c17e68acc7f22632963abf2cc54138b84"
   },
   "markdown": {
     "path": "digital_ipos_adsp.md",
-    "sha256": "b13d36f22903c4be05b00077d480b8c56b67d21bb0771834122619c8142d7d95"
+    "sha256": "bcce9d0313d4e9eb90f92539673c5f32f5071bdaa265504ce243b5c43f74cd75"
   },
-  "normalized_input_sha256": "02d8176a3c202001a1b659d618c056f468a49b488044da7f1ea96fbe2d6818d7",
+  "normalized_input_sha256": "bbf41cd97d9a2584e6e475f09d5884ffc51dc7936e1b635fae7b6a0672ecf69b",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -72,7 +72,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0022",
@@ -80,13 +80,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0022",
       "text": "OTP_WRITE, OTP_BOOT and OTP_TEST bits shall be cleared by ADSP at the end of their respective operation [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0024",
@@ -94,13 +94,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0024",
       "text": "OTP_IREF_WAKEUP shall be set to one by an external I2C/SPI to AHB write before initiating a new OTP_TEST or OTP_WRITE operation [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0020",
@@ -108,13 +108,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0020",
       "text": "During WRITE routine, ADSP shall allow copying all OTP Registers into the OTP Memory only if the location 0x24 of OTP Memory (OTP[24] in the following diagram) is not set to 0xFF."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0023",
@@ -122,7 +122,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0023",
       "text": "A new operation shall start only when quokka_run is low, and one between OTP_TEST bit, OTP_WRITE bit or OTP_BOOT bit is written to 1 [Vpriority High]"
     },
@@ -156,7 +156,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0015",
@@ -164,13 +164,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0015",
       "text": "During OTP boot operation, the ADSP shall copy the content of the OTP memory into the OTP registers, following the procedure to access OTP memory [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0014",
@@ -178,13 +178,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0014",
       "text": "The BOOT routine shall starts when the OTP_BOOT bit rises and shall completes when quokka_boot_end rises. [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0021",
@@ -192,13 +192,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0021",
       "text": "During the WRITE routine and after copying all OTP Registers into the OTP Memory, ADSP shall compare each value inside the OTP memory with the corresponding value in OTP Registers to check if the WRITE routine has been succesfull. In that case ADSP shall write 0xFF into the last location of the OTP memory."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0016",
@@ -206,13 +206,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0016",
       "text": "During BOOT routine, ADSP shall first read the last location of the OTP memory, at address 0x7F. If the content is 0xFF, called \u201clifecycle\u201d byte, then the READ operation proceeds from address 0 to address 0x2F; otherwise, ADSP shall not perform any further reads."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0018",
@@ -220,13 +220,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0018",
       "text": "The WRITE routine shall start when OTP Write Bit rises and completes when quokka_run falls. [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0019",
@@ -234,13 +234,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0019",
       "text": "During WRITE routine ADSP shall copy the content of the OTP regmap into the OTP memory, following the procedure to burn the fuses as expressed in the OTP datasheet [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0035",
@@ -248,13 +248,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0035",
       "text": "If during the start of a new operation, more than one bit is written into CONTROL_A reg in the same write operation, ADSP shall execute only the routine at higher priority and discard the others. Priority is listed below, with first routine at higher priority: 1. SOFT RESET routine 2. OTP WRITE routine 3. OTP TEST routine 4. OTP BOOT routine [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0025",
@@ -262,7 +262,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0025",
       "text": "OTP_IREF_WAKEUP shall be setted to zero by an external I2C/SPI to AHB write at the end of OTP_TEST or OTP_WRITE operation [Vpriority High]"
     },
@@ -282,7 +282,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0027",
@@ -290,13 +290,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0027",
       "text": "The TEST routine shall start when OTP Test Bit rises and completes when quokka_run falls. [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0033",
@@ -304,13 +304,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0033",
       "text": "The Soft Reset routine shall start when SOFT_RESET Bit (in CONTROL_A register) rises and completes when quokka_run falls. [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0028",
@@ -318,13 +318,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0028",
       "text": "[DDS_STBIO1_0028] Requirement: The TEST routines shall allow reading an 8-bit word on OTP of a specific address written in OTP_A register, and write this value in OTP_D_TEST register."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0017",
@@ -332,7 +332,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:ADSP:DDS_STBIO1_0017",
       "text": "To perform a BOOT routine, OTP_BOOT bit shall be written when quokka_run is low. [Vpriority High]"
     }
@@ -361,51 +361,13 @@
       "output_order": 3,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0022"
-      ],
-      "text": "OTP_WRITE, OTP_BOOT and OTP_TEST bits are cleared by ADSP at the end of their respective operation.",
-      "unit_id": "ipos-claim-53a2094f89ec8559f124"
-    },
-    {
-      "output_order": 4,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0024",
-        "requirement:ADSP:DDS_STBIO1_0025"
-      ],
-      "text": "OTP_IREF_WAKEUP is set to one by an external I2C/SPI to AHB write before initiating a new OTP_TEST or OTP_WRITE operation and is setted to zero by an external I2C/SPI to AHB write at the end of OTP_TEST or OTP_WRITE operation.",
-      "unit_id": "ipos-claim-9e1006dfba11302119e3"
-    },
-    {
-      "output_order": 5,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0020",
-        "requirement:ADSP:DDS_STBIO1_0019"
-      ],
-      "text": "During WRITE routine, ADSP allows copying all OTP Registers into the OTP Memory only if the location 0x24 of OTP Memory (OTP[24] in the following diagram) is not set to 0xFF and copies the content of the OTP regmap into the OTP memory, following the procedure to burn the fuses as expressed in the OTP datasheet.",
-      "unit_id": "ipos-claim-aecd5bcc426bf27421ee"
-    },
-    {
-      "output_order": 6,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0023"
-      ],
-      "text": "A new operation starts only when quokka_run is low, and one between OTP_TEST bit, OTP_WRITE bit or OTP_BOOT bit is written to 1.",
-      "unit_id": "ipos-claim-2e22347bcc1a73f4702a"
-    },
-    {
-      "output_order": 7,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
         "requirement:ADSP:DDS_STBIO1_0026"
       ],
       "text": "After startup phase, once started with an operation, the IP ignores any further start incoming transactions.",
       "unit_id": "ipos-claim-077e8f684b20f25310a8"
     },
     {
-      "output_order": 8,
+      "output_order": 4,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:ADSP:DDS_STBIO1_0034"
@@ -414,121 +376,13 @@
       "unit_id": "ipos-claim-2df6ac5cbc3833a9808d"
     },
     {
-      "output_order": 9,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0034"
-      ],
-      "text": "Only the first 3.5Kbyte of ADSP RAM is cleared, from address 0x000 to address 0xDFF.",
-      "unit_id": "ipos-claim-9f9120a896f2fe77ffbd"
-    },
-    {
-      "output_order": 10,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0015"
-      ],
-      "text": "During OTP boot operation, the ADSP copies the content of the OTP memory into the OTP registers, following the procedure to access OTP memory.",
-      "unit_id": "ipos-claim-5596b557a8252624dec0"
-    },
-    {
-      "output_order": 11,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0014"
-      ],
-      "text": "The BOOT routine starts when the OTP_BOOT bit rises and completes when quokka_boot_end rises.",
-      "unit_id": "ipos-claim-776269afd85e09a5de62"
-    },
-    {
-      "output_order": 12,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0021"
-      ],
-      "text": "During the WRITE routine and after copying all OTP Registers into the OTP Memory, ADSP compares each value inside the OTP memory with the corresponding value in OTP Registers to check if the WRITE routine has been succesfull. If the WRITE routine has been succesfull, ADSP writes 0xFF into the last location of the OTP memory.",
-      "unit_id": "ipos-claim-b5d46eb6003c11cc0332"
-    },
-    {
-      "output_order": 13,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0016"
-      ],
-      "text": "During BOOT routine, ADSP first reads the last location of the OTP memory, at address 0x7F.",
-      "unit_id": "ipos-claim-7d48618351971c46aa5e"
-    },
-    {
-      "output_order": 14,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0016"
-      ],
-      "text": "If the content is 0xFF, called \u201clifecycle\u201d byte, then the READ operation proceeds from address 0 to address 0x2F; otherwise, ADSP does not perform any further reads.",
-      "unit_id": "ipos-claim-14fcdf7c7530b73e5f20"
-    },
-    {
-      "output_order": 15,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0018"
-      ],
-      "text": "The WRITE routine starts when OTP Write Bit rises and completes when quokka_run falls.",
-      "unit_id": "ipos-claim-3a874f8db5342b611850"
-    },
-    {
-      "output_order": 16,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0035"
-      ],
-      "text": "If during the start of a new operation, more than one bit is written into CONTROL_A reg in the same write operation, ADSP executes only the routine at higher priority and discard the others. The priority order is 1: SOFT RESET routine, 2: OTP WRITE routine, 3: OTP TEST routine and 4: OTP BOOT routine , from higher to lower priority.",
-      "unit_id": "ipos-claim-d4ee533fe349e817eda9"
-    },
-    {
-      "output_order": 17,
+      "output_order": 5,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:ADSP:DDS_STBIO1_0013"
       ],
       "text": "To move OTP signal, ADSP writes a new value in a regbank by AHB protocol.",
       "unit_id": "ipos-claim-9a6518eec56a3744a31b"
-    },
-    {
-      "output_order": 18,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0027"
-      ],
-      "text": "The TEST routine starts when OTP Test Bit rises and completes when quokka_run falls.",
-      "unit_id": "ipos-claim-f848c225b26e54b3def4"
-    },
-    {
-      "output_order": 19,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0033"
-      ],
-      "text": "The Soft Reset routine starts when SOFT_RESET Bit (in CONTROL_A register) rises and completes when quokka_run falls.",
-      "unit_id": "ipos-claim-6d085d95192c54d7604d"
-    },
-    {
-      "output_order": 20,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0028"
-      ],
-      "text": "The TEST routines allows reading an 8-bit word on OTP of a specific address written in OTP_A register, and write this value in OTP_D_TEST register.",
-      "unit_id": "ipos-claim-0e2113f97bb15f9a45af"
-    },
-    {
-      "output_order": 21,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:ADSP:DDS_STBIO1_0017"
-      ],
-      "text": "To perform a BOOT routine, OTP_BOOT bit is written when quokka_run is low.",
-      "unit_id": "ipos-claim-f98b34bb4156d8c2bbea"
     }
   ]
 }

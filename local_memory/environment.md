@@ -2,7 +2,40 @@
 - Active source specification: specs/DDS_STBIO1.pdf
 - Use python scripts/... commands in this workspace.
 
-- Latest frozen baseline and Git tag: `freeze-ipos-6-pass-2-blocked`,
+- Current local checkpoint: `2026-10-15-selected-snapshot-ipos-reporting-pass`.
+  Selected snapshot snap-73c872b1307b6adb5eaf843e; newer approved snap-1c746489707c8d22fc8ce3d7
+  is not selected/certified. Eight current digital document artifact checks PASS;
+  user Stage6 PASS.315 affected/focused tests PASS. Stage7/final SysML unexecuted,
+  readiness NOT_ASSESSED and residuals retained. Reporting reconciles current
+  artifacts and run scope through shared read-only APIs, not saved review status.
+  Local source checkpoint/manifest under local_memory/checkpoints; no Git commit,
+  tag or push and no database/source-spec/full-artifact restore backup. Reopen GUI
+  to load changed code; do not automatically rerun production generation.
+
+- Historical checkpoint context below: `2026-10-15-main-descriptive-admission-blocked-proof`.
+  Partial implementation; MVP not complete. Latest snapshot explicitly approved
+  and frozen by user in GUI: `snap-1c746489707c8d22fc8ce3d7`.
+  Old `snap-73c872b1307b6adb5eaf843e` and earlier generated outputs preserved.
+  Current document acceptance cannot inherit old-snapshot PASS labels.
+- Existing architecture workbook `artifacts/stage1_specs/architecture_mapping_preview.xlsx`
+  contains Descriptive Content Review. Exact section5.3.2 Main/digital record is
+  approved and snapshot-bound; do not repeat approval through blocker workbook.
+  Admission/preparation code and shared validation are implemented; paragraph
+  projection/domain/omission/parity fixes remain PLANNED, not implemented.
+- Proof: `artifacts/validation/main_controller_descriptive_proof_20261014/`.
+  Main-only new-snapshot generator blocked before composer by55stale DRS trace
+  findings; central description filtering also rejects digital vs Digital/Block.
+  Original inputs and Main MD/DOCX unchanged. No enrichment certified.
+- Strict Main Controller-only scope remains: user declined isolated DRS refresh.
+  No RAG/OCR/merge/other-block regeneration, source inference or gate bypass.
+  Preserve132archived omissions without excluding newly admitted content and
+  preserve181normative requirements. Do not infer oscillator on/off from turn of.
+- Python3.11/unittest available; pytest unavailable in earlier observed runtime.
+  Latest focused admission1test and snapshot resolver12tests PASS; unrelated
+  hierarchy-warning pre-freeze test fails. No full-suite acceptance or new run
+  during local-memory save. Preserve user GUI state and dirty files.
+  New checkpoint is local documentation only, not a Git commit/tag or backup.
+- Previous frozen baseline and Git tag: `freeze-ipos-6-pass-2-blocked`,
   2026-10-12. User authorized milestone commit and tag push to origin only.
   Snapshot snap-73c872b1307b6adb5eaf843e unchanged. SRS/ARS/DRS PASS;
   ADSP/I2C_SPI_AHB/PAD MUX/PMU/Regmap/Smart FIFO regenerated and PASS;

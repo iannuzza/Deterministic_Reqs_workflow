@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from pathlib import Path
+import hashlib
+import json
 from typing import Any
 
-from approved_profile_resolver import resolve_approved_profiles
+from approved_profile_resolver import resolve_approved_profiles, resolve_snapshot_profile
 from requirement_corpus import RequirementInput, load_sqlite_snapshot_input
 from snapshot_manager import resolve_approved_snapshot
 
@@ -125,6 +127,71 @@ def resolve_authoritative_input(
         if isinstance(exc, ApprovedResolverError):
             raise
         raise ApprovedResolverError(str(exc)) from exc
+
+
+def validate_governed_source_context(profile: dict) -> list[str]:
+    """Validate content membership inside the existing architecture profile."""
+    context = profile.get("governed_source_context")
+    if context is None:
+        return []
+    if not isinstance(context, dict) or context.get("version") != 1 or not isinstance(context.get("records"), list):
+        return ["governed_source_context_invalid_schema"]
+    findings = []
+    identities = set()
+    for record in context["records"]:
+        if not isinstance(record, dict):
+            findings.append("governed_source_context_invalid_record")
+            continue
+        identity = str(record.get("record_id") or "")
+        text = str(record.get("statement") or "")
+        if not identity or identity in identities:
+            findings.append("governed_source_context_duplicate_or_missing_identity")
+        identities.add(identity)
+        if not text or hashlib.sha256(text.encode("utf-8")).hexdigest() != record.get("content_sha256"):
+            findings.append("governed_source_context_text_hash_mismatch:" + identity)
+        if record.get("evidence_kind") != "descriptive":
+            findings.append("governed_source_context_unsupported_content_kind:" + identity)
+        if record.get("review_decision") == "approved" and (
+            not record.get("source_file") or not (record.get("source_revision_id") or record.get("source_revision"))):
+            findings.append("governed_source_context_missing_source_revision:" + identity)
+        try:
+            spans = json.loads(record.get("source_spans_json") or "[]")
+            if not spans or any(not isinstance(span, dict) or not span.get("text_file")
+                                or not isinstance(span.get("page"), int) or span["page"] < 1
+                                or not isinstance(span.get("line"), int) or span["line"] < 1
+                                or not isinstance(span.get("artifact_sha256"), str)
+                                or len(span["artifact_sha256"]) != 64
+                                or any(character not in "0123456789abcdef" for character in span["artifact_sha256"])
+                                for span in spans):
+                findings.append("governed_source_context_invalid_source_spans:" + identity)
+        except (ValueError, TypeError):
+            findings.append("governed_source_context_invalid_source_spans:" + identity)
+        decision = record.get("review_decision", "pending")
+        if decision not in {"pending", "approved", "rejected"}:
+            findings.append("governed_source_context_invalid_review_decision:" + identity)
+        if decision == "approved":
+            if not record.get("mapped_block") or record["mapped_block"] not in profile.get("block_defs", {}):
+                findings.append("governed_source_context_unknown_owner:" + identity)
+            if record.get("domain") not in {"digital", "analog", "mixed_signal", "system"}:
+                findings.append("governed_source_context_invalid_domain:" + identity)
+            if not str(record.get("review_rationale") or "").strip():
+                findings.append("governed_source_context_missing_review_rationale:" + identity)
+    return findings
+
+
+def resolve_governed_descriptive_context(
+    repo_root: Path, *, snapshot_id: str, project_id: str,
+) -> tuple[dict, ...]:
+    snapshot = resolve_approved_snapshot(repo_root, snapshot_id=snapshot_id)
+    if snapshot["project_id"] != project_id:
+        raise ApprovedResolverError("Governed source context project mismatch")
+    profile = resolve_snapshot_profile(repo_root, snapshot)
+    findings = validate_governed_source_context(profile)
+    if findings:
+        raise ApprovedResolverError("; ".join(findings))
+    return tuple({**record, "snapshot_id": snapshot_id, "admission_state": "admitted"}
+                 for record in profile.get("governed_source_context", {}).get("records", ())
+                 if record.get("review_decision") == "approved")
 
 
 def resolve_complete_snapshot_id(

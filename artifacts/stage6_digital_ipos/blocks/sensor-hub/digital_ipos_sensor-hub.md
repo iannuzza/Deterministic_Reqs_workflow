@@ -1,13 +1,18 @@
 # **Digital IPOS - Sensor-Hub** {#digital-ipos---sensor-hub}
 
-- Snapshot: `snap-b2e8101b00dc6909feaed885`
+- Snapshot: `snap-73c872b1307b6adb5eaf843e`
 
 Author: Alessandro Lucio IANNUZZI
 
 ## **0. Document Navigation** {#0-document-navigation}
 
 ### **0.1 Table of contents** {#01-table-of-contents}
+
 - [1. Block overview](#1-block-overview)
+- [1.1 Functionality](#11-functionality)
+- [1.2 Supported functions and scope](#12-supported-functions-and-scope)
+- [1.3 Internal structure](#13-internal-structure)
+- [1.4 Supported block functions](#14-supported-block-functions)
 - [2. Source I/O](#2-source-io)
 - [3. Block requirements](#3-block-requirements)
 
@@ -16,8 +21,10 @@ Author: Alessandro Lucio IANNUZZI
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 0.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 digital IPOS block baseline | Alessandro Lucio IANNUZZI |
+| 0.2 | 2026-10-15 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
+#### **Table 2. Requirement navigation** {#table-2-requirement-navigation}
 | Requirement | Internal link |
 |---|---|
 | IPOS-SENSOR-HUB-001 | [Go to requirement](#ipos-sensor-hub-001) |
@@ -39,33 +46,43 @@ Author: Alessandro Lucio IANNUZZI
 | IPOS-SENSOR-HUB-017 | [Go to requirement](#ipos-sensor-hub-017) |
 | IPOS-SENSOR-HUB-018 | [Go to requirement](#ipos-sensor-hub-018) |
 
+### **0.4 Table index** {#04-table-index}
+
+- [Table 1. Version history](#table-1-version-history)
+- [Table 2. Requirement navigation](#table-2-requirement-navigation)
+- [Table 3. Source I/O](#table-3-source-io)
+
 ## **1. Block overview** {#1-block-overview}
 
 ### **1.1 Functionality** {#11-functionality}
 
-The Sensor-Hub block serves to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
+The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- The Sensor-Hub block accepts Primary sensing input. The Sensor-Hub block produces Analog input signal.
-- **The last 8-bits of the data stored in FIFO.** The last 8-bits of the data stored in FIFO contains the TAG field.
-- **SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers.** SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers defines how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12).
-- **The output port sleep master.** The output port sleep master is set to 1 when an I2C operation is not on-going.
-- **Only I2C target addressed through SLAVE0 DEV ADD register.** Only I2C target addressed through SLAVE0 DEV ADD register is the destination of an I2C Write Operation.
-- **Each data stored in FIFO.** Each data stored in FIFO is composed by 4 words (16bytes).
-- **All the SENSOR HUB x registers.** All the SENSOR HUB x registers is reset every time a new I2C operation starts.
-- **3 words (12bytes) of the data stored in FIFO.** 3 words (12bytes) of the data stored in FIFO contains the data from each I2C slave.
-- **24-bits of the data stored in FIFO.** 24-bits of the data stored in FIFO is reserved at '0'.
-- **any dvalid triggered (HW or SW).** When Quokka MasterBlaze µP runs (sleep master signal = 0), any dvalid triggered (HW or SW) is ignored.
-- **The trigger of sensor hub.** The trigger of sensor hub is possible in both ways, HW via dvalid masterblaze ext signal or SW using DVALID REGISTER.
-- **SLAVE0 NUMOP bitfield.** SLAVE0 NUMOP bitfield is ignored if an I2C Write operation is issued to the I2C Slave 0.
-- **All the values from 1 to 12.** All the values from 1 to 12 is valid for SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers.
-- **The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value.** The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value is not updated.
+The Sensor-Hub block accepts Primary sensing input and produces Analog input signal.
+
+### **1.3 Internal structure** {#13-internal-structure}
+
+The last 8-bits of the data stored in FIFO contains the TAG field.
+
+3 words (12bytes) of the data stored in FIFO contains the data from each I2C slave.
+
+### **1.4 Supported block functions** {#14-supported-block-functions}
+
+If the sensor hub IP is not enabled, the SCL and SDA pad do not toggle.
+
+All the values is tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network.
+
+Each data stored in FIFO is composed by 4 words (16bytes).
+
+24-bits of the data stored in FIFO is reserved at '0'.
 
 ## **2. Source I/O** {#2-source-io}
 
 The following approved source I/O entries are owned by this block.
 
+#### **Table 3. Source I/O** {#table-3-source-io}
 | Port name | Direction | Type / details | Table | Source page |
 |---|---|---|---|---|
 | scan_mode | input |  | Sensor Hub I/O List | 104 |

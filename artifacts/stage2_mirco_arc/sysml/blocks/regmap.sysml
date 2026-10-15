@@ -1,5 +1,6 @@
-// Snapshot ID: snap-b2e8101b00dc6909feaed885
-// Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+// NOT READY for RTL or high-level model generation
+// Snapshot ID: snap-73c872b1307b6adb5eaf843e
+// Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 package Block_Regmap {
 
@@ -14,6 +15,8 @@ package Block_Regmap {
         attribute approvedPortCount : Integer = 0;
         attribute linkedRequirementCount : Integer = 8;
         doc /* block=Regmap | description=Implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules. */;
+        doc /* governedOverview:functionality | The Regmap block is designed to implement the mapped AFE, system, and OTP registers, exposing configuration/status while enforcing reset and OTP write-protection rules. */;
+        doc /* governedOverview:scope | The Regmap block accepts Host read/write transactions and produces Register data and status fields. */;
         doc /* No approved source ports are currently assigned to this block. */;
         requirement def IPOS_REGMAP_001 : SourceRequirement {
             attribute sourceReqId = "DDS_STBIO1_3000";

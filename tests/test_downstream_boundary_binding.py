@@ -16,6 +16,31 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class DownstreamBoundaryBindingTests(unittest.TestCase):
+    def test_admitted_domain_mismatch_is_integrity_failure_not_silent_filtering(self):
+        from types import SimpleNamespace
+        from validate_downstream_coherence import DownstreamContract, DownstreamCoherenceError
+        contract = SimpleNamespace(snapshot_id="selected", expected={"one": {"approved_block": "Core", "owning_domain": "digital"}})
+        record = {"record_id": "paragraph", "mapped_block": "Core", "domain": "analog"}
+        with patch("validate_downstream_coherence.resolve_governed_descriptive_context", return_value=(record,)):
+            with self.assertRaises(DownstreamCoherenceError):
+                DownstreamContract.descriptive_context(contract, Path(__file__).resolve().parents[1], block="Core", domain="digital")
+
+    def test_descriptive_residuals_never_demote_unknown_integrity_findings(self):
+        from validate_downstream_coherence import classify_descriptive_findings
+        result = classify_descriptive_findings([
+            "ipos_required_section_missing:purpose",
+            "Digital IPOS:core: ipos_projection_gap:claim:unsupported",
+            "ipos_final_claim_missing_or_changed:file:claim",
+            "descriptive_evidence_provenance_incomplete",
+            "unknown_integrity_failure:ipos_projection_gap:claim",
+        ])
+        self.assertEqual(len(result["residuals"]), 2)
+        self.assertEqual(len(result["hard_findings"]), 3)
+        self.assertTrue(all(value["authority"] is False for value in result["residuals"]))
+        coverage = classify_descriptive_findings(["APPROVED_FUNCTION_MISSING_FROM_GENERATED_SPEC: Digital IPOS: core: Acquire: req-1"])
+        self.assertEqual(coverage["hard_findings"], [])
+        self.assertEqual(coverage["residuals"][0]["kind"], "function_description_gap")
+
     def test_generation_preflight_checks_inputs_without_resolving_old_outputs(self):
         from validate_downstream_coherence import validate_generation_inputs
         contract = SimpleNamespace(snapshot_id="new-approved", requirement_input=object(), expected={}, selection={})

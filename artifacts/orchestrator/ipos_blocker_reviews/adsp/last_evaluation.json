@@ -1,0 +1,22 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "block": "ADSP",
+  "status": "READY",
+  "blocker_count": 0,
+  "review_context": {
+    "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+    "block": "ADSP",
+    "workbook_sha256": "baa5a5a5fefec55c4f9f104513d26afb8397528d5433c84aeca3bcf4f1946a21",
+    "notes": [],
+    "decisions": [],
+    "future_source_updates": [],
+    "authority": false,
+    "gate_override": false
+  },
+  "residuals": [],
+  "generation_status": "GENERATABLE",
+  "publication_status": "NOT_ATTEMPTED",
+  "readiness_status": "NOT_ASSESSED",
+  "authority": false,
+  "gate_override": false
+}

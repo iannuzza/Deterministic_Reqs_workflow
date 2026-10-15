@@ -1,0 +1,22 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "block": "PAD MUX",
+  "status": "READY",
+  "blocker_count": 0,
+  "review_context": {
+    "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+    "block": "PAD MUX",
+    "workbook_sha256": "e33c1aca7723b6861b2f737476efc1776d79451d52a21af33f8cfdf0eb01a72d",
+    "notes": [],
+    "decisions": [],
+    "future_source_updates": [],
+    "authority": false,
+    "gate_override": false
+  },
+  "residuals": [],
+  "generation_status": "GENERATABLE",
+  "publication_status": "NOT_ATTEMPTED",
+  "readiness_status": "NOT_ASSESSED",
+  "authority": false,
+  "gate_override": false
+}

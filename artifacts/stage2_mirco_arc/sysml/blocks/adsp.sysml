@@ -1,5 +1,6 @@
-// Snapshot ID: snap-b2e8101b00dc6909feaed885
-// Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+// NOT READY for RTL or high-level model generation
+// Snapshot ID: snap-73c872b1307b6adb5eaf843e
+// Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 package Block_ADSP {
 
@@ -14,6 +15,9 @@ package Block_ADSP {
         attribute approvedPortCount : Integer = 44;
         attribute linkedRequirementCount : Integer = 19;
         doc /* block=ADSP | description=Execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. */;
+        doc /* governedOverview:functionality | The ADSP block is designed to execute ADSP firmware for OTP boot/write/test and signal elaboration, using mapped program/data/register memory and soft-reset handling. */;
+        doc /* governedOverview:scope | The ADSP block accepts Acquired samples and configuration data and produces Elaborated signal data and metadata. */;
+        doc /* governedOverview:internal_functions | After startup phase, once started with an operation, the IP ignores any further start incoming transactions. During the Soft Reset routine, ADSP writes the ADSP RAM with the value 0. To move OTP signal, ADSP writes a new value in a regbank by AHB protocol. */;
         in port stmc_clk : ArchitecturePort {
             attribute sourceName = "stmc_clk";
             attribute sourceDetails = "wire u_pmu.tst_clk_16m";

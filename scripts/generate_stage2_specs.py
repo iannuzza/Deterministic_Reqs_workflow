@@ -22,7 +22,7 @@ import sys
 from collections import Counter, defaultdict
 from typing import Dict, List, Set
 from openpyxl import Workbook, load_workbook
-from mapping_review_sync import sync_mapping_workbook_to_csv
+from mapping_review_sync import sync_mapping_workbook_to_csv, write_descriptive_review_sheet
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.styles import Alignment, Font, PatternFill, Protection
 from openpyxl.formatting.rule import FormulaRule
@@ -30,6 +30,7 @@ from openpyxl.utils import get_column_letter
 from workflow_routing import source_parent_title
 from requirement_corpus import authoritative_corpus_path
 from canonical_store import connect
+from stage1_descriptive_evidence import extract_indexed_descriptive_candidates
 
 
 PROJECT_CONTEXT = Path("config/project_context.json")
@@ -1372,10 +1373,39 @@ def _write_architecture_profile_draft(
             for owner, requirement_ids in sorted(owner_ids.items(), key=lambda item: item[0].lower())
         },
     }
+    repo_root = summary_csv.parents[2]
+    index_path = repo_root / "artifacts/stage1_requirements/integrated_ocr_index.csv"
+    if not index_path.exists():
+        index_path = summary_csv.parent / "ocr_extracts/index.csv"
+    descriptive_context = {"version": 1, "records": [], "extraction_findings": []}
+    if index_path.exists():
+        try:
+            source_context = {}
+            with index_path.open(encoding="utf-8-sig", newline="") as handle:
+                indexed_rows = list(csv.DictReader(handle))
+            for indexed_row in indexed_rows:
+                text_path = Path(indexed_row["text_file"])
+                if not text_path.is_absolute():
+                    text_path = index_path.parent / text_path
+                metadata_path = text_path.parent.parent / "source_metadata.json"
+                if metadata_path.is_file():
+                    metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+                    source_context[indexed_row["source_file"]] = {
+                        "source_revision": str(metadata.get("source_revision") or ""),
+                        "ingestion_id": str(metadata.get("ingestion_id") or ""),
+                    }
+            candidates = extract_indexed_descriptive_candidates(index_path, source_context=source_context)
+            descriptive_context["records"] = [dict(record, review_decision="pending",
+                                                    mapped_block="", domain="", review_rationale="")
+                                               for record in candidates]
+        except (OSError, ValueError, KeyError) as exc:
+            descriptive_context["extraction_findings"].append(str(exc))
+    draft["governed_source_context"] = descriptive_context
     draft_path.parent.mkdir(parents=True, exist_ok=True)
     draft_hash = _draft_review_sha256(draft)
     draft["review_package"]["draft_profile_sha256"] = draft_hash
     draft_path.write_text(json.dumps(draft, indent=2) + "\n", encoding="utf-8")
+    write_descriptive_review_sheet(workbook_path, draft)
 
     _write_csv(
         final_summary_dir / "architecture_profile_requirements_summary.csv",
@@ -1458,6 +1488,9 @@ def _write_architecture_profile_draft(
         "",
         "## Draft Evidence Summary",
         "",
+        f"- Descriptive candidates for explicit review: {len(descriptive_context['records'])}",
+        "- In governed_source_context.records, review exact text/revision/spans; explicitly set review_decision, mapped_block, domain and review_rationale in the approved profile. Pending candidates confer no authority.",
+        "- Descriptive extraction findings: " + "; ".join(descriptive_context["extraction_findings"]),
         f"- Stage 1 requirements analyzed: {len(requirements)}",
         f"- Candidate architecture terms: {len(owner_ids)}",
         f"- Ontology link rows analyzed: {len(ontology_rows)}",

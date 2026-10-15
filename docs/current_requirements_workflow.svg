@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1900" viewBox="0 0 2400 1900" role="img" aria-labelledby="title description">
+  <title id="title">Current Deterministic Requirements Workflow</title>
+  <desc id="description">All sixteen stages, immutable snapshot authority, centralized gates, correct Stage 4 ARS and Stage 5 DRS, partial Digital IPOS, and separate advisory reporting. Execution arrows do not establish normative lineage.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L12 6 L0 12 Z" fill="#244f70"/></marker>
+    <marker id="advisory-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L12 6 L0 12 Z" fill="#66747b"/></marker>
+    <style>
+      text { font-family: 'Segoe UI', sans-serif; fill: #253944; }
+      .title { font-size: 48px; font-weight: 700; }
+      .subtitle { font-size: 25px; fill: #506570; }
+      .section { font-size: 23px; font-weight: 700; fill: #244f70; }
+      .stage { font-size: 29px; font-weight: 700; fill: #fff; }
+      .heading { font-size: 26px; font-weight: 700; }
+      .body { font-size: 24px; }
+      .small { font-size: 22px; }
+      .muted { fill: #506570; }
+      .green { fill: #16705d; }
+      .amber { fill: #956019; }
+      .flow { fill: none; stroke: #244f70; stroke-width: 3; marker-end: url(#arrow); }
+      .advisory { fill: none; stroke: #66747b; stroke-width: 2.5; stroke-dasharray: 9 7; marker-end: url(#advisory-arrow); }
+      .blue-box { fill: #eef4fa; stroke: #8faac0; stroke-width: 2; }
+      .review-box { fill: #fbf5e9; stroke: #baa071; stroke-width: 2; }
+      .state-box { fill: #f1f7f4; stroke: #8cb8aa; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="2400" height="1900" fill="#fff"/>
+  <rect width="2400" height="12" fill="#16705d"/>
+  <text x="60" y="78" class="title">Deterministic Requirements Workflow</text>
+  <text x="60" y="121" class="subtitle">Source-faithful evidence, explicit approvals, immutable snapshots and centralized validation</text>
+  <text x="2340" y="77" text-anchor="end" class="small muted">Updated 12 October 2026</text>
+
+  <rect x="60" y="160" width="650" height="110" rx="6" class="blue-box"/>
+  <text x="85" y="199" class="heading">Primary source specification</text>
+  <text x="85" y="240" class="body">Identity at S0; source read only at S1</text>
+  <rect x="760" y="160" width="650" height="110" rx="6" class="review-box"/>
+  <text x="785" y="199" class="heading">Optional supplementary sources</text>
+  <text x="785" y="240" class="body">S1 ingestion; reviewed additions only</text>
+  <rect x="1460" y="160" width="880" height="110" rx="6" class="state-box"/>
+  <text x="1485" y="199" class="heading">Canonical authority / SQLite</text>
+  <text x="1485" y="240" class="body">Revisions, approvals, mappings, immutable snapshots and audit</text>
+  <path d="M385 270 V292 H620 V350" class="flow"/>
+  <path d="M1085 270 V292 H642 V350" class="advisory"/>
+  <text x="60" y="331" class="section">01 / SOURCE TO APPROVED SNAPSHOT</text>
+
+  <g transform="translate(60 350)"><rect width="340" height="150" rx="6" class="state-box"/><rect width="340" height="48" fill="#16705d"/><text x="20" y="34" class="stage">S0</text><text x="20" y="85" class="heading">Primary source baseline</text><text x="20" y="123" class="small">Identity + bootstrap context</text></g>
+  <g transform="translate(450 350)"><rect width="340" height="150" rx="6" class="blue-box"/><rect width="340" height="48" fill="#24649b"/><text x="20" y="34" class="stage">S1</text><text x="20" y="85" class="heading">Source ingestion</text><text x="20" y="123" class="small">OCR / parse / IDs / provenance</text></g>
+  <g transform="translate(840 350)"><rect width="340" height="150" rx="6" class="blue-box"/><rect width="340" height="48" fill="#24649b"/><text x="20" y="34" class="stage">S2</text><text x="20" y="85" class="heading">Classification</text><text x="20" y="123" class="small">Staging objects + preview</text></g>
+  <g transform="translate(1230 350)"><rect width="340" height="150" rx="6" class="review-box"/><rect width="340" height="48" fill="#956019"/><text x="20" y="34" class="stage">S2A</text><text x="20" y="85" class="heading">Staging review</text><text x="20" y="123" class="small">Explicit reviewer decisions</text></g>
+  <g transform="translate(1620 350)"><rect width="340" height="150" rx="6" class="review-box"/><rect width="340" height="48" fill="#956019"/><text x="20" y="34" class="stage">S2B</text><text x="20" y="85" class="heading">Merge impact analysis</text><text x="20" y="123" class="small">Affected authority + outputs</text></g>
+  <g transform="translate(2010 350)"><rect width="330" height="150" rx="6" class="review-box"/><rect width="330" height="48" fill="#956019"/><text x="20" y="34" class="stage">S2C</text><text x="20" y="85" class="heading">Merge approval</text><text x="20" y="123" class="small">Accept / reject / return</text></g>
+  <path d="M400 425 H450" class="flow"/><path d="M790 425 H840" class="flow"/><path d="M1180 425 H1230" class="flow"/><path d="M1570 425 H1620" class="flow"/><path d="M1960 425 H2010" class="flow"/>
+  <path d="M2175 500 V550 H30 V675 H60" class="flow"/>
+  <text x="60" y="535" class="small muted">Stage 1 is the only direct source reader. Stage 2+ consume artifacts; the source-independence guard is enforced.</text>
+
+  <g transform="translate(60 600)"><rect width="340" height="150" rx="6" class="state-box"/><rect width="340" height="48" fill="#16705d"/><text x="20" y="34" class="stage">S2D</text><text x="20" y="85" class="heading">Canonical merge</text><text x="20" y="123" class="small">Non-destructive revisions</text></g>
+  <g transform="translate(450 600)"><rect width="340" height="150" rx="6" class="state-box"/><rect width="340" height="48" fill="#16705d"/><text x="20" y="34" class="stage">S2E</text><text x="20" y="85" class="heading">Knowledge refresh</text><text x="20" y="123" class="small">Ontology / vocabulary / index</text></g>
+  <g transform="translate(840 600)"><rect width="340" height="150" rx="6" class="review-box"/><rect width="340" height="48" fill="#956019"/><text x="20" y="34" class="stage">S2F</text><text x="20" y="85" class="heading">Architecture map review</text><text x="20" y="123" class="small">Allocation / owner / lineage</text></g>
+  <g transform="translate(1230 600)"><rect width="340" height="150" rx="6" class="review-box"/><rect width="340" height="48" fill="#956019"/><text x="20" y="34" class="stage">S2G</text><text x="20" y="85" class="heading">Mapping approval</text><text x="20" y="123" class="small">Reviewer + evidence integrity</text></g>
+  <g transform="translate(1620 600)"><rect width="340" height="150" rx="6" class="state-box"/><rect width="340" height="48" fill="#16705d"/><text x="20" y="34" class="stage">S2H</text><text x="20" y="85" class="heading">Approved snapshot</text><text x="20" y="123" class="small">Immutable consumer boundary</text></g>
+  <path d="M400 675 H450" class="flow"/><path d="M790 675 H840" class="flow"/><path d="M1180 675 H1230" class="flow"/><path d="M1570 675 H1620" class="flow"/>
+  <text x="2020" y="630" class="small muted">Retrieval and GUI views</text><text x="2020" y="665" class="small muted">are derived, replaceable</text><text x="2020" y="700" class="small muted">and non-authoritative.</text>
+  <text x="60" y="785" class="small muted">Rework returns staging to S2 or mapping to S2F; withheld approval never advances the pipeline.</text>
+  <path d="M1790 750 V815" class="flow"/>
+  <rect x="60" y="815" width="2280" height="105" rx="6" class="state-box"/>
+  <text x="85" y="857" class="heading green">Central downstream coherence precondition</text>
+  <text x="85" y="895" class="body">One explicit approved snapshot; validate binding, partition, allocation, ownership and traceability before regeneration.</text>
+
+  <text x="60" y="965" class="section">02 / SNAPSHOT-DRIVEN SPECIFICATION GENERATION</text>
+  <path d="M1200 920 V980 H400 V1005" class="flow"/><path d="M1200 980 V1005" class="flow"/><path d="M1200 980 H2000 V1005" class="flow"/>
+  <g transform="translate(100 1005)"><rect width="600" height="160" rx="6" class="blue-box"/><rect width="600" height="48" fill="#24649b"/><text x="22" y="34" class="stage">Stage 3 / SRS</text><text x="22" y="85" class="heading">System requirements specification</text><text x="22" y="122" class="body">System-level allocation + scoped context</text><text x="22" y="149" class="small green">Current documents: PASS</text></g>
+  <g transform="translate(900 1005)"><rect width="600" height="160" rx="6" class="blue-box"/><rect width="600" height="48" fill="#24649b"/><text x="22" y="34" class="stage">Stage 4 / ARS</text><text x="22" y="85" class="heading">Analog requirements specification</text><text x="22" y="122" class="body">Approved top-analog architecture allocation</text><text x="22" y="149" class="small green">Current documents: PASS</text></g>
+  <g transform="translate(1700 1005)"><rect width="600" height="160" rx="6" class="blue-box"/><rect width="600" height="48" fill="#24649b"/><text x="22" y="34" class="stage">Stage 5 / DRS</text><text x="22" y="85" class="heading">Digital requirements specification</text><text x="22" y="122" class="body">Top-digital / integration allocation</text><text x="22" y="149" class="small green">Current documents: PASS</text></g>
+  <path d="M2340 867 H2370 V1200 H1650 V1235" class="flow"/><path d="M1650 1200 H750 V1235" class="flow"/>
+  <rect x="875" y="1183" width="665" height="32" fill="#fff"/>
+  <text x="1200" y="1207" text-anchor="middle" class="small muted">Same snapshot; approved block-local allocation</text>
+  <g transform="translate(400 1235)"><rect width="700" height="180" rx="6" class="state-box"/><rect width="700" height="48" fill="#16705d"/><text x="22" y="34" class="stage">Stage 6 / Digital IPOS</text><text x="22" y="88" class="heading">Approved concrete block specifications</text><text x="22" y="126" class="body">Shared semantic preflight + existing block gate</text><text x="22" y="161" class="small amber">Current: ADSP PASS only; 7 blocks blocked / 118 contexts</text></g>
+  <g transform="translate(1300 1235)"><rect width="700" height="180" rx="6" class="state-box"/><rect width="700" height="48" fill="#16705d"/><text x="22" y="34" class="stage">Stage 7 / Analog IPOS</text><text x="22" y="88" class="heading">Approved materialized blocks only</text><text x="22" y="126" class="body">Empty allocation creates no block documents</text><text x="22" y="161" class="small amber">Current: VALID_EMPTY allocation; Stage 7 not executed</text></g>
+  <path d="M750 1415 V1480" class="advisory"/>
+  <text x="60" y="1460" class="section">03 / REVIEW EVIDENCE AND DERIVED DELIVERABLES</text>
+  <rect x="60" y="1480" width="1480" height="160" rx="6" fill="#f5f6f7" stroke="#9ba8ae" stroke-width="2"/>
+  <text x="85" y="1523" class="heading">Separate centralized review report / English JSON, Markdown and Word</text>
+  <text x="85" y="1562" class="body">Exact omissions and unresolved evidence, five closure classes, per-block GO / NO-GO and review IDs.</text>
+  <text x="85" y="1604" class="small muted">Advisory only: no approval, authority or gate override. Current: 737 entries; not 737 source defects.</text>
+  <rect x="1620" y="1480" width="720" height="160" rx="6" class="blue-box"/>
+  <text x="1645" y="1523" class="heading">Final SysML + traceability outputs</text>
+  <text x="1645" y="1562" class="body">After required downstream deliverables are ready</text>
+  <text x="1645" y="1604" class="small muted">Same snapshot; centralized coherence validation</text>
+
+  <line x1="60" y1="1680" x2="2340" y2="1680" stroke="#cfdae0" stroke-width="2"/>
+  <text x="60" y="1720" class="section">EXECUTION AND LINEAGE ARE DIFFERENT CONTRACTS</text>
+  <text x="60" y="1758" class="body">Governed order: S0 - S1 - S2 - S2A - S2B - S2C - S2D - S2E - S2F - S2G - S2H - 3 - 4 - 5 - 6 - 7.</text>
+  <text x="60" y="1796" class="body">One runner + one validator per executable stage; forward order; immediate stop on failure. Review steps use GUI/services.</text>
+  <text x="60" y="1834" class="body">Covers follows approved lineage, not stage arrows. Direct source/supplementary-to-IPOS requires approval; no invented parents.</text>
+  <text x="60" y="1872" class="small muted">Current status: snap-73c872b1307b6adb5eaf843e. This diagram is documentation, not authority or publication certification.</text>
+</svg>

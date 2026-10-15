@@ -158,6 +158,7 @@ def _require_ipos_claim_preflights(
     block_names: list[str],
     rows: list[dict[str, str]],
     candidate_rows: list[dict[str, str]],
+    *, snapshot_id: str = "",
 ) -> None:
     failures = []
     for block_name in block_names:
@@ -167,8 +168,15 @@ def _require_ipos_claim_preflights(
             domain=kind, materialized=bool(local_rows),
             provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
             candidate_requirement_rows=candidate_rows,
+            descriptive_source_records=resolve_downstream_contract(repo_root, snapshot_id).descriptive_context(
+                repo_root, block=block_name, domain=kind) if snapshot_id else (),
         )
+        if snapshot_id:
+            from ipos_blocker_review import apply_descriptive_omissions
+            functional_input = apply_descriptive_omissions(repo_root, snapshot_id=snapshot_id, functional_input=functional_input)
         findings = ipos_claim_preflight_findings(functional_input)
+        from validate_downstream_coherence import classify_descriptive_findings
+        findings = classify_descriptive_findings(findings)["hard_findings"]
         if findings:
             plan = build_ipos_claim_plan(functional_input)
             unresolved_records = sorted({span.record_id for disposition in plan.dispositions
@@ -217,8 +225,15 @@ def _write_ipos_document(
             "artifacts/stage2_mirco_arc/block_inventory.csv",
         ),
         candidate_requirement_rows=candidate_requirement_rows,
+        descriptive_source_records=resolve_downstream_contract(repo_root, snapshot_id).descriptive_context(
+            repo_root, block=block_name, domain=kind),
     )
+    from ipos_blocker_review import apply_descriptive_omissions
+    functional_input = apply_descriptive_omissions(repo_root, snapshot_id=snapshot_id, functional_input=functional_input)
     preflight_findings = ipos_claim_preflight_findings(functional_input)
+    from validate_downstream_coherence import classify_descriptive_findings
+    classified = classify_descriptive_findings(preflight_findings)
+    preflight_findings = classified["hard_findings"]
     if preflight_findings:
         raise RuntimeError("IPOS claim preflight blocked materialization: " + "; ".join(preflight_findings[:10]))
     template_path = repo_root / DOCX_REFERENCE_TEMPLATE
@@ -271,7 +286,7 @@ def _write_ipos_document(
     ]
     for section, key in zip(document_contract["sections"], overview_sections):
         entries = overview_sections[key]
-        if section["required"] or entries:
+        if entries:
             lines.extend(["### " + section["title"], ""])
             for entry in entries:
                 lines.extend([entry, ""])
@@ -326,7 +341,7 @@ def _write_ipos_document(
     docx_path = output_dir / config["docx"]
     _convert_ipos_markdown_to_docx(markdown_path, template_path, docx_path, repo_root)
     apply_docx_authored_requirement_formatting(docx_path, ("IPOS",))
-    apply_docx_ipos_requirement_style_guard(docx_path)
+    apply_docx_ipos_requirement_style_guard(docx_path, authored_requirements={row["ipos_req_id"]: row["requirement_statement"] for row in rows})
     apply_docx_common_spec_formatting(docx_path)
     write_materialization_audit(
         output_dir / "materialization_audit.json",
@@ -505,8 +520,17 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
         if not selected_block:
             raise RuntimeError(f"Requested IPOS generation block is not materialized by the approved snapshot: {block}")
         block_names = [selected_block]
+    materialized_block_names = sorted(mapped_blocks, key=str.casefold)
     candidate_rows = approved_snapshot_candidate_rows(snapshot, downstream_contract, domain=kind)
-    _require_ipos_claim_preflights(repo_root, kind, block_names, records, candidate_rows)
+    review_results = []
+    if kind == "digital":
+        from ipos_blocker_review import assess_ipos_blocks
+        (repo_root / "artifacts/orchestrator").mkdir(parents=True, exist_ok=True)
+        review_results = assess_ipos_blocks(repo_root, snapshot_id=snapshot.snapshot_id, kind=kind,
+                                            blocks=block_names, rows=records, candidate_rows=candidate_rows,
+                                            descriptive_source_records=downstream_contract.descriptive_context(repo_root, domain=kind))
+        block_names = [value["block"] for value in review_results if value["status"] == "READY"]
+    _require_ipos_claim_preflights(repo_root, kind, block_names, records, candidate_rows, snapshot_id=snapshot.snapshot_id)
 
     output_dir = repo_root / config["output_dir"]
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -527,7 +551,7 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
             writer.writeheader()
             writer.writerows(records)
     if not block:
-        desired_block_dirs = {_block_slug(block_name) for block_name in block_names}
+        desired_block_dirs = {_block_slug(block_name) for block_name in materialized_block_names}
         for existing_dir in block_root.iterdir():
             if existing_dir.is_dir() and existing_dir.name not in desired_block_dirs:
                 try:
@@ -550,7 +574,11 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
         block_config = dict(config)
         block_config["docx"] = _block_docx_name(kind, block_name)
         try:
-            _write_ipos_document(
+            document_writer = _write_ipos_document
+            if kind == "digital":
+                from ipos_blocker_review import publish_ipos_document
+                document_writer = lambda *args, **kwargs: publish_ipos_document(_write_ipos_document, *args, **kwargs)
+            document_writer(
                 repo_root,
                 block_config,
                 kind,
@@ -563,6 +591,15 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
                 candidate_requirement_rows=candidate_rows,
             )
             outcome = "complete"
+            if kind == "digital":
+                next(value for value in review_results if value["block"] == block_name)["status"] = "PASS"
+        except Exception as exc:
+            if kind != "digital":
+                raise
+            from ipos_blocker_review import publication_failure_review
+            failure = publication_failure_review(repo_root, snapshot_id=snapshot.snapshot_id, kind=kind,
+                       block=block_name, rows=block_rows, candidate_rows=candidate_rows, failure=exc)
+            review_results = [failure if value["block"] == block_name else value for value in review_results]
         finally:
             finished_at = datetime.now().astimezone()
             elapsed = str(finished_at - started_at).split(".", 1)[0]
@@ -571,6 +608,12 @@ def generate(repo_root: Path, kind: str, *, snapshot_id: str | None = None, use_
                 f"{activity} | {outcome} | elapsed={elapsed}",
                 flush=True,
             )
+    if kind == "digital":
+        result = {"snapshot_id": snapshot.snapshot_id, "scope": block or "all", "blocks": review_results,
+                  "status": "BLOCKED" if any(value["status"] == "BLOCKED" for value in review_results) else "PASS",
+                  "authority": False, "gate_override": False}
+        result_path = repo_root / "artifacts/orchestrator/ipos_generation_results.json"
+        result_path.write_text(json.dumps(result, indent=2, ensure_ascii=True) + "\n", encoding="utf-8")
     return trace_path
 
 
@@ -586,6 +629,12 @@ def main() -> int:
     if args.regenerate_downstream and not args.snapshot_id:
         parser.error("--regenerate-downstream requires --snapshot-id")
     print(f"Generated {generate(Path(__file__).resolve().parents[1], args.kind, snapshot_id=args.snapshot_id, use_latest_approved=args.use_latest_approved, regenerate_downstream=args.regenerate_downstream, block=args.block)}")
+    if args.kind == "digital":
+        result_path = Path(__file__).resolve().parents[1] / "artifacts/orchestrator/ipos_generation_results.json"
+        result = json.loads(result_path.read_text(encoding="utf-8"))
+        if result["status"] == "BLOCKED":
+            print("Digital IPOS: BLOCKED/PARTIAL; ready blocks generated, blocked blocks require saved/closed review.")
+            return 2
     return 0
 
 

@@ -43,6 +43,93 @@ class EmptySrsContract:
 
 
 class SrsDownstreamCoherenceTests(unittest.TestCase):
+    def test_directional_coverage_distinguishes_upstream_document_from_block_denominator(self):
+        graph = {"nodes": [{"id": "DRS"}, {"id": "Digital_IPOS:block-a"}],
+                 "edge_statistics": [{"upstream_node": "DRS", "derived_node": "Digital_IPOS:block-a",
+                                      "total_unique_upstream_req_ids": ["D1", "D2", "D3"], "covered_unique_upstream_req_ids": ["D1", "D1"]}],
+                 "source_spec_edges": []}
+        contract = SimpleNamespace(source_ids_for_target=lambda target: {"R1", "R2", "R3"} if target == "DRS" else set(),
+                                   allocation=lambda requirement_id: {"approved_block": "Block A" if requirement_id != "R3" else "Block B"})
+        rows = [{"source_req_id": "R1", "drs_req_id": "D1"}, {"source_req_id": "R2", "drs_req_id": "D2"}, {"source_req_id": "R3", "drs_req_id": "D3"}]
+        with patch("generate_snapshot_reports.approved_generated_document_dependency_graph", return_value=graph) as central, \
+                patch("generate_snapshot_reports.resolve_downstream_contract", return_value=contract), \
+                patch("generate_snapshot_reports._read_csv", return_value=rows):
+            coverage = generate_snapshot_reports._directional_coverage_rows(Path("unused"), "snap-test", ("Digital IPOS",))
+        central.assert_called_once_with(Path("unused"), "snap-test", include_empty_edges=True)
+        self.assertEqual(coverage[0]["covering_level"], "Digital IPOS")
+        self.assertEqual(coverage[0]["covered_upstream_level"], "DRS")
+        self.assertAlmostEqual(coverage[0]["coverage_percentage"], 100 / 3)
+        self.assertEqual(coverage[1]["covered_upstream_block"], "Block A")
+        self.assertEqual(coverage[1]["coverage_percentage"], 50)
+        self.assertEqual(coverage[2]["covered_upstream_block"], "Block B")
+        self.assertEqual(coverage[2]["coverage_percentage"], 0)
+        self.assertEqual(coverage[2]["uncovered_upstream_requirement_ids"], "D3")
+        with patch("generate_snapshot_reports.approved_generated_document_dependency_graph", return_value={}), \
+                patch("generate_snapshot_reports.resolve_downstream_contract", return_value=contract), \
+                patch("generate_snapshot_reports._read_csv", return_value=[]):
+            empty = generate_snapshot_reports._directional_coverage_rows(Path("unused"), "snap-test", ("SRS",))
+        self.assertEqual(empty[0]["coverage_percentage"], "N/A")
+        self.assertEqual(empty[0]["coverage_status"], "no_applicable_relationship")
+        self.assertEqual(empty[0]["covered_upstream_level"], "Not applicable")
+
+    def test_snapshot_workbook_writes_and_reopens_coverage_percentage_sheet(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            resolved = SimpleNamespace(snapshot_id="snap-test", snapshot_hash="hash", source_path=root / "snapshot.json")
+            with patch("report_generation_service.resolve_complete_authoritative_input", return_value=(resolved, {})), \
+                    patch("report_generation_service.connect", return_value=MagicMock()), \
+                    patch("report_generation_service.record_event"):
+                output = generate_snapshot_report(root, project_id="test", snapshot_id="snap-test", use_latest_approved=False,
+                                                  report_kind="All Requirements Traceability", output_path=root / "report.xlsx",
+                                                  rows=[{"requirement_id": "REQ-1"}],
+                                                  additional_sheets={"Coverage by Block and Level": [{"hierarchy_level": "Digital IPOS", "block": "Block A",
+                                                                                                   "covered": 2, "total": 3, "coverage_percentage": 200 / 3}]})
+            workbook = load_workbook(output)
+            self.assertEqual(workbook.sheetnames, ["All Requirements Traceability", "Report Metadata", "Coverage by Block and Level"])
+            self.assertEqual(workbook.worksheets[0]["A2"].value, "REQ-1")
+            summary = workbook["Coverage by Block and Level"]
+            self.assertEqual(summary["A2"].value, "Digital IPOS")
+            self.assertEqual(summary["B2"].value, "Block A")
+            self.assertAlmostEqual(summary["E2"].value, 200 / 3)
+            self.assertEqual(summary["E2"].number_format, '0.0"%"')
+            self.assertEqual(summary.freeze_panes, "A2")
+            self.assertIn("ReportData2", summary.tables)
+            workbook.close()
+
+    def test_report_coverage_counts_unique_ids_by_level_and_block_not_duplicate_trace_rows(self):
+        allocations = {"R1": {"approved_block": "Block A"}, "R2": {"approved_block": "Block A"}, "R3": {"approved_block": "Block B"}}
+        contract = SimpleNamespace(source_ids_for_target=lambda target: set(allocations) if target == "Digital IPOS" else set(),
+                                   allocation=lambda requirement_id: allocations[requirement_id])
+        observed = [{"source_req_id": "R1", "ipos_req_id": "I1", "mapped_block": "Block A"},
+                    {"source_req_id": "R1", "ipos_req_id": "I2", "mapped_block": "Block A"},
+                    {"source_req_id": "R3", "ipos_req_id": "I3", "mapped_block": "Unassigned"},
+                    {"source_req_id": "R2", "ipos_req_id": "OLD", "mapped_block": "Block A", "snapshot_id": "old-snapshot"},
+                    {"source_req_id": "UNKNOWN", "ipos_req_id": "I4", "mapped_block": "Block A"}]
+        with patch("generate_snapshot_reports.resolve_downstream_contract", return_value=contract), \
+                patch("generate_snapshot_reports._read_csv", return_value=observed):
+            rows = generate_snapshot_reports._report_coverage_rows(Path("unused"), "snap-test", ("Digital IPOS",))
+        self.assertEqual([(row["block"], row["expected_requirements"], row["represented_requirements"]) for row in rows],
+                         [("(All blocks)", 3, 2), ("Block A", 2, 1), ("Block B", 1, 1)])
+        self.assertAlmostEqual(rows[0]["presence_percentage"], 200 / 3)
+        self.assertEqual(rows[1]["presence_percentage"], 50)
+        self.assertEqual(rows[1]["missing_requirement_ids"], "R2")
+        self.assertEqual(rows[2]["reported_block_label_differences"], 1)
+        with patch("generate_snapshot_reports.resolve_downstream_contract", return_value=contract), \
+                patch("generate_snapshot_reports._read_csv", return_value=[]):
+            empty = generate_snapshot_reports._report_coverage_rows(Path("unused"), "snap-test", ("SRS",))
+        self.assertEqual(empty[0]["presence_percentage"], "N/A")
+        self.assertEqual(empty[0]["presence_status"], "valid_empty")
+
+    def test_source_report_coverage_percentage_uses_approved_snapshot_ids(self):
+        rows = generate_snapshot_reports._catalog_coverage_rows([{"id": "R1"}, {"id": "R2"}, {"id": "R2"}],
+                                                                [{"source_req_id": "R1", "canonical_id": "C1"}], "snap-test", "Primary Source")
+        self.assertEqual(rows[0]["expected_requirements"], 2)
+        self.assertEqual(rows[0]["presence_percentage"], 50)
+        self.assertEqual(rows[0]["missing_requirement_ids"], "R2")
+        aliases = generate_snapshot_reports._catalog_coverage_rows([{"id": "R2"}],
+                                       [{"id": "R2", "source_req_id": "UPSTREAM", "canonical_id": "C2"}], "snap-test", "Integrated")
+        self.assertEqual(aliases[0]["presence_percentage"], 100)
+
     def test_snapshot_reports_refresh_ledger_before_reports_and_pin_selection(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -64,6 +151,8 @@ class SrsDownstreamCoherenceTests(unittest.TestCase):
                     patch("generate_snapshot_reports.resolve_complete_authoritative_input", side_effect=resolve), \
                     patch("generate_snapshot_reports.refresh_ledger", side_effect=refresh), \
                     patch("generate_snapshot_reports._read_csv", return_value=[]), \
+                    patch("generate_snapshot_reports._report_coverage_rows", return_value=[]), \
+                    patch("generate_snapshot_reports._directional_coverage_rows", return_value=[]), \
                     patch("generate_snapshot_reports.generate_snapshot_report", side_effect=report), \
                     patch.object(sys, "argv", ["generate_snapshot_reports.py", "--use-latest-approved", "--report", "drs"]), \
                     patch("builtins.print"):
@@ -127,6 +216,7 @@ class SrsDownstreamCoherenceTests(unittest.TestCase):
         gui.traceability_window = MagicMock()
         gui.traceability_graph_canvas = MagicMock()
         gui.traceability_graph_canvas.bbox.return_value = (0, 0, 200, 54)
+        gui._center_canvas_node = MagicMock()
         gui.traceability_window_status_var = MagicMock()
         gui.traceability_selected_edge = None
         gui.traceability_selected_block = None

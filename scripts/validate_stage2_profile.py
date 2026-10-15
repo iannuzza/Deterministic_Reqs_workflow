@@ -8,6 +8,7 @@ import csv
 import hashlib
 import json
 from pathlib import Path
+from approved_snapshot_resolver import validate_governed_source_context
 
 
 def _ids(value: str) -> list[str]:
@@ -55,6 +56,9 @@ def validate_approval_evidence(profile_path: Path, draft_path: Path, mapping_pat
     except (OSError, json.JSONDecodeError):
         return [f"Approved Stage 2A profile is missing or invalid: {profile_path}"]
     approval = profile.get("approval", {})
+    findings.extend(validate_governed_source_context(profile))
+    if findings:
+        return findings
     if not isinstance(approval, dict) or str(approval.get("status") or "").casefold() != "approved":
         findings.append("Stage 2A approval status is not approved")
         return findings
@@ -73,6 +77,26 @@ def validate_approval_evidence(profile_path: Path, draft_path: Path, mapping_pat
         findings.append(f"Stage 2A profile draft is missing or invalid: {draft_path}")
         return findings
     recorded_draft_hash = str(approval.get("reviewed_draft_profile_sha256") or "")
+    candidates = {record.get("record_id"): record for record in
+                  draft.get("governed_source_context", {}).get("records", ()) if isinstance(record, dict)}
+    for record in profile.get("governed_source_context", {}).get("records", ()):
+        if isinstance(record, dict) and record.get("required_for_review") and record.get("review_decision") == "pending":
+            findings.append("Required descriptive candidate is still pending user review")
+        if not isinstance(record, dict) or record.get("review_decision") != "approved":
+            continue
+        original = candidates.get(record.get("record_id"))
+        review_fields = {"review_decision", "mapped_block", "domain", "review_rationale"}
+        if original is None or {key: value for key, value in record.items() if key not in review_fields} != {
+                key: value for key, value in original.items() if key not in review_fields}:
+            findings.append("Approved source context differs from the reviewed descriptive candidate")
+    if candidates:
+        from mapping_review_sync import reviewed_descriptive_context
+        try:
+            reviewed = reviewed_descriptive_context(mapping_path.with_suffix(".xlsx"), draft, profile)
+            if reviewed != profile.get("governed_source_context"):
+                findings.append("Descriptive workbook decisions differ from the reviewed architecture profile")
+        except (OSError, ValueError, KeyError) as exc:
+            findings.append("Descriptive architecture review is invalid: " + str(exc))
     if not recorded_draft_hash:
         findings.append("Stage 2A approval is missing reviewed_draft_profile_sha256")
     elif recorded_draft_hash != _draft_review_sha256(draft):

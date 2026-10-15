@@ -1,0 +1,357 @@
+{
+  "checkpoint_id": "2026-10-15-selected-snapshot-ipos-reporting-pass",
+  "created_at": "2026-10-15T21:37:40.090507+02:00",
+  "git_head": "6418a729f986eeaf5db9d0d034f3f99c7946f9ad",
+  "git_commit_tag_or_push_created": false,
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "archive": "implementation_backup.zip",
+  "archive_sha256": "28229c64d95de772de70a33a97e5238d9d501d5e5b740a6bad157f54a36660b0",
+  "file_count": 66,
+  "files": [
+    {
+      "path": ".github/copilot-instructions.md",
+      "bytes": 121239,
+      "sha256": "98ba644f82befa9b6acf638e94abebd134a8f26612970824a8c5b8b92d16076b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 59718,
+      "sha256": "4ce58f628c26b4b628d3d5ffc17573cacbad39504df9f30596561bd9916b3724"
+    },
+    {
+      "path": "artifacts/orchestrator/ipos_generation_results.json",
+      "bytes": 7281,
+      "sha256": "0e9c93a56653049682a8eb0a7772747fae87ca961325cee2b2ab6cdb09f53873"
+    },
+    {
+      "path": "artifacts/orchestrator/remaining_ipos_blockers.docx",
+      "bytes": 11386,
+      "sha256": "57f98d2f44c099ecb29c0968f18ffc5a00fca4e70c6083a90568c5b3f7ae97f7"
+    },
+    {
+      "path": "artifacts/orchestrator/remaining_ipos_blockers.md",
+      "bytes": 1262,
+      "sha256": "9bc3a5641baca51328453f2ac657bf52e0c4b9f2950e3ad5aacf8c84bfb25373"
+    },
+    {
+      "path": "config/readiness_checklist.json",
+      "bytes": 12216,
+      "sha256": "b6d53ca40fb586748b502e50efeeb1c7e2184e020c295a8758bc9bd3f749d335"
+    },
+    {
+      "path": "config/readiness_checklist.xlsx",
+      "bytes": 12746,
+      "sha256": "15d5c65f87ed6eaf62b215d57d1d00b63344bcdc922676c19b69b6c20f11103b"
+    },
+    {
+      "path": "config/stage2_mirco_arc_profile.json",
+      "bytes": 31204,
+      "sha256": "8878e428c3fa4956c3ef8b0e4a3321128da57b4108089108f30689d998353bbd"
+    },
+    {
+      "path": "config/sysml_model_view_status_legend.md",
+      "bytes": 11586,
+      "sha256": "fb8a5f91a4fdcd5ffc675a38b94b0d9b5cd394329badd94a635948a9aab7e224"
+    },
+    {
+      "path": "config/sysml_model_view_status_legend.xlsx",
+      "bytes": 16911,
+      "sha256": "6f140fc51ed47ad92649008767b82a944f7c30eb1ba46382fa3b2907d850dcd1"
+    },
+    {
+      "path": "docs/current_requirements_workflow.png",
+      "bytes": 404724,
+      "sha256": "7d215e6f7e735b0b9f852d8082fda2e2d56ab8df7cc8ba7b374ff9e2710b27d1"
+    },
+    {
+      "path": "docs/current_requirements_workflow.svg",
+      "bytes": 12645,
+      "sha256": "2a479ae33a78cd4d39b4ce5a218e23ba0983d84a8d224df465b005e8ab710ca8"
+    },
+    {
+      "path": "docs/current_workflow_example_style.png",
+      "bytes": 514285,
+      "sha256": "737bf7febcc9930a37919c9fdd55acdc1924773b1fabef1ff5776a105ee8c421"
+    },
+    {
+      "path": "docs/current_workflow_example_style.svg",
+      "bytes": 21485,
+      "sha256": "023393b15c8a8554f7e7f8cbd708dc9e0389bd3cab3f652dcad0ca6a01d3af7b"
+    },
+    {
+      "path": "docs/ipos-descriptive-rendering.md",
+      "bytes": 85401,
+      "sha256": "9c1739a514b67f17828ec48cdda17fd1f0b364002260279682a5c8cac759b9e0"
+    },
+    {
+      "path": "docs/readiness-checklist.md",
+      "bytes": 22396,
+      "sha256": "20c82b075ec02c56c3be052d8616dbed0d50d0d4fa7a06131cadae8a40e051e5"
+    },
+    {
+      "path": "docs/step4-authority-and-snapshots.md",
+      "bytes": 4718,
+      "sha256": "0942ae655395dc231f874b81cb544a08893d634bf5c9c8e3349af851bd305e6d"
+    },
+    {
+      "path": "docs/workflow.png",
+      "bytes": 512554,
+      "sha256": "60d4c52308c4573b70646cbb543e6fd4167c34d02db6e6a6a41ecc3d00908d1a"
+    },
+    {
+      "path": "local_memory/chat_handoff.md",
+      "bytes": 175728,
+      "sha256": "a0eae410c20df4318de5e753076d74eab0ae05bd7167668d30d8c2f3304c0467"
+    },
+    {
+      "path": "local_memory/checkpoint.md",
+      "bytes": 78770,
+      "sha256": "5ccf66cf9b957fd9c3f23285116509e9b005936c62344a947e6f0be15d8c789a"
+    },
+    {
+      "path": "local_memory/checkpoints/2026-10-15-selected-snapshot-ipos-reporting-pass/README.md",
+      "bytes": 1734,
+      "sha256": "73561301e3d5101add981bc9e66f0900e60465c636fa39196d61465cb9c9d331"
+    },
+    {
+      "path": "local_memory/environment.md",
+      "bytes": 17434,
+      "sha256": "54ac52483a3d75fb6e143b3e899351f7a2dd042f1bb435c2783cac9ec00f120e"
+    },
+    {
+      "path": "local_memory/project_activity_log.md",
+      "bytes": 115129,
+      "sha256": "8ede0b819ce6d47d332a280bbae06692988195d3fa415a55aaa99f8bbbdcd7a3"
+    },
+    {
+      "path": "local_memory/sync_manifest.json",
+      "bytes": 4705,
+      "sha256": "0211bed381e783da1e45d4d2c1dd448597befc8fd7535ff4a5ec71de4249252f"
+    },
+    {
+      "path": "scripts/approved_profile_resolver.py",
+      "bytes": 3291,
+      "sha256": "d987accd5deacbb97f6f4b9fe7724e20b90c73e3fe56980f4eb44e36383bb578"
+    },
+    {
+      "path": "scripts/approved_snapshot_resolver.py",
+      "bytes": 10761,
+      "sha256": "d7238312994df6052a26cef7b9bba83e1a666e3e07eff593c3b14f8af3e96a03"
+    },
+    {
+      "path": "scripts/convert_srs_to_sysml.py",
+      "bytes": 8080,
+      "sha256": "bb5a9c126832bcaf3583cf47db743d042d6a66258748684c7b69dabdc3d55b55"
+    },
+    {
+      "path": "scripts/crosscheck_sysml_connections.py",
+      "bytes": 2662,
+      "sha256": "eafc64108a7cbc55e78538716e217253a2243ca71db5c33dfe1e733d79c68276"
+    },
+    {
+      "path": "scripts/freeze_stage2b_snapshot.py",
+      "bytes": 9802,
+      "sha256": "119e58258d136e23c9515f8f49b09d3d84273981d1e78cd23d70bffc64fa67df"
+    },
+    {
+      "path": "scripts/generate_architecture_sysml.py",
+      "bytes": 36420,
+      "sha256": "b410309b2a4664232c7f5977e289e437af16a80de1b20f242d005fb0bd021114"
+    },
+    {
+      "path": "scripts/generate_cross_spec_issue_report.py",
+      "bytes": 138506,
+      "sha256": "6583da01678e757bae2bc54bd6a3a6be3013a6f25e84e8a6ed18319d255e94ae"
+    },
+    {
+      "path": "scripts/generate_ipos_specs.py",
+      "bytes": 30702,
+      "sha256": "7a734d17224a540c04a00ae95d3e2f3097ab4b4bc415d525f52c34922271bc0a"
+    },
+    {
+      "path": "scripts/generate_snapshot_reports.py",
+      "bytes": 38065,
+      "sha256": "f2605206bc9ac97da582a244e99b04bee9cb810997b378dc6fb0cc2ad34bec89"
+    },
+    {
+      "path": "scripts/generate_stage2_specs.py",
+      "bytes": 78463,
+      "sha256": "cac71a510c851a1a024169b9399cd48997df704fcf6505a96a0b4bdda54fcb04"
+    },
+    {
+      "path": "scripts/ipos_blocker_review.py",
+      "bytes": 30020,
+      "sha256": "5dff23119fcd16ac40dc88df67ed2bc8b86375bad049a147899e197505ec3a2a"
+    },
+    {
+      "path": "scripts/mapping_review_sync.py",
+      "bytes": 16875,
+      "sha256": "b76ab29158c326c164c5488b6b16afeb0db43d0b510d867340f6a041b316f84e"
+    },
+    {
+      "path": "scripts/prepare_descriptive_architecture_review.py",
+      "bytes": 8096,
+      "sha256": "ed6c70aa59d564072b191f63d01e54e67ea7eaaaf33442942e576a1590c1ec4d"
+    },
+    {
+      "path": "scripts/readiness_checklist.py",
+      "bytes": 15909,
+      "sha256": "11ea7f89b6bf21681442b8615ecb57aa8fe569ce8e697dea0fa3c1377310b5f0"
+    },
+    {
+      "path": "scripts/report_generation_service.py",
+      "bytes": 20745,
+      "sha256": "7a48e34e9b10e703f8c382df8515b85cdab9957430adadc89a93f54bf8bfdd1e"
+    },
+    {
+      "path": "scripts/review_architecture_sysml.py",
+      "bytes": 11300,
+      "sha256": "22865b8fdc07d4e09b6e08f9d3a6163382b67818f9f282cd20bebf75c8410150"
+    },
+    {
+      "path": "scripts/run_block_operational_pilot.py",
+      "bytes": 7831,
+      "sha256": "fedfc9cf25401015f172f723dcb1fd5694bce8336e5b017e1b903843a562533e"
+    },
+    {
+      "path": "scripts/run_drs_crosscheck_agent.py",
+      "bytes": 37778,
+      "sha256": "962c31d2361d161bce66ba8d0701f53a60c1290559f505bd4e61700d77462928"
+    },
+    {
+      "path": "scripts/run_final_sysml_phase.py",
+      "bytes": 5013,
+      "sha256": "46afb29a46214b4ec273ec10fff3419c4246a10df0070b68d09620972e2bde82"
+    },
+    {
+      "path": "scripts/spec_document_contract.py",
+      "bytes": 49581,
+      "sha256": "8acbff398eaf7924ca4e0dffdaa8c96ebe66f3f97131dd4669ca00df332b3abd"
+    },
+    {
+      "path": "scripts/stage1_descriptive_evidence.py",
+      "bytes": 11922,
+      "sha256": "787e5e264bc6d5f4b4dd37df203644d064bccb29467f18b680e9ff0e9d2a3d10"
+    },
+    {
+      "path": "scripts/sysml_generation_service.py",
+      "bytes": 5031,
+      "sha256": "d0b14f6832c6f49b9dd15ad72325e78d316a389088642c9328460e05656b6918"
+    },
+    {
+      "path": "scripts/sysml_relations.py",
+      "bytes": 49030,
+      "sha256": "eca3504faf27788c209d96ec7c5f143a3bbadd010aa356cb7fccf8ac1ff97ba9"
+    },
+    {
+      "path": "scripts/validate_downstream_coherence.py",
+      "bytes": 153307,
+      "sha256": "9beaaab668e75c9eb358b81a90c63922812ce503e1429c0354019a82c1ec4920"
+    },
+    {
+      "path": "scripts/validate_ipos_gate.py",
+      "bytes": 10498,
+      "sha256": "2667db0e228835d624cb719945462091720b83225601b320b2b1910ebece2b10"
+    },
+    {
+      "path": "scripts/validate_stage2_profile.py",
+      "bytes": 9662,
+      "sha256": "810b4714ca3c79a8b1f0aef3e39ed199dfa746420957ac8e23ce1e90fcd18d5f"
+    },
+    {
+      "path": "scripts/workflow_cli.py",
+      "bytes": 33601,
+      "sha256": "a3220c478040b5d14955061c3feaa8de7cd6b7f838ff3382eb97b17f64649fd6"
+    },
+    {
+      "path": "scripts/workflow_gui.py",
+      "bytes": 451714,
+      "sha256": "243032500fb65a078758fcd9e306e706f980256567c9d123e7ea1e666e2b6961"
+    },
+    {
+      "path": "scripts/workflow_routing.py",
+      "bytes": 455414,
+      "sha256": "edf2ffa4b6a3cd7afe92949e06f8cabe7888f79b76f364ab1c844df35868ae5d"
+    },
+    {
+      "path": "tests/test_approved_snapshot_resolver.py",
+      "bytes": 14634,
+      "sha256": "d99b4ed24fad827e3ea4b671ec0ade14f168533527e79cdcf0b554f8dae5b039"
+    },
+    {
+      "path": "tests/test_cross_spec_issue_report.py",
+      "bytes": 50232,
+      "sha256": "836b8e82b1be647ae3c634005bb010892b70c5465db89bc63681e5e73c9d256c"
+    },
+    {
+      "path": "tests/test_descriptive_summary.py",
+      "bytes": 236178,
+      "sha256": "e3dc2a99b0c3a0b6dbe9b5c7e8874d6d529e3534d7e9da2df971ae5707613b8c"
+    },
+    {
+      "path": "tests/test_docx_layout.py",
+      "bytes": 12108,
+      "sha256": "535762a45d5cdb75db0a18c1e697374d5b9ef5d1255fad54dbc78d42f4822c07"
+    },
+    {
+      "path": "tests/test_downstream_boundary_binding.py",
+      "bytes": 11001,
+      "sha256": "64b51b100d779d85f546ca54d3374c98a248c537593e256e36648c8696c0e268"
+    },
+    {
+      "path": "tests/test_final_polish.py",
+      "bytes": 91447,
+      "sha256": "38ae07d2bfd00d12074d3ca1ef515db8fc9dfc29e17ba7d1d1f22931838208cc"
+    },
+    {
+      "path": "tests/test_generator_snapshot_binding.py",
+      "bytes": 20956,
+      "sha256": "d6da113892d79b6a1995a72e291c2119f76b38448ffa25076e8ee724b79e4c20"
+    },
+    {
+      "path": "tests/test_ipos_blocker_review.py",
+      "bytes": 40207,
+      "sha256": "4caf9a136d55ed35e0d3eeb57ae1914ca2c6dceaff9cf30e3bd53c2ab048afd7"
+    },
+    {
+      "path": "tests/test_mapping_review_sync.py",
+      "bytes": 21712,
+      "sha256": "5ba23cfb464a3e31036efb3b08dbe9c7103c0303d5fdbc5556bbe57cb90deb7e"
+    },
+    {
+      "path": "tests/test_spec_document_contract.py",
+      "bytes": 62013,
+      "sha256": "3c3ca0ff0352e532e7841df0b0ff32776a353d90ba3288983b07a8bf94cc68db"
+    },
+    {
+      "path": "tests/test_srs_downstream_coherence.py",
+      "bytes": 39945,
+      "sha256": "6a46e1d183e1d888a1715162359afae8a28849e9c3bbd98a03b65610e484ffde"
+    },
+    {
+      "path": "tests/test_stage1_descriptive_evidence.py",
+      "bytes": 5181,
+      "sha256": "49302c7abc0b3803b373a82ca0d898fa296f73f5783a142e64fd3cb7a034375c"
+    },
+    {
+      "path": "tests/test_stage2_sysml_role.py",
+      "bytes": 104290,
+      "sha256": "6cafdf99c4e6925f7e749a3237a75e74fbfb1d940c6068b4218bc3b1733baf94"
+    }
+  ],
+  "excluded": [
+    "canonical SQLite",
+    "source specifications",
+    "personal GUI/retrieval state",
+    "caches and WAL files",
+    "general generated specifications/models"
+  ],
+  "verification": {
+    "tests_passed": 315,
+    "actual_digital_document_checks": "8_PASS",
+    "report_md_docx_parity": "PASS",
+    "protected_files_unchanged": 54,
+    "readiness": "NOT_ASSESSED",
+    "stage7_final_sysml_executed": false
+  }
+}

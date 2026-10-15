@@ -65,16 +65,12 @@ def _review(
     findings.append({"check": "out_of_scope_interaction_context", "status": "PASS",
                      "details": "; ".join(scope.interaction_findings) if scope.interaction_findings else "None"})
 
-    missing_connections = []
-    for row in interactions:
-        source = row["From block"]
-        target = row["To block"]
-        source_path = scope.block_for_label(source).node
-        target_path = scope.block_for_label(target).node
-        expected = f"connect {source_path} to {target_path}"
-        if expected not in model:
-            missing_connections.append(f"{source}->{target}")
-    findings.append({"check": "consistency", "status": "PASS" if not missing_connections else "FAIL", "details": "all interaction endpoints are represented" if not missing_connections else "missing connections: " + ", ".join(missing_connections)})
+    from sysml_relations import validate_serialized_relations
+    relation_report = validate_serialized_relations(scope, scope.relation_inventory) if scope.relation_inventory else {"findings": ["Central relation inventory unavailable"], "gaps": []}
+    findings.append({"check": "consistency", "status": "FAIL" if relation_report["findings"] else "PASS",
+                     "details": "; ".join(relation_report["findings"]) or "Central per-class serialization parity; unresolved evidence is reported separately, not complete connectivity."})
+    findings.append({"check": "relation_completeness_residuals", "status": "PASS",
+                     "details": str(len(relation_report["gaps"])) + " central unresolved/conflicting/outside-scope candidates; see relation report. This is not a completeness PASS."})
 
     missing_source_edges = []
     extra_source_edges = []
@@ -107,7 +103,7 @@ def _review(
         ):
             extra_source_edges.append(req_id)
     source_edges_ok = not missing_source_edges and not extra_source_edges
-    source_edge_details = f"{len(source_edges) - len(missing_source_edges)} of {len(source_edges)} source XBAR edges match the interaction matrix and top model"
+    source_edge_details = f"{len(source_edges) - len(missing_source_edges)} of {len(source_edges)} source XBAR edges match the interaction matrix; serialized coverage is checked independently by central relation consistency"
     if missing_source_edges:
         source_edge_details += "; missing/mismatched: " + ", ".join(missing_source_edges)
     if extra_source_edges:

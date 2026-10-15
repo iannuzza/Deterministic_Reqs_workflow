@@ -2902,3 +2902,25 @@
 {"ts": "2026-10-09 21:14:31", "stage": "preflight", "kind": "retrieval_tests", "modules": ["tests.test_embedding_text", "tests.test_semantic_index", "tests.test_fusion", "tests.test_benchmark", "tests.test_final_polish"], "exit_code": 0}
 {"ts": "2026-10-09 21:15:37", "stage": "5", "kind": "runner", "script": "scripts/run_stage5_drs_gate.py", "run": 1, "exit_code": 0}
 {"ts": "2026-10-09 21:15:40", "stage": "5", "kind": "validator", "script": "scripts/validate_stage5_drs_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:24:52", "stage": "preflight", "kind": "retrieval_tests", "modules": ["tests.test_embedding_text", "tests.test_semantic_index", "tests.test_fusion", "tests.test_benchmark", "tests.test_final_polish"], "exit_code": 0}
+{"ts": "2026-10-15 19:25:44", "stage": "3", "kind": "runner", "script": "scripts/run_stage3_srs_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:25:49", "stage": "3", "kind": "validator", "script": "scripts/validate_stage3_srs_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:26:12", "stage": "4", "kind": "runner", "script": "scripts/run_stage4_ars_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:26:14", "stage": "4", "kind": "validator", "script": "scripts/validate_stage4_ars_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:27:03", "stage": "5", "kind": "runner", "script": "scripts/run_stage5_drs_gate.py", "run": 1, "exit_code": 1}
+{"ts": "2026-10-15 19:37:37", "stage": "preflight", "kind": "retrieval_tests", "modules": ["tests.test_embedding_text", "tests.test_semantic_index", "tests.test_fusion", "tests.test_benchmark", "tests.test_final_polish"], "exit_code": 0}
+{"ts": "2026-10-15 19:37:55", "stage": "3", "kind": "runner", "script": "scripts/run_stage3_srs_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:37:57", "stage": "3", "kind": "validator", "script": "scripts/validate_stage3_srs_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:38:09", "stage": "4", "kind": "runner", "script": "scripts/run_stage4_ars_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:38:10", "stage": "4", "kind": "validator", "script": "scripts/validate_stage4_ars_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:38:41", "stage": "5", "kind": "runner", "script": "scripts/run_stage5_drs_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:38:44", "stage": "5", "kind": "validator", "script": "scripts/validate_stage5_drs_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 19:43:40", "stage": "6", "kind": "runner", "script": "scripts/run_stage6_digital_ipos_gate.py", "run": 1, "exit_code": 1}
+{"ts": "2026-10-15 20:00:22", "stage": "preflight", "kind": "retrieval_tests", "modules": ["tests.test_embedding_text", "tests.test_semantic_index", "tests.test_fusion", "tests.test_benchmark", "tests.test_final_polish"], "exit_code": 0}
+{"ts": "2026-10-15 20:04:46", "stage": "6", "kind": "runner", "script": "scripts/run_stage6_digital_ipos_gate.py", "run": 1, "exit_code": 1}
+{"ts": "2026-10-15 20:29:23", "stage": "preflight", "kind": "retrieval_tests", "modules": ["tests.test_embedding_text", "tests.test_semantic_index", "tests.test_fusion", "tests.test_benchmark", "tests.test_final_polish"], "exit_code": 0}
+{"ts": "2026-10-15 20:33:54", "stage": "6", "kind": "runner", "script": "scripts/run_stage6_digital_ipos_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 20:34:21", "stage": "6", "kind": "validator", "script": "scripts/validate_ipos_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 21:47:27", "stage": "preflight", "kind": "retrieval_tests", "modules": ["tests.test_embedding_text", "tests.test_semantic_index", "tests.test_fusion", "tests.test_benchmark", "tests.test_final_polish"], "exit_code": 0}
+{"ts": "2026-10-15 21:52:28", "stage": "6", "kind": "runner", "script": "scripts/run_stage6_digital_ipos_gate.py", "run": 1, "exit_code": 0}
+{"ts": "2026-10-15 21:53:05", "stage": "6", "kind": "validator", "script": "scripts/validate_ipos_gate.py", "run": 1, "exit_code": 0}

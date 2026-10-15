@@ -1,6 +1,96 @@
 ﻿# Chat Handoff - Deterministic_Reqs_workflow
 
-## CURRENT HANDOFF - 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS
+## CURRENT HANDOFF - 2026-10-15 - Selected-Snapshot IPOS PASS and Reporting Fix
+
+- Checkpoint: `2026-10-15-selected-snapshot-ipos-reporting-pass`, local only.
+  Read `checkpoint.md` and its checkpoint-directory README/manifest first.
+  No Git commit/tag/push; preserve dirty worktree, canonical authority and GUI state.
+- Current selected snapshot is `snap-73c872b1307b6adb5eaf843e`, not the newer
+  admitted-description snapshot `snap-1c746489707c8d22fc8ce3d7`. User reran Stage6
+  successfully. Current eight-block shared artifact checks PASS; no Stage7 or final
+  SysML execution in this repair, no implementation-ready/MVP-complete claim.
+- Earlier today: shared immediate-instance endpoint mapping and independent
+  endpoint/model statuses; GUI historical-snapshot selection/preparation; DRS report
+  explicit snapshot; robust shared DOCX replacement, numeric sentence readback,
+  operational error labeling; full164-test descriptive gate fixture repair.
+  Source requirements, gate policy and immutable snapshots unchanged by these fixes.
+- Latest contradiction was saved descriptive review/probe failures exported after
+  a newer successful run on the SAME snapshot. Exporter now performs shared
+  read-only selected-input/materialization/current-contract reconciliation. GUI
+  forwards run interval/reached stages/block/exit. Stale, missing, wrong-snapshot
+  or outside-scope evidence is UNVERIFIED; genuine failures stay BLOCKED.
+  Historical review JSON/appendix retained byte-for-byte. No generation/probe rerun.
+- Current `remaining_ipos_blockers.md/.docx` refreshed and independently checked:
+  eight PASS rows, all readiness NOT_ASSESSED. Residuals explicitly retained;
+  Main207 and Sensor-Hub3 are not active document gate failures.54 protected files
+  unchanged during export, including SQLite and every digital block artifact.
+- Verification:268 full reporting/GUI/descriptive tests +47 focused earlier-fix
+  tests PASS =315. Known Tk teardown warning did not fail suite. Touched source
+  diagnostics clean. This is not full workspace/end-to-end/native SysML acceptance.
+- Local checkpoint archives current changed source/tests/docs/config, notes and
+  selected report evidence with SHA256 manifest; it excludes canonical database,
+  source specifications, personal GUI state and a full generated-artifact restore.
+- Next user-operated steps: reopen GUI to load fixed code; use the same selected
+  snapshot for any authorized Stage7/final SysML run. Do not auto-run generation.
+  ADSP prose improvements and the newer-snapshot Main enrichment remain separate.
+
+## PREVIOUS HANDOFF - 2026-10-15 - Main Descriptive Admission and Blocked Proof
+
+- Checkpoint ID: `2026-10-15-main-descriptive-admission-blocked-proof`.
+  Local-memory save only; no Git commit, tag, branch or push for this save.
+  Status: partial implementation; MVP not complete. No enrichment claimed.
+- Latest user-approved snapshot: `snap-1c746489707c8d22fc8ce3d7`.
+  Old `snap-73c872b1307b6adb5eaf843e` remains unchanged. Historical published
+  document PASS results below are not new-snapshot certification.
+- Implemented the missing supplementary descriptive admission inside the
+  EXISTING architecture-profile approval path, not a new approval lane.
+  `scripts/mapping_review_sync.py` writes/validates the protected Descriptive
+  Content Review sheet; GUI Enable Gate imports explicit decisions. Draft/hash,
+  exact source text/provenance, workbook/profile parity and pending-required
+  decisions are checked by the shared validation used before freeze.
+- `scripts/prepare_descriptive_architecture_review.py` prepared exactly
+  supplementary `5.3.2 Description of the Block`, revision1 dated2026-09-21,
+  indexed page56 / printed55, TXT lines5-10. No new OCR, PDF read, RAG rebuild
+  or requirement merge. Source wording including Avarage and turn of preserved.
+- User reviewed the workbook, clicked Enable Gate from Workbook, and froze
+  the new snapshot in GUI after shared approval validation passed. One record:
+  `source-context-ab8d0db457f35c8e8f814ac5`, Main Controller / digital, approved.
+  Exact passage SHA256:
+  `cf09c77280002cd0affde36a789cf54a00a3d6347c793a429fdd9f4dab86c886`.
+  Workbook: `artifacts/stage1_specs/architecture_mapping_preview.xlsx`.
+  Do NOT reopen paragraph approval or use IPOS blocker/user clarified as approval.
+- Isolated proof: `artifacts/validation/main_controller_descriptive_proof_20261014/`.
+  Read `report.json`, `generation_input_coherence.json`, `main-controller-ipos.log`.
+  Ordinary new-snapshot Main-only generator exited1 before composer:
+  55 `DRS_TRACE_STALE_SNAPSHOT` findings; upstream DRS still uses the old snapshot.
+  Separate central descriptive_context check rejects digital against approved
+  owning_domain values Digital and Block. Block is not automatically digital.
+- Proof verified old/new normative rows and allocation contract equal; original
+  input changes=[], Main MD/DOCX byte-unchanged. Paragraph is snapshot-admitted,
+  but not proven to reach production descriptive_source_records/composition.
+  Sections1.2/1.4 are NOT proven enriched; no broader regeneration performed.
+- Remaining fix PLAN ONLY, not implemented: central domain semantics; exact
+  cross-snapshot preservation of132archived omission claim IDs without extending
+  whole-section omission to new content; bounded compound/named-actor projection;
+  distinct1.2responsibilities/1.4interactions; assessment/writer/failure input
+  parity; current-snapshot block-local trace binding for targeted generation.
+  Current --block skips aggregate trace writes, while central input checks it.
+- User explicitly chose KEEP STRICT MAIN CONTROLLER-ONLY SCOPE, rejecting even
+  isolated DRS dependency refresh. Thus actual end-to-end publication remains
+  blocked until that scope decision is separately changed. Never relabel old
+  trace snapshot IDs, bypass gates or regenerate other blocks to force PASS.
+- Preserve181normative requirements, approved I/O and historical omissions.
+  Do not infer oscillator on/off from turn of, invent FSM/connector/sequence
+  semantics, read fresh source files or modify immutable snapshots.
+- Latest admission slice: focused workbook/persistence test1 PASS and snapshot
+  resolver tests12 PASS. One unrelated pre-freeze hierarchy-warning test fails;
+  no full-suite/full-freeze certification. Tests were not rerun for this save.
+  Earlier91/25-test runs and run2 pilot results remain historical scoped evidence.
+- Next chat: review this handoff, checkpoint and manifest, then obtain approval
+  before implementing the remaining plan. Latest request authorized memory save
+  only. Preserve dirty worktree and user `config/gui_state.json` changes.
+
+## PREVIOUS HANDOFF - 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS
 
 - Stable baseline/tag: `freeze-ipos-6-pass-2-blocked`; milestone commit and
   tag push authorized. No branch push, new branch or continued repair work.

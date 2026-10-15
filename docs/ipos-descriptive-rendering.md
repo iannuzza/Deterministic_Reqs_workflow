@@ -1,5 +1,49 @@
 # IPOS Descriptive Rendering
 
+## Stage 6 block-local blocker review (2026-10-12)
+
+The shared `ipos_blocker_review` coordinator evaluates each Digital IPOS against
+the unchanged approved-input, claim and document checks. A clean block is generated
+without a review workbook or GUI interruption. A blocked block is not published;
+other blocks continue, even while its review workbook is unsaved or open.
+Stage 6 remains unsuccessful overall if any block remains blocked.
+
+Only current active blockers appear in that block's dedicated
+`artifacts/orchestrator/ipos_blocker_reviews/<block-slug>/blocker_review.xlsx`
+and short Markdown companion. The GUI opens the workbook automatically and exposes
+its exact path, an Open Excel action and a block-only Re-evaluate action in a
+non-modal window. Select User decision from the three flow choices and edit Note,
+save and close Excel, then re-evaluate. Tool recommendations and facts stay read-only. The checker
+re-reads the saved workbook and reruns the existing checks for the selected block.
+An open, unchanged or altered-facts workbook holds only its own block.
+
+`omit (as non-blocking)` is an explicit operational exclusion from descriptive
+elaboration and writing only (user-authorized rule update, 2026-10-13). A saved,
+closed selection binds to the exact current claim or explicitly selected section;
+it does not require a clarification Note. Normative requirement rows, authored
+IDs/text, Covers and traceability remain complete and unchanged. Selecting a
+section excludes every descriptive claim assigned to that section, not just the
+individual rows also listed in the workbook. Required overview sections and all
+checks on remaining content still apply.
+`user clarified` requires a Note for re-evaluation. `need source/spec update -
+clarification` remains blocked and records a future source/spec task; Stage 6 does
+not perform that update. Notes cannot introduce authority, change approved meaning
+or waive any gate. A review is retired from the active location only after fresh
+checks independently clear the block. Failed publication preserves earlier output.
+The selected decision is checked independently of Excel's dropdown validation.
+A source-update selection holds the block pending a future update; another choice
+cannot clear a tool-reported source-update blocker. Descriptive omit selections
+are audited as `user_omit_descriptive_only`, never as normative deletions or
+automatic approval of unrelated failures. The
+displayed Resulting action remains the tool recommendation; the checker records
+the effective action from the saved selection. Existing workbooks can be upgraded
+without losing notes or treating the programmatic upgrade as a user save.
+Resolved omit decisions are retained in a snapshot/block-bound receipt backed by
+the hash-verified archived workbook. Generation and independent gates reconstruct
+the same descriptive exclusions from that evidence; changed or unbound decisions
+are rejected. No approved snapshot, requirement allocation or canonical text is
+edited by this content-selection policy.
+
 ## Clock and reset connection presentation (2026-10-12)
 
 The shared IPOS presentation path renders admitted, connection-only clock and

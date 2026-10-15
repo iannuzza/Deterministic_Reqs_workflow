@@ -695,6 +695,242 @@ def ipos_decision_summary(review):
     return result
 
 
+def remaining_ipos_blocker_details(repo_root, review):
+    from workflow_routing import _ipos_claim_output_role, _ipos_document_contract
+
+    decisions = review.get("decision_summary") or ipos_decision_summary(review)
+    blocked = {(value["document_type"], value["block"]) for value in decisions if value["current_status"] == "BLOCKED"}
+    context = json.loads((repo_root / "config/project_context.json").read_text(encoding="utf-8"))
+    snapshot, _selection = ipos.resolve_complete_authoritative_input(
+        repo_root, "6", project_id=str(context.get("project_name") or repo_root.name), snapshot_id=review["snapshot_id"])
+    contract = ipos.resolve_downstream_contract(repo_root, snapshot.snapshot_id)
+    sections = _ipos_document_contract()["sections"]
+    result = {}
+    for domain in ipos.CONFIG:
+        document_type = "Digital IPOS" if domain == "digital" else "Analog IPOS"
+        candidates = approved_snapshot_candidate_rows(snapshot, contract, domain=domain)
+        for name in sorted(block for kind, block in blocked if kind == document_type):
+            functional = build_ipos_functional_input(
+                name, ipos._block_inventory_record(repo_root, name),
+                [row for row in candidates if row["mapped_block"] == name], domain=domain,
+                materialized=True, provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
+                candidate_requirement_rows=candidates)
+            plan = build_ipos_claim_plan(functional)
+            details = {"claims": {}, "sections": {}}
+            for section in sections:
+                claims = [claim for claim in plan.claims if _ipos_claim_output_role(claim.role) == section["role"]]
+                meanings = list(dict.fromkeys(meaning for claim in claims for meaning in claim.meanings))
+                support = [meaning.subject + ": " + ("not " if meaning.negative else "") + meaning.predicate
+                           + " " + ", ".join(meaning.objects) for meaning in meanings[:2]]
+                summary = "; ".join(support) or "No supported claim assigned to this section in the current shared plan."
+                if len(meanings) > 2:
+                    summary += "; remaining supported relations in appendix"
+                details["sections"][section["title"].split()[0]] = {"title": section["title"], "meaning": summary}
+                for claim in claims:
+                    support = [meaning.subject + ": " + ("not " if meaning.negative else "") + meaning.predicate
+                               + " " + ", ".join(meaning.objects) for meaning in claim.meanings[:2]]
+                    summary = "; ".join(support)
+                    if re.match(r"^(?:its?|their|this|that|these|those|they)\b", claim.meanings[0].subject, re.I):
+                        excerpt = next((span.text for span in claim.spans if len(span.text.split()) <= 25
+                                        and claim.meanings[0].subject.casefold() in span.text.casefold()), None)
+                        summary = excerpt or summary
+                    details["claims"][claim.claim_id] = {"section": section["title"], "meaning": summary,
+                                                        "name": ", ".join(claim.responsibilities[:2])}
+            result[name] = details
+    return result
+
+
+def remaining_ipos_blocker_markdown(review, details=None):
+    details = details or {}
+    evidence = review.get("current_evidence", {})
+    if evidence.get("blocks") is not None:
+        lines = ["# Remaining IPOS blockers", "", "Snapshot: " + markdown_literal(review["snapshot_id"]), "",
+            "Current document status: " + evidence["status"] + ". Review-only; no gate override.", "",
+            "Current artifact checks below are separate from stage execution and implementation readiness. Saved review findings remain historical.", "",
+            "| IPOS block | Document status | Current evidence | Implementation readiness |",
+            "| --- | --- | --- | --- |"]
+        for block in evidence["blocks"]:
+            lines.append("| " + " | ".join(markdown_literal(str(value)).replace("|", "\\|") for value in
+                (block["block"], block["status"], block["reason"], "NOT_ASSESSED")) + " |")
+        if evidence.get("run_context"):
+            lines.extend(["", "Run exit: " + str(evidence["run_context"].get("exit_code")) +
+                ". A successful process exit alone does not certify document publication or readiness."])
+        lines.extend(["", "[Historical detailed evidence](descriptive_obligation_review_appendix.json)", ""])
+        return "\n".join(lines)
+    if evidence.get("status") == "UNVERIFIED":
+        return "\n".join(["# Remaining IPOS blockers", "",
+            "Current status: UNVERIFIED. " + markdown_literal(evidence["reason"]), "",
+            "Saved review findings are historical evidence, not a current PASS or BLOCKED assessment.", "",
+            "[Historical detailed evidence](descriptive_obligation_review_appendix.json)", ""])
+    labels = {
+        "ipos_final_claim_missing_or_changed": "Missing/changed supported claim",
+        "ipos_final_unmodeled_content": "Unmodeled content",
+        "ipos_final_required_section_missing": "Required section missing",
+        "ipos_final_source_relationship_changed": "Source/model relationship changed",
+    }
+    lines = ["# Remaining IPOS blockers", "",
+             "Historical saved review findings; not a current gate assessment. Support below is abbreviated; full conditions, IDs and offsets remain in the appendix.", "",
+             "[Detailed evidence](descriptive_obligation_review_appendix.json)", ""]
+    observations = review.get("clean_generation_observations", {}).get("blocks", [])
+    decisions = review.get("decision_summary")
+    if decisions is None:
+        decisions = ipos_decision_summary(review)
+    for decision in decisions:
+        if decision["current_status"] != "BLOCKED":
+            continue
+        observation = next((value for value in observations if value["block"] == decision["block"]
+                            and value["document_type"] == decision["document_type"]), {})
+        active = [value for value in review.get("issues", []) if value.get("block") == decision["block"]
+                  and value.get("blocking_status") == "blocking" and not value.get("historical_only")]
+        probe_issues = [value for value in active if value.get("identity", "").startswith("current-probe:")]
+        checks = observation.get("contract_report", {}).get("checks", {})
+        findings = [str(finding) for check in checks.values() for finding in check.get("findings", [])]
+        if findings:
+            active = probe_issues
+        else:
+            findings = [value.get("reason", value.get("blocking_reason", "Recorded blocker")) for value in active]
+        points = {}
+        for finding in findings:
+            for part in finding.split("; "):
+                compact = re.sub(r":[^:;]*\.(?:md|docx)(?=:|$)", "", part.strip())
+                code, separator, location = compact.partition(":")
+                points.setdefault(location if separator else "Recorded finding", [])
+                if labels.get(code, code) not in points[location if separator else "Recorded finding"]:
+                    points[location if separator else "Recorded finding"].append(labels.get(code, code))
+        lines.extend(["## " + markdown_literal(decision["block"]), "",
+                      "| Section or claim | Failure type | Expected supported meaning | Observed problem | Likely failing layer |",
+                      "| --- | --- | --- | --- | --- |"])
+        block_details = details.get(decision["block"], {})
+        ordinal = 0
+        for location, failures in points.items():
+            if location.startswith("audit:"):
+                ordinal += 1
+                claim = block_details.get("claims", {}).get(location[len("audit:"):])
+                if claim is None:
+                    raise ValueError("Cited blocker claim is not recoverable from the selected snapshot: " + location)
+                title = claim["section"] + " / claim " + str(ordinal) + ": " + claim["name"]
+                meaning = claim["meaning"]
+                observed = "Candidate claim rejected by independent fidelity readback; the saved probe does not isolate the lost fact."
+                layer = "realization/readback (not localized)"
+            else:
+                section = block_details.get("sections", {}).get(location, {})
+                title = section.get("title", "Section " + location)
+                meaning = section.get("meaning", "Exact supported relations are recorded in the appendix.")
+                observed = "Assembled MD and DOCX section is not reconciled with the retained claim set."
+                layer = "section mapping/readback (not localized)"
+            fields = (title, "; ".join(failures), meaning, observed, layer)
+            lines.append("| " + " | ".join(markdown_literal(field).replace("|", "\\|") for field in fields) + " |")
+        lines.append("")
+    if not any(line.startswith("## ") for line in lines):
+        lines.extend(["No blocked IPOS blocks in the saved review.", ""])
+    return "\n".join(lines)
+
+
+def current_ipos_blocker_evidence(repo_root, snapshot_id, run_context=None):
+    from ipos_blocker_review import apply_descriptive_omissions
+    from spec_document_contract import ipos_document_contract_report, validate_materialization_chain
+    from workflow_routing import build_ipos_normalized_records
+
+    context = json.loads((repo_root / "config/project_context.json").read_text(encoding="utf-8"))
+    snapshot, _selection = ipos.resolve_complete_authoritative_input(
+        repo_root, "6", project_id=str(context.get("project_name") or repo_root.name), snapshot_id=snapshot_id)
+    contract = ipos.resolve_downstream_contract(repo_root, snapshot.snapshot_id)
+    results_path = repo_root / "artifacts/orchestrator/ipos_generation_results.json"
+    results = json.loads(results_path.read_text(encoding="utf-8")) if results_path.is_file() else {}
+    blocks = []
+    for domain, config in ipos.CONFIG.items():
+        document_type = "Digital IPOS" if domain == "digital" else "Analog IPOS"
+        stage = "6" if domain == "digital" else "7"
+        candidates = approved_snapshot_candidate_rows(snapshot, contract, domain=domain)
+        names = sorted({row["mapped_block"] for row in candidates if contract.target(row["source_req_id"]) == document_type})
+        for name in names:
+            value = {"block": name, "document_type": document_type, "status": "UNVERIFIED",
+                     "reason": "No matching current publication evidence", "findings": []}
+            blocks.append(value)
+            if run_context and (stage not in run_context["stages"] or
+                    run_context.get("block") not in (None, "", name)):
+                value["reason"] = "Outside the completed run scope; historical evidence only"
+                continue
+            folder = repo_root / config["output_dir"] / "blocks" / ipos._block_slug(name)
+            markdown = folder / ipos._block_markdown_name(domain, name)
+            docx = markdown.with_suffix(".docx")
+            audit = folder / "descriptive_summary_audit.csv"
+            materialization = folder / "materialization_audit.json"
+            saved_report = folder / "document_contract_report.json"
+            try:
+                if domain == "digital":
+                    if results.get("snapshot_id") != snapshot_id:
+                        value["reason"] = "Generation observations missing or bound to another snapshot"
+                        continue
+                    observations = [row for row in results.get("blocks", ()) if row["block"] == name]
+                    if len(observations) != 1 or results.get("scope") not in ("all", name):
+                        value["reason"] = "No unique generation observation in the matching block scope"
+                        continue
+                    observation = observations[0]
+                    if run_context and not (run_context["started_at"] <= results_path.stat().st_mtime <= run_context["finished_at"]):
+                        value["reason"] = "Generation observations do not belong to the completed run"
+                        continue
+                    if observation.get("status") == "BLOCKED":
+                        value.update(status="BLOCKED", reason=observation.get("waiting_reason") or
+                            "; ".join(observation.get("findings", ())) or "Recorded current generation/publication failure",
+                            findings=observation.get("findings", []))
+                        continue
+                    if observation.get("status") != "PASS":
+                        continue
+                paths = (markdown, docx, audit, materialization, saved_report)
+                if not all(path.is_file() for path in paths):
+                    value["reason"] = "Required current document or audit artifact is missing"
+                    continue
+                if run_context and not all(run_context["started_at"] <= path.stat().st_mtime <=
+                        run_context["finished_at"] for path in paths):
+                    value["reason"] = "Published artifacts do not belong to the completed run"
+                    continue
+                if re.findall(r"^- Snapshot: `([^`]+)`", markdown.read_text(encoding="utf-8"), re.M) != [snapshot_id]:
+                    value["reason"] = "Published document does not match the selected snapshot"
+                    continue
+                functional = build_ipos_functional_input(name, ipos._block_inventory_record(repo_root, name),
+                    [row for row in candidates if row["mapped_block"] == name and contract.target(row["source_req_id"]) == document_type],
+                    domain=domain, materialized=True,
+                    provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
+                    candidate_requirement_rows=candidates,
+                    descriptive_source_records=contract.descriptive_context(repo_root, block=name, domain=domain))
+                functional = apply_descriptive_omissions(repo_root, snapshot_id=snapshot_id, functional_input=functional)
+                binding = validate_materialization_chain(materialization, "IPOS",
+                    build_ipos_normalized_records(functional), markdown, docx)
+                if binding:
+                    value.update(reason="Stale or changed materialization; current status is unverified", findings=binding)
+                    continue
+                report = ipos_document_contract_report(repo_root, markdown, audit, functional)
+                saved = json.loads(saved_report.read_text(encoding="utf-8"))
+                if saved != report and report["status"] == "PASS":
+                    value["reason"] = "Saved validation report no longer matches current artifact checks"
+                    continue
+                findings = [finding for check in report["checks"].values() for finding in check["findings"]]
+                value.update(status="PASS" if report["status"] == "PASS" else "BLOCKED",
+                    reason="Current snapshot-bound document checks PASS; residuals: " + str(len(report.get("residuals", ())))
+                        if report["status"] == "PASS" else "; ".join(findings), findings=findings)
+            except (OSError, ValueError, KeyError, TypeError, RuntimeError) as error:
+                value["reason"] = "Current evidence unavailable: " + str(error)
+    status = "BLOCKED" if any(row["status"] == "BLOCKED" for row in blocks) else (
+        "UNVERIFIED" if any(row["status"] == "UNVERIFIED" for row in blocks) else "PASS")
+    return {"status": status, "blocks": blocks, "run_context": run_context,
+            "authority": False, "gate_override": False}
+
+
+def write_remaining_ipos_blocker_report(repo_root, snapshot_id, *, run_context=None):
+    folder = repo_root / "artifacts/orchestrator"
+    review = json.loads((folder / "descriptive_obligation_review.json").read_text(encoding="utf-8"))
+    if review["snapshot_id"] != snapshot_id:
+        raise ValueError("Blocker review does not match the run snapshot")
+    output = folder / "remaining_ipos_blockers.md"
+    try:
+        review["current_evidence"] = current_ipos_blocker_evidence(repo_root, snapshot_id, run_context)
+    except (OSError, ValueError, KeyError, TypeError, RuntimeError) as error:
+        review["current_evidence"] = {"status": "UNVERIFIED", "reason": "Current evidence unavailable: " + str(error)}
+    output, _docx = export_review_document(output, remaining_ipos_blocker_markdown(review))
+    return output
+
+
 def descriptive_obligation_review_markdown(review):
     lines = ["| IPOS block | Current status | Active blocker classes | Non-blocking classes | Clean generation possible now | User clarification needed | Shortest next action |",
              "| --- | --- | --- | --- | --- | --- | --- |"]

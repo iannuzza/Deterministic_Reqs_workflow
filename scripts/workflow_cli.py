@@ -270,6 +270,7 @@ def _run_stage_once(
     validate_after_run: bool,
     dry_run: bool,
     snapshot_id: str | None = None,
+    regenerate_downstream: bool = False,
 ) -> int:
     stage = STAGES[stage_key]
     print(f"\n[{_now()}] {stage.name} run 1/1")
@@ -279,7 +280,8 @@ def _run_stage_once(
             raise ValueError(f"Stage {stage_key} requires a resolved snapshot ID")
         rc_run = _run_python_cmd(
             repo_root,
-            [runner, *stage.runner_args, "--snapshot-id", snapshot_id],
+            [runner, *stage.runner_args, "--snapshot-id", snapshot_id,
+             *(["--regenerate-downstream"] if regenerate_downstream and stage_key in {"6", "7"} else [])],
             dry_run,
         )
     else:
@@ -338,6 +340,9 @@ def cmd_run(args: argparse.Namespace, repo_root: Path) -> int:
 
     if any(key in SNAPSHOT_BACKED_STAGES for key in stage_keys) and bool(args.snapshot_id) == bool(args.use_latest_approved):
         raise ValueError("Stages 3-7 require exactly one of --snapshot-id or --use-latest-approved")
+    prepare_inputs = getattr(args, "prepare_snapshot_inputs", False)
+    if prepare_inputs and any(key not in SNAPSHOT_BACKED_STAGES for key in stage_keys):
+        raise ValueError("Snapshot input preparation is only supported for Stage 3-7 runs")
 
     selected_snapshot_id = _resolve_workflow_snapshot(
         repo_root,
@@ -348,7 +353,13 @@ def cmd_run(args: argparse.Namespace, repo_root: Path) -> int:
     if any(key in SNAPSHOT_BACKED_STAGES for key in stage_keys):
         if stage_keys[0] not in SNAPSHOT_BACKED_STAGES:
             _require_pre_freeze_gate(repo_root)
-        _require_downstream_coherence(repo_root, selected_snapshot_id)
+        if prepare_inputs:
+            print(f"Prepare derived allocation ledger for snapshot: {selected_snapshot_id}")
+            if not args.dry_run:
+                from allocation_ledger import refresh_ledger
+                refresh_ledger(repo_root, snapshot_id=selected_snapshot_id)
+        if not (prepare_inputs and args.dry_run):
+            _require_downstream_coherence(repo_root, selected_snapshot_id)
 
     print(f"Workflow run plan: {' -> '.join(stage_keys)}")
     rc_tests = _run_retrieval_tests(repo_root, args.dry_run)
@@ -371,6 +382,7 @@ def cmd_run(args: argparse.Namespace, repo_root: Path) -> int:
             validate_after_run=True,
             dry_run=args.dry_run,
             snapshot_id=selected_snapshot_id,
+            regenerate_downstream=prepare_inputs,
         )
         if rc != 0:
             print(f"[{_now()}] STOP at stage {stage_key} (exit={rc})")
@@ -637,6 +649,7 @@ def build_parser() -> argparse.ArgumentParser:
     p_run.add_argument("--to-stage", dest="to_stage", default=None, help=f"Ascending range end. {STAGE_HELP}")
     p_run.add_argument("--snapshot-id", default=None, help="Explicit approved canonical snapshot ID for Stages 3-7")
     p_run.add_argument("--use-latest-approved", action="store_true", help="Select latest approved snapshot once, then use its ID for Stages 3-7")
+    p_run.add_argument("--prepare-snapshot-inputs", action="store_true", help="Rebuild the derived allocation ledger from the selected approved snapshot before Stage 3-7 validation; never ingest sources or change approvals.")
     p_run.add_argument("--dry-run", action="store_true", help="Print the commands without executing them.")
     p_run.epilog = "Help: python scripts/workflow_cli.py run --help"
 

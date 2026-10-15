@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_i2c-spi-ahb.docx",
-    "sha256": "a4fab834bd8c729f0ce4afd45ba59566495471f07b66445d410f094ad68f577b"
+    "sha256": "12201cc63eb6d85d77799e124a9cd669d710114161cb14fb53d9da2c73f9018e"
   },
   "markdown": {
     "path": "digital_ipos_i2c-spi-ahb.md",
-    "sha256": "67fa00629cfaff1b9130093ada46f11a10d0f11db39c51d2bffb83a8adc90124"
+    "sha256": "4228c46fca25743c357ef779fbb9f46641332a61243fd41f422d583675ef3d0f"
   },
-  "normalized_input_sha256": "218c880e8ebf1cb1b063709d0c90dde2d0b6bda1bea5287003c3a8ee3817ccdf",
+  "normalized_input_sha256": "1fea83b614c624d190a167bb443d85df8f7079ae737abfc60c2d6200ee266255",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -72,7 +72,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8003",
@@ -80,7 +80,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8003",
       "text": "An I2C/SPI write access to the address 0x60-0x67 shall be translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0009] [Vpriority High]"
     },
@@ -142,7 +142,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_8005",
@@ -150,7 +150,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:I2C_SPI_AHB:DDS_STBIO1_8005",
       "text": "An I2C/SPI read access to the address 0x70-0x7f shall be translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53). [TO: IPOS_I2C_SPI_AHB_0011] [Vpriority High]"
     },
@@ -305,31 +305,13 @@
       "output_order": 3,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
-        "requirement:I2C_SPI_AHB:DDS_STBIO1_8003"
-      ],
-      "text": "An I2C/SPI write access to the address 0x60-0x67 is translated in an AHB write access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).",
-      "unit_id": "ipos-claim-f046450e580214094151"
-    },
-    {
-      "output_order": 4,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8007"
       ],
       "text": "On AHB interface, BURST is not supported as well as LOCKED transfers.",
       "unit_id": "ipos-claim-7b6e4a67fa9b242b2e60"
     },
     {
-      "output_order": 5,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:I2C_SPI_AHB:DDS_STBIO1_8005"
-      ],
-      "text": "An I2C/SPI read access to the address 0x70-0x7f is translated in an AHB read access to the configured AHB address (contained in registers SAM_ADDR_BYTE0/1/2/3, address 0x50/0x51/0x52/0x53).",
-      "unit_id": "ipos-claim-dd95545e272201224260"
-    },
-    {
-      "output_order": 6,
+      "output_order": 4,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8000"
@@ -338,7 +320,7 @@
       "unit_id": "ipos-claim-b0b30b0adf01f7bb9071"
     },
     {
-      "output_order": 7,
+      "output_order": 5,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8001"
@@ -347,7 +329,7 @@
       "unit_id": "ipos-claim-598248448eb9a8c7d300"
     },
     {
-      "output_order": 8,
+      "output_order": 6,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:I2C_SPI_AHB:DDS_STBIO1_8006"

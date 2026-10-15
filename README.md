@@ -24,6 +24,18 @@ Traceability report generation provides Excel workbooks for individual hierarchy
 
 The main advantages of this structure are modularity, auditability, repeatability, and flexibility. Individual stages can be rerun or improved without redesigning the full workflow, artifacts create reviewable handoffs, and project-specific behavior is supplied through configuration and generated evidence rather than hardcoded source-document assumptions. The tradeoffs are stricter artifact contracts, more intermediate files to maintain, and explicit approval points that slow execution when source evidence or architecture ownership is ambiguous. These tradeoffs are intentional: they favor deterministic engineering traceability over opaque automatic regeneration.
 
+## Governed Descriptions And Readiness (2026-10-14)
+
+Status remains **partial architectural PASS; MVP not yet complete**. The approved plan remains the baseline; code changes and temporary fixture checks do not approve source paragraphs or change an immutable snapshot.
+
+- IPOS generation, the IPOS checker and SysML block documentation consume the same snapshot-bound governed descriptive content and dispositions. Unsupported descriptions are audited residuals, not invented filler or normative requirements. Descriptive functions and interactions never create physical parts or connectors.
+- The central validator classifies derivative section/projection/function-coverage gaps separately from hard integrity errors. Missing descriptions and source/spec-update review outcomes do not automatically veto supported generation or publication. Unknown failures, invalid scope/provenance, altered selected meaning, normative requirements, approved IO and traceability remain mandatory gates.
+- Reports distinguish generation status, publication eligibility and implementation readiness. Residual Excel decisions are non-authoritative: omit keeps derivative content omitted with its possible readiness impact; clarification permits governed reevaluation, not fact approval; source/spec-update retains the gap.
+- The final SysML phase centrally assesses governed IO meaning/interpretation and necessary timing/handshake/reset clarity. Explicit applicable versioned standard specifications may supply standard timing only with clear local context and constraints. Ambiguous or unsupported constructions fail closed; these bounded checks are not a general semantic parser or RTL certification.
+- Fresh SysML starts with `// NOT READY for RTL or high-level model generation`. After central assessment, exactly one declaration is stamped and revalidated. The derived report is bound to the selected snapshot, contract, model-body digests and residual inputs; stale/altered assessments cannot authorize READY. NOT READY alone is not a publication failure.
+
+The real Main Controller writer passed its document contract for all 181 approved normative rows in an external disposable directory, with 207 residuals recorded and readiness not assessed. Published project documents, snapshots and approvals were not regenerated or changed. End-to-end final-phase verification, remaining complex projections and the complete residual-review lifecycle remain open; this is not MVP completion.
+
 ## Current Project Status (2026-10-01)
 
 - Approved snapshot: `snap-b2e8101b00dc6909feaed885`.

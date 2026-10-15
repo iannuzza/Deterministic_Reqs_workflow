@@ -1,5 +1,82 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-15 - Selected-Snapshot IPOS PASS, Reporting Repair and Local Checkpoint
+- Current checkpoint:2026-10-15-selected-snapshot-ipos-reporting-pass. Current
+  snapshot snap-73c872b1307b6adb5eaf843e; newer snap-1c746489707c8d22fc8ce3d7
+  remains separate. Immutable authority/source requirements were not changed.
+- Shared endpoint resolver maps complete normalized block labels only within the
+  immediate instance token, with explicit bindings first; no fuzzy inference.
+  GUI/report distinguish endpoint resolution from actual model serialization.
+- GUI downstream selection pins an approved historical ID. CLI preparation
+  rematerializes only derived snapshot inputs before unchanged preconditions;
+  IPOS prepared runners preserve regeneration flag. DRS report selector fixed.
+- IPOS operational blockers: shared DOCX formatter now stages in destination
+  directory and retries transient PermissionError four times, preserves originals
+  on permanent failure and cleans temporary ZIP files. No permission/gate changes.
+  Blocker report preserves original operational exception and does not infer a
+  missing source fact. Numeric-start sentences split correctly in fidelity readback;
+  changed values/objects/conditions, lost claims and invented sentences still fail.
+- Earlier narrow35-test green light missed full Step6 suite. Reproduced164-test
+  failures; repaired obsolete test expectations/fixtures against existing V2
+  residual/publication policy, with mutation checks retained, no skips/gate waiver.
+  User subsequently reran full Stage6 successfully; this repair did not rerun it.
+- Contradiction: old saved decision_summary/probe observations were reused solely
+  on snapshot match. Same snapshot is not same run, input state or output bytes.
+  Fixed exporter to call existing read-only shared snapshot/materialization/current
+  document checks and preserve history. Generation PASS is not publication PASS.
+  Genuine fresh failure stays BLOCKED; incomplete/stale/mismatched/out-of-scope
+  evidence remains UNVERIFIED. GUI passes reached stages, timestamps, block/exit;
+  report generation never changes exit/status or calls a probe generator.
+- Verification:32 report +72 GUI +164 descriptive tests =268 PASS;47 additional
+  blocker-review/snapshot/DOCX/numeric checks PASS. Actual selected8-block artifact
+  reconciliation PASS. MD/DOCX report parity8PASS/readiness NOT_ASSESSED;54
+  protected files unchanged. Residuals not removed; no READY or MVP completion.
+- Known incidental issues: apply_patch outcome_unknown did not apply first edit;
+  validated failure before reapplying. Markdown escapes hyphens/underscores; tests
+  use existing literal helper or narrowly normalize escaping for format parity.
+  Tk ThemeChanged warning after destroyed test widgets accompanies unittest OK.
+- Saved local memories and implementation archive/manifest, no Git commit/tag/push.
+  Separate open work: ADSP prose, newer-snapshot Main enrichment, stale legacy
+  aggregate IPOS Markdown, Stage7/final SysML/implementation readiness, old locked
+  Excel legend. Do not mutate historical review evidence to make reporting green.
+
+## 2026-10-15 - Save Main Descriptive Admission and Remaining Fix Plan
+- Checkpoint ID: `2026-10-15-main-descriptive-admission-blocked-proof`.
+  Local-memory/handoff synchronization only; no new runtime edits, approval,
+  snapshot, generation, tests or Git operations in this save.
+- Earlier implemented missing descriptive sheet/admission in existing architecture
+  workbook approval, GUI import and shared Stage2A/freeze validation. Protected
+  text/provenance, exact candidate membership, formulas/tampering, required pending
+  review and workbook/profile parity checked. No new authority or approval lane.
+- Prepared only exact supplementary5.3.2 from existing indexed TXT; preserved
+  source revision/page/line/artifact/content hashes and proposed ownership.
+  Excel scalar metadata coercion caused first check to fail; artifacts restored,
+  literal-string serialization fixed and focused regression passed before retry.
+- User reviewed and approved Main Controller/digital passage via Enable Gate,
+  then froze `snap-1c746489707c8d22fc8ce3d7`. Shared approval validation PASS;
+  source-context-ab8d0db457f35c8e8f814ac5 is admitted in the new immutable profile.
+  Old snap-73c872b1307b6adb5eaf843e remains unchanged; no requirement merge.
+- Real narrow proof in artifacts/validation/main_controller_descriptive_proof_20261014:
+  Main-only generator exit1 before composition,55DRS_TRACE_STALE_SNAPSHOT.
+  Separate domain filter rejects digital versus approved owner domains Digital/Block.
+  Requirement rows/allocation unchanged; original_input_changes=[] and original
+  Main MD/DOCX byte-unchanged. No1.2/1.4enrichment proven; no other block regenerated.
+- Source admission success is not composer/publication success. Do not misdiagnose
+  parser/ownership/dependency failures as absence of paragraph approval.
+- Plan only: central domain semantics (never guess Block=digital); preserve exact
+  132old omission IDs across successor snapshot without widening old whole-section
+  scope; support named descriptive actors/compound responsibilities; realize distinct
+  1.2/1.4facts; unify assessment/writer/failure inputs; scoped trace binding because
+  --block leaves old aggregate trace while central reader requires current snapshot.
+- User explicitly selected strict Main-only scope, rejecting isolated DRS refresh.
+  Therefore dependency remains blocked; no bypass, trace relabel or new regeneration
+  permission. No OCR/RAG/source expansion, inferred oscillator on/off or new FSM links.
+- Latest admission verification:1workbook/persistence test +12snapshot resolver
+  tests PASS. One unrelated pre-freeze hierarchy-warning test fails. Earlier91/25
+  test results and larger pilot/SysML statuses are historical, not current whole PASS.
+- Status: partial implementation; MVP not complete. Next requires explicit
+  implementation authorization for remaining bounded plan; this request saves only.
+
 ## 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS Milestone
 - Baseline/tag: freeze-ipos-6-pass-2-blocked. User requested stable preservation,
   milestone commit and tag push; no branch push and no new implementation work.

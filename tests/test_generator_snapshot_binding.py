@@ -141,6 +141,69 @@ class GeneratorSnapshotBindingTests(unittest.TestCase):
                 ])
             self.assertEqual(commands, expected)
 
+    def test_cli_prepares_selected_snapshot_inputs_before_coherence(self):
+        import workflow_cli
+        for dry_run in (False, True):
+            with self.subTest(dry_run=dry_run):
+                command = ["run", "--from-stage", "3", "--to-stage", "7", "--snapshot-id", "previous-approved", "--prepare-snapshot-inputs"]
+                args = workflow_cli.build_parser().parse_args(command + (["--dry-run"] if dry_run else []))
+                order = []
+                with patch("allocation_ledger.refresh_ledger", side_effect=lambda *args, **kwargs: order.append(("prepare", kwargs["snapshot_id"]))) as refresh, \
+                        patch.object(workflow_cli, "_require_downstream_coherence", side_effect=lambda root, snapshot: order.append(("validate", snapshot))) as validate, \
+                        patch.object(workflow_cli, "_run_retrieval_tests", return_value=0), \
+                        patch.object(workflow_cli, "_run_stage_once", return_value=0) as run, patch("builtins.print"):
+                    self.assertEqual(workflow_cli.cmd_run(args, ROOT), 0)
+                    self.assertEqual(order, [] if dry_run else [("prepare", "previous-approved"), ("validate", "previous-approved")])
+                    self.assertEqual(run.call_count, 5)
+                    self.assertTrue(all(call.kwargs["snapshot_id"] == "previous-approved" for call in run.call_args_list))
+                    self.assertTrue(all(call.kwargs["regenerate_downstream"] for call in run.call_args_list))
+                    if dry_run:
+                        refresh.assert_not_called()
+                        validate.assert_not_called()
+        args = workflow_cli.build_parser().parse_args(["run", "--stage", "2", "--prepare-snapshot-inputs"])
+        with self.assertRaisesRegex(ValueError, "only supported"):
+            workflow_cli.cmd_run(args, ROOT)
+
+    def test_cli_snapshot_preparation_failure_does_not_launch_stages(self):
+        import workflow_cli
+        args = workflow_cli.build_parser().parse_args([
+            "run", "--from-stage", "3", "--to-stage", "7", "--snapshot-id", "rejected", "--prepare-snapshot-inputs",
+        ])
+        with patch("allocation_ledger.refresh_ledger", side_effect=ApprovedResolverError("snapshot rejected")), \
+                patch.object(workflow_cli, "_require_downstream_coherence") as validate, \
+                patch.object(workflow_cli, "_run_stage_once") as run, patch("builtins.print"):
+            with self.assertRaises(ApprovedResolverError):
+                workflow_cli.cmd_run(args, ROOT)
+            validate.assert_not_called()
+            run.assert_not_called()
+
+    def test_cli_prepared_ipos_runs_preserve_regeneration_and_snapshot_flags(self):
+        import workflow_cli
+        for stage in ("6", "7"):
+            with self.subTest(stage=stage), \
+                    patch.object(workflow_cli, "_run_python_cmd", return_value=0) as run, \
+                    patch.object(workflow_cli, "_log_manifest"), patch("builtins.print"):
+                self.assertEqual(workflow_cli._run_stage_once(ROOT, stage, True, False, "previous-approved", regenerate_downstream=True), 0)
+                runner = run.call_args_list[0].args[1]
+                validator = run.call_args_list[1].args[1]
+                self.assertIn("--regenerate-downstream", runner)
+                self.assertNotIn("--regenerate-downstream", validator)
+                for command in (runner, validator):
+                    self.assertEqual(command[command.index("--snapshot-id") + 1], "previous-approved")
+
+    def test_drs_hierarchy_coverage_keeps_selected_contract_snapshot(self):
+        tree = ast.parse((ROOT / "scripts/run_drs_crosscheck_agent.py").read_text(encoding="utf-8-sig"))
+        calls = [node for node in ast.walk(tree) if isinstance(node, ast.Call)
+                 and isinstance(node.func, ast.Name) and node.func.id == "write_hierarchy_coverage_report"]
+        self.assertEqual(len(calls), 1)
+        keyword = next(item for item in calls[0].keywords if item.arg == "snapshot_id")
+        expression = ast.Expression(keyword.value)
+        selected = SimpleNamespace(snapshot_id="previous-approved")
+        for snapshot_id, latest in (("previous-approved", False), (None, True)):
+            value = eval(compile(expression, "<coverage-snapshot>", "eval"), {},
+                         {"args": SimpleNamespace(snapshot_id=snapshot_id, use_latest_approved=latest), "downstream_contract": selected})
+            self.assertEqual(value, "previous-approved")
+
     def test_history_changes_only_for_new_snapshot_and_preserves_prior_rows(self):
         with TemporaryDirectory() as directory:
             output = Path(directory) / "spec.md"

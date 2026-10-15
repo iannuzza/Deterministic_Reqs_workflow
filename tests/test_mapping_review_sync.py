@@ -1,4 +1,6 @@
 import csv
+import hashlib
+import json
 import sys
 import tempfile
 import unittest
@@ -9,6 +11,7 @@ from openpyxl import Workbook, load_workbook
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from mapping_review_sync import _row_is_valid, sync_mapping_workbook_to_csv
+from mapping_review_sync import write_descriptive_review_sheet, reviewed_descriptive_context, DESCRIPTIVE_SHEET
 from generate_stage2_specs import _write_mapping_workbook
 
 
@@ -16,6 +19,86 @@ FIELDS = ["requirement_id", "approved_classification", "review_decision", "appro
 
 
 class MappingReviewSyncTests(unittest.TestCase):
+    def test_descriptive_admission_preserves_candidate_and_requires_explicit_review(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "review.xlsx"
+            workbook = Workbook()
+            workbook.save(path)
+            workbook.close()
+            statement = "The controller identifies the working state."
+            record = {
+                "record_id": "description-1", "statement": statement,
+                "content_sha256": hashlib.sha256(statement.encode()).hexdigest(),
+                "evidence_kind": "descriptive", "source_file": "source.pdf",
+                "source_revision_id": "revision-1",
+                "source_spans_json": json.dumps([{"page": 2, "line": 3, "text_file": "page.txt", "artifact_sha256": "a" * 64}]),
+                "review_decision": "pending", "mapped_block": "Controller",
+                "domain": "digital", "review_rationale": "",
+                "required_for_review": True,
+            }
+            draft = {"governed_source_context": {"version": 1, "records": [record]}}
+            profile = {"block_defs": {"Controller": {}}}
+            write_descriptive_review_sheet(path, draft)
+            result = reviewed_descriptive_context(path, draft, profile)
+            self.assertEqual(result["records"][0], record)
+            workbook = load_workbook(path)
+            sheet = workbook[DESCRIPTIVE_SHEET]
+            sheet.cell(2, 1).value = "approved"
+            workbook.save(path)
+            workbook.close()
+            with self.assertRaisesRegex(ValueError, "missing_review_rationale"):
+                reviewed_descriptive_context(path, draft, profile)
+            workbook = load_workbook(path)
+            workbook[DESCRIPTIVE_SHEET].cell(2, 4).value = "Explicitly reviewed source content."
+            workbook.save(path)
+            workbook.close()
+            result = reviewed_descriptive_context(path, draft, profile)
+            self.assertEqual(result["records"][0]["review_decision"], "approved")
+            self.assertEqual(result["records"][0]["statement"], statement)
+            from validate_stage2_profile import validate_approval_evidence, _draft_review_sha256
+            from freeze_stage2b_snapshot import _register_approved_profiles
+            from canonical_store import connect
+            root = Path(directory)
+            (root / "config").mkdir()
+            mapping = root / "review.csv"
+            mapping.write_text("requirement_id\nREQ-1\n", encoding="utf-8")
+            draft_path = root / "draft.json"
+            draft_path.write_text(json.dumps(draft), encoding="utf-8")
+            profile["governed_source_context"] = result
+            profile["approval"] = {
+                "status": "approved", "approved_by": "test reviewer",
+                "reviewed_draft_profile_sha256": _draft_review_sha256(draft),
+                "reviewed_mapping_preview_csv_sha256": hashlib.sha256(mapping.read_bytes()).hexdigest(),
+            }
+            profile_path = root / "config/stage2_mirco_arc_profile.json"
+            profile_path.write_text(json.dumps(profile), encoding="utf-8")
+            self.assertEqual(validate_approval_evidence(profile_path, draft_path, mapping), [])
+            for name in ("domain_vocabulary.json", "ontology_role_taxonomy.json"):
+                (root / "config" / name).write_text("{}", encoding="utf-8")
+            connection = connect(root)
+            try:
+                connection.execute("INSERT INTO projects(project_id,project_name,created_at) VALUES (?,?,?)",
+                                   ("test-project", "Test Project", "2026-01-01"))
+                connection.commit()
+            finally:
+                connection.close()
+            _register_approved_profiles(root, "test-project", "test reviewer")
+            connection = connect(root)
+            try:
+                saved = connection.execute("SELECT profile_payload_json FROM profile_revisions WHERE profile_kind='architecture'").fetchone()
+                self.assertEqual(json.loads(saved[0])["governed_source_context"], result)
+                self.assertEqual(connection.execute("SELECT COUNT(*) FROM snapshots").fetchone()[0], 0)
+            finally:
+                connection.close()
+            workbook = load_workbook(path)
+            sheet = workbook[DESCRIPTIVE_SHEET]
+            headers = [cell.value for cell in sheet[1]]
+            sheet.cell(2, headers.index("statement") + 1).value = "Changed meaning."
+            workbook.save(path)
+            workbook.close()
+            with self.assertRaisesRegex(ValueError, "text/provenance was changed"):
+                reviewed_descriptive_context(path, draft, profile)
+
     def _write_csv(self, path, rows):
         with path.open("w", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=FIELDS)

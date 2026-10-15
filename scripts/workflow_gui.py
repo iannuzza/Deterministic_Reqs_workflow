@@ -24,7 +24,8 @@ from urllib import request, error
 from canonical_store import connect
 from approved_snapshot_resolver import resolve_complete_authoritative_input, resolve_complete_snapshot_id, ApprovedResolverError
 from allocation_ledger import read_csv
-from mapping_review_sync import sync_mapping_workbook_to_csv
+from mapping_review_sync import sync_mapping_workbook_to_csv, reviewed_descriptive_context
+from validate_stage2_profile import validate_approval_evidence
 from generate_stage2_specs import _write_mapping_workbook
 from ingest_source_spec import _sync_saved_review_workbook
 from pre_freeze_coverage import validate_pre_freeze_coverage
@@ -144,7 +145,8 @@ WORKFLOW_DIAGRAM_NODES = [
     {"id": "stage7", "label": "Stage 7\nAnalog IPOS", "kind": "main", "x": 1340, "y": 270},
     {"id": "arch_compare", "label": "Optional\nArchitecture Comparison", "kind": "main", "x": 1470, "y": 170},
     {"id": "reports", "label": "Snapshot XLSX\nSRS / ARS / DRS", "kind": "main", "x": 1210, "y": 370},
-    {"id": "sysml", "label": "Snapshot SysML\nFull Block Coverage", "kind": "main", "x": 1340, "y": 370},
+    {"id": "sysml", "label": "Final SysML\nGeneration", "kind": "main", "x": 1470, "y": 270},
+    {"id": "sysml_readiness", "label": "Auto Readiness\nCheck + Excel\nReports", "kind": "main", "x": 1600, "y": 270},
     {"id": "supp_import", "label": "Supplementary Source\nReview + Import", "kind": "supplementary", "x": 330, "y": 480},
     {"id": "supp_ingest", "label": "Supplementary Ingestion /\nOCR / Parsing / Req-ID Extraction", "kind": "supplementary", "x": 560, "y": 480},
     {"id": "supp_review", "label": "Supplementary Deterministic\nClassification / Review", "kind": "supplementary", "x": 820, "y": 480},
@@ -158,7 +160,8 @@ WORKFLOW_DIAGRAM_EDGES = [
     ("stage3", "stage4", "main"), ("stage4", "stage5", "main"),
     ("stage5", "stage6", "main"), ("stage6", "stage7", "main"),
     ("stage5", "arch_compare", "main"),
-    ("s2e", "reports", "main"), ("s2e", "sysml", "main"),
+    ("s2e", "reports", "main"),
+    ("stage7", "sysml", "main"), ("sysml", "sysml_readiness", "main"),
     ("s2", "s1", "loopback"), ("s2c", "s2a", "loopback"), ("s2d", "s2c", "loopback"),
     ("supp_import", "supp_ingest", "supplementary"),
     ("supp_ingest", "supp_review", "supplementary"),
@@ -178,9 +181,10 @@ WORKFLOW_NODE_MEANINGS = {
     "s2b": "S2B Merge Impact Analysis: evaluate affected requirements, mappings, profiles, snapshots, and regeneration scope before approval.",
     "s2c": "S2C Mapping Review and Approval Gate: resolve candidate ownership and require explicit review decisions before snapshotting.",
     "s2d": "S2D Immutable Snapshot: freeze the approved canonical revisions, mappings, profiles, and retrieval context for downstream generation.",
-    "s2e": "S2E Downstream Generation: consume the approved immutable snapshot for specifications, reports, and SysML outputs.",
+    "s2e": "S2E Downstream Generation: consume the approved immutable snapshot for specifications and derived reports; final SysML follows the completed IPOS scope.",
     "reports": "Snapshot XLSX Reports: generate derived SRS, ARS, or DRS reports from an approved immutable snapshot.",
-    "sysml": "Snapshot SysML: generate the architecture model with full approved requirement coverage for represented blocks.",
+    "sysml": "Final SysML Generation: after Stage 6 Digital IPOS and Stage 7 Analog IPOS when applicable (valid-empty otherwise), use Generate SysML + Checklist with one selected approved snapshot. Read existing governed artifacts without rerunning or changing upstream stages; isolated demo exports are excluded. Production coherence gates remain enforced.",
+    "sysml_readiness": "Automatic Central Readiness Checklist: assess each official SysML model after the generation attempt, fail closed to NOT READY for unsupported or uncertain implementation semantics, and generate the general summary plus per-model Excel checklists. Open Excel reports using the clickable execution-log paths. If generation is blocked, reports assess available artifacts, not a successful new model set.",
     "arch_compare": "Optional Architecture Comparison: run the deterministic comparison against another project after Stage 5.",
     "stage6": "Stage 6 Digital IPOS: generate and validate digital implementation-oriented requirements.",
     "6": "Stage 6 Digital IPOS: generate and validate digital implementation-oriented requirements.",
@@ -231,6 +235,7 @@ def responsive_layout_scale(screen_width: int, screen_height: int) -> float:
 
 def scale_window_geometry(geometry: str, factor: float) -> str:
     """Scale saved window dimensions while preserving its last screen position."""
+    geometry = geometry.replace("+-", "-")
     match = re.match(r"^(\d+)x(\d+)([+-]\d+)?([+-]\d+)?$", geometry)
     if not match:
         return geometry
@@ -611,6 +616,9 @@ class WorkflowGUI:
             "sysml_vertical_pane",
             "sysml_horizontal_pane",
             "traceability_pane",
+            "traceability_window_pane",
+            "sysml_hierarchy_content_pane",
+            "sysml_hierarchy_details_pane",
         )
 
     @staticmethod
@@ -628,7 +636,110 @@ class WorkflowGUI:
             pass
         return {}
 
+    def _apply_saved_pane_layout(self, name: str, pane, layout: dict) -> bool:
+        if not self._is_sash_pane(pane):
+            return False
+        if not pane.winfo_exists():
+            return False
+        pane.update_idletasks()
+        if not pane.winfo_ismapped():
+            return False
+        horizontal = str(pane.cget("orient")) == tk.HORIZONTAL
+        extent = pane.winfo_width() if horizontal else pane.winfo_height()
+        count = max(0, len(pane.panes()) - 1)
+        if extent <= 1 or not count:
+            return False
+        ratios = layout.get("sash_ratios", {}).get(name)
+        positions = layout.get("sashes", {}).get(name)
+        if not isinstance(ratios, list) and not isinstance(positions, list):
+            return False
+        if not isinstance(ratios, list) and isinstance(positions, list):
+            reference = layout.get("pane_extents", {}).get(name)
+            if not reference:
+                match = re.match(r"^(\d+)x(\d+)", str(layout.get("geometry", "")))
+                if match:
+                    reference = int(match.group(1 if horizontal else 2))
+            if reference:
+                ratios = [float(position) / float(reference) for position in positions]
+        if not isinstance(ratios, list) or len(ratios) != count:
+            ratios = [(index + 1) / (count + 1) for index in range(count)]
+        try:
+            for index, ratio in enumerate(ratios):
+                value = float(ratio)
+                if not 0 < value < 1:
+                    value = (index + 1) / (count + 1)
+                pane.sashpos(index, round(extent * value))
+        except (tk.TclError, TypeError, ValueError):
+            return False
+        return True
+
+    @staticmethod
+    def _layout_window_names() -> tuple[str, ...]:
+        return ("root", "traceability_window", "sysml_hierarchy_window")
+
+    def _capture_layout_window(self, window) -> dict:
+        geometry = window.geometry().replace("+-", "-")
+        match = re.match(r"^(\d+)x(\d+)([+-]\d+)([+-]\d+)$", geometry)
+        entry = {"open": window.state() != "withdrawn", "geometry": geometry, "state": window.state()}
+        if match:
+            width, height, left, top = (int(value) for value in match.groups())
+            area = self._monitor_work_area(left + width // 2, top + height // 2)
+            area_width, area_height = max(1, area[2] - area[0]), max(1, area[3] - area[1])
+            entry["work_area"] = list(area)
+            entry["rect_ratios"] = [width / area_width, height / area_height, (left - area[0]) / area_width, (top - area[1]) / area_height]
+        return entry
+
+    def _apply_layout_window(self, window, entry: dict) -> None:
+        geometry = str(entry.get("geometry", window.geometry())).replace("+-", "-")
+        match = re.match(r"^(\d+)x(\d+)([+-]\d+)([+-]\d+)$", geometry)
+        if not match:
+            return
+        width, height, left, top = (int(value) for value in match.groups())
+        area = self._monitor_work_area(left + width // 2, top + height // 2)
+        area_width, area_height = max(1, area[2] - area[0]), max(1, area[3] - area[1])
+        ratios = entry.get("rect_ratios")
+        if isinstance(ratios, list) and len(ratios) == 4:
+            width, height = round(area_width * float(ratios[0])), round(area_height * float(ratios[1]))
+            left, top = area[0] + round(area_width * float(ratios[2])), area[1] + round(area_height * float(ratios[3]))
+        width, height = min(area_width, max(320, width)), min(area_height, max(240, height))
+        left, top = min(max(left, area[0]), area[2] - width), min(max(top, area[1]), area[3] - height)
+        minimum_width, minimum_height = window.minsize()
+        window.minsize(min(minimum_width, width), min(minimum_height, height))
+        window.geometry(f"{width}x{height}+{left}+{top}")
+        window.state("zoomed" if entry.get("state") == "zoomed" else "normal")
+
+    def _restore_layout_windows(self, layout: dict) -> None:
+        windows = layout.get("windows", {})
+        if "root" in windows:
+            self._apply_layout_window(self.root, windows["root"])
+        for name, opener in (("traceability_window", self._open_system_traceability_window),
+                             ("sysml_hierarchy_window", self._open_sysml_hierarchy_window)):
+            entry = windows.get(name)
+            if isinstance(entry, dict) and entry.get("open"):
+                opener()
+                self._apply_layout_window(getattr(self, name), entry)
+        notebook = getattr(self, "work_tabs", None)
+        selected = layout.get("selected_work_tab")
+        if notebook is not None and selected:
+            for tab in notebook.tabs():
+                if notebook.tab(tab, "text") == selected:
+                    notebook.select(tab)
+                    break
+
+    def _on_layout_window_resize(self, event) -> None:
+        if not getattr(self, "_gui_layout_ready", False):
+            return
+        if not any(event.widget is getattr(self, name, None) for name in self._layout_window_names()):
+            return
+        pending = getattr(self, "_layout_resize_after_id", None)
+        if pending is not None:
+            self.root.after_cancel(pending)
+        self._layout_resize_after_id = self.root.after(120, self._reapply_saved_gui_sashes)
+
     def _restore_gui_layout(self) -> None:
+        layout = self.gui_state.get("last_user_layout", self.gui_state)
+        self._restore_layout_windows(layout)
+        self.root.update_idletasks()
         panes = {
             name: getattr(self, name, None) for name in self._gui_pane_names()
         }
@@ -660,6 +771,10 @@ class WorkflowGUI:
         for name, pane in panes.items():
             if not self._is_sash_pane(pane):
                 continue
+            if self._apply_saved_pane_layout(name, pane, saved_layout):
+                continue
+            if name not in defaults:
+                continue
             positions = saved.get(name, saved.get(legacy_names.get(name, ""), defaults[name]))
             positions = positions if isinstance(positions, list) else [positions]
             try:
@@ -690,6 +805,7 @@ class WorkflowGUI:
 
     def _reapply_saved_gui_sashes(self) -> None:
         """Apply user-saved sash positions after Tk has laid out all panes."""
+        self._layout_resize_after_id = None
         if not self.gui_state.get("layout_saved_by_user") and not self.gui_state.get("last_user_layout"):
             return
         saved_layout = self.gui_state.get("last_user_layout")
@@ -706,6 +822,9 @@ class WorkflowGUI:
         for name in self._gui_pane_names():
             pane = getattr(self, name, None)
             positions = saved.get(name)
+            if self._apply_saved_pane_layout(name, pane, saved_layout):
+                applied[name] = [pane.sashpos(index) for index in range(max(0, len(pane.panes()) - 1))]
+                continue
             if not self._is_sash_pane(pane) or not isinstance(positions, list):
                 continue
             try:
@@ -742,7 +861,7 @@ class WorkflowGUI:
                 if len(pane.panes()) <= 1:
                     continue
                 sash = pane.sashpos(0)
-                extent = pane.winfo_width() if pane.cget("orient") == tk.HORIZONTAL else pane.winfo_height()
+                extent = pane.winfo_width() if str(pane.cget("orient")) == tk.HORIZONTAL else pane.winfo_height()
                 if extent > 0:
                     minimum = 120 if pane_name in {"main_vertical_pane", "top_horizontal_pane"} else 80
                     fallback = min(default_position, max(minimum, extent - minimum))
@@ -768,6 +887,7 @@ class WorkflowGUI:
         if selected_tab not in visible_tabs:
             return
         self.root.after_idle(self._restore_collapsed_visual_panes)
+        self.root.after_idle(self._reapply_saved_gui_sashes)
         self.root.after(250, self._restore_collapsed_visual_panes)
 
     def _open_system_traceability_window(self) -> None:
@@ -784,6 +904,7 @@ class WorkflowGUI:
         self._set_responsive_geometry(window, 1180, 760, 820, 520)
         window.transient(self.root)
         self.traceability_window = window
+        window.bind("<Configure>", self._on_layout_window_resize, add="+")
         self.traceability_zoom = 1.0
 
         header = ttk.Frame(window, padding=(12, 10, 12, 6))
@@ -813,6 +934,15 @@ class WorkflowGUI:
         close_button = ttk.Button(header, text="Close", command=window.destroy, width=8)
         close_button.pack(side=tk.RIGHT, padx=(6, 0))
         self._bind_button_help(close_button, "Close the System Traceability window.")
+        selector_frame = ttk.Frame(window, padding=(12, 0, 12, 8))
+        selector_frame.pack(fill=tk.X)
+        ttk.Label(selector_frame, text="Block / specification:").pack(side=tk.LEFT)
+        self.traceability_block_choice_var = tk.StringVar(master=window, value="All blocks")
+        self.traceability_block_choices = {"All blocks": None}
+        self.traceability_block_choice = ttk.Combobox(selector_frame, textvariable=self.traceability_block_choice_var,
+                                state="readonly", width=60)
+        self.traceability_block_choice.pack(side=tk.LEFT, fill=tk.X, expand=True, padx=(8, 0))
+        self.traceability_block_choice.bind("<<ComboboxSelected>>", self._on_traceability_block_choice)
         self.traceability_window_status_var = tk.StringVar(value="Loading traceability hierarchy...")
         ttk.Label(
             window,
@@ -822,6 +952,7 @@ class WorkflowGUI:
         ).pack(fill=tk.X)
 
         visual_pane = ttk.Panedwindow(window, orient=tk.VERTICAL)
+        self.traceability_window_pane = visual_pane
         visual_pane.pack(fill=tk.BOTH, expand=True, padx=12, pady=(0, 12))
 
         graph_frame = ttk.Frame(visual_pane)
@@ -1005,6 +1136,21 @@ class WorkflowGUI:
         if tree is None or window is None or not window.winfo_exists():
             return
         graph = approved_generated_document_dependency_graph(REPO_ROOT, getattr(self, "workflow_snapshot_id", None))
+        if hasattr(self, "traceability_block_choice"):
+            choices = {"All blocks": None}
+            for node in graph.get("nodes") or []:
+                if not isinstance(node, dict) or not node.get("id"):
+                    continue
+                label = str(node.get("label") or node["id"])
+                qualification = str(node.get("document_qualification") or "")
+                if qualification and qualification not in label:
+                    label += " (" + qualification + ")"
+                if label in choices:
+                    label += " [" + str(node["id"]) + "]"
+                choices[label] = str(node["id"])
+            self.traceability_block_choices = choices
+            self.traceability_block_choice.configure(values=list(choices))
+            self._sync_traceability_block_choice()
         tree.delete(*tree.get_children())
         for index, node in enumerate(graph.get("nodes") or []):
             if not isinstance(node, dict):
@@ -1102,16 +1248,54 @@ class WorkflowGUI:
         self._draw_generated_dependency_graph(canvas)
         return
 
+    def _sync_traceability_block_choice(self) -> None:
+        variable = getattr(self, "traceability_block_choice_var", None)
+        if variable is not None:
+            selected = getattr(self, "traceability_selected_block", None)
+            label = next((label for label, node_id in self.traceability_block_choices.items() if node_id == selected), "All blocks")
+            variable.set(label)
+
+    def _on_traceability_block_choice(self, _event=None) -> None:
+        node_id = self.traceability_block_choices.get(self.traceability_block_choice_var.get())
+        if node_id is None:
+            self._clear_traceability_selection()
+        elif self.traceability_tree.exists(node_id):
+            self.traceability_tree.selection_set(node_id)
+            self.traceability_tree.focus(node_id)
+            self.traceability_tree.see(node_id)
+            self._on_traceability_tree_select()
+
     def _on_traceability_tree_select(self, _event=None) -> None:
         selected = self.traceability_tree.selection()
         if not selected:
             return
         node_id = selected[0]
-        if node_id == self.traceability_selected_block:
-            return
+        previous_selection = self.traceability_selected_block
         self.traceability_selected_block = node_id
+        self._sync_traceability_block_choice()
+        if node_id == previous_selection and self.traceability_selected_edge is None:
+            self._center_canvas_node(self.traceability_graph_canvas, "traceability_node:" + node_id)
+            return
         self.traceability_selected_edge = None
         self._draw_generated_dependency_graph(self.traceability_graph_canvas)
+        self._center_canvas_node(self.traceability_graph_canvas, "traceability_node:" + node_id)
+
+    @staticmethod
+    def _center_canvas_node(canvas: tk.Canvas, tag: str) -> bool:
+        bounds = canvas.bbox(tag)
+        if not bounds:
+            return False
+        width, height = max(1, canvas.winfo_width()), max(1, canvas.winfo_height())
+        center_x, center_y = (bounds[0] + bounds[2]) / 2, (bounds[1] + bounds[3]) / 2
+        region = tuple(float(value) for value in canvas.tk.splitlist(canvas.cget("scrollregion")))
+        if len(region) != 4:
+            region = canvas.bbox("all") or bounds
+        left, top = min(region[0], center_x - width / 2), min(region[1], center_y - height / 2)
+        right, bottom = max(region[2], center_x + width / 2), max(region[3], center_y + height / 2)
+        canvas.configure(scrollregion=(left, top, right, bottom))
+        canvas.xview_moveto((center_x - width / 2 - left) / max(1, right - left))
+        canvas.yview_moveto((center_y - height / 2 - top) / max(1, bottom - top))
+        return True
 
     def _on_traceability_canvas_click(self, event) -> str:
         canvas = self.traceability_graph_canvas
@@ -1685,16 +1869,46 @@ class WorkflowGUI:
             "geometry": self.root.geometry(),
             "layout_scale": self.layout_scale,
             "sashes": {},
+            "sash_ratios": {},
+            "pane_extents": {},
+            "windows": {},
         }
+        previous_layout = self.gui_state.get("last_user_layout", self.gui_state)
+        for field in ("sashes", "sash_ratios", "pane_extents"):
+            current_layout[field].update(previous_layout.get(field, {}))
+        previous_geometry = re.match(r"^(\d+)x(\d+)", str(previous_layout.get("geometry", "")))
+        for name, positions in previous_layout.get("sashes", {}).items():
+            pane = getattr(self, name, None)
+            if name in current_layout["sash_ratios"] or not self._is_sash_pane(pane) or not pane.winfo_exists():
+                continue
+            if not isinstance(positions, list) or not positions or previous_geometry is None:
+                continue
+            horizontal = str(pane.cget("orient")) == tk.HORIZONTAL
+            reference = previous_layout.get("pane_extents", {}).get(name) or int(previous_geometry.group(1 if horizontal else 2))
+            current_layout["sash_ratios"][name] = [
+                float(position) / reference if 0 < float(position) < reference else (index + 1) / (len(positions) + 1)
+                for index, position in enumerate(positions)
+            ]
+        for name in self._layout_window_names():
+            window = getattr(self, name, None)
+            current_layout["windows"][name] = self._capture_layout_window(window) if window is not None and window.winfo_exists() else {"open": False}
+        notebook = getattr(self, "work_tabs", None)
+        if notebook is not None and notebook.select():
+            current_layout["selected_work_tab"] = notebook.tab(notebook.select(), "text")
         for name in self._gui_pane_names():
             pane = getattr(self, name, None)
-            if self._is_sash_pane(pane):
+            if self._is_sash_pane(pane) and pane.winfo_exists() and pane.winfo_ismapped():
                 try:
+                    extent = pane.winfo_width() if str(pane.cget("orient")) == tk.HORIZONTAL else pane.winfo_height()
+                    if extent <= 1:
+                        continue
                     saved_positions = []
                     for index in range(max(0, len(pane.panes()) - 1)):
                         position = pane.sashpos(index)
                         saved_positions.append(max(0, position))
                     current_layout["sashes"][name] = saved_positions
+                    current_layout["pane_extents"][name] = extent
+                    current_layout["sash_ratios"][name] = [position / extent for position in saved_positions]
                 except (AttributeError, tk.TclError):
                     pass
         state = {
@@ -1703,7 +1917,12 @@ class WorkflowGUI:
             "verbose_trace": self.verbose_trace_enabled,
             "layout_saved_by_user": bool(self.gui_state.get("layout_saved_by_user", False)),
             "sashes": current_layout["sashes"],
+            "sash_ratios": current_layout["sash_ratios"],
+            "pane_extents": current_layout["pane_extents"],
+            "windows": current_layout["windows"],
         }
+        if "previous_user_layout" in self.gui_state:
+            state["previous_user_layout"] = self.gui_state["previous_user_layout"]
         if user_initiated:
             state["layout_saved_by_user"] = True
             state["last_user_layout"] = current_layout
@@ -2685,6 +2904,10 @@ class WorkflowGUI:
             wraplength=214,
         ).pack(fill=tk.BOTH, expand=True)
 
+        log_x_scroll = ttk.Scrollbar(log_frame, orient=tk.HORIZONTAL, command=lambda *args: self.log.xview(*args))
+        log_x_scroll.pack(side=tk.BOTTOM, fill=tk.X, pady=(4, 0))
+        self.log_x_scroll = log_x_scroll
+
         log_text_frame = ttk.Frame(log_frame)
         log_text_frame.pack(fill=tk.BOTH, expand=True)
 
@@ -2692,13 +2915,9 @@ class WorkflowGUI:
         self.log = tk.Text(log_text_frame, wrap=tk.NONE, font=self.log_font)
         self.log.tag_configure("ipos_activity", background="#e8f5e9", foreground="#1b5e20")
         self.log.tag_configure("ipos_run_boundary", background="#c8e6c9", foreground="#14532d")
-        self.log.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
         log_y_scroll = ttk.Scrollbar(log_text_frame, orient=tk.VERTICAL, command=self.log.yview)
         log_y_scroll.pack(side=tk.RIGHT, fill=tk.Y)
-
-        log_x_scroll = ttk.Scrollbar(log_frame, orient=tk.HORIZONTAL, command=self.log.xview)
-        log_x_scroll.pack(fill=tk.X, pady=(4, 0))
+        self.log.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
         self.log.config(yscrollcommand=log_y_scroll.set, xscrollcommand=log_x_scroll.set)
         self.log.bind("<Control-MouseWheel>", self._zoom_execution_log_wheel, add="+")
@@ -2750,7 +2969,7 @@ class WorkflowGUI:
     def ensure_visible(self) -> None:
         # Restore the saved layout and clamp it to the work area of its current monitor.
         self.root.update_idletasks()
-        geometry_match = re.match(r"^(\d+)x(\d+)(?:([+-]\d+)([+-]\d+))?$", self.root.geometry())
+        geometry_match = re.match(r"^(\d+)x(\d+)(?:([+-]\d+)([+-]\d+))?$", self.root.geometry().replace("+-", "-"))
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         if geometry_match:
@@ -2779,6 +2998,7 @@ class WorkflowGUI:
         self.root.attributes("-topmost", True)
         self.root.after(350, lambda: self.root.attributes("-topmost", False))
         self.root.focus_force()
+        self.root.bind("<Configure>", self._on_layout_window_resize, add="+")
 
     def append_log(self, text: str) -> None:
         if text.startswith("[GUI]") and "[TRACE]" not in text and not self.verbose_trace_enabled:
@@ -2799,6 +3019,20 @@ class WorkflowGUI:
 
     def _append_log_ui(self, text: str) -> None:
         visible_text = text.lstrip()
+        artifact_prefix = "[REPORT] Open IPOS blocker report: "
+        excel_prefix = "[REPORT] Open SysML readiness Excel: "
+        if visible_text.startswith((artifact_prefix, excel_prefix)):
+            is_excel = visible_text.startswith(excel_prefix)
+            path = Path(visible_text[len(excel_prefix if is_excel else artifact_prefix):])
+            tag = "run_artifact_" + self.log.index("end-1c").replace(".", "_")
+            self.log.tag_configure(tag, foreground="#005ea8", underline=True)
+            opener = self._open_xlsx_in_excel if is_excel else self._open_run_artifact
+            self.log.tag_bind(tag, "<Button-1>", lambda _event, target=path, open_report=opener: open_report(target))
+            self.log.tag_bind(tag, "<Enter>", lambda _event: self.log.configure(cursor="hand2"))
+            self.log.tag_bind(tag, "<Leave>", lambda _event: self.log.configure(cursor=""))
+            self.log.insert(tk.END, text + "\n", (tag,))
+            self.log.see(tk.END)
+            return
         if visible_text.startswith("[IPOS_ACTIVITY]"):
             tags = ("ipos_activity",)
         elif visible_text.startswith(("=== START Stage 6 Digital IPOS", "=== END Stage 6 Digital IPOS")):
@@ -2808,6 +3042,26 @@ class WorkflowGUI:
         self.log.insert(tk.END, text + "\n", tags)
         self.log.see(tk.END)
 
+    def _open_run_artifact(self, path: Path) -> None:
+        self.refresh_work_area()
+        self.work_tabs.select(self.work_browser_tab)
+        self._on_work_area_select_path(path)
+
+    def _append_ipos_blocker_report_evidence(self, cmd, *, run_context=None) -> None:
+        snapshot_id = str(cmd[cmd.index("--snapshot-id") + 1]) if "--snapshot-id" in cmd else getattr(self, "workflow_snapshot_id", None)
+        if not snapshot_id:
+            self.append_log("[REPORT] IPOS blocker report not generated: no run snapshot was bound.")
+            return
+        try:
+            from generate_cross_spec_issue_report import write_remaining_ipos_blocker_report
+            path = write_remaining_ipos_blocker_report(REPO_ROOT, snapshot_id, run_context=run_context)
+            self.append_log("[REPORT] Remaining IPOS blocker report generated (review-only; current artifact checks; historical evidence separated).")
+            self.append_log("[REPORT] Open IPOS blocker report: " + str(path.resolve()))
+            self.append_log("[REPORT] Open IPOS blocker report: " + str(path.with_suffix(".docx").resolve()))
+            self.root.after(0, self.refresh_work_area)
+        except Exception as exc:
+            self.append_log("[REPORT] IPOS blocker report not generated: " + str(exc))
+
     def append_chat(self, text: str) -> None:
         try:
             LOG_DIR.mkdir(parents=True, exist_ok=True)
@@ -2816,6 +3070,62 @@ class WorkflowGUI:
         except OSError as exc:
             self.append_log(f"[WARN] Could not write local chat log: {exc}")
         self.root.after(0, self._append_chat_ui, text)
+
+    def _show_ipos_blocker_review(self, event: dict) -> None:
+        from ipos_blocker_review import read_blocker_review, review_paths
+
+        block = event["block"]
+        snapshot_id = event["snapshot_id"]
+        path = Path(event["path"]).resolve()
+        if path != review_paths(REPO_ROOT, block)[0].resolve() or not path.is_file():
+            self.append_log("[REPORT] IPOS review path is not a generated block-local workbook.")
+            return
+        self.append_log("[REPORT] " + block + " BLOCKED: " + str(event["blocker_count"]) + " active blockers. Save and close Excel before re-evaluation.")
+        self.append_log("[REPORT] Open IPOS blocker report: " + str(path))
+        self.refresh_work_area()
+        dialogs = getattr(self, "_ipos_review_dialogs", {})
+        self._ipos_review_dialogs = dialogs
+        previous = dialogs.get(block)
+        if previous is not None and previous.winfo_exists():
+            if getattr(previous, "_ipos_review_snapshot_id", None) == snapshot_id:
+                previous.lift()
+                return
+            previous.destroy()
+        dialog = tk.Toplevel(self.root)
+        dialog._ipos_review_snapshot_id = snapshot_id
+        dialogs[block] = dialog
+        dialog.title("Stage 6 IPOS review - " + block)
+        dialog.transient(self.root)
+        frame = ttk.Frame(dialog, padding=16)
+        frame.pack(fill=tk.BOTH, expand=True)
+        ttk.Label(frame, text=block + ": BLOCKED", font=("Calibri", 12, "bold")).pack(anchor="w")
+        ttk.Label(frame, text="Active blockers: " + str(event["blocker_count"])).pack(anchor="w", pady=(4, 8))
+        ttk.Label(frame, text=str(path), wraplength=760).pack(anchor="w", pady=(0, 8))
+        ttk.Label(frame, text="Select User decision. Omit excludes description only; all requirements remain. User clarified needs a Note. Save and close Excel, then re-evaluate this IPOS.",
+                  wraplength=760).pack(anchor="w", pady=(0, 12))
+        buttons = ttk.Frame(frame)
+        buttons.pack(fill=tk.X)
+
+        def open_excel() -> None:
+            self._on_work_area_select_path(path)
+
+        def re_evaluate() -> None:
+            if self.is_running:
+                messagebox.showwarning("Busy", "Wait for the current flow to finish before re-evaluation.", parent=dialog)
+                return
+            try:
+                read_blocker_review(REPO_ROOT, snapshot_id=snapshot_id, block=block)
+            except (ValueError, OSError) as exc:
+                messagebox.showwarning("Save and close Excel", str(exc), parent=dialog)
+                return
+            self._run_command_async(
+                [PYTHON_EXE, str(SCRIPTS_DIR / "generate_ipos_specs.py"), "--kind", "digital",
+                 "--snapshot-id", snapshot_id, "--block", block], "Re-evaluate IPOS: " + block)
+
+        ttk.Button(buttons, text="Open Excel", command=open_excel).pack(side=tk.LEFT)
+        ttk.Button(buttons, text="Re-evaluate (saved + closed)", command=re_evaluate).pack(side=tk.LEFT, padx=(8, 0))
+        ttk.Button(buttons, text="Close", command=dialog.destroy).pack(side=tk.RIGHT)
+        open_excel()
 
     def _load_chat_log(self) -> None:
         try:
@@ -3474,6 +3784,9 @@ class WorkflowGUI:
 
     def _show_downstream_block_dialog(self, output_lines, cmd) -> None:
         """Present downstream validation failures without exposing internal diagnostics."""
+        if any(Path(str(item)).name == "run_final_sysml_phase.py" for item in cmd):
+            self._show_sysml_block_dialog(output_lines, cmd)
+            return
         snapshot_id = "unavailable"
         command_text = " ".join(str(item) for item in cmd)
         snapshot_match = re.search(r"--snapshot-id\s+([^\s]+)", command_text)
@@ -3577,6 +3890,80 @@ class WorkflowGUI:
 
         ttk.Button(buttons, text="Open validation report", command=open_report).pack(side=tk.LEFT, padx=(0, 6))
         ttk.Button(buttons, text="Copy report path", command=copy_report_path).pack(side=tk.LEFT, padx=(0, 6))
+        ttk.Button(buttons, text="Close", command=dialog.destroy).pack(side=tk.LEFT)
+        dialog.protocol("WM_DELETE_WINDOW", dialog.destroy)
+        self._set_responsive_geometry(dialog, 820, 640, 680, 420)
+
+    def _show_sysml_block_dialog(self, output_lines, cmd) -> None:
+        snapshot_id = str(cmd[cmd.index("--snapshot-id") + 1]) if "--snapshot-id" in cmd else "unavailable"
+        directory = REPO_ROOT / "artifacts/validation/readiness_checklists"
+        report_path = directory / "readiness_summary.xlsx"
+        summary_path = directory / "readiness_summary.json"
+        receipts = []
+        for line in output_lines:
+            if line.startswith("[SYSML_READINESS] "):
+                try:
+                    value = json.loads(line[len("[SYSML_READINESS] "):])
+                    if isinstance(value, dict):
+                        receipts.append(value)
+                except ValueError:
+                    pass
+
+        def current_summary():
+            if not receipts or receipts[-1].get("snapshot_id") != snapshot_id:
+                return None
+            try:
+                receipt = receipts[-1]
+                summary_bytes = summary_path.read_bytes()
+                if (hashlib.sha256(summary_bytes).hexdigest() != receipt.get("summary_json_sha256")
+                        or hashlib.sha256(report_path.read_bytes()).hexdigest() != receipt.get("summary_excel_sha256")):
+                    return None
+                summary = json.loads(summary_bytes)
+                return summary if isinstance(summary, dict) and summary.get("binding", {}).get("snapshot_id") == snapshot_id else None
+            except (OSError, ValueError, AttributeError):
+                return None
+
+        summary = current_summary()
+        dialog = tk.Toplevel(self.root)
+        dialog.title("Final SysML execution blocked")
+        dialog.transient(self.root)
+        dialog.grab_set()
+        dialog.columnconfigure(0, weight=1)
+        dialog.rowconfigure(0, weight=1)
+        body = ttk.Frame(dialog, padding=16)
+        body.grid(row=0, column=0, sticky="nsew")
+        body.columnconfigure(0, weight=1)
+        body.rowconfigure(0, weight=1)
+        report_description = (report_path.relative_to(REPO_ROOT).as_posix() if summary else
+                              "No verified Excel readiness summary was produced for this run. Existing reports may belong to another snapshot or have changed.")
+        diagnostic_text = "\n\n".join((
+            "Final SysML execution was blocked by the selected snapshot's downstream coherence checks.",
+            "Snapshot:\n" + snapshot_id,
+            "Execution detail:\n" + self._failure_reason(output_lines),
+            ("Readiness: " + str(summary.get("status")) + "; publication: " + str(summary.get("publication_status"))) if summary else "Readiness assessment unavailable for this run; READY is not established.",
+            "Upstream stages were not rerun or repaired. Reports may assess existing official models, not a successfully generated new model set. Isolated demo exports are not used.",
+            "Excel summary and per-model checklists:\n" + report_description,
+            "Use Open Excel summary, then follow the workbook links to individual checklists. Review blockers before any separately authorized upstream repair; no automatic repair is performed.",
+            "Command:\n" + " ".join(str(item) for item in cmd),
+        ))
+        viewer = tk.Text(body, wrap=tk.WORD, width=76, height=24, font=("Segoe UI", 10))
+        scrollbar = ttk.Scrollbar(body, orient=tk.VERTICAL, command=viewer.yview)
+        viewer.configure(yscrollcommand=scrollbar.set)
+        viewer.grid(row=0, column=0, sticky="nsew", pady=(0, 14))
+        scrollbar.grid(row=0, column=1, sticky="ns", pady=(0, 14))
+        viewer.insert("1.0", diagnostic_text)
+        viewer.configure(state=tk.DISABLED)
+        self._bind_copy_support(viewer)
+        buttons = ttk.Frame(body)
+        buttons.grid(row=1, column=0, columnspan=2, sticky="e")
+
+        def open_excel() -> None:
+            if current_summary() is None:
+                messagebox.showerror("Open SysML readiness Excel", "This report is missing, changed, or not bound to the selected run. Do not use an older summary.", parent=dialog)
+                return
+            self._open_xlsx_in_excel(report_path)
+
+        ttk.Button(buttons, text="Open Excel summary", command=open_excel, state=tk.NORMAL if summary else tk.DISABLED).pack(side=tk.LEFT, padx=(0, 6))
         ttk.Button(buttons, text="Close", command=dialog.destroy).pack(side=tk.LEFT)
         dialog.protocol("WM_DELETE_WINDOW", dialog.destroy)
         self._set_responsive_geometry(dialog, 820, 640, 680, 420)
@@ -3742,13 +4129,14 @@ class WorkflowGUI:
             self.clear_stage_failure(stage)
             self.set_active_stage(stage)
             is_stage6_run = stage == "6" or label == "Stage 6 Digital IPOS"
-            started_at = datetime.now().astimezone() if is_stage6_run else None
-            start_suffix = f" | start={started_at.isoformat(timespec='seconds')}" if started_at else ""
+            started_at = datetime.now().astimezone()
+            start_suffix = f" | start={started_at.isoformat(timespec='seconds')}" if is_stage6_run else ""
             self.append_log(f"\n=== START {label}{start_suffix} ===")
             self.append_log("Command: " + " ".join(str(c) for c in cmd))
             self.append_chat(f"GUI: Running {label}")
             output_lines = []
             last_stage = stage
+            reached_ipos_stages = [stage] if stage in {"6", "7"} else []
             success_callback = None
             code = None
 
@@ -3772,9 +4160,21 @@ class WorkflowGUI:
                     ) if "workflow_cli.py" in " ".join(str(item) for item in cmd) else None
                     if stage_match:
                         last_stage = stage_match.group(1).lower()
+                        if last_stage in {"6", "7"} and last_stage not in reached_ipos_stages:
+                            reached_ipos_stages.append(last_stage)
                         self.clear_stage_failure(last_stage)
                         self.set_active_stage(last_stage)
                     self.append_log(line.rstrip("\n"))
+                    if line.startswith("[IPOS_REVIEW] "):
+                        try:
+                            event = json.loads(line[len("[IPOS_REVIEW] "):])
+                            bound_snapshot = str(cmd[cmd.index("--snapshot-id") + 1]) if "--snapshot-id" in cmd else getattr(self, "workflow_snapshot_id", None)
+                            if event["snapshot_id"] == bound_snapshot:
+                                self.root.after(0, self._show_ipos_blocker_review, event)
+                            else:
+                                self.append_log("[REPORT] Ignored IPOS review event with a different snapshot.")
+                        except (ValueError, KeyError) as exc:
+                            self.append_log("[REPORT] Invalid IPOS review event: " + str(exc))
 
                 code = self.current_process.wait()
                 if not is_stage6_run:
@@ -3815,6 +4215,14 @@ class WorkflowGUI:
                 self.set_stage_failure(last_stage, str(exc))
                 self._set_status("Idle")
             finally:
+                includes_ipos = stage in {"6", "7"} or last_stage in {"6", "7"}
+                if "--to-stage" in cmd:
+                    includes_ipos = includes_ipos or str(cmd[cmd.index("--to-stage") + 1]) in {"6", "7"}
+                if includes_ipos:
+                    self._append_ipos_blocker_report_evidence(cmd, run_context={
+                        "started_at": started_at.timestamp(), "finished_at": datetime.now().astimezone().timestamp(),
+                        "exit_code": code, "stages": reached_ipos_stages,
+                        "block": str(cmd[cmd.index("--block") + 1]) if "--block" in cmd else None})
                 if is_stage6_run:
                     finished_at = datetime.now().astimezone()
                     elapsed = finished_at - started_at
@@ -4449,7 +4857,7 @@ class WorkflowGUI:
     def run_stage_cli(self, stage: str) -> None:
         stage = self._resolve_gui_stage(stage)
         if stage == "3":
-            self._prepare_stage3_run()
+            self._run_stage3_from_latest_snapshot()
             return
         if stage in {"2b", "2c", "2g", "2h"}:
             self.append_chat(f"GUI: {stage.upper()} is an approval-gated workflow action; opening the approval controls.")
@@ -4470,35 +4878,16 @@ class WorkflowGUI:
         if stage == "2e":
             self.run_taxonomy_update()
             return
-        if stage == "6":
-            selector = self._snapshot_selector_args()
-            if selector is None:
-                return
-            self._run_command_async(
-                [PYTHON_EXE, str(SCRIPTS_DIR / "run_stage6_digital_ipos_gate.py"), *selector, "--regenerate-downstream"],
-                "Stage 6 Digital IPOS",
-                stage="6",
-            )
-            return
-        if stage == "7":
-            selector = self._snapshot_selector_args()
-            if selector is None:
-                return
-            self._run_command_async(
-                [PYTHON_EXE, str(SCRIPTS_DIR / "run_stage7_analog_ipos_gate.py"), *selector, "--regenerate-downstream"],
-                "Stage 7 Analog IPOS",
-                stage="7",
-            )
-            return
         if stage == "arch-compare":
             self.run_stage6_compare()
             return
         cmd = [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "run", "--stage", stage]
-        if stage.strip().lower() in {"3", "4", "5"}:
+        if stage.strip().lower() in {"3", "4", "5", "6", "7"}:
             selector = self._snapshot_selector_args()
             if selector is None:
                 return
             cmd.extend(selector)
+            cmd.append("--prepare-snapshot-inputs")
         self._run_command_async(
             cmd,
             f"CLI run stage {stage}",
@@ -4568,7 +4957,7 @@ class WorkflowGUI:
         if selector is None:
             return
         self._run_command_async(
-            [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "run", "--stage", "3", *selector],
+            [PYTHON_EXE, str(SCRIPTS_DIR / "workflow_cli.py"), "run", "--stage", "3", *selector, "--prepare-snapshot-inputs"],
             "CLI run stage 3",
             stage="3",
         )
@@ -4779,6 +5168,8 @@ class WorkflowGUI:
             end_stage,
             *selector,
         ]
+        if all(stage in {"3", "4", "5", "6", "7"} for stage in selected_stages):
+            cmd.append("--prepare-snapshot-inputs")
         self._run_command_async(
             cmd,
             f"CLI run range {start_stage} -> {end_stage}",
@@ -5343,6 +5734,9 @@ WScript.Quit 0
                 "- Complete the allocation fields in the workbook. Do not invent a new block here.\n\n"
                 "Color guide: red fields are incomplete or invalid; green means the row is explicitly reviewed and currently valid. "
                 "After editing, save and close Excel, then select Enable Gate from Workbook.\n\n"
+                "Descriptive Content Review: review the exact supplementary passage and provenance; explicitly choose approved or rejected, "
+                "set mapped_block and domain, and enter review_rationale. Pending is not approval. "
+                "This is part of this architecture-profile approval, not the IPOS blocker workbook or user clarified.\n\n"
                 "Supplementary source approval means the requirement entered the integrated corpus. "
                 "This architecture review separately approves its block ownership and classification."
             ),
@@ -5411,6 +5805,10 @@ WScript.Quit 0
                 )
                 return
             self.append_chat("GUI: Stage 2A started; Architecture Profile Approval remains open for Stage 2B snapshot freezing.")
+            findings = validate_approval_evidence(approved_profile, profile_draft, mapping_preview)
+            if findings:
+                messagebox.showerror("Stage 2A Approval Required", "\n".join(findings), parent=dialog)
+                return
             self.run_stage_cli("2a")
 
         def freeze_stage2b_snapshot() -> None:
@@ -5472,6 +5870,12 @@ WScript.Quit 0
                 digest = hashlib.sha256(mapping_preview.read_bytes()).hexdigest()
                 profile = json.loads(approved_profile.read_text(encoding="utf-8"))
                 draft = json.loads(profile_draft.read_text(encoding="utf-8"))
+                descriptive_context = reviewed_descriptive_context(mapping_workbook, draft, profile)
+                if descriptive_context is not None:
+                    if any(record.get("required_for_review") and record.get("review_decision") == "pending"
+                           for record in descriptive_context["records"]):
+                        raise ValueError("Review the required supplementary descriptive candidate before enabling the architecture gate.")
+                    profile["governed_source_context"] = descriptive_context
                 approval = profile.setdefault("approval", {})
                 draft_approval = draft.get("approval", {}) if isinstance(draft, dict) else {}
                 review_package = draft.get("review_package", {}) if isinstance(draft, dict) else {}
@@ -5843,9 +6247,15 @@ WScript.Quit 0
         refresh_btn = ttk.Button(controls, text="Refresh", command=self._refresh_sysml_architecture, width=10)
         refresh_btn.pack(side=tk.RIGHT)
         self._bind_button_help(refresh_btn, "Reload the generated SysML top, DigitalSubsystem, shared definitions, and block files.")
-        hierarchy_window_btn = ttk.Button(controls, text="Hierarchy Window", command=self._open_sysml_hierarchy_window, width=17)
+        hierarchy_window_btn = ttk.Button(controls, text="Model Views", command=self._open_sysml_hierarchy_window, width=17)
         hierarchy_window_btn.pack(side=tk.RIGHT, padx=(6, 0))
         self._bind_button_help(hierarchy_window_btn, "Open the graphical SysML hierarchy navigator in a separate window.")
+
+        generation_controls = ttk.Frame(self.sysml_architecture_tab)
+        generation_controls.pack(fill=tk.X, pady=(0, 6))
+        self.sysml_generate_btn = ttk.Button(generation_controls, text="Generate SysML + Checklist", command=self.regenerate_sysml, width=28)
+        self.sysml_generate_btn.pack(side=tk.LEFT)
+        self._bind_button_help(self.sysml_generate_btn, "Generate official SysML with the selected approved snapshot, automatically assess readiness, and link Excel reports in the execution log. Production coherence gates remain enforced.")
 
         self.sysml_vertical_pane = ttk.Panedwindow(self.sysml_architecture_tab, orient=tk.HORIZONTAL)
         self.sysml_vertical_pane.pack(fill=tk.BOTH, expand=True)
@@ -5881,16 +6291,26 @@ WScript.Quit 0
 
         self.sysml_hierarchy_tree = ttk.Treeview(hierarchy_frame, show="tree", selectmode="browse")
         hierarchy_scroll = ttk.Scrollbar(hierarchy_frame, orient=tk.VERTICAL, command=self.sysml_hierarchy_tree.yview)
-        self.sysml_hierarchy_tree.configure(yscrollcommand=hierarchy_scroll.set)
-        self.sysml_hierarchy_tree.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-        hierarchy_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        hierarchy_horizontal = ttk.Scrollbar(hierarchy_frame, orient=tk.HORIZONTAL, command=self.sysml_hierarchy_tree.xview)
+        self.sysml_hierarchy_tree.configure(yscrollcommand=hierarchy_scroll.set, xscrollcommand=hierarchy_horizontal.set)
+        self.sysml_hierarchy_tree.column("#0", width=360, stretch=False)
+        self.sysml_hierarchy_tree.grid(row=0, column=0, sticky="nsew")
+        hierarchy_scroll.grid(row=0, column=1, sticky="ns")
+        hierarchy_horizontal.grid(row=1, column=0, sticky="ew")
+        hierarchy_frame.grid_rowconfigure(0, weight=1)
+        hierarchy_frame.grid_columnconfigure(0, weight=1)
         self.sysml_hierarchy_tree.bind("<<TreeviewSelect>>", self._on_sysml_hierarchy_select)
 
-        self.sysml_tree = ttk.Treeview(tree_frame, show="tree", selectmode="browse")
+        self.sysml_tree = ttk.Treeview(source_tree_frame, show="tree", selectmode="browse")
         tree_scroll = ttk.Scrollbar(source_tree_frame, orient=tk.VERTICAL, command=self.sysml_tree.yview)
-        self.sysml_tree.configure(yscrollcommand=tree_scroll.set)
-        self.sysml_tree.pack(in_=source_tree_frame, side=tk.LEFT, fill=tk.BOTH, expand=True)
-        tree_scroll.pack(side=tk.RIGHT, fill=tk.Y)
+        tree_horizontal = ttk.Scrollbar(source_tree_frame, orient=tk.HORIZONTAL, command=self.sysml_tree.xview)
+        self.sysml_tree.configure(yscrollcommand=tree_scroll.set, xscrollcommand=tree_horizontal.set)
+        self.sysml_tree.column("#0", width=360, stretch=False)
+        self.sysml_tree.grid(row=0, column=0, sticky="nsew")
+        tree_scroll.grid(row=0, column=1, sticky="ns")
+        tree_horizontal.grid(row=1, column=0, sticky="ew")
+        source_tree_frame.grid_rowconfigure(0, weight=1)
+        source_tree_frame.grid_columnconfigure(0, weight=1)
         self.sysml_tree.bind("<<TreeviewSelect>>", self._on_sysml_select)
 
         self.sysml_file_var = tk.StringVar(value="No SysML file selected")
@@ -5925,15 +6345,17 @@ WScript.Quit 0
         self.sysml_viewer.tag_configure("find_hit", background="#fff2a8")
         self.sysml_viewer.tag_configure("find_current", background="#ffbf47")
         text_scroll_y = ttk.Scrollbar(text_area, orient=tk.VERTICAL, command=self.sysml_viewer.yview)
-        text_scroll_x = ttk.Scrollbar(text_frame, orient=tk.HORIZONTAL, command=self.sysml_viewer.xview)
+        text_scroll_x = ttk.Scrollbar(text_area, orient=tk.HORIZONTAL, command=self.sysml_viewer.xview)
         self.sysml_viewer.configure(yscrollcommand=text_scroll_y.set, xscrollcommand=text_scroll_x.set)
-        self.sysml_viewer.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        self.sysml_viewer.grid(row=0, column=0, sticky="nsew")
         self._bind_copy_support(self.sysml_viewer)
         self.sysml_viewer.bind("<KeyPress>", self._block_rendered_text_edit, add="+")
         self.sysml_viewer.bind("<Control-f>", lambda _event: self._open_sysml_find(self.sysml_viewer), add="+")
         self.sysml_viewer.bind("<Control-F>", lambda _event: self._open_sysml_find(self.sysml_viewer), add="+")
-        text_scroll_y.pack(side=tk.RIGHT, fill=tk.Y)
-        text_scroll_x.pack(fill=tk.X, pady=(4, 0))
+        text_scroll_y.grid(row=0, column=1, sticky="ns")
+        text_scroll_x.grid(row=1, column=0, sticky="ew")
+        text_area.grid_rowconfigure(0, weight=1)
+        text_area.grid_columnconfigure(0, weight=1)
         self.sysml_viewer.bind("<Control-MouseWheel>", self._zoom_sysml_source_wheel, add="+")
         self._refresh_sysml_architecture()
 
@@ -5978,15 +6400,17 @@ WScript.Quit 0
             existing.lift()
             existing.focus_force()
             self._draw_sysml_hierarchy_window()
+            self._refresh_sysml_relation_tabs()
             return
 
         window = tk.Toplevel(self.root)
-        window.title("SysML Hierarchy Navigation")
+        window.title("SysML Model Views")
         self._set_responsive_geometry(window, 1100, 700, 620, 420)
         self.sysml_hierarchy_window = window
+        window.bind("<Configure>", self._on_layout_window_resize, add="+")
         header = ttk.Frame(window, padding=(8, 8, 8, 4))
         header.pack(fill=tk.X)
-        ttk.Label(header, text="Graphical SysML Hierarchy Navigation", font=("Segoe UI", 12, "bold")).pack(side=tk.LEFT)
+        ttk.Label(header, text="SysML Model Views", font=("Segoe UI", 12, "bold")).pack(side=tk.LEFT)
         self.sysml_hierarchy_zoom = getattr(self, "sysml_hierarchy_zoom", 1.0)
         self.sysml_hierarchy_zoom_var = tk.StringVar(value=f"Zoom: {round(self.sysml_hierarchy_zoom * 100)}%")
         ttk.Label(header, textvariable=self.sysml_hierarchy_zoom_var).pack(side=tk.RIGHT, padx=(8, 0))
@@ -5999,6 +6423,9 @@ WScript.Quit 0
         self._bind_button_help(reset_hierarchy_zoom_btn, "Return the hierarchy navigator to 100 percent.")
         self._bind_button_help(hierarchy_zoom_out_btn, "Zoom out the hierarchy navigator.")
         self._bind_button_help(hierarchy_zoom_in_btn, "Zoom in the hierarchy navigator.")
+        fit_hierarchy_btn = ttk.Button(header, text="Fit All", command=self._fit_sysml_hierarchy_zoom, width=8)
+        fit_hierarchy_btn.pack(side=tk.RIGHT, padx=(6, 0))
+        self._bind_button_help(fit_hierarchy_btn, "Fit the complete hierarchy in the current viewport.")
         ttk.Button(header, text="Refresh", command=self._refresh_sysml_hierarchy_window, width=10).pack(side=tk.RIGHT)
         source_selector = ttk.Frame(window, padding=(8, 0, 8, 4))
         source_selector.pack(fill=tk.X)
@@ -6021,25 +6448,34 @@ WScript.Quit 0
         ).pack(side=tk.RIGHT, padx=(6, 0))
         self._bind_button_help(source_selector, "Select any generated .sysml file to inspect it in this hierarchy window.")
         content_pane = ttk.Panedwindow(window, orient=tk.VERTICAL)
+        self.sysml_hierarchy_content_pane = content_pane
         content_pane.pack(fill=tk.BOTH, expand=True, padx=8, pady=(4, 8))
         canvas_frame = ttk.Frame(content_pane, padding=(0, 0, 0, 4))
         content_pane.add(canvas_frame, weight=4)
-        canvas = tk.Canvas(canvas_frame, background="#f7f9fb", highlightthickness=1, highlightbackground="#c8d2dc")
-        scroll_y = ttk.Scrollbar(canvas_frame, orient=tk.VERTICAL, command=canvas.yview)
-        scroll_x = ttk.Scrollbar(canvas_frame, orient=tk.HORIZONTAL, command=canvas.xview)
+        notebook = ttk.Notebook(canvas_frame)
+        notebook.pack(fill=tk.BOTH, expand=True)
+        hierarchy_tab = ttk.Frame(notebook)
+        notebook.add(hierarchy_tab, text="Hierarchy")
+        self.sysml_relation_notebook = notebook
+        self._build_sysml_relation_tabs(notebook)
+        canvas = tk.Canvas(hierarchy_tab, background="#f7f9fb", highlightthickness=1, highlightbackground="#c8d2dc")
+        scroll_y = ttk.Scrollbar(hierarchy_tab, orient=tk.VERTICAL, command=canvas.yview)
+        scroll_x = ttk.Scrollbar(hierarchy_tab, orient=tk.HORIZONTAL, command=canvas.xview)
         canvas.configure(yscrollcommand=scroll_y.set, xscrollcommand=scroll_x.set)
         canvas.grid(row=0, column=0, sticky="nsew")
         scroll_y.grid(row=0, column=1, sticky="ns")
         scroll_x.grid(row=1, column=0, sticky="ew")
-        canvas_frame.grid_rowconfigure(0, weight=1)
-        canvas_frame.grid_columnconfigure(0, weight=1)
+        hierarchy_tab.grid_rowconfigure(0, weight=1)
+        hierarchy_tab.grid_columnconfigure(0, weight=1)
         canvas.bind("<MouseWheel>", lambda event: canvas.yview_scroll(-1 if event.delta > 0 else 1, "units"), add="+")
         canvas.bind("<Shift-MouseWheel>", lambda event: canvas.xview_scroll(-1 if event.delta > 0 else 1, "units"), add="+")
         canvas.bind("<Control-MouseWheel>", self._zoom_sysml_hierarchy_wheel, add="+")
         self.sysml_hierarchy_window_canvas = canvas
+        canvas.bind("<Configure>", lambda _event: self._draw_sysml_hierarchy_window(), add="+")
         details_frame = ttk.LabelFrame(content_pane, text="Selected Block Port Map and Full SysML Source", padding=6)
         content_pane.add(details_frame, weight=3)
         details_pane = ttk.Panedwindow(details_frame, orient=tk.HORIZONTAL)
+        self.sysml_hierarchy_details_pane = details_pane
         details_pane.pack(fill=tk.BOTH, expand=True)
         port_frame = ttk.Frame(details_pane)
         details_pane.add(port_frame, weight=1)
@@ -6048,23 +6484,31 @@ WScript.Quit 0
         self.sysml_port_zoom = getattr(self, "sysml_port_zoom", 1.0)
         self.sysml_port_zoom_var = tk.StringVar(value=f"Ports: {round(self.sysml_port_zoom * 100)}%")
         ttk.Label(port_controls, textvariable=self.sysml_port_zoom_var).pack(side=tk.LEFT)
-        self.sysml_hierarchy_port_canvas = tk.Canvas(port_frame, width=620, height=300, background="#ffffff", highlightthickness=1, highlightbackground="#c8d2dc")
-        port_scroll = ttk.Scrollbar(port_frame, orient=tk.VERTICAL, command=self.sysml_hierarchy_port_canvas.yview)
-        self.sysml_hierarchy_port_canvas.configure(yscrollcommand=port_scroll.set)
-        port_scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        self.sysml_hierarchy_port_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        port_area = ttk.Frame(port_frame)
+        port_area.pack(fill=tk.BOTH, expand=True)
+        self.sysml_hierarchy_port_canvas = tk.Canvas(port_area, width=620, height=180, background="#ffffff", highlightthickness=1, highlightbackground="#c8d2dc")
+        port_scroll = ttk.Scrollbar(port_area, orient=tk.VERTICAL, command=self.sysml_hierarchy_port_canvas.yview)
+        port_horizontal = ttk.Scrollbar(port_area, orient=tk.HORIZONTAL, command=self.sysml_hierarchy_port_canvas.xview)
+        self.sysml_hierarchy_port_canvas.configure(yscrollcommand=port_scroll.set, xscrollcommand=port_horizontal.set)
+        self.sysml_hierarchy_port_canvas.grid(row=0, column=0, sticky="nsew")
+        port_scroll.grid(row=0, column=1, sticky="ns")
+        port_horizontal.grid(row=1, column=0, sticky="ew")
+        port_area.grid_rowconfigure(0, weight=1)
+        port_area.grid_columnconfigure(0, weight=1)
         self.sysml_hierarchy_port_canvas.bind("<Control-MouseWheel>", self._zoom_sysml_port_wheel, add="+")
         text_frame = ttk.Frame(details_pane)
         details_pane.add(text_frame, weight=1)
         text_frame.grid_rowconfigure(0, weight=1)
         text_frame.grid_columnconfigure(0, weight=1)
-        self.sysml_hierarchy_details = tk.Text(text_frame, height=14, wrap=tk.WORD, state=tk.DISABLED)
+        self.sysml_hierarchy_details = tk.Text(text_frame, height=8, wrap=tk.NONE, state=tk.DISABLED)
         self.sysml_hierarchy_details.tag_configure("find_hit", background="#fff2a8")
         self.sysml_hierarchy_details.tag_configure("find_current", background="#ffbf47")
         details_scroll = ttk.Scrollbar(text_frame, orient=tk.VERTICAL, command=self.sysml_hierarchy_details.yview)
-        self.sysml_hierarchy_details.configure(yscrollcommand=details_scroll.set)
+        details_horizontal = ttk.Scrollbar(text_frame, orient=tk.HORIZONTAL, command=self.sysml_hierarchy_details.xview)
+        self.sysml_hierarchy_details.configure(yscrollcommand=details_scroll.set, xscrollcommand=details_horizontal.set)
         self.sysml_hierarchy_details.grid(row=0, column=0, sticky="nsew")
         details_scroll.grid(row=0, column=1, sticky="ns")
+        details_horizontal.grid(row=1, column=0, sticky="ew")
         self._bind_copy_support(self.sysml_hierarchy_details)
         self.sysml_hierarchy_details.bind(
             "<Control-f>",
@@ -6086,6 +6530,127 @@ WScript.Quit 0
 
         window.protocol("WM_DELETE_WINDOW", close_window)
         self._draw_sysml_hierarchy_window()
+        self._refresh_sysml_relation_tabs()
+
+    def _configure_sysml_table_headings(self, tree, fields, *, details=False) -> None:
+        for field in fields:
+            heading = {"source": "Local Port", "target": "Documented Peer"}.get(field, field.replace("_", " ").title()) if details else field.replace("_", " ").title()
+            heading = {"status": "Endpoint Status" if details else "Assessment", "resolution_status": "Endpoint Status", "model_status": "Model Status"}.get(field, heading)
+            tree.heading(field, text=heading, command=lambda column=field: self._sort_sysml_table(tree, column))
+
+    def _sort_sysml_table(self, tree, column=None) -> None:
+        states = getattr(self, "sysml_table_sort_states", {})
+        self.sysml_table_sort_states = states
+        key = (str(tree), tuple(tree.cget("columns")))
+        previous = states.get(key)
+        if column is None:
+            if previous is None:
+                return
+            column, descending = previous
+        else:
+            descending = previous is not None and previous[0] == column and not previous[1]
+        states[key] = (column, descending)
+        populated, empty = [], []
+        for item in tree.get_children(""):
+            value = tree.set(item, column).strip()
+            if not value:
+                empty.append(item)
+                continue
+            natural = tuple((0, float(part)) if re.fullmatch(r"\d+(?:\.\d+)?", part) else (1, part)
+                            for part in re.split(r"(\d+(?:\.\d+)?)", value.casefold()))
+            populated.append((natural, item))
+        ordered = [item for _value, item in sorted(populated, key=lambda entry: entry[0], reverse=descending)] + empty
+        for position, item in enumerate(ordered):
+            tree.move(item, "", position)
+        for field in tree.cget("columns"):
+            heading = tree.heading(field, "text").split(" [", 1)[0]
+            tree.heading(field, text=heading + (" [desc]" if descending else " [asc]") if field == column else heading)
+
+    def _build_sysml_relation_tabs(self, notebook) -> None:
+        self.sysml_relation_tables = {}
+        for relation_class, title in (("block_relation", "Block Relations"), ("signal_connection", "Signal Connections")):
+            frame = ttk.Frame(notebook, padding=6)
+            notebook.add(frame, text=title)
+            controls = ttk.Frame(frame)
+            controls.pack(fill=tk.X, pady=(0, 6))
+            kind = tk.StringVar(master=frame, value="all")
+            focus = tk.BooleanVar(master=frame, value=False)
+            status = tk.StringVar(master=frame)
+            ttk.Label(controls, text="Filter:").pack(side=tk.LEFT)
+            choice = ttk.Combobox(controls, textvariable=kind, values=("all", "clock", "reset", "data", "control", "status", "bus", "signal", "interaction", "dependency", "unresolved", "unverified",
+                                 "unmapped_instance", "port_not_found", "block_only", "incomplete_reference", "unsupported_reference",
+                                 "identity_conflict", "direction_missing", "direction_conflict", "connection_conflict", "evidence_unbound", "outside_scope", "missing", "resolved", "serialized", "invalid", "historical/unverified"), state="readonly", width=24)
+            choice.pack(side=tk.LEFT, padx=6)
+            choice.bind("<<ComboboxSelected>>", lambda _event: self._refresh_sysml_relation_tabs())
+            ttk.Checkbutton(controls, text="Selected block", variable=focus, command=self._refresh_sysml_relation_tabs).pack(side=tk.LEFT)
+            if relation_class == "signal_connection":
+                self.sysml_signal_view = tk.StringVar(master=frame, value="connections")
+                modes = ttk.Frame(frame)
+                modes.pack(fill=tk.X, pady=(0, 6))
+                for label, value in (("Connections", "connections"), ("Signal Details", "details")):
+                    ttk.Radiobutton(modes, text=label, value=value, variable=self.sysml_signal_view,
+                                    command=self._refresh_sysml_relation_tabs).pack(side=tk.LEFT, padx=(0, 12))
+            ttk.Label(frame, textvariable=status, wraplength=580).pack(fill=tk.X, pady=(0, 6))
+            table_frame = ttk.Frame(frame)
+            table_frame.pack(fill=tk.BOTH, expand=True)
+            fields = ("kind", "source", "target", "status", "resolution_status", "model_status", "evidence", "qualifiers", "snapshot_id", "identity", "reason")
+            tree = ttk.Treeview(table_frame, columns=fields, show="headings", selectmode="browse")
+            self._configure_sysml_table_headings(tree, fields)
+            for field in fields:
+                tree.column(field, width=180 if field in {"source", "target", "reason"} else 130, minwidth=90, stretch=True)
+            scroll_y = ttk.Scrollbar(table_frame, orient=tk.VERTICAL, command=tree.yview)
+            scroll_x = ttk.Scrollbar(table_frame, orient=tk.HORIZONTAL, command=tree.xview)
+            tree.configure(yscrollcommand=scroll_y.set, xscrollcommand=scroll_x.set)
+            tree.grid(row=0, column=0, sticky="nsew")
+            scroll_y.grid(row=0, column=1, sticky="ns")
+            scroll_x.grid(row=1, column=0, sticky="ew")
+            table_frame.grid_rowconfigure(0, weight=1)
+            table_frame.grid_columnconfigure(0, weight=1)
+            tree.tag_configure("gap", foreground="#9b3c15")
+            self.sysml_relation_tables[relation_class] = (tree, fields, kind, focus, status)
+
+    def _refresh_sysml_relation_tabs(self) -> None:
+        from sysml_relations import relation_projection, signal_description_projection
+        scope = self._get_sysml_materialization_scope()
+        selected = scope.block_for_path(self.sysml_hierarchy_selected_path) if scope and getattr(self, "sysml_hierarchy_selected_path", None) else None
+        for relation_class, (tree, fields, kind, focus, status) in getattr(self, "sysml_relation_tables", {}).items():
+            if not tree.winfo_exists():
+                continue
+            tree.delete(*tree.get_children())
+            if scope is None:
+                status.set("No governed snapshot scope available")
+                continue
+            selected_node = selected.node if selected and focus.get() else ""
+            if focus.get() and not selected and getattr(self, "sysml_hierarchy_selected_path", None) == scope.digital_path:
+                selected_node = "topDigital"
+            details = relation_class == "signal_connection" and self.sysml_signal_view.get() == "details"
+            display_fields = (("kind", "source", "name_status", "direction", "direction_status", "width", "description", "description_status", "target", "peer_role", "reference_level", "peer_port_status", "status",
+                               "model_status", "source_table", "source_page", "evidence", "snapshot_id", "reason") if details else
+                              ("kind", "source", "target", "status", "resolution_status", "model_status", "evidence", "qualifiers", "snapshot_id", "identity", "reason"))
+            if fields != display_fields:
+                fields = display_fields
+                tree.configure(displaycolumns="#all")
+                tree.configure(columns=fields)
+                self._configure_sysml_table_headings(tree, fields, details=details)
+                for field in fields:
+                    tree.column(field, width=280 if field == "description" else 180 if field in {"source", "target", "reason"} else 130,
+                                minwidth=90, stretch=True)
+                self.sysml_relation_tables[relation_class] = (tree, fields, kind, focus, status)
+            tree.configure(displaycolumns=fields if details else tuple(field for field in fields if field != "status"))
+            projection = (signal_description_projection(scope, selected_node=selected_node, kind=kind.get()) if details else
+                          relation_projection(scope, relation_class, selected_node=selected_node, kind=kind.get()))
+            for row in projection["rows"]:
+                tree.insert("", tk.END, values=tuple(row.get(field, "") for field in fields), tags=("gap",) if row["gap"] else ())
+            self._sort_sysml_table(tree)
+            if details:
+                missing = sum(row["description_status"] == "not_established" for row in projection["rows"])
+                model_missing = sum(row["model_status"] == "missing" for row in projection["rows"])
+                status.set(f"Snapshot: {scope.snapshot_id} | {len(projection['rows'])} source signals | {missing} descriptions not established | {projection['gaps']} unresolved references | {model_missing} missing model connections | {projection['hidden']} hidden")
+                if not projection["rows"]:
+                    status.set(status.get() + " | No catalog rows match this scope/filter; not a completeness result")
+                continue
+            prefix = "Partial documented connectivity | " if relation_class == "signal_connection" else ""
+            status.set(prefix + f"Snapshot: {scope.snapshot_id} | {projection['serialized']} serialized | {projection['gaps']} gaps | {projection['hidden']} hidden")
 
     def _open_sysml_find(self, target: tk.Text) -> str:
         existing = getattr(self, "sysml_find_window", None)
@@ -6195,11 +6760,31 @@ WScript.Quit 0
         return "break"
 
     def _zoom_sysml_hierarchy(self, factor: float) -> str:
-        self.sysml_hierarchy_zoom = min(2.5, max(0.5, self.sysml_hierarchy_zoom * factor))
+        self.sysml_hierarchy_zoom = min(2.5, max(0.001, self.sysml_hierarchy_zoom * factor))
         if hasattr(self, "sysml_hierarchy_zoom_var"):
-            self.sysml_hierarchy_zoom_var.set(f"Zoom: {round(self.sysml_hierarchy_zoom * 100)}%")
+            self.sysml_hierarchy_zoom_var.set(f"Zoom: {round(self.sysml_hierarchy_zoom * 100, 1):g}%")
         self._draw_sysml_hierarchy_window()
         return "break"
+
+    def _fit_sysml_hierarchy_zoom(self) -> None:
+        canvas = getattr(self, "sysml_hierarchy_window_canvas", None)
+        if canvas is None or not canvas.winfo_exists():
+            return
+        canvas.update_idletasks()
+        self._draw_sysml_hierarchy_window()
+        for _attempt in range(4):
+            bounds = canvas.bbox("all")
+            if not bounds:
+                return
+            factor = min(max(1, canvas.winfo_width() - 24) / max(1, bounds[2] - bounds[0]),
+                         max(1, canvas.winfo_height() - 24) / max(1, bounds[3] - bounds[1]))
+            if abs(factor - 1) < 0.02:
+                break
+            previous_zoom = self.sysml_hierarchy_zoom
+            self._zoom_sysml_hierarchy(factor)
+            if self.sysml_hierarchy_zoom == previous_zoom:
+                break
+        self._center_canvas_node(canvas, "all")
 
     def _zoom_sysml_hierarchy_wheel(self, event) -> str:
         return self._zoom_sysml_hierarchy(1.15 if event.delta > 0 else 1 / 1.15)
@@ -6235,8 +6820,109 @@ WScript.Quit 0
         path = self.sysml_hierarchy_source_paths.get(selected)
         if path is None:
             return
+        self._select_sysml_hierarchy_path(path)
+
+    def _select_sysml_hierarchy_path(self, path: Path) -> None:
         self.sysml_hierarchy_selected_path = path
+        scope = self._get_sysml_materialization_scope()
+        if scope is not None:
+            self.sysml_selected_block = None
+            block = scope.block_for_path(path)
+            if block is not None:
+                self.sysml_selected_block = block.node
+            elif path == scope.system_path:
+                self.sysml_selected_block = scope.system_definition
+            elif path == scope.digital_path:
+                self.sysml_selected_block = "topDigital"
+            self.sysml_selected_connection = None
         self._show_sysml_block_details(path)
+        self._draw_sysml_hierarchy_window()
+        self._draw_sysml_architecture()
+        self._refresh_sysml_relation_tabs()
+
+    def _show_sysml_connections_popup(self, path: Path) -> None:
+        canvas = getattr(self, "sysml_hierarchy_window_canvas", None)
+        if canvas is None or not canvas.winfo_exists():
+            return
+        scope = self._get_sysml_materialization_scope()
+        connected = {}
+        if scope is not None:
+            for connection in self._sysml_architecture_connections(scope):
+                if connection["source"] == path:
+                    connected.setdefault(connection["target"], set()).add("Outgoing")
+                elif connection["target"] == path:
+                    connected.setdefault(connection["source"], set()).add("Incoming")
+        window = getattr(self, "sysml_connections_window", None)
+        if window is None or not window.winfo_exists():
+            parent = canvas.winfo_toplevel()
+            window = tk.Toplevel(parent)
+            window.title("Connected SysML Blocks")
+            window.transient(parent)
+            window.geometry("720x360")
+            window.minsize(460, 220)
+            self.sysml_connections_window = window
+            content = ttk.Frame(window, padding=12)
+            content.pack(fill=tk.BOTH, expand=True)
+            self.sysml_connections_heading_var = tk.StringVar(master=window)
+            ttk.Label(content, textvariable=self.sysml_connections_heading_var,
+                      font=("Segoe UI", 12, "bold"), wraplength=430).pack(anchor=tk.W, pady=(0, 8))
+            table = ttk.Frame(content)
+            table.pack(fill=tk.BOTH, expand=True)
+            tree = ttk.Treeview(table, columns=("block", "direction", "file"), show="headings", selectmode="browse")
+            for column, title, width in (("block", "Connected block", 180), ("direction", "Direction", 110), ("file", "SysML file", 310)):
+                tree.heading(column, text=title)
+                tree.column(column, width=width, minwidth=80, stretch=True)
+            scrollbar = ttk.Scrollbar(table, orient=tk.VERTICAL, command=tree.yview)
+            horizontal = ttk.Scrollbar(table, orient=tk.HORIZONTAL, command=tree.xview)
+            tree.configure(yscrollcommand=scrollbar.set, xscrollcommand=horizontal.set)
+            tree.grid(row=0, column=0, sticky="nsew")
+            scrollbar.grid(row=0, column=1, sticky="ns")
+            horizontal.grid(row=1, column=0, sticky="ew")
+            table.grid_rowconfigure(0, weight=1)
+            table.grid_columnconfigure(0, weight=1)
+            tree.bind("<Double-1>", self._on_sysml_connected_block_open)
+            tree.bind("<Return>", self._on_sysml_connected_block_open)
+            self.sysml_connections_tree = tree
+            footer = ttk.Frame(content)
+            footer.pack(fill=tk.X, pady=(8, 0))
+            self.sysml_connections_status_var = tk.StringVar(master=window)
+            ttk.Label(footer, textvariable=self.sysml_connections_status_var).pack(side=tk.LEFT)
+            ttk.Button(footer, text="Open block", command=self._on_sysml_connected_block_open).pack(side=tk.RIGHT, padx=(6, 0))
+            ttk.Button(footer, text="Close", command=window.destroy).pack(side=tk.RIGHT)
+        block = scope.block_for_path(path) if scope is not None else None
+        label = getattr(block, "name", path.stem)
+        self.sysml_connections_heading_var.set("Connected to: " + label)
+        tree = self.sysml_connections_tree
+        tree.delete(*tree.get_children())
+        self.sysml_connected_block_paths = {}
+        for peer in sorted(connected, key=lambda value: value.stem.casefold()):
+            peer_block = scope.block_for_path(peer)
+            direction = "Bidirectional" if len(connected[peer]) > 1 else next(iter(connected[peer]))
+            try:
+                file_label = peer.relative_to(REPO_ROOT).as_posix()
+            except ValueError:
+                file_label = peer.as_posix()
+            item = tree.insert("", tk.END, values=(getattr(peer_block, "name", peer.stem), direction, file_label))
+            self.sysml_connected_block_paths[item] = peer
+        status = f"{len(connected)} connected blocks" if connected else "No explicit architecture connections."
+        if scope is None:
+            status = "No approved SysML architecture available."
+        self.sysml_connections_status_var.set(status)
+        window.deiconify()
+        window.lift()
+
+    def _on_sysml_connected_block_open(self, _event=None) -> str:
+        selected = self.sysml_connections_tree.selection()
+        path = self.sysml_connected_block_paths.get(selected[0]) if selected else None
+        if path is not None:
+            self._select_sysml_file(path)
+            self._select_sysml_hierarchy_path(path)
+        return "break"
+
+    @staticmethod
+    def _sysml_architecture_connections(scope) -> list[dict]:
+        from sysml_relations import serialized_connections
+        return [row for row in serialized_connections(scope) if row["source"] and row["target"] and row["source"] != row["target"]]
 
     def _draw_sysml_hierarchy_window(self) -> None:
         canvas = getattr(self, "sysml_hierarchy_window_canvas", None)
@@ -6246,9 +6932,18 @@ WScript.Quit 0
         scope = self._get_sysml_materialization_scope()
         if scope is None:
             canvas.create_text(24, 24, anchor="nw", text=self.sysml_scope_diagnostic, fill="#a32626", width=900)
+            for index, path in enumerate(self._concrete_sysml_block_paths()):
+                tag = "sysml_historical_file:" + path.as_posix()
+                canvas.create_text(24, 100 + index * 30, anchor="nw", text=path.name,
+                                   fill="#0b4f8a", tags=(tag,))
+                canvas.tag_bind(tag, "<Button-1>", lambda _event, selected=path: self._select_sysml_file(selected))
+            canvas.configure(scrollregion=canvas.bbox("all"))
             return
         top_path, digital_path = scope.system_path, scope.digital_path
         source_paths = self._concrete_sysml_block_paths()
+        from sysml_relations import containment_projection
+        containment = set(containment_projection(scope))
+        analog_key = scope.system_path.with_name("AnalogSubsystem")
         if hasattr(self, "sysml_hierarchy_source_choice"):
             self.sysml_hierarchy_source_paths = {
                 path.relative_to(REPO_ROOT).as_posix(): path for path in source_paths
@@ -6264,12 +6959,19 @@ WScript.Quit 0
 
         zoom = getattr(self, "sysml_hierarchy_zoom", 1.0)
         node_width, node_height = 220 * zoom, 48 * zoom
+        block_paths = list(source_paths)
+        viewport_aspect = min(2.5, max(1.0, canvas.winfo_width() / max(1, canvas.winfo_height())))
+        block_columns = min(len(block_paths), max(2, int((len(block_paths) * viewport_aspect) ** 0.5 + 0.999)))
+        block_x_step = 315 * zoom
+        diagram_width = (50 + block_columns * 315 - 35) * zoom
+        top_x = (diagram_width - node_width) / 2
         nodes = []
         if top_path.exists():
-            nodes.append((scope.system_definition, top_path, 440 * zoom, 30 * zoom, "root"))
+            nodes.append((scope.system_definition, top_path, top_x, 30 * zoom, "root"))
         if digital_path.exists():
-            nodes.append(("DigitalSubsystem", digital_path, 150 * zoom, 150 * zoom, "subsystem"))
-        block_paths = list(source_paths)
+            nodes.append(("DigitalSubsystem", digital_path, top_x + (170 * zoom if any(block.target == "Analog IPOS" for block in scope.blocks) else 0), 150 * zoom, "subsystem"))
+        if any(block.target == "Analog IPOS" for block in scope.blocks):
+            nodes.append(("AnalogSubsystem", analog_key, max(25 * zoom, top_x - 170 * zoom), 150 * zoom, "subsystem"))
         hierarchy_ports = {}
         for path in block_paths:
             source = path.read_text(encoding="utf-8", errors="replace")
@@ -6279,11 +6981,10 @@ WScript.Quit 0
             )
         block_width = 280 * zoom
         block_heights = {
-            path: max(74 * zoom, (42 + max(0, len(hierarchy_ports.get(path, []))) * 14) * zoom)
+            path: max(74 * zoom, (42 + min(4, len(hierarchy_ports.get(path, []))) * 14
+                                 + (20 if len(hierarchy_ports.get(path, [])) > 4 else 0)) * zoom)
             for path in block_paths
         }
-        block_columns = 3
-        block_x_step = 315 * zoom
         block_y = 285 * zoom
         for row_start in range(0, len(block_paths), block_columns):
             row_paths = block_paths[row_start:row_start + block_columns]
@@ -6297,47 +6998,64 @@ WScript.Quit 0
         }
         node_sizes.update({path: (220 * zoom, 48 * zoom) for _label, path, _x, _y, kind in nodes if kind != "block"})
         root_path = top_path
+        selected_path = getattr(self, "sysml_hierarchy_selected_path", None)
         for label, path, x, y, kind in nodes:
             if path == root_path:
                 continue
-            block = self.sysml_materialization_scope.block_for_path(path) if kind == "block" else None
-            parent_path = digital_path if block and block.target == "Digital IPOS" else root_path
-            if parent_path in positions:
+            block = scope.block_for_path(path) if kind == "block" else None
+            parent_path = digital_path if block and block.target == "Digital IPOS" else analog_key if block else root_path
+            child_node = block.node if block else "topDigital" if path == digital_path else "topAnalog.analogSubsystem"
+            parent_node = child_node.rsplit(".", 1)[0] if block else scope.system_definition
+            if parent_path in positions and (parent_node, child_node) in containment:
                 px, py = positions[parent_path]
                 parent_width, parent_height = node_sizes.get(parent_path, (node_width, node_height))
                 child_width, _child_height = node_sizes.get(path, (node_width, node_height))
-                canvas.create_line(px + parent_width / 2, py + parent_height, x + child_width / 2, y, fill="#78909c", width=2, arrow=tk.LAST)
+                selected = selected_path in (parent_path, path)
+                canvas.create_line(px + parent_width / 2, py + parent_height, x + child_width / 2, y,
+                                   fill="#005fbd" if selected else "#78909c", width=3 if selected else 2,
+                                   dash=(5, 3), arrow=tk.LAST, tags=("sysml_hierarchy_dependency_edge",))
         for label, path, x, y, kind in nodes:
             fill = {"root": "#dceef7", "subsystem": "#fff0d6", "block": "#ffffff"}[kind]
             outline = {"root": "#236477", "subsystem": "#a66a00", "block": "#8493a1"}[kind]
+            selected = path == selected_path
+            if selected:
+                fill, outline = "#cfe8ff", "#1976d2"
+            tags = ("sysml_hierarchy_node", path.as_posix(), "sysml_hierarchy_path:" + path.as_posix())
             current_width, current_height = node_sizes.get(path, (node_width, node_height))
-            canvas.create_rectangle(x, y, x + current_width, y + current_height, fill=fill, outline=outline, width=2, tags=("sysml_hierarchy_node", path.as_posix()))
-            canvas.create_text(x + current_width / 2, y + 16 * zoom, text=label, fill="#263238", font=("Segoe UI", max(7, round(10 * zoom)), "bold" if kind != "block" else "normal"), tags=("sysml_hierarchy_node", path.as_posix()))
+            canvas.create_rectangle(x, y, x + current_width, y + current_height, fill=fill, outline=outline, width=3 if selected else 2, tags=tags)
+            canvas.create_text(x + current_width / 2, y + 16 * zoom, text=label, fill="#0b4f8a" if selected else "#263238", font=("Segoe UI", max(1, round(10 * zoom)), "bold" if selected or kind != "block" else "normal"), tags=tags)
             if kind == "block":
                 canvas.create_line(x + 8 * zoom, y + 30 * zoom, x + current_width - 8 * zoom, y + 30 * zoom, fill="#c8d2dc", width=1)
                 ports = hierarchy_ports.get(path, [])
                 input_ports = [name for direction, name in ports if direction in {"in", "inout"} or not direction]
                 output_ports = [name for direction, name in ports if direction in {"out", "inout"}]
-                rows = max(len(input_ports), len(output_ports))
+                rows = min(4, max(len(input_ports), len(output_ports)))
                 for index in range(rows):
                     port_y = y + (44 + index * 14) * zoom
                     if index < len(input_ports):
                         canvas.create_line(x + 2 * zoom, port_y, x + 12 * zoom, port_y, fill="#1976d2", width=max(1, round(zoom)))
-                        canvas.create_text(x + 16 * zoom, port_y, text=input_ports[index], anchor=tk.W, width=max(70, int(current_width / 2 - 28 * zoom)), fill="#245174", font=("Segoe UI", max(6, round(7 * zoom))), tags=("sysml_hierarchy_node", path.as_posix()))
+                        canvas.create_text(x + 16 * zoom, port_y, text=input_ports[index], anchor=tk.W, width=max(1, int(current_width / 2 - 28 * zoom)), fill="#245174", font=("Segoe UI", max(1, round(7 * zoom))), tags=("sysml_hierarchy_node", path.as_posix()))
                     if index < len(output_ports):
                         canvas.create_line(x + current_width - 12 * zoom, port_y, x + current_width - 2 * zoom, port_y, fill="#c75b12", width=max(1, round(zoom)))
-                        canvas.create_text(x + current_width - 16 * zoom, port_y, text=output_ports[index], anchor=tk.E, width=max(70, int(current_width / 2 - 28 * zoom)), fill="#7a3b12", font=("Segoe UI", max(6, round(7 * zoom))), tags=("sysml_hierarchy_node", path.as_posix()))
+                        canvas.create_text(x + current_width - 16 * zoom, port_y, text=output_ports[index], anchor=tk.E, width=max(1, int(current_width / 2 - 28 * zoom)), fill="#7a3b12", font=("Segoe UI", max(1, round(7 * zoom))), tags=("sysml_hierarchy_node", path.as_posix()))
+                remaining_input, remaining_output = max(0, len(input_ports) - rows), max(0, len(output_ports) - rows)
+                if remaining_input or remaining_output:
+                    canvas.create_text(x + current_width / 2, y + (44 + rows * 14) * zoom,
+                                       text=f"+{remaining_input} in / +{remaining_output} out", fill="#52606d",
+                                       font=("Segoe UI", max(1, round(7 * zoom))), tags=("sysml_hierarchy_node", path.as_posix()))
         canvas.configure(
             scrollregion=(
                 0,
                 0,
-                max(980 * zoom, (25 + min(block_columns, len(block_paths)) * 315) * zoom),
+                diagram_width,
                 max(390 * zoom, block_y + 40 * zoom),
             )
         )
         if self.sysml_scope_diagnostic:
             canvas.create_text(24, block_y + 20, anchor="nw", text=self.sysml_scope_diagnostic, fill="#a32626", width=900)
             canvas.configure(scrollregion=canvas.bbox("all"))
+        if selected_path in positions:
+            self._center_canvas_node(canvas, "sysml_hierarchy_path:" + selected_path.as_posix())
 
         def open_node(event) -> None:
             current = canvas.find_withtag("current")
@@ -6348,7 +7066,7 @@ WScript.Quit 0
                 self.work_tabs.select(self.sysml_architecture_tab)
                 selected_path = Path(path_text)
                 self._select_sysml_file(selected_path)
-                self._show_sysml_block_details(selected_path)
+                self._select_sysml_hierarchy_path(selected_path)
 
         canvas.tag_bind("sysml_hierarchy_node", "<Button-1>", open_node)
         canvas.tag_bind("sysml_hierarchy_node", "<Double-1>", open_node)
@@ -6469,22 +7187,16 @@ WScript.Quit 0
         def node_label(path: str) -> str:
             return path.rsplit(".", 1)[-1]
 
-        connection_pattern = re.compile(
-            r"connection\s+([A-Za-z0-9_]+).*?connect\s+([A-Za-z0-9_.]+)\s+to\s+([A-Za-z0-9_.]+);",
-            flags=re.S,
-        )
-        metadata_pattern = re.compile(
-            r"doc\s+[A-Za-z0-9_]+\s+/\*\s*signal=([^|]*)\|\s*trigger=([^|]*)\|\s*notes=([^|]*)\|\s*sourceReqIds=([^|]*)[^*]*\*/",
-            flags=re.S,
-        )
-        metadata_matches = list(metadata_pattern.finditer(top_text))
-        for connection_match in connection_pattern.finditer(top_text):
-            connection_id, source, target = connection_match.groups()
-            metadata = next(
-                (match for match in metadata_matches if match.start() >= connection_match.end()),
-                None,
-            )
-            signal, trigger, notes, source_ids = metadata.groups() if metadata else ("", "", "", "")
+        for index, connection in enumerate(self._sysml_architecture_connections(scope)):
+            connection_id = connection["identity"]
+            source = scope.block_for_path(connection["source"]).node
+            target = scope.block_for_path(connection["target"]).node
+            metadata = connection["metadata"]
+            qualifiers = dict(metadata.get("qualifiers", ()))
+            signal = metadata.get("kind", "unverified")
+            trigger = qualifiers.get("Trigger", "")
+            notes = connection["details"]
+            source_ids = "; ".join(metadata.get("evidence", ()))
             if source in positions and target in positions:
                 sx, sy = positions[source]
                 tx, ty = positions[target]
@@ -6497,13 +7209,13 @@ WScript.Quit 0
                     "source_ids": source_ids.strip() or "None",
                 }
                 canvas.create_line(
-                    sx + node_width / 2,
-                    sy + node_height / 2,
-                    tx + node_width / 2,
-                    ty + node_height / 2,
+                    sx + node_width / 2, sy + node_height,
+                    (sx + tx + node_width) / 2, max(sy, ty) + node_height + 16 + index * 8,
+                    tx + node_width / 2, ty + node_height,
                     fill="#1976d2" if connection_id == self.sysml_selected_connection else "#78909c",
                     arrow=tk.LAST,
                     width=3 if connection_id == self.sysml_selected_connection else 1.5,
+                    smooth=True,
                     tags=("sysml_connection", connection_id),
                 )
 
@@ -6518,6 +7230,8 @@ WScript.Quit 0
             canvas.create_text(20, 270 + ((len(blocks) + 3) // 4) * 72, anchor="nw",
                                text=self.sysml_scope_diagnostic, fill="#a32626", width=1200)
             canvas.configure(scrollregion=canvas.bbox("all"))
+        if self.sysml_selected_block in positions:
+            self._center_canvas_node(canvas, self.sysml_selected_block)
 
         def open_node(event) -> None:
             current = canvas.find_withtag("current")
@@ -6545,7 +7259,7 @@ WScript.Quit 0
         current = canvas.find_withtag("current")
         if not current:
             return "break"
-        connection_id = next((tag for tag in canvas.gettags(current[0]) if tag.startswith("connection_")), None)
+        connection_id = next((tag for tag in canvas.gettags(current[0]) if tag in self.sysml_connection_details), None)
         details = self.sysml_connection_details.get(connection_id)
         if not details:
             return "break"
@@ -6594,17 +7308,18 @@ WScript.Quit 0
             except (OSError, ValueError) as exc:
                 content = f"Unable to read SysML file: {exc}"
                 label = path.name
-            self.sysml_file_var.set(label)
+            self.sysml_file_var.set(self._sysml_navigation_label(path, label))
             self.sysml_viewer.configure(state=tk.NORMAL)
             self.sysml_viewer.delete("1.0", tk.END)
             self.sysml_viewer.insert("1.0", content)
-            self.sysml_viewer.configure(state=tk.NORMAL)
+            self.sysml_viewer.configure(state=tk.DISABLED)
 
     def _on_sysml_file_choice(self, _event=None) -> None:
         selected = self.sysml_file_choice_var.get().strip()
         path = self.sysml_file_choice_paths.get(selected)
         if path is not None:
             self._select_sysml_file(path)
+            self._select_sysml_hierarchy_path(path)
 
     def _on_sysml_hierarchy_select(self, _event=None) -> None:
         selection = self.sysml_hierarchy_tree.selection()
@@ -6613,18 +7328,27 @@ WScript.Quit 0
         values = self.sysml_hierarchy_tree.item(selection[0], "values")
         if values and Path(values[0]).is_file():
             self._select_sysml_file(Path(values[0]))
+            self._select_sysml_hierarchy_path(Path(values[0]))
 
     def _get_sysml_materialization_scope(self):
         snapshot_id = getattr(self, "workflow_snapshot_id", None) or self._latest_approved_snapshot_id()
         if not hasattr(self, "sysml_materialization_scope") or getattr(self, "sysml_scope_snapshot_id", None) != snapshot_id:
             self.sysml_scope_snapshot_id = snapshot_id
             try:
-                self.sysml_materialization_scope = resolve_sysml_materialization_scope(REPO_ROOT, snapshot_id).require_valid()
-                self.sysml_scope_diagnostic = ""
+                self.sysml_materialization_scope = resolve_sysml_materialization_scope(REPO_ROOT, snapshot_id)
+                self.sysml_scope_diagnostic = "\n".join(self.sysml_materialization_scope.findings)
             except (DownstreamCoherenceError, ApprovedResolverError, OSError, ValueError) as exc:
                 self.sysml_materialization_scope = None
                 self.sysml_scope_diagnostic = str(exc)
         return self.sysml_materialization_scope
+
+    def _sysml_navigation_label(self, path: Path, label: str) -> str:
+        source = path.read_text(encoding="utf-8", errors="replace") if path.is_file() else ""
+        match = re.search(r"^// Snapshot ID:\s*(\S+)", source, re.M)
+        model_snapshot = match[1] if match else "unknown"
+        selected_snapshot = getattr(self, "sysml_scope_snapshot_id", None) or "unresolved"
+        status = "historical/unverified" if getattr(self, "sysml_scope_diagnostic", "") or model_snapshot != selected_snapshot else "snapshot-bound; readiness not assessed"
+        return f"{label} | READ-ONLY / {status} | Model: {model_snapshot} | Workflow: {selected_snapshot}"
 
     def _sysml_block_file_is_concrete(self, path: Path) -> bool:
         scope = self._get_sysml_materialization_scope()
@@ -6633,27 +7357,34 @@ WScript.Quit 0
     def _concrete_sysml_block_paths(self) -> list[Path]:
         scope = self._get_sysml_materialization_scope()
         if scope is None:
-            return []
+            return sorted((REPO_ROOT / "artifacts/stage2_mirco_arc/sysml/blocks").glob("*.sysml"))
         paths, findings = scope.existing_model_paths(REPO_ROOT)
-        self.sysml_scope_diagnostic = "\n".join(findings)
+        for path in (*scope.structural_paths(), *paths):
+            if path.is_file():
+                match = re.search(r"^// Snapshot ID:\s*(\S+)", path.read_text(encoding="utf-8", errors="replace"), re.M)
+                if not match or match[1] != self.sysml_scope_snapshot_id:
+                    findings.append(f"SYSML_NAVIGATION_STALE_MODEL: {path.name}: {match[1] if match else 'unknown'}")
+        self.sysml_scope_diagnostic = ("Existing models are historical/unverified; read-only navigation only.\n" + "\n".join(dict.fromkeys(findings))) if findings else ""
         return paths
 
     def _refresh_sysml_hierarchy_window(self) -> None:
         self._refresh_sysml_architecture()
         self._draw_sysml_hierarchy_window()
+        self._refresh_sysml_relation_tabs()
 
     def _populate_sysml_hierarchy(self, source_paths: list[Path]) -> None:
         for item in self.sysml_hierarchy_tree.get_children():
             self.sysml_hierarchy_tree.delete(item)
         scope = self._get_sysml_materialization_scope()
         if scope is None:
-            self.sysml_hierarchy_tree.insert("", tk.END, text=self.sysml_scope_diagnostic)
+            root = self.sysml_hierarchy_tree.insert("", tk.END, text="Existing SysML files (read-only / unverified)", open=True)
+            for path in source_paths:
+                self.sysml_hierarchy_tree.insert(root, tk.END, text=path.stem, values=(path.as_posix(),))
+            self.sysml_hierarchy_tree.insert(root, tk.END, text=self.sysml_scope_diagnostic)
             return
         top_path = scope.system_path
-        if top_path not in source_paths:
-            self.sysml_hierarchy_tree.insert("", tk.END, text="System SysML model missing")
-            return
-        root = self.sysml_hierarchy_tree.insert("", tk.END, text=top_path.stem, values=(top_path.as_posix(),), open=True)
+        root = self.sysml_hierarchy_tree.insert("", tk.END, text=top_path.stem if top_path in source_paths else "System SysML model missing",
+                                              values=(top_path.as_posix(),) if top_path in source_paths else (), open=True)
         parents = {}
         for target, path in (("Digital IPOS", scope.digital_path), ("Analog IPOS", top_path)):
             parents[target] = self.sysml_hierarchy_tree.insert(root, tk.END, text=target,
@@ -6674,7 +7405,7 @@ WScript.Quit 0
         scope = self._get_sysml_materialization_scope()
         model_paths = [
             path
-            for path in (scope.structural_paths() if scope else ())
+            for path in (scope.structural_paths() if scope else sorted((REPO_ROOT / "artifacts/stage2_mirco_arc/sysml").glob("*.sysml")))
             if path.exists()
         ]
         concrete_paths = self._concrete_sysml_block_paths()
@@ -6710,11 +7441,12 @@ WScript.Quit 0
         except (OSError, ValueError) as exc:
             content = f"Unable to read SysML file: {exc}"
             label = path.name
-        self.sysml_file_var.set(label)
+        self.sysml_file_var.set(self._sysml_navigation_label(path, label))
         self.sysml_viewer.configure(state=tk.NORMAL)
         self.sysml_viewer.delete("1.0", tk.END)
         self.sysml_viewer.insert("1.0", content)
-        self.sysml_viewer.configure(state=tk.NORMAL)
+        self.sysml_viewer.configure(state=tk.DISABLED)
+        self._select_sysml_hierarchy_path(path)
 
     def _build_system_traceability_tab(self) -> None:
         self.traceability_pane = ttk.Frame(self.system_traceability_tab, padding=18)
@@ -7723,7 +8455,7 @@ WScript.Quit 0
                 rows = connection.execute(
                     """SELECT snapshot_id, approved_by, approved_at, status FROM snapshots
                         WHERE project_id = ?
-                        ORDER BY approved_at DESC, snapshot_id DESC LIMIT 10""",
+                        ORDER BY approved_at DESC, snapshot_id DESC""",
                     (project_id,),
                 ).fetchall()
             finally:
@@ -7876,7 +8608,7 @@ WScript.Quit 0
         if selector is None:
             return
         cmd = [PYTHON_EXE, str(SCRIPTS_DIR / "run_final_sysml_phase.py"), *selector]
-        self._run_command_async(cmd, "Final SysML generation and central validation", on_success=self._refresh_generated_sysml)
+        self._run_command_async(cmd, "Final SysML generation, readiness checklist and Excel reports", on_success=self._refresh_generated_sysml)
 
     def _review_regenerated_sysml(self) -> None:
         self._run_command_async(

@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import csv
+import hashlib
+import json
 import re
 from pathlib import Path
 from typing import Dict, Iterable, List, Mapping, Sequence, Tuple
@@ -131,6 +133,124 @@ def extract_stage1_descriptive_evidence(
         if len(matches) == 1:
             record["mapped_block"] = matches[0]
         records.append(record)
+    return records
+
+
+def extract_indexed_descriptive_candidates(
+    index_path: Path,
+    *,
+    source_context: Mapping[str, Mapping[str, str]] | None = None,
+) -> List[Dict[str, str]]:
+    """Extract review candidates only; indexed material does not confer approval."""
+    with index_path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if not {"source_file", "page", "text_file"}.issubset(reader.fieldnames or ()):
+            raise ValueError("Descriptive source index is missing identity/page/text fields")
+        indexed = list(reader)
+    sources: Dict[str, Dict[int, Path]] = {}
+    for row in indexed:
+        source = str(row.get("source_file") or "").strip()
+        text_file = str(row.get("text_file") or "").strip()
+        if not source or not text_file:
+            raise ValueError("Descriptive source index contains an incomplete entry")
+        page = int(row["page"])
+        if page < 1:
+            raise ValueError("Descriptive source page must be positive")
+        path = Path(text_file)
+        if not path.is_absolute():
+            path = index_path.parent / path
+        path = path.resolve(strict=True)
+        if path.suffix.lower() != ".txt":
+            raise ValueError("Descriptive extraction accepts indexed text artifacts only")
+        pages = sources.setdefault(source, {})
+        if page in pages and pages[page] != path:
+            raise ValueError("Conflicting descriptive source page identity")
+        pages[page] = path
+
+    records: List[Dict[str, str]] = []
+    excluded_heading = re.compile(
+        r"\b(?:requirements?|parameters?|ports?|i/o\s+list|register\s+map|"
+        r"contents|references|abbreviations|terms\s+and)\b", re.I,
+    )
+    marker = re.compile(r"^\s*\[[^\]]+\]\s*(?:requirement|assumption|definition|comment|$)", re.I)
+    for source, pages in sources.items():
+        context = dict((source_context or {}).get(source, {}))
+        headings: List[Tuple[str, str]] = []
+        current: List[Tuple[int, int, str, str, str]] = []
+        active = False
+        previous_page = 0
+
+        def flush() -> None:
+            if not current:
+                return
+            statement = " ".join(text.strip() for _page, _line, text, _path, _hash in current)
+            spans = [{"page": page, "line": line, "text_file": path, "artifact_sha256": digest}
+                     for page, line, _text, path, digest in current]
+            current.clear()
+            if len(statement) < 20 or len(statement.split()) < 4:
+                return
+            if re.search(r"\b(?:shall|must|required to)\b|\bCovers:\s*", statement, re.I):
+                return
+            text_hash = hashlib.sha256(statement.encode("utf-8")).hexdigest()
+            section = headings[-1][0] if headings else ""
+            identity = json.dumps([source, context, section, spans, text_hash], sort_keys=True)
+            records.append({
+                "record_id": "source-context-" + hashlib.sha256(identity.encode("utf-8")).hexdigest()[:24],
+                "statement": statement,
+                "source_file": source,
+                "source_revision": str(context.get("source_revision") or ""),
+                "source_revision_id": str(context.get("source_revision_id") or ""),
+                "ingestion_id": str(context.get("ingestion_id") or ""),
+                "section": section,
+                "section_context_json": json.dumps(headings, ensure_ascii=True),
+                "source_spans_json": json.dumps(spans, sort_keys=True),
+                "content_sha256": text_hash,
+                "evidence_kind": "descriptive",
+                "admission_state": "candidate",
+            })
+
+        for page, path in sorted(pages.items()):
+            if previous_page and page != previous_page + 1:
+                flush()
+                active = False
+                headings.clear()
+            previous_page = page
+            raw = path.read_bytes()
+            digest = hashlib.sha256(raw).hexdigest()
+            lines = raw.decode("utf-8-sig").splitlines()
+            for line_number, raw_line in enumerate(lines, start=1):
+                line = raw_line.strip()
+                heading = re.fullmatch(r"(\d+(?:\.\d+)*)\.?\s+(.+)", line)
+                if heading and re.search(r"\.{2,}|\s\d+\s*$", heading[2]):
+                    flush()
+                    active = False
+                    continue
+                if heading:
+                    flush()
+                    depth = heading[1].count(".")
+                    while headings and headings[-1][0].count(".") >= depth:
+                        headings.pop()
+                    headings.append((heading[1], heading[2]))
+                    active = not any(excluded_heading.search(title) for _number, title in headings)
+                    continue
+                if marker.match(line) or line.upper() == "[END]":
+                    flush()
+                    active = False
+                    continue
+                if re.match(r"^(?:Figure|Table)\s+\d+\b", line, re.I):
+                    flush()
+                    active = False
+                    continue
+                if re.fullmatch(r"\d{1,4}", line):
+                    continue
+                if not line:
+                    flush()
+                    continue
+                if active and not re.search(r"\t|\|", raw_line):
+                    current.append((page, line_number, raw_line, str(path), digest))
+                elif current:
+                    flush()
+        flush()
     return records
 
 

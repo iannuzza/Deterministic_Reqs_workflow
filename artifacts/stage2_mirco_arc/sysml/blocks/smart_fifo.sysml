@@ -1,5 +1,6 @@
-// Snapshot ID: snap-b2e8101b00dc6909feaed885
-// Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+// NOT READY for RTL or high-level model generation
+// Snapshot ID: snap-73c872b1307b6adb5eaf843e
+// Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 package Block_SmartFIFO {
 
@@ -14,6 +15,9 @@ package Block_SmartFIFO {
         attribute approvedPortCount : Integer = 20;
         attribute linkedRequirementCount : Integer = 13;
         doc /* block=Smart FIFO | description=Provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting. */;
+        doc /* governedOverview:functionality | The Smart FIFO block is designed to provide FIFO storage and AHB/memory access in mutually exclusive Unique or Multiple modes, including sub-FIFO depth/addressing and tagged Sensor Hub data formatting. */;
+        doc /* governedOverview:scope | The Smart FIFO block accepts Digital samples, FIFO mode configuration and produces Buffered samples and FIFO status flags. */;
+        doc /* governedOverview:internal_functions | As default, the FIFO works in Unique FIFO Mode. If input signal HMASTER is set to 0 or 1, the FIFO Controller enters Memory mode. */;
         in port TEST_MODE : ArchitecturePort {
             attribute sourceName = "TEST_MODE";
             attribute sourceDetails = "ScanMode u_pad_mux. scan_mode";

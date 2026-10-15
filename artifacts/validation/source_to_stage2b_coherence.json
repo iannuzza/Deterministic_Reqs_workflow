@@ -16,7 +16,7 @@
     "staged_at": "2026-09-21T12:38:22+00:00",
     "tag_pattern": "IPOS_STBIO1_MAIN_CONTROLLER_\\d+"
   },
-  "authority_fingerprint": "aaf3670f7e5581d258e11eaafb18f00dfe5f777b320a741c74aaea48881ee975",
+  "authority_fingerprint": "d50c688b10f6b927d298f3913732bc247ebb68aaf9cb42e4911ce2eafb049652",
   "blockers": [],
   "checked_paths": [
     "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\artifacts\\source_ingestion\\ipos_main_ctrl_20260921_143819",

@@ -14,6 +14,19 @@ class SysMLCompletenessError(RuntimeError):
     """Raised when generated SysML omits approved requirements in scope."""
 
 
+def resolve_sysml_descriptive_model(repo_root: Path, contract, *, block: str, domain: str) -> dict:
+    from workflow_routing import compose_ipos_overview, ipos_claim_preflight_findings, ipos_derivative_residuals
+    from validate_downstream_coherence import classify_descriptive_findings
+
+    functional = contract.ipos_descriptive_input(repo_root, block=block, domain=domain)
+    hard = classify_descriptive_findings(ipos_claim_preflight_findings(functional))["hard_findings"]
+    if hard:
+        raise SysMLCompletenessError("Governed descriptive integrity failed: " + "; ".join(hard))
+    sections, audit = compose_ipos_overview(functional)
+    return {"snapshot_id": contract.snapshot_id, "sections": sections, "audit": audit,
+            "residuals": ipos_derivative_residuals(functional), "authority": False}
+
+
 def validate_snapshot_requirement_coverage(
     snapshot,
     requirements: Iterable[Mapping[str, str]],

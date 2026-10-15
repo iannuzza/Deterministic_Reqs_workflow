@@ -1,0 +1,5453 @@
+{
+  "application": {
+    "decisions": [
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:function:clause:1:meaning:1",
+        "role": "purpose",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:inputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "inventory:outputs:clause:1:meaning:1",
+        "role": "boundaries",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1",
+        "role": "organization",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1",
+        "role": "limits",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1",
+        "role": "organization",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      },
+      {
+        "decision": "retained",
+        "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1",
+        "role": "functions",
+        "rule": "explicit_functional_claim"
+      }
+    ],
+    "findings": [],
+    "policy": {
+      "abstraction": "block",
+      "domains": [
+        "digital"
+      ],
+      "functional_actions": [
+        "accept",
+        "acquire",
+        "accumulate",
+        "average",
+        "calculate",
+        "compute",
+        "control",
+        "convert",
+        "copy",
+        "divide",
+        "filter",
+        "generate",
+        "monitor",
+        "perform",
+        "process",
+        "produce",
+        "provide",
+        "read",
+        "receive",
+        "route",
+        "sample",
+        "send",
+        "store",
+        "subtract",
+        "support",
+        "transfer",
+        "write"
+      ],
+      "layers": [
+        "block"
+      ],
+      "name": "digital-ipos-structure-v1",
+      "omitted_details": [
+        "example",
+        "procedure"
+      ],
+      "output_sections": [
+        [
+          "purpose",
+          "functionality"
+        ],
+        [
+          "main_functions",
+          "scope"
+        ],
+        [
+          "functions",
+          "internal_functions"
+        ],
+        [
+          "boundaries",
+          "scope"
+        ],
+        [
+          "organization",
+          "internal_structure"
+        ],
+        [
+          "limits",
+          "scope"
+        ],
+        [
+          "operating_concept",
+          "internal_functions"
+        ],
+        [
+          "power",
+          "internal_functions"
+        ]
+      ],
+      "presentation_order": [
+        "behavior",
+        "support",
+        "clarification"
+      ],
+      "required_roles": [
+        "purpose",
+        "functions"
+      ],
+      "role_sections": [
+        [
+          "purpose",
+          "function"
+        ],
+        [
+          "main_functions",
+          "function"
+        ],
+        [
+          "functions",
+          "function"
+        ],
+        [
+          "boundaries",
+          "interfaces"
+        ],
+        [
+          "organization",
+          "function"
+        ],
+        [
+          "limits",
+          "function"
+        ],
+        [
+          "operating_concept",
+          "operating_concept"
+        ],
+        [
+          "power",
+          "power"
+        ]
+      ],
+      "version": 1,
+      "writing_profile": "ipos-structural-integrity-v1"
+    },
+    "profile_status": "policy_valid"
+  },
+  "contract_version": "1.1",
+  "document_contract": {
+    "detail_policy": "preserve_essential_block_detail_v1",
+    "document_type": "IPOS",
+    "essential_sources": {
+      "capabilities": [
+        "inventory:main_functions",
+        "inventory:inputs",
+        "inventory:outputs"
+      ],
+      "purpose": [
+        "inventory:function"
+      ]
+    },
+    "gap_policy": "required_sections_with_audited_omissions_v1",
+    "interpretation": "admitted_normative_clauses_v1",
+    "mandatory_rules": [
+      "section_roles",
+      "functional_claims",
+      "information_gain",
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "paragraph": {
+      "claim_scope": [
+        "initiation",
+        "behavior",
+        "result",
+        "exception",
+        "local_interaction"
+      ],
+      "required": [
+        "responsibility",
+        "supported_behavior"
+      ],
+      "when_supported": [
+        "condition",
+        "effect",
+        "result",
+        "dependency",
+        "exception"
+      ]
+    },
+    "profile": "block_local_v1",
+    "rendering": "scoped_explanatory_prose_v1",
+    "sections": [
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "purpose",
+        "title": "1.1 Functionality"
+      },
+      {
+        "information_gain": true,
+        "required": true,
+        "role": "capabilities",
+        "title": "1.2 Supported functions and scope"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "organization",
+        "title": "1.3 Internal structure"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "functions",
+        "title": "1.4 Supported block functions"
+      },
+      {
+        "information_gain": true,
+        "required": false,
+        "role": "architecture",
+        "title": "1.5 General architecture"
+      }
+    ],
+    "sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+    "synthesis": "explicit_functional_claims_v1",
+    "validation_hooks": [
+      "semantic_fidelity",
+      "publication_quality",
+      "materialization"
+    ],
+    "version": 1
+  },
+  "functional_claim_findings": [],
+  "functional_claim_plan": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "claims": [
+      {
+        "claim_id": "ipos-claim-049123119bbc80f17dbc",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Sensor-Hub block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "role": "purpose",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 145,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-fabb54e21714dbe30228",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Primary sensing input"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Sensor-Hub block"
+          },
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Analog input signal"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Sensor-Hub block"
+          }
+        ],
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "role": "boundaries",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 21,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Primary sensing input"
+          },
+          {
+            "end": 19,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Analog input signal"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-15e7aeb0bed7e69eabc7",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "If the sensor hub IP is not enabled"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": true,
+            "objects": [],
+            "predicate": "toggle",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "the SCL and SDA pad"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 117,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+            "start": 0,
+            "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_context_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-5027534bb6f1dde43847",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the TAG field"
+            ],
+            "predicate": "contain",
+            "qualifiers": [],
+            "relation": "containment",
+            "results": [],
+            "subject": "The last 8-bits of the data stored in FIFO"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1"
+        ],
+        "role": "organization",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 97,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+            "start": 0,
+            "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-98b31493d52c54cad125",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)"
+            ],
+            "predicate": "define",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1"
+        ],
+        "role": "limits",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 179,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+            "start": 0,
+            "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-e1b0094470da6d4fbfae",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "set to 1 when an I2C operation is not on-going"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The output port sleep_master"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 128,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+            "start": 0,
+            "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-208f8915f7dd10770746",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the destination of an I2C Write Operation"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Only I2C target addressed through SLAVE0_DEV_ADD register"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 139,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+            "start": 0,
+            "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-41c0e9cce5a03237025a",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "0,1,2,3"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "AUX_SENS_ON possible values"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 45,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+            "start": 0,
+            "text": "AUX_SENS_ON possible values shall be 0,1,2,3."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-776e759edcbe52d815f1",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "All the values"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 175,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+            "start": 46,
+            "text": "All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-963fc615065613cfd1ee",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "composed by 4 words (16bytes)"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Each data stored in FIFO"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 90,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+            "start": 0,
+            "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-0d50cf9030b11a07357e",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "reset every time a new I2C operation starts"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "All the SENSOR_HUB_x registers"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 110,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+            "start": 0,
+            "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-adc0e432725f49198164",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the data from each I2C slave"
+            ],
+            "predicate": "contain",
+            "qualifiers": [],
+            "relation": "containment",
+            "results": [],
+            "subject": "3 words (12bytes) of the data stored in FIFO"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1"
+        ],
+        "role": "organization",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 114,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+            "start": 0,
+            "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-684783630f1ad0ebbcc1",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "reserved at '0'"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "24-bits of the data stored in FIFO"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 86,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+            "start": 0,
+            "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-fcf60a8639972f2fc5e9",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0)"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "ignored"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "any dvalid triggered (HW or SW)"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 134,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+            "start": 0,
+            "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_context_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-3e43a96563ed980e1305",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "or",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The trigger of sensor hub"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 153,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+            "start": 0,
+            "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-32213423ba108abd5106",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "ignored if an I2C Write operation is issued to the I2C Slave 0"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "SLAVE0_NUMOP bitfield"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 124,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+            "start": 0,
+            "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-a610e2f1de1a357bb23c",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "All the values from 1 to 12"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 124,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+            "start": 0,
+            "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-0b9b7b7cf6956236a73f",
+        "dependencies": [],
+        "meanings": [
+          {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": true,
+            "objects": [
+              "updated"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value"
+          }
+        ],
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1"
+        ],
+        "role": "functions",
+        "scope": "behavior",
+        "spans": [
+          {
+            "end": 178,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+            "start": 0,
+            "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+          }
+        ],
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "decisions": [
+      {
+        "claim_id": "ipos-claim-049123119bbc80f17dbc",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-fabb54e21714dbe30228",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-15e7aeb0bed7e69eabc7",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-5027534bb6f1dde43847",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-98b31493d52c54cad125",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-e1b0094470da6d4fbfae",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-208f8915f7dd10770746",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-41c0e9cce5a03237025a",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-776e759edcbe52d815f1",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-963fc615065613cfd1ee",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-0d50cf9030b11a07357e",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-adc0e432725f49198164",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-684783630f1ad0ebbcc1",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-fcf60a8639972f2fc5e9",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-3e43a96563ed980e1305",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-32213423ba108abd5106",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-a610e2f1de1a357bb23c",
+        "decision": "preserved",
+        "findings": []
+      },
+      {
+        "claim_id": "ipos-claim-0b9b7b7cf6956236a73f",
+        "decision": "preserved",
+        "findings": []
+      }
+    ],
+    "dispositions": [
+      {
+        "claim_ids": [
+          "ipos-claim-049123119bbc80f17dbc"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 145,
+            "record_id": "inventory:function",
+            "start": 0,
+            "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-fabb54e21714dbe30228"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 21,
+            "record_id": "inventory:inputs",
+            "start": 0,
+            "text": "Primary sensing input"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-fabb54e21714dbe30228"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 19,
+            "record_id": "inventory:outputs",
+            "start": 0,
+            "text": "Analog input signal"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-15e7aeb0bed7e69eabc7"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 117,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+            "start": 0,
+            "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-5027534bb6f1dde43847"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 97,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+            "start": 0,
+            "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-98b31493d52c54cad125"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 179,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+            "start": 0,
+            "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-e1b0094470da6d4fbfae"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 128,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+            "start": 0,
+            "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-208f8915f7dd10770746"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 139,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+            "start": 0,
+            "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-41c0e9cce5a03237025a"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 45,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+            "start": 0,
+            "text": "AUX_SENS_ON possible values shall be 0,1,2,3."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-776e759edcbe52d815f1"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 175,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+            "start": 46,
+            "text": "All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-963fc615065613cfd1ee"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 90,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+            "start": 0,
+            "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-0d50cf9030b11a07357e"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 110,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+            "start": 0,
+            "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-adc0e432725f49198164"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 114,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+            "start": 0,
+            "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-684783630f1ad0ebbcc1"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 86,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+            "start": 0,
+            "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-fcf60a8639972f2fc5e9"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 134,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+            "start": 0,
+            "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-3e43a96563ed980e1305"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 153,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+            "start": 0,
+            "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-32213423ba108abd5106"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 124,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+            "start": 0,
+            "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-a610e2f1de1a357bb23c"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 124,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+            "start": 0,
+            "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      },
+      {
+        "claim_ids": [
+          "ipos-claim-0b9b7b7cf6956236a73f"
+        ],
+        "decision": "preserved",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1"
+        ],
+        "reason": "explicit_relationship_bundle",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 178,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+            "start": 0,
+            "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported conditional consequence marker; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 186,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
+            "start": 0,
+            "text": "[DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' ."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 188,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
+            "start": 0,
+            "text": "[DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed."
+          }
+        ]
+      },
+      {
+        "claim_ids": [],
+        "decision": "excluded",
+        "proposition_ids": [],
+        "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+        "representative_id": "",
+        "spans": [
+          {
+            "end": 100,
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
+            "start": 0,
+            "text": "The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ]
+      }
+    ],
+    "evidence": {
+      "dependencies": [],
+      "propositions": [
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Sensor-Hub block"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "inventory:function:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 145,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Primary sensing input"
+            ],
+            "predicate": "accept",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Sensor-Hub block"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "inventory:inputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 21,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Primary sensing input"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "Analog input signal"
+            ],
+            "predicate": "produce",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The Sensor-Hub block"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "inventory:outputs:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 19,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Analog input signal"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "If the sensor hub IP is not enabled"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": true,
+            "objects": [],
+            "predicate": "toggle",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "the SCL and SDA pad"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 117,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+              "start": 0,
+              "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the TAG field"
+            ],
+            "predicate": "contain",
+            "qualifiers": [],
+            "relation": "containment",
+            "results": [],
+            "subject": "The last 8-bits of the data stored in FIFO"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 97,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+              "start": 0,
+              "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)"
+            ],
+            "predicate": "define",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 179,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+              "start": 0,
+              "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "set to 1 when an I2C operation is not on-going"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The output port sleep_master"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 128,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+              "start": 0,
+              "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the destination of an I2C Write Operation"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Only I2C target addressed through SLAVE0_DEV_ADD register"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 139,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+              "start": 0,
+              "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "0,1,2,3"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "AUX_SENS_ON possible values"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 45,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+              "start": 0,
+              "text": "AUX_SENS_ON possible values shall be 0,1,2,3."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "All the values"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1",
+          "spans": [
+            {
+              "end": 175,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+              "start": 46,
+              "text": "All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "composed by 4 words (16bytes)"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "Each data stored in FIFO"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 90,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+              "start": 0,
+              "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "reset every time a new I2C operation starts"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "All the SENSOR_HUB_x registers"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 110,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+              "start": 0,
+              "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "the data from each I2C slave"
+            ],
+            "predicate": "contain",
+            "qualifiers": [],
+            "relation": "containment",
+            "results": [],
+            "subject": "3 words (12bytes) of the data stored in FIFO"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 114,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+              "start": 0,
+              "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "reserved at '0'"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "24-bits of the data stored in FIFO"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 86,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+              "start": 0,
+              "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [
+              {
+                "operands": [],
+                "operator": "atom",
+                "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0)"
+              }
+            ],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "ignored"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "any dvalid triggered (HW or SW)"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 134,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+              "start": 0,
+              "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "or",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The trigger of sensor hub"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 153,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+              "start": 0,
+              "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "ignored if an I2C Write operation is issued to the I2C Slave 0"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "SLAVE0_NUMOP bitfield"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 124,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+              "start": 0,
+              "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": false,
+            "objects": [
+              "valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "All the values from 1 to 12"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 124,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+              "start": 0,
+              "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "domain": "digital",
+          "layer": "block",
+          "meaning": {
+            "contexts": [],
+            "coordination": "and",
+            "effects": [],
+            "modality": "",
+            "mode": "",
+            "negative": true,
+            "objects": [
+              "updated"
+            ],
+            "predicate": "be",
+            "qualifiers": [],
+            "relation": "behavior",
+            "results": [],
+            "subject": "The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value"
+          },
+          "owner": "Sensor-Hub",
+          "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1",
+          "spans": [
+            {
+              "end": 178,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+              "start": 0,
+              "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+            }
+          ]
+        }
+      ],
+      "records": [
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:function",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:function",
+          "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:inputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:inputs",
+          "text": "Primary sensing input"
+        },
+        {
+          "authority_tier": "admitted_context",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "inventory:outputs",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "approved block inventory",
+          "record_id": "inventory:outputs",
+          "text": "Analog input signal"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9317",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+          "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9263",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+          "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9500",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
+          "text": "[DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' ."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9027",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
+          "text": "[DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9030",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+          "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9017",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+          "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9024",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+          "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9029",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+          "text": "AUX_SENS_ON possible values shall be 0,1,2,3. All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9260",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+          "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9033",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+          "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9261",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+          "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9262",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+          "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9035",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+          "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9018",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+          "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9032",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+          "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9031",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+          "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9300",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+          "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+        },
+        {
+          "authority_tier": "approved_normative",
+          "decision": "retained",
+          "ownership_scope": "block_local",
+          "provenance": [
+            "approved requirement:DDS_STBIO1_9034",
+            "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+            "approved snapshot",
+            "artifacts/stage2_mirco_arc/block_inventory.csv"
+          ],
+          "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+          "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
+          "text": "The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+        }
+      ],
+      "unresolved_contexts": [
+        {
+          "context_id": "requirement:Sensor-Hub:DDS_STBIO1_9500:clause:1:unresolved",
+          "reason": "unsupported conditional consequence marker; full source retained",
+          "spans": [
+            {
+              "end": 186,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
+              "start": 0,
+              "text": "[DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' ."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Sensor-Hub:DDS_STBIO1_9027:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 188,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
+              "start": 0,
+              "text": "[DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed."
+            }
+          ]
+        },
+        {
+          "context_id": "requirement:Sensor-Hub:DDS_STBIO1_9034:clause:1:unresolved",
+          "reason": "unsupported multi-clause or non-normative construction; full source retained",
+          "spans": [
+            {
+              "end": 100,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
+              "start": 0,
+              "text": "The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        }
+      ]
+    },
+    "findings": [],
+    "intents": [
+      {
+        "claim_id": "ipos-claim-049123119bbc80f17dbc",
+        "proposition_ids": [
+          "inventory:function:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "purpose",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-fabb54e21714dbe30228",
+        "proposition_ids": [
+          "inventory:inputs:clause:1:meaning:1",
+          "inventory:outputs:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "boundaries",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-15e7aeb0bed7e69eabc7",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_context_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-5027534bb6f1dde43847",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "organization",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-98b31493d52c54cad125",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "limits",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-e1b0094470da6d4fbfae",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-208f8915f7dd10770746",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-41c0e9cce5a03237025a",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-776e759edcbe52d815f1",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-963fc615065613cfd1ee",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-0d50cf9030b11a07357e",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-adc0e432725f49198164",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "organization",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-684783630f1ad0ebbcc1",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-fcf60a8639972f2fc5e9",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_context_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-3e43a96563ed980e1305",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-32213423ba108abd5106",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-a610e2f1de1a357bb23c",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      },
+      {
+        "claim_id": "ipos-claim-0b9b7b7cf6956236a73f",
+        "proposition_ids": [
+          "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1"
+        ],
+        "required_dependency_ids": [],
+        "role": "functions",
+        "scope": "behavior",
+        "synthesis_rule": "shared_responsibility_bundle-v1"
+      }
+    ],
+    "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+    "version": "1.1"
+  },
+  "model": {
+    "acceptance": {
+      "materialization": "UNRESOLVED",
+      "materialization_findings": [],
+      "publication_findings": [],
+      "publication_quality": "UNRESOLVED",
+      "semantic_fidelity": "UNRESOLVED",
+      "semantic_findings": []
+    },
+    "contract_version": "1.1",
+    "final_prose_validation": "not_implemented",
+    "findings": [],
+    "phase": "pre_prose_model_only",
+    "plan": {
+      "acceptance": {
+        "materialization": "UNRESOLVED",
+        "materialization_findings": [],
+        "publication_findings": [],
+        "publication_quality": "UNRESOLVED",
+        "semantic_fidelity": "UNRESOLVED",
+        "semantic_findings": []
+      },
+      "claims": [
+        {
+          "claim_id": "ipos-claim-049123119bbc80f17dbc",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Sensor-Hub block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "role": "purpose",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 145,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-fabb54e21714dbe30228",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Primary sensing input"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Sensor-Hub block"
+            },
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Analog input signal"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Sensor-Hub block"
+            }
+          ],
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "role": "boundaries",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 21,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Primary sensing input"
+            },
+            {
+              "end": 19,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Analog input signal"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-15e7aeb0bed7e69eabc7",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "If the sensor hub IP is not enabled"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": true,
+              "objects": [],
+              "predicate": "toggle",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "the SCL and SDA pad"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 117,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+              "start": 0,
+              "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_context_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-5027534bb6f1dde43847",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the TAG field"
+              ],
+              "predicate": "contain",
+              "qualifiers": [],
+              "relation": "containment",
+              "results": [],
+              "subject": "The last 8-bits of the data stored in FIFO"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1"
+          ],
+          "role": "organization",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 97,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+              "start": 0,
+              "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-98b31493d52c54cad125",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)"
+              ],
+              "predicate": "define",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1"
+          ],
+          "role": "limits",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 179,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+              "start": 0,
+              "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-e1b0094470da6d4fbfae",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "set to 1 when an I2C operation is not on-going"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The output port sleep_master"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 128,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+              "start": 0,
+              "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-208f8915f7dd10770746",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the destination of an I2C Write Operation"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Only I2C target addressed through SLAVE0_DEV_ADD register"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 139,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+              "start": 0,
+              "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-41c0e9cce5a03237025a",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "0,1,2,3"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "AUX_SENS_ON possible values"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 45,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+              "start": 0,
+              "text": "AUX_SENS_ON possible values shall be 0,1,2,3."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-776e759edcbe52d815f1",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "All the values"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 175,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+              "start": 46,
+              "text": "All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-963fc615065613cfd1ee",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "composed by 4 words (16bytes)"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Each data stored in FIFO"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 90,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+              "start": 0,
+              "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-0d50cf9030b11a07357e",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "reset every time a new I2C operation starts"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "All the SENSOR_HUB_x registers"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 110,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+              "start": 0,
+              "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-adc0e432725f49198164",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the data from each I2C slave"
+              ],
+              "predicate": "contain",
+              "qualifiers": [],
+              "relation": "containment",
+              "results": [],
+              "subject": "3 words (12bytes) of the data stored in FIFO"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1"
+          ],
+          "role": "organization",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 114,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+              "start": 0,
+              "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-684783630f1ad0ebbcc1",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "reserved at '0'"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "24-bits of the data stored in FIFO"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 86,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+              "start": 0,
+              "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-fcf60a8639972f2fc5e9",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0)"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "ignored"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "any dvalid triggered (HW or SW)"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 134,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+              "start": 0,
+              "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_context_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-3e43a96563ed980e1305",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "or",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The trigger of sensor hub"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 153,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+              "start": 0,
+              "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-32213423ba108abd5106",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "ignored if an I2C Write operation is issued to the I2C Slave 0"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "SLAVE0_NUMOP bitfield"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 124,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+              "start": 0,
+              "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-a610e2f1de1a357bb23c",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "All the values from 1 to 12"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 124,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+              "start": 0,
+              "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-0b9b7b7cf6956236a73f",
+          "dependencies": [],
+          "meanings": [
+            {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": true,
+              "objects": [
+                "updated"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value"
+            }
+          ],
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1"
+          ],
+          "role": "functions",
+          "scope": "behavior",
+          "spans": [
+            {
+              "end": 178,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+              "start": 0,
+              "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+            }
+          ],
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "decisions": [
+        {
+          "claim_id": "ipos-claim-049123119bbc80f17dbc",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-fabb54e21714dbe30228",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-15e7aeb0bed7e69eabc7",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-5027534bb6f1dde43847",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-98b31493d52c54cad125",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-e1b0094470da6d4fbfae",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-208f8915f7dd10770746",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-41c0e9cce5a03237025a",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-776e759edcbe52d815f1",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-963fc615065613cfd1ee",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-0d50cf9030b11a07357e",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-adc0e432725f49198164",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-684783630f1ad0ebbcc1",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-fcf60a8639972f2fc5e9",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-3e43a96563ed980e1305",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-32213423ba108abd5106",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-a610e2f1de1a357bb23c",
+          "decision": "preserved",
+          "findings": []
+        },
+        {
+          "claim_id": "ipos-claim-0b9b7b7cf6956236a73f",
+          "decision": "preserved",
+          "findings": []
+        }
+      ],
+      "dispositions": [
+        {
+          "claim_ids": [
+            "ipos-claim-049123119bbc80f17dbc"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 145,
+              "record_id": "inventory:function",
+              "start": 0,
+              "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-fabb54e21714dbe30228"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 21,
+              "record_id": "inventory:inputs",
+              "start": 0,
+              "text": "Primary sensing input"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-fabb54e21714dbe30228"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 19,
+              "record_id": "inventory:outputs",
+              "start": 0,
+              "text": "Analog input signal"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-15e7aeb0bed7e69eabc7"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 117,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+              "start": 0,
+              "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-5027534bb6f1dde43847"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 97,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+              "start": 0,
+              "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-98b31493d52c54cad125"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 179,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+              "start": 0,
+              "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-e1b0094470da6d4fbfae"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 128,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+              "start": 0,
+              "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-208f8915f7dd10770746"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 139,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+              "start": 0,
+              "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-41c0e9cce5a03237025a"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 45,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+              "start": 0,
+              "text": "AUX_SENS_ON possible values shall be 0,1,2,3."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-776e759edcbe52d815f1"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 175,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+              "start": 46,
+              "text": "All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-963fc615065613cfd1ee"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 90,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+              "start": 0,
+              "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-0d50cf9030b11a07357e"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 110,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+              "start": 0,
+              "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-adc0e432725f49198164"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 114,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+              "start": 0,
+              "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-684783630f1ad0ebbcc1"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 86,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+              "start": 0,
+              "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-fcf60a8639972f2fc5e9"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 134,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+              "start": 0,
+              "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-3e43a96563ed980e1305"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 153,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+              "start": 0,
+              "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-32213423ba108abd5106"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 124,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+              "start": 0,
+              "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-a610e2f1de1a357bb23c"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 124,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+              "start": 0,
+              "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        },
+        {
+          "claim_ids": [
+            "ipos-claim-0b9b7b7cf6956236a73f"
+          ],
+          "decision": "preserved",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1"
+          ],
+          "reason": "explicit_relationship_bundle",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 178,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+              "start": 0,
+              "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported conditional consequence marker; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 186,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
+              "start": 0,
+              "text": "[DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' ."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 188,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
+              "start": 0,
+              "text": "[DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed."
+            }
+          ]
+        },
+        {
+          "claim_ids": [],
+          "decision": "excluded",
+          "proposition_ids": [],
+          "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+          "representative_id": "",
+          "spans": [
+            {
+              "end": 100,
+              "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
+              "start": 0,
+              "text": "The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+            }
+          ]
+        }
+      ],
+      "evidence": {
+        "dependencies": [],
+        "propositions": [
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Sensor-Hub block"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "inventory:function:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 145,
+                "record_id": "inventory:function",
+                "start": 0,
+                "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Primary sensing input"
+              ],
+              "predicate": "accept",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Sensor-Hub block"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "inventory:inputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 21,
+                "record_id": "inventory:inputs",
+                "start": 0,
+                "text": "Primary sensing input"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "Analog input signal"
+              ],
+              "predicate": "produce",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The Sensor-Hub block"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "inventory:outputs:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 19,
+                "record_id": "inventory:outputs",
+                "start": 0,
+                "text": "Analog input signal"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "If the sensor hub IP is not enabled"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": true,
+              "objects": [],
+              "predicate": "toggle",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "the SCL and SDA pad"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 117,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+                "start": 0,
+                "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the TAG field"
+              ],
+              "predicate": "contain",
+              "qualifiers": [],
+              "relation": "containment",
+              "results": [],
+              "subject": "The last 8-bits of the data stored in FIFO"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 97,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+                "start": 0,
+                "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)"
+              ],
+              "predicate": "define",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 179,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+                "start": 0,
+                "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "set to 1 when an I2C operation is not on-going"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The output port sleep_master"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 128,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+                "start": 0,
+                "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the destination of an I2C Write Operation"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Only I2C target addressed through SLAVE0_DEV_ADD register"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 139,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+                "start": 0,
+                "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "0,1,2,3"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "AUX_SENS_ON possible values"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 45,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+                "start": 0,
+                "text": "AUX_SENS_ON possible values shall be 0,1,2,3."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "All the values"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1",
+            "spans": [
+              {
+                "end": 175,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+                "start": 46,
+                "text": "All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "composed by 4 words (16bytes)"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "Each data stored in FIFO"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 90,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+                "start": 0,
+                "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "reset every time a new I2C operation starts"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "All the SENSOR_HUB_x registers"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 110,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+                "start": 0,
+                "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "the data from each I2C slave"
+              ],
+              "predicate": "contain",
+              "qualifiers": [],
+              "relation": "containment",
+              "results": [],
+              "subject": "3 words (12bytes) of the data stored in FIFO"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 114,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+                "start": 0,
+                "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "reserved at '0'"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "24-bits of the data stored in FIFO"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 86,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+                "start": 0,
+                "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [
+                {
+                  "operands": [],
+                  "operator": "atom",
+                  "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0)"
+                }
+              ],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "ignored"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "any dvalid triggered (HW or SW)"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 134,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+                "start": 0,
+                "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "or",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The trigger of sensor hub"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 153,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+                "start": 0,
+                "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "ignored if an I2C Write operation is issued to the I2C Slave 0"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "SLAVE0_NUMOP bitfield"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 124,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+                "start": 0,
+                "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": false,
+              "objects": [
+                "valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "All the values from 1 to 12"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 124,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+                "start": 0,
+                "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          },
+          {
+            "domain": "digital",
+            "layer": "block",
+            "meaning": {
+              "contexts": [],
+              "coordination": "and",
+              "effects": [],
+              "modality": "",
+              "mode": "",
+              "negative": true,
+              "objects": [
+                "updated"
+              ],
+              "predicate": "be",
+              "qualifiers": [],
+              "relation": "behavior",
+              "results": [],
+              "subject": "The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value"
+            },
+            "owner": "Sensor-Hub",
+            "proposition_id": "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1",
+            "spans": [
+              {
+                "end": 178,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+                "start": 0,
+                "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+              }
+            ]
+          }
+        ],
+        "records": [
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:function",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:function",
+            "text": "Operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination."
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:inputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:inputs",
+            "text": "Primary sensing input"
+          },
+          {
+            "authority_tier": "admitted_context",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "inventory:outputs",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "approved block inventory",
+            "record_id": "inventory:outputs",
+            "text": "Analog input signal"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9317",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9317",
+            "text": "If the sensor hub IP is not enabled, the SCL and SDA pad shall not toggle. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9263",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9263",
+            "text": "The last 8-bits of the data stored in FIFO shall contain the TAG field. [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9500",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
+            "text": "[DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' ."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9027",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
+            "text": "[DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9030",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
+            "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9017",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
+            "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9024",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
+            "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9029",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9029",
+            "text": "AUX_SENS_ON possible values shall be 0,1,2,3. All the values shall be tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network. [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9260",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9260",
+            "text": "Each data stored in FIFO shall be composed by 4 words (16bytes). [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9033",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
+            "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9261",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9261",
+            "text": "3 words (12bytes) of the data stored in FIFO shall contain the data from each I2C slave. [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9262",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9262",
+            "text": "24-bits of the data stored in FIFO shall be reserved at '0'. [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9035",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
+            "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9018",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
+            "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9032",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
+            "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9031",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
+            "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9300",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
+            "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
+          },
+          {
+            "authority_tier": "approved_normative",
+            "decision": "retained",
+            "ownership_scope": "block_local",
+            "provenance": [
+              "approved requirement:DDS_STBIO1_9034",
+              "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\data\\canonical\\canonical_store.sqlite",
+              "approved snapshot",
+              "artifacts/stage2_mirco_arc/block_inventory.csv"
+            ],
+            "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+            "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
+            "text": "The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+          }
+        ],
+        "unresolved_contexts": [
+          {
+            "context_id": "requirement:Sensor-Hub:DDS_STBIO1_9500:clause:1:unresolved",
+            "reason": "unsupported conditional consequence marker; full source retained",
+            "spans": [
+              {
+                "end": 186,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
+                "start": 0,
+                "text": "[DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' ."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Sensor-Hub:DDS_STBIO1_9027:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 188,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
+                "start": 0,
+                "text": "[DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed."
+              }
+            ]
+          },
+          {
+            "context_id": "requirement:Sensor-Hub:DDS_STBIO1_9034:clause:1:unresolved",
+            "reason": "unsupported multi-clause or non-normative construction; full source retained",
+            "spans": [
+              {
+                "end": 100,
+                "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
+                "start": 0,
+                "text": "The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
+              }
+            ]
+          }
+        ]
+      },
+      "findings": [],
+      "intents": [
+        {
+          "claim_id": "ipos-claim-049123119bbc80f17dbc",
+          "proposition_ids": [
+            "inventory:function:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "purpose",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-fabb54e21714dbe30228",
+          "proposition_ids": [
+            "inventory:inputs:clause:1:meaning:1",
+            "inventory:outputs:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "boundaries",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-15e7aeb0bed7e69eabc7",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9317:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_context_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-5027534bb6f1dde43847",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9263:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "organization",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-98b31493d52c54cad125",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9030:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "limits",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-e1b0094470da6d4fbfae",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9017:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-208f8915f7dd10770746",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9024:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-41c0e9cce5a03237025a",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-776e759edcbe52d815f1",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9029:clause:2:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-963fc615065613cfd1ee",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9260:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-0d50cf9030b11a07357e",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9033:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-adc0e432725f49198164",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9261:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "organization",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-684783630f1ad0ebbcc1",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9262:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-fcf60a8639972f2fc5e9",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9035:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_context_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-3e43a96563ed980e1305",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9018:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-32213423ba108abd5106",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9032:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-a610e2f1de1a357bb23c",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9031:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        },
+        {
+          "claim_id": "ipos-claim-0b9b7b7cf6956236a73f",
+          "proposition_ids": [
+            "requirement:Sensor-Hub:DDS_STBIO1_9300:clause:1:meaning:1"
+          ],
+          "required_dependency_ids": [],
+          "role": "functions",
+          "scope": "behavior",
+          "synthesis_rule": "shared_responsibility_bundle-v1"
+        }
+      ],
+      "profile_fingerprint": "5a64d10deeddd5fd029e6863d80d0dff0b76698e75a36a3744745cb2f13cfa89",
+      "version": "1.1"
+    },
+    "profile": {
+      "allowed_domains": [],
+      "allowed_layers": [
+        "block"
+      ],
+      "allowed_scopes": [
+        "block_local"
+      ],
+      "authority_tiers": [
+        "admitted_context",
+        "approved_normative"
+      ],
+      "document_type": "IPOS",
+      "evidence_kinds": [
+        "descriptive",
+        "approved_normative"
+      ],
+      "excluded_terms": [],
+      "name": "ipos-structural-integrity-v1",
+      "owner_policy": "same_owner",
+      "projection_adapters": [
+        "ipos-local"
+      ],
+      "runtime_enabled": true,
+      "topic_roles": [
+        "function",
+        "interfaces",
+        "operating_concept",
+        "power"
+      ],
+      "version": 1
+    },
+    "source_semantic_validation": "not_implemented",
+    "typed_model_status": "model_valid"
+  },
+  "phase": "ipos_functional_claim_materialization",
+  "publication_status": "requires_independent_final_artifact_checks",
+  "section_plan": [
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Sensor-Hub block"
+        }
+      ],
+      "claim_id": "ipos-claim-049123119bbc80f17dbc",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "purpose"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Primary sensing input"
+          ],
+          "predicate": "accept",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Sensor-Hub block"
+        },
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "Analog input signal"
+          ],
+          "predicate": "produce",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The Sensor-Hub block"
+        }
+      ],
+      "claim_id": "ipos-claim-fabb54e21714dbe30228",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "boundaries"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [
+            {
+              "operands": [],
+              "operator": "atom",
+              "text": "If the sensor hub IP is not enabled"
+            }
+          ],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": true,
+          "objects": [],
+          "predicate": "toggle",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "the SCL and SDA pad"
+        }
+      ],
+      "claim_id": "ipos-claim-15e7aeb0bed7e69eabc7",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "the TAG field"
+          ],
+          "predicate": "contain",
+          "qualifiers": [],
+          "relation": "containment",
+          "results": [],
+          "subject": "The last 8-bits of the data stored in FIFO"
+        }
+      ],
+      "claim_id": "ipos-claim-5027534bb6f1dde43847",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "organization"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)"
+          ],
+          "predicate": "define",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+        }
+      ],
+      "claim_id": "ipos-claim-98b31493d52c54cad125",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "limits"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "set to 1 when an I2C operation is not on-going"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The output port sleep_master"
+        }
+      ],
+      "claim_id": "ipos-claim-e1b0094470da6d4fbfae",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "the destination of an I2C Write Operation"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "Only I2C target addressed through SLAVE0_DEV_ADD register"
+        }
+      ],
+      "claim_id": "ipos-claim-208f8915f7dd10770746",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "0,1,2,3"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "AUX_SENS_ON possible values"
+        }
+      ],
+      "claim_id": "ipos-claim-41c0e9cce5a03237025a",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "All the values"
+        }
+      ],
+      "claim_id": "ipos-claim-776e759edcbe52d815f1",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "composed by 4 words (16bytes)"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "Each data stored in FIFO"
+        }
+      ],
+      "claim_id": "ipos-claim-963fc615065613cfd1ee",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "reset every time a new I2C operation starts"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "All the SENSOR_HUB_x registers"
+        }
+      ],
+      "claim_id": "ipos-claim-0d50cf9030b11a07357e",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "the data from each I2C slave"
+          ],
+          "predicate": "contain",
+          "qualifiers": [],
+          "relation": "containment",
+          "results": [],
+          "subject": "3 words (12bytes) of the data stored in FIFO"
+        }
+      ],
+      "claim_id": "ipos-claim-adc0e432725f49198164",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "organization"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "reserved at '0'"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "24-bits of the data stored in FIFO"
+        }
+      ],
+      "claim_id": "ipos-claim-684783630f1ad0ebbcc1",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [
+            {
+              "operands": [],
+              "operator": "atom",
+              "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0)"
+            }
+          ],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "ignored"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "any dvalid triggered (HW or SW)"
+        }
+      ],
+      "claim_id": "ipos-claim-fcf60a8639972f2fc5e9",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "or",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The trigger of sensor hub"
+        }
+      ],
+      "claim_id": "ipos-claim-3e43a96563ed980e1305",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "ignored if an I2C Write operation is issued to the I2C Slave 0"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "SLAVE0_NUMOP bitfield"
+        }
+      ],
+      "claim_id": "ipos-claim-32213423ba108abd5106",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": false,
+          "objects": [
+            "valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "All the values from 1 to 12"
+        }
+      ],
+      "claim_id": "ipos-claim-a610e2f1de1a357bb23c",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    },
+    {
+      "added_dependency_ids": [],
+      "added_meanings": [
+        {
+          "contexts": [],
+          "coordination": "and",
+          "effects": [],
+          "modality": "",
+          "mode": "",
+          "negative": true,
+          "objects": [
+            "updated"
+          ],
+          "predicate": "be",
+          "qualifiers": [],
+          "relation": "behavior",
+          "results": [],
+          "subject": "The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value"
+        }
+      ],
+      "claim_id": "ipos-claim-0b9b7b7cf6956236a73f",
+      "decision": "retained",
+      "reason": "distinct_supported_content",
+      "role": "functions"
+    }
+  ],
+  "source_findings": [],
+  "source_semantic_status": "controlled_constructions_valid",
+  "source_validation_scope": "controlled_normative_constructions_and_literal_inventory"
+}

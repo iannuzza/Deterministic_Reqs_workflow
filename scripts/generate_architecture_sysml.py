@@ -14,7 +14,7 @@ from typing import Dict, Iterable, List, Optional, Tuple
 
 from openpyxl import load_workbook
 
-from sysml_generation_service import require_sysml_snapshot, validate_snapshot_requirement_coverage
+from sysml_generation_service import require_sysml_snapshot, validate_snapshot_requirement_coverage, resolve_sysml_descriptive_model
 from validate_downstream_coherence import (
     canonical_human_label,
     created_ipos_block_directories,
@@ -106,7 +106,10 @@ def doc_text(value: str) -> str:
 
 
 def sysml_header(snapshot_id: str, contract_fingerprint: str) -> str:
+    from validate_downstream_coherence import readiness_declaration
+
     return (
+        "// " + readiness_declaration(None, None, "") + "\n"
         f"// Snapshot ID: {snapshot_id}\n"
         f"// Downstream contract fingerprint: {contract_fingerprint}\n\n"
     )
@@ -259,11 +262,8 @@ def port_rows(path: Path) -> Dict[str, List[Dict[str, str]]]:
 
 
 def port_sysml_name(value: str) -> str:
-    name = re.sub(r"[^A-Za-z0-9_]", "_", (value or "").strip())
-    name = re.sub(r"_+", "_", name).strip("_") or "unnamedPort"
-    if name[0].isdigit():
-        name = "port_" + name
-    return name
+    from sysml_relations import port_identifier
+    return port_identifier(value)
 
 
 def model_file_name(value: str) -> str:
@@ -338,6 +338,8 @@ def build_shared_model() -> str:
         "        attribute sourceRequirementIds : String;",
         "        attribute sourceArtifact : String;",
         "    }",
+        "    connection def BlockRelation :> ArchitectureConnection;",
+        "    connection def SignalConnection :> ArchitectureConnection;",
         "",
         "    port def ArchitecturePort {",
         "        attribute sourceName : String;",
@@ -363,7 +365,7 @@ def build_block_model(
     requirements: List[Dict[str, str]],
     ports: List[Dict[str, str]],
     ipos_requirements: List[Dict[str, str]],
-    *, scope: SysMLMaterializationScope,
+    *, scope: SysMLMaterializationScope, descriptive_sections: Optional[Dict[str, List[str]]] = None,
 ) -> str:
     scope.require_valid()
     materialization = scope.block_for_label(name)
@@ -385,6 +387,10 @@ def build_block_model(
         f"        attribute linkedRequirementCount : Integer = {len(ipos_requirements)};",
         f"        doc /* block={doc_text(name)} | description={doc_text(block_description(name, block, requirements, ports))} */;",
     ]
+    for role, entries in (descriptive_sections or {}).items():
+        if entries:
+            text = " ".join(" ".join(entry.split()) for entry in entries)
+            lines.append(f"        doc /* governedOverview:{role} | {doc_text(text)} */;")
     if not ports:
         lines.append("        doc /* No approved source ports are currently assigned to this block. */;")
     if not ipos_requirements:
@@ -542,11 +548,6 @@ def build_model(
         "        part topDigital : DigitalSubsystem;",
     ])
     _append_ports(lines, ports_by_owner.get(scope.system_definition, []), "        ")
-    lines.extend([
-        "",
-        "        // Level 1 subsystem relationships are derived from the interaction matrix.",
-        "        connection analog_to_digital : ArchitectureConnection connect topAnalog to topDigital;",
-    ])
     system_requirements = srs_requirements if srs_requirements is not None else system_level_requirements
     if system_requirements:
         lines.extend(["", "        // Complete system requirements are mirrored from the approved SRS traceability matrix."])
@@ -568,16 +569,9 @@ def build_model(
             ])
     lines.append("")
     lines.append("")
-    for index, row in enumerate(interactions, start=1):
-        source = row["From block"]
-        target = row["To block"]
-        connection_id = f"connection_{index:03d}"
-        source_path = scope.block_for_label(source).node
-        target_path = scope.block_for_label(target).node
-        lines.extend([
-            f"        connection {connection_id} : ArchitectureConnection connect {source_path} to {target_path};",
-            f'        doc {connection_id} /* signal={doc_text(row.get("Signal/control", ""))} | trigger={doc_text(row.get("Trigger", ""))} | notes={doc_text(row.get("Notes", ""))} | sourceReqIds={doc_text(";".join(item.strip() for item in (row.get("Requirement IDs") or "").split(";") if item.strip() in approved_srs_source_ids))} | sourceArtifact=artifacts/stage2_mirco_arc/interaction_matrix.csv */;',
-        ])
+    from sysml_relations import serialize_relations
+    if scope.relation_inventory is not None:
+        lines.extend(serialize_relations(scope.relation_inventory))
     lines.extend(["    }", "", "}", ""])
     return "\n".join(lines)
 
@@ -680,8 +674,12 @@ def main() -> int:
     )
     generated_files.append(digital_subsystem_path)
     expected_block_files = set()
+    descriptive_models = {}
     for materialization in scope.blocks:
         name = materialization.name
+        domain = "digital" if materialization.target == "Digital IPOS" else "analog"
+        descriptive_model = resolve_sysml_descriptive_model(repo_root, downstream_contract, block=name, domain=domain)
+        descriptive_models[name] = descriptive_model
         block_path = blocks_dir / materialization.path.name
         expected_block_files.add(block_path)
         block_path.write_text(sysml_header(snapshot.snapshot_id, contract_fingerprint) + build_block_model(
@@ -691,6 +689,7 @@ def main() -> int:
             ports_by_block.get(name, []),
             ipos_requirements_by_block.get(name, []),
             scope=scope,
+            descriptive_sections=descriptive_model["sections"],
         ), encoding="utf-8")
         generated_files.append(block_path)
     for stale_path in blocks_dir.glob("*.sysml"):
@@ -715,6 +714,9 @@ def main() -> int:
         legacy_stage3_sysml.unlink()
     manifest.write_text(json.dumps({
         "snapshot_id": snapshot.snapshot_id,
+        "descriptive_model_version": "governed-ipos-shared-v1",
+        "descriptive_models": descriptive_models,
+        "relation_inventory": scope.relation_inventory.payload() if scope.relation_inventory else None,
         "materialization_scope": [
             {"name": block.name, "target": block.target, "model": block.path.relative_to(repo_root).as_posix()}
             for block in scope.blocks

@@ -7,7 +7,11 @@ Author: Alessandro Lucio IANNUZZI
 ## **0. Document Navigation** {#0-document-navigation}
 
 ### **0.1 Table of contents** {#01-table-of-contents}
+
 - [1. Block overview](#1-block-overview)
+- [1.1 Functionality](#11-functionality)
+- [1.2 Supported functions and scope](#12-supported-functions-and-scope)
+- [1.4 Supported block functions](#14-supported-block-functions)
 - [2. Source I/O](#2-source-io)
 - [3. Block requirements](#3-block-requirements)
 
@@ -19,6 +23,7 @@ Author: Alessandro Lucio IANNUZZI
 | 0.2 | 2026-10-12 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
+#### **Table 2. Requirement navigation** {#table-2-requirement-navigation}
 | Requirement | Internal link |
 |---|---|
 | IPOS-SMART-FIFO-001 | [Go to requirement](#ipos-smart-fifo-001) |
@@ -35,6 +40,12 @@ Author: Alessandro Lucio IANNUZZI
 | IPOS-SMART-FIFO-012 | [Go to requirement](#ipos-smart-fifo-012) |
 | IPOS-SMART-FIFO-013 | [Go to requirement](#ipos-smart-fifo-013) |
 
+### **0.4 Table index** {#04-table-index}
+
+- [Table 1. Version history](#table-1-version-history)
+- [Table 2. Requirement navigation](#table-2-requirement-navigation)
+- [Table 3. Source I/O](#table-3-source-io)
+
 ## **1. Block overview** {#1-block-overview}
 
 ### **1.1 Functionality** {#11-functionality}
@@ -45,24 +56,17 @@ The Smart FIFO block is designed to provide FIFO storage and AHB/memory access i
 
 The Smart FIFO block accepts Digital samples, FIFO mode configuration and produces Buffered samples and FIFO status flags.
 
-The user selects the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode.
-
-The parameter MEM_LOC defines the first Memory Location of the FIFO RAM: 0xC4000.
-
 ### **1.4 Supported block functions** {#14-supported-block-functions}
-
-The FIFO Controller has a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs and has an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory and has two working modes: Multiple FIFO and Unique FIFO and works at 16 MHz clock frequency.
 
 As default, the FIFO works in Unique FIFO Mode.
 
 If input signal HMASTER is set to 0 or 1, the FIFO Controller enters Memory mode.
 
-The FIFO register map first memory location is defined as MEM_LOC + 0x1000: 0xC5000.
-
 ## **2. Source I/O** {#2-source-io}
 
 The following approved source I/O entries are owned by this block.
 
+#### **Table 3. Source I/O** {#table-3-source-io}
 | Port name | Direction | Type / details | Table | Source page |
 |---|---|---|---|---|
 | TEST_MODE | input | ScanMode u_pad_mux. scan_mode | FIFO Controller I/O List | 112 |

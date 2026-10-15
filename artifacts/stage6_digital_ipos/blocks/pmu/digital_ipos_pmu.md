@@ -85,20 +85,6 @@ After At least 2 ms from the Release of the POR, the reset of the digital domain
 
 After At least 2 ms from the Release of the POR, the device starts the Boot Phase.
 
-When i_START_CLK_16M is high for the first time, after at least 20 cycles of i_clk_16M (16MHz), o_main_resetn is high.
-
-When i_POR1V2_1V2 is low, o_PD_CLKF is high. When i_POR1V2_1V2 is low, o_DIS_RC_VIREF is high. When i_POR1V2_1V2 is low, o_CLK_16M_READY is low. When i_POR1V2_1V2 is low, o_ EN_LDO1V8 is low.
-
-When clk_64k_divided is stable, after at least 352 cycles of clk_64k_divided (32kHz), o_DIS_RC_VIREF is low.
-
-When i_mask_en_ldo_pdclkf_reg and o_EN_LDO1V8 are set to 1, o_PD_CLKF is low after at least 40 cycles of the clk_64k_divided.
-
-When i_START_CLK_16M is high, after at least 20 cycles of i_clk_16M (16MHz), o_CLK_16M_READY is high.
-
-When i_POR1V2_1V2 rises, after at least 10 cycles of i_clk_64k (64kHz), o_ EN_LDO1V8 is high and the clk_64k_divided is considered stable.
-
-When the device is turned on, i_POR1V2_1V2 is high.
-
 ### **1.5 General architecture** {#15-general-architecture}
 
 #### **1.5.1 Clock connections** {#151-clock-connections}

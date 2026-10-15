@@ -3,15 +3,108 @@
 from __future__ import annotations
 
 import csv
+import json
 import re
 from pathlib import Path
 from tempfile import NamedTemporaryFile
 
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
+from openpyxl.styles import Protection, Alignment
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 from requirement_allocation_policy import requires_hierarchy_parent
+from approved_snapshot_resolver import validate_governed_source_context
+
+
+DESCRIPTIVE_SHEET = "Descriptive Content Review"
+DESCRIPTIVE_REVIEW_FIELDS = ("review_decision", "mapped_block", "domain", "review_rationale")
+
+
+def write_descriptive_review_sheet(workbook_path: Path, draft: dict) -> None:
+    records = draft.get("governed_source_context", {}).get("records", [])
+    workbook = load_workbook(workbook_path)
+    try:
+        if DESCRIPTIVE_SHEET in workbook.sheetnames:
+            raise ValueError("Descriptive review sheet already exists; do not overwrite reviewer decisions.")
+        sheet = workbook.create_sheet(DESCRIPTIVE_SHEET)
+        fields = list(DESCRIPTIVE_REVIEW_FIELDS) + sorted({
+            field for record in records for field in record if field not in DESCRIPTIVE_REVIEW_FIELDS
+        })
+        sheet.append(fields)
+        for record in records:
+            sheet.append([json.dumps(record[field], sort_keys=True) if isinstance(record.get(field), (dict, list))
+                          else str(record.get(field, "")) for field in fields])
+        for row in sheet.iter_rows(min_row=2):
+            for field, cell in zip(fields, row):
+                cell.data_type = "s"
+                cell.protection = Protection(locked=field not in DESCRIPTIVE_REVIEW_FIELDS)
+                cell.alignment = Alignment(wrap_text=True, vertical="top")
+                if field in DESCRIPTIVE_REVIEW_FIELDS:
+                    cell.fill = PatternFill("solid", fgColor="FFF2CC")
+        for column, field in enumerate(fields, 1):
+            sheet.column_dimensions[get_column_letter(column)].width = 75 if field == "statement" else 28
+        sheet.freeze_panes = "E2"
+        sheet.auto_filter.ref = sheet.dimensions
+        sheet.protection.sheet = True
+        for column, options in ((1, "pending,approved,rejected"), (3, "digital,analog,mixed_signal,system")):
+            validation = DataValidation(type="list", formula1='"' + options + '"', allow_blank=False)
+            validation.showErrorMessage = True
+            sheet.add_data_validation(validation)
+            if records:
+                validation.add(f"{get_column_letter(column)}2:{get_column_letter(column)}{len(records) + 1}")
+        workbook.save(workbook_path)
+    finally:
+        workbook.close()
+
+
+def reviewed_descriptive_context(workbook_path: Path, draft: dict, profile: dict) -> dict | None:
+    context = draft.get("governed_source_context")
+    if context is None:
+        return None
+    lock_path = workbook_path.with_name("~$" + workbook_path.name)
+    if lock_path.exists():
+        raise ValueError("Save and close the architecture workbook before descriptive admission.")
+    workbook = load_workbook(workbook_path, data_only=False)
+    try:
+        if DESCRIPTIVE_SHEET not in workbook.sheetnames:
+            raise ValueError("Architecture workbook is missing Descriptive Content Review.")
+        sheet = workbook[DESCRIPTIVE_SHEET]
+        headers = [str(cell.value or "") for cell in sheet[1]]
+        expected_fields = set(DESCRIPTIVE_REVIEW_FIELDS) | {
+            field for record in context["records"] for field in record
+        }
+        if len(headers) != len(set(headers)) or set(headers) != expected_fields:
+            raise ValueError("Descriptive review columns differ from the draft.")
+        originals = {record["record_id"]: record for record in context["records"]}
+        if len(originals) != len(context["records"]):
+            raise ValueError("Duplicate descriptive candidate in draft.")
+        reviewed = {}
+        for cells in sheet.iter_rows(min_row=2):
+            if not any(cell.value is not None for cell in cells):
+                continue
+            if any(cell.data_type == "f" for cell in cells):
+                raise ValueError("Formulas are not allowed in descriptive review.")
+            values = {field: "" if cell.value is None else str(cell.value) for field, cell in zip(headers, cells)}
+            identity = values.get("record_id")
+            if identity not in originals or identity in reviewed:
+                raise ValueError("Unknown or duplicate descriptive candidate.")
+            original = originals[identity]
+            for field in expected_fields - set(DESCRIPTIVE_REVIEW_FIELDS):
+                expected = original.get(field, "")
+                expected = json.dumps(expected, sort_keys=True) if isinstance(expected, (dict, list)) else str(expected)
+                if values[field] != expected:
+                    raise ValueError("Descriptive candidate text/provenance was changed: " + identity)
+            reviewed[identity] = dict(original, **{field: values[field].strip() for field in DESCRIPTIVE_REVIEW_FIELDS})
+        if set(reviewed) != set(originals):
+            raise ValueError("Descriptive review is missing candidates.")
+        result = dict(context, records=[reviewed[record["record_id"]] for record in context["records"]])
+        findings = validate_governed_source_context(dict(profile, governed_source_context=result))
+        if findings:
+            raise ValueError("; ".join(findings))
+        return result
+    finally:
+        workbook.close()
 
 
 EDITABLE_FIELDS = {

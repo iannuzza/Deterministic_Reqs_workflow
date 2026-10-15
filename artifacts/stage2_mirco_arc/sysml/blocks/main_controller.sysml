@@ -1,5 +1,6 @@
-// Snapshot ID: snap-b2e8101b00dc6909feaed885
-// Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+// NOT READY for RTL or high-level model generation
+// Snapshot ID: snap-73c872b1307b6adb5eaf843e
+// Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 package Block_MainController {
 
@@ -12,8 +13,11 @@ package Block_MainController {
         attribute inputs : String = "Configuration register settings, sampled data";
         attribute outputs : String = "Control state and data routing";
         attribute approvedPortCount : Integer = 224;
-        attribute linkedRequirementCount : Integer = 138;
+        attribute linkedRequirementCount : Integer = 181;
         doc /* block=Main Controller | description=Generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses. */;
+        doc /* governedOverview:functionality | The Main Controller block is designed to generate and receive Analog Domain control signals, perform DSP elaboration on ADC outputs, and write elaborated results to the defined addresses. */;
+        doc /* governedOverview:scope | The Main Controller block is designed to generate and receive Analog Domain control signals. The Main Controller block is designed to perform DSP elaboration on ADC outputs. The Main Controller block is designed to write elaborated results to the defined addresses. The Main Controller block accepts Configuration register settings, sampled data and produces Control state and data routing. */;
+        doc /* governedOverview:internal_functions | The interval between two GSR acquisitions is defined in time slots. */;
         in port i_clk_32kHz : ArchitecturePort {
             attribute sourceName = "i_clk_32kHz";
             attribute sourceDetails = "clk 32kHz from pmu";
@@ -1513,20 +1517,20 @@ package Block_MainController {
             attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_002";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-016";
-            doc /* The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set */;
+            doc /* The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set to 0 or when i_debug is set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_016 : IPOS_MAIN_CONTROLLER_016;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-016 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_002 | The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-016 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_002 | The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set to 0 or when i_debug is set to 1. */;
         doc /* coverageDependency: IPOS-MAIN-CONTROLLER-016 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_002 */;
         satisfy req_IPOS_MAIN_CONTROLLER_016 by self;
         requirement def IPOS_MAIN_CONTROLLER_017 : SourceRequirement {
             attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_004";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-017";
-            doc /* [Covers: DDS_STBIO1_0116] When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and that */;
+            doc /* [Covers: DDS_STBIO1_0116] When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and that the O_PD_CLKF signal is set to high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_017 : IPOS_MAIN_CONTROLLER_017;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-017 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_004 | [Covers: DDS_STBIO1_0116] When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and that */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-017 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_004 | [Covers: DDS_STBIO1_0116] When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and that the O_PD_CLKF signal is set to high. */;
         doc /* coverageDependency: IPOS-MAIN-CONTROLLER-017 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_004 */;
         satisfy req_IPOS_MAIN_CONTROLLER_017 by self;
         requirement def IPOS_MAIN_CONTROLLER_018 : SourceRequirement {
@@ -1543,1202 +1547,1632 @@ package Block_MainController {
             attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_009";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-019";
-            doc /* [Covers: DDS_STBIO1_0123] [Covers: DDS_STBIO1_0141] When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL (DEVICE_CONFIG_CHANNEL register [3]) is set high, or ADC_DO_CALIBRATION ( ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE (GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL (DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go */;
+            doc /* [Covers: DDS_STBIO1_0123] [Covers: DDS_STBIO1_0141] When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL (DEVICE_CONFIG_CHANNEL register [3]) is set high, or ADC_DO_CALIBRATION ( ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE (GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL (DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go to 0, the w_en_ldo1v8 shall be set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_019 : IPOS_MAIN_CONTROLLER_019;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-019 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_009 | [Covers: DDS_STBIO1_0123] [Covers: DDS_STBIO1_0141] When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL (DEVICE_CONFIG_CHANNEL register [3]) is set high, or ADC_DO_CALIBRATION ( ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE (GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL (DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-019 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_009 | [Covers: DDS_STBIO1_0123] [Covers: DDS_STBIO1_0141] When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL (DEVICE_CONFIG_CHANNEL register [3]) is set high, or ADC_DO_CALIBRATION ( ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE (GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL (DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go to 0, the w_en_ldo1v8 shall be set to 1. */;
         doc /* coverageDependency: IPOS-MAIN-CONTROLLER-019 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_009 */;
         satisfy req_IPOS_MAIN_CONTROLLER_019 by self;
         requirement def IPOS_MAIN_CONTROLLER_020 : SourceRequirement {
             attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_010";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-020";
-            doc /* [Covers: DDS_STBIO1_0119] When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 0, ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall go low and the Device_FSM FSM shall go to the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register */;
+            doc /* [Covers: DDS_STBIO1_0119] When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 0, ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall go low and the Device_FSM FSM shall go to the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_020 : IPOS_MAIN_CONTROLLER_020;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-020 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_010 | [Covers: DDS_STBIO1_0119] When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 0, ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall go low and the Device_FSM FSM shall go to the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-020 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_010 | [Covers: DDS_STBIO1_0119] When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 0, ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall go low and the Device_FSM FSM shall go to the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03. */;
         doc /* coverageDependency: IPOS-MAIN-CONTROLLER-020 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_010 */;
         satisfy req_IPOS_MAIN_CONTROLLER_020 by self;
         requirement def IPOS_MAIN_CONTROLLER_021 : SourceRequirement {
             attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_011";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-021";
-            doc /* When the HC_EN (ECG_CTRL register [0]) is set to 0 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the Device_FSM shall go to the WAIT_SU State, so main_controller_status_register */;
+            doc /* When the HC_EN (ECG_CTRL register [0]) is set to 0 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the Device_FSM shall go to the WAIT_SU State, so main_controller_status_register (DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_021 : IPOS_MAIN_CONTROLLER_021;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-021 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_011 | When the HC_EN (ECG_CTRL register [0]) is set to 0 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the Device_FSM shall go to the WAIT_SU State, so main_controller_status_register */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-021 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_011 | When the HC_EN (ECG_CTRL register [0]) is set to 0 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the Device_FSM shall go to the WAIT_SU State, so main_controller_status_register (DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03. */;
         doc /* coverageDependency: IPOS-MAIN-CONTROLLER-021 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_011 */;
         satisfy req_IPOS_MAIN_CONTROLLER_021 by self;
         requirement def IPOS_MAIN_CONTROLLER_022 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_0152";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_015";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-022";
-            doc /* If the calibration has been done, the ADC_error_caps values computed shall reset only if the */;
+            doc /* When the user selects the ECG, BIA, the wave velocity mode or the ppg ioff calibration, the device Shall go to WAIT_SU state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_022 : IPOS_MAIN_CONTROLLER_022;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-022 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_0152 | If the calibration has been done, the ADC_error_caps values computed shall reset only if the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-022 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_0152 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-022 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_015 | When the user selects the ECG, BIA, the wave velocity mode or the ppg ioff calibration, the device Shall go to WAIT_SU state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-022 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_015 */;
         satisfy req_IPOS_MAIN_CONTROLLER_022 by self;
         requirement def IPOS_MAIN_CONTROLLER_023 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_016";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_0152";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-023";
-            doc /* When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low within 5 clock cycle at */;
+            doc /* If the calibration has been done, the ADC_error_caps values computed shall reset only if the POR signal is asserted or shall be overwritten if another calibration is performed. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_023 : IPOS_MAIN_CONTROLLER_023;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-023 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_016 | When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low within 5 clock cycle at */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-023 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_016 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-023 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_0152 | If the calibration has been done, the ADC_error_caps values computed shall reset only if the POR signal is asserted or shall be overwritten if another calibration is performed. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-023 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_0152 */;
         satisfy req_IPOS_MAIN_CONTROLLER_023 by self;
         requirement def IPOS_MAIN_CONTROLLER_024 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_017";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_016";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-024";
-            doc /* When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain */;
+            doc /* When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low within 5 clock cycle at 32kHz. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_024 : IPOS_MAIN_CONTROLLER_024;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-024 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_017 | When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-024 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_017 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-024 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_016 | When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low within 5 clock cycle at 32kHz. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-024 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_016 */;
         satisfy req_IPOS_MAIN_CONTROLLER_024 by self;
         requirement def IPOS_MAIN_CONTROLLER_025 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_018";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_017";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-025";
-            doc /* When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall be chosen from 20kHz, 50kHz, 100kHz, 200kHz . On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and */;
+            doc /* When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_025 : IPOS_MAIN_CONTROLLER_025;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-025 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_018 | When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall be chosen from 20kHz, 50kHz, 100kHz, 200kHz . On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-025 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_018 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-025 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_017 | When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-025 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_017 */;
         satisfy req_IPOS_MAIN_CONTROLLER_025 by self;
         requirement def IPOS_MAIN_CONTROLLER_026 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_019";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_018";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-026";
-            doc /* When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase */;
+            doc /* When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall be chosen from 20kHz, 50kHz, 100kHz, 200kHz . On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and ck_q shall stay low. After this, the clock shall always run. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_026 : IPOS_MAIN_CONTROLLER_026;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-026 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_019 | When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-026 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_019 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-026 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_018 | When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall be chosen from 20kHz, 50kHz, 100kHz, 200kHz . On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and ck_q shall stay low. After this, the clock shall always run. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-026 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_018 */;
         satisfy req_IPOS_MAIN_CONTROLLER_026 by self;
         requirement def IPOS_MAIN_CONTROLLER_027 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_021";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_019";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-027";
-            doc /* When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of O_RST_IMP, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be run at 10kHz frequency. On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set */;
+            doc /* When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase delay of 90 degrees (opposite) with respect O_CK_P. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_027 : IPOS_MAIN_CONTROLLER_027;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-027 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_021 | When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of O_RST_IMP, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be run at 10kHz frequency. On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-027 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_021 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-027 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_019 | When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase delay of 90 degrees (opposite) with respect O_CK_P. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-027 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_019 */;
         satisfy req_IPOS_MAIN_CONTROLLER_027 by self;
         requirement def IPOS_MAIN_CONTROLLER_028 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_023";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_020";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-028";
-            doc /* When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the */;
+            doc /* When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 15ms after the falling of O_PD_IMP, the O_RST_IMP shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_028 : IPOS_MAIN_CONTROLLER_028;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-028 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_023 | When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-028 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_023 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-028 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_020 | When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 15ms after the falling of O_PD_IMP, the O_RST_IMP shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-028 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_020 */;
         satisfy req_IPOS_MAIN_CONTROLLER_028 by self;
         requirement def IPOS_MAIN_CONTROLLER_029 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_024";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_021";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-029";
-            doc /* When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal */;
+            doc /* When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of O_RST_IMP, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be run at 10kHz frequency. On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 0, then O_CK_CHOP_IMP shall stay low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_029 : IPOS_MAIN_CONTROLLER_029;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-029 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_024 | When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-029 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_024 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-029 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_021 | When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of O_RST_IMP, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be run at 10kHz frequency. On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 0, then O_CK_CHOP_IMP shall stay low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-029 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_021 */;
         satisfy req_IPOS_MAIN_CONTROLLER_029 by self;
         requirement def IPOS_MAIN_CONTROLLER_030 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_026";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_022";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-030";
-            doc /* When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in */;
+            doc /* When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 30ms after the falling of O_RST_IMP, O_RSTI_IMP shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_030 : IPOS_MAIN_CONTROLLER_030;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-030 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_026 | When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-030 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_026 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-030 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_022 | When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 30ms after the falling of O_RST_IMP, O_RSTI_IMP shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-030 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_022 */;
         satisfy req_IPOS_MAIN_CONTROLLER_030 by self;
         requirement def IPOS_MAIN_CONTROLLER_031 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_028";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_023";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-031";
-            doc /* When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
+            doc /* When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_031 : IPOS_MAIN_CONTROLLER_031;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-031 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_028 | When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-031 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_028 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-031 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_023 | When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-031 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_023 */;
         satisfy req_IPOS_MAIN_CONTROLLER_031 by self;
         requirement def IPOS_MAIN_CONTROLLER_032 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_029";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_024";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-032";
-            doc /* When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register */;
+            doc /* When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04) */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_032 : IPOS_MAIN_CONTROLLER_032;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-032 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_029 | When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-032 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_029 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-032 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_024 | When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04) */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-032 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_024 */;
         satisfy req_IPOS_MAIN_CONTROLLER_032 by self;
         requirement def IPOS_MAIN_CONTROLLER_033 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_030";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_026";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-033";
-            doc /* When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or */;
+            doc /* When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_033 : IPOS_MAIN_CONTROLLER_033;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-033 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_030 | When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-033 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_030 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-033 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_026 | When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-033 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_026 */;
         satisfy req_IPOS_MAIN_CONTROLLER_033 by self;
         requirement def IPOS_MAIN_CONTROLLER_034 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_031";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_027";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-034";
-            doc /* When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES (FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times. */;
+            doc /* When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_034 : IPOS_MAIN_CONTROLLER_034;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-034 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_031 | When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES (FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-034 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_031 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-034 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_027 | When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-034 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_027 */;
         satisfy req_IPOS_MAIN_CONTROLLER_034 by self;
         requirement def IPOS_MAIN_CONTROLLER_035 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_032";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_028";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-035";
-            doc /* When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, o_Txi_idac_VREF shall be increase its value of N_START for next step o_Txi_idac_VREF shall */;
+            doc /* When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_035 : IPOS_MAIN_CONTROLLER_035;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-035 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_032 | When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, o_Txi_idac_VREF shall be increase its value of N_START for next step o_Txi_idac_VREF shall */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-035 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_032 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-035 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_028 | When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-035 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_028 */;
         satisfy req_IPOS_MAIN_CONTROLLER_035 by self;
         requirement def IPOS_MAIN_CONTROLLER_036 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_033";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_029";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-036";
-            doc /* When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) , Device_FSM shall go back in IDLE only if the user turns off the */;
+            doc /* When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) and O_PD_TIA and O_PD_IDAC shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_036 : IPOS_MAIN_CONTROLLER_036;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-036 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_033 | When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) , Device_FSM shall go back in IDLE only if the user turns off the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-036 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_033 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-036 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_029 | When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) and O_PD_TIA and O_PD_IDAC shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-036 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_029 */;
         satisfy req_IPOS_MAIN_CONTROLLER_036 by self;
         requirement def IPOS_MAIN_CONTROLLER_037 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_034";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_030";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-037";
-            doc /* When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state (DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top. */;
+            doc /* When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or at the end of the last frame. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_037 : IPOS_MAIN_CONTROLLER_037;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-037 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_034 | When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state (DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-037 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_034 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-037 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_030 | When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or at the end of the last frame. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-037 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_030 */;
         satisfy req_IPOS_MAIN_CONTROLLER_037 by self;
         requirement def IPOS_MAIN_CONTROLLER_038 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_035";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_031";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-038";
-            doc /* When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if */;
+            doc /* When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES (FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_038 : IPOS_MAIN_CONTROLLER_038;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-038 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_035 | When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-038 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_035 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-038 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_031 | When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES (FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-038 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_031 */;
         satisfy req_IPOS_MAIN_CONTROLLER_038 by self;
         requirement def IPOS_MAIN_CONTROLLER_039 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_036";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_032";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-039";
-            doc /* When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck at 0) occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital */;
+            doc /* When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, o_Txi_idac_VREF shall be increase its value of N_START for next step o_Txi_idac_VREF shall be increase its value by 1 */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_039 : IPOS_MAIN_CONTROLLER_039;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-039 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_036 | When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck at 0) occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-039 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_036 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-039 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_032 | When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, o_Txi_idac_VREF shall be increase its value of N_START for next step o_Txi_idac_VREF shall be increase its value by 1 */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-039 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_032 */;
         satisfy req_IPOS_MAIN_CONTROLLER_039 by self;
         requirement def IPOS_MAIN_CONTROLLER_040 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_037";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_033";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-040";
-            doc /* In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first */;
+            doc /* When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) , Device_FSM shall go back in IDLE only if the user turns off the MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0]) is set to 0). */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_040 : IPOS_MAIN_CONTROLLER_040;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-040 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_037 | In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-040 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_037 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-040 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_033 | When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) , Device_FSM shall go back in IDLE only if the user turns off the MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0]) is set to 0). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-040 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_033 */;
         satisfy req_IPOS_MAIN_CONTROLLER_040 by self;
         requirement def IPOS_MAIN_CONTROLLER_041 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_038";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_034";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-041";
-            doc /* When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions (described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the */;
+            doc /* When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state (DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_041 : IPOS_MAIN_CONTROLLER_041;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-041 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_038 | When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions (described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-041 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_038 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-041 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_034 | When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state (DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-041 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_034 */;
         satisfy req_IPOS_MAIN_CONTROLLER_041 by self;
         requirement def IPOS_MAIN_CONTROLLER_042 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_039";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_035";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-042";
-            doc /* When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall */;
+            doc /* When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if no error occurred. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_042 : IPOS_MAIN_CONTROLLER_042;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-042 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_039 | When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-042 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_039 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-042 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_035 | When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if no error occurred. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-042 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_035 */;
         satisfy req_IPOS_MAIN_CONTROLLER_042 by self;
         requirement def IPOS_MAIN_CONTROLLER_043 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_044";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_036";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-043";
-            doc /* When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set */;
+            doc /* When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck at 0) occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital Top signal) shall be set to 1, otherwise shall be left to 0. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_043 : IPOS_MAIN_CONTROLLER_043;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-043 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_044 | When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-043 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_044 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-043 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_036 | When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck at 0) occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital Top signal) shall be set to 1, otherwise shall be left to 0. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-043 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_036 */;
         satisfy req_IPOS_MAIN_CONTROLLER_043 by self;
         requirement def IPOS_MAIN_CONTROLLER_044 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_045";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_037";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-044";
-            doc /* The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not */;
+            doc /* In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first bio-channel to measure with the o_ADC_mux_reg. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_044 : IPOS_MAIN_CONTROLLER_044;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-044 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_045 | The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-044 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_045 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-044 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_037 | In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first bio-channel to measure with the o_ADC_mux_reg. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-044 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_037 */;
         satisfy req_IPOS_MAIN_CONTROLLER_044 by self;
         requirement def IPOS_MAIN_CONTROLLER_045 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_047";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_038";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-045";
-            doc /* When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high */;
+            doc /* When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions (described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the o_adc_mux_biochannel shall be set also to 011, 100, 101 and 110. In the ECG state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_045 : IPOS_MAIN_CONTROLLER_045;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-045 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_047 | When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-045 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_047 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-045 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_038 | When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions (described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the o_adc_mux_biochannel shall be set also to 011, 100, 101 and 110. In the ECG state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-045 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_038 */;
         satisfy req_IPOS_MAIN_CONTROLLER_045 by self;
         requirement def IPOS_MAIN_CONTROLLER_046 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_049";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_039";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-046";
-            doc /* When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1. */;
+            doc /* When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall stay low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_046 : IPOS_MAIN_CONTROLLER_046;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-046 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_049 | When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-046 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_049 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-046 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_039 | When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall stay low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-046 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_039 */;
         satisfy req_IPOS_MAIN_CONTROLLER_046 by self;
         requirement def IPOS_MAIN_CONTROLLER_047 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_051";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_040";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-047";
-            doc /* [Covers: DDS_STBIO1_0121] [Covers: DDS_STBIO1_0129] The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This */;
+            doc /* When the ELAB_FSM is in BIA State (Check ELAB_STATUS_REG), the ADC_Mux (o_adc_mux_biochannel on digital top) output shall be set equal to 011, 100, 101 or 110. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_047 : IPOS_MAIN_CONTROLLER_047;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-047 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_051 | [Covers: DDS_STBIO1_0121] [Covers: DDS_STBIO1_0129] The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-047 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_051 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-047 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_040 | When the ELAB_FSM is in BIA State (Check ELAB_STATUS_REG), the ADC_Mux (o_adc_mux_biochannel on digital top) output shall be set equal to 011, 100, 101 or 110. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-047 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_040 */;
         satisfy req_IPOS_MAIN_CONTROLLER_047 by self;
         requirement def IPOS_MAIN_CONTROLLER_048 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_052";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_043";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-048";
-            doc /* When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end */;
+            doc /* The ADC_PHGEN shall work at 16 MHz clock frequency. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_048 : IPOS_MAIN_CONTROLLER_048;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-048 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_052 | When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-048 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_052 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-048 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_043 | The ADC_PHGEN shall work at 16 MHz clock frequency. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-048 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_043 */;
         satisfy req_IPOS_MAIN_CONTROLLER_048 by self;
         requirement def IPOS_MAIN_CONTROLLER_049 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_053";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_044";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-049";
-            doc /* When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before */;
+            doc /* When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set to 9 and o_end_cal_phase that shall be set to high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_049 : IPOS_MAIN_CONTROLLER_049;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-049 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_053 | When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-049 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_053 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-049 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_044 | When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set to 9 and o_end_cal_phase that shall be set to high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-049 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_044 */;
         satisfy req_IPOS_MAIN_CONTROLLER_049 by self;
         requirement def IPOS_MAIN_CONTROLLER_050 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_054";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_045";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-050";
-            doc /* When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay */;
+            doc /* The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not 160 clock cycles are passed), or i_calibration_phase is set to 1 or i_adc_start is set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_050 : IPOS_MAIN_CONTROLLER_050;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-050 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_054 | When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-050 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_054 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-050 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_045 | The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not 160 clock cycles are passed), or i_calibration_phase is set to 1 or i_adc_start is set to 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-050 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_045 */;
         satisfy req_IPOS_MAIN_CONTROLLER_050 by self;
         requirement def IPOS_MAIN_CONTROLLER_051 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_055";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_047";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-051";
-            doc /* After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new */;
+            doc /* When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high until the reset is not asserted or the i_reset_end_calibration is set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_051 : IPOS_MAIN_CONTROLLER_051;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-051 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_055 | After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-051 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_055 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-051 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_047 | When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high until the reset is not asserted or the i_reset_end_calibration is set to 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-051 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_047 */;
         satisfy req_IPOS_MAIN_CONTROLLER_051 by self;
         requirement def IPOS_MAIN_CONTROLLER_052 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_058";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_048";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-052";
-            doc /* The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration */;
+            doc /* When the i_reset_end_calibration , i_do_calibration and i_mode_operation are set to 1, the o_end_cal_phase shall be set to 0. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_052 : IPOS_MAIN_CONTROLLER_052;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-052 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_058 | The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-052 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_058 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-052 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_048 | When the i_reset_end_calibration , i_do_calibration and i_mode_operation are set to 1, the o_end_cal_phase shall be set to 0. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-052 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_048 */;
         satisfy req_IPOS_MAIN_CONTROLLER_052 by self;
         requirement def IPOS_MAIN_CONTROLLER_053 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_059";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_049";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-053";
-            doc /* If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall */;
+            doc /* When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_053 : IPOS_MAIN_CONTROLLER_053;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-053 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_059 | If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-053 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_059 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-053 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_049 | When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-053 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_049 */;
         satisfy req_IPOS_MAIN_CONTROLLER_053 by self;
         requirement def IPOS_MAIN_CONTROLLER_054 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_060";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_051";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-054";
-            doc /* When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall */;
+            doc /* [Covers: DDS_STBIO1_0121] [Covers: DDS_STBIO1_0129] The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This signal indicates the number of clock that o_ADC_start shall stay high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_054 : IPOS_MAIN_CONTROLLER_054;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-054 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_060 | When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-054 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_060 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-054 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_051 | [Covers: DDS_STBIO1_0121] [Covers: DDS_STBIO1_0129] The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This signal indicates the number of clock that o_ADC_start shall stay high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-054 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_051 */;
         satisfy req_IPOS_MAIN_CONTROLLER_054 by self;
         requirement def IPOS_MAIN_CONTROLLER_055 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_061";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_052";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-055";
-            doc /* When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to */;
+            doc /* When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end of the calibration phase. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_055 : IPOS_MAIN_CONTROLLER_055;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-055 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_061 | When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-055 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_061 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-055 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_052 | When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end of the calibration phase. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-055 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_052 */;
         satisfy req_IPOS_MAIN_CONTROLLER_055 by self;
         requirement def IPOS_MAIN_CONTROLLER_056 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_062";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_053";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-056";
-            doc /* When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to */;
+            doc /* When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before the ADC is ready to work. The first i_ADC_EOC shall be ignored. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_056 : IPOS_MAIN_CONTROLLER_056;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-056 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_062 | When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-056 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_062 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-056 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_053 | When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before the ADC is ready to work. The first i_ADC_EOC shall be ignored. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-056 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_053 */;
         satisfy req_IPOS_MAIN_CONTROLLER_056 by self;
         requirement def IPOS_MAIN_CONTROLLER_057 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_063";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_054";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-057";
-            doc /* When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result shall be bypassed in favor of the value written inside the registers */;
+            doc /* When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay High for i_N_clk+1 cycles. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_057 : IPOS_MAIN_CONTROLLER_057;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-057 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_063 | When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result shall be bypassed in favor of the value written inside the registers */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-057 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_063 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-057 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_054 | When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay High for i_N_clk+1 cycles. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-057 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_054 */;
         satisfy req_IPOS_MAIN_CONTROLLER_057 by self;
         requirement def IPOS_MAIN_CONTROLLER_058 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_064";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_055";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-058";
-            doc /* When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in ADC_GENERAL_DEBUG_0 and the sampled data shall be written in ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and In this mode, before start a new sampling operation, the RESET_DEBUG_ADC DATA in */;
+            doc /* After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new data on the falling edge of the clock. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_058 : IPOS_MAIN_CONTROLLER_058;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-058 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_064 | When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in ADC_GENERAL_DEBUG_0 and the sampled data shall be written in ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and In this mode, before start a new sampling operation, the RESET_DEBUG_ADC DATA in */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-058 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_064 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-058 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_055 | After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new data on the falling edge of the clock. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-058 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_055 */;
         satisfy req_IPOS_MAIN_CONTROLLER_058 by self;
         requirement def IPOS_MAIN_CONTROLLER_059 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_073";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_058";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-059";
-            doc /* When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low */;
+            doc /* The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration algorithm. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_059 : IPOS_MAIN_CONTROLLER_059;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-059 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_073 | When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-059 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_073 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-059 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_058 | The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration algorithm. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-059 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_058 */;
         satisfy req_IPOS_MAIN_CONTROLLER_059 by self;
         requirement def IPOS_MAIN_CONTROLLER_060 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_074";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_059";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-060";
-            doc /* When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0- ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and */;
+            doc /* If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall be divided by 2. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_060 : IPOS_MAIN_CONTROLLER_060;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-060 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_074 | When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0- ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-060 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_074 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-060 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_059 | If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall be divided by 2. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-060 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_059 */;
         satisfy req_IPOS_MAIN_CONTROLLER_060 by self;
         requirement def IPOS_MAIN_CONTROLLER_061 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_077";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_060";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-061";
-            doc /* 20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0, */;
+            doc /* When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall set to high the o_do_avarage signal for 1 clock cycle. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_061 : IPOS_MAIN_CONTROLLER_061;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-061 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_077 | 20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0, */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-061 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_077 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-061 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_060 | When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall set to high the o_do_avarage signal for 1 clock cycle. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-061 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_060 */;
         satisfy req_IPOS_MAIN_CONTROLLER_061 by self;
         requirement def IPOS_MAIN_CONTROLLER_062 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_078";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_061";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-062";
-            doc /* If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go */;
+            doc /* When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to convert the input in Two Complement. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_062 : IPOS_MAIN_CONTROLLER_062;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-062 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_078 | If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-062 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_078 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-062 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_061 | When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to convert the input in Two Complement. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-062 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_061 */;
         satisfy req_IPOS_MAIN_CONTROLLER_062 by self;
         requirement def IPOS_MAIN_CONTROLLER_063 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_080";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_062";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-063";
-            doc /* When the user selects an operative mode that includes the BIA channel, a start-up shall be done. */;
+            doc /* When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to speed-up the AM-S simulation). */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_063 : IPOS_MAIN_CONTROLLER_063;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-063 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_080 | When the user selects an operative mode that includes the BIA channel, a start-up shall be done. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-063 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_080 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-063 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_062 | When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to speed-up the AM-S simulation). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-063 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_062 */;
         satisfy req_IPOS_MAIN_CONTROLLER_063 by self;
         requirement def IPOS_MAIN_CONTROLLER_064 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_082";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_063";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-064";
-            doc /* When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if */;
+            doc /* When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result shall be bypassed in favor of the value written inside the registers ADC_ERROR_CAP_x_DEBUG */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_064 : IPOS_MAIN_CONTROLLER_064;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-064 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_082 | When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-064 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_082 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-064 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_063 | When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result shall be bypassed in favor of the value written inside the registers ADC_ERROR_CAP_x_DEBUG */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-064 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_063 */;
         satisfy req_IPOS_MAIN_CONTROLLER_064 by self;
         requirement def IPOS_MAIN_CONTROLLER_065 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_083";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_064";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-065";
-            doc /* At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low. */;
+            doc /* When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in ADC_GENERAL_DEBUG_0 and the sampled data shall be written in ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and In this mode, before start a new sampling operation, the RESET_DEBUG_ADC DATA in ADC_GENERAL_DEBUG_0 shall be set to 1 and then to 0. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_065 : IPOS_MAIN_CONTROLLER_065;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-065 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_083 | At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-065 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_083 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-065 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_064 | When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in ADC_GENERAL_DEBUG_0 and the sampled data shall be written in ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and In this mode, before start a new sampling operation, the RESET_DEBUG_ADC DATA in ADC_GENERAL_DEBUG_0 shall be set to 1 and then to 0. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-065 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_064 */;
         satisfy req_IPOS_MAIN_CONTROLLER_065 by self;
         requirement def IPOS_MAIN_CONTROLLER_066 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_085";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_072";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-066";
-            doc /* 20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is */;
+            doc /* When the i_hc_en is set to 1 and i_imp_en is set to 0 and i_n_ecg_channel is equal to 1, ECG0 shall be active so the o_pd_hc2 shall go low and counter shall be work. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_066 : IPOS_MAIN_CONTROLLER_066;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-066 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_085 | 20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-066 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_085 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-066 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_072 | When the i_hc_en is set to 1 and i_imp_en is set to 0 and i_n_ecg_channel is equal to 1, ECG0 shall be active so the o_pd_hc2 shall go low and counter shall be work. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-066 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_072 */;
         satisfy req_IPOS_MAIN_CONTROLLER_066 by self;
         requirement def IPOS_MAIN_CONTROLLER_067 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_087";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_073";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-067";
-            doc /* If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low. */;
+            doc /* When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low and counter shall be work. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_067 : IPOS_MAIN_CONTROLLER_067;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-067 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_087 | If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-067 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_087 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-067 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_073 | When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low and counter shall be work. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-067 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_073 */;
         satisfy req_IPOS_MAIN_CONTROLLER_067 by self;
         requirement def IPOS_MAIN_CONTROLLER_068 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_088";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_074";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-068";
-            doc /* The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass between two GSR acquisitions following this formula: GSRdata = time_slot 2 ∗ m_gsr */;
+            doc /* When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0- ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and counter shall be work. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_068 : IPOS_MAIN_CONTROLLER_068;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-068 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_088 | The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass between two GSR acquisitions following this formula: GSRdata = time_slot 2 ∗ m_gsr */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-068 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_088 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-068 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_074 | When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0- ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and counter shall be work. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-068 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_074 */;
         satisfy req_IPOS_MAIN_CONTROLLER_068 by self;
         requirement def IPOS_MAIN_CONTROLLER_069 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_089";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_075";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-069";
-            doc /* If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set */;
+            doc /* The counter that defines the timing during the start-up phase shall work at 32KHz. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_069 : IPOS_MAIN_CONTROLLER_069;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-069 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_089 | If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-069 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_089 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-069 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_075 | The counter that defines the timing during the start-up phase shall work at 32KHz. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-069 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_075 */;
         satisfy req_IPOS_MAIN_CONTROLLER_069 by self;
         requirement def IPOS_MAIN_CONTROLLER_070 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_092";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_076";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-070";
-            doc /* If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot */;
+            doc /* 15ms after that the o_pd_hc2 is gone low, the o_rst_hc2 shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_070 : IPOS_MAIN_CONTROLLER_070;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-070 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_092 | If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-070 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_092 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-070 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_076 | 15ms after that the o_pd_hc2 is gone low, the o_rst_hc2 shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-070 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_076 */;
         satisfy req_IPOS_MAIN_CONTROLLER_070 by self;
         requirement def IPOS_MAIN_CONTROLLER_071 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_093";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_077";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-071";
-            doc /* If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then mediated to get one single value for each of them, and then the final result shall be the subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of */;
+            doc /* 20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0, then o_rsti_hc2 shall go low after 30ms since the falling of o_rst_hc2. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_071 : IPOS_MAIN_CONTROLLER_071;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-071 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_093 | If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then mediated to get one single value for each of them, and then the final result shall be the subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-071 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_093 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-071 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_077 | 20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0, then o_rsti_hc2 shall go low after 30ms since the falling of o_rst_hc2. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-071 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_077 */;
         satisfy req_IPOS_MAIN_CONTROLLER_071 by self;
         requirement def IPOS_MAIN_CONTROLLER_072 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_094";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_078";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-072";
-            doc /* When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE State and shall go back in Operative State only when the measurement shall be run or, in case of */;
+            doc /* If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_072 : IPOS_MAIN_CONTROLLER_072;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-072 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_094 | When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE State and shall go back in Operative State only when the measurement shall be run or, in case of */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-072 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_094 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-072 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_078 | If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-072 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_078 */;
         satisfy req_IPOS_MAIN_CONTROLLER_072 by self;
         requirement def IPOS_MAIN_CONTROLLER_073 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_095";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_080";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-073";
-            doc /* The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high when the PPG_FSM is */;
+            doc /* When the user selects an operative mode that includes the BIA channel, a start-up shall be done. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_073 : IPOS_MAIN_CONTROLLER_073;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-073 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_095 | The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high when the PPG_FSM is */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-073 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_095 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-073 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_080 | When the user selects an operative mode that includes the BIA channel, a start-up shall be done. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-073 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_080 */;
         satisfy req_IPOS_MAIN_CONTROLLER_073 by self;
         requirement def IPOS_MAIN_CONTROLLER_074 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_096";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_081";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-074";
-            doc /* When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and PPG_SEL in DEVICE_CONFIG_CHANNEL register is set to 1, when the ELAB_FSM is in PPG STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set */;
+            doc /* When i_imp_en signal is equal to 1, the o_pd_imp_from_bia shall be go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_074 : IPOS_MAIN_CONTROLLER_074;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-074 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_096 | When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and PPG_SEL in DEVICE_CONFIG_CHANNEL register is set to 1, when the ELAB_FSM is in PPG STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-074 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_096 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-074 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_081 | When i_imp_en signal is equal to 1, the o_pd_imp_from_bia shall be go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-074 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_081 */;
         satisfy req_IPOS_MAIN_CONTROLLER_074 by self;
         requirement def IPOS_MAIN_CONTROLLER_075 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_098";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_082";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-075";
-            doc /* When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC */;
+            doc /* When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if i_imp_curinj is equal to 0, the o_imp_curinj_pd shall stay high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_075 : IPOS_MAIN_CONTROLLER_075;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-075 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_098 | When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-075 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_098 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-075 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_082 | When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if i_imp_curinj is equal to 0, the o_imp_curinj_pd shall stay high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-075 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_082 */;
         satisfy req_IPOS_MAIN_CONTROLLER_075 by self;
         requirement def IPOS_MAIN_CONTROLLER_076 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_099";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_083";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-076";
-            doc /* When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE. */;
+            doc /* At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_076 : IPOS_MAIN_CONTROLLER_076;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-076 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_099 | When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-076 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_099 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-076 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_083 | At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-076 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_083 */;
         satisfy req_IPOS_MAIN_CONTROLLER_076 by self;
         requirement def IPOS_MAIN_CONTROLLER_077 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_100";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_084";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-077";
-            doc /* When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1, the o_BIDAC shall maintain the value reached during the ALC Compensation summed up, if i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration */;
+            doc /* At least 15ms after the falling of o_pd_imp_from_bia, the o_rst_imp shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_077 : IPOS_MAIN_CONTROLLER_077;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-077 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_100 | When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1, the o_BIDAC shall maintain the value reached during the ALC Compensation summed up, if i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-077 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_100 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-077 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_084 | At least 15ms after the falling of o_pd_imp_from_bia, the o_rst_imp shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-077 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_084 */;
         satisfy req_IPOS_MAIN_CONTROLLER_077 by self;
         requirement def IPOS_MAIN_CONTROLLER_078 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1004";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_085";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-078";
-            doc /* [Covers: DDS_STBIO1_0118] [Covers: DDS_STBIO1_0125] The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2] */;
+            doc /* 20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is set to 0, the o_en_ck_chop_imp shall stay low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_078 : IPOS_MAIN_CONTROLLER_078;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-078 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1004 | [Covers: DDS_STBIO1_0118] [Covers: DDS_STBIO1_0125] The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2] */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-078 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1004 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-078 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_085 | 20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is set to 0, the o_en_ck_chop_imp shall stay low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-078 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_085 */;
         satisfy req_IPOS_MAIN_CONTROLLER_078 by self;
         requirement def IPOS_MAIN_CONTROLLER_079 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1005";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_086";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-079";
-            doc /* The user shall configure which channel is selected and if work in Data Storage mode for the */;
+            doc /* 30ms after the falling of o_rst_imp, o_rsti_imp shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_079 : IPOS_MAIN_CONTROLLER_079;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-079 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1005 | The user shall configure which channel is selected and if work in Data Storage mode for the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-079 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1005 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-079 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_086 | 30ms after the falling of o_rst_imp, o_rsti_imp shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-079 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_086 */;
         satisfy req_IPOS_MAIN_CONTROLLER_079 by self;
         requirement def IPOS_MAIN_CONTROLLER_080 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1007";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_087";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-080";
-            doc /* [Covers: DDS_STBIO1_0120] [Covers: DDS_STBIO1_0122] [Covers: DDS_STBIO1_0127] [Covers: DDS_STBIO1_0130] In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel */;
+            doc /* If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_080 : IPOS_MAIN_CONTROLLER_080;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-080 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1007 | [Covers: DDS_STBIO1_0120] [Covers: DDS_STBIO1_0122] [Covers: DDS_STBIO1_0127] [Covers: DDS_STBIO1_0130] In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-080 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1007 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-080 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_087 | If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-080 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_087 */;
         satisfy req_IPOS_MAIN_CONTROLLER_080 by self;
         requirement def IPOS_MAIN_CONTROLLER_081 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1008";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_088";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-081";
-            doc /* [Covers: DDS_STBIO1_0128] [Covers: DDS_STBIO1_0140] In Order to enable a BIA Channel Operation, the user shall always select the BIA channel */;
+            doc /* The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass between two GSR acquisitions following this formula: GSRdata = time_slot 2 ∗ m_gsr . */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_081 : IPOS_MAIN_CONTROLLER_081;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-081 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1008 | [Covers: DDS_STBIO1_0128] [Covers: DDS_STBIO1_0140] In Order to enable a BIA Channel Operation, the user shall always select the BIA channel */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-081 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1008 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-081 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_088 | The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass between two GSR acquisitions following this formula: GSRdata = time_slot 2 ∗ m_gsr . */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-081 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_088 */;
         satisfy req_IPOS_MAIN_CONTROLLER_081 by self;
         requirement def IPOS_MAIN_CONTROLLER_082 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1009";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_089";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-082";
-            doc /* In Order to enable a GSR Channel Operation, the user shall always select the GSR channel */;
+            doc /* If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set to 0) shall be performed. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_082 : IPOS_MAIN_CONTROLLER_082;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-082 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1009 | In Order to enable a GSR Channel Operation, the user shall always select the GSR channel */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-082 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1009 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-082 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_089 | If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set to 0) shall be performed. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-082 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_089 */;
         satisfy req_IPOS_MAIN_CONTROLLER_082 by self;
         requirement def IPOS_MAIN_CONTROLLER_083 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_101";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_090";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-083";
-            doc /* When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time (GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES */;
+            doc /* The gsr_on shall set high at least 300us before the start of the sampling. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_083 : IPOS_MAIN_CONTROLLER_083;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-083 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_101 | When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time (GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-083 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_101 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-083 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_090 | The gsr_on shall set high at least 300us before the start of the sampling. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-083 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_090 */;
         satisfy req_IPOS_MAIN_CONTROLLER_083 by self;
         requirement def IPOS_MAIN_CONTROLLER_084 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1010";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_092";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-084";
-            doc /* In Order to enable a PPG Channel Operation, the user shall always select the PPG channel */;
+            doc /* If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot where the GSR_SNS signal is acquired and shall set low at end of the same time slot. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_084 : IPOS_MAIN_CONTROLLER_084;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-084 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1010 | In Order to enable a PPG Channel Operation, the user shall always select the PPG channel */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-084 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1010 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-084 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_092 | If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot where the GSR_SNS signal is acquired and shall set low at end of the same time slot. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-084 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_092 */;
         satisfy req_IPOS_MAIN_CONTROLLER_084 by self;
         requirement def IPOS_MAIN_CONTROLLER_085 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1011";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_093";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-085";
-            doc /* In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and */;
+            doc /* If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then mediated to get one single value for each of them, and then the final result shall be the subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of GSR_SNS. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_085 : IPOS_MAIN_CONTROLLER_085;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-085 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1011 | In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-085 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1011 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-085 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_093 | If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then mediated to get one single value for each of them, and then the final result shall be the subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of GSR_SNS. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-085 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_093 */;
         satisfy req_IPOS_MAIN_CONTROLLER_085 by self;
         requirement def IPOS_MAIN_CONTROLLER_086 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_102";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_094";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-086";
-            doc /* When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until */;
+            doc /* When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE State and shall go back in Operative State only when the measurement shall be run or, in case of cds disabled, when the o_gsr_curr shall change its polarity. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_086 : IPOS_MAIN_CONTROLLER_086;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-086 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_102 | When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-086 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_102 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-086 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_094 | When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE State and shall go back in Operative State only when the measurement shall be run or, in case of cds disabled, when the o_gsr_curr shall change its polarity. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-086 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_094 */;
         satisfy req_IPOS_MAIN_CONTROLLER_086 by self;
         requirement def IPOS_MAIN_CONTROLLER_087 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_103";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_095";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-087";
-            doc /* When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM */;
+            doc /* The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high when the PPG_FSM is RX_START UP state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_087 : IPOS_MAIN_CONTROLLER_087;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-087 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_103 | When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-087 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_103 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-087 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_095 | The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high when the PPG_FSM is RX_START UP state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-087 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_095 */;
         satisfy req_IPOS_MAIN_CONTROLLER_087 by self;
         requirement def IPOS_MAIN_CONTROLLER_088 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1034";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_096";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-088";
-            doc /* Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go */;
+            doc /* When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and PPG_SEL in DEVICE_CONFIG_CHANNEL register is set to 1, when the ELAB_FSM is in PPG STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_088 : IPOS_MAIN_CONTROLLER_088;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-088 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1034 | Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-088 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1034 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-088 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_096 | When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and PPG_SEL in DEVICE_CONFIG_CHANNEL register is set to 1, when the ELAB_FSM is in PPG STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set to 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-088 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_096 */;
         satisfy req_IPOS_MAIN_CONTROLLER_088 by self;
         requirement def IPOS_MAIN_CONTROLLER_089 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_104";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_097";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-089";
-            doc /* When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state. */;
+            doc /* When in Reset state, if the rstn_i is de-asserted , i_wave_velocity_mode is and the i_start_ppg_fsm is high, if i_ID_Frame is equal to 0 or two successively frame have two different i_rx_ch_frame , then the PPG FSM shall go to ALC Compensation state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_089 : IPOS_MAIN_CONTROLLER_089;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-089 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_104 | When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-089 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_104 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-089 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_097 | When in Reset state, if the rstn_i is de-asserted , i_wave_velocity_mode is and the i_start_ppg_fsm is high, if i_ID_Frame is equal to 0 or two successively frame have two different i_rx_ch_frame , then the PPG FSM shall go to ALC Compensation state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-089 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_097 */;
         satisfy req_IPOS_MAIN_CONTROLLER_089 by self;
         requirement def IPOS_MAIN_CONTROLLER_090 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_105";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_098";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-090";
-            doc /* When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the */;
+            doc /* When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC Compensation block to start the ALC Compensation algorithm. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_090 : IPOS_MAIN_CONTROLLER_090;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-090 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_105 | When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-090 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_105 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-090 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_098 | When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC Compensation block to start the ALC Compensation algorithm. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-090 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_098 */;
         satisfy req_IPOS_MAIN_CONTROLLER_090 by self;
         requirement def IPOS_MAIN_CONTROLLER_091 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_106";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_099";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-091";
-            doc /* When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time */;
+            doc /* When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_091 : IPOS_MAIN_CONTROLLER_091;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-091 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_106 | When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-091 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_106 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-091 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_099 | When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-091 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_099 */;
         satisfy req_IPOS_MAIN_CONTROLLER_091 by self;
         requirement def IPOS_MAIN_CONTROLLER_092 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_108";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_100";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-092";
-            doc /* When in Measurement state, the PPG_FSM shall stay in this state until the rising of the i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling */;
+            doc /* When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1, the o_BIDAC shall maintain the value reached during the ALC Compensation summed up, if i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration Procedure. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_092 : IPOS_MAIN_CONTROLLER_092;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-092 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_108 | When in Measurement state, the PPG_FSM shall stay in this state until the rising of the i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-092 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_108 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-092 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_100 | When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1, the o_BIDAC shall maintain the value reached during the ALC Compensation summed up, if i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration Procedure. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-092 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_100 */;
         satisfy req_IPOS_MAIN_CONTROLLER_092 by self;
         requirement def IPOS_MAIN_CONTROLLER_093 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_109";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1004";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-093";
-            doc /* When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the */;
+            doc /* [Covers: DDS_STBIO1_0118] [Covers: DDS_STBIO1_0125] The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2] */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_093 : IPOS_MAIN_CONTROLLER_093;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-093 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_109 | When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-093 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_109 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-093 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1004 | [Covers: DDS_STBIO1_0118] [Covers: DDS_STBIO1_0125] The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2] */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-093 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1004 */;
         satisfy req_IPOS_MAIN_CONTROLLER_093 by self;
         requirement def IPOS_MAIN_CONTROLLER_094 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1095";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1005";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-094";
-            doc /* The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac */;
+            doc /* The user shall configure which channel is selected and if work in Data Storage mode for the measure writing the DEVICE_CONFIG_CHANNEL register [Covers] */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_094 : IPOS_MAIN_CONTROLLER_094;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-094 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1095 | The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-094 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1095 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-094 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1005 | The user shall configure which channel is selected and if work in Data Storage mode for the measure writing the DEVICE_CONFIG_CHANNEL register [Covers] */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-094 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1005 */;
         satisfy req_IPOS_MAIN_CONTROLLER_094 by self;
         requirement def IPOS_MAIN_CONTROLLER_095 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_110";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1007";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-095";
-            doc /* When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be */;
+            doc /* [Covers: DDS_STBIO1_0120] [Covers: DDS_STBIO1_0122] [Covers: DDS_STBIO1_0127] [Covers: DDS_STBIO1_0130] In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and set to HC_EN. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_095 : IPOS_MAIN_CONTROLLER_095;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-095 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_110 | When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-095 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_110 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-095 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1007 | [Covers: DDS_STBIO1_0120] [Covers: DDS_STBIO1_0122] [Covers: DDS_STBIO1_0127] [Covers: DDS_STBIO1_0130] In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and set to HC_EN. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-095 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1007 */;
         satisfy req_IPOS_MAIN_CONTROLLER_095 by self;
         requirement def IPOS_MAIN_CONTROLLER_096 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1102";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1008";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-096";
-            doc /* Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital */;
+            doc /* [Covers: DDS_STBIO1_0128] [Covers: DDS_STBIO1_0140] In Order to enable a BIA Channel Operation, the user shall always select the BIA channel (DEVICE_CONFIG_CHANNEL), set the i_M_BIA greater than zero and set to IMP_EN. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_096 : IPOS_MAIN_CONTROLLER_096;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-096 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1102 | Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-096 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1102 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-096 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1008 | [Covers: DDS_STBIO1_0128] [Covers: DDS_STBIO1_0140] In Order to enable a BIA Channel Operation, the user shall always select the BIA channel (DEVICE_CONFIG_CHANNEL), set the i_M_BIA greater than zero and set to IMP_EN. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-096 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1008 */;
         satisfy req_IPOS_MAIN_CONTROLLER_096 by self;
         requirement def IPOS_MAIN_CONTROLLER_097 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1104";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1009";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-097";
-            doc /* Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase */;
+            doc /* In Order to enable a GSR Channel Operation, the user shall always select the GSR channel (DEVICE_CONFIG_CHANNEL) and set the i_M_GSR greater than zero. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_097 : IPOS_MAIN_CONTROLLER_097;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-097 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1104 | Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-097 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1104 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-097 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1009 | In Order to enable a GSR Channel Operation, the user shall always select the GSR channel (DEVICE_CONFIG_CHANNEL) and set the i_M_GSR greater than zero. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-097 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1009 */;
         satisfy req_IPOS_MAIN_CONTROLLER_097 by self;
         requirement def IPOS_MAIN_CONTROLLER_098 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_111";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_101";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-098";
-            doc /* When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time (depends on the user's configuration of Digital Ramp parameters) and bring itself into the */;
+            doc /* When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time (GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_098 : IPOS_MAIN_CONTROLLER_098;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-098 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_111 | When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time (depends on the user's configuration of Digital Ramp parameters) and bring itself into the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-098 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_111 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-098 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_101 | When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time (GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-098 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_101 */;
         satisfy req_IPOS_MAIN_CONTROLLER_098 by self;
         requirement def IPOS_MAIN_CONTROLLER_099 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1116";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1010";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-099";
-            doc /* When the Ioff Calibration algorithm is enabled, it shall be performed every time a new */;
+            doc /* In Order to enable a PPG Channel Operation, the user shall always select the PPG channel (DEVICE_CONFIG_CHANNEL) and set the i_M_PPG greater than zero. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_099 : IPOS_MAIN_CONTROLLER_099;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-099 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1116 | When the Ioff Calibration algorithm is enabled, it shall be performed every time a new */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-099 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1116 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-099 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1010 | In Order to enable a PPG Channel Operation, the user shall always select the PPG channel (DEVICE_CONFIG_CHANNEL) and set the i_M_PPG greater than zero. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-099 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1010 */;
         satisfy req_IPOS_MAIN_CONTROLLER_099 by self;
         requirement def IPOS_MAIN_CONTROLLER_100 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_112";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1011";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-100";
-            doc /* When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1. */;
+            doc /* In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and IMP_EN set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_100 : IPOS_MAIN_CONTROLLER_100;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-100 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_112 | When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-100 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_112 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-100 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1011 | In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and IMP_EN set to 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-100 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1011 */;
         satisfy req_IPOS_MAIN_CONTROLLER_100 by self;
         requirement def IPOS_MAIN_CONTROLLER_101 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_113";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_102";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-101";
-            doc /* When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG */;
+            doc /* When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until i_end_average is low. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_101 : IPOS_MAIN_CONTROLLER_101;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-101 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_113 | When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-101 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_113 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-101 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_102 | When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until i_end_average is low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-101 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_102 */;
         satisfy req_IPOS_MAIN_CONTROLLER_101 by self;
         requirement def IPOS_MAIN_CONTROLLER_102 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1139";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_103";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-102";
-            doc /* The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the */;
+            doc /* When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM shall bring itself into the Rising_Ramp state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_102 : IPOS_MAIN_CONTROLLER_102;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-102 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1139 | The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-102 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1139 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-102 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_103 | When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM shall bring itself into the Rising_Ramp state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-102 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_103 */;
         satisfy req_IPOS_MAIN_CONTROLLER_102 by self;
         requirement def IPOS_MAIN_CONTROLLER_103 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1143";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1034";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-103";
-            doc /* For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with */;
+            doc /* Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go back into the IDLE State. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_103 : IPOS_MAIN_CONTROLLER_103;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-103 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1143 | For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-103 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1143 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-103 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1034 | Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go back into the IDLE State. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-103 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1034 */;
         satisfy req_IPOS_MAIN_CONTROLLER_103 by self;
         requirement def IPOS_MAIN_CONTROLLER_104 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_115";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_104";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-104";
-            doc /* At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. Once the Average is computed, if no averages_between_equal_frames option is selected, the data shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there is avareges_between_equal_frames option selected from regmap, after the computations of this average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB */;
+            doc /* When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_104 : IPOS_MAIN_CONTROLLER_104;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-104 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_115 | At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. Once the Average is computed, if no averages_between_equal_frames option is selected, the data shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there is avareges_between_equal_frames option selected from regmap, after the computations of this average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-104 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_115 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-104 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_104 | When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-104 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_104 */;
         satisfy req_IPOS_MAIN_CONTROLLER_104 by self;
         requirement def IPOS_MAIN_CONTROLLER_105 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_118";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_105";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-105";
-            doc /* When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset */;
+            doc /* When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the frame that is being executed. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_105 : IPOS_MAIN_CONTROLLER_105;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-105 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_118 | When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-105 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_118 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-105 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_105 | When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the frame that is being executed. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-105 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_105 */;
         satisfy req_IPOS_MAIN_CONTROLLER_105 by self;
         requirement def IPOS_MAIN_CONTROLLER_106 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_120";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_106";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-106";
-            doc /* When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock */;
+            doc /* When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time and then go into the Measurement state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_106 : IPOS_MAIN_CONTROLLER_106;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-106 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_120 | When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-106 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_120 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-106 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_106 | When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time and then go into the Measurement state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-106 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_106 */;
         satisfy req_IPOS_MAIN_CONTROLLER_106 by self;
         requirement def IPOS_MAIN_CONTROLLER_107 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_126";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_107";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-107";
-            doc /* When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start (PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at */;
+            doc /* When in Measurement state, after the wait at least of the TX_ledset time related to the frame that is being executed. (TX_LEDSET_FRAME {n}]), the o_start_adc signal shall be set high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_107 : IPOS_MAIN_CONTROLLER_107;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-107 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_126 | When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start (PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-107 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_126 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-107 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_107 | When in Measurement state, after the wait at least of the TX_ledset time related to the frame that is being executed. (TX_LEDSET_FRAME {n}]), the o_start_adc signal shall be set high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-107 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_107 */;
         satisfy req_IPOS_MAIN_CONTROLLER_107 by self;
         requirement def IPOS_MAIN_CONTROLLER_108 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_128";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_108";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-108";
-            doc /* When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in section 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register */;
+            doc /* When in Measurement state, the PPG_FSM shall stay in this state until the rising of the i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling Ramp state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_108 : IPOS_MAIN_CONTROLLER_108;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-108 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_128 | When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in section 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-108 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_128 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-108 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_108 | When in Measurement state, the PPG_FSM shall stay in this state until the rising of the i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling Ramp state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-108 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_108 */;
         satisfy req_IPOS_MAIN_CONTROLLER_108 by self;
         requirement def IPOS_MAIN_CONTROLLER_109 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_134";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_109";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-109";
-            doc /* According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock */;
+            doc /* When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the FALLING_RAMP State and shall stay 1 until i_falling_ramp_end is different from 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_109 : IPOS_MAIN_CONTROLLER_109;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-109 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_134 | According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-109 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_134 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-109 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_109 | When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the FALLING_RAMP State and shall stay 1 until i_falling_ramp_end is different from 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-109 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_109 */;
         satisfy req_IPOS_MAIN_CONTROLLER_109 by self;
         requirement def IPOS_MAIN_CONTROLLER_110 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_137";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1095";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-110";
-            doc /* The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the */;
+            doc /* The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac and o_en_buffer of respectively. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_110 : IPOS_MAIN_CONTROLLER_110;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-110 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_137 | The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-110 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_137 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-110 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1095 | The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac and o_en_buffer of respectively. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-110 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1095 */;
         satisfy req_IPOS_MAIN_CONTROLLER_110 by self;
         requirement def IPOS_MAIN_CONTROLLER_111 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_138";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_110";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-111";
-            doc /* The average block shall perform the average on 16 sample acquisition for GSR. When the CDS mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between */;
+            doc /* When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be set to 0. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_111 : IPOS_MAIN_CONTROLLER_111;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-111 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_138 | The average block shall perform the average on 16 sample acquisition for GSR. When the CDS mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-111 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_138 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-111 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_110 | When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be set to 0. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-111 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_110 */;
         satisfy req_IPOS_MAIN_CONTROLLER_111 by self;
         requirement def IPOS_MAIN_CONTROLLER_112 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_140";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1102";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-112";
-            doc /* Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed as follow: I_N_Average_PPG Samples Result with ALC MASK=0 Result with ALC Mask=1 0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 Table 18: PPG Result Table Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P */;
+            doc /* Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital Ramp rising phase */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_112 : IPOS_MAIN_CONTROLLER_112;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-112 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_140 | Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed as follow: I_N_Average_PPG Samples Result with ALC MASK=0 Result with ALC Mask=1 0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 Table 18: PPG Result Table Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-112 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_140 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-112 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1102 | Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital Ramp rising phase */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-112 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1102 */;
         satisfy req_IPOS_MAIN_CONTROLLER_112 by self;
         requirement def IPOS_MAIN_CONTROLLER_113 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2143";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1104";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-113";
-            doc /* When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2, */;
+            doc /* Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase (i_start_falling_ramp) of the digital ramp */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_113 : IPOS_MAIN_CONTROLLER_113;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-113 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2143 | When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2, */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-113 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2143 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-113 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1104 | Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase (i_start_falling_ramp) of the digital ramp */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-113 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1104 */;
         satisfy req_IPOS_MAIN_CONTROLLER_113 by self;
         requirement def IPOS_MAIN_CONTROLLER_114 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2144";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1105";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-114";
-            doc /* [Covers: DDS_STBIO1_0124] [Covers: DDS_STBIO1_0142] The data written in FIFO shall have the following tag: DATA TYPE BIT: 23 - 20 BIT: 19 - 16 BIT: 15 - 0 PPG FRAME 0 0000 DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT PPG FRAME 1 0001 PPG FRAME 2 0010 PPG FRAME 3 0011 PPG FRAME 4 0100 PPG FRAME 5 0101 PPG FRAME 6 0110 PPG FRAME 7 0111 PPG FRAME 8 1000 PPG FRAME 9 1001 PPG FRAME 10 1010 PPG FRAME 11 1011 TIME SLOT DATA 1111 0000 DATA 16 BIT ECG0_AC 1100 0000 DATA 16 BIT ECG0_DC 1101 0000 DATA 16 BIT ECG1_AC 1100 0001 DATA 16 BIT ECG1_DC 1101 0001 DATA 16 BIT ECG2_AC 1100 0010 DATA 16 BIT ECG2_DC 1101 0010 DATA 16 BIT */;
+            doc /* If no multiple frame is selected (i_frame_repetition in ppg_fsm set to 0), when Tx Preset falls from 1 to 0, also the en_tx shall pass from 1 to 0. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_114 : IPOS_MAIN_CONTROLLER_114;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-114 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2144 | [Covers: DDS_STBIO1_0124] [Covers: DDS_STBIO1_0142] The data written in FIFO shall have the following tag: DATA TYPE BIT: 23 - 20 BIT: 19 - 16 BIT: 15 - 0 PPG FRAME 0 0000 DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT PPG FRAME 1 0001 PPG FRAME 2 0010 PPG FRAME 3 0011 PPG FRAME 4 0100 PPG FRAME 5 0101 PPG FRAME 6 0110 PPG FRAME 7 0111 PPG FRAME 8 1000 PPG FRAME 9 1001 PPG FRAME 10 1010 PPG FRAME 11 1011 TIME SLOT DATA 1111 0000 DATA 16 BIT ECG0_AC 1100 0000 DATA 16 BIT ECG0_DC 1101 0000 DATA 16 BIT ECG1_AC 1100 0001 DATA 16 BIT ECG1_DC 1101 0001 DATA 16 BIT ECG2_AC 1100 0010 DATA 16 BIT ECG2_DC 1101 0010 DATA 16 BIT */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-114 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2144 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-114 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1105 | If no multiple frame is selected (i_frame_repetition in ppg_fsm set to 0), when Tx Preset falls from 1 to 0, also the en_tx shall pass from 1 to 0. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-114 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1105 */;
         satisfy req_IPOS_MAIN_CONTROLLER_114 by self;
         requirement def IPOS_MAIN_CONTROLLER_115 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2145";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_111";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-115";
-            doc /* The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be obtained as explained in [IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT 3. After the last repetition has been accumulated, the data output shall be obtained dividing by the number of repeated frames the accumulated data to obtain a 20 bit data. The final result shall be computed as follows: Number of times the Frame has been repeated Result 2 (Res_F_R1 + Res_F_R2)/2 4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 Table 20: Frame Repetitions Result Computation table Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the result of the second repetition of the frame. */;
+            doc /* When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time (depends on the user's configuration of Digital Ramp parameters) and bring itself into the SECOND_ALC_SAMPLES state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_115 : IPOS_MAIN_CONTROLLER_115;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-115 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2145 | The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be obtained as explained in [IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT 3. After the last repetition has been accumulated, the data output shall be obtained dividing by the number of repeated frames the accumulated data to obtain a 20 bit data. The final result shall be computed as follows: Number of times the Frame has been repeated Result 2 (Res_F_R1 + Res_F_R2)/2 4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 Table 20: Frame Repetitions Result Computation table Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the result of the second repetition of the frame. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-115 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2145 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-115 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_111 | When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time (depends on the user's configuration of Digital Ramp parameters) and bring itself into the SECOND_ALC_SAMPLES state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-115 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_111 */;
         satisfy req_IPOS_MAIN_CONTROLLER_115 by self;
         requirement def IPOS_MAIN_CONTROLLER_116 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2146";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1116";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-116";
-            doc /* In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at the start of the next frame or frame repetition. */;
+            doc /* When the Ioff Calibration algorithm is enabled, it shall be performed every time a new measurements cycle starts. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_116 : IPOS_MAIN_CONTROLLER_116;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-116 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2146 | In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at the start of the next frame or frame repetition. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-116 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2146 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-116 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1116 | When the Ioff Calibration algorithm is enabled, it shall be performed every time a new measurements cycle starts. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-116 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1116 */;
         satisfy req_IPOS_MAIN_CONTROLLER_116 by self;
         requirement def IPOS_MAIN_CONTROLLER_117 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3124";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1118";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-117";
-            doc /* When the ELAB_FSM is in ECG State and only ECG0 is selected, the o_ADC_EN shall go high, */;
+            doc /* Nm0 shall be the result of average on 8 acquired samples. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_117 : IPOS_MAIN_CONTROLLER_117;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-117 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3124 | When the ELAB_FSM is in ECG State and only ECG0 is selected, the o_ADC_EN shall go high, */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-117 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3124 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-117 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1118 | Nm0 shall be the result of average on 8 acquired samples. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-117 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1118 */;
         satisfy req_IPOS_MAIN_CONTROLLER_117 by self;
         requirement def IPOS_MAIN_CONTROLLER_118 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3125";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1119";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-118";
-            doc /* When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE). */;
+            doc /* Nm1 shall be the result of average on 8 acquired samples. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_118 : IPOS_MAIN_CONTROLLER_118;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-118 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3125 | When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE). */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-118 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3125 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-118 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1119 | Nm1 shall be the result of average on 8 acquired samples. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-118 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1119 */;
         satisfy req_IPOS_MAIN_CONTROLLER_118 by self;
         requirement def IPOS_MAIN_CONTROLLER_119 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3126";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_112";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-119";
-            doc /* When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device */;
+            doc /* When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_119 : IPOS_MAIN_CONTROLLER_119;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-119 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3126 | When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-119 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3126 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-119 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_112 | When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-119 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_112 */;
         satisfy req_IPOS_MAIN_CONTROLLER_119 by self;
         requirement def IPOS_MAIN_CONTROLLER_120 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3127";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_113";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-120";
-            doc /* When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions described in section 5.4 ADC PHASE ) and then device shall go in */;
+            doc /* When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG state and the into the ALC_Compensation state. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_120 : IPOS_MAIN_CONTROLLER_120;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-120 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3127 | When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions described in section 5.4 ADC PHASE ) and then device shall go in */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-120 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3127 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-120 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_113 | When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG state and the into the ALC_Compensation state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-120 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_113 */;
         satisfy req_IPOS_MAIN_CONTROLLER_120 by self;
         requirement def IPOS_MAIN_CONTROLLER_121 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3128";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1136";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-121";
-            doc /* When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE */;
+            doc /* After the assertion of i_end_of_conversion a number of times equals to i_n_average_ecg_bia_gsr (in case of ECG, BIA and GSR) or i_n_average_ppg (in case of PPG without frame repetitions) , after at least one clock cycle o_data_result shall be computed and o_write_enable shall rise */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_121 : IPOS_MAIN_CONTROLLER_121;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-121 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3128 | When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-121 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3128 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-121 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1136 | After the assertion of i_end_of_conversion a number of times equals to i_n_average_ecg_bia_gsr (in case of ECG, BIA and GSR) or i_n_average_ppg (in case of PPG without frame repetitions) , after at least one clock cycle o_data_result shall be computed and o_write_enable shall rise */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-121 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1136 */;
         satisfy req_IPOS_MAIN_CONTROLLER_121 by self;
         requirement def IPOS_MAIN_CONTROLLER_122 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3129";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1139";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-122";
-            doc /* When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be */;
+            doc /* The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the SECOND_ALC_SAMPLES */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_122 : IPOS_MAIN_CONTROLLER_122;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-122 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3129 | When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-122 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3129 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-122 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1139 | The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the SECOND_ALC_SAMPLES */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-122 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1139 */;
         satisfy req_IPOS_MAIN_CONTROLLER_122 by self;
         requirement def IPOS_MAIN_CONTROLLER_123 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4079";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_1143";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-123";
-            doc /* If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled. */;
+            doc /* For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with o_gsr_curr_on set to 0 and o_gsr_on set to 1 */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_123 : IPOS_MAIN_CONTROLLER_123;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-123 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4079 | If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-123 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4079 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-123 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_1143 | For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with o_gsr_curr_on set to 0 and o_gsr_on set to 1 */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-123 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_1143 */;
         satisfy req_IPOS_MAIN_CONTROLLER_123 by self;
         requirement def IPOS_MAIN_CONTROLLER_124 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4080";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_115";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-124";
-            doc /* If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0. */;
+            doc /* At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. Once the Average is computed, if no averages_between_equal_frames option is selected, the data shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there is avareges_between_equal_frames option selected from regmap, after the computations of this average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB Master interface. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_124 : IPOS_MAIN_CONTROLLER_124;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-124 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4080 | If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0. */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-124 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4080 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-124 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_115 | At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. Once the Average is computed, if no averages_between_equal_frames option is selected, the data shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there is avareges_between_equal_frames option selected from regmap, after the computations of this average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB Master interface. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-124 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_115 */;
         satisfy req_IPOS_MAIN_CONTROLLER_124 by self;
         requirement def IPOS_MAIN_CONTROLLER_125 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4090";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_118";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-125";
-            doc /* If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if */;
+            doc /* When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset (DIGITAL_RAMP_CONFIG_PARAM_1 register [5:4]). */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_125 : IPOS_MAIN_CONTROLLER_125;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-125 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4090 | If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-125 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4090 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-125 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_118 | When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset (DIGITAL_RAMP_CONFIG_PARAM_1 register [5:4]). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-125 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_118 */;
         satisfy req_IPOS_MAIN_CONTROLLER_125 by self;
         requirement def IPOS_MAIN_CONTROLLER_126 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4091";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_120";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-126";
-            doc /* If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0 */;
+            doc /* When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock cycle. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_126 : IPOS_MAIN_CONTROLLER_126;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-126 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4091 | If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0 */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-126 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4091 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-126 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_120 | When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock cycle. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-126 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_120 */;
         satisfy req_IPOS_MAIN_CONTROLLER_126 by self;
         requirement def IPOS_MAIN_CONTROLLER_127 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_436";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_121";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-127";
-            doc /* When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go */;
+            doc /* Nmax shall be a value between 1 and 15 configurable by user. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_127 : IPOS_MAIN_CONTROLLER_127;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-127 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_436 | When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-127 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_436 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-127 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_121 | Nmax shall be a value between 1 and 15 configurable by user. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-127 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_121 */;
         satisfy req_IPOS_MAIN_CONTROLLER_127 by self;
         requirement def IPOS_MAIN_CONTROLLER_128 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5004";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_122";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-128";
-            doc /* The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is */;
+            doc /* When o_ TX_Vref is equal to i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0])), o_rising_ramp_end shall go high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_128 : IPOS_MAIN_CONTROLLER_128;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-128 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5004 | The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-128 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5004 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-128 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_122 | When o_ TX_Vref is equal to i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0])), o_rising_ramp_end shall go high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-128 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_122 */;
         satisfy req_IPOS_MAIN_CONTROLLER_128 by self;
         requirement def IPOS_MAIN_CONTROLLER_129 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5005";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_123";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-129";
-            doc /* If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main */;
+            doc /* When o_Tx_Vref is equal to 0 during the falling and the rising ramp is ended (o_rising_ramp_end ==0), o_falling_ramp_end shall go high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_129 : IPOS_MAIN_CONTROLLER_129;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-129 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5005 | If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-129 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5005 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-129 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_123 | When o_Tx_Vref is equal to 0 during the falling and the rising ramp is ended (o_rising_ramp_end ==0), o_falling_ramp_end shall go high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-129 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_123 */;
         satisfy req_IPOS_MAIN_CONTROLLER_129 by self;
         requirement def IPOS_MAIN_CONTROLLER_130 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5015";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_124";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-130";
-            doc /* [Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS */;
+            doc /* When the rising ramp reaches half its value, o_half_rising_ramp shall go high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_130 : IPOS_MAIN_CONTROLLER_130;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-130 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5015 | [Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-130 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5015 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-130 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_124 | When the rising ramp reaches half its value, o_half_rising_ramp shall go high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-130 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_124 */;
         satisfy req_IPOS_MAIN_CONTROLLER_130 by self;
         requirement def IPOS_MAIN_CONTROLLER_131 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5016";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_125";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-131";
-            doc /* When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for these two channels shall be written in the following regmap registers ECG0_AC ECG0_DC ECG1_BIA_P_AC ECG1_BIA_P_DC ECG2_BIA_Q_AC ECG2_BIA_Q_DC GSR_RESULT */;
+            doc /* When i_reset_ramp is high all output shall be down. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_131 : IPOS_MAIN_CONTROLLER_131;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-131 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5016 | When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for these two channels shall be written in the following regmap registers ECG0_AC ECG0_DC ECG1_BIA_P_AC ECG1_BIA_P_DC ECG2_BIA_Q_AC ECG2_BIA_Q_DC GSR_RESULT */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-131 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5016 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-131 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_125 | When i_reset_ramp is high all output shall be down. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-131 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_125 */;
         satisfy req_IPOS_MAIN_CONTROLLER_131 by self;
         requirement def IPOS_MAIN_CONTROLLER_132 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5092";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_126";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-132";
-            doc /* i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and */;
+            doc /* When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start (PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at 100000000. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_132 : IPOS_MAIN_CONTROLLER_132;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-132 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5092 | i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-132 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5092 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-132 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_126 | When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start (PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at 100000000. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-132 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_126 */;
         satisfy req_IPOS_MAIN_CONTROLLER_132 by self;
         requirement def IPOS_MAIN_CONTROLLER_133 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_6070";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_127";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-133";
-            doc /* When i_wave_velocity mode is enabled together with the DISABLE_ALC, the PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the */;
+            doc /* ALC cycle algorithm shall be done until the set of the last o_w_BTIA_ALC bit. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_133 : IPOS_MAIN_CONTROLLER_133;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-133 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_6070 | When i_wave_velocity mode is enabled together with the DISABLE_ALC, the PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-133 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_6070 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-133 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_127 | ALC cycle algorithm shall be done until the set of the last o_w_BTIA_ALC bit. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-133 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_127 */;
         satisfy req_IPOS_MAIN_CONTROLLER_133 by self;
         requirement def IPOS_MAIN_CONTROLLER_134 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_6098";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_128";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-134";
-            doc /* When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the */;
+            doc /* When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in section 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 101). */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_134 : IPOS_MAIN_CONTROLLER_134;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-134 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_6098 | When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-134 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_6098 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-134 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_128 | When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in section 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 101). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-134 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_128 */;
         satisfy req_IPOS_MAIN_CONTROLLER_134 by self;
         requirement def IPOS_MAIN_CONTROLLER_135 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_6129";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_129";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-135";
-            doc /* When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after */;
+            doc /* When i_ALC_comp_start is set to 1 and the o_BTIA_ALC (ALC Compensation) change is value, after a configurable time T1 (PPG_ALC_CONFIG_PARAM_1 register [3:0]), o_comp_rx_ck shall be high. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_135 : IPOS_MAIN_CONTROLLER_135;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-135 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_6129 | When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-135 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_6129 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-135 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_129 | When i_ALC_comp_start is set to 1 and the o_BTIA_ALC (ALC Compensation) change is value, after a configurable time T1 (PPG_ALC_CONFIG_PARAM_1 register [3:0]), o_comp_rx_ck shall be high. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-135 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_129 */;
         satisfy req_IPOS_MAIN_CONTROLLER_135 by self;
         requirement def IPOS_MAIN_CONTROLLER_136 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_7095";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_132";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-136";
-            doc /* All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the */;
+            doc /* After T1+T2 (PPG_ALC_CONFIG_PARAM_2 register [1:0]), if o_BTIA_gain (2:0) < i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), during ALC_COMPENSATION state of PPG fsm with o_end_compensation set to 0, o_BTIA_gain increase its value of 1. Instead, if o_BTIA_gain 2:0) >= i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), o_BTIA_gain shall remain at its old value. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_136 : IPOS_MAIN_CONTROLLER_136;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-136 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_7095 | All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-136 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_7095 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-136 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_132 | After T1+T2 (PPG_ALC_CONFIG_PARAM_2 register [1:0]), if o_BTIA_gain (2:0) < i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), during ALC_COMPENSATION state of PPG fsm with o_end_compensation set to 0, o_BTIA_gain increase its value of 1. Instead, if o_BTIA_gain 2:0) >= i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), o_BTIA_gain shall remain at its old value. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-136 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_132 */;
         satisfy req_IPOS_MAIN_CONTROLLER_136 by self;
         requirement def IPOS_MAIN_CONTROLLER_137 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_728";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_133";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-137";
-            doc /* At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If */;
+            doc /* Once is set to 1, o_comp_rx_ck shall be set to 0 after a T2+1 clock cycle. */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_137 : IPOS_MAIN_CONTROLLER_137;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-137 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_728 | At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-137 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_728 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-137 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_133 | Once is set to 1, o_comp_rx_ck shall be set to 0 after a T2+1 clock cycle. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-137 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_133 */;
         satisfy req_IPOS_MAIN_CONTROLLER_137 by self;
         requirement def IPOS_MAIN_CONTROLLER_138 : SourceRequirement {
-            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_8106";
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_134";
             attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
             attribute sourceContext = "IPOS-MAIN-CONTROLLER-138";
-            doc /* If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when */;
+            doc /* According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock cycle after i_start_ppg is set to 1 */;
         }
         requirement req_IPOS_MAIN_CONTROLLER_138 : IPOS_MAIN_CONTROLLER_138;
-        doc /* iposReqId=IPOS-MAIN-CONTROLLER-138 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_8106 | If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when */;
-        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-138 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_8106 */;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-138 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_134 | According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock cycle after i_start_ppg is set to 1 */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-138 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_134 */;
         satisfy req_IPOS_MAIN_CONTROLLER_138 by self;
+        requirement def IPOS_MAIN_CONTROLLER_139 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_137";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-139";
+            doc /* The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the correct number of times) */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_139 : IPOS_MAIN_CONTROLLER_139;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-139 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_137 | The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the correct number of times) */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-139 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_137 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_139 by self;
+        requirement def IPOS_MAIN_CONTROLLER_140 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_138";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-140";
+            doc /* The average block shall perform the average on 16 sample acquisition for GSR. When the CDS mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between the two results. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_140 : IPOS_MAIN_CONTROLLER_140;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-140 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_138 | The average block shall perform the average on 16 sample acquisition for GSR. When the CDS mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between the two results. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-140 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_138 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_140 by self;
+        requirement def IPOS_MAIN_CONTROLLER_141 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_139";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-141";
+            doc /* When a PPG Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise (i_data_valid_noise_ppg_adc set to 1) data is sampled (i_end_of_conversion set to 1) the data shall be accumulated until i_n_average_ppg is not reached. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_141 : IPOS_MAIN_CONTROLLER_141;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-141 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_139 | When a PPG Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise (i_data_valid_noise_ppg_adc set to 1) data is sampled (i_end_of_conversion set to 1) the data shall be accumulated until i_n_average_ppg is not reached. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-141 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_139 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_141 by self;
+        requirement def IPOS_MAIN_CONTROLLER_142 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_140";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-142";
+            doc /* Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed as follow: I_N_Average_PPG Samples Result with ALC MASK=0 Result with ALC Mask=1 0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 Table 18: PPG Result Table Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P is the accumulated PPG data and Acc_N is the accumulated noise */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_142 : IPOS_MAIN_CONTROLLER_142;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-142 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_140 | Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed as follow: I_N_Average_PPG Samples Result with ALC MASK=0 Result with ALC Mask=1 0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 Table 18: PPG Result Table Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P is the accumulated PPG data and Acc_N is the accumulated noise */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-142 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_140 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_142 by self;
+        requirement def IPOS_MAIN_CONTROLLER_143 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_143";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-143";
+            doc /* When i_end_of_conversion is set to 1 and i_n_average_ecg_bia_gsr (average ecg,bia and gsr) or i_n_average_ppg (Frame_X_Parameter_1) is equal to their limit values, an average operation shall be done and o_write_enable shall be set to 1. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_143 : IPOS_MAIN_CONTROLLER_143;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-143 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_143 | When i_end_of_conversion is set to 1 and i_n_average_ecg_bia_gsr (average ecg,bia and gsr) or i_n_average_ppg (Frame_X_Parameter_1) is equal to their limit values, an average operation shall be done and o_write_enable shall be set to 1. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-143 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_143 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_143 by self;
+        requirement def IPOS_MAIN_CONTROLLER_144 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2117";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-144";
+            doc /* When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_144 : IPOS_MAIN_CONTROLLER_144;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-144 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2117 | When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-144 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2117 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_144 by self;
+        requirement def IPOS_MAIN_CONTROLLER_145 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2143";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-145";
+            doc /* When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2, o_adc_data_debug_alc_1 and o_adc_data_debug_ppg_raw. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_145 : IPOS_MAIN_CONTROLLER_145;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-145 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2143 | When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2, o_adc_data_debug_alc_1 and o_adc_data_debug_ppg_raw. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-145 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2143 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_145 by self;
+        requirement def IPOS_MAIN_CONTROLLER_146 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2144";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-146";
+            doc /* [Covers: DDS_STBIO1_0124] [Covers: DDS_STBIO1_0142] The data written in FIFO shall have the following tag: DATA TYPE BIT: 23 - 20 BIT: 19 - 16 BIT: 15 - 0 PPG FRAME 0 0000 DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT PPG FRAME 1 0001 PPG FRAME 2 0010 PPG FRAME 3 0011 PPG FRAME 4 0100 PPG FRAME 5 0101 PPG FRAME 6 0110 PPG FRAME 7 0111 PPG FRAME 8 1000 PPG FRAME 9 1001 PPG FRAME 10 1010 PPG FRAME 11 1011 TIME SLOT DATA 1111 0000 DATA 16 BIT ECG0_AC 1100 0000 DATA 16 BIT ECG0_DC 1101 0000 DATA 16 BIT ECG1_AC 1100 0001 DATA 16 BIT ECG1_DC 1101 0001 DATA 16 BIT ECG2_AC 1100 0010 DATA 16 BIT ECG2_DC 1101 0010 DATA 16 BIT */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_146 : IPOS_MAIN_CONTROLLER_146;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-146 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2144 | [Covers: DDS_STBIO1_0124] [Covers: DDS_STBIO1_0142] The data written in FIFO shall have the following tag: DATA TYPE BIT: 23 - 20 BIT: 19 - 16 BIT: 15 - 0 PPG FRAME 0 0000 DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT PPG FRAME 1 0001 PPG FRAME 2 0010 PPG FRAME 3 0011 PPG FRAME 4 0100 PPG FRAME 5 0101 PPG FRAME 6 0110 PPG FRAME 7 0111 PPG FRAME 8 1000 PPG FRAME 9 1001 PPG FRAME 10 1010 PPG FRAME 11 1011 TIME SLOT DATA 1111 0000 DATA 16 BIT ECG0_AC 1100 0000 DATA 16 BIT ECG0_DC 1101 0000 DATA 16 BIT ECG1_AC 1100 0001 DATA 16 BIT ECG1_DC 1101 0001 DATA 16 BIT ECG2_AC 1100 0010 DATA 16 BIT ECG2_DC 1101 0010 DATA 16 BIT */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-146 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2144 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_146 by self;
+        requirement def IPOS_MAIN_CONTROLLER_147 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2145";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-147";
+            doc /* The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be obtained as explained in [IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT 3. After the last repetition has been accumulated, the data output shall be obtained dividing by the number of repeated frames the accumulated data to obtain a 20 bit data. The final result shall be computed as follows: Number of times the Frame has been repeated Result 2 (Res_F_R1 + Res_F_R2)/2 4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 Table 20: Frame Repetitions Result Computation table Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the result of the second repetition of the frame. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_147 : IPOS_MAIN_CONTROLLER_147;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-147 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2145 | The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be obtained as explained in [IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT 3. After the last repetition has been accumulated, the data output shall be obtained dividing by the number of repeated frames the accumulated data to obtain a 20 bit data. The final result shall be computed as follows: Number of times the Frame has been repeated Result 2 (Res_F_R1 + Res_F_R2)/2 4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 Table 20: Frame Repetitions Result Computation table Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the result of the second repetition of the frame. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-147 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2145 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_147 by self;
+        requirement def IPOS_MAIN_CONTROLLER_148 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_2146";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-148";
+            doc /* In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at the start of the next frame or frame repetition. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_148 : IPOS_MAIN_CONTROLLER_148;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-148 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_2146 | In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at the start of the next frame or frame repetition. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-148 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_2146 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_148 by self;
+        requirement def IPOS_MAIN_CONTROLLER_149 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_300";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-149";
+            doc /* When the rstn_i is asserted low, the PPG FSM shall return in Reset state immediately. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_149 : IPOS_MAIN_CONTROLLER_149;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-149 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_300 | When the rstn_i is asserted low, the PPG FSM shall return in Reset state immediately. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-149 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_300 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_149 by self;
+        requirement def IPOS_MAIN_CONTROLLER_150 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3124";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-150";
+            doc /* When the ELAB_FSM is in ECG State and only ECG0 is selected, the o_ADC_EN shall go high, 5 acquisitions are required (acquisitions described in section 5.4 ADC PHASE). */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_150 : IPOS_MAIN_CONTROLLER_150;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-150 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3124 | When the ELAB_FSM is in ECG State and only ECG0 is selected, the o_ADC_EN shall go high, 5 acquisitions are required (acquisitions described in section 5.4 ADC PHASE). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-150 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3124 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_150 by self;
+        requirement def IPOS_MAIN_CONTROLLER_151 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3125";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-151";
+            doc /* When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE). */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_151 : IPOS_MAIN_CONTROLLER_151;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-151 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3125 | When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-151 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3125 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_151 by self;
+        requirement def IPOS_MAIN_CONTROLLER_152 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3126";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-152";
+            doc /* When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_152 : IPOS_MAIN_CONTROLLER_152;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-152 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3126 | When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-152 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3126 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_152 by self;
+        requirement def IPOS_MAIN_CONTROLLER_153 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3127";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-153";
+            doc /* When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions described in section 5.4 ADC PHASE ) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_153 : IPOS_MAIN_CONTROLLER_153;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-153 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3127 | When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions described in section 5.4 ADC PHASE ) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-153 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3127 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_153 by self;
+        requirement def IPOS_MAIN_CONTROLLER_154 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3128";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-154";
+            doc /* When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_154 : IPOS_MAIN_CONTROLLER_154;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-154 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3128 | When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-154 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3128 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_154 by self;
+        requirement def IPOS_MAIN_CONTROLLER_155 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3129";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-155";
+            doc /* When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be performed first. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_155 : IPOS_MAIN_CONTROLLER_155;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-155 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3129 | When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be performed first. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-155 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3129 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_155 by self;
+        requirement def IPOS_MAIN_CONTROLLER_156 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3130";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-156";
+            doc /* When the wave velocity mode and the ppg ioff calibration are selected, the wave velocity mode shall be performed first. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_156 : IPOS_MAIN_CONTROLLER_156;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-156 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3130 | When the wave velocity mode and the ppg ioff calibration are selected, the wave velocity mode shall be performed first. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-156 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3130 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_156 by self;
+        requirement def IPOS_MAIN_CONTROLLER_157 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_3131";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-157";
+            doc /* When the ppg ioff calibration is selected and device fsm is in WAIT_SU State, the Elab FSM shall go into the Timer Buffer state and then PPG IOFF CALIB state. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_157 : IPOS_MAIN_CONTROLLER_157;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-157 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_3131 | When the ppg ioff calibration is selected and device fsm is in WAIT_SU State, the Elab FSM shall go into the Timer Buffer state and then PPG IOFF CALIB state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-157 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_3131 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_157 by self;
+        requirement def IPOS_MAIN_CONTROLLER_158 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4034";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-158";
+            doc /* Every Time a new measurement cycle starts (DEVICE FSM goes in OPERATIVE from another state), the o_irq_start_measurement shall be set to 1 for at least 1 clock cycle */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_158 : IPOS_MAIN_CONTROLLER_158;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-158 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4034 | Every Time a new measurement cycle starts (DEVICE FSM goes in OPERATIVE from another state), the o_irq_start_measurement shall be set to 1 for at least 1 clock cycle */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-158 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4034 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_158 by self;
+        requirement def IPOS_MAIN_CONTROLLER_159 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4079";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-159";
+            doc /* If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_159 : IPOS_MAIN_CONTROLLER_159;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-159 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4079 | If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-159 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4079 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_159 by self;
+        requirement def IPOS_MAIN_CONTROLLER_160 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4080";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-160";
+            doc /* If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_160 : IPOS_MAIN_CONTROLLER_160;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-160 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4080 | If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-160 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4080 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_160 by self;
+        requirement def IPOS_MAIN_CONTROLLER_161 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4090";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-161";
+            doc /* If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if enabled. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_161 : IPOS_MAIN_CONTROLLER_161;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-161 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4090 | If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if enabled. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-161 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4090 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_161 by self;
+        requirement def IPOS_MAIN_CONTROLLER_162 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_4091";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-162";
+            doc /* If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0 as in the next figure. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_162 : IPOS_MAIN_CONTROLLER_162;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-162 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_4091 | If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0 as in the next figure. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-162 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_4091 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_162 by self;
+        requirement def IPOS_MAIN_CONTROLLER_163 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_436";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-163";
+            doc /* When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go low. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_163 : IPOS_MAIN_CONTROLLER_163;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-163 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_436 | When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go low. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-163 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_436 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_163 by self;
+        requirement def IPOS_MAIN_CONTROLLER_164 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5004";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-164";
+            doc /* The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is 1024 */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_164 : IPOS_MAIN_CONTROLLER_164;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-164 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5004 | The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is 1024 */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-164 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5004 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_164 by self;
+        requirement def IPOS_MAIN_CONTROLLER_165 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5005";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-165";
+            doc /* If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main controller fsm) */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_165 : IPOS_MAIN_CONTROLLER_165;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-165 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5005 | If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main controller fsm) */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-165 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5005 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_165 by self;
+        requirement def IPOS_MAIN_CONTROLLER_166 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5015";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-166";
+            doc /* [Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS [DDS_STBIO1_1114] */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_166 : IPOS_MAIN_CONTROLLER_166;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-166 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5015 | [Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS [DDS_STBIO1_1114] */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-166 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5015 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_166 by self;
+        requirement def IPOS_MAIN_CONTROLLER_167 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5016";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-167";
+            doc /* When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for these two channels shall be written in the following regmap registers ECG0_AC ECG0_DC ECG1_BIA_P_AC ECG1_BIA_P_DC ECG2_BIA_Q_AC ECG2_BIA_Q_DC GSR_RESULT */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_167 : IPOS_MAIN_CONTROLLER_167;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-167 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5016 | When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for these two channels shall be written in the following regmap registers ECG0_AC ECG0_DC ECG1_BIA_P_AC ECG1_BIA_P_DC ECG2_BIA_Q_AC ECG2_BIA_Q_DC GSR_RESULT */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-167 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5016 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_167 by self;
+        requirement def IPOS_MAIN_CONTROLLER_168 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5080";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-168";
+            doc /* i_rst_async_ecg Shall be used only when the Device FSM is in SLEEP or Operative State. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_168 : IPOS_MAIN_CONTROLLER_168;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-168 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5080 | i_rst_async_ecg Shall be used only when the Device FSM is in SLEEP or Operative State. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-168 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5080 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_168 by self;
+        requirement def IPOS_MAIN_CONTROLLER_169 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5091";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-169";
+            doc /* i_rst_async_bia shall be used only when Device FSM is in OPERATIVE or SLEEP state. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_169 : IPOS_MAIN_CONTROLLER_169;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-169 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5091 | i_rst_async_bia shall be used only when Device FSM is in OPERATIVE or SLEEP state. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-169 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5091 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_169 by self;
+        requirement def IPOS_MAIN_CONTROLLER_170 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_5092";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-170";
+            doc /* i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and 2. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_170 : IPOS_MAIN_CONTROLLER_170;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-170 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_5092 | i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and 2. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-170 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_5092 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_170 by self;
+        requirement def IPOS_MAIN_CONTROLLER_171 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_6059";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-171";
+            doc /* I_noise shall be set to 0 during the ADC calibration. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_171 : IPOS_MAIN_CONTROLLER_171;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-171 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_6059 | I_noise shall be set to 0 during the ADC calibration. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-171 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_6059 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_171 by self;
+        requirement def IPOS_MAIN_CONTROLLER_172 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_6070";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-172";
+            doc /* When i_wave_velocity mode is enabled together with the DISABLE_ALC, the PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the values are not summed (visible) to the o_BIDAC. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_172 : IPOS_MAIN_CONTROLLER_172;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-172 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_6070 | When i_wave_velocity mode is enabled together with the DISABLE_ALC, the PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the values are not summed (visible) to the o_BIDAC. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-172 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_6070 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_172 by self;
+        requirement def IPOS_MAIN_CONTROLLER_173 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_6098";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-173";
+            doc /* When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the ELAB FSM is into the PPG_ALC_STORAGE and then never repeated. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_173 : IPOS_MAIN_CONTROLLER_173;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-173 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_6098 | When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the ELAB FSM is into the PPG_ALC_STORAGE and then never repeated. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-173 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_6098 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_173 by self;
+        requirement def IPOS_MAIN_CONTROLLER_174 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_6129";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-174";
+            doc /* When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after a T1+T_TIA_On time, both configurable by regmap. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_174 : IPOS_MAIN_CONTROLLER_174;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-174 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_6129 | When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after a T1+T_TIA_On time, both configurable by regmap. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-174 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_6129 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_174 by self;
+        requirement def IPOS_MAIN_CONTROLLER_175 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_7095";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-175";
+            doc /* All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the states values are described in the register’s comment). */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_175 : IPOS_MAIN_CONTROLLER_175;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-175 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_7095 | All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the states values are described in the register’s comment). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-175 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_7095 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_175 by self;
+        requirement def IPOS_MAIN_CONTROLLER_176 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_7135";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-176";
+            doc /* If the ALC_COARSE (o_w_BTIA_ALC) result is equal to zero, it shall be brought to 1 */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_176 : IPOS_MAIN_CONTROLLER_176;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-176 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_7135 | If the ALC_COARSE (o_w_BTIA_ALC) result is equal to zero, it shall be brought to 1 */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-176 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_7135 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_176 by self;
+        requirement def IPOS_MAIN_CONTROLLER_177 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_728";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-177";
+            doc /* At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If it’s masked, its contribution shall be 0 */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_177 : IPOS_MAIN_CONTROLLER_177;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-177 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_728 | At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If it’s masked, its contribution shall be 0 */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-177 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_728 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_177 by self;
+        requirement def IPOS_MAIN_CONTROLLER_178 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_8106";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-178";
+            doc /* If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when o_end_ppg_fsm is set, en_tx is 0). */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_178 : IPOS_MAIN_CONTROLLER_178;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-178 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_8106 | If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when o_end_ppg_fsm is set, en_tx is 0). */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-178 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_8106 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_178 by self;
+        requirement def IPOS_MAIN_CONTROLLER_179 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_8116";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-179";
+            doc /* i_n_start_case shall be lesser or equal than i_Nmax_to_reg. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_179 : IPOS_MAIN_CONTROLLER_179;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-179 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_8116 | i_n_start_case shall be lesser or equal than i_Nmax_to_reg. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-179 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_8116 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_179 by self;
+        requirement def IPOS_MAIN_CONTROLLER_180 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_9116";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-180";
+            doc /* GAIN_START shall be lesser or equal than GAIN_MAX. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_180 : IPOS_MAIN_CONTROLLER_180;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-180 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_9116 | GAIN_START shall be lesser or equal than GAIN_MAX. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-180 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_9116 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_180 by self;
+        requirement def IPOS_MAIN_CONTROLLER_181 : SourceRequirement {
+            attribute sourceReqId = "IPOS_STBIO1_MAIN_CONTROLLER_9139";
+            attribute sourceArtifact = "data/canonical/canonical_store.sqlite";
+            attribute sourceContext = "IPOS-MAIN-CONTROLLER-181";
+            doc /* If during the PPG Frame computation, the i_alc_mask (ALC Disabled) is enabled, the final result shall be only the ppg acquisition and the subtraction of the alc data shall not be performed. */;
+        }
+        requirement req_IPOS_MAIN_CONTROLLER_181 : IPOS_MAIN_CONTROLLER_181;
+        doc /* iposReqId=IPOS-MAIN-CONTROLLER-181 | sourceReqId=IPOS_STBIO1_MAIN_CONTROLLER_9139 | If during the PPG Frame computation, the i_alc_mask (ALC Disabled) is enabled, the final result shall be only the ppg acquisition and the subtraction of the alc data shall not be performed. */;
+        doc /* coverageDependency: IPOS-MAIN-CONTROLLER-181 -> approved source requirement IPOS_STBIO1_MAIN_CONTROLLER_9139 */;
+        satisfy req_IPOS_MAIN_CONTROLLER_181 by self;
     }
 
 }

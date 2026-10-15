@@ -113,6 +113,27 @@ from run_drs_gen_spec_agent import (
 
 
 class DescriptiveSummaryTests(unittest.TestCase):
+    def assert_nonessential_ipos_residual(self, functional):
+        from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings, ipos_derivative_residuals
+        plan = build_ipos_claim_plan(functional)
+        omitted = [value for value in plan.dispositions if value.reason.startswith("omitted_nonessential:")]
+        self.assertTrue(omitted)
+        self.assertEqual(ipos_claim_preflight_findings(functional), [])
+        records = {record.record_id: record for record in plan.evidence.records}
+        residuals = ipos_derivative_residuals(functional)
+        for disposition in omitted:
+            self.assertEqual(disposition.decision, "excluded")
+            self.assertTrue(disposition.spans)
+            for span in disposition.spans:
+                self.assertEqual(records[span.record_id].text[span.start:span.end], span.text)
+                self.assertTrue(any(span.record_id in value.get("source_record_ids", ())
+                                    and value["readiness_impact"] == "requires_assessment"
+                                    and value["authority"] is False for value in residuals))
+        self.assertTrue(validate_descriptive_synthesis_plan(replace(plan, dispositions=()),
+                        expected_evidence=plan.evidence, expected_intents=plan.intents,
+                        profile=IPOS_DESCRIPTIVE_PROFILE, owner=functional.block))
+        return omitted
+
     def test_drs_dedicated_connection_tables_preserve_approved_fields(self):
         from run_drs_gen_spec_agent import _drs_reset_connection_rows, _drs_connection_table_findings
         from workflow_routing import render_connection_table_sections
@@ -435,7 +456,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
             with self.subTest(outputs=outputs):
                 unsupported = build_ipos_functional_input("Module", dict(inventory, Outputs=outputs),
                     [{"source_req_id": "guard", "statement": statement}], domain="digital")
-                self.assertTrue(ipos_claim_preflight_findings(unsupported))
+                self.assert_nonessential_ipos_residual(unsupported)
 
     def test_ipos_formula_tail_is_structured_not_a_descriptive_obligation(self):
         from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings, ipos_descriptive_structural_audit
@@ -452,14 +473,14 @@ class DescriptiveSummaryTests(unittest.TestCase):
         self.assertIn("interval = slots * scale", plan.evidence.records[-1].text)
         self.assertEqual(ipos_descriptive_structural_audit(functional)["source_findings"], [])
 
-    def test_ipos_formula_tail_with_behavior_remains_blocking(self):
+    def test_ipos_formula_tail_with_behavior_retains_nonessential_residual(self):
         from workflow_routing import ipos_claim_preflight_findings
         functional = build_ipos_functional_input("Module",
             {"Function": "Acquire samples", "Inputs": "samples", "Outputs": "results"},
             [{"source_req_id": "interval", "statement":
               "The interval shall define how many slots pass between acquisitions following this formula: interval = slots * scale and then sampling starts"}],
             domain="digital")
-        self.assertTrue(ipos_claim_preflight_findings(functional))
+        self.assert_nonessential_ipos_residual(functional)
 
     def test_ipos_priority_list_preserves_ranks_order_and_direction(self):
         from workflow_routing import (
@@ -487,7 +508,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
             self.assertEqual(_ipos_readback_section_findings(rendered, (claim,)), [])
         broken = build_ipos_functional_input("Module", inventory,
             [{"source_req_id": "broken", "statement": source.replace("3. TEST", "2. TEST")}], domain="digital")
-        self.assertTrue(ipos_claim_preflight_findings(broken))
+        self.assert_nonessential_ipos_residual(broken)
 
     def test_ipos_case_reference_binds_only_explicit_check_in_same_requirement(self):
         from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings, _ipos_evidence_semantic_findings
@@ -510,10 +531,10 @@ class DescriptiveSummaryTests(unittest.TestCase):
         self.assertTrue(_ipos_evidence_semantic_findings(replace(plan.evidence, dependencies=())))
         unresolved = build_ipos_functional_input("Module", inventory,
             [{"source_req_id": "no-antecedent", "statement": "In that case Module shall write 0xFF into memory."}], domain="digital")
-        self.assertTrue(ipos_claim_preflight_findings(unresolved))
+        self.assert_nonessential_ipos_residual(unresolved)
         ambiguous = build_ipos_functional_input("Module", inventory,
             [{"source_req_id": "ambiguous", "statement": source.replace("to check if programming has been successful", "during programming")}], domain="digital")
-        self.assertTrue(ipos_claim_preflight_findings(ambiguous))
+        self.assert_nonessential_ipos_residual(ambiguous)
 
     def test_ipos_comma_less_guard_requires_exact_approved_owner_and_preserves_condition(self):
         from workflow_routing import build_ipos_claim_plan, ipos_claim_preflight_findings, _ipos_evidence_semantic_findings
@@ -531,7 +552,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
         self.assertTrue(_ipos_evidence_semantic_findings(mutated))
         ambiguous = build_ipos_functional_input("Module", inventory,
             [{"source_req_id": "ambiguous", "statement": statement.replace("routine Module", "routine Another unit")}], domain="digital")
-        self.assertTrue(ipos_claim_preflight_findings(ambiguous))
+        self.assert_nonessential_ipos_residual(ambiguous)
 
     def test_ipos_modal_predicates_preserve_inflection_order_and_processing_actions(self):
         from workflow_routing import (
@@ -589,7 +610,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
         self.assertEqual(claim.meanings[0].predicate, "filter")
         self.assertEqual(claim.spans[0].text, "Processor shall filter samples.")
         self.assertEqual(source[claim.spans[0].start:claim.spans[0].end], claim.spans[0].text)
-        self.assertTrue(any(value.decision == "unresolved" for value in plan.dispositions))
+        self.assert_nonessential_ipos_residual(functional)
         self.assertFalse(hasattr(claim, "text"))
         self.assertEqual(plan.acceptance, DescriptiveAcceptance())
 
@@ -730,8 +751,14 @@ class DescriptiveSummaryTests(unittest.TestCase):
                 self.assertIn("unresolved_dependency:configuration", plan.decisions[1].findings)
                 self.assertEqual(plan.acceptance, DescriptiveAcceptance())
                 self.assertEqual(plan.acceptance.verification_status, "UNRESOLVED")
-                self.assertTrue(validate_descriptive_synthesis_plan(plan, expected_evidence=evidence,
-                                expected_intents=intents, profile=profile, owner="Module"))
+                findings = validate_descriptive_synthesis_plan(plan, expected_evidence=evidence,
+                           expected_intents=intents, profile=profile, owner="Module")
+                if profile.document_type == "IPOS":
+                    self.assertEqual(findings, [])
+                    self.assertTrue(any(value.reason.startswith("omitted_nonessential:")
+                                        and value.decision == "excluded" for value in plan.dispositions))
+                else:
+                    self.assertTrue(findings)
 
     def test_synthesis_transitive_unresolved_context_blocks_only_related_claims(self):
         evidence = self.synthesis_evidence()
@@ -802,11 +829,17 @@ class DescriptiveSummaryTests(unittest.TestCase):
         self.assertIn("disconnected_claim_bundle", plan.decisions[0].findings)
         missing = replace(evidence, unresolved_contexts=(), dependencies=())
         plan = build_descriptive_synthesis_plan(missing, (), profile=IPOS_DESCRIPTIVE_PROFILE, owner="Module")
-        self.assertIn("unmodeled_source_span", [disposition.reason for disposition in plan.dispositions])
+        omitted = [disposition for disposition in plan.dispositions
+               if disposition.reason == "omitted_nonessential:unmodeled_source_span"]
+        self.assertEqual(len(omitted), 1)
+        self.assertEqual(omitted[0].decision, "excluded")
+        self.assertEqual(omitted[0].spans[0].text.strip(), "When configured (")
         covered = {offset for disposition in plan.dispositions for span in disposition.spans
                    for offset in range(span.start, span.end)}
         self.assertTrue(all(offset in covered for offset, character in enumerate(evidence.records[0].text)
                             if not character.isspace()))
+        self.assertTrue(validate_descriptive_synthesis_plan(replace(plan, dispositions=()),
+                expected_evidence=missing, expected_intents=(), profile=IPOS_DESCRIPTIVE_PROFILE, owner="Module"))
 
     def test_synthesis_rejects_scope_span_identity_role_and_dependency_mutations(self):
         evidence = self.synthesis_evidence()
@@ -1204,15 +1237,16 @@ class DescriptiveSummaryTests(unittest.TestCase):
                           if row["decision"] == "selected"} - {""}, {"one", "two", "three"})
         self.assertTrue(all(row["profile"] == "block_local_v1" for row in audit))
 
-    def test_ipos_shared_migration_retains_unsupported_source_as_gap(self):
+    def test_ipos_shared_migration_retains_unsupported_source_as_nonessential_residual(self):
         statement = "Coordinator shall store samples and Receiver shall process them."
         sections, audit = compose_shared_ipos_overview(build_ipos_functional_input(
             "Module", {"Function": "Coordinate acquisition", "Inputs": "samples", "Outputs": "results"},
             [{"source_req_id": "one", "statement": statement}], domain="digital",
         ))
-        gaps = [row for row in audit if row["decision"] == "projection_gap"]
+        gaps = [row for row in audit if row["decision"] == "omitted"]
         self.assertEqual(len(gaps), 1)
         self.assertEqual(gaps[0]["candidate_evidence_statement"], statement)
+        self.assertTrue(gaps[0]["reason"].startswith("omitted_nonessential:"))
         self.assertNotIn("Receiver", " ".join(sections["scope"]))
 
     def test_ipos_runtime_adapter_materializes_common_structure_and_profile_roles_for_both_domains(self):
@@ -1239,15 +1273,17 @@ class DescriptiveSummaryTests(unittest.TestCase):
                 path.write_text(json.dumps(changed), encoding="utf-8")
                 self.assertIn("ipos_structural_audit_changed", validate_ipos_structural_audit(path, functional_input))
 
-    def test_ipos_runtime_adapter_cannot_claim_valid_structure_with_incomplete_source(self):
+    def test_ipos_runtime_adapter_keeps_incomplete_source_as_audited_nonessential_residual(self):
         functional_input = build_ipos_functional_input("Module",
             {"Function": "Coordinate acquisition", "Inputs": "samples", "Outputs": "results"},
             [{"source_req_id": "one", "statement": "Coordinator shall transfer samples into the."}], domain="digital")
         audit = ipos_descriptive_structural_audit(functional_input)
-        self.assertEqual(audit["model"]["typed_model_status"], "blocked")
-        self.assertEqual(audit["application"]["profile_status"], "blocked")
-        self.assertEqual(audit["source_semantic_status"], "blocked")
-        self.assertEqual(audit["model"]["plan"]["dispositions"][-1]["decision"], "unresolved")
+        self.assertEqual(audit["model"]["typed_model_status"], "model_valid")
+        self.assertEqual(audit["application"]["profile_status"], "policy_valid")
+        self.assertEqual(audit["source_semantic_status"], "controlled_constructions_valid")
+        self.assertEqual(audit["model"]["plan"]["dispositions"][-1]["decision"], "excluded")
+        self.assertEqual(audit["publication_status"], "requires_independent_final_artifact_checks")
+        self.assert_nonessential_ipos_residual(functional_input)
         partial = build_ipos_functional_input("Module",
             {"Function": "Coordinate acquisition", "Inputs": "samples", "Outputs": "results"},
             [{"source_req_id": "one", "statement": "Coordinator shall write samples to Receiver. The value shall refer to the cycle start (for"}],
@@ -1256,9 +1292,10 @@ class DescriptiveSummaryTests(unittest.TestCase):
         self.assertEqual(len(flow.facts), 4)
         self.assertIn("unbalanced source delimiters", flow.audit[3]["reason"])
         self.assertTrue(ipos_source_preservation_findings(flow.records, flow.facts))
-        self.assertEqual(ipos_descriptive_structural_audit(partial)["source_semantic_status"], "blocked")
+        self.assertEqual(ipos_descriptive_structural_audit(partial)["source_semantic_status"], "controlled_constructions_valid")
+        self.assert_nonessential_ipos_residual(partial)
 
-    def test_ipos_runtime_adapter_preserves_each_complete_sentence_and_blocks_a_trailing_fragment(self):
+    def test_ipos_runtime_adapter_preserves_each_complete_sentence_and_audits_a_trailing_fragment(self):
         statement = "Coordinator shall store samples. Receiver shall process samples."
         functional_input = build_ipos_functional_input(
             "Module", {"Function": "Coordinate acquisition", "Inputs": "samples", "Outputs": "results"},
@@ -1275,9 +1312,10 @@ class DescriptiveSummaryTests(unittest.TestCase):
             "Module", {"Function": "Coordinate acquisition", "Inputs": "samples", "Outputs": "results"},
             [{"source_req_id": "one", "statement": statement}], domain="digital",
         ))
-        gaps = [row for row in audit if row["decision"] == "projection_gap"]
+        gaps = [row for row in audit if row["decision"] == "omitted"]
         self.assertTrue(gaps)
         self.assertEqual(gaps[0]["candidate_evidence_statement"], statement)
+        self.assertTrue(gaps[0]["reason"].startswith("omitted_nonessential:"))
         self.assertIn("Receiver processes samples.", " ".join(sections["internal_functions"]))
         self.assertIn("Coordinator stores samples.", sections["internal_functions"])
 
@@ -1300,17 +1338,24 @@ class DescriptiveSummaryTests(unittest.TestCase):
                                  if statement.startswith("Coordinator shall store samples.")
                                  else ["Output goes high."] if statement == "Output shall go high," else [])
                 self.assertEqual(sections["internal_structure"], [])
-                self.assertEqual(len([row for row in audit if row["decision"] == "projection_gap"]), 1)
-                self.assertEqual(ipos_descriptive_structural_audit(functional)["source_semantic_status"], "blocked")
+                omissions = [row for row in audit if row["decision"] == "omitted"]
+                self.assertEqual(len(omissions), 1)
+                self.assertTrue(omissions[0]["reason"].startswith("omitted_nonessential:"))
+                self.assertEqual(omissions[0]["candidate_evidence_statement"], statement)
+                self.assert_nonessential_ipos_residual(functional)
 
-    def test_ipos_scope_does_not_repeat_inventory_capabilities_already_expressed_in_purpose(self):
+    def test_ipos_scope_expands_inventory_capabilities_without_changing_purpose(self):
         functional = build_ipos_functional_input("Module",
             {"Function": "Acquire samples, process data, and write results", "Inputs": "samples", "Outputs": "results"},
             [], domain="digital")
         sections, audit = compose_shared_ipos_overview(functional)
-        self.assertEqual(len(sections["scope"]), 1)
+        self.assertEqual(len(sections["scope"]), 4)
+        for responsibility in ("acquire samples", "process data", "write results"):
+            self.assertEqual(sum(responsibility in text for text in sections["scope"]), 1)
         self.assertIn("acquire samples, process data, and write results", sections["functionality"][0])
-        self.assertNotIn("designed to", sections["scope"][0])
+        boundaries = [text for text in sections["scope"] if "accepts samples" in text and "produces results" in text]
+        self.assertEqual(len(boundaries), 1)
+        self.assertNotIn("designed to", boundaries[0])
         plan = ipos_descriptive_structural_audit(functional)["section_plan"]
         self.assertFalse(any(value["decision"] == "excluded" for value in plan))
         self.assertFalse(any(row["source_record_id"] == "inventory:main_functions" for row in audit))
@@ -1326,7 +1371,9 @@ class DescriptiveSummaryTests(unittest.TestCase):
             {"Function": "Generate and receive commands, process values (read inputs, write outputs), and store results",
              "Inputs": "samples", "Outputs": "results"}, [], domain="digital")
         sections, audit = compose_shared_ipos_overview(functional)
-        self.assertEqual(len(sections["scope"]), 1)
+        self.assertEqual(len(sections["scope"]), 4)
+        for responsibility in ("generate and receive commands", "process values (read inputs, write outputs)", "store results"):
+            self.assertEqual(sum(responsibility in text for text in sections["scope"]), 1)
         self.assertIn("generate and receive commands", sections["functionality"][0])
         self.assertIn("process values (read inputs, write outputs)", sections["functionality"][0])
         self.assertIn("store results", sections["functionality"][0])
@@ -1364,7 +1411,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
         functional = build_ipos_functional_input("Unrelated module",
             {"Function": "Control acquisition", "Inputs": "samples", "Outputs": "results"}, rows, domain="analog")
         sections, audit = compose_shared_ipos_overview(functional)
-        output = " ".join(sections["internal_functions"])
+        output = " ".join((*sections["scope"], *sections["internal_functions"]))
         self.assertNotIn("**", output)
         claim = json.loads(next(row["claim_json"] for row in audit if row["candidate_evidence_requirement_id"] == "start"))
         self.assertEqual(claim["scope"], "initiation")
@@ -1382,7 +1429,14 @@ class DescriptiveSummaryTests(unittest.TestCase):
             {"Function": "Process data", "Inputs": "samples", "Outputs": "results"},
             [{"source_req_id": "flag", "statement": statement}], domain="digital")
         sections, audit = compose_shared_ipos_overview(functional)
-        output = " ".join(sections["internal_functions"])
+        from workflow_routing import build_ipos_claim_plan, realize_descriptive_functional_claim
+        claims = [claim for claim in build_ipos_claim_plan(functional).claims
+                  if any(span.record_id.endswith(":flag") for span in claim.spans)]
+        output = " ".join(realize_descriptive_functional_claim(claim) for claim in claims)
+        demoted = [row for row in audit if row["candidate_evidence_requirement_id"] == "flag"]
+        self.assertTrue(demoted)
+        self.assertTrue(all(row["decision"] == "demoted" and not row["rendered_summary"] for row in demoted))
+        self.assertNotIn("o_saturation_flag", " ".join(sections["internal_functions"]))
         self.assertIn("o_saturation_flag", output)
         self.assertNotIn("o saturation flag", output)
         self.assertIn("threshold is greater or equal to 64", output)
@@ -1496,7 +1550,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
         self.assertEqual(flow.facts[4].subject, "Receiver, Sender and Processor")
         self.assertNotIn("Vpriority", " ".join(unit.text for unit in flow.units))
 
-    def test_ipos_shared_intransitive_behavior_preserves_negation_and_incomplete_source_stays_blocked(self):
+    def test_ipos_shared_intransitive_behavior_preserves_negation_and_audits_incomplete_source(self):
         rows = [{"source_req_id": "one", "statement": "Unless enabled, Receiver shall not toggle."},
                 {"source_req_id": "two", "statement": "Coordinator shall transfer samples into the."}]
         functional_input = build_ipos_functional_input(
@@ -1504,7 +1558,8 @@ class DescriptiveSummaryTests(unittest.TestCase):
         )
         sections, audit = compose_shared_ipos_overview(functional_input)
         self.assertEqual({row["candidate_evidence_requirement_id"] for row in audit
-                          if row["decision"] == "projection_gap"}, {"two"})
+                          if row["decision"] == "omitted"}, {"two"})
+        self.assert_nonessential_ipos_residual(functional_input)
         self.assertIn("receiver does not toggle", " ".join(sections["internal_functions"]))
         flow = _ipos_shared_flow(functional_input)
         self.assertIn("Unless enabled, receiver does not toggle.", [unit.text for unit in flow.units])
@@ -1869,6 +1924,11 @@ class DescriptiveSummaryTests(unittest.TestCase):
         clock_summary = "The clock network distributes the fixture clocks."
         clock_table = "| " + " | ".join(clock_header) + " |\n" + "\n".join(
             _drs_clock_path_markdown_row(row) for row in clock_rows)
+        from spec_document_contract import apply_clean_document_presentation, clean_descriptive_review_text
+        from workflow_routing import IPOS_CONNECTION_TABLES, render_connection_table_sections
+        connection_rows = [tuple(clean_descriptive_review_text(value) for value in row) for row in clock_rows]
+        connection_sections = render_connection_table_sections("4.7", {
+            "clock": [_drs_clock_path_markdown_row(row) for row in connection_rows]}, first_table_number=8)
         baseline = "\n".join([
             "Snapshot ID: fixture-snapshot", "## 3. Top Level Overview", "Fixture overview.",
             "### 3.1 Digital Main Functions", "#### **Storage** {#storage}", "Storage buffers samples.",
@@ -1882,6 +1942,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
             "Clock-path endpoints requiring clarification: ROUTE-2.",
             "### 4.7 Clock and synchronization across domains", clock_summary, clock_table,
             "Clock-domain crossing, reset-domain crossing, and measured interrupt response time: need clarification.",
+            *connection_sections,
             "## 5. Other requirements",
         ])
         with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
@@ -1892,12 +1953,23 @@ class DescriptiveSummaryTests(unittest.TestCase):
             (output / "descriptive_summary_audit.csv").write_text("section\n", encoding="utf-8")
             (output / "descriptive_low_power_audit.csv").write_text("decision,query_seed,statement\n", encoding="utf-8")
             (output / "drs_traceability_matrix.csv").write_text("requirement_statement\n", encoding="utf-8")
+            baseline = "\n".join(apply_clean_document_presentation(baseline.splitlines(), markdown_path, "DRS"))
+            publication_audit_path = output / "descriptive_publication_audit.json"
+            publication_audit = json.loads(publication_audit_path.read_text(encoding="utf-8"))
             document = Document()
             document.add_paragraph(baseline)
             for values in (power_header, power_row, clock_header, *clock_rows,
                            ["Block", "Role", "Architectural relationship"], ["Storage", "Buffer samples.", "none"]):
                 table = document.add_table(rows=1, cols=len(values))
                 for cell, value in zip(table.rows[0].cells, values):
+                    cell.text = clean_descriptive_review_text(value)
+            document.add_heading("4.7.1 Clock connections", level=4)
+            document.add_heading("Table 8. Clock connections", level=5)
+            table = document.add_table(rows=1, cols=len(IPOS_CONNECTION_TABLES["clock"][1]))
+            for cell, value in zip(table.rows[0].cells, IPOS_CONNECTION_TABLES["clock"][1]):
+                cell.text = value
+            for values in connection_rows:
+                for cell, value in zip(table.add_row().cells, values):
                     cell.text = value
             document.save(markdown_path.with_suffix(".docx"))
             block = BlockInfo("Storage", "Buffer samples.", "", "", "", "concrete_block")
@@ -1909,7 +1981,7 @@ class DescriptiveSummaryTests(unittest.TestCase):
                 "_drs_rendered_prose_findings": [], "_drs_power_domain_rows": [tuple(power_row)],
                 "power_domain_records_from_ocr": [], "_drs_block_relationships": "none",
                 "_stage1_overview_descriptive_records": ([], {"Storage": [{"statement": "Buffer samples."}]}),
-                "load_sqlite_snapshot_input": SimpleNamespace(rows=()), "_drs_clock_path_rows": clock_rows,
+                "load_sqlite_snapshot_input": SimpleNamespace(rows=()),
                 "_drs_clock_section_summary": clock_summary, "_drs_power_clock_routes": clock_rows,
                 "_drs_section_interaction_summary": "", "_drs_shared_facet_rows": [("Flow control and backpressure", "need clarification")],
                 "_drs_power_reset_outputs": [], "_drs_sync_connection_rows": [],
@@ -1917,6 +1989,8 @@ class DescriptiveSummaryTests(unittest.TestCase):
             for name, value in mocks.items():
                 stack.enter_context(patch.object(generator, name, side_effect=lambda *args, value=value, **kwargs:
                                                 list(value) if isinstance(value, list) else value))
+            stack.enter_context(patch.object(generator, "_drs_clock_path_rows", side_effect=lambda *args, **kwargs:
+                                            connection_rows if kwargs.get("preserve_source_fields") else clock_rows))
             stack.enter_context(patch.object(generator, "DRS_NARRATIVE_ROLE_TERMS", ()))
             markdown_path.write_text(baseline, encoding="utf-8")
             self.assertEqual(validate_drs_descriptive_artifacts(root), [])
@@ -1931,6 +2005,9 @@ class DescriptiveSummaryTests(unittest.TestCase):
             for original, replacement, expected in mutations:
                 with self.subTest(original=original):
                     markdown_path.write_text(baseline.replace(original, replacement), encoding="utf-8")
+                    changed_audit = dict(publication_audit, omissions=[item for item in publication_audit["omissions"]
+                                        if original in baseline or original not in item["original"]])
+                    publication_audit_path.write_text(json.dumps(changed_audit), encoding="utf-8")
                     findings = validate_drs_descriptive_artifacts(root)
                     for finding in expected:
                         self.assertIn(finding, findings)

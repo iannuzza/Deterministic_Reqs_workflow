@@ -1,6 +1,6 @@
 # Requirement Coverage Across Document Hierarchy
 
-Date: 2026-10-12 16:33:17
+Date: 2026-10-15 21:54:12
 
 ## Basis
 - Source document: `DDS_STBIO1.pdf` (from the Stage 1 OCR index).
@@ -85,7 +85,7 @@ Date: 2026-10-12 16:33:17
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | adsp | 27 | 19 / 27 (70.4%) | 0 / 27 (0.0%) | 0 / 27 (0.0%) | 1 / 27 (3.7%) | 19 / 27 (70.4%) | 0 / 27 (0.0%) |
 | i2cspiahb | 20 | 15 / 20 (75.0%) | 0 / 20 (0.0%) | 0 / 20 (0.0%) | 0 / 20 (0.0%) | 15 / 20 (75.0%) | 0 / 20 (0.0%) |
-| maincontroller | 187 | 138 / 187 (73.8%) | 0 / 187 (0.0%) | 0 / 187 (0.0%) | 3 / 187 (1.6%) | 181 / 187 (96.8%) | 0 / 187 (0.0%) |
+| maincontroller | 187 | 181 / 187 (96.8%) | 0 / 187 (0.0%) | 0 / 187 (0.0%) | 3 / 187 (1.6%) | 181 / 187 (96.8%) | 0 / 187 (0.0%) |
 | otp | 0 | 0 / 0 (0.0%) | 0 / 0 (0.0%) | 0 / 0 (0.0%) | 0 / 0 (0.0%) | 0 / 0 (0.0%) | 0 / 0 (0.0%) |
 | padmux | 17 | 17 / 17 (100.0%) | 0 / 17 (0.0%) | 0 / 17 (0.0%) | 0 / 17 (0.0%) | 17 / 17 (100.0%) | 0 / 17 (0.0%) |
 | pmu | 31 | 31 / 31 (100.0%) | 0 / 31 (0.0%) | 0 / 31 (0.0%) | 0 / 31 (0.0%) | 31 / 31 (100.0%) | 0 / 31 (0.0%) |
@@ -96,7 +96,7 @@ Date: 2026-10-12 16:33:17
 ## Cross-Artifact ID Sets
 | Comparison | Common source IDs |
 | --- | ---: |
-| Source specification -> SysML block files | 259 / 357 (72.5%) |
+| Source specification -> SysML block files | 302 / 357 (84.6%) |
 | Source specification -> SRS | 0 / 357 (0.0%) |
 | Source specification -> ARS | Not applicable |
 | Source specification -> DRS | 55 / 357 (15.4%) |

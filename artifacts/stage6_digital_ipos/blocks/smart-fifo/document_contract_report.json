@@ -15,5 +15,37 @@
   },
   "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
   "document_type": "IPOS",
+  "generation_status": "GENERATED",
+  "publication_status": "ELIGIBLE",
+  "readiness_status": "NOT_ASSESSED",
+  "residuals": [
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Smart FIFO:DDS_STBIO1_89455449"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Smart FIFO:DDS_STBIO1_89456557"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Smart FIFO:DDS_STBIO1_89457790"
+      ]
+    }
+  ],
   "status": "PASS"
 }

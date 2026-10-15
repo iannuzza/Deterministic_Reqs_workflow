@@ -1,13 +1,17 @@
 # **Digital IPOS - Main Controller** {#digital-ipos---main-controller}
 
-- Snapshot: `snap-b2e8101b00dc6909feaed885`
+- Snapshot: `snap-73c872b1307b6adb5eaf843e`
 
 Author: Alessandro Lucio IANNUZZI
 
 ## **0. Document Navigation** {#0-document-navigation}
 
 ### **0.1 Table of contents** {#01-table-of-contents}
+
 - [1. Block overview](#1-block-overview)
+- [1.1 Functionality](#11-functionality)
+- [1.2 Supported functions and scope](#12-supported-functions-and-scope)
+- [1.4 Supported block functions](#14-supported-block-functions)
 - [2. Source I/O](#2-source-io)
 - [3. Block requirements](#3-block-requirements)
 
@@ -16,8 +20,10 @@ Author: Alessandro Lucio IANNUZZI
 | Version | Date | Description | Author |
 |---|---|---|---|
 | 0.1 | 2026-10-01 | Snapshot snap-b2e8101b00dc6909feaed885 digital IPOS block baseline | Alessandro Lucio IANNUZZI |
+| 0.2 | 2026-10-13 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
+#### **Table 2. Requirement navigation** {#table-2-requirement-navigation}
 | Requirement | Internal link |
 |---|---|
 | IPOS-MAIN-CONTROLLER-001 | [Go to requirement](#ipos-main-controller-001) |
@@ -158,6 +164,55 @@ Author: Alessandro Lucio IANNUZZI
 | IPOS-MAIN-CONTROLLER-136 | [Go to requirement](#ipos-main-controller-136) |
 | IPOS-MAIN-CONTROLLER-137 | [Go to requirement](#ipos-main-controller-137) |
 | IPOS-MAIN-CONTROLLER-138 | [Go to requirement](#ipos-main-controller-138) |
+| IPOS-MAIN-CONTROLLER-139 | [Go to requirement](#ipos-main-controller-139) |
+| IPOS-MAIN-CONTROLLER-140 | [Go to requirement](#ipos-main-controller-140) |
+| IPOS-MAIN-CONTROLLER-141 | [Go to requirement](#ipos-main-controller-141) |
+| IPOS-MAIN-CONTROLLER-142 | [Go to requirement](#ipos-main-controller-142) |
+| IPOS-MAIN-CONTROLLER-143 | [Go to requirement](#ipos-main-controller-143) |
+| IPOS-MAIN-CONTROLLER-144 | [Go to requirement](#ipos-main-controller-144) |
+| IPOS-MAIN-CONTROLLER-145 | [Go to requirement](#ipos-main-controller-145) |
+| IPOS-MAIN-CONTROLLER-146 | [Go to requirement](#ipos-main-controller-146) |
+| IPOS-MAIN-CONTROLLER-147 | [Go to requirement](#ipos-main-controller-147) |
+| IPOS-MAIN-CONTROLLER-148 | [Go to requirement](#ipos-main-controller-148) |
+| IPOS-MAIN-CONTROLLER-149 | [Go to requirement](#ipos-main-controller-149) |
+| IPOS-MAIN-CONTROLLER-150 | [Go to requirement](#ipos-main-controller-150) |
+| IPOS-MAIN-CONTROLLER-151 | [Go to requirement](#ipos-main-controller-151) |
+| IPOS-MAIN-CONTROLLER-152 | [Go to requirement](#ipos-main-controller-152) |
+| IPOS-MAIN-CONTROLLER-153 | [Go to requirement](#ipos-main-controller-153) |
+| IPOS-MAIN-CONTROLLER-154 | [Go to requirement](#ipos-main-controller-154) |
+| IPOS-MAIN-CONTROLLER-155 | [Go to requirement](#ipos-main-controller-155) |
+| IPOS-MAIN-CONTROLLER-156 | [Go to requirement](#ipos-main-controller-156) |
+| IPOS-MAIN-CONTROLLER-157 | [Go to requirement](#ipos-main-controller-157) |
+| IPOS-MAIN-CONTROLLER-158 | [Go to requirement](#ipos-main-controller-158) |
+| IPOS-MAIN-CONTROLLER-159 | [Go to requirement](#ipos-main-controller-159) |
+| IPOS-MAIN-CONTROLLER-160 | [Go to requirement](#ipos-main-controller-160) |
+| IPOS-MAIN-CONTROLLER-161 | [Go to requirement](#ipos-main-controller-161) |
+| IPOS-MAIN-CONTROLLER-162 | [Go to requirement](#ipos-main-controller-162) |
+| IPOS-MAIN-CONTROLLER-163 | [Go to requirement](#ipos-main-controller-163) |
+| IPOS-MAIN-CONTROLLER-164 | [Go to requirement](#ipos-main-controller-164) |
+| IPOS-MAIN-CONTROLLER-165 | [Go to requirement](#ipos-main-controller-165) |
+| IPOS-MAIN-CONTROLLER-166 | [Go to requirement](#ipos-main-controller-166) |
+| IPOS-MAIN-CONTROLLER-167 | [Go to requirement](#ipos-main-controller-167) |
+| IPOS-MAIN-CONTROLLER-168 | [Go to requirement](#ipos-main-controller-168) |
+| IPOS-MAIN-CONTROLLER-169 | [Go to requirement](#ipos-main-controller-169) |
+| IPOS-MAIN-CONTROLLER-170 | [Go to requirement](#ipos-main-controller-170) |
+| IPOS-MAIN-CONTROLLER-171 | [Go to requirement](#ipos-main-controller-171) |
+| IPOS-MAIN-CONTROLLER-172 | [Go to requirement](#ipos-main-controller-172) |
+| IPOS-MAIN-CONTROLLER-173 | [Go to requirement](#ipos-main-controller-173) |
+| IPOS-MAIN-CONTROLLER-174 | [Go to requirement](#ipos-main-controller-174) |
+| IPOS-MAIN-CONTROLLER-175 | [Go to requirement](#ipos-main-controller-175) |
+| IPOS-MAIN-CONTROLLER-176 | [Go to requirement](#ipos-main-controller-176) |
+| IPOS-MAIN-CONTROLLER-177 | [Go to requirement](#ipos-main-controller-177) |
+| IPOS-MAIN-CONTROLLER-178 | [Go to requirement](#ipos-main-controller-178) |
+| IPOS-MAIN-CONTROLLER-179 | [Go to requirement](#ipos-main-controller-179) |
+| IPOS-MAIN-CONTROLLER-180 | [Go to requirement](#ipos-main-controller-180) |
+| IPOS-MAIN-CONTROLLER-181 | [Go to requirement](#ipos-main-controller-181) |
+
+### **0.4 Table index** {#04-table-index}
+
+- [Table 1. Version history](#table-1-version-history)
+- [Table 2. Requirement navigation](#table-2-requirement-navigation)
+- [Table 3. Source I/O](#table-3-source-io)
 
 ## **1. Block overview** {#1-block-overview}
 
@@ -167,34 +222,23 @@ The Main Controller block is designed to generate and receive Analog Domain cont
 
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
-- **Generate and receive Analog Domain control signals.** The Main Controller block is designed to generate and receive Analog Domain control signals.
+The Main Controller block is designed to generate and receive Analog Domain control signals.
 
-- **Perform DSP elaboration on ADC outputs.** The Main Controller block is designed to perform DSP elaboration on ADC outputs.
+The Main Controller block is designed to perform DSP elaboration on ADC outputs.
 
-- **Write elaborated results to the defined addresses.** The Main Controller block is designed to write elaborated results to the defined addresses.
+The Main Controller block is designed to write elaborated results to the defined addresses.
 
-The Main Controller block accepts Configuration register settings, sampled data. The Main Controller block produces Control state and data routing.
-
+The Main Controller block accepts Configuration register settings, sampled data and produces Control state and data routing.
 
 ### **1.4 Supported block functions** {#14-supported-block-functions}
 
-- **PPG saturation flag control.** In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold is greater or equal to 64), o saturation flag is set to 1 and goes to 0 at the start of the next frame or frame repetition.
-
-- **Elaboration FSM.** When the wave velocity mode is selected and the device FSM is in WAIT SU, the Elaboration FSM goes into the TIMER BUFFER State and then into the PPG ALC STORAGE.
-
-- **Measurement initiation.** The user starts measurement writing register DEVICE CONFIG OPERATION [0] at 1.
-
-- **Device FSM.** When DEVICE FSM FSM is in IDLE STATE (main controller status register (DEVICE STATUS REG register [2:0]) is equal to 0x02) if HC EN (ECG CTRL register [0]) is set to 1 and ECG0 SEL (DEVICE CONFIG CHANNEL [0]) is set to 1 and IMP EN (IMP CTRL register [0]) is set to 1 and BIA SEL (DEVICE CONFIG CHANNEL [2]) is set to 1, after WAIT SU, the device FSM goes in OPERATIVE (DEVICE STATUS REG register [2:0] is equal to 0x04). When in OPERATIVE (main controller status register (DEVICE STATUS REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device FSM goes into the error state (DEVICE STATUS REGISTER) and raise an interrupt (o error time slot) to the Digital Top.
-
-- **PPG FSM.** When in Rising Ramp State, the PPG FSM stays in this state until the end of the Rising Time.
-
-- **Digital ramp control.** When in FIRST ALC SAMPLES state, when i end average is set to 1, the o start digital ramp signal is set high to start the rising of the digital ramp and go into the RISING RAMP state.
-
+The interval between two GSR acquisitions is defined in time slots.
 
 ## **2. Source I/O** {#2-source-io}
 
 The following approved source I/O entries are owned by this block.
 
+#### **Table 3. Source I/O** {#table-3-source-io}
 | Port name | Direction | Type / details | Table | Source page |
 |---|---|---|---|---|
 | i_clk_32kHz | input | clk 32kHz from pmu | Main Controller I/O List | 76 |
@@ -546,7 +590,7 @@ Covers: DDS_STBIO1_0140
 
 
 #### **IPOS-MAIN-CONTROLLER-016** {#ipos-main-controller-016}
-The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set
+The only registers that the user shall change after setting the mode_operation to 1 are the ones described in requirement 7096. All the Other signals shall change only with mode_operation set to 0 or when i_debug is set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_002
 
@@ -554,7 +598,7 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_002
 
 
 #### **IPOS-MAIN-CONTROLLER-017** {#ipos-main-controller-017}
-[Covers: DDS_STBIO1_0116] When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and that
+[Covers: DDS_STBIO1_0116] When the Device_FSM FSM is in BOOT State, that is DEVICE_STATUS_REG register [2:0]) == 0x01 (main_controller_status_register), it shall wait that the ADSP ends the BOOT Phase, checking when the i_quokka_boot_end is set high. When the BOOT Phase is ended, the Device_FSM FSM shall go to IDLE State, check that DEVICE_STATUS_REG register [2:0]) == 0x02, (main_controller_status_register), check that the w_en_ldo1v8 signal is set low and that the O_PD_CLKF signal is set to high.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_004
 
@@ -570,7 +614,7 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_008
 
 
 #### **IPOS-MAIN-CONTROLLER-019** {#ipos-main-controller-019}
-[Covers: DDS_STBIO1_0123] [Covers: DDS_STBIO1_0141] When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL (DEVICE_CONFIG_CHANNEL register [3]) is set high, or ADC_DO_CALIBRATION ( ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE (GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL (DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go
+[Covers: DDS_STBIO1_0123] [Covers: DDS_STBIO1_0141] When in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, or BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is set high, or ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set high, or GSR_SEL (DEVICE_CONFIG_CHANNEL register [3]) is set high, or ADC_DO_CALIBRATION ( ADC_CAL_CONFIG register [0]) is set high, or WAVE_VELOCITY_MODE (GENERAL_PPG_PARAMETERS_1 register [4]) is set high together wit h PPG_SEL (DEVICE_CONFIG_CHANNEL register [4]), when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_CLKF shall go to 0, the w_en_ldo1v8 shall be set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_009
 
@@ -578,7 +622,7 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_009
 
 
 #### **IPOS-MAIN-CONTROLLER-020** {#ipos-main-controller-020}
-[Covers: DDS_STBIO1_0119] When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 0, ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall go low and the Device_FSM FSM shall go to the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register
+[Covers: DDS_STBIO1_0119] When the FSM is in IDLE State, if ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is high, HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 0, ECG0 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall go low and the Device_FSM FSM shall go to the WAIT_SU State , so the main_controller_status_register (DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_010
 
@@ -586,7 +630,7 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_010
 
 
 #### **IPOS-MAIN-CONTROLLER-021** {#ipos-main-controller-021}
-When the HC_EN (ECG_CTRL register [0]) is set to 0 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the Device_FSM shall go to the WAIT_SU State, so main_controller_status_register
+When the HC_EN (ECG_CTRL register [0]) is set to 0 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL register [1]) is set to 1, ECG1 and ECG2 shall be active so, when MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0] ) is set different from 0, the O_PD_HC2 shall remain high, O_PD_IMP shall go low and the Device_FSM shall go to the WAIT_SU State, so main_controller_status_register (DEVICE_STATUS_REG register [2:0]) shall be equal to 0x03.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_011
 
@@ -594,78 +638,110 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_011
 
 
 #### **IPOS-MAIN-CONTROLLER-022** {#ipos-main-controller-022}
-If the calibration has been done, the ADC_error_caps values computed shall reset only if the
+When the user selects the ECG, BIA, the wave velocity mode or the ppg ioff calibration, the device Shall go to WAIT_SU state.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_015
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-023** {#ipos-main-controller-023}
+If the calibration has been done, the ADC_error_caps values computed shall reset only if the POR signal is asserted or shall be overwritten if another calibration is performed.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_0152
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-023** {#ipos-main-controller-023}
-When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low within 5 clock cycle at
+#### **IPOS-MAIN-CONTROLLER-024** {#ipos-main-controller-024}
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is equal to 1, O_PD_IMP shall go low within 5 clock cycle at 32kHz.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_016
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-024** {#ipos-main-controller-024}
-When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain
+#### **IPOS-MAIN-CONTROLLER-025** {#ipos-main-controller-025}
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1 and the IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, the O_IMP_CURINJ_PD shall go low. On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, the O_IMP_CURINJ_PD shall remain high.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_017
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-025** {#ipos-main-controller-025}
-When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall be chosen from 20kHz, 50kHz, 100kHz, 200kHz . On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and
+#### **IPOS-MAIN-CONTROLLER-026** {#ipos-main-controller-026}
+When DEVICE is in WAIT_SU, if IMP_EN (IMP_CTRL register [0]) signal is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 5ms after the falling of imp_curinj_pd and O_PD_IMP, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 1, O_CK_M, O_CK_P and O_CK_Q shall be generated from Clock generator block so they run at FREQ_BIA_CLK_m_p_q (EN_CHOP_FREQ_MOD_DEMOD register [4:3] ) and its values shall be chosen from 20kHz, 50kHz, 100kHz, 200kHz . On the other hand, if IMP_CURRINJ_EN (CURR_INJ register [3]) is equal to 0, ck_m, ck_p and ck_q shall stay low. After this, the clock shall always run.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_018
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-026** {#ipos-main-controller-026}
-When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase
+#### **IPOS-MAIN-CONTROLLER-027** {#ipos-main-controller-027}
+When IMP_CURRINJ_EN (CURR_INJ register [3]) is high, O_CK_Q shall be run with a phase delay of 90 degrees (opposite) with respect O_CK_P.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_019
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-027** {#ipos-main-controller-027}
-When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of O_RST_IMP, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be run at 10kHz frequency. On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set
+#### **IPOS-MAIN-CONTROLLER-028** {#ipos-main-controller-028}
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1, 15ms after the falling of O_PD_IMP, the O_RST_IMP shall go low.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_020
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-029** {#ipos-main-controller-029}
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 20ms after the falling of O_RST_IMP, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 1, O_CK_CHOP_IMP shall be generated from Clock generator block, so O_CK_CHOP_IMP shall be run at 10kHz frequency. On the other hand, if EN_CHOP_CLK_IMP (EN_CHOP_FREQ_MOD_DEMOD register [1]) is set to 0, then O_CK_CHOP_IMP shall stay low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_021
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-028** {#ipos-main-controller-028}
-When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the
+#### **IPOS-MAIN-CONTROLLER-030** {#ipos-main-controller-030}
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; 30ms after the falling of O_RST_IMP, O_RSTI_IMP shall go low.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_022
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-031** {#ipos-main-controller-031}
+When DEVICE_FSM FSM is in WAIT_SU state, if IMP_EN signal (IMP_CTRL register [0]) is equal to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL register [2]) is equal to 1; If i_su_hlt_dly is set to 0, 205ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low. Instead, if SU_DLY (EN_CHOP_FREQ_MOD_DEMOD register [2]) is set to 1, 755ms after the falling of O_RSTI_IMP, O_SUG_IMP shall go low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_023
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-029** {#ipos-main-controller-029}
-When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal
+#### **IPOS-MAIN-CONTROLLER-032** {#ipos-main-controller-032}
+When DEVICE_FSM FSM is in WAIT_SU STATE ( main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x03) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL register [0]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, after WAIT_SU state the device shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04)
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_024
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-030** {#ipos-main-controller-030}
-When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in
+#### **IPOS-MAIN-CONTROLLER-033** {#ipos-main-controller-033}
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and ECG1_ECG2_SEL (DEVICE_CONFIG_CHANNEL [1]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_026
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-031** {#ipos-main-controller-031}
+#### **IPOS-MAIN-CONTROLLER-034** {#ipos-main-controller-034}
+When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU the device_fsm shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_027
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-035** {#ipos-main-controller-035}
 When DEVICE_FSM FSM is in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) if HC_EN (ECG_CTRL register [0]) is set to 1 and ECG0_SEL (DEVICE_CONFIG_CHANNEL [0]) is set to 1 and IMP_EN (IMP_CTRL register [0]) is set to 1 and BIA_SEL (DEVICE_CONFIG_CHANNEL [2]) is set to 1, after WAIT_SU, the device FSM shall go in OPERATIVE (DEVICE_STATUS_REG register [2:0] is equal to 0x04).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_028
@@ -673,23 +749,23 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_028
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-032** {#ipos-main-controller-032}
-When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register
+#### **IPOS-MAIN-CONTROLLER-036** {#ipos-main-controller-036}
+When DEVICE_FSM FSM is in IDLE if PPG_SEL (DEVICE_CONFIG_CHANNEL [4]) is set to 1 and MODE_OPERATION (bit [1:0] on DEVICE_CONFIG_OPERATION register) is different to 0, the device shall go in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) and O_PD_TIA and O_PD_IDAC shall go low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_029
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-033** {#ipos-main-controller-033}
-When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or
+#### **IPOS-MAIN-CONTROLLER-037** {#ipos-main-controller-037}
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) the device shall be execute a number of frames equal to N_PPG_FRAME (GENERAL_PPG_PARAMETERS_1 register [3:0]) (Check the i_id_frame shall increase until it’s equal to N_PPG_FRAME-1). At the beginning of each frame o_ADC_EN shall go high and it shall go low when ALC_COMPENSATION is performed or at the end of the last frame.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_030
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-034** {#ipos-main-controller-034}
+#### **IPOS-MAIN-CONTROLLER-038** {#ipos-main-controller-038}
 When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x 05) o_ADC_start shall go high a number of times equal “2 ^ value indicated in regmap of FRAME_{n}_SAMPLES (FRAME_n_PARAMETERS_1 register [5:3]) for ALC and PPG both (2*(2^regmap_value). Except when FRAME_{n}_SAMPLES is equal to 3’b000, in this case o_ADC_start shall go high 3 times.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_031
@@ -697,23 +773,23 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_031
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-035** {#ipos-main-controller-035}
-When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, o_Txi_idac_VREF shall be increase its value of N_START for next step o_Txi_idac_VREF shall
+#### **IPOS-MAIN-CONTROLLER-039** {#ipos-main-controller-039}
+When DEVICE_FSM FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) during each frame o_Txi_idac_VREF shall go from 0 to N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]). At first, o_Txi_idac_VREF shall be increase its value of N_START for next step o_Txi_idac_VREF shall be increase its value by 1
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_032
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-036** {#ipos-main-controller-036}
-When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) , Device_FSM shall go back in IDLE only if the user turns off the
+#### **IPOS-MAIN-CONTROLLER-040** {#ipos-main-controller-040}
+When not in IDLE STATE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02) , Device_FSM shall go back in IDLE only if the user turns off the MODE_OPERATION (DEVICE_CONFIG_OPERATION register [1:0]) is set to 0).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_033
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-037** {#ipos-main-controller-037}
+#### **IPOS-MAIN-CONTROLLER-041** {#ipos-main-controller-041}
 When in OPERATIVE (main_controller_status_register (DEVICE_STATUS_REG register [2:0]) is equal to 0x02), if the time slot counter reach its limit, the Device_FSM shall go into the error state (DEVICE_STATUS_REGISTER) and raise an interrupt (o_error_time_slot) to the Digital_Top.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_034
@@ -721,71 +797,95 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_034
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-038** {#ipos-main-controller-038}
-When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if
+#### **IPOS-MAIN-CONTROLLER-042** {#ipos-main-controller-042}
+When DEVICE_FSM FSM is in Operative State (DEVICE_STATUS_REG register [2:0]==0x04), the o_MC_busy shall go to 1 and shall go to 0 one clock cycle after entering the SLEEP state if no error occurred.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_035
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-039** {#ipos-main-controller-039}
-When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck at 0) occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital
+#### **IPOS-MAIN-CONTROLLER-043** {#ipos-main-controller-043}
+When in Sleep Mode, the device shall go back to the Operative State if no error (o_error_irq stuck at 0) occurs and all the operations are ended . Furthermore, if no Bio -Channel operations are selected and more than 150us are left before the start of a new time slot, the o_pd_clkf (Digital Top signal) shall be set to 1, otherwise shall be left to 0.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_036
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-040** {#ipos-main-controller-040}
-In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first
+#### **IPOS-MAIN-CONTROLLER-044** {#ipos-main-controller-044}
+In a Time Slot, when a BIO-Channel operation is selected, o_en_bufxbio signal (in Digital Top) shall go high at least a configurable time (Device Config Operation [6:5]) before selecting the first bio-channel to measure with the o_ADC_mux_reg.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_037
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-041** {#ipos-main-controller-041}
-When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions (described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the
+#### **IPOS-MAIN-CONTROLLER-045** {#ipos-main-controller-045}
+When the ELAB_FSM is in ECG State, the ADC_Mux (concatenation of {o_adc_mux_sel, o_adc_mux_bio_channel} on digital top) output shall be set equal to 001 and after 4 acquisitions (described in section 5.4 ADC PHASE) shall be set to 010. If ECG1 and ECG2 are selected, the o_adc_mux_biochannel shall be set also to 011, 100, 101 and 110. In the ECG state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_038
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-042** {#ipos-main-controller-042}
-When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall
+#### **IPOS-MAIN-CONTROLLER-046** {#ipos-main-controller-046}
+When ELAB FSM is in PPG state (main_controller_status_register in ELAB_STATUS_REG register [3:0] shall be equal to 0x05) or a WAIT_END_OPERATIVE State, o_en_biobuffer shall stay low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_039
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-043** {#ipos-main-controller-043}
-When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set
+#### **IPOS-MAIN-CONTROLLER-047** {#ipos-main-controller-047}
+When the ELAB_FSM is in BIA State (Check ELAB_STATUS_REG), the ADC_Mux (o_adc_mux_biochannel on digital top) output shall be set equal to 011, 100, 101 or 110.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_040
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-048** {#ipos-main-controller-048}
+The ADC_PHGEN shall work at 16 MHz clock frequency.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_043
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-049** {#ipos-main-controller-049}
+When i_rstn is asserted low, all the output shall be set to 0, except for count_cap that shall be set to 9 and o_end_cal_phase that shall be set to high.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_044
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-044** {#ipos-main-controller-044}
-The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not
+#### **IPOS-MAIN-CONTROLLER-050** {#ipos-main-controller-050}
+The o_adc_ready shall be set to 1 when the ADC is getting ready (o_adc_en is set to 1 but not 160 clock cycles are passed), or i_calibration_phase is set to 1 or i_adc_start is set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_045
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-045** {#ipos-main-controller-045}
-When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high
+#### **IPOS-MAIN-CONTROLLER-051** {#ipos-main-controller-051}
+When the calibration phase is ended, the o_end_cal_phase shall be set to 1 and shall stay high until the reset is not asserted or the i_reset_end_calibration is set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_047
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-046** {#ipos-main-controller-046}
+#### **IPOS-MAIN-CONTROLLER-052** {#ipos-main-controller-052}
+When the i_reset_end_calibration , i_do_calibration and i_mode_operation are set to 1, the o_end_cal_phase shall be set to 0.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_048
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-053** {#ipos-main-controller-053}
 When ECG, BIA or GSR Is sampled, i_ADC_en is equal to 1, the o_ADC_clk_en shall be set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_049
@@ -793,135 +893,159 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_049
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-047** {#ipos-main-controller-047}
-[Covers: DDS_STBIO1_0121] [Covers: DDS_STBIO1_0129] The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This
+#### **IPOS-MAIN-CONTROLLER-054** {#ipos-main-controller-054}
+[Covers: DDS_STBIO1_0121] [Covers: DDS_STBIO1_0129] The Sampling Phase shall be configurable by the user with i_N_clk values from 0 up to 63. This signal indicates the number of clock that o_ADC_start shall stay high.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_051
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-048** {#ipos-main-controller-048}
-When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end
+#### **IPOS-MAIN-CONTROLLER-055** {#ipos-main-controller-055}
+When the i_ADC_en_mc and i_adc_en_mask is set to 0, all the output shall be set to 0, except for the o_end_cal_phases and o_ADC_clk_en. The o_end_cal_phases shall be set to 1 if i_do_calibration (bit 0 of ADC_CAL_CONFIG) is set to 0, otherwise shall be set to 0 until the end of the calibration phase.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_052
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-049** {#ipos-main-controller-049}
-When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before
+#### **IPOS-MAIN-CONTROLLER-056** {#ipos-main-controller-056}
+When the i_ADC_en_mc and i_adc_en_mask is set to 1, at least 160 clock cycles shall pass before the ADC is ready to work. The first i_ADC_EOC shall be ignored.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_053
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-050** {#ipos-main-controller-050}
-When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay
+#### **IPOS-MAIN-CONTROLLER-057** {#ipos-main-controller-057}
+When the ADC_phases fsm is ready and an acquisition is required, the o_ADC_start shall stay High for i_N_clk+1 cycles.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_054
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-051** {#ipos-main-controller-051}
-After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new
+#### **IPOS-MAIN-CONTROLLER-058** {#ipos-main-controller-058}
+After an acquisition is started, the ADC_Phases shall wait for the i_ADC_EOC sampling the new data on the falling edge of the clock.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_055
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-052** {#ipos-main-controller-052}
-The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration
+#### **IPOS-MAIN-CONTROLLER-059** {#ipos-main-controller-059}
+The calibration phase shall set the adc_error_cap8…0 to the correct value, following the calibration algorithm.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_058
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-053** {#ipos-main-controller-053}
-If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall
+#### **IPOS-MAIN-CONTROLLER-060** {#ipos-main-controller-060}
+If the i_noise signal is set to 1 when the DEVICE_FSM is into PPG State, the i_n_avarage shall be divided by 2.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_059
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-054** {#ipos-main-controller-054}
-When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall
+#### **IPOS-MAIN-CONTROLLER-061** {#ipos-main-controller-061}
+When the last acquisition is performed, after the last i_ADC_EOC arrived, the ADC_phases shall set to high the o_do_avarage signal for 1 clock cycle.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_060
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-055** {#ipos-main-controller-055}
-When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to
+#### **IPOS-MAIN-CONTROLLER-062** {#ipos-main-controller-062}
+When the i_data_out_adc is sampled, the 15 bit (MSB in little endian), shall be negated in order to convert the input in Two Complement.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_061
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-056** {#ipos-main-controller-056}
-When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to
+#### **IPOS-MAIN-CONTROLLER-063** {#ipos-main-controller-063}
+When i_debug_calibration is set (second bitfield of ADC_CAL_CONFIG ), the number of samples used by the avarage block during the calibration shall be set to 2. (The purpose of this mode is to speed-up the AM-S simulation).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_062
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-057** {#ipos-main-controller-057}
-When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result shall be bypassed in favor of the value written inside the registers
+#### **IPOS-MAIN-CONTROLLER-064** {#ipos-main-controller-064}
+When i_debug_adc_error_cap8_0_bypass is set to 1 (set to 1 en_debug_adc_error_cap8_0_bypass of ADC_GENERAL_DEBUG_0 ), the calibration result shall be bypassed in favor of the value written inside the registers ADC_ERROR_CAP_x_DEBUG
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_063
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-058** {#ipos-main-controller-058}
-When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in ADC_GENERAL_DEBUG_0 and the sampled data shall be written in ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and In this mode, before start a new sampling operation, the RESET_DEBUG_ADC DATA in
+#### **IPOS-MAIN-CONTROLLER-065** {#ipos-main-controller-065}
+When the adc_readout_bypass mode is enabled by the 2 bitfield ADC_GENERAL_DEBUG_0 , the sampling phase of the ADC Phgen shall be bypassed in favor of regmap. In particular, the Sampling phase shall be controlled by the register EN_ADC_DEBUG and EN_ADC_START in ADC_GENERAL_DEBUG_0 and the sampled data shall be written in ADC_DATA_OUT_DEBUG_LOW and ADC_DATA_OUT_DEBUG_HIGH. and In this mode, before start a new sampling operation, the RESET_DEBUG_ADC DATA in ADC_GENERAL_DEBUG_0 shall be set to 1 and then to 0.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_064
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-059** {#ipos-main-controller-059}
-When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low
+#### **IPOS-MAIN-CONTROLLER-066** {#ipos-main-controller-066}
+When the i_hc_en is set to 1 and i_imp_en is set to 0 and i_n_ecg_channel is equal to 1, ECG0 shall be active so the o_pd_hc2 shall go low and counter shall be work.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_072
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-067** {#ipos-main-controller-067}
+When the i_hc_en is set to 0 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 2, ECG1 and ECG2 shall be active so the o_pd_hc2 shall remain high, o_pd_imp_from_bia shall go low and counter shall be work.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_073
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-060** {#ipos-main-controller-060}
-When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0- ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and
+#### **IPOS-MAIN-CONTROLLER-068** {#ipos-main-controller-068}
+When the i_hc_en is set to 1 and i_imp_en is set to 1 and i_n_ecg_channel is equal to 3, ECG0- ECG1 and ECG2 shall be active so the o_pd_hc2 shall go low, o_pd_imp shall go low and counter shall be work.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_074
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-061** {#ipos-main-controller-061}
-20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0,
+#### **IPOS-MAIN-CONTROLLER-069** {#ipos-main-controller-069}
+The counter that defines the timing during the start-up phase shall work at 32KHz.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_075
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-070** {#ipos-main-controller-070}
+15ms after that the o_pd_hc2 is gone low, the o_rst_hc2 shall go low.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_076
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-071** {#ipos-main-controller-071}
+20ms after that the o_rst_hc2 is gone low, if i_clk_hlt_en is equal to 1, chopper_clock shall be generated and after another 10ms, o_rsti_hc2 shall go low. Instead, if i_clk_hlt_en is equal to 0, then o_rsti_hc2 shall go low after 30ms since the falling of o_rst_hc2.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_077
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-062** {#ipos-main-controller-062}
-If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go
+#### **IPOS-MAIN-CONTROLLER-072** {#ipos-main-controller-072}
+If i_su_hlt_dly is set to 0. At least after 205ms that the o_rsti_hc2 is gone low, o_su_hc2 shall go low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_078
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-063** {#ipos-main-controller-063}
+#### **IPOS-MAIN-CONTROLLER-073** {#ipos-main-controller-073}
 When the user selects an operative mode that includes the BIA channel, a start-up shall be done.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_080
@@ -929,15 +1053,23 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_080
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-064** {#ipos-main-controller-064}
-When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if
+#### **IPOS-MAIN-CONTROLLER-074** {#ipos-main-controller-074}
+When i_imp_en signal is equal to 1, the o_pd_imp_from_bia shall be go low.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_081
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-075** {#ipos-main-controller-075}
+When i_imp_curinj signal is equal to 1, the o_imp_curinj_pd shall go low. On the other hand, if i_imp_curinj is equal to 0, the o_imp_curinj_pd shall stay high.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_082
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-065** {#ipos-main-controller-065}
+#### **IPOS-MAIN-CONTROLLER-076** {#ipos-main-controller-076}
 At least 5ms after the falling of o_imp_curinj_pd and o_pd_imp_from_bia, if i_imp_curinj is equal to 1, o_en_ck_m_p_q shall be high and ck_m, ck_p and ck_q shall be generated from Clock generator block. On the other hand, if i_imp_curinj is equal to 0, the ck_m_p_q shall stay low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_083
@@ -945,15 +1077,31 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_083
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-066** {#ipos-main-controller-066}
-20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is
+#### **IPOS-MAIN-CONTROLLER-077** {#ipos-main-controller-077}
+At least 15ms after the falling of o_pd_imp_from_bia, the o_rst_imp shall go low.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_084
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-078** {#ipos-main-controller-078}
+20ms after the falling of o_rst_imp, if i_clk_imp_en is set to 1, the o_en_ck_chop_imp shall be high and ck_chop_imp shall be generated from Clock generator block. On the hand, if i_clk_imp_en is set to 0, the o_en_ck_chop_imp shall stay low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_085
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-067** {#ipos-main-controller-067}
+#### **IPOS-MAIN-CONTROLLER-079** {#ipos-main-controller-079}
+30ms after the falling of o_rst_imp, o_rsti_imp shall go low.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_086
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-080** {#ipos-main-controller-080}
 If i_su_hlt_dly is set to 0,at least 205 ms after the falling of o_rsti_imp, o_sug_imp shall go low. Instead, if i_su_hlt_dly is set to 1, 755ms after the falling of o_rsti_imp, o_sug_imp shall go low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_087
@@ -961,71 +1109,87 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_087
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-068** {#ipos-main-controller-068}
-The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass between two GSR acquisitions following this formula: GSRdata = time_slot 2 ∗ m_gsr
+#### **IPOS-MAIN-CONTROLLER-081** {#ipos-main-controller-081}
+The i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] shall define how many time slots pass between two GSR acquisitions following this formula: GSRdata = time_slot 2 ∗ m_gsr .
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_088
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-069** {#ipos-main-controller-069}
-If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set
+#### **IPOS-MAIN-CONTROLLER-082** {#ipos-main-controller-082}
+If the en_gsr_cds [bit 3 of GSR_CTRL] is set High, the i_m_gsr shall define also in which time slot after the GSR_Curr_on falls from 1 to 0, an acquisition without current injection (o_gsr_curr_on set to 0) shall be performed.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_089
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-070** {#ipos-main-controller-070}
-If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot
+#### **IPOS-MAIN-CONTROLLER-083** {#ipos-main-controller-083}
+The gsr_on shall set high at least 300us before the start of the sampling.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_090
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-084** {#ipos-main-controller-084}
+If en_gsr_cds is set low [bit 3 of GSR_CTRL], the gsr_curr_on shall set high in every time slot where the GSR_SNS signal is acquired and shall set low at end of the same time slot.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_092
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-071** {#ipos-main-controller-071}
-If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then mediated to get one single value for each of them, and then the final result shall be the subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of
+#### **IPOS-MAIN-CONTROLLER-085** {#ipos-main-controller-085}
+If en_gsr_cds is set high [bit 3 of GSR_CTRL] the GSR_SNS (acquisition with o_gsr_curr_on set to 1) and GSR_CDS (acquisition with o_gsr_curr_on set to 0) shall be sampled 16 times, then mediated to get one single value for each of them, and then the final result shall be the subtraction between GSR_SNS and GSR_CDS. On the other hand, If en_gsr_cds is set low, no acquisition of GSR_CDS shall be done and the result shall be the average of 16 acquisitions of GSR_SNS.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_093
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-072** {#ipos-main-controller-072}
-When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE State and shall go back in Operative State only when the measurement shall be run or, in case of
+#### **IPOS-MAIN-CONTROLLER-086** {#ipos-main-controller-086}
+When only GSR is selected (NO ECG0 and PPG are selected), if i_m_gsr [SET_GSR_FREQ_h and SET_GSR_FREQ_l] is greater than 0, the Device FSM shall go in SLEEP after the IDLE State and shall go back in Operative State only when the measurement shall be run or, in case of cds disabled, when the o_gsr_curr shall change its polarity.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_094
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-073** {#ipos-main-controller-073}
-The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high when the PPG_FSM is
+#### **IPOS-MAIN-CONTROLLER-087** {#ipos-main-controller-087}
+The o_En_TIA, o_EN_Buff, o_EN_ADC and o_EN_IDAC shall be high when the PPG_FSM is RX_START UP state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_095
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-074** {#ipos-main-controller-074}
-When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and PPG_SEL in DEVICE_CONFIG_CHANNEL register is set to 1, when the ELAB_FSM is in PPG STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set
+#### **IPOS-MAIN-CONTROLLER-088** {#ipos-main-controller-088}
+When the i_m_ppg ( SET_PPG_FREQ_h and SET_PPG_FREQ_l) is different from 0 and PPG_SEL in DEVICE_CONFIG_CHANNEL register is set to 1, when the ELAB_FSM is in PPG STATE, PPG_IOFF_CALIB or PPG_ALC_STORAGE, the i_start_operation_for_ppg shall be set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_096
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-075** {#ipos-main-controller-075}
-When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC
+#### **IPOS-MAIN-CONTROLLER-089** {#ipos-main-controller-089}
+When in Reset state, if the rstn_i is de-asserted , i_wave_velocity_mode is and the i_start_ppg_fsm is high, if i_ID_Frame is equal to 0 or two successively frame have two different i_rx_ch_frame , then the PPG FSM shall go to ALC Compensation state.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_097
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-090** {#ipos-main-controller-090}
+When in ALC Compensation, the PPG FSM shall raise the o_start_alc_comp signal to the ALC Compensation block to start the ALC Compensation algorithm.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_098
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-076** {#ipos-main-controller-076}
+#### **IPOS-MAIN-CONTROLLER-091** {#ipos-main-controller-091}
 When in ALC Compensation, the PPG shall wait that the rise of i_end_compensation signal from the ALC Compensation block to go into the RX_Start_UP state. This shall happen in OPERATIVE.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_099
@@ -1033,15 +1197,15 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_099
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-077** {#ipos-main-controller-077}
-When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1, the o_BIDAC shall maintain the value reached during the ALC Compensation summed up, if i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration
+#### **IPOS-MAIN-CONTROLLER-092** {#ipos-main-controller-092}
+When in Rx_Start_Up state, the o_tx_Preset shall be set 0, the en_tx_i shall be set to 1, the o_BIDAC shall maintain the value reached during the ALC Compensation summed up, if i_ppg_ioff_calibration is enabled, with the IOFF_OFFSET computed during the IOFF Calibration Procedure.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_100
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-078** {#ipos-main-controller-078}
+#### **IPOS-MAIN-CONTROLLER-093** {#ipos-main-controller-093}
 [Covers: DDS_STBIO1_0118] [Covers: DDS_STBIO1_0125] The user shall configure time slot duration in DEVICE_CONFIG_OPERATION register [4:2]
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1004
@@ -1049,87 +1213,87 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_1004
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-079** {#ipos-main-controller-079}
-The user shall configure which channel is selected and if work in Data Storage mode for the
+#### **IPOS-MAIN-CONTROLLER-094** {#ipos-main-controller-094}
+The user shall configure which channel is selected and if work in Data Storage mode for the measure writing the DEVICE_CONFIG_CHANNEL register [Covers]
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1005
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-080** {#ipos-main-controller-080}
-[Covers: DDS_STBIO1_0120] [Covers: DDS_STBIO1_0122] [Covers: DDS_STBIO1_0127] [Covers: DDS_STBIO1_0130] In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel
+#### **IPOS-MAIN-CONTROLLER-095** {#ipos-main-controller-095}
+[Covers: DDS_STBIO1_0120] [Covers: DDS_STBIO1_0122] [Covers: DDS_STBIO1_0127] [Covers: DDS_STBIO1_0130] In Order to enable an ECG0 Channel Operation, the user shall always select the ECG0 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and set to HC_EN.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1007
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-081** {#ipos-main-controller-081}
-[Covers: DDS_STBIO1_0128] [Covers: DDS_STBIO1_0140] In Order to enable a BIA Channel Operation, the user shall always select the BIA channel
+#### **IPOS-MAIN-CONTROLLER-096** {#ipos-main-controller-096}
+[Covers: DDS_STBIO1_0128] [Covers: DDS_STBIO1_0140] In Order to enable a BIA Channel Operation, the user shall always select the BIA channel (DEVICE_CONFIG_CHANNEL), set the i_M_BIA greater than zero and set to IMP_EN.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1008
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-082** {#ipos-main-controller-082}
-In Order to enable a GSR Channel Operation, the user shall always select the GSR channel
+#### **IPOS-MAIN-CONTROLLER-097** {#ipos-main-controller-097}
+In Order to enable a GSR Channel Operation, the user shall always select the GSR channel (DEVICE_CONFIG_CHANNEL) and set the i_M_GSR greater than zero.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1009
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-083** {#ipos-main-controller-083}
-When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time (GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES
+#### **IPOS-MAIN-CONTROLLER-098** {#ipos-main-controller-098}
+When in Rx_Start_Up state, the PPG_FSM shall stay in this state for the T_rx_set time (GENERAL_PPG_PARAMETERS_3 register [3:0])) and then go into the FIRST_ALC_SAMPLES state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_101
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-084** {#ipos-main-controller-084}
-In Order to enable a PPG Channel Operation, the user shall always select the PPG channel
+#### **IPOS-MAIN-CONTROLLER-099** {#ipos-main-controller-099}
+In Order to enable a PPG Channel Operation, the user shall always select the PPG channel (DEVICE_CONFIG_CHANNEL) and set the i_M_PPG greater than zero.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1010
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-085** {#ipos-main-controller-085}
-In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and
+#### **IPOS-MAIN-CONTROLLER-100** {#ipos-main-controller-100}
+In Order to enable an ECG1_ECG2 Channel Operation, the user shall always select the ECG1_ECG2 channel (DEVICE_CONFIG_CHANNEL), set the i_M_ECG greater than zero and IMP_EN set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1011
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-086** {#ipos-main-controller-086}
-When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until
+#### **IPOS-MAIN-CONTROLLER-101** {#ipos-main-controller-101}
+When in FIRST_ALC_SAMPLES state, the o_start_ADC signal shall be set high until i_end_average is low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_102
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-087** {#ipos-main-controller-087}
-When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM
+#### **IPOS-MAIN-CONTROLLER-102** {#ipos-main-controller-102}
+When in FIRST_ALC_SAMPLES state, the PPG_FSM Shall stay in this state until 1 clock cycle after the rise of the i_end_average and the TX_start_up time has passed. After that, the PPG FSM shall bring itself into the Rising_Ramp state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_103
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-088** {#ipos-main-controller-088}
-Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go
+#### **IPOS-MAIN-CONTROLLER-103** {#ipos-main-controller-103}
+Once in the ERROR state, the user shall wait 1ms before set to 0 the MODE_OPERATION to go back into the IDLE State.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1034
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-089** {#ipos-main-controller-089}
+#### **IPOS-MAIN-CONTROLLER-104** {#ipos-main-controller-104}
 When in FIRST_ALC_SAMPLES state, when i_end_average is set to 1, the o_start_digital_ramp signal shall be set high to start the rising of the digital ramp and go into the RISING_RAMP state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_104
@@ -1137,87 +1301,119 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_104
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-090** {#ipos-main-controller-090}
-When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the
+#### **IPOS-MAIN-CONTROLLER-105** {#ipos-main-controller-105}
+When in Rising_Ramp state, at the half of Rising_time, the o_idac_dc_ppg_frame shall be set to the IDAC_DC_PPG_FRAME_{n} (FRAME_n_PARAMETERS_5 register [5:0]) value related to the frame that is being executed.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_105
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-091** {#ipos-main-controller-091}
-When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time
+#### **IPOS-MAIN-CONTROLLER-106** {#ipos-main-controller-106}
+When in Rising_Ramp State, the PPG_FSM shall stay in this state until the end of the Rising Time and then go into the Measurement state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_106
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-092** {#ipos-main-controller-092}
-When in Measurement state, the PPG_FSM shall stay in this state until the rising of the i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling
+#### **IPOS-MAIN-CONTROLLER-107** {#ipos-main-controller-107}
+When in Measurement state, after the wait at least of the TX_ledset time related to the frame that is being executed. (TX_LEDSET_FRAME {n}]), the o_start_adc signal shall be set high.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_107
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-108** {#ipos-main-controller-108}
+When in Measurement state, the PPG_FSM shall stay in this state until the rising of the i_end_average signal from the ADC block. After that, the PPG_FSM shall bring itself into the Falling Ramp state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_108
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-093** {#ipos-main-controller-093}
-When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the
+#### **IPOS-MAIN-CONTROLLER-109** {#ipos-main-controller-109}
+When in MEASUREMENT State, the o_falling_digital_ramp signal shall be set to 1 to go into the FALLING_RAMP State and shall stay 1 until i_falling_ramp_end is different from 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_109
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-094** {#ipos-main-controller-094}
-The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac
+#### **IPOS-MAIN-CONTROLLER-110** {#ipos-main-controller-110}
+The o_pd_tia, o_pd_idac and o_pd_pga shall be the negated version the o_en_tia, o_en_idac and o_en_buffer of respectively.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1095
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-095** {#ipos-main-controller-095}
-When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be
+#### **IPOS-MAIN-CONTROLLER-111** {#ipos-main-controller-111}
+When in Falling_Ramp State, at the half of the Falling_Time the o_idac_dc_ppg_frame shall be set to 0.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_110
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-096** {#ipos-main-controller-096}
-Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital
+#### **IPOS-MAIN-CONTROLLER-112** {#ipos-main-controller-112}
+Tx Preset shall be set to 1 a configurable TX_Preset_Step time before the start of the Digital Ramp rising phase
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1102
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-097** {#ipos-main-controller-097}
-Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase
+#### **IPOS-MAIN-CONTROLLER-113** {#ipos-main-controller-113}
+Tx Preset shall be set to 0 before the rising phase(i_start_digtal_ramp) and after the falling phase (i_start_falling_ramp) of the digital ramp
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1104
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-098** {#ipos-main-controller-098}
-When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time (depends on the user's configuration of Digital Ramp parameters) and bring itself into the
+#### **IPOS-MAIN-CONTROLLER-114** {#ipos-main-controller-114}
+If no multiple frame is selected (i_frame_repetition in ppg_fsm set to 0), when Tx Preset falls from 1 to 0, also the en_tx shall pass from 1 to 0.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_1105
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-115** {#ipos-main-controller-115}
+When in Falling_Ramp state, the PPG_FSM shall stay in this state until the end of the Falling Time (depends on the user's configuration of Digital Ramp parameters) and bring itself into the SECOND_ALC_SAMPLES state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_111
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-099** {#ipos-main-controller-099}
-When the Ioff Calibration algorithm is enabled, it shall be performed every time a new
+#### **IPOS-MAIN-CONTROLLER-116** {#ipos-main-controller-116}
+When the Ioff Calibration algorithm is enabled, it shall be performed every time a new measurements cycle starts.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1116
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-100** {#ipos-main-controller-100}
+#### **IPOS-MAIN-CONTROLLER-117** {#ipos-main-controller-117}
+Nm0 shall be the result of average on 8 acquired samples.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_1118
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-118** {#ipos-main-controller-118}
+Nm1 shall be the result of average on 8 acquired samples.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_1119
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-119** {#ipos-main-controller-119}
 When in SECOND_ALC_SAMPLES state, the o_en_Txi shall be set low after the end at least of the T_tx_ledoff time (TX_LEDOFF_FRAME_{n}) and the o_start_adc signal shall be set to 1.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_112
@@ -1225,111 +1421,215 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_112
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-101** {#ipos-main-controller-101}
-When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG
+#### **IPOS-MAIN-CONTROLLER-120** {#ipos-main-controller-120}
+When in SECOND_ALC_SAMPLES state, the PPG_FSM shall stay in this state until the rise of the end_of_conversion signal from the ADC block. After that, if there are no more frames to run, the PPG_FSM shall go into the Reset State, otherwise, if there are other frames to run and channel rx is not changed, the PPG_FSM shall go into the Rx_start_up phase. On the other hand, if there are other frame to run and rx_channel is changed, the PPG_FSM shall go into the RESET_PPG state and the into the ALC_Compensation state.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_113
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-102** {#ipos-main-controller-102}
-The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the
+#### **IPOS-MAIN-CONTROLLER-121** {#ipos-main-controller-121}
+After the assertion of i_end_of_conversion a number of times equals to i_n_average_ecg_bia_gsr (in case of ECG, BIA and GSR) or i_n_average_ppg (in case of PPG without frame repetitions) , after at least one clock cycle o_data_result shall be computed and o_write_enable shall rise
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_1136
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-122** {#ipos-main-controller-122}
+The PPG Noise Data shall be accumulated in two phases, the first when the PPG FSM state is in FIRST_ALC_SAMPLES States and the second when the PPG FSM state is in the SECOND_ALC_SAMPLES
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1139
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-103** {#ipos-main-controller-103}
-For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with
+#### **IPOS-MAIN-CONTROLLER-123** {#ipos-main-controller-123}
+For GSR Operation, if i_en_cds is set 0, the behavior shall as described in Requirement 143, otherwise the o_write_enabled shall be asserted when i_end_of_coversion is set to 1 and i_n_average_ecg_bia_gsr is equal to their limit values when the measurement is done with o_gsr_curr_on set to 0 and o_gsr_on set to 1
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_1143
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-104** {#ipos-main-controller-104}
-At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. Once the Average is computed, if no averages_between_equal_frames option is selected, the data shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there is avareges_between_equal_frames option selected from regmap, after the computations of this average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB
+#### **IPOS-MAIN-CONTROLLER-124** {#ipos-main-controller-124}
+At the end of each Frame, the start_avarage signal shall be rise to the Average block computation. Once the Average is computed, if no averages_between_equal_frames option is selected, the data shall be written inside the FIFO Memory using the Main Control ler AHB Master interface. If there is avareges_between_equal_frames option selected from regmap, after the computations of this average, the obtained data shall be written inside the FIFO Memory using the Main Controller AHB Master interface.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_115
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-105** {#ipos-main-controller-105}
-When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset
+#### **IPOS-MAIN-CONTROLLER-125** {#ipos-main-controller-125}
+When the input signal o_Tx_preset is set to 1, the o_Tx_Vref shall increment the first step at value i_N_start (DIGITAL_RAMP_CONFIG_PARAM_3 register [2:0]) at a time i_T_preset (DIGITAL_RAMP_CONFIG_PARAM_1 register [5:4]).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_118
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-106** {#ipos-main-controller-106}
-When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock
+#### **IPOS-MAIN-CONTROLLER-126** {#ipos-main-controller-126}
+When the i_falling_digital_ramp is set to 1, the o_TX_Vref shall decrement from N_MAX value (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0]) to zero with a step equal to 1 every 2-clock cycle.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_120
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-107** {#ipos-main-controller-107}
-When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start (PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at
+#### **IPOS-MAIN-CONTROLLER-127** {#ipos-main-controller-127}
+Nmax shall be a value between 1 and 15 configurable by user.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_121
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-128** {#ipos-main-controller-128}
+When o_ TX_Vref is equal to i_Nmax_to_reg (N_MAX (DIGITAL_RAMP_CONFIG_PARAM_1 register [3:0])), o_rising_ramp_end shall go high.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_122
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-129** {#ipos-main-controller-129}
+When o_Tx_Vref is equal to 0 during the falling and the rising ramp is ended (o_rising_ramp_end ==0), o_falling_ramp_end shall go high.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_123
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-130** {#ipos-main-controller-130}
+When the rising ramp reaches half its value, o_half_rising_ramp shall go high.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_124
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-131** {#ipos-main-controller-131}
+When i_reset_ramp is high all output shall be down.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_125
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-132** {#ipos-main-controller-132}
+When ALC_COMP starts, o_BTIA_gain (2:0) shall be set at i_gain_start (PPG_ALC_CONFIG_PARAM_2 register [4:2]) and o_w_BTIA_ALC (8:0) shall be set at 100000000.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_126
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-108** {#ipos-main-controller-108}
-When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in section 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register
+#### **IPOS-MAIN-CONTROLLER-133** {#ipos-main-controller-133}
+ALC cycle algorithm shall be done until the set of the last o_w_BTIA_ALC bit.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_127
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-134** {#ipos-main-controller-134}
+When ECG0 and BIA are selected 21 acquisitions shall be required (acquisitions described in section 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 101).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_128
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-109** {#ipos-main-controller-109}
-According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock
+#### **IPOS-MAIN-CONTROLLER-135** {#ipos-main-controller-135}
+When i_ALC_comp_start is set to 1 and the o_BTIA_ALC (ALC Compensation) change is value, after a configurable time T1 (PPG_ALC_CONFIG_PARAM_1 register [3:0]), o_comp_rx_ck shall be high.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_129
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-136** {#ipos-main-controller-136}
+After T1+T2 (PPG_ALC_CONFIG_PARAM_2 register [1:0]), if o_BTIA_gain (2:0) < i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), during ALC_COMPENSATION state of PPG fsm with o_end_compensation set to 0, o_BTIA_gain increase its value of 1. Instead, if o_BTIA_gain 2:0) >= i_gain_max_set (PPG_ALC_CONFIG_PARAM_2 register [7:5]), o_BTIA_gain shall remain at its old value.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_132
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-137** {#ipos-main-controller-137}
+Once is set to 1, o_comp_rx_ck shall be set to 0 after a T2+1 clock cycle.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_133
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-138** {#ipos-main-controller-138}
+According to time diagram, when in RESET_PPG and ELAB_FSM is in PPG state during the first frame (i_id_frame=0) , shall be wait a configurable time PPG_START_UP_TIME (PPG_START_UP_TIME starting from when i_start_operation_ppg is set to 1 and at least 1 clock cycle after i_start_ppg is set to 1
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_134
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-110** {#ipos-main-controller-110}
-The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the
+#### **IPOS-MAIN-CONTROLLER-139** {#ipos-main-controller-139}
+The average block shall perform an average on 4 Samples for each of ECG_x_AC, BIA AC P, BIA AC Q, BIA DC P and BIA DC Q , 1 Sample ECG_x_DC (Check if the i_end_of_coversion rise the correct number of times)
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_137
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-111** {#ipos-main-controller-111}
-The average block shall perform the average on 16 sample acquisition for GSR. When the CDS mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between
+#### **IPOS-MAIN-CONTROLLER-140** {#ipos-main-controller-140}
+The average block shall perform the average on 16 sample acquisition for GSR. When the CDS mode is enabled, the average block shall perform a n average on 16 sample acquisition on GSR ON and 16 sample acquisition on GSR OFF, then shall perform a subtraction operation between the two results.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_138
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-112** {#ipos-main-controller-112}
-Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed as follow: I_N_Average_PPG Samples Result with ALC MASK=0 Result with ALC Mask=1 0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 Table 18: PPG Result Table Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P
+#### **IPOS-MAIN-CONTROLLER-141** {#ipos-main-controller-141}
+When a PPG Raw data ( i_data_valid_ppg_adc set to 1) or a PPG_Noise (i_data_valid_noise_ppg_adc set to 1) data is sampled (i_end_of_conversion set to 1) the data shall be accumulated until i_n_average_ppg is not reached.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_139
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-142** {#ipos-main-controller-142}
+Once the PPG Raw Data and PPG Noise reach the i_n_average_ppg value , depending on the ALC Mask bit value, the two accumulated shall be subtracted and final results shall be computed as follow: I_N_Average_PPG Samples Result with ALC MASK=0 Result with ALC Mask=1 0 3= (N1+P+N2) (Acc_P-(Acc_N)/2) * 8 Acc_P*16 2 4= (N1+2P+N2) (Acc_P -(Acc_N)) * 4 Acc_P *8 4 8= (2N1+4P+2N2) (Acc_P -(Acc_N)) * 2 Acc_P *4 8 16= (4N1+8P+4N2) (Acc_P -(Acc_N)) Acc_P *2 16 32= (8N1+16P+8N2) (Acc_P -(Acc_N))/2 Acc_P 32 64= (16N1+32P+16N2) (Acc_P -(Acc_N))/4 Acc_P /2 64 128= (32N1+64P+32N2) (Acc_P -(Acc_N))/8 Acc_P /4 128 256= (64N1+128P+64N2) (Acc_P -(Acc_N))/16 Acc_P /8 Table 18: PPG Result Table Where PPG Raw Data is indicated as P and PPG Noise is indicated as N1 and N2, while Acc_P is the accumulated PPG data and Acc_N is the accumulated noise
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_140
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-113** {#ipos-main-controller-113}
-When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2,
+#### **IPOS-MAIN-CONTROLLER-143** {#ipos-main-controller-143}
+When i_end_of_conversion is set to 1 and i_n_average_ecg_bia_gsr (average ecg,bia and gsr) or i_n_average_ppg (Frame_X_Parameter_1) is equal to their limit values, an average operation shall be done and o_write_enable shall be set to 1.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_143
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-144** {#ipos-main-controller-144}
+When the PPG_FSM is in the RX_START_UP state, the o_PD_PGA shall go to 0.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_2117
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-145** {#ipos-main-controller-145}
+When i_frame_ppg_debug is set to a value greater than 0 and i_n_average_ppg is set to a value between 1 and 16, all the ADC output (i_data_in) for ALC (i_data_valid_noise_ppg_adc set to 1) and PPG data (i_data_valid_ppg_adc) shall be stored in o_adc_data_debug_alc_2, o_adc_data_debug_alc_1 and o_adc_data_debug_ppg_raw.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_2143
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-114** {#ipos-main-controller-114}
+#### **IPOS-MAIN-CONTROLLER-146** {#ipos-main-controller-146}
 [Covers: DDS_STBIO1_0124] [Covers: DDS_STBIO1_0142] The data written in FIFO shall have the following tag: DATA TYPE BIT: 23 - 20 BIT: 19 - 16 BIT: 15 - 0 PPG FRAME 0 0000 DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT DATA 20 BIT PPG FRAME 1 0001 PPG FRAME 2 0010 PPG FRAME 3 0011 PPG FRAME 4 0100 PPG FRAME 5 0101 PPG FRAME 6 0110 PPG FRAME 7 0111 PPG FRAME 8 1000 PPG FRAME 9 1001 PPG FRAME 10 1010 PPG FRAME 11 1011 TIME SLOT DATA 1111 0000 DATA 16 BIT ECG0_AC 1100 0000 DATA 16 BIT ECG0_DC 1101 0000 DATA 16 BIT ECG1_AC 1100 0001 DATA 16 BIT ECG1_DC 1101 0001 DATA 16 BIT ECG2_AC 1100 0010 DATA 16 BIT ECG2_DC 1101 0010 DATA 16 BIT
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_2144
@@ -1337,7 +1637,7 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_2144
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-115** {#ipos-main-controller-115}
+#### **IPOS-MAIN-CONTROLLER-147** {#ipos-main-controller-147}
 The Frame shall work as follows: 1. Select how many times a particular frame shall be repeated 2. The result of each repetition shall be obtained as explained in [IPOS_STBIO1_MAIN_CONTROLLER_1 40] REQUIREMENT 3. After the last repetition has been accumulated, the data output shall be obtained dividing by the number of repeated frames the accumulated data to obtain a 20 bit data. The final result shall be computed as follows: Number of times the Frame has been repeated Result 2 (Res_F_R1 + Res_F_R2)/2 4 (Res_F_R1 + Res_F_R2+Res_F_R3+Res_F_R4)/4 8 (Res_F_R1 + Res_F_R2+Res_F_R3+…..+Res_F_R8)/8 Table 20: Frame Repetitions Result Computation table Where Res_F_Rx stands for Result_frame_Repeated_times (Example: RES_F_R2 refers to the result of the second repetition of the frame.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_2145
@@ -1345,7 +1645,7 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_2145
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-116** {#ipos-main-controller-116}
+#### **IPOS-MAIN-CONTROLLER-148** {#ipos-main-controller-148}
 In case the ppg sample data are equal (once converted in two’s complement) at 0x8000 or 0x7FFF for at least half of the selected average (example, if 128 acquisitions are selected, the threshold shall be greater or equal to 64), o_saturation_flag shall be set to 1 and shall go to 0 at the start of the next frame or frame repetition.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_2146
@@ -1353,15 +1653,23 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_2146
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-117** {#ipos-main-controller-117}
-When the ELAB_FSM is in ECG State and only ECG0 is selected, the o_ADC_EN shall go high,
+#### **IPOS-MAIN-CONTROLLER-149** {#ipos-main-controller-149}
+When the rstn_i is asserted low, the PPG FSM shall return in Reset state immediately.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_300
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-150** {#ipos-main-controller-150}
+When the ELAB_FSM is in ECG State and only ECG0 is selected, the o_ADC_EN shall go high, 5 acquisitions are required (acquisitions described in section 5.4 ADC PHASE).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_3124
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-118** {#ipos-main-controller-118}
+#### **IPOS-MAIN-CONTROLLER-151** {#ipos-main-controller-151}
 When ELAB_FSM is in ECG state and ECG1 and ECG2 are selected , o_ADC_EN shall go high and 10 acquisitions are required (acquisitions described in chapter in section 5.4 ADC PHASE).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_3125
@@ -1369,23 +1677,23 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_3125
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-119** {#ipos-main-controller-119}
-When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device
+#### **IPOS-MAIN-CONTROLLER-152** {#ipos-main-controller-152}
+When ELAB_FSM is in ECG state and EC0, ECG1 and ECG2 are selected , o_ADC_EN shall go high and15 acquisitions are required (acquisitions described in 5.4 ADC PHASE) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_3126
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-120** {#ipos-main-controller-120}
-When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions described in section 5.4 ADC PHASE ) and then device shall go in
+#### **IPOS-MAIN-CONTROLLER-153** {#ipos-main-controller-153}
+When ELAB_FSM is in BIA state , o_ADC_EN shall go high and 16 acquisitions are required (acquisitions described in section 5.4 ADC PHASE ) and then device shall go in SLEEP (DEVICE_STATUS_REG register [2:0] is equal to 0x05).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_3127
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-121** {#ipos-main-controller-121}
+#### **IPOS-MAIN-CONTROLLER-154** {#ipos-main-controller-154}
 When the wave velocity mode is selected and the device FSM is in WAIT_SU, the Elaboration FSM shall go into the TIMER BUFFER State and then into the PPG ALC STORAGE
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_3128
@@ -1393,15 +1701,39 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_3128
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-122** {#ipos-main-controller-122}
-When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be
+#### **IPOS-MAIN-CONTROLLER-155** {#ipos-main-controller-155}
+When the ppg ioff calibration and the adc calibration are selected, the adc calibration shall be performed first.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_3129
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-123** {#ipos-main-controller-123}
+#### **IPOS-MAIN-CONTROLLER-156** {#ipos-main-controller-156}
+When the wave velocity mode and the ppg ioff calibration are selected, the wave velocity mode shall be performed first.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_3130
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-157** {#ipos-main-controller-157}
+When the ppg ioff calibration is selected and device fsm is in WAIT_SU State, the Elab FSM shall go into the Timer Buffer state and then PPG IOFF CALIB state.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_3131
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-158** {#ipos-main-controller-158}
+Every Time a new measurement cycle starts (DEVICE FSM goes in OPERATIVE from another state), the o_irq_start_measurement shall be set to 1 for at least 1 clock cycle
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_4034
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-159** {#ipos-main-controller-159}
 If i_rst_async_ecg is set to 1, the start-up phase shall restart but no clock shall stop if enabled.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_4079
@@ -1409,7 +1741,7 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_4079
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-124** {#ipos-main-controller-124}
+#### **IPOS-MAIN-CONTROLLER-160** {#ipos-main-controller-160}
 If i_rst_async_ecg is set to 1, it shall go to zero at least 5ms after that o_su_hc2 is set to 0.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_4080
@@ -1417,55 +1749,55 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_4080
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-125** {#ipos-main-controller-125}
-If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if
+#### **IPOS-MAIN-CONTROLLER-161** {#ipos-main-controller-161}
+If i_rst_async_bia is set to 1, the start-up phase shall restart but no clock shall stop if enabled.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_4090
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-126** {#ipos-main-controller-126}
-If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0
+#### **IPOS-MAIN-CONTROLLER-162** {#ipos-main-controller-162}
+If i_rst_async_bia is set to 1, it shall go to zero at least 5ms after that the o_sug_imp is set to 0 as in the next figure.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_4091
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-127** {#ipos-main-controller-127}
-When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go
+#### **IPOS-MAIN-CONTROLLER-163** {#ipos-main-controller-163}
+When in Sleep Mode and no Bio-Channel are selected, if every elaboration is ended and there are at least 34 clock cycles at 32kHz before the start of a new time slot, the o_en_ldo_1v8 shall go low.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_436
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-128** {#ipos-main-controller-128}
-The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is
+#### **IPOS-MAIN-CONTROLLER-164** {#ipos-main-controller-164}
+The max value that the user shall use for every m_channel (m_ecg, m_bia, m_gsr and m_ppg) is 1024
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_5004
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-129** {#ipos-main-controller-129}
-If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main
+#### **IPOS-MAIN-CONTROLLER-165** {#ipos-main-controller-165}
+If the user set a value greater than 1024 into ones of the m_channel (see req 5004), the value shall clamp at 1024 (check the input i_m_ecg, i_m_bia, i_m_gsr or i_m_ppg into the main controller fsm)
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_5005
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-130** {#ipos-main-controller-130}
-[Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS
+#### **IPOS-MAIN-CONTROLLER-166** {#ipos-main-controller-166}
+[Covers: DDS_STBIO1_1114] The State WAIT_SU shall not be considered interruptible. If the user wants to interrupt the WAIT_SU state, it shall perform the Soft Reset procedure described in the DDS [DDS_STBIO1_1114]
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_5015
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-131** {#ipos-main-controller-131}
+#### **IPOS-MAIN-CONTROLLER-167** {#ipos-main-controller-167}
 When an ECG, BIA or GSR Operation is selected and DS_SEL is set to 0, The DATA Output for these two channels shall be written in the following regmap registers ECG0_AC ECG0_DC ECG1_BIA_P_AC ECG1_BIA_P_DC ECG2_BIA_Q_AC ECG2_BIA_Q_DC GSR_RESULT
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_5016
@@ -1473,58 +1805,114 @@ Covers: IPOS_STBIO1_MAIN_CONTROLLER_5016
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-132** {#ipos-main-controller-132}
-i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and
+#### **IPOS-MAIN-CONTROLLER-168** {#ipos-main-controller-168}
+i_rst_async_ecg Shall be used only when the Device FSM is in SLEEP or Operative State.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_5080
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-169** {#ipos-main-controller-169}
+i_rst_async_bia shall be used only when Device FSM is in OPERATIVE or SLEEP state.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_5091
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-170** {#ipos-main-controller-170}
+i_rst_async_bia shall be used also to reset the START-UP phase for ECG channel 1 and 2.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_5092
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-133** {#ipos-main-controller-133}
-When i_wave_velocity mode is enabled together with the DISABLE_ALC, the PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the
+#### **IPOS-MAIN-CONTROLLER-171** {#ipos-main-controller-171}
+I_noise shall be set to 0 during the ADC calibration.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_6059
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-172** {#ipos-main-controller-172}
+When i_wave_velocity mode is enabled together with the DISABLE_ALC, the PPG_ALC_STORAGE shall be performed but once the Device goes into OPERATIVE State, the values are not summed (visible) to the o_BIDAC.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_6070
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-134** {#ipos-main-controller-134}
-When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the
+#### **IPOS-MAIN-CONTROLLER-173** {#ipos-main-controller-173}
+When i_wave_velocity_mode is set to 1, the ALC Compensation shall be set only when the ELAB FSM is into the PPG_ALC_STORAGE and then never repeated.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_6098
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-135** {#ipos-main-controller-135}
-When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after
+#### **IPOS-MAIN-CONTROLLER-174** {#ipos-main-controller-174}
+When i_ALC_comp_start is set to 1, the first rise of the o_comp_rx_ck shall happen at least after a T1+T_TIA_On time, both configurable by regmap.
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_6129
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-136** {#ipos-main-controller-136}
-All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the
+#### **IPOS-MAIN-CONTROLLER-175** {#ipos-main-controller-175}
+All the PPG_FSM state shall be checked using the PPG_STATUS_REGISTER in Regmap (the states values are described in the register’s comment).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_7095
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-137** {#ipos-main-controller-137}
-At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If
+#### **IPOS-MAIN-CONTROLLER-176** {#ipos-main-controller-176}
+If the ALC_COARSE (o_w_BTIA_ALC) result is equal to zero, it shall be brought to 1
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_7135
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-177** {#ipos-main-controller-177}
+At the end of ALC compensation, if ALC is not masked, o_w_BTIA_ALC relative to the running frame, shall be set to output system (check when i_end_of_compensation rise in PPG FSM). If it’s masked, its contribution shall be 0
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_728
 
 [End]
 
 
-#### **IPOS-MAIN-CONTROLLER-138** {#ipos-main-controller-138}
-If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when
+#### **IPOS-MAIN-CONTROLLER-178** {#ipos-main-controller-178}
+If multiple frame is selected (i_frame_repetition in ppg_fsm greater than 0), when Tx Preset falls from 1 to 0, the en_tx shall pass from 1 to 0 only during the last repetition (check that when o_end_ppg_fsm is set, en_tx is 0).
 
 Covers: IPOS_STBIO1_MAIN_CONTROLLER_8106
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-179** {#ipos-main-controller-179}
+i_n_start_case shall be lesser or equal than i_Nmax_to_reg.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_8116
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-180** {#ipos-main-controller-180}
+GAIN_START shall be lesser or equal than GAIN_MAX.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_9116
+
+[End]
+
+
+#### **IPOS-MAIN-CONTROLLER-181** {#ipos-main-controller-181}
+If during the PPG Frame computation, the i_alc_mask (ALC Disabled) is enabled, the final result shall be only the ppg acquisition and the subtraction of the alc data shall not be performed.
+
+Covers: IPOS_STBIO1_MAIN_CONTROLLER_9139
 
 [End]
 

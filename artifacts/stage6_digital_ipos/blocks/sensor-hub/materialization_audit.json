@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_sensor-hub.docx",
-    "sha256": "30fcb325d31a4d35537d41d14a51afe0b6299d11534793b626539beb883abeca"
+    "sha256": "d1a7c6d9e574838a5a515deb0fa5bdb0449968bd9459bc2e74886f6769ea38bc"
   },
   "markdown": {
     "path": "digital_ipos_sensor-hub.md",
-    "sha256": "d8642da405606f05313b9da8b1c1b2e29a8b0355086f86edcab9a1929cf14161"
+    "sha256": "4b50dc51f2aa3485b9427009559485ad1f6835db02d2a00d2d0eb4fc6e8789e5"
   },
-  "normalized_input_sha256": "83f0ec5bb71559a833b5fb6b716da828dc14c12b52b1f35574f740d1a514a9de",
+  "normalized_input_sha256": "482a9b006a3f5fd4d4516fb4f7b3cf7b33a6b9772be52c38e19b37f079ce0292",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -100,7 +100,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9500",
@@ -108,13 +108,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported conditional consequence marker; full source retained",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9500",
       "text": "[DDS_STBIO1_9500] Requirement In case also other sources that writes into FIFO are active, then sensor hub shall work always in multi-fifo mode fifo_mode input of sensor hub set to '1' ."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9027",
@@ -122,13 +122,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9027",
       "text": "[DDS_STBIO1_9027] Requirement The bit 0 of SLAVE1_DEV_ADD, SLAVE2_DEV_ADD, SLAVE3_DEV_ADD registers shall be ignored: ONLY read operations towards I2C target 1, 2 and 3 shall be performed."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9030",
@@ -136,13 +136,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9030",
       "text": "[DDS_STBIO1_9030] Requirement SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers shall define how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12)."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9017",
@@ -150,13 +150,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9017",
       "text": "The output port sleep_master shall be set to 1 when an I2C operation is not on-going. [Vpriority High] [TO: IPOS_Senshub_MB_i2c]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9024",
@@ -164,7 +164,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9024",
       "text": "[DDS_STBIO1_9024] Requirement Only I2C target addressed through SLAVE0_DEV_ADD register shall be the destination of an I2C Write Operation."
     },
@@ -198,7 +198,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9033",
@@ -206,7 +206,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9033",
       "text": "All the SENSOR_HUB_x registers shall be reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
     },
@@ -240,7 +240,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9035",
@@ -248,13 +248,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9035",
       "text": "When Quokka MasterBlaze \u00b5P runs (sleep_master signal = 0), any dvalid triggered (HW or SW) shall be ignored. [TO: IPOS_Senshub_MB_i2c]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9018",
@@ -262,13 +262,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9018",
       "text": "[DDS_STBIO1_9018] Requirement The trigger of sensor hub shall be possible in both ways, HW via dvalid_masterblaze_ext signal or SW using DVALID_REGISTER."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9032",
@@ -276,13 +276,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9032",
       "text": "[DDS_STBIO1_9032] Requirement SLAVE0_NUMOP bitfield shall be ignored if an I2C Write operation is issued to the I2C Slave 0."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9031",
@@ -290,13 +290,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9031",
       "text": "All the values from 1 to 12 shall be valid for SLAVEx_NUMOP bit-fields of SLAVEx_CONFIG registers. [TO: IPOS_Senshub_MB_i2c]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9300",
@@ -304,13 +304,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9300",
       "text": "[DDS_STBIO1_9300] Requirement The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value shall not be updated."
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_9034",
@@ -318,7 +318,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "audited unpublished descriptive input: omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
       "record_id": "requirement:Sensor-Hub:DDS_STBIO1_9034",
       "text": "The NACK_REGISTER register is reset every time a new I2C operation starts. [TO: IPOS_Senshub_MB_i2c]"
     }
@@ -330,143 +330,72 @@
       "source_record_ids": [
         "inventory:function"
       ],
-      "text": "The Sensor-Hub block serves to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.",
-      "unit_id": "desc-unit-9daae2d25b5a1253fccf"
+      "text": "The Sensor-Hub block is designed to operate the Sensor Hub I2C master for external targets, including trigger/control, pad enable, data collection, and FIFO multi-mode coordination.",
+      "unit_id": "ipos-claim-049123119bbc80f17dbc"
     },
     {
       "output_order": 2,
       "section": "1.2 Supported functions and scope",
       "source_record_ids": [
-        "inventory:inputs"
+        "inventory:inputs",
+        "inventory:outputs"
       ],
-      "text": "The Sensor-Hub block accepts Primary sensing input.",
-      "unit_id": "desc-unit-8433474f2828abfae972"
+      "text": "The Sensor-Hub block accepts Primary sensing input and produces Analog input signal.",
+      "unit_id": "ipos-claim-fabb54e21714dbe30228"
     },
     {
       "output_order": 3,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "inventory:outputs"
-      ],
-      "text": "The Sensor-Hub block produces Analog input signal.",
-      "unit_id": "desc-unit-ae73837927e79a43b6e0"
-    },
-    {
-      "output_order": 4,
-      "section": "1.2 Supported functions and scope",
+      "section": "1.3 Internal structure",
       "source_record_ids": [
         "requirement:Sensor-Hub:DDS_STBIO1_9263"
       ],
       "text": "The last 8-bits of the data stored in FIFO contains the TAG field.",
-      "unit_id": "desc-unit-cbb61e8de36c4cd41260"
+      "unit_id": "ipos-claim-5027534bb6f1dde43847"
     },
     {
-      "output_order": 5,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9030"
-      ],
-      "text": "SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers defines how many bytes per slave are read as per effect of an I2C operation (x from 1 to 12).",
-      "unit_id": "desc-unit-ae14bc8ac99249abf48a"
-    },
-    {
-      "output_order": 6,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9017"
-      ],
-      "text": "The output port sleep master is set to 1 when an I2C operation is not on-going.",
-      "unit_id": "desc-unit-83fd12d2434d00fcaad7"
-    },
-    {
-      "output_order": 7,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9024"
-      ],
-      "text": "Only I2C target addressed through SLAVE0 DEV ADD register is the destination of an I2C Write Operation.",
-      "unit_id": "desc-unit-55903148966a6e410b24"
-    },
-    {
-      "output_order": 8,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9260"
-      ],
-      "text": "Each data stored in FIFO is composed by 4 words (16bytes).",
-      "unit_id": "desc-unit-b3c78b3ca99ee681dbaa"
-    },
-    {
-      "output_order": 9,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9033"
-      ],
-      "text": "All the SENSOR HUB x registers is reset every time a new I2C operation starts.",
-      "unit_id": "desc-unit-93204c7ddffd9ba396d6"
-    },
-    {
-      "output_order": 10,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 4,
+      "section": "1.3 Internal structure",
       "source_record_ids": [
         "requirement:Sensor-Hub:DDS_STBIO1_9261"
       ],
       "text": "3 words (12bytes) of the data stored in FIFO contains the data from each I2C slave.",
-      "unit_id": "desc-unit-ab92972aabfa8f206966"
+      "unit_id": "ipos-claim-adc0e432725f49198164"
     },
     {
-      "output_order": 11,
-      "section": "1.2 Supported functions and scope",
+      "output_order": 5,
+      "section": "1.4 Supported block functions",
+      "source_record_ids": [
+        "requirement:Sensor-Hub:DDS_STBIO1_9317"
+      ],
+      "text": "If the sensor hub IP is not enabled, the SCL and SDA pad do not toggle.",
+      "unit_id": "ipos-claim-15e7aeb0bed7e69eabc7"
+    },
+    {
+      "output_order": 6,
+      "section": "1.4 Supported block functions",
+      "source_record_ids": [
+        "requirement:Sensor-Hub:DDS_STBIO1_9029"
+      ],
+      "text": "All the values is tested since MasterBlaze supports up-to 4 I2C targets connected to I2C network.",
+      "unit_id": "ipos-claim-776e759edcbe52d815f1"
+    },
+    {
+      "output_order": 7,
+      "section": "1.4 Supported block functions",
+      "source_record_ids": [
+        "requirement:Sensor-Hub:DDS_STBIO1_9260"
+      ],
+      "text": "Each data stored in FIFO is composed by 4 words (16bytes).",
+      "unit_id": "ipos-claim-963fc615065613cfd1ee"
+    },
+    {
+      "output_order": 8,
+      "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:Sensor-Hub:DDS_STBIO1_9262"
       ],
       "text": "24-bits of the data stored in FIFO is reserved at '0'.",
-      "unit_id": "desc-unit-695e0b85014dd2451c15"
-    },
-    {
-      "output_order": 12,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9035"
-      ],
-      "text": "When Quokka MasterBlaze \u00b5P runs (sleep master signal = 0), any dvalid triggered (HW or SW) is ignored.",
-      "unit_id": "desc-unit-58d7701133e91c778fea"
-    },
-    {
-      "output_order": 13,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9018"
-      ],
-      "text": "The trigger of sensor hub is possible in both ways, HW via dvalid masterblaze ext signal or SW using DVALID REGISTER.",
-      "unit_id": "desc-unit-6e5e896ccc3551d60bad"
-    },
-    {
-      "output_order": 14,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9032"
-      ],
-      "text": "SLAVE0 NUMOP bitfield is ignored if an I2C Write operation is issued to the I2C Slave 0.",
-      "unit_id": "desc-unit-a7dddc6bdfcc69d53992"
-    },
-    {
-      "output_order": 15,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9031"
-      ],
-      "text": "All the values from 1 to 12 is valid for SLAVEx NUMOP bit-fields of SLAVEx CONFIG registers.",
-      "unit_id": "desc-unit-5316e91c3922088d9e75"
-    },
-    {
-      "output_order": 16,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Sensor-Hub:DDS_STBIO1_9300"
-      ],
-      "text": "The AHB Write to registers has no effect if the IP masterblaze processor is busy (I2C operation on-going); the registers value is not updated.",
-      "unit_id": "desc-unit-6f2d15524c864ef575a7"
+      "unit_id": "ipos-claim-684783630f1ad0ebbcc1"
     }
   ]
 }

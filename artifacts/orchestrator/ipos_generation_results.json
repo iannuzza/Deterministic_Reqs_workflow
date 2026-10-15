@@ -1,0 +1,177 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "scope": "all",
+  "blocks": [
+    {
+      "block": "ADSP",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "notes": [],
+        "future_source_updates": []
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    },
+    {
+      "block": "I2C_SPI_AHB",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "notes": [],
+        "future_source_updates": []
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    },
+    {
+      "block": "Main Controller",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "notes": [],
+        "future_source_updates": []
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    },
+    {
+      "block": "PAD MUX",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "notes": [],
+        "future_source_updates": []
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    },
+    {
+      "block": "PMU",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "notes": [],
+        "future_source_updates": []
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    },
+    {
+      "block": "Regmap",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "notes": [],
+        "future_source_updates": []
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    },
+    {
+      "block": "Sensor-Hub",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+        "block": "Sensor-Hub",
+        "workbook_sha256": "334832b117303e0a5f4a99b036a24fe41a0065c958007d9c1ffc6dbf29d47d86",
+        "notes": [],
+        "decisions": [
+          {
+            "Reference req_id": "",
+            "Block": "Sensor-Hub",
+            "Section or claim": "1.3 Internal structure",
+            "Failure type": "Unmodeled content; Missing/changed supported claim",
+            "Expected supported meaning": "The last 8-bits of the data stored in FIFO: contain the TAG field; 3 words (12bytes) of the data stored in FIFO: contain the data from each I2C slave",
+            "Observed problem": "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+            "Likely failing layer": "realization/readback/section mapping; not localized",
+            "Flow recommendation": "user clarified",
+            "Why": "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+            "User decision": "need source/spec update - clarification",
+            "Note": "",
+            "Resulting action": "generate supported content; retain source/spec update gap for readiness"
+          },
+          {
+            "Reference req_id": "",
+            "Block": "Sensor-Hub",
+            "Section or claim": "1.4 Supported block functions",
+            "Failure type": "Unmodeled content; Missing/changed supported claim",
+            "Expected supported meaning": "the SCL and SDA pad: not toggle ; The output port sleep_master: be set to 1 when an I2C operation is not on-going",
+            "Observed problem": "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+            "Likely failing layer": "realization/readback/section mapping; not localized",
+            "Flow recommendation": "user clarified",
+            "Why": "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+            "User decision": "need source/spec update - clarification",
+            "Note": "",
+            "Resulting action": "generate supported content; retain source/spec update gap for readiness"
+          }
+        ],
+        "future_source_updates": [
+          {
+            "Reference req_id": "",
+            "Block": "Sensor-Hub",
+            "Section or claim": "1.3 Internal structure",
+            "Failure type": "Unmodeled content; Missing/changed supported claim",
+            "Expected supported meaning": "The last 8-bits of the data stored in FIFO: contain the TAG field; 3 words (12bytes) of the data stored in FIFO: contain the data from each I2C slave",
+            "Observed problem": "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+            "Likely failing layer": "realization/readback/section mapping; not localized",
+            "Flow recommendation": "user clarified",
+            "Why": "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+            "User decision": "need source/spec update - clarification",
+            "Note": "",
+            "Resulting action": "generate supported content; retain source/spec update gap for readiness"
+          },
+          {
+            "Reference req_id": "",
+            "Block": "Sensor-Hub",
+            "Section or claim": "1.4 Supported block functions",
+            "Failure type": "Unmodeled content; Missing/changed supported claim",
+            "Expected supported meaning": "the SCL and SDA pad: not toggle ; The output port sleep_master: be set to 1 when an I2C operation is not on-going",
+            "Observed problem": "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+            "Likely failing layer": "realization/readback/section mapping; not localized",
+            "Flow recommendation": "user clarified",
+            "Why": "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+            "User decision": "need source/spec update - clarification",
+            "Note": "",
+            "Resulting action": "generate supported content; retain source/spec update gap for readiness"
+          }
+        ],
+        "authority": false,
+        "gate_override": false
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    },
+    {
+      "block": "Smart FIFO",
+      "status": "PASS",
+      "blocker_count": 0,
+      "review_context": {
+        "notes": [],
+        "future_source_updates": []
+      },
+      "residuals": [],
+      "generation_status": "GENERATABLE",
+      "publication_status": "NOT_ATTEMPTED",
+      "readiness_status": "NOT_ASSESSED"
+    }
+  ],
+  "status": "PASS",
+  "authority": false,
+  "gate_override": false
+}

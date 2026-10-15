@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_smart-fifo.docx",
-    "sha256": "91f588643df2f98db5ec8646ce85725d5dc44053b5646ff3bdcef40c90728dbc"
+    "sha256": "1b971b4e58fc9b96c6dfc1ab2133a45bf7fa367befb65ac6565ae79691d131ba"
   },
   "markdown": {
     "path": "digital_ipos_smart-fifo.md",
-    "sha256": "692477b1b455f15f1ae2dbb330578d879f60527f038a373481cb4453ef8681a3"
+    "sha256": "15c21fe780be1c6ab2a084e1147e66ba099e5c8d6d48824665e8ccf775738428"
   },
-  "normalized_input_sha256": "074e5170c3feb5bae504188711ef1cb4b3964d5c12223a0710bc64f0c6a07985",
+  "normalized_input_sha256": "93b17d50de75f8f327e012c2d74a717d8cb429400c391b288aed56e6a242bb21",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -72,7 +72,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_89456975",
@@ -80,13 +80,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Smart FIFO:DDS_STBIO1_89456975",
       "text": "The user shall select the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode. [TO: IPOS_FIFO_CTRL_89456975]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_89457435",
@@ -94,7 +94,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Smart FIFO:DDS_STBIO1_89457435",
       "text": "The FIFO Controller shall have a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs. [TO: IPOS_FIFO_CTRL_89457435]"
     },
@@ -114,7 +114,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_00000102",
@@ -122,7 +122,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000102",
       "text": "The parameter MEM_LOC shall define the first Memory Location of the FIFO RAM: 0xC4000. [TO: IPOS_FIFO_CTRL_00000102]"
     },
@@ -156,7 +156,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_89455261",
@@ -164,13 +164,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455261",
       "text": "The FIFO Controller shall have an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory. [TO: IPOS_FIFO_CTRL_89455261]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_89455449",
@@ -178,7 +178,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Smart FIFO:DDS_STBIO1_89455449",
       "text": "The FIFO Controller shall have two working modes: Multiple FIFO and Unique FIFO. These two modes are mutually exclusive. [TO: IPOS_FIFO_CTRL_89455449]"
     },
@@ -212,7 +212,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_00000202",
@@ -220,13 +220,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Smart FIFO:DDS_STBIO1_00000202",
       "text": "The FIFO register map first memory location shall be defined as MEM_LOC + 0x1000: 0xC5000. [TO: IPOS_FIFO_CTRL_00000202]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_89459082",
@@ -234,7 +234,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Smart FIFO:DDS_STBIO1_89459082",
       "text": "The FIFO Controller shall work at 16 MHz clock frequency. [TO: IPOS_FIFO_CTRL_89459082]"
     },
@@ -275,36 +275,6 @@
     },
     {
       "output_order": 3,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Smart FIFO:DDS_STBIO1_89456975"
-      ],
-      "text": "The user selects the Multiple FIFO mode setting to 1 the first bit into the FIFO_CFG_MODE and 0 for the Unique FIFO mode.",
-      "unit_id": "ipos-claim-bc4bf0a52ec9b300e038"
-    },
-    {
-      "output_order": 4,
-      "section": "1.2 Supported functions and scope",
-      "source_record_ids": [
-        "requirement:Smart FIFO:DDS_STBIO1_00000102"
-      ],
-      "text": "The parameter MEM_LOC defines the first Memory Location of the FIFO RAM: 0xC4000.",
-      "unit_id": "ipos-claim-f323bc5b0fe14a7aa418"
-    },
-    {
-      "output_order": 5,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:Smart FIFO:DDS_STBIO1_89457435",
-        "requirement:Smart FIFO:DDS_STBIO1_89455261",
-        "requirement:Smart FIFO:DDS_STBIO1_89455449",
-        "requirement:Smart FIFO:DDS_STBIO1_89459082"
-      ],
-      "text": "The FIFO Controller has a 6 i_depth input of 8 bit to be used in Multiple FIFO Mode to define the depth of each subFIFOs and has an AHB Slave Interface connected to the AHB BUS and a Memory Master Interface connected to the Physical Memory and has two working modes: Multiple FIFO and Unique FIFO and works at 16 MHz clock frequency.",
-      "unit_id": "ipos-claim-1d33707c4dbaa1e2b151"
-    },
-    {
-      "output_order": 6,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:Smart FIFO:DDS_STBIO1_89455232"
@@ -313,7 +283,7 @@
       "unit_id": "ipos-claim-8cc2792abed09ed68a5f"
     },
     {
-      "output_order": 7,
+      "output_order": 4,
       "section": "1.4 Supported block functions",
       "source_record_ids": [
         "requirement:Smart FIFO:DDS_STBIO1_00000008",
@@ -321,15 +291,6 @@
       ],
       "text": "If input signal HMASTER is set to 0 or 1, the FIFO Controller enters Memory mode.",
       "unit_id": "ipos-claim-00f5aa9e75148fb4da26"
-    },
-    {
-      "output_order": 8,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:Smart FIFO:DDS_STBIO1_00000202"
-      ],
-      "text": "The FIFO register map first memory location is defined as MEM_LOC + 0x1000: 0xC5000.",
-      "unit_id": "ipos-claim-639c134da69dc27d39ff"
     }
   ]
 }

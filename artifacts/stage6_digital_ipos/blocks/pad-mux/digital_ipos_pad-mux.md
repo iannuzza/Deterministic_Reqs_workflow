@@ -7,7 +7,10 @@ Author: Alessandro Lucio IANNUZZI
 ## **0. Document Navigation** {#0-document-navigation}
 
 ### **0.1 Table of contents** {#01-table-of-contents}
+
 - [1. Block overview](#1-block-overview)
+- [1.1 Functionality](#11-functionality)
+- [1.2 Supported functions and scope](#12-supported-functions-and-scope)
 - [2. Source I/O](#2-source-io)
 - [3. Block requirements](#3-block-requirements)
 
@@ -19,6 +22,7 @@ Author: Alessandro Lucio IANNUZZI
 | 0.2 | 2026-10-12 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
+#### **Table 2. Requirement navigation** {#table-2-requirement-navigation}
 | Requirement | Internal link |
 |---|---|
 | IPOS-PAD-MUX-001 | [Go to requirement](#ipos-pad-mux-001) |
@@ -39,6 +43,12 @@ Author: Alessandro Lucio IANNUZZI
 | IPOS-PAD-MUX-016 | [Go to requirement](#ipos-pad-mux-016) |
 | IPOS-PAD-MUX-017 | [Go to requirement](#ipos-pad-mux-017) |
 
+### **0.4 Table index** {#04-table-index}
+
+- [Table 1. Version history](#table-1-version-history)
+- [Table 2. Requirement navigation](#table-2-requirement-navigation)
+- [Table 3. Source I/O](#table-3-source-io)
+
 ## **1. Block overview** {#1-block-overview}
 
 ### **1.1 Functionality** {#11-functionality}
@@ -49,16 +59,11 @@ The PAD MUX block is designed to route source-specified functional, scan, BIST, 
 
 The PAD MUX block accepts Mode selection, register-map controls, test controls, and internal block outputs and produces Pad controls, test observations, and routed internal signals.
 
-### **1.4 Supported block functions** {#14-supported-block-functions}
-
-In function mode, the GPIO1,2,3,4 output is i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is “0” and is i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is “0”.
-
-In function mode, the GPIO1,2,3,4_out is i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is “0” and is General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is “0” and is irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is “0” and is i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is “0”.
-
 ## **2. Source I/O** {#2-source-io}
 
 The following approved source I/O entries are owned by this block.
 
+#### **Table 3. Source I/O** {#table-3-source-io}
 | Port name | Direction | Type / details | Table | Source page |
 |---|---|---|---|---|
 | i_write_protection_en | input | write_protection_en OTP regmap enable from regmap | PAD MUX I/O List | 49 |

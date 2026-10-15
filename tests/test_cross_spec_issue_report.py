@@ -14,6 +14,197 @@ contracts = importlib.import_module("spec_document_contract")
 
 
 class CrossSpecIssueReportTests(unittest.TestCase):
+    def test_unverified_saved_review_is_not_presented_as_current_blockers(self):
+        review = {"snapshot_id": "snapshot-test", "current_evidence": {"status": "UNVERIFIED",
+            "reason": "No matching completed-run evidence"}, "decision_summary": [
+            {"block": "Module", "document_type": "Digital IPOS", "current_status": "BLOCKED"}]}
+        text = reporting.remaining_ipos_blocker_markdown(review)
+        self.assertIn("UNVERIFIED", text)
+        self.assertIn(reporting.markdown_literal("No matching completed-run evidence"), text)
+        self.assertNotIn("Listed blocks remain BLOCKED", text)
+        self.assertNotIn("## Module", text)
+
+    def test_concrete_blocker_claim_rows_keep_ids_only_in_appendix(self):
+        review = {"snapshot_id": "snapshot-test", "decision_summary": [
+            {"block": "Module", "document_type": "Digital IPOS", "current_status": "BLOCKED"}],
+            "clean_generation_observations": {"blocks": [{"block": "Module", "document_type": "Digital IPOS",
+                "contract_report": {"checks": {"semantic_fidelity": {"findings": [
+                    "ipos_final_unmodeled_content:audit:private-claim-id",
+                    "ipos_final_claim_missing_or_changed:audit:private-claim-id"]}}}}]}}
+        details = {"Module": {"claims": {"private-claim-id": {"section": "1.4 Supported block functions",
+            "name": "masked contribution", "meaning": "If masked, the contribution is zero."}}}}
+        text = reporting.remaining_ipos_blocker_markdown(review, details)
+        self.assertIn("masked contribution", text)
+        self.assertIn(reporting.markdown_literal("If masked, the contribution is zero."), text)
+        self.assertNotIn("private-claim-id", text)
+        self.assertIn("does not isolate the lost fact", text)
+        self.assertIn("Detailed evidence", text)
+
+    def test_remaining_blockers_are_short_current_and_project_agnostic(self):
+        review = {
+            "snapshot_id": "snapshot-test",
+            "minimum_shared_or_profile_adjustments": {"block_preflight": []},
+            "decision_summary": [
+                {"block": "Module A", "document_type": "Digital IPOS", "current_status": "BLOCKED"},
+                {"block": "Module B", "document_type": "Digital IPOS", "current_status": "PASS"},
+            ],
+            "issues": [
+                {"block": "Module A", "identity": "current-probe:semantic_fidelity", "blocking_status": "blocking",
+                 "issue_class": "parser_or_projection_limitation", "user_clarification_needed": "none"},
+                {"block": "Module A", "identity": "old", "blocking_status": "blocking", "historical_only": True,
+                 "reason": "HISTORICAL DUMP", "issue_class": "missing_source_information", "user_clarification_needed": "yes"},
+            ],
+            "clean_generation_observations": {"blocks": [
+                {"block": "Module A", "document_type": "Digital IPOS", "contract_report": {"checks": {
+                    "semantic_fidelity": {"findings": [
+                        "ipos_final_claim_missing_or_changed:module.md:1.3",
+                        "ipos_final_claim_missing_or_changed:module.docx:1.3",
+                    ]}}}},
+            ]},
+        }
+        details = {"Module A": {"sections": {"1.3": {"title": "1.3 Internal blocks or functions",
+                                 "meaning": "Process samples into ordered results"}}}}
+        text = reporting.remaining_ipos_blocker_markdown(review, details)
+        self.assertIn("## Module A", text)
+        self.assertNotIn("Module B", text)
+        self.assertNotIn("HISTORICAL DUMP", text)
+        self.assertEqual(text.count(reporting.markdown_literal("1.3 Internal blocks or functions")), 1)
+        self.assertIn("Expected supported meaning", text)
+        self.assertIn("Process samples into ordered results", text)
+        self.assertIn("section mapping/readback", text)
+        self.assertLess(len(text.splitlines()), 20)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            folder = root / "artifacts/orchestrator"
+            folder.mkdir(parents=True)
+            import json
+            source = folder / "descriptive_obligation_review.json"
+            source.write_text(json.dumps(review), encoding="utf-8")
+            before = source.read_bytes()
+            current = {"status": "BLOCKED", "blocks": [{"block": "Module A", "status": "BLOCKED",
+                "reason": "Missing/changed supported claim: Process samples into ordered results"}]}
+            with patch.object(reporting, "current_ipos_blocker_evidence", return_value=current):
+                output = reporting.write_remaining_ipos_blocker_report(root, "snapshot-test")
+            self.assertEqual(output.read_text(encoding="utf-8"),
+                reporting.remaining_ipos_blocker_markdown({**review, "current_evidence": current}))
+            self.assertTrue(output.with_suffix(".docx").is_file())
+            word_text = "\n".join(event.get("text", "") if event["kind"] != "table" else " ".join(cell for row in event["rows"] for cell in row)
+                                  for event in contracts.drs_document_events(output.with_suffix(".docx")))
+            self.assertIn("Module A", word_text)
+            self.assertNotIn("Module B", word_text)
+            self.assertIn("Missing/changed supported claim", word_text)
+            self.assertIn("Process samples into ordered results", word_text)
+            self.assertEqual(source.read_bytes(), before)
+            with self.assertRaises(ValueError):
+                reporting.write_remaining_ipos_blocker_report(root, "other-snapshot")
+
+    def test_current_evidence_is_bound_to_snapshot_artifacts_and_run_scope(self):
+        import json
+        import time
+        from contextlib import ExitStack
+
+        real_binding = contracts.validate_materialization_chain
+        with tempfile.TemporaryDirectory() as directory, ExitStack() as stack:
+            root = Path(directory)
+            (root / "config").mkdir()
+            (root / "config/project_context.json").write_text('{"project_name":"Generic"}', encoding="utf-8")
+            orchestrator = root / "artifacts/orchestrator"
+            orchestrator.mkdir(parents=True)
+            results_path = orchestrator / "ipos_generation_results.json"
+            result = {"snapshot_id": "snapshot-test", "scope": "all", "blocks": [
+                {"block": "Module", "status": "PASS"}, {"block": "Other", "status": "PASS"}]}
+            results_path.write_text(json.dumps(result), encoding="utf-8")
+            report = {"status": "PASS", "residuals": [{"authority": False}],
+                      "checks": {"semantic_fidelity": {"findings": []}}}
+            for name in ("Module", "Other"):
+                folder = root / reporting.ipos.CONFIG["digital"]["output_dir"] / "blocks" / reporting.ipos._block_slug(name)
+                folder.mkdir(parents=True)
+                (folder / reporting.ipos._block_markdown_name("digital", name)).write_text(
+                    "- Snapshot: `snapshot-test`\n", encoding="utf-8")
+                for filename in (reporting.ipos._block_docx_name("digital", name),
+                                 "descriptive_summary_audit.csv", "materialization_audit.json"):
+                    (folder / filename).write_text("fixture", encoding="utf-8")
+                (folder / "document_contract_report.json").write_text(json.dumps(report), encoding="utf-8")
+            contract = SimpleNamespace(target=lambda source_id: "Digital IPOS", descriptive_context=lambda *args, **kwargs: ())
+            stack.enter_context(patch.object(reporting.ipos, "resolve_complete_authoritative_input",
+                return_value=(SimpleNamespace(snapshot_id="snapshot-test"), {})))
+            stack.enter_context(patch.object(reporting.ipos, "resolve_downstream_contract", return_value=contract))
+            stack.enter_context(patch.object(reporting, "approved_snapshot_candidate_rows", side_effect=
+                lambda snapshot, contract, domain: [{"mapped_block": name, "source_req_id": name} for name in ("Module", "Other")]
+                    if domain == "digital" else []))
+            stack.enter_context(patch.object(reporting, "build_ipos_functional_input", return_value=object()))
+            stack.enter_context(patch("ipos_blocker_review.apply_descriptive_omissions", side_effect=lambda root, **kwargs: kwargs["functional_input"]))
+            stack.enter_context(patch("workflow_routing.build_ipos_normalized_records", return_value=()))
+            binding = stack.enter_context(patch.object(contracts, "validate_materialization_chain", return_value=[]))
+            checker = stack.enter_context(patch.object(contracts, "ipos_document_contract_report", return_value=report))
+            evidence = reporting.current_ipos_blocker_evidence(root, "snapshot-test")
+            self.assertEqual(evidence["status"], "PASS")
+            self.assertEqual(len(evidence["blocks"]), 2)
+            self.assertTrue(all(row["status"] == "PASS" for row in evidence["blocks"]))
+            self.assertIn("residuals: 1", evidence["blocks"][0]["reason"])
+            binding.return_value = ["content changed after audited materialization"]
+            self.assertEqual(reporting.current_ipos_blocker_evidence(root, "snapshot-test")["status"], "UNVERIFIED")
+            binding.return_value = []
+            checker.return_value = {"status": "FAIL", "checks": {"semantic_fidelity": {
+                "findings": ["ipos_final_claim_missing_or_changed:1.4"]}}}
+            self.assertEqual(reporting.current_ipos_blocker_evidence(root, "snapshot-test")["status"], "BLOCKED")
+            checker.return_value = report
+            result["blocks"][0].update(status="BLOCKED", findings=["ipos_publication_failure:access denied"])
+            results_path.write_text(json.dumps(result), encoding="utf-8")
+            blocked = reporting.current_ipos_blocker_evidence(root, "snapshot-test")
+            self.assertEqual(blocked["status"], "BLOCKED")
+            self.assertIn("access denied", blocked["blocks"][0]["reason"])
+            result["snapshot_id"] = "another-snapshot"
+            results_path.write_text(json.dumps(result), encoding="utf-8")
+            self.assertEqual(reporting.current_ipos_blocker_evidence(root, "snapshot-test")["status"], "UNVERIFIED")
+            result["snapshot_id"] = "snapshot-test"
+            result["blocks"][0]["status"] = "PASS"
+            results_path.write_text(json.dumps(result), encoding="utf-8")
+            run = {"stages": ["6"], "block": "Module", "started_at": 0,
+                   "finished_at": time.time() + 1, "exit_code": 0}
+            scoped = reporting.current_ipos_blocker_evidence(root, "snapshot-test", run)
+            self.assertEqual([row["status"] for row in scoped["blocks"]], ["PASS", "UNVERIFIED"])
+            run.update(block=None, started_at=time.time() + 2, finished_at=time.time() + 3)
+            self.assertEqual(reporting.current_ipos_blocker_evidence(root, "snapshot-test", run)["status"], "UNVERIFIED")
+            from docx import Document
+            for name in ("Module", "Other"):
+                folder = root / reporting.ipos.CONFIG["digital"]["output_dir"] / "blocks" / reporting.ipos._block_slug(name)
+                markdown = folder / reporting.ipos._block_markdown_name("digital", name)
+                Document().save(markdown.with_suffix(".docx"))
+                contracts.write_materialization_audit(folder / "materialization_audit.json", "IPOS", (), (),
+                    markdown, markdown.with_suffix(".docx"))
+            binding.side_effect = real_binding
+            self.assertEqual(reporting.current_ipos_blocker_evidence(root, "snapshot-test")["status"], "PASS")
+            markdown.write_text("- Snapshot: `snapshot-test`\nChanged after audit\n", encoding="utf-8")
+            changed = reporting.current_ipos_blocker_evidence(root, "snapshot-test")
+            self.assertEqual(changed["status"], "UNVERIFIED")
+            self.assertTrue(any("content changed" in finding for row in changed["blocks"] for finding in row["findings"]))
+
+    def test_new_current_pass_supersedes_saved_blockers_without_editing_history(self):
+        import json
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            folder = root / "artifacts/orchestrator"
+            folder.mkdir(parents=True)
+            review = {"snapshot_id": "snapshot-test", "decision_summary": [
+                {"block": "Module", "document_type": "Digital IPOS", "current_status": "BLOCKED"}]}
+            source = folder / "descriptive_obligation_review.json"
+            source.write_text(json.dumps(review), encoding="utf-8")
+            before = source.read_bytes()
+            current = {"status": "PASS", "blocks": [{"block": "Module", "status": "PASS",
+                "reason": "Current snapshot-bound document checks PASS; residuals: 0"}]}
+            with patch.object(reporting, "current_ipos_blocker_evidence", return_value=current):
+                output = reporting.write_remaining_ipos_blocker_report(root, "snapshot-test")
+            text = output.read_text(encoding="utf-8")
+            word_text = "\n".join(event.get("text", "") if event["kind"] != "table" else
+                " ".join(cell for row in event["rows"] for cell in row)
+                for event in contracts.drs_document_events(output.with_suffix(".docx")))
+            for rendered in (text, word_text):
+                self.assertIn("Current document status: PASS", rendered)
+                self.assertIn("NOT_ASSESSED", rendered.replace("\\_", "_"))
+                self.assertNotIn("remain BLOCKED", rendered)
+            self.assertEqual(source.read_bytes(), before)
+
     def test_actual_current_fidelity_failure_remains_blocking_not_missing_source(self):
         value = {"reason": "ipos_final_claim_missing_or_changed:audit:claim", "current_failure_layer": "semantic_fidelity", "blocking": True}
         reporting.populate_report_issue_notes(value)

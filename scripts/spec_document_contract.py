@@ -268,7 +268,7 @@ def load_drs_contract(template_path: Path) -> dict:
 def ipos_document_contract_report(repo_root: Path, markdown_path: Path, audit_path: Path, functional_input) -> dict:
     from workflow_routing import (
         build_ipos_normalized_records, validate_ipos_descriptive_output,
-        _ipos_final_sections, ipos_publication_quality_findings,
+        _ipos_final_sections, ipos_publication_quality_findings, ipos_derivative_residuals,
     )
     contract = load_ipos_contract(repo_root / IPOS_TEMPLATE)
     semantic = validate_ipos_descriptive_output(markdown_path, audit_path, functional_input.block,
@@ -284,9 +284,15 @@ def ipos_document_contract_report(repo_root: Path, markdown_path: Path, audit_pa
     materialization = validate_materialization_chain(audit_path.with_name("materialization_audit.json"), "IPOS",
                       build_ipos_normalized_records(functional_input), markdown_path, markdown_path.with_suffix(".docx"))
     boundaries = {"semantic_fidelity": semantic, "publication_quality": publication, "materialization": materialization}
+    from validate_downstream_coherence import classify_descriptive_findings
+    classified = {hook: classify_descriptive_findings(values) for hook, values in boundaries.items()}
     return {"document_type": "IPOS", "contract_sha256": contract["sha256"],
-            "status": "FAIL" if any(boundaries.values()) else "PASS",
-            "checks": {hook: {"status": "FAIL" if boundaries[hook] else "PASS", "findings": boundaries[hook]}
+            "status": "FAIL" if any(value["hard_findings"] for value in classified.values()) else "PASS",
+            "residuals": ipos_derivative_residuals(functional_input) + [row for value in classified.values() for row in value["residuals"]],
+            "generation_status": "GENERATED",
+            "publication_status": "ELIGIBLE" if not any(value["hard_findings"] for value in classified.values()) else "BLOCKED",
+            "readiness_status": "NOT_ASSESSED",
+            "checks": {hook: {"status": "FAIL" if classified[hook]["hard_findings"] else "PASS", "findings": classified[hook]["hard_findings"]}
                        for hook in contract["validation_hooks"]}}
 
 

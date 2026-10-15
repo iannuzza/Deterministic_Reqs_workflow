@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1240" viewBox="0 0 1200 1240" role="img" aria-labelledby="title description">
+<title id="title">Current Requirements Workflow</title>
+<desc id="description">Updated example-style diagram. Includes all stages S0 to S2H, central downstream coherence, Stage 3 SRS, Stage 4 ARS, Stage 5 DRS, Stage 6 Digital IPOS, Stage 7 Analog IPOS, and separate advisory review reporting. All specifications consume the same approved immutable snapshot; connectors do not infer requirement parentage.</desc>
+<defs>
+ <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#273746"/></marker>
+ <marker id="loop" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#234f87"/></marker>
+ <marker id="accept" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#2c753d"/></marker>
+ <marker id="supplementary-rework" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#cf7b1d"/></marker>
+ <marker id="reject" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#b63f3f"/></marker>
+ <symbol id="doc" viewBox="0 0 36 44"><path d="M4 2 H23 L32 11 V41 H4 Z M23 2 V11 H32 M10 19 H26 M10 25 H26 M10 31 H26 M10 36 H21" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+ <symbol id="review" viewBox="0 0 36 44"><rect x="4" y="3" width="28" height="37" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 13 L13 17 L19 9 M9 27 L13 31 L19 23 M23 13 H27 M23 27 H27" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+ <symbol id="network" viewBox="0 0 36 44"><path d="M18 10 V21 H6 V32 M18 21 H30 V32 M18 21 V32" fill="none" stroke="currentColor" stroke-width="1.5"/><g fill="white" stroke="currentColor" stroke-width="1.5"><rect x="12" y="2" width="12" height="9"/><rect x="1" y="32" width="10" height="9"/><rect x="13" y="32" width="10" height="9"/><rect x="25" y="32" width="10" height="9"/></g></symbol>
+ <symbol id="shield" viewBox="0 0 36 44"><path d="M18 3 L32 8 V22 Q32 33 18 41 Q4 33 4 22 V8 Z M10 22 L16 28 L27 15" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+ <symbol id="lock" viewBox="0 0 24 28"><path d="M6 12 V8 A6 6 0 0 1 18 8 V12" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="3" y="12" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 17 V22" stroke="currentColor" stroke-width="1.7"/></symbol>
+ <symbol id="chip" viewBox="0 0 36 44"><rect x="8" y="10" width="20" height="24" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 3 V10 M18 3 V10 M24 3 V10 M12 34 V41 M18 34 V41 M24 34 V41 M2 15 H8 M2 22 H8 M2 29 H8 M28 15 H34 M28 22 H34 M28 29 H34" stroke="currentColor" stroke-width="1.5"/></symbol>
+ <style>
+ text{font-family:'Segoe UI',sans-serif;fill:#273746} .pt{font-size:14px;font-weight:700;fill:#19477f;text-anchor:middle} .st{font-size:18px;font-weight:700;fill:white;text-anchor:middle} .label{font-size:12px;font-weight:600;text-anchor:middle} .small{font-size:12px} .center{text-anchor:middle} .purple{fill:#674396} .green{fill:#2c753d} .blue{fill:#234f87} .bold{font-weight:700} .node{fill:#f5f8fd;stroke:#234f87;stroke-width:1.2} .flow{fill:none;stroke:#273746;stroke-width:1.6;marker-end:url(#arrow)} .rework{fill:none;stroke:#234f87;stroke-width:1.5;stroke-dasharray:5 4;marker-end:url(#loop)}
+ </style>
+</defs>
+<rect width="1200" height="1240" fill="white"/>
+<rect x="10" y="10" width="158" height="572" rx="6" fill="#f8f5fc" stroke="#7755a4"/>
+<text x="89" y="33" class="pt purple">SUPPLEMENTARY</text><text x="89" y="52" class="pt purple">SOURCE INPUTS</text><text x="89" y="71" class="small center purple">OPTIONAL</text>
+<rect x="23" y="94" width="132" height="89" rx="4" fill="white" stroke="#7755a4"/><use href="#doc" x="31" y="117" width="25" height="33" style="color:#674396"/><text x="104" y="119" class="small bold center">Supplementary</text><text x="104" y="140" class="small center">source import</text><text x="89" y="165" class="small center">Evidence retained</text>
+<path d="M89 183 V205" class="flow"/>
+<rect x="23" y="208" width="132" height="83" rx="4" fill="white" stroke="#7755a4"/><text x="89" y="235" class="small bold center">Ingest through S1</text><text x="89" y="255" class="small center">OCR / parse / IDs</text><text x="89" y="276" class="small center">Exact provenance</text>
+<path d="M155 250 H177 V60 H380 V82" class="rework"/>
+<path d="M89 291 V316" class="flow"/>
+<rect x="23" y="319" width="132" height="85" rx="4" fill="white" stroke="#7755a4"/><text x="89" y="344" class="small bold center">Review and impact</text><text x="89" y="365" class="small center">S2A / S2B / S2C</text><text x="89" y="386" class="small center">Explicit merge approval</text>
+<path d="M89 404 V422" class="flow"/><path d="M89 425 L136 459 L89 493 L42 459 Z" fill="white" stroke="#7755a4"/><text x="89" y="455" class="small bold center">Merge</text><text x="89" y="474" class="small center">approved?</text>
+<path d="M136 459 H176 V375 H192" fill="none" stroke="#2c753d" stroke-width="1.6" marker-end="url(#accept)"/><text x="150" y="447" class="small green">Accept</text>
+<path d="M42 459 H16 V136 H23" fill="none" stroke="#b63f3f" stroke-dasharray="5 4" stroke-width="1.4" marker-end="url(#reject)"/>
+<path d="M89 493 V513 H161 V86 H89 V92" fill="none" stroke="#cf7b1d" stroke-dasharray="5 4" stroke-width="1.4" marker-end="url(#supplementary-rework)"/>
+<text x="89" y="530" class="small center">Reject: no merge</text><text x="89" y="551" class="small center">Rework: return to source</text>
+
+<rect x="184" y="10" width="834" height="431" rx="6" fill="#f2f6fc" stroke="#234f87"/>
+<text x="601" y="33" class="pt">PRIMARY SOURCE INGESTION &amp; ARCHITECTURE MAPPING PIPELINE</text>
+<path d="M638 82 V51 H510 V82" class="rework"/><text x="575" y="47" class="small center blue">Staging rework</text>
+<g transform="translate(192 82)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S0</text><use href="#doc" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Primary source</text><text x="59" y="116" class="label">baseline</text></g>
+<g transform="translate(322 82)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S1</text><use href="#doc" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Source ingestion</text><text x="59" y="116" class="label">OCR / parse / IDs</text></g>
+<g transform="translate(452 82)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2</text><use href="#network" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Classification</text><text x="59" y="116" class="label">Staging objects</text></g>
+<g transform="translate(582 82)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2A</text><use href="#review" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Staging review</text><text x="59" y="116" class="label">Reviewer decision</text></g>
+<g transform="translate(712 82)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2B</text><use href="#network" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Merge impact</text><text x="59" y="116" class="label">Affected outputs</text></g>
+<g transform="translate(842 82)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2C</text><use href="#shield" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Merge approval</text><text x="59" y="116" class="label">Explicit decision</text></g>
+<path d="M310 149 H322" class="flow"/><path d="M440 149 H452" class="flow"/><path d="M570 149 H582" class="flow"/><path d="M700 149 H712" class="flow"/><path d="M830 149 H842" class="flow"/>
+<path d="M901 215 V239 H187 V324 H192" class="flow"/>
+<g transform="translate(192 259)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2D</text><use href="#doc" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Canonical merge</text><text x="59" y="116" class="label">Retain history</text></g>
+<g transform="translate(322 259)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2E</text><use href="#network" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Knowledge refresh</text><text x="59" y="116" class="label">Vocabulary / index</text></g>
+<g transform="translate(452 259)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2F</text><use href="#network" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Architecture map</text><text x="59" y="116" class="label">review</text></g>
+<g transform="translate(582 259)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2G</text><use href="#shield" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Mapping approval</text><text x="59" y="116" class="label">Evidence + reviewer</text></g>
+<g transform="translate(712 259)"><rect width="118" height="133" rx="4" class="node"/><rect width="118" height="26" fill="#19477f"/><text x="59" y="20" class="st">S2H</text><use href="#shield" x="43" y="35" width="32" height="40" style="color:#19477f"/><text x="59" y="95" class="label">Immutable</text><text x="59" y="116" class="label">approved snapshot</text></g>
+<path d="M310 325 H322" class="flow"/><path d="M440 325 H452" class="flow"/><path d="M570 325 H582" class="flow"/><path d="M700 325 H712" class="flow"/>
+<path d="M641 392 V411 H511 V393" class="rework"/><text x="575" y="405" class="small center blue">Mapping rework</text>
+<text x="919" y="290" class="small bold center blue">Canonical SQLite</text><text x="919" y="312" class="small center">Revisions + approvals</text><text x="919" y="334" class="small center">Mappings + snapshots</text><text x="919" y="356" class="small center">Audit + rollback</text>
+<text x="471" y="431" class="small center blue">Only S1 reads sources. S2+ consume artifacts.</text>
+<text x="919" y="411" class="small center blue">Approval withheld</text><text x="919" y="431" class="small center blue">stops progression.</text>
+
+<rect x="1030" y="10" width="160" height="572" rx="6" fill="#f6faf4" stroke="#398246"/>
+<text x="1110" y="35" class="pt green">OUTPUTS</text>
+<rect x="1042" y="71" width="136" height="102" rx="4" fill="white" stroke="#398246"/><use href="#doc" x="1050" y="91" width="24" height="31" style="color:#2c753d"/><text x="1121" y="98" class="small bold center">Specifications</text><text x="1121" y="121" class="small center">MD + DOCX</text><text x="1110" y="150" class="small center">Approved snapshot</text>
+<rect x="1042" y="202" width="136" height="110" rx="4" fill="white" stroke="#398246"/><use href="#network" x="1050" y="223" width="24" height="31" style="color:#2c753d"/><text x="1121" y="228" class="small bold center">Final SysML</text><text x="1121" y="252" class="small center">+ traceability</text><text x="1110" y="279" class="small center">When downstream ready</text><text x="1110" y="301" class="small center">Central validation</text>
+<path d="M1110 312 V336" class="flow"/><rect x="1042" y="340" width="136" height="83" rx="4" fill="white" stroke="#398246" stroke-dasharray="5 4"/><text x="1110" y="364" class="small bold center">Retrieval / GUI</text><text x="1110" y="387" class="small center">Derived views</text><text x="1110" y="410" class="small center">Not authority</text>
+<rect x="1042" y="456" width="136" height="107" rx="4" fill="#f8f5fc" stroke="#7755a4" stroke-dasharray="5 4"/><text x="1110" y="481" class="small bold center purple">Separate review</text><text x="1110" y="503" class="small bold center purple">report</text><text x="1110" y="527" class="small center">Omissions + blockers</text><text x="1110" y="550" class="small center">No gate override</text>
+
+<path d="M771 392 V464 H605 V478" class="flow"/>
+<rect x="340" y="480" width="530" height="50" rx="4" fill="#edf7f1" stroke="#398246"/><use href="#shield" x="354" y="488" width="27" height="34" style="color:#2c753d"/><text x="623" y="501" class="label">Central downstream coherence precondition</text><text x="623" y="521" class="small center">Approved snapshot / allocation / ownership / traceability</text>
+<path d="M605 530 V559" class="flow"/>
+<g transform="translate(465 561)"><rect width="280" height="82" rx="4" fill="#f8f5fc" stroke="#7755a4"/><rect width="47" height="82" fill="#674396"/><text x="24" y="25" class="small center" style="fill:white">STAGE</text><text x="24" y="62" class="st" style="font-size:32px">3</text><use href="#doc" x="60" y="22" width="29" height="36" style="color:#674396"/><text x="182" y="30" class="label">Generate SRS</text><text x="182" y="52" class="small center">System-level allocation</text><text x="182" y="72" class="small center">Approved source context</text></g>
+<path d="M870 505 H997 V680 H820 V707" class="flow"/><path d="M997 680 H385 V707" class="flow"/>
+<text x="605" y="674" class="small center blue">All generators consume the same approved immutable snapshot</text>
+<g transform="translate(245 709)"><rect width="280" height="82" rx="4" fill="#f2f7fc" stroke="#2c6cb0"/><rect width="47" height="82" fill="#2c6cb0"/><text x="24" y="25" class="small center" style="fill:white">STAGE</text><text x="24" y="62" class="st" style="font-size:32px">4</text><use href="#doc" x="60" y="22" width="29" height="36" style="color:#2c6cb0"/><text x="182" y="29" class="label">Generate ARS</text><text x="182" y="51" class="small center">Top-analog architecture</text><text x="182" y="72" class="small center">Approved allocation</text></g>
+<g transform="translate(680 709)"><rect width="280" height="82" rx="4" fill="#fff6ef" stroke="#cd6b18"/><rect width="47" height="82" fill="#cd6b18"/><text x="24" y="25" class="small center" style="fill:white">STAGE</text><text x="24" y="62" class="st" style="font-size:32px">5</text><use href="#doc" x="60" y="22" width="29" height="36" style="color:#cd6b18"/><text x="182" y="29" class="label">Generate DRS</text><text x="182" y="51" class="small center">Top-digital architecture</text><text x="182" y="72" class="small center">Approved allocation</text></g>
+<path d="M997 680 V832 H820 V858" class="flow"/><path d="M997 832 H385 V858" class="flow"/>
+<text x="605" y="824" class="small center blue">Approved block-local allocation / shared preflight / existing gates</text>
+<g transform="translate(245 860)"><rect width="280" height="82" rx="4" fill="#f1f9f9" stroke="#0a7b86"/><rect width="47" height="82" fill="#0a7b86"/><text x="24" y="25" class="small center" style="fill:white">STAGE</text><text x="24" y="62" class="st" style="font-size:32px">6</text><use href="#chip" x="60" y="22" width="29" height="36" style="color:#0a7b86"/><text x="182" y="29" class="label">Digital IPOS</text><text x="182" y="51" class="small center">Approved concrete blocks</text><text x="182" y="72" class="small center">Block publication gates</text></g>
+<g transform="translate(680 860)"><rect width="280" height="82" rx="4" fill="#faf7f1" stroke="#9d7435"/><rect width="47" height="82" fill="#9d7435"/><text x="24" y="25" class="small center" style="fill:white">STAGE</text><text x="24" y="62" class="st" style="font-size:32px">7</text><use href="#chip" x="60" y="22" width="29" height="36" style="color:#9d7435"/><text x="182" y="29" class="label">Analog IPOS</text><text x="182" y="51" class="small center">Approved concrete blocks</text><text x="182" y="72" class="small center">Valid-empty scope allowed</text></g>
+
+<g id="coverage-panel">
+ <rect x="10" y="969" width="360" height="261" rx="4" fill="#f7f9fc" stroke="#234f87"/>
+ <rect x="22" y="981" width="336" height="25" rx="3" fill="#19477f"/>
+ <text x="190" y="999" class="pt" style="fill:white;font-size:13px">COVERAGE / TRACEABILITY HIERARCHY</text>
+ <circle cx="32" cy="1028" r="10" fill="#674396"/><text x="32" y="1032" class="small bold center" style="fill:white">1</text>
+ <text x="52" y="1029" class="small bold">SRS / system requirements</text><text x="52" y="1046" class="small">Exact source-origin IDs and provenance</text>
+ <circle cx="32" cy="1067" r="10" fill="#cd6b18"/><text x="32" y="1071" class="small bold center" style="fill:white">2</text>
+ <text x="52" y="1068" class="small bold">DRS / top-digital architecture</text><text x="52" y="1085" class="small">Approved lineage and source-origin IDs</text>
+ <circle cx="32" cy="1106" r="10" fill="#2c6cb0"/><text x="32" y="1110" class="small bold center" style="fill:white">3</text>
+ <text x="52" y="1107" class="small bold">ARS / top-analog architecture</text><text x="52" y="1124" class="small">Approved lineage and source-origin IDs</text>
+ <circle cx="32" cy="1145" r="10" fill="#0a7b86"/><text x="32" y="1149" class="small bold center" style="fill:white">4</text>
+ <text x="52" y="1146" class="small bold">Digital IPOS / approved block-local scope</text><text x="52" y="1163" class="small">Approved parent Covers + source-origin IDs</text>
+ <circle cx="32" cy="1184" r="10" fill="#9d7435"/><text x="32" y="1188" class="small bold center" style="fill:white">5</text>
+ <text x="52" y="1185" class="small bold">Analog IPOS / approved block-local scope</text><text x="52" y="1202" class="small">Approved parent Covers + source-origin IDs</text>
+ <text x="24" y="1222" class="small blue">Direct source lineage allowed; no invented parents.</text>
+</g>
+<g id="legend-panel">
+ <rect x="384" y="969" width="285" height="261" rx="4" fill="#f7f9fc" stroke="#234f87"/>
+ <rect x="396" y="981" width="261" height="25" rx="3" fill="#19477f"/><text x="526" y="999" class="pt" style="fill:white">LEGEND</text>
+ <path d="M400 1028 H438" class="flow"/><text x="450" y="1032" class="small">Primary forward flow</text>
+ <path d="M400 1055 H438" class="rework"/><text x="450" y="1059" class="small">Loopback / rework path</text>
+ <path d="M400 1082 H438" fill="none" stroke="#2c753d" stroke-width="1.6" marker-end="url(#accept)"/><text x="450" y="1086" class="small">Accepted supplementary flow</text>
+ <path d="M400 1109 H438" fill="none" stroke="#cf7b1d" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#supplementary-rework)"/><text x="450" y="1113" class="small">Supplementary rework loop</text>
+ <path d="M400 1136 H438" fill="none" stroke="#b63f3f" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#reject)"/><text x="450" y="1140" class="small">Supplementary reject loop</text>
+ <use href="#lock" x="409" y="1151" width="20" height="23" style="color:#273746"/><text x="450" y="1168" class="small">Immutable / approved artifact</text>
+ <rect x="400" y="1184" width="38" height="18" rx="2" fill="#f8f5fc" stroke="#7755a4" stroke-dasharray="4 3"/><text x="450" y="1198" class="small">Coverage / traceability note</text>
+ <text x="400" y="1222" class="small blue">Arrows do not establish requirement parents.</text>
+</g>
+<g id="notes-panel">
+ <rect x="683" y="969" width="507" height="261" rx="4" fill="#f7f9fc" stroke="#234f87"/>
+ <rect x="695" y="981" width="483" height="25" rx="3" fill="#19477f"/><text x="936" y="999" class="pt" style="fill:white">NOTES</text>
+ <text x="699" y="1029" class="small">- Deterministic stages and gates enforce quality and consistency.</text>
+ <text x="699" y="1051" class="small">- Approved snapshots are immutable; exact IDs preserve traceability.</text>
+ <text x="699" y="1073" class="small">- Outputs and indexes are derived and replaceable, not authority.</text>
+ <text x="699" y="1095" class="small">- Covers uses approved lineage, not a fixed end-to-end hierarchy.</text>
+ <text x="699" y="1117" class="small">- Execution: 3 - 4 - 5 - 6 - 7. Stop on failure; no gate weakening.</text>
+ <rect x="697" y="1145" width="479" height="72" rx="5" fill="#f0f6f3" stroke="#70a69b" stroke-width="1.5"/>
+ <use href="#shield" x="709" y="1159" width="37" height="45" style="color:#27703c"/>
+ <text x="759" y="1166" class="pt" style="text-anchor:start;fill:#296454;font-size:13px">APPROVAL &amp; TRACEABILITY PRINCIPLE</text>
+ <text x="759" y="1187" class="small">Nothing proceeds downstream without approval.</text>
+ <text x="759" y="1205" class="small">Every artifact is traceable. Every decision is recorded.</text>
+</g>
+</svg>

@@ -1,6 +1,100 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS
+## Latest checkpoint: 2026-10-15 - Selected-Snapshot IPOS PASS and Reporting Fix
+
+- Checkpoint ID: `2026-10-15-selected-snapshot-ipos-reporting-pass`.
+  Local source/test/configuration backup and memory checkpoint, not a Git commit,
+  tag, branch, full repository backup or canonical database restore point.
+  See `local_memory/checkpoints/2026-10-15-selected-snapshot-ipos-reporting-pass/`.
+  The generated archive and SHA256 manifest preserve current changed implementation
+  files, memory notes and report evidence without staging unrelated user work.
+- Selected run snapshot: `snap-73c872b1307b6adb5eaf843e`. Latest newer approved
+  snapshot `snap-1c746489707c8d22fc8ce3d7` is separate and not selected or certified.
+  No snapshot mutation, new approval, source change or production generation by
+  this reporting repair. Historical admission/proof sections below remain history.
+- Today's shared fixes: immediate-instance endpoint resolution and separate
+  endpoint/model statuses; historical snapshot GUI selection and CLI preparation;
+  explicit DRS report snapshot propagation; same-directory DOCX ZIP replacement
+  with bounded PermissionError retries and original preservation; numeric sentence
+  readback boundaries; accurate operational blocker labels; descriptive regression
+  fixtures aligned with existing V2 presentation/residual/publication policy.
+- Reporting root cause fixed in `scripts/generate_cross_spec_issue_report.py`:
+  matching snapshot alone no longer makes saved review failures current. Rebuild
+  selected-snapshot inputs, apply existing omissions, validate materialization hashes
+  and current document contracts through shared read-only APIs. Preserve genuine
+  current failures; stale/missing/mismatched/out-of-scope evidence is UNVERIFIED.
+  Historical review JSON/appendix are not rewritten. Fresh failure cannot inherit
+  saved PASS. Generation PASS alone is not publication or implementation readiness.
+- GUI forwards run interval, actual reached IPOS stages, block scope and exit code;
+  preserves reporting after failure, process status and single-process execution.
+  No probe document generation is called by reporting. Standalone exports disclose
+  current document checks, not a rerun of the stage gate.
+- User's successful Stage6 runner and validator exits recorded at20:33:54/20:34:21.
+  Read-only actual crosscheck after fix: all8 digital blocks PASS on selected
+  snapshot. Analog allocation valid-empty; Stage7/final SysML NOT run here.
+  Residual counts: ADSP0, I2C_SPI_AHB3, Main Controller207, PAD MUX11, PMU2,
+  Regmap2, Sensor-Hub3, Smart FIFO3. These are audit residuals, not source defects
+  or automatic generation/publication failures. Readiness remains NOT_ASSESSED.
+- Refreshed only `artifacts/orchestrator/remaining_ipos_blockers.md` and `.docx`.
+  Independent actual Word/Markdown eight-row PASS/readiness parity passed;
+  54 protected files SHA256 unchanged, including canonical SQLite, historical review
+  and appendix, generation results and every current digital block artifact.
+- Verification this turn:268 reporting/GUI/descriptive tests +47 blocker-review,
+  snapshot-binding, DOCX retry/preservation and numeric-readback tests =315 PASS.
+  Four touched Python files have no editor diagnostics. Tk emitted known queued
+  ThemeChanged teardown warning; unittest completed OK. Not a full workspace test.
+- Still separate/open: ADSP prose quality, newer-snapshot Main descriptive enrichment,
+  historical aggregate IPOS snapshot mismatch, locked older Excel legend, Stage7,
+  final SysML end-to-end/native compilation and implementation readiness. No MVP
+  completion or zero-residual claim. Do not restart production stages automatically.
+
+## Previous checkpoint: 2026-10-15 - Main Descriptive Admission, Proof Blocked
+
+- Checkpoint ID: `2026-10-15-main-descriptive-admission-blocked-proof`.
+  Documentation/local-memory save only, not a Git restore point or code backup.
+  Partial implementation; MVP not complete. Existing uncommitted fixes preserved.
+- User-approved/frozen snapshot: `snap-1c746489707c8d22fc8ce3d7`; old
+  `snap-73c872b1307b6adb5eaf843e` remains immutable and unchanged.
+  Requirement rows and allocation contract were equal in isolated comparison.
+- Completed fix: existing architecture workbook/GUI approval now carries
+  supplementary descriptive candidates through explicit review, shared validation
+  and architecture-profile persistence/freeze. No parallel approval lane.
+  Source text/provenance protected, formulas/tampering rejected; required pending
+  candidate blocks approval; edited ownership does not imply paragraph approval.
+- One exact admitted record: `source-context-ab8d0db457f35c8e8f814ac5`,
+  section5.3.2, Main Controller/digital, revision1, indexed page56/printed55.
+  Passage hash `cf09c77280002cd0affde36a789cf54a00a3d6347c793a429fdd9f4dab86c886`.
+  User completed Enable Gate and new snapshot freeze; no repeat approval needed.
+- Runtime files changed in the admission slice: `scripts/mapping_review_sync.py`,
+  `workflow_gui.py`, `generate_stage2_specs.py`, `validate_stage2_profile.py`,
+  new `prepare_descriptive_architecture_review.py`; regressions in existing
+  `tests/test_mapping_review_sync.py` and `test_approved_snapshot_resolver.py`.
+  This checkpoint documents those earlier edits; it performs no runtime edit.
+- Existing pending review artifacts were backed up at
+  `artifacts/validation/main_controller_descriptive_review_20261014_before/`
+  and `_before_retry/` (same full directory prefix). First preparation attempt
+  restored artifacts after scalar metadata coercion; literal-string fix passed.
+- Latest isolated proof directory:
+  `artifacts/validation/main_controller_descriptive_proof_20261014/`.
+  Status GENERATION_BLOCKED; generator exit1,55DRS_TRACE_STALE_SNAPSHOT.
+  Separate central owner-domain mismatch: digital versus Digital/Block.
+  Initial input check also found old-snapshot aggregate IPOS trace binding.
+- Production composer not reached; no demonstrated1.2/1.4enrichment. Main
+  MD/DOCX and original inputs unchanged by proof. No other block regenerated.
+- Remaining plan NOT implemented: domain semantics, exact132omission continuity,
+  compound descriptive projection/section realization, shared input parity and
+  block-local trace binding. Preserve181normative rows and approved source I/O.
+  Ambiguous turn of oscillator wording remains a residual, not inferred on/off.
+- User excluded isolated DRS refresh and kept strict Main-only scope.55stale
+  DRS findings remain a release dependency; do not bypass/relabel trace IDs.
+  No OCR/RAG rebuild/requirement merge/source scope expansion/snapshot mutation.
+- Latest admission checks:1focused workbook/persistence regression PASS,
+  12snapshot resolver tests PASS. Unrelated hierarchy-warning pre-freeze test
+  still fails. No tests/generation/freeze rerun for this documentation save.
+- Historical tag `freeze-ipos-6-pass-2-blocked` is an older restore reference;
+  it does NOT include these latest local fixes. No commit/tag/push requested.
+
+## Previous checkpoint: 2026-10-12 - Frozen Six-PASS, Two-BLOCKED IPOS
 
 - Frozen baseline/tag: `freeze-ipos-6-pass-2-blocked`; user authorized a
   milestone commit and tag push to `origin`, not a branch push or new branch.

@@ -7,7 +7,10 @@ Author: Alessandro Lucio IANNUZZI
 ## **0. Document Navigation** {#0-document-navigation}
 
 ### **0.1 Table of contents** {#01-table-of-contents}
+
 - [1. Block overview](#1-block-overview)
+- [1.1 Functionality](#11-functionality)
+- [1.2 Supported functions and scope](#12-supported-functions-and-scope)
 - [2. Source I/O](#2-source-io)
 - [3. Block requirements](#3-block-requirements)
 
@@ -19,6 +22,7 @@ Author: Alessandro Lucio IANNUZZI
 | 0.2 | 2026-10-12 | Snapshot snap-73c872b1307b6adb5eaf843e digital IPOS block baseline | Alessandro Lucio IANNUZZI |
 
 ### **0.3 Requirement navigation** {#03-requirement-navigation}
+#### **Table 2. Requirement navigation** {#table-2-requirement-navigation}
 | Requirement | Internal link |
 |---|---|
 | IPOS-REGMAP-001 | [Go to requirement](#ipos-regmap-001) |
@@ -30,6 +34,11 @@ Author: Alessandro Lucio IANNUZZI
 | IPOS-REGMAP-007 | [Go to requirement](#ipos-regmap-007) |
 | IPOS-REGMAP-008 | [Go to requirement](#ipos-regmap-008) |
 
+### **0.4 Table index** {#04-table-index}
+
+- [Table 1. Version history](#table-1-version-history)
+- [Table 2. Requirement navigation](#table-2-requirement-navigation)
+
 ## **1. Block overview** {#1-block-overview}
 
 ### **1.1 Functionality** {#11-functionality}
@@ -39,10 +48,6 @@ The Regmap block is designed to implement the mapped AFE, system, and OTP regist
 ### **1.2 Supported functions and scope** {#12-supported-functions-and-scope}
 
 The Regmap block accepts Host read/write transactions and produces Register data and status fields.
-
-### **1.4 Supported block functions** {#14-supported-block-functions}
-
-Write enable for each OTP REGISTER is 0, in functional mode, if bit 31 of OTP_PRG10 is set 1.
 
 ## **2. Source I/O** {#2-source-io}
 

@@ -15,5 +15,109 @@
   },
   "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
   "document_type": "IPOS",
+  "generation_status": "GENERATED",
+  "publication_status": "ELIGIBLE",
+  "readiness_status": "NOT_ASSESSED",
+  "residuals": [
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_302"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_394"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_393"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_395"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_306"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_308"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_307"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_303"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_305"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_392"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:PAD MUX:DDS_STBIO1_304"
+      ]
+    }
+  ],
   "status": "PASS"
 }

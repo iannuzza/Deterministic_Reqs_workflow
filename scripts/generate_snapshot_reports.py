@@ -10,7 +10,7 @@ from pathlib import Path
 from approved_snapshot_resolver import resolve_complete_authoritative_input
 from allocation_ledger import refresh_ledger
 from report_generation_service import generate_snapshot_report
-from validate_downstream_coherence import approved_primary_source_name
+from validate_downstream_coherence import approved_primary_source_name, canonical_human_label, human_label_key, resolve_downstream_contract, approved_generated_document_dependency_graph
 
 
 HIERARCHY_REPORTS = {
@@ -494,6 +494,132 @@ def _inclusive_requirement_rows(
     return result
 
 
+def _coverage_row(snapshot_id: str, level: str, block: str, scope: str, expected: set[str], covered: set[str], basis: str) -> dict[str, object]:
+    covered = expected & covered
+    missing = expected - covered
+    return {
+        "hierarchy_level": level, "block": block, "scope": scope,
+        "expected_requirements": len(expected), "represented_requirements": len(covered), "missing_requirements": len(missing),
+        "presence_percentage": len(covered) / len(expected) * 100 if expected else "N/A",
+        "presence_status": "valid_empty" if not expected else "all_present" if not missing else "partial",
+        "coverage_basis": basis, "missing_requirement_ids": ";".join(sorted(missing)), "snapshot_id": snapshot_id,
+    }
+
+
+def _report_coverage_rows(repo_root: Path, snapshot_id: str, targets: tuple[str, ...] | None = None) -> list[dict[str, object]]:
+    contract = resolve_downstream_contract(repo_root, snapshot_id)
+    result = []
+    for specification in HIERARCHY_REPORTS.values():
+        target = specification["downstream_label"]
+        if targets is not None and target not in targets:
+            continue
+        expected = contract.source_ids_for_target(target)
+        observed = [row for row in _read_csv(repo_root / specification["downstream_path"])
+                if not row.get("snapshot_id") or row["snapshot_id"] == snapshot_id]
+        represented = {row.get("source_req_id", "") for row in observed if row.get(specification["downstream_id"])}
+        result.append(_coverage_row(snapshot_id, target, "(All blocks)", "Level total", expected, represented,
+                                    "Approved allocation IDs represented in target traceability matrix"))
+        groups: dict[str, tuple[str, set[str]]] = {}
+        for requirement_id in sorted(expected):
+            label = canonical_human_label(contract.allocation(requirement_id).get("approved_block", ""))
+            key = human_label_key(label)
+            groups.setdefault(key, (label or "(Unassigned)", set()))[1].add(requirement_id)
+        for key, (label, ids) in sorted(groups.items()):
+            matching = {row.get("source_req_id", "") for row in observed
+                        if row.get(specification["downstream_id"])
+                        and human_label_key(row.get("owning_block") or row.get("mapped_block") or "") == key}
+            block_row = _coverage_row(snapshot_id, target, label, "Block", ids, represented,
+                                      "Target matrix IDs grouped by approved block allocation; not publication gate status")
+            block_row["reported_block_label_differences"] = len((ids & represented) - matching)
+            result.append(block_row)
+    return result
+
+
+def _directional_coverage_rows(repo_root: Path, snapshot_id: str, targets: tuple[str, ...] | None = None) -> list[dict[str, object]]:
+    graph = approved_generated_document_dependency_graph(repo_root, snapshot_id, include_empty_edges=True)
+    nodes = {str(node["id"]): node for node in graph.get("nodes", [])}
+    contract = resolve_downstream_contract(repo_root, snapshot_id)
+    levels = {spec["downstream_label"]: spec for spec in HIERARCHY_REPORTS.values()}
+
+    def endpoint(node_id):
+        if node_id in levels:
+            return node_id, "(All blocks)"
+        for stage in ("Digital IPOS", "Analog IPOS"):
+            prefix = stage.replace(" ", "_") + ":"
+            if node_id.startswith(prefix):
+                return stage, canonical_human_label(node_id[len(prefix):])
+        node = nodes.get(node_id, {})
+        return str(node.get("label") or node_id), "(All blocks)"
+
+    block_ids = {}
+    for level, spec in levels.items():
+        matrix = _read_csv(repo_root / spec["downstream_path"])
+        for row in matrix:
+            source_id = row.get("source_req_id", "")
+            authored_id = row.get(spec["downstream_id"], "")
+            if source_id not in contract.source_ids_for_target(level) or not authored_id:
+                continue
+            if row.get("snapshot_id") and row["snapshot_id"] != snapshot_id:
+                continue
+            block = canonical_human_label(contract.allocation(source_id).get("approved_block", "")) or "(Unassigned)"
+            block_ids.setdefault(level, {}).setdefault(block, set()).add(authored_id)
+
+    result = []
+    seen = set()
+
+    def append(upstream, derived, expected, covered, scope, basis, upstream_block="(All blocks)"):
+        covering_level, covering_block = endpoint(derived)
+        covered_level, _block = endpoint(upstream)
+        if targets is not None and covering_level not in targets:
+            return
+        expected, covered = set(expected), set(covered) & set(expected)
+        identity = (upstream, derived, scope, upstream_block)
+        if identity in seen:
+            return
+        seen.add(identity)
+        missing = expected - covered
+        denominator_scope = "Approved source ledger" if upstream.startswith("source:") and scope == "Entire upstream document" else scope
+        result.append({"covering_level": covering_level, "covering_block": covering_block,
+                       "covered_upstream_level": covered_level, "covered_upstream_block": upstream_block,
+                   "denominator_scope": denominator_scope, "covered_unique_upstream_requirements": len(covered),
+                   "total_unique_upstream_requirements": len(expected), "uncovered_upstream_requirements": len(missing),
+                       "coverage_percentage": len(covered) / len(expected) * 100 if expected else "N/A",
+                       "coverage_status": "not_applicable_empty_upstream" if not expected else "covered" if not missing else "partial",
+                       "coverage_basis": basis, "covered_upstream_requirement_ids": ";".join(sorted(covered)),
+                       "uncovered_upstream_requirement_ids": ";".join(sorted(missing)), "snapshot_id": snapshot_id,
+                       "covering_node_id": derived, "covered_upstream_node_id": upstream})
+
+    for statistic in graph.get("edge_statistics", []):
+        upstream, derived = str(statistic["upstream_node"]), str(statistic["derived_node"])
+        expected = set(statistic.get("total_unique_upstream_req_ids") or [])
+        covered = set(statistic.get("covered_unique_upstream_req_ids") or [])
+        append(upstream, derived, expected, covered, "Entire upstream document",
+               "Unique upstream IDs resolved by central approved Covers contract; not publication gate status")
+        for block, ids in sorted(block_ids.get(upstream, {}).items()):
+            append(upstream, derived, expected & ids, covered, "Upstream block within document",
+                   "Central Covers IDs restricted to approved upstream block allocation", block)
+    for edge in [*graph.get("source_spec_edges", []), *graph.get("source_spec_relationship_edges", [])]:
+        metrics = edge["source_coverage"]
+        append(str(edge["source"]), str(edge["target"]), metrics.get("total_unique_source_req_ids", []),
+               metrics.get("covered_unique_source_req_ids", []), "Entire upstream document",
+               "Central source-spec provenance/trace ID coverage; not generated-document Covers or publication gate status")
+    if not result and targets:
+        for target in targets:
+            append("Not applicable", target, set(), set(), "No approved upstream relationship",
+                   "No approved upstream relationship in central graph; no coverage denominator inferred")
+            result[-1]["coverage_status"] = "no_applicable_relationship"
+    return result
+
+
+def _catalog_coverage_rows(catalog_rows: list[dict[str, str]], approved_rows, snapshot_id: str, level: str) -> list[dict[str, object]]:
+    expected = {str(row.get("id") or row.get("source_req_id") or "").strip() for row in catalog_rows}
+    expected.discard("")
+    represented = {str(row.get(field) or "").strip() for row in approved_rows for field in ("id", "source_req_id", "canonical_id")}
+    represented.discard("")
+    return [_coverage_row(snapshot_id, level, "(All blocks)", "Catalog total", expected, represented,
+                          "Source catalog IDs present in approved snapshot; not publication gate status")]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Generate direct hierarchy traceability XLSX reports from an approved snapshot.")
     selector = parser.add_mutually_exclusive_group(required=True)
@@ -537,6 +663,11 @@ def main() -> int:
             output_path=output,
             rows=catalog_rows,
             source_catalog_path=catalog_path,
+            additional_sheets={
+                "Upstream Coverage": [row for row in _directional_coverage_rows(repo_root, resolved.snapshot_id)
+                                      if row["covered_upstream_node_id"].startswith("source:" if args.report == "primary_source" else ("source:", "supplementary:"))],
+                "Requirement Presence": _catalog_coverage_rows(catalog_rows, resolved.rows, resolved.snapshot_id, report_kind),
+            },
         )
         print(output)
         return 0
@@ -562,6 +693,10 @@ def main() -> int:
             report_kind=f"{spec['downstream_label']} vs {spec['upstream_label']}",
             output_path=output,
             rows=_hierarchy_rows(upstream_rows, downstream_rows, spec),
+            additional_sheets={
+                "Upstream Coverage": _directional_coverage_rows(repo_root, resolved.snapshot_id, (spec["downstream_label"],)),
+                "Requirement Presence": _report_coverage_rows(repo_root, resolved.snapshot_id, (spec["downstream_label"],)),
+            },
         )
         print(output)
     if args.report == "all":
@@ -576,6 +711,10 @@ def main() -> int:
             report_kind="All Requirements Traceability",
             output_path=output,
             rows=_inclusive_requirement_rows(repo_root, source_rows_for_all, resolved_for_all.snapshot_id),
+            additional_sheets={
+                "Upstream Coverage": _directional_coverage_rows(repo_root, resolved_for_all.snapshot_id),
+                "Requirement Presence": _report_coverage_rows(repo_root, resolved_for_all.snapshot_id),
+            },
         )
         print(output)
     return 0

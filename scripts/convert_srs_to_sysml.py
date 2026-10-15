@@ -156,7 +156,8 @@ def _write_model(output: Path, requirements: List[Dict[str, str]], inventory_row
 
     lines.extend(["    }", "", "}", ""])
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text("\n".join(lines), encoding="utf-8")
+    from validate_downstream_coherence import readiness_declaration
+    output.write_text("// " + readiness_declaration(None, None, "") + "\n" + "\n".join(lines), encoding="utf-8")
 
 
 def main() -> int:

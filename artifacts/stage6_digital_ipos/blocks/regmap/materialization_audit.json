@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_regmap.docx",
-    "sha256": "e967971eb0a7927540191dad63cf36652e52c9bdba79170e06f2c53469781ae0"
+    "sha256": "4af63721a5b32782e2510da831f7dd0a2d1cb8abc22768f75f05413c66fce407"
   },
   "markdown": {
     "path": "digital_ipos_regmap.md",
-    "sha256": "9d0c63521af4ed9855bf3450312a0ecc506d68f86f336e2e6342aac9a7283214"
+    "sha256": "905928127604ce83f8c435ebaf1debeb96723fe6f8a51d7684e37d33b235c030"
   },
-  "normalized_input_sha256": "26cad2ece4800d11416d6b84e461f7d3648cdf4fafc81dd0a62a4b6203900f97",
+  "normalized_input_sha256": "4d3c40b660269709bd679fe35f9b34a2300d5ff15d7698e0d939e9e15006ecce",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -156,7 +156,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_4000",
@@ -164,7 +164,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:Regmap:DDS_STBIO1_4000",
       "text": "[DDS_STBIO1_4000] Requirement: Write enable for each OTP REGISTER shall be 0, in functional mode, if bit 31 of OTP_PRG10 is set 1."
     },
@@ -202,15 +202,6 @@
       ],
       "text": "The Regmap block accepts Host read/write transactions and produces Register data and status fields.",
       "unit_id": "ipos-claim-2cec935c21d8dddad3f7"
-    },
-    {
-      "output_order": 3,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:Regmap:DDS_STBIO1_4000"
-      ],
-      "text": "Write enable for each OTP REGISTER is 0, in functional mode, if bit 31 of OTP_PRG10 is set 1.",
-      "unit_id": "ipos-claim-81732bdff035c13d398e"
     }
   ]
 }

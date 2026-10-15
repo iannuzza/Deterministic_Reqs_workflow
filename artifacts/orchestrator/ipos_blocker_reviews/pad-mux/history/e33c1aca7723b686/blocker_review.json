@@ -1,0 +1,23 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "block": "PAD MUX",
+  "rows": [
+    [
+      "",
+      "PAD MUX",
+      "[WinError 5] Access is denied: 'C:\\\\Users\\\\iannuzza\\\\AppData\\\\Local\\\\Temp\\\\tmp3xrxp3tx.docx' -> 'C:\\\\Users\\\\iannuzza\\\\LOCAL_PROJ\\\\Github_copilot_proj\\\\Deterministic_Reqs_workflow\\\\artifacts\\\\stage6_digital_ipos\\\\blocks\\\\pad-mux\\\\digital_ipos_pad-mux.docx'",
+      "ipos_publication_failure",
+      "See the current checker evidence; no missing meaning is inferred.",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ]
+  ],
+  "initial_sha256": "e33c1aca7723b6861b2f737476efc1776d79451d52a21af33f8cfdf0eb01a72d",
+  "authority": false,
+  "gate_override": false
+}

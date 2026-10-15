@@ -1,0 +1,51 @@
+{
+  "checks": {
+    "materialization": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "publication_quality": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "semantic_fidelity": {
+      "findings": [],
+      "status": "PASS"
+    }
+  },
+  "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+  "document_type": "IPOS",
+  "generation_status": "GENERATED",
+  "publication_status": "ELIGIBLE",
+  "readiness_status": "NOT_ASSESSED",
+  "residuals": [
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported conditional consequence marker; full source retained",
+      "source_record_ids": [
+        "requirement:Sensor-Hub:DDS_STBIO1_9500"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Sensor-Hub:DDS_STBIO1_9027"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Sensor-Hub:DDS_STBIO1_9034"
+      ]
+    }
+  ],
+  "status": "PASS"
+}

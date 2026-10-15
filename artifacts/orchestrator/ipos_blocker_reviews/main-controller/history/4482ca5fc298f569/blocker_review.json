@@ -1,0 +1,93 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "block": "Main Controller",
+  "rows": [
+    [
+      "IPOS_STBIO1_MAIN_CONTROLLER_2146",
+      "Main Controller",
+      "o_saturation_flag",
+      "Unmodeled content; Missing/changed supported claim",
+      "o_saturation_flag: be set to 1 and goes to 0 at the start of the next frame or frame repetition",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ],
+    [
+      "IPOS_STBIO1_MAIN_CONTROLLER_7095",
+      "Main Controller",
+      "All the PPG_FSM state",
+      "Unmodeled content; Missing/changed supported claim",
+      "All the PPG_FSM state: be checked using the PPG_STATUS_REGISTER in Regmap (the states values are described in the register\u2019s comment)",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ],
+    [
+      "IPOS_STBIO1_MAIN_CONTROLLER_728",
+      "Main Controller",
+      "its contribution",
+      "Unmodeled content; Missing/changed supported claim",
+      "its contribution: be 0",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ],
+    [
+      "IPOS_STBIO1_MAIN_CONTROLLER_031",
+      "Main Controller",
+      "Except when FRAME_{n}_SAMPLES is equal to 3\u2019b000, in this case o_ADC_start",
+      "Unmodeled content; Missing/changed supported claim",
+      "Except when FRAME_{n}_SAMPLES is equal to 3\u2019b000, in this case o_ADC_start: go high 3 times",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ],
+    [
+      "IPOS_STBIO1_MAIN_CONTROLLER_085",
+      "Main Controller",
+      "the o_en_ck_chop_imp, ck_chop_imp",
+      "Unmodeled content; Missing/changed supported claim",
+      "the o_en_ck_chop_imp: be high; ck_chop_imp: be generated from Clock generator block",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ],
+    [
+      "",
+      "Main Controller",
+      "1.4 Supported block functions",
+      "Unmodeled content; Missing/changed supported claim",
+      "o_falling_ramp_end: go high; o_saturation_flag: be set to 1 and goes to 0 at the start of the next frame or frame repetition",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ]
+  ],
+  "initial_sha256": "032f28b06356c0a274556251b7cf3208d8a6078f103480057d4df9be324dc8fa",
+  "authority": false,
+  "gate_override": false
+}

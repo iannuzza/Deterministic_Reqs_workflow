@@ -1,0 +1,23 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "block": "ADSP",
+  "rows": [
+    [
+      "",
+      "ADSP",
+      "[WinError 5] Access is denied: 'C:\\\\Users\\\\iannuzza\\\\AppData\\\\Local\\\\Temp\\\\tmp75joq07v.docx' -> 'C:\\\\Users\\\\iannuzza\\\\LOCAL_PROJ\\\\Github_copilot_proj\\\\Deterministic_Reqs_workflow\\\\artifacts\\\\orchestrator\\\\.ipos-check-urbt6bt4\\\\adsp\\\\digital_ipos_adsp.docx'",
+      "ipos_generation_failure",
+      "See the current checker evidence; no missing meaning is inferred.",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ]
+  ],
+  "initial_sha256": "baa5a5a5fefec55c4f9f104513d26afb8397528d5433c84aeca3bcf4f1946a21",
+  "authority": false,
+  "gate_override": false
+}

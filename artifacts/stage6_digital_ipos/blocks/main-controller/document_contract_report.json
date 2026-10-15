@@ -1,0 +1,1755 @@
+{
+  "checks": {
+    "materialization": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "publication_quality": {
+      "findings": [],
+      "status": "PASS"
+    },
+    "semantic_fidelity": {
+      "findings": [],
+      "status": "PASS"
+    }
+  },
+  "contract_sha256": "8ac1aacabb9b232b1239946e1cd3557a75a21e146da535f19cd259c8e4d50b22",
+  "document_type": "IPOS",
+  "generation_status": "GENERATED",
+  "publication_status": "ELIGIBLE",
+  "readiness_status": "NOT_ASSESSED",
+  "residuals": [
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:no_supported_claim",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2145"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:no_supported_claim",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2145"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:no_supported_claim",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_064"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:no_supported_claim",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_064"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:no_supported_claim",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_064"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:no_supported_claim",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_064"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_107"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_094"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_052"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_011"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_125"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported structured/table/procedure evidence; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_140"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_103"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_108"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported relative-clause subject; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_002"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5005"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_8106"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_032"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_032"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3127"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_4090"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1143"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_138"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported structured/table/procedure evidence; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:DDS_STBIO1_0117"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:DDS_STBIO1_0124"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported structured/table/procedure evidence; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2145"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported structured/table/procedure evidence; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_2145"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_017"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_044"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_0152"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_128"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported conditional consequence marker; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_097"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_078"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_089"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_018"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_018"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_036"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_134"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1136"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_126"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_132"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_132"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_004"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_004"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported relative-clause subject; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_075"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_072"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_053"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_029"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_4079"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_021"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_099"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_074"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_038"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_038"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported relative-clause subject; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5004"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_093"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_113"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_3126"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_008"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_728"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_010"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_033"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_073"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_077"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unresolved subject reference; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_5015"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unresolved subject reference; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_7135"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_031"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_6129"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unbalanced source delimiters; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_101"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_030"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported multi-clause or non-normative construction; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_030"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported predicate grammar; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1105"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unsupported or incomplete predicate; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_061"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:unresolved subject reference; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_1116"
+      ]
+    },
+    {
+      "authority": false,
+      "kind": "projection_gap",
+      "readiness_impact": "requires_assessment",
+      "reason": "omitted_nonessential:ambiguous guard boundary; full source retained",
+      "source_record_ids": [
+        "requirement:Main Controller:IPOS_STBIO1_MAIN_CONTROLLER_139"
+      ]
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-017fe3a0573ad1f6f1f1",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-02bff68011de6f533dbd",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-067f4933ec8b6883bc32",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-0a9310231692fed3ec50",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-0d5421d23a95dbbc616d",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-109ffd73e7c454ca7571",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-199f2a911b2b7978609b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-1b5ef53dca371650e017",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-1da8a510720e1a2c973d",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-1e4697bbe64cc1103a7c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-1fd25a5cdc9d987c6124",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-21c787e467ae28cedd3b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-240dd45facd26efe7009",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-247d2541648a50f9df4f",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-26136bb6aa937b47d5ee",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-261db2527251ce7dbf24",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-277b5cc2335fd2ae43b9",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-29777caa3ff9798c4e96",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-2b29028d5c97a0d8e904",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-2eb456b1a029718070eb",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-2edbca1fce6199fc01b8",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-2f3c492db0c94a7ef094",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-30e104b8365be06e0385",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-336935f470fffef562da",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-33b9d9c2e603bd8b2e2e",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-3438c998a466553a642e",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-3b6ceabc55d80dc14e11",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-3ea7f00488720a240672",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-414d2aaf5dfc7b0d8da1",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-4419e3befbfd93fd6989",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-47cbc7fd19cd33247840",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-4809f9c0c2793b681c33",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-50a92aad58c773b0d9fd",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-55072f2368f9b50465fc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-56a51561940537877efc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-59ce57523ceefb88772b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-5a9c8894b6df8cf0fcb5",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-5ac0dd5b2ccf7ecb1d0c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-5d71b5d7ef40245c4cd9",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-60071da5270f3e14accc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-609eed0875b692e724ad",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-60c3540f569c1f33034e",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-613d13b4e458f0bc169e",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-6349a34e09c253f5d240",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-63f59616d2b538bb8c99",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-64a3a93e1bcf57c8f0ae",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-65a65e6672f6997360d5",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-668ad0d814d92a803b8e",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-671fb87ed3d6621f2dfc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-6891bdf43da6164f83ea",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-6afbc1e7689a7341fa45",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-7362d0386dd5414233ac",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-744e1a1eeff4ed3f5401",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-7a2128fa7a6739653a15",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-7a60a52a56788f6627d8",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-7c6b3f443d59c9be638c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-7d160e0c976028bf1c21",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-7f4932e6ab2907785edf",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-82edfdce2c3d7ac2ce25",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-897aa65a789a8323324c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-8982e2bc3a13d6751ba6",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-89b0f8d5281e6c8ae5c6",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-8a242043ff41a4ce8d9b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-8d7811205d75dd2dbead",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-8de92ad56972a8076bdc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-8e53063d5bd221bc48b3",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-952adf115d8307f48a24",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-9c25738c07441aa210ee",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-9ef093cc815f8fbb30df",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-9fb65cc8984fab9d9517",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-a1fd58ba633020fc7271",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-a410c7c882c95c550554",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-a47c4838fb1022f69289",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-a50f64e2c4c5c68fb9fc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ac9cd01162a2e539ca96",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ad9e5c61d2b7a20b43d3",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ae7b7f5906e2e7d292d9",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-b12043e881c2ac49cc43",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-b1a6ed619960b48ef33c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-b26b277e6a166ea0bbe6",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-b84668fa857f8a87891c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ba23c9a6e4d0c2901431",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-bb4af38a3a4580f50d9f",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-bbc75e6d0634168ed628",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-becea3f4d0fac8640d37",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c44701592df1b818c433",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c44f428e7e361423d046",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c4de51808a2dca338e63",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c5da6d14fed478d206b3",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c696cea9e36f0ab6595c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c782d1a112a701a629ac",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c81708d8f354452df23b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-c9e4f074446ffd6278be",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-cb3c74125bee6d29e43b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-cb7ab2f6cc8832830c15",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ccf1ed77454a76a04f73",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-cd6ede0a41f34cd69748",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ce5585d4583c12085187",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-cf5e2cf898f84b86a779",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d2b7e6303cd6c4f4605b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d3c72bd87b8b6d7f2704",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d418a45f4bf265fdbae4",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d5481597feb254b08cad",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d56d85d58dc031ed9400",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d798727c8c51be91350b",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d85a4b04c10391d00d64",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-d9566a46d40a84130466",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-dcc1b854613b06ebf712",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ddf5f712d8ef5f029a5c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-dfdbd154206f84dfaef9",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-e092d557fe7d5d0f6917",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-e2a4eef9a2e7a71f0fe8",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-e4d83eecd888ecc310cc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-e6a2128c38d7d1c58add",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-e7919f7e5ca22ac33818",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-e84ec68f7f38904724a1",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-e880a4b8b0e94c42c16d",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ed90d6abaf17a1ee5813",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ede05bb3af57452be371",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ee109b9d5efda2ab5d3f",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ef99088f3bd1991f4919",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-f0c78d46fc31b242434a",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-f12e87b100ff5fdb1077",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-f30888968f6bb8ce84cc",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-f62b19a2591328dfb29c",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-f992089e19fc6b963692",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-fb578bf03f72f0fc3bdb",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-fb67f42453afa8abc66a",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-fbd89fceba8e386b4fa6",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-fdb6be919448150e3473",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-fe928d697a05332d748d",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    },
+    {
+      "authority": false,
+      "claim_id": "ipos-claim-ff31beec3d719d414e94",
+      "kind": "intentional_omission",
+      "readiness_impact": "requires_assessment",
+      "reason": "keep the derivative descriptive content omitted, record the omission and its possible readiness impact",
+      "role": "functions"
+    }
+  ],
+  "status": "PASS"
+}

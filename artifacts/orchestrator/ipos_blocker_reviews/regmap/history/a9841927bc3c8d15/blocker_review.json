@@ -1,0 +1,23 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "block": "Regmap",
+  "rows": [
+    [
+      "",
+      "Regmap",
+      "[WinError 5] Access is denied: 'C:\\\\Users\\\\iannuzza\\\\AppData\\\\Local\\\\Temp\\\\tmpcpa284ip.docx' -> 'C:\\\\Users\\\\iannuzza\\\\LOCAL_PROJ\\\\Github_copilot_proj\\\\Deterministic_Reqs_workflow\\\\artifacts\\\\orchestrator\\\\.ipos-check-0l16l3ef\\\\regmap\\\\digital_ipos_regmap.docx'",
+      "ipos_generation_failure",
+      "See the current checker evidence; no missing meaning is inferred.",
+      "Supported claim/section fails the existing checker; exact lost fact is not localized.",
+      "realization/readback/section mapping; not localized",
+      "user clarified",
+      "Current strict checker failure; a user note is review context only and cannot waive the gate.",
+      "",
+      "",
+      "re-evaluate after user note"
+    ]
+  ],
+  "initial_sha256": "a9841927bc3c8d157167f9fe08508ac45f55477b5ab432cbbe39e7d5d2bb1253",
+  "authority": false,
+  "gate_override": false
+}

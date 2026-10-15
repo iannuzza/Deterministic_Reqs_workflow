@@ -6,8 +6,10 @@ import unittest
 import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from unittest.mock import patch
 
 from scripts.workflow_routing import (
+    apply_docx_authored_requirement_formatting,
     apply_docx_common_spec_formatting,
     apply_docx_ipos_requirement_style_guard,
     validate_ipos_docx_layout,
@@ -15,6 +17,54 @@ from scripts.workflow_routing import (
 
 
 class DocxLayoutTests(unittest.TestCase):
+    def _write_minimal_docx(self, output):
+        members = {
+            "docProps/core.xml": '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties"/>',
+            "word/document.xml": '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:sectPr/></w:body></w:document>',
+            "word/_rels/document.xml.rels": '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"/>',
+            "[Content_Types].xml": '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"/>',
+        }
+        with zipfile.ZipFile(output, "w") as archive:
+            for name, content in members.items():
+                archive.writestr(name, content)
+
+    def test_docx_formatters_retry_transient_permission_errors(self):
+        original_replace = Path.replace
+        for formatter in (apply_docx_authored_requirement_formatting,
+                          apply_docx_ipos_requirement_style_guard, apply_docx_common_spec_formatting):
+            with self.subTest(formatter=formatter.__name__), tempfile.TemporaryDirectory() as directory:
+                output = Path(directory) / "output.docx"
+                self._write_minimal_docx(output)
+                attempts = []
+
+                def replace_after_denial(source, target):
+                    attempts.append(source)
+                    if len(attempts) == 1:
+                        raise PermissionError(13, "Access is denied", str(target))
+                    return original_replace(source, target)
+
+                with patch.object(Path, "replace", replace_after_denial), patch("time.sleep"):
+                    formatter(output)
+                self.assertEqual(len(attempts), 2)
+                self.assertTrue(all(source.parent == output.parent for source in attempts))
+                with zipfile.ZipFile(output) as archive:
+                    self.assertIsNone(archive.testzip())
+                self.assertEqual(list(Path(directory).iterdir()), [output])
+
+    def test_docx_formatters_preserve_original_on_persistent_permission_error(self):
+        for formatter in (apply_docx_authored_requirement_formatting,
+                          apply_docx_ipos_requirement_style_guard, apply_docx_common_spec_formatting):
+            with self.subTest(formatter=formatter.__name__), tempfile.TemporaryDirectory() as directory:
+                output = Path(directory) / "output.docx"
+                self._write_minimal_docx(output)
+                original = output.read_bytes()
+                with patch.object(Path, "replace", side_effect=PermissionError(13, "Access is denied", str(output))) as replace_docx, patch("time.sleep"):
+                    with self.assertRaisesRegex(PermissionError, "DOCX replacement failed"):
+                        formatter(output)
+                self.assertEqual(replace_docx.call_count, 4)
+                self.assertEqual(output.read_bytes(), original)
+                self.assertEqual(list(Path(directory).iterdir()), [output])
+
     def test_core_date_type_namespace_survives_common_formatting(self):
         terms = "http://purl.org/dc/terms/"
         xsi = "{http://www.w3.org/2001/XMLSchema-instance}"

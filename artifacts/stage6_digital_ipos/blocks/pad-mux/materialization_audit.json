@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_pad-mux.docx",
-    "sha256": "f8a5ecf47ba906f9634ba47a8e0630e2ee23d7d5fb2954f7de189d6cc48603af"
+    "sha256": "7a40f002dde926a16f8620bf890773d257a18333462e0a72cd73c31968cd0d9f"
   },
   "markdown": {
     "path": "digital_ipos_pad-mux.md",
-    "sha256": "da0a781aff200fc1b7e65be0b41f1664feaadd91e1c3f5ed9021d9550ddcb8af"
+    "sha256": "f166bc4e72e55c52285f2fb6e10771b9ce2e299bc96c7ad36b498b5e849f85be"
   },
-  "normalized_input_sha256": "073d5ce8b77af4585c1f998951461f048f08297bb3c54e0d086f3411a807c57a",
+  "normalized_input_sha256": "a5815c7f9efc4ca95e7b0ec8131729b7192a242767063a7608f5353e5637cd5d",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -114,7 +114,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_313",
@@ -122,7 +122,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_313",
       "text": "In function mode, the GPIO1,2,3,4 output shall be i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d [Vpriority High]"
     },
@@ -156,7 +156,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_312",
@@ -164,13 +164,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_312",
       "text": "In function mode, the GPIO1,2,3,4 output shall be i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_310",
@@ -178,7 +178,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_310",
       "text": "In function mode, the GPIO1,2,3,4_out shall be i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d [Vpriority High]"
     },
@@ -198,7 +198,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_314",
@@ -206,13 +206,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_314",
       "text": "In function mode, the GPIO1,2,3,4_out shall be General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d [Vpriority High]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_309",
@@ -220,7 +220,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_309",
       "text": "In function mode, the GPIO1,2,3,4_out shall be irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d [Vpriority High]"
     },
@@ -296,7 +296,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_311",
@@ -304,7 +304,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PAD MUX:DDS_STBIO1_311",
       "text": "In function mode, the GPIO1,2,3,4_out shall be i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d [Vpriority High]"
     }
@@ -328,28 +328,6 @@
       ],
       "text": "The PAD MUX block accepts Mode selection, register-map controls, test controls, and internal block outputs and produces Pad controls, test observations, and routed internal signals.",
       "unit_id": "ipos-claim-4016d075af5aa6f897b8"
-    },
-    {
-      "output_order": 3,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PAD MUX:DDS_STBIO1_313",
-        "requirement:PAD MUX:DDS_STBIO1_312"
-      ],
-      "text": "In function mode, the GPIO1,2,3,4 output is i_time_slot_irq if sel irq gpi1,2,3,4 is 0x05 and ext_cap_en is \u201c0\u201d and is i_error_time_slot if sel irq gpi1,2,3,4 is 0x04 and ext_cap_en is \u201c0\u201d.",
-      "unit_id": "ipos-claim-e919c1caa14b274f8ec2"
-    },
-    {
-      "output_order": 4,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PAD MUX:DDS_STBIO1_310",
-        "requirement:PAD MUX:DDS_STBIO1_314",
-        "requirement:PAD MUX:DDS_STBIO1_309",
-        "requirement:PAD MUX:DDS_STBIO1_311"
-      ],
-      "text": "In function mode, the GPIO1,2,3,4_out is i_LED_Pilot if sel irq gpi1,2,3,4 is 0x02 and ext_cap_en is \u201c0\u201d and is General-Purpose if sel irq gpi1,2,3,4 is 0x00 and ext_cap_en is \u201c0\u201d and is irq_fifo if sel irq gpio1,2,3,4 is 0x01 and ext_cap_en is \u201c0\u201d and is i_DCCK_irq if sel irq gpi1,2,3,4 is 0x03 and ext_cap_en is \u201c0\u201d.",
-      "unit_id": "ipos-claim-db2f05003e65783cfc4c"
     }
   ]
 }

@@ -18,6 +18,7 @@ from pre_freeze_coverage import validate_pre_freeze_coverage
 from pre_freeze_coherence_gate import evaluate as evaluate_pre_freeze_gate
 from validate_source_to_stage2b_coherence import validate as validate_source_coherence
 from validate_stage2_profile import validate_approval_evidence
+from approved_snapshot_resolver import validate_governed_source_context
 
 
 def _sha256(path: Path) -> str:
@@ -48,6 +49,10 @@ def _register_approved_profiles(repo_root: Path, project_id: str, reviewer: str)
             payload = json.loads(path.read_text(encoding="utf-8"))
             if not isinstance(payload, dict):
                 raise RuntimeError(f"Required {kind} profile is not a JSON object: {path}")
+            if kind == "architecture":
+                findings = validate_governed_source_context(payload)
+                if findings:
+                    raise RuntimeError("Invalid governed source context: " + "; ".join(findings))
             content_fingerprint = fingerprint(payload)
             profile_revision_id = f"profile-{kind}-{content_fingerprint[:24]}"
             connection.execute(

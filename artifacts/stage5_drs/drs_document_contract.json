@@ -1,6 +1,6 @@
 {
-  "docx_sha256": "45789dd0151188cfcd1835da679b804899ba77a94f65ad1089084ebc11c763d7",
-  "markdown_sha256": "247c4ea1f7c7d99e588d38e481fed7cec4c7b90188936f2bf9e0d0a593d6b2bc",
+  "docx_sha256": "bfbb39c924968ad20ee55edb009f7693c267359175456596c777d8f87e0eb2be",
+  "markdown_sha256": "84f0c5f9703f61d1fd78bb2182f4868f80c7d5f964540c58d145fcb22f500450",
   "preservation_baseline_sha256": "b9eca798e639b02f3ef4970d98f7439c77e4b38b76ae7828c8e08a54e62a5e80",
   "rules": {
     "artifact_fidelity": "PASS",

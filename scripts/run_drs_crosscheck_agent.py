@@ -801,7 +801,9 @@ def main() -> int:
     if io_findings:
         status = "fail"
         findings.extend(io_findings[:20])
-    hierarchy_coverage_report = write_hierarchy_coverage_report(repo_root)
+    hierarchy_coverage_report = write_hierarchy_coverage_report(
+        repo_root, snapshot_id=downstream_contract.snapshot_id if args.snapshot_id or args.use_latest_approved else None,
+    )
     out = repo_root / "artifacts/orchestrator/stage_drs_crosscheck_report.md"
     lines = [
         "# Stage DRS Crosscheck Report",

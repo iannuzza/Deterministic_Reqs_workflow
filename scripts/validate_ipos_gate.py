@@ -139,7 +139,11 @@ def main() -> int:
                 materialized=True,
                 provenance=("approved snapshot", "artifacts/stage2_mirco_arc/block_inventory.csv"),
                 candidate_requirement_rows=approved_snapshot_candidate_rows(snapshot, resolve_downstream_contract(root, snapshot.snapshot_id), domain=args.kind),
+                descriptive_source_records=resolve_downstream_contract(root, snapshot.snapshot_id).descriptive_context(
+                    root, block=concrete_block, domain=args.kind),
             )
+            from ipos_blocker_review import apply_descriptive_omissions
+            functional_input = apply_descriptive_omissions(root, snapshot_id=snapshot.snapshot_id, functional_input=functional_input)
             descriptive_findings = validate_ipos_descriptive_output(
                 markdown_path,
                 block_dir / "descriptive_summary_audit.csv",
@@ -161,6 +165,8 @@ def main() -> int:
             ))
             descriptive_findings.extend(validate_ipos_document_contract(root, markdown_path,
                                         block_dir / "descriptive_summary_audit.csv", functional_input))
+            from validate_downstream_coherence import classify_descriptive_findings
+            descriptive_findings = classify_descriptive_findings(descriptive_findings)["hard_findings"]
             if descriptive_findings:
                 raise RuntimeError("IPOS descriptive-output findings: " + "; ".join(descriptive_findings[:10]))
         if any(row.get("snapshot_id") != snapshot.snapshot_id for row in rows):

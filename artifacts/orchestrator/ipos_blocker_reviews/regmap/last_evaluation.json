@@ -1,0 +1,22 @@
+{
+  "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+  "block": "Regmap",
+  "status": "READY",
+  "blocker_count": 0,
+  "review_context": {
+    "snapshot_id": "snap-73c872b1307b6adb5eaf843e",
+    "block": "Regmap",
+    "workbook_sha256": "a9841927bc3c8d157167f9fe08508ac45f55477b5ab432cbbe39e7d5d2bb1253",
+    "notes": [],
+    "decisions": [],
+    "future_source_updates": [],
+    "authority": false,
+    "gate_override": false
+  },
+  "residuals": [],
+  "generation_status": "GENERATABLE",
+  "publication_status": "NOT_ATTEMPTED",
+  "readiness_status": "NOT_ASSESSED",
+  "authority": false,
+  "gate_override": false
+}

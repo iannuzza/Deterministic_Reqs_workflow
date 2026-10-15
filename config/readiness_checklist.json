@@ -1,0 +1,101 @@
+{
+  "version": "governed-ai-readiness-checklist-v2",
+  "authority": false,
+  "optional_rule_ids": ["diagnostics.behavior"],
+  "required_optional_rule_ids": [],
+  "categories": {
+    "Scope and intent": {
+      "scope.boundary": "The model or block boundary, external dependencies and ownership shall be explicitly defined within the selected governed scope",
+      "scope.purpose": "The model or block purpose shall be sufficiently defined for both RTL and high-level model generation",
+      "scope.behavior": "Included behavior, exclusions and assumptions shall be explicit; outside-scope behavior shall remain visible without being inferred or implemented"
+    },
+    "Interfaces": {
+      "io.names": "Every admitted in-scope signal or port shall have an explicit, traceable name",
+      "io.direction": "Every admitted in-scope signal or port direction shall be defined relative to its owning block",
+      "io.width": "Every admitted in-scope signal or port width shall be defined, including applicable parameterization and legal values",
+      "io.grouping": "Interface membership, signal grouping and local signal-to-standard mapping shall be explicit where relevant",
+      "io.standard": "For each interface, governed evidence shall identify either a recognized standard with an unambiguous applicable specification or full custom behavior. AMBA, AHB, APB, AXI, I2C, SPI, LIN and UART are examples, not an exhaustive list. A family name, acronym or vague reference alone shall not establish standard coverage. Verify the role, subset or mode, deviations, sidebands and integration constraints under the following items; valid standard coverage shall replace, not duplicate, checks of standard-defined signal semantics, interpretation, handshakes and timing. Non-standard, partially identified or undocumented deviating behavior shall receive full custom-interface checks",
+      "io.role": "The block role and endpoints on each interface shall be defined, including the applicable initiator, target, controller, peripheral, transmitter or receiver role",
+      "io.mode": "Each standard interface's supported subset, mode and applicable version or revision shall be unambiguous where relevant; unsupported features shall not be inferred",
+      "io.meaning": "Every in-scope signal meaning shall be defined locally or validly covered by io.standard; standard-defined semantics shall not require redundant restatement",
+      "io.interpretation": "Signal value interpretation, encodings and valid values shall be defined locally or validly covered by io.standard; local extensions shall be checked explicitly",
+      "io.handshake": "Required transfer, handshake, flow-control and backpressure behavior shall be defined locally or validly covered by io.standard without redundant revalidation of standard-defined behavior",
+      "io.deviations": "Local deviations from a standard shall be explicitly defined and checked, or governed evidence shall establish that none apply; undocumented deviations shall force custom checks for affected behavior",
+      "io.sideband": "Local sideband and extra signals shall be explicitly identified and checked independently of standard coverage, or governed evidence shall establish their non-applicability",
+      "io.integration": "Local integration constraints not covered by the standard shall be defined, including relevant clock, reset, timing, electrical or operating assumptions; standard coverage shall be bounded to the exact interfaces and behavior it supports"
+    },
+    "Clocks and resets": {
+      "clock.identity": "All behaviorally relevant clocks, sources and operating conditions shall be identified",
+      "clock.synchrony": "Synchronous relationships and asynchronous signals or interfaces shall be explicitly identified where relevant",
+      "reset.identity": "All behaviorally relevant resets and their sources shall be identified",
+      "reset.polarity": "Each reset's active polarity shall be explicit",
+      "reset.semantics": "Each reset's synchronous or asynchronous type, assertion and release semantics shall be explicit",
+      "reset.initialization": "Initial state, reset values, post-reset behavior and conditions for resuming operation shall be defined where needed",
+      "clock.domains": "The clock and reset domain of each signal or interface shall be defined where relevant, including domain relationships",
+      "clock.cdc": "Applicable clock-domain and reset-domain crossing boundaries and synchronization expectations shall be explicit; synchronizers or crossing behavior shall not be guessed",
+      "clock.power": "Clock gating, power gating, isolation, retention and entry or exit sequencing shall be defined only when behaviorally relevant to the governed scope"
+    },
+    "FSMs and control behavior": {
+      "control.identity": "Required state machines or control domains shall be identified without inventing an FSM decomposition",
+      "control.states": "States, control roles and observable behavior shall be sufficiently defined",
+      "control.transitions": "Transition conditions, priorities, guards and relevant outputs shall be sufficiently defined",
+      "control.initialization": "Initial and reset control states and startup behavior shall be explicit",
+      "control.interactions": "Interactions and ordering between state machines and control domains shall be defined where relevant",
+      "control.recovery": "Applicable illegal-state, safe-state, fault and recovery behavior shall be defined without assuming an implementation"
+    },
+    "Functional behavior": {
+      "function.main": "All implementation-critical in-scope functions and observable results shall be sufficiently defined",
+      "function.triggers": "Triggering, enabling and completion conditions shall be defined",
+      "function.sequence": "Required functional sequencing, concurrency and ordering constraints shall be defined",
+      "function.priority": "Priority, arbitration and simultaneous-event behavior shall be defined where needed",
+      "function.errors": "Error, exception, cancellation and recovery behavior shall be defined where relevant"
+    },
+    "Datapath and data semantics": {
+      "data.transformations": "Required data transformations, input-output relationships and applicable algorithms shall be defined",
+      "data.arithmetic": "Arithmetic operations, units, ranges and data interpretation shall be explicit where relevant",
+      "data.format": "Data formats, encodings, byte ordering and fixed-point or floating-point representations shall be defined where relevant",
+      "data.signedness": "Signed or unsigned interpretation and conversions shall be explicit where relevant",
+      "data.precision": "Required precision, scaling, rounding, truncation and saturation behavior shall be explicit where relevant",
+      "data.overflow": "Overflow and underflow behavior, including reporting or recovery, shall be defined where relevant",
+      "data.latency": "Data-path latency, buffering, ordering and validity relationships shall be defined where relevant"
+    },
+    "Configuration, CSR, memory and registers": {
+      "config.effects": "Configuration fields and their functional effects, update visibility and side effects shall be defined where relevant",
+      "config.illegal": "Illegal, reserved and unsupported configurations and required responses shall be explicit where applicable",
+      "config.dependencies": "Configuration dependencies, access ordering and sequencing constraints shall be defined where relevant",
+      "config.csr": "Applicable CSR and register maps shall define addresses, bitfields, permissions, reset values, reserved bits and field effects; register-map evidence shall not be treated as interface or I/O evidence",
+      "config.memory": "Applicable memory access behavior, organization, capacity, widths, ports, arbitration and initialization shall be defined, including relevant FIFO, RAM, ROM and buffering characteristics",
+      "config.buffering": "Applicable buffer or FIFO ordering, full or empty behavior, overflow or underflow handling and backpressure shall be explicit"
+    },
+    "Timing, ordering and performance constraints": {
+      "timing.sequence": "Required timing relationships, sequencing, ordering and completion conditions shall be sufficiently defined",
+      "timing.local": "Custom timing, non-standard handshakes, deviations and integration-specific constraints shall be explicit; behavior already validly covered by io.standard shall not be redundantly revalidated",
+      "timing.standard": "Applicable standard references shall establish the required standard-defined timing and handshake behavior under io.standard; local exceptions shall remain explicit checks rather than demanding restatement of the standard",
+      "timing.performance": "Required latency, throughput, service rate, deadlines and relevant operating conditions shall be defined where applicable"
+    },
+    "Internal structure and composition": {
+      "structure.parts": "Necessary parts, internal domains and composition boundaries shall be sufficiently represented using governed evidence only",
+      "structure.interactions": "Implementation-critical dependencies, interactions and composition contracts shall be defined; block relations shall not imply physical wiring",
+      "structure.support": "No unsupported inferred structure or connection shall be present; containment, block relations and directed signal connections shall retain their distinct evidence requirements"
+    },
+    "Consistency and conflict checks": {
+      "consistency.contradictions": "No unresolved material conflict shall remain across requirements, descriptions, tables, diagrams, models and applicable standard references",
+      "consistency.ambiguity": "No unresolved ambiguity shall permit materially different implementation-critical behavior"
+    },
+    "Traceability and governed evidence support": {
+      "consistency.traceability": "Functions, interfaces, data, configuration, timing and control shall be traceable to admitted governed inputs within approved scope; candidate or unadmitted evidence shall not establish support",
+      "consistency.snapshot": "The selected immutable snapshot, allocations, ownership, scope and downstream coherence shall be valid and consistently bound across all assessment inputs",
+      "evidence.authority": "Readiness shall not outrun governed authority, invent missing facts, infer intent or create an approval lane; applicable standards shall have traceable governed applicability and reference support"
+    },
+    "Residual gaps and readiness blockers": {
+      "residual.classification": "Unresolved, ambiguous, conflicting, intentionally omitted, outside-scope and source-update-needed gaps shall remain visible and classified with provenance, disposition and readiness impact; parser gaps shall not be misrepresented as source absence",
+      "residual.material": "No unresolved implementation-critical gap shall prevent trustworthy RTL or high-level model generation; generation with gaps shall not imply READY, and omissions or future source updates shall not waive required information"
+    },
+    "Optional DFT, DFX and diagnostics": {
+      "diagnostics.behavior": "DFT, DFX, test access, observability, fault reporting and diagnostic behavior shall be checked when explicitly required by applicable governed policy. This section is informational by default, not a universal readiness blocker; explicit policy requirements shall make it blocking and require governed evidence"
+    },
+    "Final READY or NOT READY decision": {
+      "readiness.decision": "The central assessor shall declare READY only when every required applicable obligation is sufficiently defined or validly covered by standard references, non-applicability is evidenced, and snapshot, coherence, traceability, dependency and critical residual-gap gates pass. Otherwise it shall declare NOT READY, fail closed and preserve visible reasons; generation or publication success shall not substitute for implementation readiness"
+    }
+  }
+}

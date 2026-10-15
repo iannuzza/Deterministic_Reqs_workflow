@@ -23,13 +23,13 @@
   "document_type": "IPOS",
   "docx": {
     "path": "digital_ipos_pmu.docx",
-    "sha256": "3b55ba522d38b36d76e92ab9d76a89854fc875d495eeab06216a7cffdbf14ea9"
+    "sha256": "5c57199f537edb2dc30e04b7cee294eac2b13025c63baf362e56097e548ad394"
   },
   "markdown": {
     "path": "digital_ipos_pmu.md",
-    "sha256": "7fc4086afc24c2448d139b733e16e16505d5ecaa5f47ac047e21a4a8ef57fa6f"
+    "sha256": "2bb7989340c88e7786519b7a5a765dfb39a027b88b04f5af401736fd2152c6eb"
   },
-  "normalized_input_sha256": "b8cc2bbcb3b2149bbf1027d9fed5da42d28b22dcd0a994e9b92f5f522d58cb81",
+  "normalized_input_sha256": "2c6a0926a4d7becf7921848be3c0872ef69f954277fae9cda77fc3cc47d3ca12",
   "normalized_records": [
     {
       "authority_tier": "admitted_context",
@@ -86,7 +86,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0113",
@@ -94,7 +94,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0113",
       "text": "When i_START_CLK_16M is high for the first time, after at least 20 cycles of i_clk_16M (16MHz), o_main_resetn shall be high. [TO: IPOS_PMU]"
     },
@@ -142,7 +142,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0106",
@@ -150,13 +150,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0106",
       "text": "When i_POR1V2_1V2 is low, o_PD_CLKF shall be high. [TO: IPOS_PMU]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0110",
@@ -164,7 +164,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0110",
       "text": "When clk_64k_divided is stable, after at least 352 cycles of clk_64k_divided (32kHz), o_DIS_RC_VIREF shall be low. [TO: IPOS_PMU]"
     },
@@ -184,7 +184,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0108",
@@ -192,7 +192,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0108",
       "text": "When i_POR1V2_1V2 is low, o_DIS_RC_VIREF shall be high. [TO: IPOS_PMU]"
     },
@@ -254,7 +254,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0107",
@@ -262,7 +262,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0107",
       "text": "When i_POR1V2_1V2 is low, o_CLK_16M_READY shall be low. [TO: IPOS_PMU]"
     },
@@ -310,7 +310,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0111",
@@ -318,7 +318,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0111",
       "text": "When i_mask_en_ldo_pdclkf_reg and o_EN_LDO1V8 are set to 1, o_PD_CLKF shall be low after at least 40 cycles of the clk_64k_divided. [TO: IPOS_PMU]"
     },
@@ -380,7 +380,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0112",
@@ -388,13 +388,13 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0112",
       "text": "When i_START_CLK_16M is high, after at least 20 cycles of i_clk_16M (16MHz), o_CLK_16M_READY shall be high. [TO: IPOS_PMU]"
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0105",
@@ -402,7 +402,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0105",
       "text": "When i_POR1V2_1V2 is low, o_ EN_LDO1V8 shall be low. [TO: IPOS_PMU]"
     },
@@ -450,7 +450,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0109",
@@ -458,7 +458,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0109",
       "text": "When i_POR1V2_1V2 rises, after at least 10 cycles of i_clk_64k (64kHz), o_ EN_LDO1V8 shall be high and the clk_64k_divided is considered stable. [TO: IPOS_PMU]"
     },
@@ -492,7 +492,7 @@
     },
     {
       "authority_tier": "approved_normative",
-      "decision": "retained",
+      "decision": "excluded",
       "ownership_scope": "block_local",
       "provenance": [
         "approved requirement:DDS_STBIO1_0104",
@@ -500,7 +500,7 @@
         "approved snapshot",
         "artifacts/stage2_mirco_arc/block_inventory.csv"
       ],
-      "rationale": "same-owner approved IPOS evidence; normative text preserved separately",
+      "rationale": "functional_detail_in_normative_requirements",
       "record_id": "requirement:PMU:DDS_STBIO1_0104",
       "text": "When the device is turned on, i_POR1V2_1V2 shall be high. [TO: IPOS_PMU]"
     }
@@ -545,72 +545,6 @@
     },
     {
       "output_order": 5,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PMU:DDS_STBIO1_0113"
-      ],
-      "text": "When i_START_CLK_16M is high for the first time, after at least 20 cycles of i_clk_16M (16MHz), o_main_resetn is high.",
-      "unit_id": "ipos-claim-dda49ed51ffc625397d2"
-    },
-    {
-      "output_order": 6,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PMU:DDS_STBIO1_0106",
-        "requirement:PMU:DDS_STBIO1_0108",
-        "requirement:PMU:DDS_STBIO1_0107",
-        "requirement:PMU:DDS_STBIO1_0105"
-      ],
-      "text": "When i_POR1V2_1V2 is low, o_PD_CLKF is high. When i_POR1V2_1V2 is low, o_DIS_RC_VIREF is high. When i_POR1V2_1V2 is low, o_CLK_16M_READY is low. When i_POR1V2_1V2 is low, o_ EN_LDO1V8 is low.",
-      "unit_id": "ipos-claim-7c6839095c3cb46704c2"
-    },
-    {
-      "output_order": 7,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PMU:DDS_STBIO1_0110"
-      ],
-      "text": "When clk_64k_divided is stable, after at least 352 cycles of clk_64k_divided (32kHz), o_DIS_RC_VIREF is low.",
-      "unit_id": "ipos-claim-d8c571a339b7a28a3f27"
-    },
-    {
-      "output_order": 8,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PMU:DDS_STBIO1_0111"
-      ],
-      "text": "When i_mask_en_ldo_pdclkf_reg and o_EN_LDO1V8 are set to 1, o_PD_CLKF is low after at least 40 cycles of the clk_64k_divided.",
-      "unit_id": "ipos-claim-dfe1df57c830db44a5d5"
-    },
-    {
-      "output_order": 9,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PMU:DDS_STBIO1_0112"
-      ],
-      "text": "When i_START_CLK_16M is high, after at least 20 cycles of i_clk_16M (16MHz), o_CLK_16M_READY is high.",
-      "unit_id": "ipos-claim-f164e896467f6c012f49"
-    },
-    {
-      "output_order": 10,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PMU:DDS_STBIO1_0109"
-      ],
-      "text": "When i_POR1V2_1V2 rises, after at least 10 cycles of i_clk_64k (64kHz), o_ EN_LDO1V8 is high and the clk_64k_divided is considered stable.",
-      "unit_id": "ipos-claim-5765d0cd668fc56df83d"
-    },
-    {
-      "output_order": 11,
-      "section": "1.4 Supported block functions",
-      "source_record_ids": [
-        "requirement:PMU:DDS_STBIO1_0104"
-      ],
-      "text": "When the device is turned on, i_POR1V2_1V2 is high.",
-      "unit_id": "ipos-claim-2644c16697bb5af3fb3e"
-    },
-    {
-      "output_order": 12,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_1024",
@@ -620,7 +554,7 @@
       "unit_id": "ipos-claim-b5fb51735df9b45ee413"
     },
     {
-      "output_order": 13,
+      "output_order": 6,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_1023"
@@ -629,7 +563,7 @@
       "unit_id": "ipos-claim-a7e9ca728686454ba5e3"
     },
     {
-      "output_order": 14,
+      "output_order": 7,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_2026"
@@ -638,7 +572,7 @@
       "unit_id": "ipos-claim-cd9bd0af121133319960"
     },
     {
-      "output_order": 15,
+      "output_order": 8,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_1025"
@@ -647,7 +581,7 @@
       "unit_id": "ipos-claim-bb354058a8800a18f883"
     },
     {
-      "output_order": 16,
+      "output_order": 9,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_2024"
@@ -656,7 +590,7 @@
       "unit_id": "ipos-claim-f348bcd0e9a831735ae6"
     },
     {
-      "output_order": 17,
+      "output_order": 10,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_2025"
@@ -665,7 +599,7 @@
       "unit_id": "ipos-claim-38f5c26eec8b59eb746a"
     },
     {
-      "output_order": 18,
+      "output_order": 11,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_1021"
@@ -674,7 +608,7 @@
       "unit_id": "ipos-claim-c4161b650a6db6ac3e1f"
     },
     {
-      "output_order": 19,
+      "output_order": 12,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_1026"
@@ -683,7 +617,7 @@
       "unit_id": "ipos-claim-198e81e82bf36fe26308"
     },
     {
-      "output_order": 20,
+      "output_order": 13,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_1027"
@@ -692,7 +626,7 @@
       "unit_id": "ipos-claim-8732ca6d748765314564"
     },
     {
-      "output_order": 21,
+      "output_order": 14,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_1020"
@@ -701,7 +635,7 @@
       "unit_id": "ipos-claim-5d168436c40984d9dbd1"
     },
     {
-      "output_order": 22,
+      "output_order": 15,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_2054",
@@ -716,7 +650,7 @@
       "unit_id": "ipos-claim-70011586d4f9564f929c"
     },
     {
-      "output_order": 23,
+      "output_order": 16,
       "section": "1.5 General architecture",
       "source_record_ids": [
         "requirement:PMU:DDS_STBIO1_2052"

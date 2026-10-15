@@ -1,5 +1,6 @@
-// Snapshot ID: snap-b2e8101b00dc6909feaed885
-// Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+// NOT READY for RTL or high-level model generation
+// Snapshot ID: snap-73c872b1307b6adb5eaf843e
+// Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 package Block_PadMux {
 
@@ -14,6 +15,8 @@ package Block_PadMux {
         attribute approvedPortCount : Integer = 178;
         attribute linkedRequirementCount : Integer = 17;
         doc /* block=Pad Mux | description=Route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads. */;
+        doc /* governedOverview:functionality | The Pad Mux block is designed to route source-specified functional, scan, BIST, debug, and ISPU-debug signals to and from device pads. */;
+        doc /* governedOverview:scope | The Pad Mux block accepts Mode selection, register-map controls, test controls, and internal block outputs and produces Pad controls, test observations, and routed internal signals. */;
         in port i_write_protection_en : ArchitecturePort {
             attribute sourceName = "i_write_protection_en";
             attribute sourceDetails = "write_protection_en OTP regmap enable from regmap";

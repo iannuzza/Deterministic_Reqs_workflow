@@ -1,5 +1,6 @@
-// Snapshot ID: snap-b2e8101b00dc6909feaed885
-// Downstream contract fingerprint: 8d22eb86b9a584c32e1fedacf6d98a199b8f93896143054eb1c8b2075b0ea372
+// NOT READY for RTL or high-level model generation
+// Snapshot ID: snap-73c872b1307b6adb5eaf843e
+// Downstream contract fingerprint: fe7fcb076580a4245cd18758f20d821b4ea5f2e9333b83cbcabaac32735886cf
 
 package Block_I2CSPIAHB {
 
@@ -14,6 +15,9 @@ package Block_I2CSPIAHB {
         attribute approvedPortCount : Integer = 39;
         attribute linkedRequirementCount : Integer = 15;
         doc /* block=I2C_SPI_AHB | description=Accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access. */;
+        doc /* governedOverview:functionality | The I2C_SPI_AHB block is designed to accept I2C/SPI accesses and translate them as needed into AHB transactions for device configuration and readback, including ISPU access. */;
+        doc /* governedOverview:scope | The I2C_SPI_AHB block accepts Host bus transactions and produces Protocol-compliant responses. */;
+        doc /* governedOverview:internal_functions | On AHB interface, BURST is not supported as well as LOCKED transfers. I2C interface supports all the specified modalities (Standard, FM, FM+) and, if configured, HS is also supported. Clock frequency ratio between system (AHB) and I2C/SPI interfaces domains are at least 2 times. On AHB interface, data size is limited to BYTE and WORD. */;
         in port rst_n : ArchitecturePort {
             attribute sourceName = "rst_n";
             attribute sourceDetails = "POR";
