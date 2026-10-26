@@ -1,6 +1,44 @@
 ﻿# Chat Handoff - Deterministic_Reqs_workflow
 
-## CURRENT HANDOFF - 2026-10-15 - Full Flow PASS, Final SysML PASS
+## CURRENT HANDOFF - 2026-10-26 - SRS Rules Approved
+
+- User approved the SRS rules as valid for the main official workflow.
+  The approved, project-agnostic baseline is saved in
+  `.github/copilot-instructions.md`, under the dated SRS semantic-composition section.
+- Local checkpoint: `2026-10-26-srs-rules-approved`; start with its README and
+  `checkpoint_manifest.json`. It preserves trial source/tests, final pilot
+  evidence, exact diffs, ambiguity tracking and local/session memories.
+- This save updates general rules and checkpoint/memory metadata ONLY.
+  Trial runtime was NOT imported into official scripts; official generated
+  documents, canonical approvals, source-use permissions and snapshots were NOT
+  changed. Rule acceptance is not publication eligibility or implementation READY.
+- Latest pilot is in the sibling workspace
+  `..\review_srs_20261026_1437\artifacts\reviews\system_requirements_specification\pilot_final`.
+  It remains visibly non-authoritative where destination permissions are pending.
+  Trial snapshot `snap-8b3673edc9cf590589b8ab39` is recorded as evidence, not
+  selected or frozen by this save.
+- Central trial fixes enforce semantic placement, retain guarded operating
+  behaviour and support independent artifact readback. The last minimal polish
+  is a review-only editorial amendment, not an automatically deployed composer
+  change. Preserve this distinction when planning official runtime integration.
+- Verification retained: 203 focused trial tests, 44 bounded actual-prose checks,
+  final renderer regression, Markdown/Word parity and 159 final-pass protected
+  files. Broader independent assessment remains UNRESOLVED (335 findings);
+  no whole-hierarchy closure or new full-flow PASS is asserted.
+- Final pilot explains 3.3 conversion-interface/digital-domain complement,
+  improves 3.1/3.5 grammar and evidence-bound serial directions. Ambiguous
+  "eventually" is retained without inferred timing/optionality; "cent inputs"
+  remains unchanged with separate ambiguity tracking.
+- Suggested Git tag: `srs-rules-baseline-2026-10-26`. Proposed only:
+  NO commit, tag or push performed for this save. Preserve dirty user work.
+- Next priorities remain DRS and Main Controller IPOS, or separately requested
+  controlled official runtime integration. Do not auto-run stages or import code.
+  Use isolated copies/worktrees for parallel implementation, not shared
+  databases, workbooks, runtime files or output directories.
+- Work efficiently: one bounded, promising trial, focused verification and short
+  diff; avoid speculative iterations and loading the entire historical handoff.
+
+## PREVIOUS HANDOFF - 2026-10-15 - Full Flow PASS, Final SysML PASS
 
 - Start with checkpoint `2026-10-15-full-flow-final-sysml-pass`, its README and
   hash manifest. Requested annotated tag: `full-flow-PASS-Final-SysML-PASS`;

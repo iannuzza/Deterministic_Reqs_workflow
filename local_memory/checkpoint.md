@@ -1,6 +1,29 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: 2026-10-15 - Full Flow PASS, Final SysML PASS
+## Latest checkpoint: 2026-10-26 - Approved SRS Rules Baseline
+
+- ID: `2026-10-26-srs-rules-approved`.
+- Directory: `local_memory/checkpoints/2026-10-26-srs-rules-approved/`.
+- User-approved main-workflow SRS rules saved in `.github/copilot-instructions.md`.
+- Source/evidence archive and per-member SHA256 manifest preserve the isolated
+  trial implementation/tests, final pilot, source-bound corrections, ambiguities,
+  exact diffs, verification evidence and restart notes.
+- `before_metadata.zip` preserves the four official rule/memory files before this
+  save. No automatic extraction or restore over newer work is provided.
+- Official runtime, templates, configuration, canonical database and tracked
+  workbooks are protected by before/after hashes. Only general rules and
+  local-memory/checkpoint metadata are intentionally changed.
+- No official runtime deployment, document regeneration/overwrite, source-use
+  approval, snapshot change, Git commit, tag or push occurs in this save.
+- Suggested tag only: `srs-rules-baseline-2026-10-26`.
+- Existing pilot and source ambiguities remain documented; historical broader
+  assessment is UNRESOLVED, not hidden by rule approval.
+- Resume with this checkpoint README and current chat handoff. Do not infer that
+  official scripts already contain the approved isolated fixes or final editorial
+  polish. Next focused work is DRS/Main Controller, or explicitly scoped runtime
+  integration, without speculative reruns.
+
+## Previous checkpoint: 2026-10-15 - Full Flow PASS, Final SysML PASS
 
 - Checkpoint ID: `2026-10-15-full-flow-final-sysml-pass`.
   Directory: `local_memory/checkpoints/2026-10-15-full-flow-final-sysml-pass/`.

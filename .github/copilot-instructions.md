@@ -193,6 +193,21 @@ Legacy numeric stage commands remain compatibility aliases during migration.
 - Snapshot IDs are deterministic content/configuration-derived identities including canonical revisions, mappings, profile hashes, retrieval configuration, and semantic-enabled metadata.
 - Semantic retrieval is optional, local-only, version-pinned, auditable, and never required for the deterministic core. GUI chat is visibly non-authoritative.
 
+## Approved SRS Semantic Composition Baseline - 2026-10-26
+- The user-approved SRS rule baseline is valid for the main workflow. Keep implementation central, deterministic, local-only and project-agnostic; never encode pilot prose, project names or review examples in reusable logic.
+- Keep semantic placement separate from authorization. A reviewed context use does not make purpose, capability or operating behaviour appropriate to section 3.4, nor authorize another destination. Preserve existing decisions and expose pending destination gaps through the existing source-bound review and snapshot process.
+- Section 3.1 explains evidenced product identity, macro-purpose and application scope, not document purpose. Do not infer application scope from an unclear source clause.
+- Section 3.2 explains top-level capabilities. Section 3.3 explains approved domains/subsystems and their complementary responsibilities, not a list of capability labels or blocks. A classified interface or conversion boundary must not become an invented architectural domain.
+- Section 3.4 retains supported interface/boundary roles. Distinguish control/clock/select and data directions only where explicit evidence supports the distinction; otherwise retain the unresolved direction without guessing from names or interface presence.
+- Section 3.5 organizes supported operating concepts, phases, modes and sequences. Preserve actors, conditions, dependencies, modal strength, alternatives, exclusivity and exceptions. Do not infer transition order, ownership or outcomes; do not concatenate source operations as a substitute for explanation.
+- Decompose mixed source meanings and recompose them in their proper sections. Check overlap with section 3.2 and avoid misplaced repetition in section 3.4; do not move whole mixed paragraphs wholesale.
+- Exclude register syntax from system prose without discarding essential behaviour. Replace a configuration condition with a mode name only when source evidence establishes equivalence; a mode heading alone is insufficient.
+- Correct grammar without changing source meaning. Leave ambiguous terminology unchanged and track it separately; do not turn an unclear adverb into optionality, a delay, a completion guarantee or a transition.
+- Independently check actual Markdown and Word for explanatory adequacy, source coverage, qualifications, actor/action and mode binding, placement and nonduplication. Populated headings, contributor counts and producer/checker agreement alone are not acceptance evidence.
+- Preserve normative requirements, IDs, allocations, Covers, Source I/O, original evidence, section 3.6 and unrelated artifacts. Keep generation, writing quality, publication eligibility and readiness separate.
+- Pending-destination demonstrations remain explicitly non-authoritative review proposals outside publication-input collection. Approval of this rule baseline does not approve pending source uses, modify canonical approvals, freeze another snapshot or certify publication/implementation readiness.
+- Prefer a bounded, practical pilot: make the smallest complete evidence-backed correction, run focused checks, report limits, and stop. Iterate for concrete failures or requested refinements, not speculative polishing or unrequested full-flow reruns.
+
 ## Step 3 Workflow Enforcement Rules
 - Persist and centrally validate workflow states: `ingested`, `parsed`, `classified`, `under_review`, `impact_analyzed`, `approved_for_merge`, `merged`, `mapping_under_review`, `mapping_approved`, `snapshotted`, `rejected`, and `needs_rework`.
 - Record every transition with actor, reason, approval requirement, timestamp, and metadata. Loopbacks add history and never erase prior state.

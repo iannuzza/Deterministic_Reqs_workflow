@@ -1,5 +1,27 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-26 - SRS Rules Approved and Saved
+
+- User approved the SRS semantic/composition rules as valid for the main official
+  workflow. Saved the concise project-agnostic baseline in general instructions.
+- Saved the latest local implementation and source-bound pilot corrections:
+  proper 3.1/3.5 placement, removal of mixed 3.4 duplication, explanatory 3.3,
+  supported serial directions, minor grammar and separately tracked ambiguities.
+- Original evidence, normative requirements/IDs/allocations/Covers/Source I/O,
+  3.6 and unrelated outputs remain protected. No canonical source-use approvals
+  or snapshot state changed; pending previews stay non-authoritative.
+- Checkpoint `2026-10-26-srs-rules-approved` archives source/tests and review
+  evidence with hashes. It is not a full canonical/database restore or runtime
+  deployment. Official scripts and generated documents are not overwritten.
+- Verification carried forward without claiming another run: 203 focused tests,
+  44 bounded prose checks and the final renderer regression; broader source
+  assessment remains UNRESOLVED. Final editorial pass preserves other prose.
+- Suggested tag `srs-rules-baseline-2026-10-26`; no commit/tag/push requested or
+  performed. Preserve existing dirty work and the already modified sync manifest.
+- Efficiency preference: focused handoff/new chat, bounded trials, targeted
+  validation and short diffs. Separate working copies for parallel DRS,
+  Main Controller or GUI implementation.
+
 ## 2026-10-15 - Full Flow PASS, Final SysML PASS Checkpoint
 - User final phase on snap-73c872b1307b6adb5eaf843e completed23:09:11+02:00,
   exit0. Central coherence and declaration validation PASS. Earlier stage/IPOS
