@@ -1,6 +1,53 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: 2026-10-26 - Approved SRS Rules Baseline
+## Latest checkpoint: main-controller-ipos-review-pass-2026-10-27
+
+- Named directory: `local_memory/checkpoints/main-controller-ipos-review-pass-2026-10-27/`.
+- User authorized checkpoint commit, annotated tag with the exact same name,
+  and push to `origin/main`. The local/remote tag and branch refs record the
+  completed transaction; this file does not guess its own commit hash.
+- References the verified `2026-10-27-main-controller-ipos-review-pass` payload:
+  603 source/evidence members, complete hashes, current Main Controller Word/MD,
+  all local fixes and frozen baseline, audits, diffs and focused restart notes.
+  The checkpoint commit includes that payload; no second archive copy is needed.
+- Only checkpoint and memory files are in the commit scope. Isolated fixes
+  remain unintegrated; official runtime, generated outputs, database, approvals,
+  snapshot state and all unrelated dirty work are not imported or staged.
+- Session PASS is scoped to the isolated Main Controller result and 78 focused
+  tests. Broader writing findings remain UNRESOLVED (522); future main-workflow
+  verification/integration is separate. Preserve SRS 3.6 and all gates.
+
+## Previous checkpoint: 2026-10-27 - Main Controller IPOS Review PASS
+
+- ID: `2026-10-27-main-controller-ipos-review-pass`.
+- Directory: `local_memory/checkpoints/2026-10-27-main-controller-ipos-review-pass/`.
+- User accepted session PASS; full isolated Main Controller generation, document
+  contract and scoped gate PASS. Twelve 1.2 functions match twelve 1.4 subsections.
+- All 78 focused tests passed. Actual Markdown/Word and source/provenance checks
+  preserve 181 normative requirements, 198 admitted records, prior detail, 1.1,
+  47 trial-protected files and 5,595 protected official files.
+- Snapshot `snap-8b3673edc9cf590589b8ab39` is explicit pilot evidence, not an
+  instruction to select/change the official default or refresh approvals.
+- Source/evidence ZIP and per-member SHA256 manifest preserve the full active
+  isolated implementation/tests/templates, frozen source baseline, current
+  Main Controller Word/Markdown, audits, diffs, previous coverage and memories.
+  `before_metadata.zip` preserves the five local-memory files before this save,
+  including the pre-existing dirty sync manifest.
+- Start with `restart_handoff.md` and the manifest. Restore only into a new
+  isolated directory; do not blindly extract over the dirty official worktree.
+  This is not a canonical-database, approval-workbook or source-spec restore.
+- Broader writing assessment remains UNRESOLVED (522 findings); the existing
+  SRS shared-mode test fails identically before/after. Session PASS does not mean
+  whole-workflow/implementation-ready or that historical candidate deltas are
+  automatically eligible for integration.
+- Only local-memory/checkpoint metadata changes in the official project.
+  No runtime import, official generated-output overwrite, approval/snapshot
+  change, new gate, Git commit/tag/branch/push or unrelated regeneration.
+- Suggested tag: `main-controller-ipos-review-pass-2026-10-27` (not created).
+- Later SRS/DRS/IPOS main-workflow verification/integration is separate.
+  Preserve SRS 3.6; new features come after controlled integration.
+
+## Previous checkpoint: 2026-10-26 - Approved SRS Rules Baseline
 
 - ID: `2026-10-26-srs-rules-approved`.
 - Directory: `local_memory/checkpoints/2026-10-26-srs-rules-approved/`.

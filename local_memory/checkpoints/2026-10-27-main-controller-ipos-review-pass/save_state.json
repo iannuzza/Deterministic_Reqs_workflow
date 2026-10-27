@@ -1,0 +1,12 @@
+{
+  "checkpoint": "2026-10-27-main-controller-ipos-review-pass",
+  "official_metadata_before": {
+    "chat_handoff.md": "2a5f4521531bbd6fe8a7395922acb9baf6a6526e1e5bd5ac0bb9aadd403ba770",
+    "checkpoint.md": "3de9bf6faf69d9af427182afb326e7a32b82aff8274fd15326bac03e1d21889a",
+    "project_activity_log.md": "199ad26c9902890aa5ed5c90c545b32f9f82c7f5ad42e3ce8c7ce9e0f1d10d49",
+    "environment.md": "bbbc132f2152cce15f160ba926f4e79eced9abb8df04c26d6bbf0afcda94543b",
+    "sync_manifest.json": "202becfb3694d63b408e0c721d5f8ea1e2ba81203b90313fbbce3cbae8e56101"
+  },
+  "protected_official_files": 5595,
+  "before_metadata_sha256": "ec51fe364d5e5eec84ba9db83d1f7c59b91cd9c97ea6876103906ef42b8fc163"
+}

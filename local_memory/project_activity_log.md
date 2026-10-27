@@ -1,5 +1,61 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-27 - Named Checkpoint Commit, Tag and Push Authorization
+
+- User explicitly requested local checkpoint
+  `main-controller-ipos-review-pass-2026-10-27`, a Git tag with that exact name,
+  then push. Named checkpoint references the previously verified 603-member
+  payload rather than duplicating it.
+- The checkpoint commit is limited to memory/checkpoint metadata and archived
+  local source/evidence. It does not import the isolated runtime, change official
+  generated documents, select/modify snapshots or approve source/destination uses.
+  All unrelated dirty work remains outside its staging scope.
+- User-authorized publication targets configured `origin/main` plus the
+  annotated tag. Git refs are the exact publication receipt; do not manufacture
+  an in-file self-commit hash or claim success before the push is verified.
+- Existing scoped Main Controller PASS and all readiness caveats are retained.
+  Later controlled official integration and new-feature work are not started.
+
+## 2026-10-27 - Main Controller IPOS Review PASS and Local Checkpoint
+
+- User approved the revised role/purpose summary approach, requested complete
+  Main Controller regeneration with corresponding 1.4 subsections, and accepted
+  the delivered session as PASS. Official integration was not performed.
+- Complete isolated document generated from
+  `snap-8b3673edc9cf590589b8ab39`: twelve readable 1.2 responsibility bullets,
+  twelve corresponding 1.4 subsections with higher-level openings before detail.
+  Explicit ramp control, result processing and result storage/delivery retained.
+- Reused the centralized semantic core and document-specific planner; no pasted
+  project paragraphs, project-name branch, new synthesis engine or new gate.
+  Snapshot-bound inventory, large audit CSV handling, complete evidence recovery,
+  semantic grouping and audit persistence from the earlier work are preserved.
+- Local processing coordination is supported by explicit same-owner
+  descriptions; peer initiation never implies peer execution. Primary status
+  responsibility overrides incidental clock-cycle wording. Mixed purpose/scope
+  projections remain partitioned, not dropped at parent-claim level.
+- Production readback caught a real semantic-unit ordering issue around bold
+  list labels and a Word smart-apostrophe mismatch. Per-bullet body-text units
+  and neutral grammatical wording fixed these without weakening checks.
+  Actual digital/analog Pandoc materialization and write-only coordination tests
+  protect the root causes, not only an in-memory composer result.
+- Final validation:78 focused tests PASS, existing scoped gate/document contract
+  PASS,24 actual bullet checks, twelve matching summary/detail functions,
+  full Markdown/Word meaning parity.181 normative requirements/IDs/Covers and
+  source I/O,198-record approved input and all previous detail paragraphs intact.
+-47 protected trial and5,595 protected official files unchanged. Broader writing
+  assessment remains UNRESOLVED at522 findings; no whole-workflow readiness
+  claim. The unrelated SRS shared-mode KeyError('3.4') also fails using the saved
+  pre-change runtime; no SRS fix or SRS3.6 change attempted.
+- Saved focused handoff, full source/evidence checkpoint, rollback metadata and
+  member hashes under `checkpoints/2026-10-27-main-controller-ipos-review-pass`.
+  Updated current handoff/checkpoint/environment/activity memories; older history
+  and dirty work preserved. Sync metadata refreshed through the existing tool.
+- Suggested tag `main-controller-ipos-review-pass-2026-10-27` only. No commit,
+  tag, push, official runtime import or approval/snapshot mutation.
+- Next phase is separately scoped main-workflow SRS/DRS/IPOS verification and
+  controlled integration, then new features. Do not automatically regenerate
+  official documents or bulk-copy historical trial candidates.
+
 ## 2026-10-26 - SRS Rules Approved and Saved
 
 - User approved the SRS semantic/composition rules as valid for the main official

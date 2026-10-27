@@ -1,6 +1,86 @@
 ﻿# Chat Handoff - Deterministic_Reqs_workflow
 
-## CURRENT HANDOFF - 2026-10-26 - SRS Rules Approved
+## CURRENT HANDOFF - 2026-10-27 - Named Checkpoint and Git Publication
+
+- Current checkpoint and requested annotated Git tag:
+  `main-controller-ipos-review-pass-2026-10-27`.
+  Start with `checkpoints/main-controller-ipos-review-pass-2026-10-27/README.md`.
+- The user explicitly authorized a checkpoint commit, tag and push. The exact
+  transaction outcome is recorded by the local/remote Git refs; resolve the tag
+  for its checkpoint commit. Do not infer publication success from this note alone.
+- The named checkpoint references the immutable 603-member payload saved as
+  `2026-10-27-main-controller-ipos-review-pass`; the checkpoint commit includes
+  that backup, hashes, focused restart handoff and memory metadata. The archive
+  is not duplicated. Earlier "no commit/tag/push" statements describe the
+  preceding pre-publication save, not this subsequent authorized transaction.
+- Commit scope is checkpoint/memory evidence only. Preserve all unrelated dirty
+  work; do not stage the official runtime, canonical database or generated
+  artifacts. All isolated source fixes are preserved inside the verified backup,
+  not deployed into official scripts.
+- Scoped session PASS, 78 tests, twelve matching functions, 181 unchanged
+  normative requirements and the 198-record input remain the accepted baseline.
+  The broader 522 writing findings and SRS baseline regression remain explicit.
+  No new approval, snapshot selection/change or implementation-readiness claim.
+- Later main-workflow SRS/DRS/IPOS verification/integration and new features
+  remain separate; this Git publication does not perform them.
+
+## PREVIOUS SESSION CLOSURE - 2026-10-27 - Main Controller IPOS Review PASS
+
+- User accepted this completed session as PASS. Full isolated Main Controller
+  IPOS regeneration, existing document contract and scoped IPOS gate passed.
+  This is not official runtime integration or whole-workflow readiness.
+- Start with local checkpoint
+  `checkpoints/2026-10-27-main-controller-ipos-review-pass/restart_handoff.md`,
+  then its README and `checkpoint_manifest.json`; do not reload the whole chat.
+  It supersedes the earlier "1.2 pending" and paused descriptive-integration
+  handoffs for Main Controller work. Older entries below remain history.
+- Active implementation is
+  `C:\Users\iannuzza\.copilot\session-state\80272f99-6494-4238-9a42-55101692cf95\files\descriptive_closure_20261026\workspace`.
+  Full Word/Markdown IPOS is under
+  `artifacts\stage6_digital_ipos\blocks\main-controller`.
+  The archive preserves a durable copy if session folders become unavailable.
+- Explicit pilot snapshot: `snap-8b3673edc9cf590589b8ab39`; do not change the
+  official/default snapshot selection or approvals. The obsolete nested
+  snapshot-73 trial is not the active source.
+- Preserved shared fixes: snapshot-bound inventory/provenance across generation,
+  blocker review and validation; bounded large-CSV reading; compound/qualified
+  meaning recovery; source-backed functional openings; production audit
+  persistence; actor/channel association and nonduplication.
+- Latest composition: brief complementary 1.2 overview plus twelve concise
+  role/purpose bullets, each with a matching 1.4 subsection. Processing
+  coordination, digital-ramp control, result processing and storage/delivery are
+  explicit. Functional evidence, not a project-name branch or fixed catalogue,
+  determines which responsibilities exist.
+- Initiating/communicating with a peer does not become algorithm execution.
+  Clock generation stays with its source; FIFO delivery does not grant internal
+  ownership. Status indications are assigned by primary responsibility rather
+  than incidental clock-cycle words. Conditions, alternatives and resets remain
+  in the detail; ambiguous source identifiers are not guessed or aliased.
+- `summarized` audit dispositions affect covered 1.2 projections only, preserving
+  mixed 1.1 purpose projections. Per-bullet body-text semantic units preserve
+  Markdown/Word ordering and readability; real Word-list and write-only
+  coordination regressions protect both digital and analog composition.
+- Verified: 78 focused tests; twelve summary/detail pairs; 24 actual bullet
+  checks; full Markdown/Word meaning consistency; 1.1 and prior detail preserved;
+  181 requirements/IDs/Covers/source I/O and the complete 198-record input
+  unchanged; 47 protected trial and 5,595 protected official files unchanged.
+- Broader writing assessment remains UNRESOLVED (522 findings, versus 486 in
+  the preceding pass). No whole-assessment closure is claimed. The unrelated SRS
+  shared-mode `KeyError('3.4')` reproduces with the pre-change runtime; do not
+  reopen SRS solely to chase that historical failure. Preserve SRS 3.6.
+- The checkpoint archives the complete isolated source/tests/templates, frozen
+  source baseline, current pilot, audits, source/evidence diffs, prior functional
+  coverage and updated memories with SHA256 manifest. Historical SRS/DRS deltas
+  are preserved for review, not blanket-certified for promotion.
+- Suggested tag only: `main-controller-ipos-review-pass-2026-10-27`.
+  No Git commit, tag, branch or push, official runtime/document overwrite,
+  canonical approval/snapshot update or new gate is performed by this save.
+- Next intended phase: separately scoped verification and controlled integration
+  of reusable SRS/DRS/IPOS fixes in the main workflow; new features afterwards.
+  Compare against current dirty official files and preserve destination gates.
+  Do not auto-import code, rerun official generation or change source permissions.
+
+## PREVIOUS HANDOFF - 2026-10-26 - SRS Rules Approved
 
 - User approved the SRS rules as valid for the main official workflow.
   The approved, project-agnostic baseline is saved in

@@ -1,0 +1,27 @@
+{
+  "checkpoint": "main-controller-ipos-review-pass-2026-10-27",
+  "status": "PASS_CHECKPOINT_PAYLOAD_VERIFIED",
+  "payload_checkpoint": "2026-10-27-main-controller-ipos-review-pass",
+  "payload_manifest": "../2026-10-27-main-controller-ipos-review-pass/checkpoint_manifest.json",
+  "archive": "../2026-10-27-main-controller-ipos-review-pass/main_controller_ipos_review_pass_backup.zip",
+  "archive_sha256": "53961e5fded2586d470c28a6c2bdfe8025cf5f49e8184dcc7f01f683df4ba69e",
+  "archive_members": 603,
+  "snapshot_id": "snap-8b3673edc9cf590589b8ab39",
+  "generation_scope": "Isolated Main Controller IPOS only",
+  "focused_tests_passed": 78,
+  "functions": 12,
+  "normative_requirements_unchanged": 181,
+  "admitted_records_unchanged": 198,
+  "broader_writing_assessment": {"status": "UNRESOLVED", "findings": 522},
+  "official_runtime_imported": false,
+  "official_generated_documents_overwritten": false,
+  "approvals_or_snapshot_changed": false,
+  "git": {
+    "tag": "main-controller-ipos-review-pass-2026-10-27",
+    "base_commit": "9ef626957fc47135940c6a515434f2ebe1f971f3",
+    "remote": "origin",
+    "branch": "main",
+    "commit_tag_push_authorized": true,
+    "publication_receipt": "Local and remote Git refs; peel the annotated tag for the checkpoint commit"
+  }
+}

@@ -2,7 +2,32 @@
 - Active source specification: specs/DDS_STBIO1.pdf
 - Use python scripts/... commands in this workspace.
 
-- Current checkpoint: `2026-10-15-full-flow-final-sysml-pass`.
+- Current local checkpoint and annotated Git tag:
+  `main-controller-ipos-review-pass-2026-10-27`.
+  The named checkpoint README references the immutable verified payload
+  `2026-10-27-main-controller-ipos-review-pass`. Git refs record publication.
+  Read its README and manifest, then the referenced focused `restart_handoff.md`;
+  do not reload chat.
+  User accepted isolated Main Controller IPOS session PASS.12 summary/detail
+  functions,78 focused tests and scoped gate/document contract PASS.
+  Broader writing assessment remains UNRESOLVED (522); not whole-flow readiness.
+- Active isolated code/output workspace:
+  `C:\Users\iannuzza\.copilot\session-state\80272f99-6494-4238-9a42-55101692cf95\files\descriptive_closure_20261026\workspace`.
+  Word/Markdown: `artifacts\stage6_digital_ipos\blocks\main-controller`.
+  Explicit pilot snapshot `snap-8b3673edc9cf590589b8ab39`; do not infer or change
+  the official selected/default snapshot from this trial binding.
+- Python executable for this work:
+  `C:\Users\syslocadm1906\AppData\Local\Programs\Python\Python311\python.exe`.
+  Use `-B`, local Pandoc and isolated `scripts;tests` on `PYTHONPATH`.
+  Existing unittest runner works; editor test discovery found no tests.
+- Official runtime/documents/approvals/snapshots remain unchanged. Preserve
+  dirty user work and SRS3.6. Source/evidence archive is not a database restore;
+  never rerun `trial_control.py setup` or extract over the official root.
+  Later controlled main-workflow integration is separate; new features follow it.
+  User authorized checkpoint commit/tag/push under the exact named checkpoint;
+  consult local and remote refs for the completed Git transaction.
+
+- Historical checkpoint: `2026-10-15-full-flow-final-sysml-pass`.
   Requested annotated tag `full-flow-PASS-Final-SysML-PASS`; commit/tag/push
   authorized. Previous pushed milestone d3160a3. Selected immutable snapshot
   snap-73c872b1307b6adb5eaf843e; user final phase exit0 at23:09:11+02:00.
@@ -241,4 +266,3 @@
   - Connection-matrix requirements retain interaction-matrix source-row ownership and their downstream `Covers:` link targets the matching SRS-authored matrix requirement.
   - Protocol/bus terms (`I2C`, `SPI`, `AHB`, `AXI`, `APB`, `UART`, `JTAG`, `serial`, `protocol`, `bus`) and processor terms (`processor`, `CPU`, `microprocessor`, `core`, `digital`) are authoritative digital indicators.
   - Latest restored orchestrator pass records: Stage 3 PASS at 2026-08-20 17:53:14; Stage 4 PASS at 17:58:56; Stage 5 PASS at 17:59:01.
-
