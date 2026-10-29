@@ -11,7 +11,9 @@
   Snapshot `snap-8b3673edc9cf590589b8ab39` is unchanged. The GUI S3-to-S6 command
   uses that explicit snapshot plus `--prepare-snapshot-inputs`; see GUI receipts.
   Never replace the canonical database or frozen approvals from a backup.
-  Proposed tag `srs-drs-official-approved-2026-10-29` is not created/pushed.
+  The subsequent user request authorizes commit/tag
+  `srs-drs-official-approved-2026-10-29` and push to origin. Consult the current
+  checkpoint's `GIT_PUBLICATION.md` and Git refs for the transaction outcome.
   The local Git checkpoint saves memory and complete source/evidence archive;
   preserve other dirty work.
 

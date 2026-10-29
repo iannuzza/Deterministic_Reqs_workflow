@@ -23,8 +23,10 @@
   DRS writing UNRESOLVED (216); historical Main Controller writing UNRESOLVED
   (522). No whole-workflow readiness claim.
 - Local checkpoint commit contains memory/archive evidence, not unrelated loose
-  runtime/database changes. Proposed tag only:
-  `srs-drs-official-approved-2026-10-29`; no tag creation or push.
+  runtime/database changes. The subsequent user request authorizes a new commit
+  with exact subject `srs-drs-official-approved-2026-10-29`, the same-named annotated
+  tag and push. Consult `GIT_PUBLICATION.md` and local/remote refs for the result;
+  older no-tag/no-push fields describe the pre-publication save.
 
 ## Previous checkpoint: main-controller-ipos-review-pass-2026-10-27
 

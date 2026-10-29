@@ -37,8 +37,11 @@
 - Current source, tests, templates, approved artifacts and reproducibility inputs
   are durably archived with hashes. Git checkpoint scope follows the existing
   memory/archive convention; do not stage/reset unrelated dirty runtime changes.
-- Proposed tag only: `srs-drs-official-approved-2026-10-29`. No tag or push is
-  authorized by this save. The prior 2026-10-27 Main Controller tag is unchanged.
+- Subsequent user request explicitly authorizes a new commit with exact subject
+  `srs-drs-official-approved-2026-10-29`, an annotated tag with that name and push
+  of main/tag to origin. Read the checkpoint's `GIT_PUBLICATION.md`; local/remote
+  refs record the exact transaction result. Earlier no-tag/no-push fields refer
+  to the preceding save. The prior Main Controller tag remains unchanged.
 - Next: await the user's next improvement. Do not auto-publish the deferred Main
   Controller review, restructure DRS, change snapshots, approve sources or rerun
   official generators merely to resume. Older sections below are history.

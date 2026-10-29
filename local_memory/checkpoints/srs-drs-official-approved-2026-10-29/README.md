@@ -79,9 +79,13 @@ The fixes are already integrated in the live official runtime; the archive is
 their durable point-in-time copy. A checkout of the checkpoint commit alone is
 not an instruction to overwrite or reconstruct the dirty runtime.
 
-Proposed tag: `srs-drs-official-approved-2026-10-29`.
-The tag is not created and nothing is pushed. Resolve the local checkpoint commit
-through Git history; its committed files do not manufacture a self-commit hash.
+The user subsequently authorized a new commit with the exact subject
+`srs-drs-official-approved-2026-10-29`, an annotated tag with that same name,
+and push of the current branch and tag to `origin`.
+See [GIT_PUBLICATION.md](GIT_PUBLICATION.md). Local/remote Git refs are the exact
+transaction receipt; do not infer push success from authorization alone.
+Earlier no-tag/no-push fields in archived evidence describe the preceding save,
+not the result of this subsequent transaction. The payload is unchanged.
 
 ## Recovery
 

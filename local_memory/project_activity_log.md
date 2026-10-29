@@ -1,5 +1,19 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-29 - SRS/DRS Checkpoint Commit, Tag and Push Authorization
+
+- After the verified local save at `104d8fe`, the user explicitly requested a new
+  commit with exact subject `srs-drs-official-approved-2026-10-29`, an annotated
+  tag with that name, and push to the configured remote.
+- Commit scope remains current memory/publication metadata plus the existing
+  verified archive, preserving unrelated dirty runtime/database/artifact work.
+  Archive bytes, approved documents, source/snapshot authority and earlier tags
+  remain unchanged.
+- Read the checkpoint's `GIT_PUBLICATION.md`; local/remote Git refs are the exact
+  receipt. A fast-forward-safe branch/tag push is intended, without force-push,
+  reset, rebase, amendment or unrelated generation.
+- Earlier no-tag/no-push statements below describe the preceding local save.
+
 ## 2026-10-29 - Official SRS/DRS Approval, Publication and Local Checkpoint
 
 - Integrated the archived reusable fixes centrally across the current main

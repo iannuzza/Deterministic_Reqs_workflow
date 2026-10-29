@@ -3508,8 +3508,6 @@
   ],
   "git_scope": "memory/archive only; preserve pre-existing loose runtime/database/artifact changes",
   "suggested_tag": "srs-drs-official-approved-2026-10-29",
-  "tag_created": false,
-  "pushed": false,
   "restore_policy": "Extract only into a new isolated directory. Do not overwrite canonical authority, snapshots or current dirty work.",
   "finalized_at": "2026-10-29T12:10:01+01:00",
   "gui_verification": "PASS_AFTER_TARGETED_RESUME",
@@ -3517,6 +3515,7 @@
   "checkpoint_files": {
     "before_official_publication.zip": "526f2582bac78ba182fc5f048c61455413baacb61516a1d828fef3090adff86c",
     "descriptive_regressions_final.log": "602dd801fd7168d6d061dc3bd958d8ca0be0820e5f09b8c399ae21eff9a598fe",
+    "GIT_PUBLICATION.md": "8b5e110e06abb19d5c3eb9ee8331173559b460bd3db9aeacece04d1522569247",
     "gui_s3_s6_initial_run.log": "7921b0b47a165df9bf06417f559f0f2b1be38db203e54499479186fe1de79026",
     "gui_s3_s6_verification.json": "118c59121e438a918368865f7f7e15cecfc3befc3b831cb8efc5e756bc46f404",
     "gui_s6_final_validation.log": "5e400e2f6d223cfd30e625500b262b5551570e2b3ff2a7b9b8d43d7ac6142446",
@@ -3525,7 +3524,23 @@
     "integrated_source_and_approved_documents.zip": "26fac9c13cf6670b6451981b9afe5bb06bb0d83d12eeea68f10631ab5581994a",
     "official_crosschecks.log": "89c9e6ee0c02dfa8640b97bb44924fc8715e0bb18f277bfff5f8d103c0657b82",
     "publication_receipt.json": "9dbdebd4f60af78dea6637fbe3309841dbdfdd3ab2a7ee365c54437be9eee98c",
-    "README.md": "ed2eb6c3ab6da31df819c1e83c75c4d3971fd9663ef995f7604a910db4c640d0",
+    "README.md": "aac2a5fa93d41301e481e3ed62cbe2957a776b3b1585a84ec95a9b00e2b37941",
     "restart_handoff.md": "05ad9ac95f86311876355ce82eaf9cebb8f4eaac6c91c2a685b18e7f32f39b00"
-  }
+  },
+  "pre_git_publication_state": {
+    "commit": "104d8fe24a4ef1caaff270db9bbee12a91336d27",
+    "tag_created": false,
+    "pushed": false
+  },
+  "git_publication": {
+    "authorized_by": "user",
+    "requested_at": "2026-10-29T12:13:35+01:00",
+    "commit_subject": "srs-drs-official-approved-2026-10-29",
+    "annotated_tag": "srs-drs-official-approved-2026-10-29",
+    "remote": "origin",
+    "branch": "main",
+    "result_receipt": "local and remote Git refs; see GIT_PUBLICATION.md",
+    "archive_unchanged": true
+  },
+  "loose_metadata_hash_policy": "Recorded working-copy bytes; Git may normalize loose text line endings on checkout. ZIP and every archive member remain byte-exact."
 }
