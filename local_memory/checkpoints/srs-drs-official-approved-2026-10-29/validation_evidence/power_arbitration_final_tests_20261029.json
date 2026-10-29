@@ -1,0 +1,13 @@
+{
+  "run": 101,
+  "failures": 0,
+  "errors": 0,
+  "baseline_failures_separately_reproduced": [
+    "test_contract_driven_synthesis.ContractDrivenSynthesisTests.test_complete_proposed_srs_has_role_specific_sections_without_authorizing_them",
+    "test_contract_driven_synthesis.ContractDrivenSynthesisTests.test_shared_mode_context_is_expressed_once_with_all_dependencies",
+    "test_contract_driven_synthesis.ContractDrivenSynthesisTests.test_supported_purpose_is_proposed_without_forging_destination_authority",
+    "test_srs_integrity_policy.SrsIntegrityPolicyTests.test_block_owner_does_not_override_authoritative_srs_or_drs_target",
+    "test_srs_integrity_policy.SrsIntegrityPolicyTests.test_ledger_maps_canonical_snapshot_ids_to_source_ids",
+    "test_srs_integrity_policy.SrsIntegrityPolicyTests.test_srs_overview_full_renderer_has_unique_headings_and_audit"
+  ]
+}

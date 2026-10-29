@@ -1,6 +1,10 @@
 {
-  "timestamp": "2026-10-27 19:45:42",
+  "timestamp": "2026-10-29T12:10:01+01:00",
   "target_dir": "local_memory",
-  "mode": "local_memory_only",
-  "file_count": 32
+  "mode": "local_memory_checkpoint",
+  "file_count": 54,
+  "current_checkpoint": "srs-drs-official-approved-2026-10-29",
+  "archive_member_count": 698,
+  "tag_status": "proposed_only",
+  "remote_push": false
 }

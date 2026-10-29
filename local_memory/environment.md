@@ -2,7 +2,20 @@
 - Active source specification: specs/DDS_STBIO1.pdf
 - Use python scripts/... commands in this workspace.
 
-- Current local checkpoint and annotated Git tag:
+- Current official state, 2026-10-29:
+  `local_memory/checkpoints/srs-drs-official-approved-2026-10-29/`.
+  Read its focused handoff/manifest. SRS and DRS are user-approved and published
+  in official stage3/stage5 paths; exact approved Word hashes and official
+  crosscheck/gate PASS are recorded in the publication receipt.
+  Current live runtime contains the integrated fixes, unlike the older archive.
+  Snapshot `snap-8b3673edc9cf590589b8ab39` is unchanged. The GUI S3-to-S6 command
+  uses that explicit snapshot plus `--prepare-snapshot-inputs`; see GUI receipts.
+  Never replace the canonical database or frozen approvals from a backup.
+  Proposed tag `srs-drs-official-approved-2026-10-29` is not created/pushed.
+  The local Git checkpoint saves memory and complete source/evidence archive;
+  preserve other dirty work.
+
+- Historical local checkpoint and annotated Git tag:
   `main-controller-ipos-review-pass-2026-10-27`.
   The named checkpoint README references the immutable verified payload
   `2026-10-27-main-controller-ipos-review-pass`. Git refs record publication.
@@ -20,7 +33,7 @@
   `C:\Users\syslocadm1906\AppData\Local\Programs\Python\Python311\python.exe`.
   Use `-B`, local Pandoc and isolated `scripts;tests` on `PYTHONPATH`.
   Existing unittest runner works; editor test discovery found no tests.
-- Official runtime/documents/approvals/snapshots remain unchanged. Preserve
+- At that historical checkpoint, runtime/documents/approvals/snapshots were unchanged. Preserve
   dirty user work and SRS3.6. Source/evidence archive is not a database restore;
   never rerun `trial_control.py setup` or extract over the official root.
   Later controlled main-workflow integration is separate; new features follow it.

@@ -1,0 +1,38 @@
+{
+  "snapshot_id": "snap-8b3673edc9cf590589b8ab39",
+  "final_verification_status": "PASS_AFTER_TARGETED_RESUME",
+  "gui_startup": "PASS",
+  "actual_range_command": "workflow_cli.py run --from-stage 3 --to-stage 6 --snapshot-id snap-8b3673edc9cf590589b8ab39 --prepare-snapshot-inputs",
+  "initial_range_exit_code": 3,
+  "initial_range_failure": "Only the S6 synthetic DRS power-table regression fixture was obsolete for the explicit 4.2 policy-note obligation. No document-generation command failed.",
+  "repair_scope": "Test fixture only: include the contractual note and render actual Word headings. No test disabled, no production guard weakened, no fake snapshot approved.",
+  "rerun_strategy": "Resume exactly the failed 166-test regression step, then the remaining S6 gate and final generation-input coherence. Do not duplicate ten-minute successful generation.",
+  "stage3": "PASS",
+  "stage4": "PASS (valid-empty ARS; CLI continued normally)",
+  "stage5": "PASS",
+  "stage6_generation": "PASS",
+  "stage6_descriptive_tests": {
+    "tests": 166,
+    "exit_code": 0,
+    "status": "PASS"
+  },
+  "stage6_gate": {
+    "status": "PASS",
+    "requirements": 302,
+    "blocks": 8
+  },
+  "final_generation_input_coherence": {
+    "decision": "PASS",
+    "findings": 0
+  },
+  "approved_srs_drs_rerun_content_equivalence": {
+    "stage3_srs.md": true,
+    "stage3_srs.docx": true,
+    "stage5_drs.md": true,
+    "stage5_drs.docx": true
+  },
+  "metadata_normalization": "Only equivalent workspace path prefixes; all heading/paragraph/table events otherwise exact.",
+  "official_generation_invoked": false,
+  "snapshot_authority_modified": false,
+  "global_sysml_readiness_certified": false
+}

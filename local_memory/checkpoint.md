@@ -1,6 +1,32 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: main-controller-ipos-review-pass-2026-10-27
+## Latest checkpoint: srs-drs-official-approved-2026-10-29
+
+- Directory: `local_memory/checkpoints/srs-drs-official-approved-2026-10-29/`.
+- User-approved SRS and DRS published as exact reviewed Word files with matching
+  Markdown/audit companions. Official crosschecks and Stage 3/5 gates PASS.
+- Current integrated shared runtime, tests, templates, project data, accepted
+  documents, frozen reproducibility inputs and focused proof are archived with
+  per-member hashes. Preserve the existing dirty worktree.
+- Read `restart_handoff.md`, `publication_receipt.json`, GUI receipts/log and
+  `checkpoint_manifest.json`. Archive recovery is isolated-only, not an automatic
+  runtime/canonical/approval restore.
+- Explicit snapshot `snap-8b3673edc9cf590589b8ab39`; no source/snapshot approval
+  changes. DRS 55 normative requirements, IDs/Covers, tables, source I/O and
+  final 3.1 are preserved. Normative SRS partition is valid-empty.
+- GUI S3-to-S6 route is separately exercised on that snapshot. Its receipt, not
+  individual document checks, records range completion.
+  Startup and all generation steps PASS; obsolete S6 fixture repaired and
+  targeted resume PASS:166 tests,302 requirements,8 blocks,zero coherence findings.
+  The original failed test attempt remains explicitly recorded.
+- 101 regression tests PASS; six reproduced baseline failures remain separate.
+  DRS writing UNRESOLVED (216); historical Main Controller writing UNRESOLVED
+  (522). No whole-workflow readiness claim.
+- Local checkpoint commit contains memory/archive evidence, not unrelated loose
+  runtime/database changes. Proposed tag only:
+  `srs-drs-official-approved-2026-10-29`; no tag creation or push.
+
+## Previous checkpoint: main-controller-ipos-review-pass-2026-10-27
 
 - Named directory: `local_memory/checkpoints/main-controller-ipos-review-pass-2026-10-27/`.
 - User authorized checkpoint commit, annotated tag with the exact same name,

@@ -1,0 +1,705 @@
+--- before/scripts/workflow_routing.py
++++ after/scripts/workflow_routing.py
+@@ -2501,7 +2501,7 @@
+         if identity_match:
+             identity = identity_match.group(2).rstrip('.')
+             identity = re.sub(r"\banalog front end device\b", "analog front end", identity, flags=re.IGNORECASE)
+-            identity = re.sub(r"\bembedded process capabilities\b", "embedded processing capabilities", identity, flags=re.IGNORECASE)
++            identity = descriptive_identity_text(identity)
+             identities.append(f"The system is {identity}.")
+             audit_candidate(SRS_SYSTEM_OVERVIEW_HEADINGS[0], statement, source, identities[-1])
+         elif re.match(r"^The system is\b", statement, re.IGNORECASE):
+@@ -4288,6 +4288,7 @@
+ 
+ 
+ ARBITRATION_POLICY_GAP = "The arbitration policy needs clarification."
++COMMON_BUS_ARBITRATION_POLICY_GAP = "common bus and shared resources arbitration policy to be clarified"
+ 
+ 
+ def shared_resource_relations(evidence: Mapping) -> Tuple[Mapping, ...]:
+@@ -4383,6 +4384,15 @@
+     return proposals
+ 
+ 
++def descriptive_identity_text(text: str) -> str:
++    return re.sub(r"\bembedded process capabilities\b", "embedded processing capabilities", text, flags=re.I)
++
++
++def drs_overview_presentation_meaning(meaning: DescriptiveMeaning) -> DescriptiveMeaning:
++    return (replace(meaning, objects=tuple(descriptive_identity_text(value) for value in meaning.objects))
++            if meaning.predicate == "be" else meaning)
++
++
+ def digital_overview_meaning(meaning: DescriptiveMeaning) -> bool:
+     """Keep brief device identity and explicitly digital objectives, not parallel channel descriptions."""
+     return bool((functional_meaning_role(meaning) == "purpose" and meaning.predicate == "be")
+@@ -4405,17 +4415,33 @@
+                                 "parallel system/channel context or qualified detail is not a Digital Top objective",
+                       "normative_covers_created": False})
+         if kept:
+-            selected.append(proposition.meaning)
++            selected.append(drs_overview_presentation_meaning(proposition.meaning))
+     if not any(functional_meaning_role(meaning) != "purpose" for meaning in selected):
+         audit.append({"section": "3", "disposition": "unresolved",
+                       "reason": "Digital Top objective not established; supported context retained without objective credit",
+                       "source_record_ids": [record.record_id for record in model.records],
+                       "spans": [], "normative_covers_created": False})
+-        return shared_document_descriptive_contributions(
+-            evidence.get("shared_records", ()), document="DRS").get("3", []), audit
+-    text = realize_descriptive_functional_claim(DescriptiveFunctionalClaim(
+-        "digital-top-objective", "purpose", (), tuple(selected), (), ())) if selected else ""
+-    return ([text] if text else []), audit
++        texts = shared_document_descriptive_contributions(
++            evidence.get("shared_records", ()), document="DRS").get("3", [])
++    else:
++        text = realize_descriptive_functional_claim(DescriptiveFunctionalClaim(
++            "digital-top-objective", "purpose", (), tuple(selected), (), ())) if selected else ""
++        texts = [text] if text else []
++    texts = [descriptive_identity_text(text) for text in texts]
++    for domain, meaning, sources in system_domain_responsibilities(evidence):
++        if domain != "digital" or len(sources) < 2:
++            continue
++        complement = replace(meaning, predicate="combine",
++            objects=(meaning.objects[0].removeprefix("to "),),
++            qualifiers=("as complementary subsystem responsibilities",))
++        paragraph = realize_descriptive_functional_claim(DescriptiveFunctionalClaim(
++            "digital-domain-complement", "purpose", (), (complement,), (), ()))
++        texts.append(paragraph)
++        audit.append({"section": "3", "disposition": "synthesized",
++                      "reason": "complementary_domain_responsibilities_from_approved_function_mapping",
++                      "source_record_ids": list(sources), "meanings": [asdict(complement)],
++                      "rendered_summary": paragraph, "normative_covers_created": False})
++    return texts, audit
+ 
+ 
+ def drs_functional_actor(meaning: DescriptiveMeaning, evidence: Mapping) -> str:
+@@ -4646,7 +4672,7 @@
+         for section, statements in sections.items():
+             body = literal_publication_text(" ".join(bodies.get(section, [])))
+             if overview_model is not None:
+-                required = tuple(value.meaning for value in overview_model.propositions
++                required = tuple(drs_overview_presentation_meaning(value.meaning) for value in overview_model.propositions
+                                  if digital_overview_meaning(value.meaning))
+                 candidates = [text for text in bodies.get(section, ()) if any(
+                     re.search(_ipos_phrase_pattern(meaning.subject), text, re.I) for meaning in required)]
+@@ -4829,6 +4855,7 @@
+     records: List[NormalizedSourceRecord] = []
+     units: List[SemanticUnit] = []
+     power_rows: List[Dict[str, str]] = []
++    power_groups: Dict[Tuple[str, str, str], List[Dict[str, str]]] = {}
+     gaps: List[str] = list(catalog_findings)
+ 
+     def retain(section: str, text: str, source_text: str, provenance: Tuple[str, ...], tier: str,
+@@ -4838,7 +4865,8 @@
+                                         provenance, "selected", "SRS document-specific presentation")
+         unit = SemanticUnit("srs-unit-" + stable_payload_hash((section, text, record_id))[:20], section, text,
+                             (record_id,), len(units))
+-        records.append(record)
++        if record not in records:
++            records.append(record)
+         units.append(unit)
+         sections[section].append(text)
+ 
+@@ -4968,8 +4996,25 @@
+         cells = [name, fields["domain type"], fields.get("control mode") or fields.get("control") or "Not specified",
+                  role, conditions or "Not specified"]
+         text = "| " + " | ".join(value.replace("|", "\\|").replace("\n", " ") for value in cells) + " |"
+-        retain("3.6", text, statement, (source,), "admitted_context", scope)
+-        power_rows.append({"source": source, "statement": statement, "domain": name, "row": text})
++        row = {"source": source, "statement": statement, "domain": name, "row": text}
++        power_rows.append(row)
++        power_groups.setdefault((fields["domain type"], fields.get("control mode") or fields.get("control", ""),
++                                 scope), []).append(row)
++    for (domain_type, control, scope), members in power_groups.items():
++        names = list(dict.fromkeys(row["domain"] for row in members))
++        plural = len(names) > 1
++        subject = "The " + domain_type.casefold() + " power " + ("domains" if plural else "domain")
++        statement = "\n\n".join(row["statement"] for row in members)
++        provenance = tuple(dict.fromkeys(row["source"] for row in members))
++        fact = DescriptiveFact(subject=subject, action="use" if control else "be",
++            objects=(control + " control",) if control else ("part of the power architecture",),
++            source="\n".join(provenance), statement=statement, scope=scope,
++            section=SRS_SYSTEM_OVERVIEW_HEADINGS[5], plural_subject=plural)
++        for paragraph in compose_descriptive_paragraphs((fact,), profile=SRS_DESCRIPTIVE_PROFILE):
++            retain("3.6", paragraph.text, statement, provenance, "admitted_context", scope)
++    for row in power_rows:
++        scope = next(key[2] for key, members in power_groups.items() if row in members)
++        retain("3.6", row["row"], row["statement"], (row["source"],), "admitted_context", scope)
+     return sections, {"schema_version": 1, "snapshot_id": snapshot_id, "project_name": project_name,
+                       "profile": SRS_DOCUMENT_CONTENT_PROFILE.name, "profile_version": SRS_DOCUMENT_CONTENT_PROFILE.version,
+                       "profile_fingerprint": stable_payload_hash(asdict(SRS_DOCUMENT_CONTENT_PROFILE)),
+@@ -5116,6 +5161,7 @@
+                     findings.append("srs_content_provenance_mismatch:" + field)
+         docx_sections: Dict[str, str] = {}
+         docx_tables: List[List[List[str]]] = []
++        docx_power_preface = ""
+         docx_path = markdown_path.with_suffix(".docx")
+         if docx_path.exists():
+             from docx import Document
+@@ -5131,6 +5177,8 @@
+                         current = heading.group(1)
+                 if current in sections:
+                     docx_sections[current] = docx_sections.get(current, "") + " " + words
++                if current == "3.6" and element.tag == qn("w:p") and not docx_tables:
++                    docx_power_preface += " " + words
+                 if current == "3.6" and element.tag == qn("w:tbl"):
+                     table = Table(element, document)
+                     docx_tables.append([[cell.text for cell in row.cells] for row in table.rows])
+@@ -5155,7 +5203,7 @@
+                     or unit["unit_id"] != "srs-unit-" + stable_payload_hash((section, unit["text"], record["record_id"]))[:20]):
+                 findings.append("srs_content_provenance_invalid:" + section)
+             rendered = unit["text"]
+-            if section == "3.6":
++            if section == "3.6" and rendered.startswith("|"):
+                 if rendered not in sections[section]:
+                     findings.append("srs_domain_row_missing_or_changed")
+                 cells = [value.strip().replace("\\|", "|") for value in re.split(r"(?<!\\)\|", rendered)[1:-1]]
+@@ -5167,6 +5215,12 @@
+                     findings.append("srs_content_missing_from_markdown:" + section)
+                 if docx_path.exists() and normalized(summary) not in normalized(docx_sections.get(section, "")):
+                     findings.append("srs_content_missing_from_docx:" + section)
++                if section == "3.6":
++                    header = "| Domain | Type | Control | Functional Role | Power Conditions |"
++                    if sections[section].find(rendered) > sections[section].find(header) >= 0:
++                        findings.append("srs_power_explanation_after_table")
++                    if docx_path.exists() and normalized(summary) not in normalized(docx_power_preface):
++                        findings.append("srs_power_explanation_missing_from_docx")
+                 if section in {"4.1", "5.1"}:
+                     remainder = text.replace(sections[section], "", 1)
+                     if normalized(summary) in normalized(remainder):
+--- before/scripts/spec_document_contract.py
++++ after/scripts/spec_document_contract.py
+@@ -30,7 +30,7 @@
+ 
+ PUBLICATION_REVIEW_MARKERS = re.compile(
+     r"\b(?:need clarification|requires? clarification|not specified|not described|"
+-    r"TBD(?:-\d+)?|TBC|clarification|placeholder|insufficient|unresolved|SRS_(?:CATALOG|POWER)_[A-Z_]+)\b", re.I,
++    r"TBD(?:-\d+)?|TBC|clarification|to be clarified|placeholder|insufficient|unresolved|SRS_(?:CATALOG|POWER)_[A-Z_]+)\b", re.I,
+ )
+ 
+ 
+@@ -81,13 +81,13 @@
+                 raise ValueError("Approved normative text contains a review marker; source review is required")
+             result.append(line)
+         else:
+-            from workflow_routing import ARBITRATION_POLICY_GAP
+-            retained_policy_gap = (technical_policy_review and document_type == "DRS"
+-                                   and numbered_section == "3.1"
+-                                   and line.strip() == ARBITRATION_POLICY_GAP)
++            from workflow_routing import ARBITRATION_POLICY_GAP, COMMON_BUS_ARBITRATION_POLICY_GAP
++            retained_policy_gap = (document_type == "DRS" and (
++                (technical_policy_review and numbered_section == "3.1" and line.strip() == ARBITRATION_POLICY_GAP)
++                or (numbered_section == "4.2" and line.strip() == COMMON_BUS_ARBITRATION_POLICY_GAP)))
+             if retained_policy_gap:
+                 projected = line
+-                technical_gaps.append({"text": line.strip(), "section": "3.1",
++                technical_gaps.append({"text": line.strip(), "section": numbered_section,
+                                        "reason": "arbitration_policy_requires_source_clarification"})
+             else:
+                 projected = clean_publication_line(line) if PUBLICATION_REVIEW_MARKERS.search(line) or re.search(r"-tbd\b", line, re.I) else line
+@@ -139,14 +139,26 @@
+             findings.append("publication_artifact_missing:" + path.name)
+             continue
+         events = drs_document_events(path)
+-        values = [event["text"] for event in events if event["kind"] != "table"]
+-        values.extend(cell for event in events if event["kind"] == "table" for row in event["rows"] for cell in row)
+-        from workflow_routing import ARBITRATION_POLICY_GAP
+-        retained = {item["text"] for item in audit.get("technical_policy_gaps", ())
+-                    if audit.get("document_type") == "DRS" and item.get("section") == "3.1"
++        from workflow_routing import ARBITRATION_POLICY_GAP, COMMON_BUS_ARBITRATION_POLICY_GAP
++        allowed_gaps = {"3.1": ARBITRATION_POLICY_GAP, "4.2": COMMON_BUS_ARBITRATION_POLICY_GAP}
++        retained = {(item["section"], item["text"]) for item in audit.get("technical_policy_gaps", ())
++                    if audit.get("document_type") == "DRS" and item.get("section") in allowed_gaps
+                     and item.get("reason") == "arbitration_policy_requires_source_clarification"
+-                    and item.get("text") == ARBITRATION_POLICY_GAP}
+-        if any(PUBLICATION_REVIEW_MARKERS.search(value) and value not in retained for value in values):
++                    and item.get("text") == allowed_gaps[item["section"]]}
++        section, invalid = "", False
++        for event in events:
++            if event["kind"] == "heading":
++                number = re.match(r"^(\d+(?:\.\d+)*)(?:\.?\s|$)", event["text"])
++                if number:
++                    section = number[1]
++                elif event["level"] <= 3:
++                    section = ""
++            values = ([cell for row in event["rows"] for cell in row]
++                      if event["kind"] == "table" else [event["text"]])
++            if any(PUBLICATION_REVIEW_MARKERS.search(value)
++                   and not (event["kind"] == "paragraph" and (section, value) in retained) for value in values):
++                invalid = True
++        if invalid:
+             findings.append("publication_inline_marker:" + path.name)
+     return findings
+ 
+@@ -463,9 +475,10 @@
+         concrete_owner_rows, structural_owner_rows, descriptive_functional_roles, descriptive_processing_meaning,
+         descriptive_processing_contribution,
+         shared_resource_relations, shared_arbitration_policies, ARBITRATION_POLICY_GAP,
++        COMMON_BUS_ARBITRATION_POLICY_GAP,
+         system_responsibility_meaning, system_domain_responsibilities, ipos_local_context_relationships,
+         system_local_capability_meanings,
+-        digital_overview_meaning,
++        digital_overview_meaning, drs_overview_presentation_meaning,
+         system_mode_capability_projections,
+         abstract_srs_evidence_model, srs_implementation_syntax, srs_source_evidence_model,
+     )
+@@ -495,6 +508,8 @@
+         gaps.append(row)
+ 
+     def add_meaning(meaning, role, source, spans=(), proposition_id="", optional=False):
++        if document == "DRS":
++            meaning = drs_overview_presentation_meaning(meaning)
+         expected.append({"meaning": meaning, "role": role, "source": source,
+                          "spans": [asdict(span) for span in spans], "proposition_id": proposition_id,
+                          "optional": optional})
+@@ -693,6 +708,13 @@
+                 add_meaning(DescriptiveMeaning("behavior", "The " + function["owner"] + " block", action.lower(), (obj,)),
+                             "main_functions", function["source"], (span,))
+     if document == "DRS":
++        for domain, meaning, source_ids in system_domain_responsibilities(evidence):
++            if domain == "digital" and len(source_ids) >= 2:
++                from dataclasses import replace
++                complement = replace(meaning, predicate="combine",
++                    objects=(meaning.objects[0].removeprefix("to "),),
++                    qualifiers=("as complementary subsystem responsibilities",))
++                add_meaning(complement, "context", ";".join(source_ids))
+         for values in drs_purpose_fallbacks.values():
+             for value in values:
+                 if all(span.record_id.startswith("requirement:") for span in value.spans):
+@@ -840,9 +862,12 @@
+                         finding("supported_function_coverage", "supported structural block missing from domain inventory",
+                                 source=row["source"], section=target, artifact=path.name, impact="architecture_coverage")
+         if document == "DRS":
+-            if missing_policy and not any(ARBITRATION_POLICY_GAP == text for text in sections.get("3.1", ())):
++            policy_sections = descriptive_section_paragraphs(path, {"sections": {"4.2": {}}})
++            if (missing_policy
++                    and ARBITRATION_POLICY_GAP not in sections.get("3.1", ())
++                    and COMMON_BUS_ARBITRATION_POLICY_GAP not in policy_sections["4.2"]):
+                 finding("supported_function_coverage", "missing arbitration policy clarification is not visible",
+-                        section="3.1", artifact=path.name, impact="policy_coverage")
++                        section="4.2", artifact=path.name, impact="policy_coverage")
+             processing_prose = []
+             active_processing = False
+             for event in drs_document_events(path):
+@@ -1038,7 +1063,8 @@
+                                          + r"(?:\s+block)?(?:\s|:)", text, re.I)):
+                     continue
+                 supported_actor = any(
+-                    actor.search(sentence) and atoms(meaning.predicate).issubset(atoms(sentence))
++                    actor.search(sentence)
++                    and re.search(r"\b" + _ipos_readback_finite_verb_pattern(meaning) + r"\b", sentence, re.I)
+                     and atoms(" ".join(meaning.objects)).issubset(atoms(sentence))
+                     and (document != "IPOS" or re.search(
+                         r"\b" + _ipos_readback_finite_verb_pattern(meaning) + r"\b", sentence, re.I))
+--- before/scripts/run_srs_gen_spec_agent.py
++++ after/scripts/run_srs_gen_spec_agent.py
+@@ -2623,12 +2623,14 @@
+                 if not heading.startswith("3.1 "):
+                     lines.extend([f"### {heading}", ""])
+                 if heading.startswith("3.6 ") and support_sections["3.6"]:
++                    lines.extend(item for item in support_sections["3.6"] if not item.startswith("|"))
+                     for item in overview_sections[heading]:
+                         if not item.startswith("- **Clock and reset**"):
+                             for sentence in item.split("\n")[1:]:
+                                 lines.extend([sentence.removeprefix("  - "), ""])
+                     lines.extend(["", "| Domain | Type | Control | Functional Role | Power Conditions |",
+-                                  "|---|---|---|---|---|", *support_sections["3.6"], ""])
++                                  "|---|---|---|---|---|",
++                                  *(item for item in support_sections["3.6"] if item.startswith("|")), ""])
+                     lines.extend(item for item in overview_sections[heading] if item.startswith("- **Clock and reset**"))
+                 else:
+                     lines.extend(overview_sections[heading])
+--- before/scripts/run_drs_gen_spec_agent.py
++++ after/scripts/run_drs_gen_spec_agent.py
+@@ -2261,9 +2261,28 @@
+             continue
+         if not publication_text_is_accounted(narrative, body, docx_text, presentation_audit):
+             findings.append(f"drs_digital_topic_narrative_missing:{topic}")
+-    if functions_section and not publication_text_is_accounted("Priority between simultaneous resource requesters: need clarification.", functions_section.group(1), docx_text, presentation_audit):
+-        findings.append("drs_arbitration_boundary_missing")
+     shared_section = re.search(r"(?ms)^### (?:\*\*)?4\.2 Arbitration, control, and shared resources[^\n]*\n(.*?)(?=^### (?:\*\*)?4\.3 )", markdown)
++    from workflow_routing import (
++        COMMON_BUS_ARBITRATION_POLICY_GAP, shared_resource_relations, shared_arbitration_policies,
++        realize_descriptive_functional_claim,
++    )
++    from spec_document_contract import descriptive_section_paragraphs
++    policy_sections = {path: descriptive_section_paragraphs(path, {"sections": {"4.2": {}}})["4.2"]
++                       for path in (markdown_path, docx_path)}
++    if any(COMMON_BUS_ARBITRATION_POLICY_GAP not in paragraphs for paragraphs in policy_sections.values()):
++        if snapshot_match and purpose_evidence is None:
++            purpose_evidence = resolve_downstream_contract(repo_root, snapshot_match[1]).synthesis_evidence(
++                repo_root, document="DRS")
++        policies = shared_arbitration_policies(purpose_evidence) if purpose_evidence is not None else ()
++        missing_policy = (not policies or bool(
++            {row["owner"] for row in shared_resource_relations(purpose_evidence)}
++            - {value.subject for value in policies})) if purpose_evidence is not None else True
++        policy_text = (" ".join(realize_descriptive_functional_claim(DescriptiveFunctionalClaim(
++            "independent-policy", "functions", (), (meaning,), (), ())) for meaning in policies)
++            if not missing_policy else COMMON_BUS_ARBITRATION_POLICY_GAP)
++        for path, paragraphs in policy_sections.items():
++            if policy_text not in " ".join(paragraphs):
++                findings.append("drs_arbitration_boundary_missing:" + path.name)
+     shared_narrative = _drs_section_interaction_summary(expected[DRS_INTRO_TOPICS[0][0]])
+     if not shared_section or shared_narrative not in shared_section.group(1) or shared_narrative not in docx_text:
+         findings.append("drs_shared_section_summary_missing")
+@@ -3211,6 +3230,8 @@
+             for topic, entries in digital_summary.items() if topic != "Shared digital resources"
+         }
+     processing_claims = ()
++    missing_arbitration_policy = True
++    policies = ()
+     if responsibility_evidence is not None:
+         from workflow_routing import (
+             ARBITRATION_POLICY_GAP, document_processing_claims, realize_descriptive_functional_claim,
+@@ -3219,6 +3240,8 @@
+         processing_claims = document_processing_claims(responsibility_evidence)
+         resource_relations = shared_resource_relations(responsibility_evidence)
+         policies = shared_arbitration_policies(responsibility_evidence)
++        missing_arbitration_policy = (not policies
++            or bool({row["owner"] for row in resource_relations} - {value.subject for value in policies}))
+         if resource_relations:
+             digital_summary.setdefault(combined_topic, [])
+         if processing_claims:
+@@ -3373,7 +3396,12 @@
+     facet_rows = _drs_shared_facet_rows(digital_block_rows, intro_rows[DRS_INTRO_TOPICS[0][0]])
+     for facet, evidence in sorted(facet_rows, key=lambda row: row[1] == "need clarification"):
+         lines.append(f"{facet}: {evidence}")
+-    lines.append("Priority between simultaneous resource requesters: need clarification.")
++    if missing_arbitration_policy:
++        from workflow_routing import COMMON_BUS_ARBITRATION_POLICY_GAP
++        lines.append(COMMON_BUS_ARBITRATION_POLICY_GAP)
++    else:
++        lines.extend(realize_descriptive_functional_claim(DescriptiveFunctionalClaim(
++            "shared-resource-policy", "functions", (), (meaning,), (), ())) for meaning in policies)
+     lines.append("")
+     append_interaction_context(intro_rows[DRS_INTRO_TOPICS[0][0]], include_summary=False)
+     lines.append("")
+--- before/templates/SRS_gen_AI_template_prompt.md
++++ after/templates/SRS_gen_AI_template_prompt.md
+@@ -198,6 +198,10 @@
+ 
+ ### 3.6 Power, Clock, and Reset Overview
+ Describe only safe top-level power, clock, and reset structure supported by clean evidence. Keep unsupported facets as narrow technical gaps; do not infer behavior from route or signal presence.
++Before the power-domain table, explain the documented domain types and control
++responsibilities in concise prose derived from the same admitted structured records.
++Preserve the table, functional qualifications, clock/reset material and normative
++content; do not infer retention, sequencing or timing from domain classification.
+ 
+ ### 3.7 Assumptions, Scope Limits, and Allocation Boundaries
+ State engineering scope, supported assumptions, and allocation boundaries. Do not use generator disclaimers or audit language; identify only the specific unsupported technical points and do not change allocation authority.
+--- before/templates/DRS_gen_AI_template_prompt.md
++++ after/templates/DRS_gen_AI_template_prompt.md
+@@ -232,6 +232,12 @@
+ Connections, wake-up events, memory sizes and actor mentions alone do not
+ establish a processing function. Do not copy source fragments to fill a heading.
+ 
++The section 3 overview may add one concise paragraph combining the digital
++domain's supported architecture-level responsibilities from the approved function
++mapping. Explain their complementary scope, not an inferred execution chain;
++do not repeat block purposes, append source passages or impose a fixed function
++list. Keep the existing overview, inventory and section 3.1 unchanged.
++
+ ### 4. Digital requirements
+ 
+ #### 4.1 Digital block list
+@@ -240,6 +246,11 @@
+ #### 4.2 Arbitration, control, and shared resources
+ Explain approved shared-resource responsibilities, integration control, mode coordination,
+ reset/boot and power transitions. Keep private state machines in IPOS.
++State arbitration policies only when explicitly supported by applicable approved
++evidence. If the common bus/shared-resource policy is not established, retain this
++non-normative technical note in 4.2: `common bus and shared resources arbitration policy to be clarified`.
++Account for it in the existing technical-policy-gap audit; the note neither defines
++a policy nor resolves the source gap, creates a requirement or blocks generation.
+ 
+ #### 4.3 Register and configuration requirements
+ Explain system-visible register/configuration contracts, parameter dependencies, defaults,
+--- before/tests/test_srs_integrity_policy.py
++++ after/tests/test_srs_integrity_policy.py
+@@ -317,6 +317,87 @@
+             document.save(output.with_suffix(".docx"))
+             self.assertEqual(validate_srs_system_overview(output), [])
+ 
++    def test_power_preface_uses_admitted_domain_types_and_controls_without_inference(self):
++        power = [
++            {"statement": name + ": Domain type: " + kind + ". Control mode: " + control
++                          + ". Function: Supplies acquisition only in capture mode. "
++                            "Characteristics: May be powered down when unused.",
++             "source": "Architecture description " + name, "scope": "architecture", "evidence_kind": "power_domain"}
++            for name, kind, control in (("PD_CAPTURE", "Always-On", "HW"), ("PD_LINK", "Always-On", "HW"),
++                                        ("PD_COMPUTE", "Switchable", "SW"))
++        ]
++        sections, audit = compose_srs_support_content("Synthetic", "snapshot", [], [], power)
++        prose = [text for text in sections["3.6"] if not text.startswith("|")]
++        self.assertEqual(prose, [
++            "The always-on power domains use HW control.",
++            "The switchable power domain uses SW control.",
++        ])
++        self.assertEqual(len(audit["power_rows"]), 3)
++        self.assertTrue(all("May be powered down when unused" in row["row"] for row in audit["power_rows"]))
++        self.assertTrue(all("only in capture mode" in row["row"] for row in audit["power_rows"]))
++        units = [unit for unit in audit["units"] if unit["section"] == "3.6"]
++        self.assertEqual([unit["text"] for unit in units], sections["3.6"])
++        origins = {record["record_id"]: record for record in audit["records"]}
++        self.assertEqual(origins[units[0]["source_record_ids"][0]]["provenance"],
++                         ("Architecture description PD_CAPTURE", "Architecture description PD_LINK"))
++        for field, value in (("scope", "block_local"), ("source", "")):
++            with self.subTest(field=field):
++                rejected, _ = compose_srs_support_content("Synthetic", "snapshot", [], [],
++                    [{**record, field: value} for record in power])
++                self.assertEqual(rejected["3.6"], [])
++        empty, _ = compose_srs_support_content("Synthetic", "snapshot", [], [], [])
++        self.assertEqual(empty["3.6"], [])
++        no_control = {**power[0], "statement": "PD_A: Domain type: Always-On. Function: Supplies capture."}
++        sections, _ = compose_srs_support_content("Synthetic", "snapshot", [], [], [no_control])
++        self.assertEqual(sections["3.6"][0], "The always-on power domain is part of the power architecture.")
++
++    def test_power_preface_renderer_and_independent_artifact_checks(self):
++        from docx import Document
++        power = [{"statement": "PD_CAPTURE: Domain type: Always-On. Control mode: HW. "
++                  "Function: Supplies acquisition only in capture mode. Characteristics: Always active.",
++                  "source": "Architecture power description", "scope": "architecture", "evidence_kind": "power_domain"}]
++        with tempfile.TemporaryDirectory() as directory:
++            output = Path(directory) / "srs.md"
++            template = Path(__file__).resolve().parents[1] / "templates/SRS_gen_AI_template_prompt.md"
++            with patch("run_srs_gen_spec_agent._structured_srs_low_power_records", return_value=power):
++                _write_srs_markdown(output_path=output, template_path=template, source_spec="source.pdf",
++                    project_name="Synthetic", document_author="Review", requirements=[], srs_id_map={},
++                    req_to_block={}, block_inventory_rows=[], interface_rows=[], source_port_rows=[],
++                    interaction_rows=[], connection_matrix_srs_ids={}, function_rows=[], descriptive_records=[],
++                    block_requirements={}, unmapped_requirements=[], user_specific_requirements=[],
++                    non_block_context_rows=[], crosscheck_decision="PASS", missing_inputs=[], mode_rows=[],
++                    approved_srs_source_ids=set(), snapshot_id="synthetic", contract_fingerprint="fixture",
++                    document_version="1.0", catalog_entries=[], catalog_findings=[])
++            sections, audit = compose_srs_support_content("Synthetic", "synthetic", [], [], power)
++            preface = sections["3.6"][0]
++            original = output.read_text(encoding="utf-8")
++            self.assertLess(original.index(preface), original.index("| Domain | Type | Control |"))
++            self.assertEqual(validate_srs_support_content(output), [])
++            document = Document()
++            for section, items in sections.items():
++                document.add_heading(section + " Context", level=3)
++                for item in items:
++                    if not item.startswith("|"):
++                        paragraph = document.add_paragraph(item)
++                if section == "3.6":
++                    preface_paragraph = paragraph
++                    table = document.add_table(rows=2, cols=5)
++                    for row, values in zip(table.rows, [
++                        ["Domain", "Type", "Control", "Functional Role", "Power Conditions"],
++                        [value.strip() for value in audit["power_rows"][0]["row"].split("|")[1:-1]],
++                    ]):
++                        for cell, value in zip(row.cells, values):
++                            cell.text = value
++            document.save(output.with_suffix(".docx"))
++            self.assertEqual(validate_srs_support_content(output), [])
++            for replacement in ("", preface.replace("HW", "SW")):
++                output.write_text(original.replace(preface, replacement), encoding="utf-8")
++                self.assertIn("srs_content_missing_from_markdown:3.6", validate_srs_support_content(output))
++            output.write_text(original, encoding="utf-8")
++            table._tbl.addnext(preface_paragraph._p)
++            document.save(output.with_suffix(".docx"))
++            self.assertIn("srs_power_explanation_missing_from_docx", validate_srs_support_content(output))
++
+     def test_srs_overview_full_renderer_has_unique_headings_and_audit(self):
+         with tempfile.TemporaryDirectory() as directory:
+             root = Path(directory)
+@@ -371,6 +452,8 @@
+             self.assertIn("Active after 20 ms", original)
+             self.assertNotIn("Supply voltage: 3A", original)
+             self.assertNotIn("- Voltage: 3A", original)
++            preface = content_sections["3.6"][0]
++            self.assertLess(original.index(preface), original.index("| Domain | Type | Control |"))
+             self.assertIn("[section 3.6](#36-power-clock-and-reset-overview)", original)
+             self.assertIn("SRS_POWER_VOLTAGE_UNRELIABLE", original)
+             for old, new, expected in (
+@@ -379,6 +462,8 @@
+                 (content_sections["1.2"][0], "", "srs_introductory_section_missing:1.2"),
+                 ("- **Unused buffer**", "- **Changed block**", "srs_catalog_coverage_invalid:5.1"),
+                 ("| PD_A | Always-On", "| PD_A | Switchable", "srs_domain_row_missing_or_changed"),
++                (preface, "", "srs_content_missing_from_markdown:3.6"),
++                (preface, preface.replace("HW", "SW"), "srs_content_missing_from_markdown:3.6"),
+             ):
+                 output.write_text(original.replace(old, new), encoding="utf-8")
+                 self.assertIn(expected, validate_srs_support_content(output))
+@@ -413,13 +498,19 @@
+                 for unit in sections[section]:
+                     document.add_paragraph(unit.split("\n\n", 1)[-1].strip())
+             document.add_heading("3.6 Power", level=3)
++            preface_paragraph = document.add_paragraph(preface)
+             table = document.add_table(rows=2, cols=5)
+             for cell, value in zip(table.rows[0].cells, ("Domain", "Type", "Control", "Functional Role", "Power Conditions")):
+                 cell.text = value
+-            for cell, value in zip(table.rows[1].cells, sections["3.6"][0].split("|")[1:-1]):
++            power_row = next(text for text in sections["3.6"] if text.startswith("|"))
++            for cell, value in zip(table.rows[1].cells, power_row.split("|")[1:-1]):
+                 cell.text = value.strip()
+             document.save(output.with_suffix(".docx"))
+             self.assertEqual(validate_srs_support_content(output), [])
++            table._tbl.addnext(preface_paragraph._p)
++            document.save(output.with_suffix(".docx"))
++            self.assertIn("srs_power_explanation_missing_from_docx", validate_srs_support_content(output))
++            table._tbl.addprevious(preface_paragraph._p)
+             table.cell(1, 1).text = "Switchable"
+             document.save(output.with_suffix(".docx"))
+             self.assertIn("srs_domain_row_missing_from_docx", validate_srs_support_content(output))
+--- before/tests/test_contract_driven_synthesis.py
++++ after/tests/test_contract_driven_synthesis.py
+@@ -288,7 +288,7 @@
+                                      for gap in report["gaps"]), changed)
+ 
+     def test_digital_overview_projects_objective_not_parallel_measurement_descriptions(self):
+-        from workflow_routing import drs_overview_plan
++        from workflow_routing import drs_overview_plan, shared_document_descriptive_contributions
+         uses = self.uses("NOVA is a measurement device. "
+             "The optical channel (LUMA) is designed as an optical transceiver, stimulating up to five emitters "
+             "and measuring the return signal on up to three inputs. "
+@@ -731,6 +731,56 @@
+             document="DRS")
+         self.assertEqual({value.subject for value in shared_arbitration_policies(evidence)}, {"Ledger", "Queue"})
+ 
++    def test_drs_overview_complement_is_mapping_bound_and_does_not_change_block_purposes(self):
++        from workflow_routing import drs_overview_plan, shared_document_descriptive_contributions
++        evidence = self.resource_evidence()
++        evidence["shared_records"] = self.uses(
++            "AURORA9 is a measurement device.", document="DRS")
++        evidence["function_decomposition"] = [
++            {"top_function": "Measurement coordination", "subfunctions": "capture scheduling",
++             "blocks_involved": "Timing Unit"},
++            {"top_function": "Result delivery", "subfunctions": "host readback", "blocks_involved": "Queue"},
++            {"top_function": "Unscoped private behavior", "subfunctions": "internal activity",
++             "blocks_involved": "Unknown owner"},
++        ]
++        before = compose_document_responsibilities(evidence, document="DRS")
++        overview = shared_document_descriptive_contributions(evidence["shared_records"], document="DRS").get("3", [])
++        paragraphs, audit = drs_overview_plan(evidence)
++        self.assertEqual(paragraphs[:-1], overview)
++        self.assertEqual(len(paragraphs), len(overview) + 1)
++        self.assertIn("measurement coordination and result delivery", paragraphs[-1])
++        self.assertNotIn("Unscoped", paragraphs[-1])
++        self.assertFalse(any(owner in paragraphs[-1] for owner in ("Timing Unit", "Queue")))
++        self.assertNotIn("capture scheduling", paragraphs[-1])
++        self.assertEqual(before, compose_document_responsibilities(evidence, document="DRS"))
++        mapped = [row for row in audit if row.get("reason", "").startswith("complementary_domain")]
++        self.assertEqual(mapped[0]["source_record_ids"], ["architecture-function:1", "architecture-function:2"])
++        self.assertFalse(mapped[0]["normative_covers_created"])
++        with tempfile.TemporaryDirectory() as directory:
++            path = Path(directory) / "overview.md"
++            source = ";".join(mapped[0]["source_record_ids"])
++            for text, recovered in ((paragraphs[-1], True),
++                                    (paragraphs[-1].replace("measurement coordination and ", ""), False),
++                                    (paragraphs[-1].replace("combines", "ignores"), False)):
++                parts = ["## 3. Top Level Overview", text, "### 3.1 Digital Main Functions", *before[0]]
++                path.write_text("\n\n".join(parts), encoding="utf-8")
++                _write_docx(path.with_suffix(".docx"), parts)
++                with patch("workflow_routing.drs_overview_plan", side_effect=AssertionError("producer")):
++                    assessment = assess_descriptive_synthesis(path, "DRS", evidence)
++                self.assertEqual(not any(gap["source"] == source for gap in assessment["gaps"]), recovered)
++        evidence["function_decomposition"] = []
++        self.assertEqual(drs_overview_plan(evidence)[0], overview)
++
++    def test_drs_identity_grammar_preserves_supported_meaning_fields(self):
++        from workflow_routing import DescriptiveMeaning, drs_overview_presentation_meaning
++        meaning = DescriptiveMeaning("responsibility", "The device", "be",
++            ("a measurement device with embedded process capabilities",),
++            qualifiers=("in capture mode",), modality="may")
++        corrected = drs_overview_presentation_meaning(meaning)
++        self.assertEqual(corrected.objects, ("a measurement device with embedded processing capabilities",))
++        self.assertEqual(replace(corrected, objects=meaning.objects), meaning)
++        self.assertEqual(drs_overview_presentation_meaning(corrected), corrected)
++
+     def test_policy_clarification_is_visible_only_in_explicit_drs_technical_review(self):
+         from workflow_routing import ARBITRATION_POLICY_GAP
+         from spec_document_contract import apply_clean_document_presentation, validate_clean_document_presentation
+@@ -759,6 +809,56 @@
+                     audit = json.loads(path.with_name("descriptive_publication_audit.json").read_text(encoding="utf-8"))
+                     self.assertEqual(audit["omissions"][0]["input_line"], 2)
+ 
++    def test_common_bus_policy_note_is_audited_only_in_drs_section_42(self):
++        from workflow_routing import COMMON_BUS_ARBITRATION_POLICY_GAP
++        from spec_document_contract import apply_clean_document_presentation, validate_clean_document_presentation
++        with tempfile.TemporaryDirectory() as directory:
++            path = Path(directory) / "policy.md"
++            for document, section in (("DRS", "4.2"), ("DRS", "3.1"), ("SRS", "4.2"), ("ARS", "4.2")):
++                with self.subTest(document=document, section=section):
++                    lines = ["Snapshot ID: synthetic", "### " + section + " Resources",
++                             COMMON_BUS_ARBITRATION_POLICY_GAP, "Other behavior to be clarified"]
++                    retained = apply_clean_document_presentation(lines, path, document)
++                    self.assertEqual(COMMON_BUS_ARBITRATION_POLICY_GAP in retained,
++                                     document == "DRS" and section == "4.2")
++                    self.assertNotIn(lines[-1], retained)
++                    path.write_text("\n\n".join(retained), encoding="utf-8")
++                    _write_docx(path.with_suffix(".docx"), retained)
++                    self.assertEqual(validate_clean_document_presentation(path), [])
++            lines = ["Snapshot ID: synthetic", "### 4.2 Resources", COMMON_BUS_ARBITRATION_POLICY_GAP]
++            retained = apply_clean_document_presentation(lines, path, "DRS")
++            path.write_text("\n\n".join(retained), encoding="utf-8")
++            _write_docx(path.with_suffix(".docx"), retained)
++            audit = json.loads(path.with_name("descriptive_publication_audit.json").read_text(encoding="utf-8"))
++            self.assertEqual(audit["technical_policy_gaps"][0]["section"], "4.2")
++            path.write_text("\n\n".join(retained).replace("4.2 Resources", "4.3 Resources"), encoding="utf-8")
++            self.assertIn("publication_inline_marker:policy.md", validate_clean_document_presentation(path))
++
++    def test_full_drs_42_arbitration_note_is_conditional_on_approved_policy_evidence(self):
++        import run_drs_gen_spec_agent as generator
++        from spec_document_contract import DRS_TEMPLATE, descriptive_section_paragraphs, load_drs_contract
++        from workflow_routing import COMMON_BUS_ARBITRATION_POLICY_GAP
++        with tempfile.TemporaryDirectory() as directory:
++            path = Path(directory) / "review.md"
++            for policy, missing in (
++                ("", True),
++                ("Ledger uses a round-robin arbitration policy.", True),
++                ("Ledger uses a round-robin arbitration policy. Queue uses a fixed-priority arbitration policy.", False),
++            ):
++                with self.subTest(policy=policy):
++                    evidence = self.resource_evidence()
++                    evidence["shared_records"] = self.uses(policy, document="DRS") if policy else []
++                    generator._write_drs_markdown(
++                        path, "approved source", "AURORA9", "Review", "approved-synthetic", "review",
++                        [], {}, [], {}, [], {}, [], {}, [], [], [], "PASS", [], {}, set(), {}, [], [],
++                        load_drs_contract(Path(__file__).resolve().parents[1] / DRS_TEMPLATE),
++                        responsibility_evidence=evidence)
++                    paragraphs = descriptive_section_paragraphs(path, {"sections": {"4.2": {}}})["4.2"]
++                    self.assertEqual(COMMON_BUS_ARBITRATION_POLICY_GAP in paragraphs, missing)
++                    if not missing:
++                        self.assertTrue(any("Ledger uses a round-robin arbitration policy" in text for text in paragraphs))
++                        self.assertTrue(any("Queue uses a fixed-priority arbitration policy" in text for text in paragraphs))
++
+     def test_active_resource_theme_keeps_the_policy_gap_after_publication_cleanup(self):
+         import run_drs_gen_spec_agent as generator
+         from spec_document_contract import DRS_TEMPLATE, load_drs_contract
+@@ -777,7 +877,7 @@
+             self.assertIn(ARBITRATION_POLICY_GAP, text)
+ 
+     def test_independent_resource_review_detects_removed_user_or_policy_clarification(self):
+-        from workflow_routing import ARBITRATION_POLICY_GAP, shared_resource_relations
++        from workflow_routing import ARBITRATION_POLICY_GAP, COMMON_BUS_ARBITRATION_POLICY_GAP, shared_resource_relations
+         evidence = self.resource_evidence()
+         texts = [
+             row["owner"] + " is a shared " + " and ".join(row["kinds"])
+@@ -787,10 +887,12 @@
+         with tempfile.TemporaryDirectory() as directory:
+             path = Path(directory) / "review.md"
+ 
+-            def assess(values):
++            def assess(values, policy_section=""):
+                 parts = ["## 3. Top Level Overview", "The digital system processes measurements.",
+                          "### 3.1 Digital Main Functions",
+                          "#### Arbitration, control, and shared resources", *values]
++                if policy_section:
++                    parts.extend(["### " + policy_section + " Resources", COMMON_BUS_ARBITRATION_POLICY_GAP])
+                 path.write_text("\n\n".join(parts), encoding="utf-8")
+                 _write_docx(path.with_suffix(".docx"), parts)
+                 with patch("workflow_routing.shared_resource_meaning", side_effect=AssertionError("producer")):
+@@ -800,6 +902,11 @@
+             self.assertFalse(any(gap["readiness_impact"] == "policy_coverage" for gap in clean["gaps"]))
+             deleted_policy = assess(texts)
+             self.assertTrue(any(gap["readiness_impact"] == "policy_coverage" for gap in deleted_policy["gaps"]))
++            visible_in_42 = assess(texts, policy_section="4.2")
++            self.assertFalse(any(gap["readiness_impact"] == "policy_coverage" for gap in visible_in_42["gaps"]))
++            self.assertTrue(any(gap["readiness_impact"] == "source_policy_clarification" for gap in visible_in_42["gaps"]))
++            misplaced = assess(texts, policy_section="4.3")
++            self.assertTrue(any(gap["readiness_impact"] == "policy_coverage" for gap in misplaced["gaps"]))
+             deleted_user = assess([text.replace(" and Compute Engine", "") for text in texts] + [ARBITRATION_POLICY_GAP])
+             self.assertTrue(any(gap["source"].startswith("shared-resource:")
+                                 and gap["obligation"] in {"semantic_fidelity", "essential_qualifications"}

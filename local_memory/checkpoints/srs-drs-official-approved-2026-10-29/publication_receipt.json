@@ -1,0 +1,203 @@
+{
+  "approved_by": "user",
+  "approval_time": "2026-10-29T11:43:32+01:00",
+  "approval_scope": "SRS and DRS documents; no canonical/source/ownership/snapshot approval change",
+  "snapshot_id": "snap-8b3673edc9cf590589b8ab39",
+  "no_generation_invoked": true,
+  "protected": {
+    "data\\canonical\\canonical_store.sqlite": "6d56c47910c149a8dc24f593f52b1200d53eb7e5d5b0fda621bc8336583c7f6a",
+    "artifacts\\traceability_reports\\requirement_allocation_ledger.csv": "814d2d67fbb82941151399fe012847ca995619e957cd03c42d969cae64318481",
+    "config\\descriptive_topics.json": "bda2e064b68fb4418091e5bcdb619874b7d05896cb8847d27868d78b07634d62",
+    "config\\domain_vocabulary.json": "4faece963dd9fc3f2927398f73007ea600db885ca7697a67688cf2ef3eed3ba0",
+    "config\\downstream_benchmark.json": "ac29b4461ab2bf355740130c4822dce611c9eb9a0bcfca256c57000f93af1b1b",
+    "config\\gui_state.json": "2bc4d9c44ff703bee65e57a2e8049a4e59e8b0535390b689d438455441393bce",
+    "config\\local_models.json": "3639bbb1a846bc8f6b3f9fe63822a3b60f3889815c8cb76770206344c21c17e3",
+    "config\\ontology_role_taxonomy.json": "aa412d9649211112e6326933dd9ab22416e2a968138cd5d920debcb4bc50c1bb",
+    "config\\project_context.json": "86c5efe5ba91ee48873b4245f15dc4a19b344f7be32ba862f374b3d4a250f7af",
+    "config\\readiness_checklist.json": "b6d53ca40fb586748b502e50efeeb1c7e2184e020c295a8758bc9bd3f749d335",
+    "config\\readiness_checklist.xlsx": "15d5c65f87ed6eaf62b215d57d1d00b63344bcdc922676c19b69b6c20f11103b",
+    "config\\retrieval_benchmark_cases.json": "da8cdbfe2b66e7b6ca843ef928422bcd3bcbdbd51e1920ba9616040a313faf78",
+    "config\\retrieval_config.json": "59680b9cf678de19b31c017264b650137a6ac379993c6e53d64a1bd0fe39d540",
+    "config\\retrieval_mapping_benchmark_cases.json": "514bcae71349901b981b0ef1269439162525a5ce4a742f7874dfa0c9506973ae",
+    "config\\retrieval_selection.json": "d01dd9eca46955c32900e806cf438bdc937646288b05efa359ea677d6043029e",
+    "config\\srs_digital_subsystem_summary.json": "0287a187d294da8e83a176dd6859462c1cf7d40a08e33105b29a7ccc91567181",
+    "config\\srs_system_overview_summary.json": "0b75349c59f3bee4e3d990176cf599b46d0f1bf8dc8a870a4650e0dc6149cfb3",
+    "config\\stage2_mirco_arc_profile.json": "7cb4a2dd2181372e1b9d6af02a3af2ddd9c291b7d62a3da5c258cfcc64010669",
+    "config\\sysml_model_view_status_legend.md": "fb8a5f91a4fdcd5ffc675a38b94b0d9b5cd394329badd94a635948a9aab7e224",
+    "config\\sysml_model_view_status_legend.xlsx": "6f140fc51ed47ad92649008767b82a944f7c30eb1ba46382fa3b2907d850dcd1",
+    "artifacts\\stage4_ars\\analog_requirements_specification.docx": "516689d68d4a21b44723d974e9f228c833b6063e2a4941ff7aa8274f143d53f2",
+    "artifacts\\stage4_ars\\analog_requirements_specification.md": "c58133451aab063f2f9485b916dc5ab107fd33e5c14d90d5bde1f326c473b5d4",
+    "artifacts\\stage4_ars\\ars_traceability_matrix.csv": "020d1d177f02616999b469016a766f32e15c27d8dd7d1db35b1cb2a9e6d75cb9",
+    "artifacts\\stage4_ars\\descriptive_low_power_audit.csv": "29d4b7887ecda9a1b253af5da96db5f7c134eb33a86f93b8feebe35b219baa05",
+    "artifacts\\stage4_ars\\descriptive_publication_audit.json": "2f9ef6a395fb3f07ee9176af9b95ddd5e984cda7fbd9d3b41e9dd483e88aea3f",
+    "artifacts\\stage4_ars\\descriptive_summary_audit.csv": "6c643bd10ea3c23e239a309f7eb3301c7163525a20552570a11122eb621190a0",
+    "artifacts\\stage6_digital_ipos\\ipos_requirements_specification.md": "7cc84e1b50562e5639fa7d8c00275b0471cf93f048b5fa57c71bc0a299509a19",
+    "artifacts\\stage6_digital_ipos\\ipos_traceability_matrix.csv": "19f90457cd80fb039709d468ddb4f919741d061c137e418edd0e0c525a0c357f",
+    "artifacts\\stage6_digital_ipos\\blocks\\adsp\\descriptive_structure_audit.json": "2c2ad9ecf5ee5856b7b3e0e76c1997d9720ce97e36429b3c75b51b131eb71537",
+    "artifacts\\stage6_digital_ipos\\blocks\\adsp\\descriptive_summary_audit.csv": "8418ad3cc99916d71de57263bd891053e8a3c900d0e65f6f0ad6d0051728a0d4",
+    "artifacts\\stage6_digital_ipos\\blocks\\adsp\\digital_ipos_adsp.docx": "203ecad340a549685b5213e65b7c25468c2e2b9e889bc7b7906738b5e582a298",
+    "artifacts\\stage6_digital_ipos\\blocks\\adsp\\digital_ipos_adsp.md": "4cc3c0c5f9880baab7a4fad482dea88e88718ebc16f9af0fd9b1b5d839da0ff6",
+    "artifacts\\stage6_digital_ipos\\blocks\\adsp\\document_contract_report.json": "398a6a5d3367eb92eaad83306e918324b1222e15385d4e8fe5e0a0a6aa551e9c",
+    "artifacts\\stage6_digital_ipos\\blocks\\adsp\\materialization_audit.json": "edb9e7ac3120c0c980de1887b38b6c6994a4f88e2c3e2139faea93c415ed211d",
+    "artifacts\\stage6_digital_ipos\\blocks\\i2c-spi-ahb\\descriptive_structure_audit.json": "c37a53ede4f3c9038c094358f523fdc3679354ea5da57bf029580dde4fd79e1d",
+    "artifacts\\stage6_digital_ipos\\blocks\\i2c-spi-ahb\\descriptive_summary_audit.csv": "39638fa1abbbc6cb152167d1c7ed3ea1e768bf49cc7bcc46b9388e8d1559f791",
+    "artifacts\\stage6_digital_ipos\\blocks\\i2c-spi-ahb\\digital_ipos_i2c-spi-ahb.docx": "9a202b358abd7be16631afff8a6909c5a618468f064f62de877961d5cd88c838",
+    "artifacts\\stage6_digital_ipos\\blocks\\i2c-spi-ahb\\digital_ipos_i2c-spi-ahb.md": "2b7fa8f92fed32707e6387210e7f6e1e1612eefb905bfe4278c43b746844e00b",
+    "artifacts\\stage6_digital_ipos\\blocks\\i2c-spi-ahb\\document_contract_report.json": "8487e5a6a3466d09d58d4fe826f16645490c0cb033e326f820a2a8803830bba9",
+    "artifacts\\stage6_digital_ipos\\blocks\\i2c-spi-ahb\\materialization_audit.json": "6f147b35d1fdec26f6d03bd68d56838b4399cc396c35a0ea16e8222c075eeaf4",
+    "artifacts\\stage6_digital_ipos\\blocks\\main-controller\\descriptive_structure_audit.json": "35f424ca65ebf60ac10796869a7bdd9438935d41aace38bb3bd28cae00ee1716",
+    "artifacts\\stage6_digital_ipos\\blocks\\main-controller\\descriptive_summary_audit.csv": "904e25a102bbb2f86c547f8c2b918fbeb08037d37d533c8759a710acfd83ad4d",
+    "artifacts\\stage6_digital_ipos\\blocks\\main-controller\\digital_ipos_main-controller.docx": "b6026d246afa3934062fd2c883d69a7ebbed1fbc966aa38aeeb42011f8527801",
+    "artifacts\\stage6_digital_ipos\\blocks\\main-controller\\digital_ipos_main-controller.md": "ba4d2e037db0fbea9494b7e04f80fc9d766b285fac4e0b6de7a4a941ab79c314",
+    "artifacts\\stage6_digital_ipos\\blocks\\main-controller\\document_contract_report.json": "9c3e2ab606b47533f8c2074521e29dcd9870101a31fb0ac9ce15c187384e10c9",
+    "artifacts\\stage6_digital_ipos\\blocks\\main-controller\\golden_Main_ctrl_supp_functions.docx": "0da3e7f9fca9d81d557fa91eccc0e285df00654b2c80c45125fdc13a31e29488",
+    "artifacts\\stage6_digital_ipos\\blocks\\main-controller\\materialization_audit.json": "f98c10993daa4d3da8331a9e361aaa9fea37064ee2a7838d15578cd5cb9005a7",
+    "artifacts\\stage6_digital_ipos\\blocks\\pad-mux\\descriptive_structure_audit.json": "00ed3f1062d5d8408beeb3fb770915c1b27f081bcfbafdb02a0ada411468be01",
+    "artifacts\\stage6_digital_ipos\\blocks\\pad-mux\\descriptive_summary_audit.csv": "4bffa99e6237450f6cf2f4caf5cb77e1040b31faf62d0e3549ab9c3a02bcc696",
+    "artifacts\\stage6_digital_ipos\\blocks\\pad-mux\\digital_ipos_pad-mux.docx": "660990cac68f236d69f78fcd7d9fa03a1bd034624e49460cd08501478903873c",
+    "artifacts\\stage6_digital_ipos\\blocks\\pad-mux\\digital_ipos_pad-mux.md": "97345cb11d3472569f3b6ff1f06c380c04139feeab43b768d4d7eb7cef3678f6",
+    "artifacts\\stage6_digital_ipos\\blocks\\pad-mux\\document_contract_report.json": "e99d98c60241c4ebd7b5ed1db31e24e3e2ebc6d0caade9941bc13cf9fcd770be",
+    "artifacts\\stage6_digital_ipos\\blocks\\pad-mux\\materialization_audit.json": "48e4fd17935cf890d095003ea0b1cca0c41f3d424f8516726cafe939592820c5",
+    "artifacts\\stage6_digital_ipos\\blocks\\pmu\\descriptive_structure_audit.json": "72082d1290a49a20fad27351b77689dac5f8141db44aa50bfaf70d82d31cee61",
+    "artifacts\\stage6_digital_ipos\\blocks\\pmu\\descriptive_summary_audit.csv": "5781d9302f95a386ca31d1bdaabf65ee668c32ca3a3ee065853ebc43a35e68f7",
+    "artifacts\\stage6_digital_ipos\\blocks\\pmu\\digital_ipos_pmu.docx": "9fa6599b0d209bd72247379681d02fd0c34db1cbf460c961f9616a4561a12ea6",
+    "artifacts\\stage6_digital_ipos\\blocks\\pmu\\digital_ipos_pmu.md": "4dfef1776339f5ab4892d7aa86e8b6c10e398484ca81d58b4b3ea955f47aeda1",
+    "artifacts\\stage6_digital_ipos\\blocks\\pmu\\document_contract_report.json": "63243790d686ae8374a21ad039d33cee5e6fda155981197670d3a6444b4ceccf",
+    "artifacts\\stage6_digital_ipos\\blocks\\pmu\\materialization_audit.json": "d7c2dc5e0b76f0e8558af13c06bbbe40dcfbba201ffce86b155d88f931bbe500",
+    "artifacts\\stage6_digital_ipos\\blocks\\regmap\\descriptive_structure_audit.json": "8a87c3c60311a585100e65d69b43d349f095847cba20a1a24e23fc5a4bd81af9",
+    "artifacts\\stage6_digital_ipos\\blocks\\regmap\\descriptive_summary_audit.csv": "c1df1ce959308b301be83483fd2f56b0f82ac200240db8effa1d22d2c131ca17",
+    "artifacts\\stage6_digital_ipos\\blocks\\regmap\\digital_ipos_regmap.docx": "bd193d3f04d511c215a7b0be9b110722b3bc5cb60d93564b40859064b45d061b",
+    "artifacts\\stage6_digital_ipos\\blocks\\regmap\\digital_ipos_regmap.md": "35c031f2a9a48b961d3a9f3c861034827a458c2389bcdd72592aded4764f322d",
+    "artifacts\\stage6_digital_ipos\\blocks\\regmap\\document_contract_report.json": "95fded5a9a623d6c3b2fb820b3d98bd62101934b668d8493e452053a27569e0a",
+    "artifacts\\stage6_digital_ipos\\blocks\\regmap\\materialization_audit.json": "29ab8651d7cb47c83619db399952eb22a59caa44e9992c472cb4892ef3bd8803",
+    "artifacts\\stage6_digital_ipos\\blocks\\sensor-hub\\descriptive_structure_audit.json": "20b354e58e226b66099ab3fc4b46396b6040cdeb8f0bccb5d995049ffb72e873",
+    "artifacts\\stage6_digital_ipos\\blocks\\sensor-hub\\descriptive_summary_audit.csv": "db6698fd1f72d8be33b6d846cdc67a1facbc292c52bb2536a4635e4ba988b834",
+    "artifacts\\stage6_digital_ipos\\blocks\\sensor-hub\\digital_ipos_sensor-hub.docx": "d5375aab13f298eef6b12bead57a85bb22c4d139166700149fe965869f1a53f4",
+    "artifacts\\stage6_digital_ipos\\blocks\\sensor-hub\\digital_ipos_sensor-hub.md": "97b39eee28e6d037096b2d0ce42bdf373667e116276ed35fb7c1805ea664d3c7",
+    "artifacts\\stage6_digital_ipos\\blocks\\sensor-hub\\document_contract_report.json": "42f7c7c16dd4eeac0e65c6aec6b88a05d1063cfbe1554e68c7eb008168cc9a35",
+    "artifacts\\stage6_digital_ipos\\blocks\\sensor-hub\\materialization_audit.json": "75cae9a014371ab66878723ee61baf6064ca568cb08cfd78032610589c2a271c",
+    "artifacts\\stage6_digital_ipos\\blocks\\smart-fifo\\descriptive_structure_audit.json": "47384ca0e61d67fd2dfcd55cc5192dfeda38f77c0132892cc7d067986e69a043",
+    "artifacts\\stage6_digital_ipos\\blocks\\smart-fifo\\descriptive_summary_audit.csv": "1f73cd26465870bdb884be135dc293b7b34252b62f816a2c5284991fe00fc566",
+    "artifacts\\stage6_digital_ipos\\blocks\\smart-fifo\\digital_ipos_smart-fifo.docx": "29053a687c25af15fb0d7321c3ba0f292464063cfd81c0f67f48243ff1b1d560",
+    "artifacts\\stage6_digital_ipos\\blocks\\smart-fifo\\digital_ipos_smart-fifo.md": "16e8bbb8798ba1c381f5e698424183e15679247e891406b315750a9028d2044c",
+    "artifacts\\stage6_digital_ipos\\blocks\\smart-fifo\\document_contract_report.json": "b77769e1cf555c3abc3aaffd9059a3bdc2cfe410f87348a7ae67171a8e87c924",
+    "artifacts\\stage6_digital_ipos\\blocks\\smart-fifo\\materialization_audit.json": "c4d4d987988bd6dec2ef7c0f60422240a0dd45b065727b5a7e9be76ae31d1d1d",
+    "artifacts\\stage7_analog_ipos\\ipos_requirements_specification.md": "750a76e5f781dc8db540c64c8121248f3331a909723805c1b06d8bb9df52fb3d",
+    "artifacts\\stage7_analog_ipos\\ipos_traceability_matrix.csv": "11defafb82066537baab1856f3e243a9cbdf43d08643d2a4e7e379ecacfea20a"
+  },
+  "publication_files": [
+    {
+      "path": "artifacts\\stage3_srs\\descriptive_publication_audit.json",
+      "sha256": "db198309c7fd4af0c1aa62e169ab87dcdf889d95073eae326f06af452725cfe4"
+    },
+    {
+      "path": "artifacts\\stage3_srs\\descriptive_srs_content_audit.json",
+      "sha256": "3bacafd4adc664bae77b05379edd31d2a608ef38fa48ebf252fece5125cd9e8b"
+    },
+    {
+      "path": "artifacts\\stage3_srs\\descriptive_writing_quality.json",
+      "sha256": "977322815acbed2ab27747c4b51de1de3ad2cc86fdab7a8f1477c1413a9aa65b"
+    },
+    {
+      "path": "artifacts\\stage3_srs\\stage2_srs_combined.tex",
+      "sha256": "e5e5d689f6a160aeee8966aa87ec451070578687bd5d4cd107dd53f9125e38ce"
+    },
+    {
+      "path": "artifacts\\stage3_srs\\system_requirements_specification.docx",
+      "sha256": "c5cf18cfd12e154903710bb17ce27ddf19bed39041785aba5d75be41a0e5cc8b"
+    },
+    {
+      "path": "artifacts\\stage3_srs\\system_requirements_specification.md",
+      "sha256": "769ab7201ea7a5b67c2bcbe9d7f0a52757b3af301dab58a260d0506dce5bc6ee"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\cross_req_id_coverage_report.md",
+      "sha256": "5f58ad46732eb1d40e657e0dc17d1b40f28cdbcd94bf663f9ac538aadf36f534"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\descriptive_publication_audit.json",
+      "sha256": "3d5a948ce74a21af1e9a2d5425a5f580d1a83d0f61a8fdaa0b3fb59075646c6f"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\descriptive_summary_audit.csv",
+      "sha256": "b47c9c237705e614364d2af18d7e3cd46fbce43bec70d361fc0ba1cc744a275d"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\descriptive_synthesis_proposals.json",
+      "sha256": "714c113bcd9018989ce1527e109176f26f0c5582f0b378e9aa95b333d37e6062"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\descriptive_writing_quality.json",
+      "sha256": "81de39c4e5f226837b859d92aa1490642894ae9af427cd28af6a16dacca0e54d"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\digital_requirements_specification.docx",
+      "sha256": "74cd1879d08fdb736e7079957ce4dc9b1321c4188c346e44517440792c59dc21"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\digital_requirements_specification.md",
+      "sha256": "6e2a0ca61919a25268e6fcde63e842cab5015fc4d2ec47a4ae87b774ea407c6e"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\drs_document_contract.json",
+      "sha256": "4b3e51094f465f016adb3a05d484ebaa5a0201e0e9888ae083566c1963ab4f05"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\drs_traceability_matrix.csv",
+      "sha256": "5c7f06b4a067ed9ed3dd58ff1c3d378cd88d6058e8695ac8181dc2b4c7dec942"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\governed_shared_context_audit.json",
+      "sha256": "9bc778bf3e4bd84f5363aada7f71beffdb2e06f6bb78164c6ab779a79dacc52f"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\requirements_hierarchy_coverage_report.md",
+      "sha256": "5f58ad46732eb1d40e657e0dc17d1b40f28cdbcd94bf663f9ac538aadf36f534"
+    },
+    {
+      "path": "artifacts\\stage5_drs\\responsibility_synthesis_audit.json",
+      "sha256": "5cf71acef2c3f199c2d7f1d959eb8e536402aa39ab7661b82f92e2770ee78ddd"
+    },
+    {
+      "path": "artifacts\\orchestrator\\stage_srs_report.md",
+      "sha256": "1e9f4387963c67c72ae1616d753e87559cfc10c6ce19396a2c632ccccd8cdb27"
+    },
+    {
+      "path": "artifacts\\orchestrator\\stage_drs_report.md",
+      "sha256": "f201662b5f0a748d8165e68ebf6349aa881b2f46df8438f2b5193b5fb871dbf6"
+    },
+    {
+      "path": "artifacts\\orchestrator\\stage_srs_latex_crosscheck_report.md",
+      "sha256": "9fbc6f5fb6b42039a5e7a7f9d80c1059a914044ba6b22db560fc2219db5d783f"
+    }
+  ],
+  "existing_git_head": "163e019",
+  "suggested_tag": "srs-drs-official-approved-2026-10-29",
+  "tag_created": false,
+  "pushed": false,
+  "verification": {
+    "official_srs_gate": "PASS",
+    "official_drs_gate": "PASS",
+    "official_srs_crosscheck": "PASS",
+    "official_srs_latex_crosscheck": "PASS",
+    "official_drs_crosscheck": "PASS",
+    "word_byte_identity_to_user_approved_files": true,
+    "protected_unchanged": 79,
+    "canonical_database_unchanged": true,
+    "shared_ledger_unchanged": true,
+    "ars_digital_ipos_analog_ipos_unchanged": true,
+    "source_approval_snapshot_changes": false
+  },
+  "refreshed_non_authoritative_sidecar": {
+    "path": "artifacts\\stage5_drs\\descriptive_writing_quality.json",
+    "sha256": "9a1225b739ec4b86b3b44f3788eb9b06bfeca11be5bfa6c1318e9796a5ea7a0e",
+    "status": "UNRESOLVED",
+    "findings_including_projection_rows": 451,
+    "independent_assessment_findings": 216,
+    "word_regenerated": false
+  },
+  "final_official_word_hashes": {
+    "artifacts\\stage3_srs\\system_requirements_specification.docx": "c5cf18cfd12e154903710bb17ce27ddf19bed39041785aba5d75be41a0e5cc8b",
+    "artifacts\\stage5_drs\\digital_requirements_specification.docx": "74cd1879d08fdb736e7079957ce4dc9b1321c4188c346e44517440792c59dc21"
+  }
+}

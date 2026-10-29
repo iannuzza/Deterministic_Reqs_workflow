@@ -1,0 +1,32 @@
+--- before/tests/test_descriptive_summary.py
++++ after/tests/test_descriptive_summary.py
+@@ -2015,7 +2015,7 @@
+         clock_table = "| " + " | ".join(clock_header) + " |\n" + "\n".join(
+             _drs_clock_path_markdown_row(row) for row in clock_rows)
+         from spec_document_contract import apply_clean_document_presentation, clean_descriptive_review_text
+-        from workflow_routing import IPOS_CONNECTION_TABLES, render_connection_table_sections
++        from workflow_routing import COMMON_BUS_ARBITRATION_POLICY_GAP, IPOS_CONNECTION_TABLES, render_connection_table_sections
+         connection_rows = [tuple(clean_descriptive_review_text(value) for value in row) for row in clock_rows]
+         connection_sections = render_connection_table_sections("4.7", {
+             "clock": [_drs_clock_path_markdown_row(row) for row in connection_rows]}, first_table_number=8)
+@@ -2026,6 +2026,7 @@
+             "## 4. Functional requirements", "### 4.1 Digital block list",
+             "| Block | Role | Architectural relationship |", "| Storage | Buffer samples. | none |",
+             "### 4.2 Arbitration, control, and shared resources",
++            COMMON_BUS_ARBITRATION_POLICY_GAP,
+             "Flow control and backpressure: need clarification", "### 4.3 Other functions",
+             "| Domain | Type | Control | Function |", "| " + " | ".join(power_row) + " |",
+             "### 4.6 Digital performance requirements", clock_table,
+@@ -2047,7 +2048,11 @@
+             publication_audit_path = output / "descriptive_publication_audit.json"
+             publication_audit = json.loads(publication_audit_path.read_text(encoding="utf-8"))
+             document = Document()
+-            document.add_paragraph(baseline)
++            for line in baseline.splitlines():
++                if line.startswith("#"):
++                    document.add_heading(line.lstrip("# "), level=len(line) - len(line.lstrip("#")))
++                elif not line.lstrip().startswith("|"):
++                    document.add_paragraph(line)
+             for values in (power_header, power_row, clock_header, *clock_rows,
+                            ["Block", "Role", "Architectural relationship"], ["Storage", "Buffer samples.", "none"]):
+                 table = document.add_table(rows=1, cols=len(values))

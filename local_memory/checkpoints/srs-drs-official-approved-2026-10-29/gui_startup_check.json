@@ -1,0 +1,18 @@
+{
+  "gui_startup": "PASS",
+  "callback_errors": [],
+  "actual_range_command": [
+    "C:\\Users\\syslocadm1906\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+    "C:\\Users\\iannuzza\\LOCAL_PROJ\\Github_copilot_proj\\Deterministic_Reqs_workflow\\scripts\\workflow_cli.py",
+    "run",
+    "--from-stage",
+    "3",
+    "--to-stage",
+    "6",
+    "--snapshot-id",
+    "snap-8b3673edc9cf590589b8ab39",
+    "--prepare-snapshot-inputs"
+  ],
+  "snapshot_id": "snap-8b3673edc9cf590589b8ab39",
+  "gui_preferences_unchanged": true
+}

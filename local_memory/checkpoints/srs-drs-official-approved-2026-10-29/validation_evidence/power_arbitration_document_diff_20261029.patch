@@ -1,0 +1,81 @@
+--- before/system_requirements_specification.md
++++ after/system_requirements_specification.md
+@@ -6,7 +6,7 @@
+ 
+ <p>&nbsp;</p>
+ 
+-Date: 2026-10-28
++Date: 2026-10-29
+ 
+ <p>&nbsp;</p>
+ 
+@@ -18,7 +18,7 @@
+ 
+ <p>&nbsp;</p>
+ 
+-Source specification: C:/Users/iannuzza/AppData/Local/Temp/workflow_srs_top_overview_20261028/specs/DDS_STBIO1.pdf
++Source specification: C:/Users/iannuzza/AppData/Local/Temp/workflow_power_arbitration_20261029/specs/DDS_STBIO1.pdf
+ 
+ <p>&nbsp;</p>
+ 
+@@ -498,6 +498,14 @@
+ 
+ ### 3.6 Power, Clock, and Reset Overview {#36-power-clock-and-reset-overview}
+ 
++The always-on power domains use HW control.
++
++<p>&nbsp;</p>
++
++The switchable power domain uses SW control.
++
++<p>&nbsp;</p>
++
+ 
+ 
+ | Domain | Type | Control | Functional Role | Power Conditions |
+--- before/digital_requirements_specification.md
++++ after/digital_requirements_specification.md
+@@ -14,7 +14,7 @@
+ 
+ <p>&nbsp;</p>
+ 
+-Source specification: C:/Users/iannuzza/AppData/Local/Temp/workflow_drs_repair_20261029/specs/DDS_STBIO1.pdf
++Source specification: C:/Users/iannuzza/AppData/Local/Temp/workflow_power_arbitration_20261029/specs/DDS_STBIO1.pdf
+ 
+ <p>&nbsp;</p>
+ 
+@@ -246,7 +246,11 @@
+ <p>&nbsp;</p>
+ 
+ ## **3. Top Level Overview** {#3-top-level-overview}
+-STBIO1 is an Analog Front End Device with embedded process capabilities. Within STBIO1, the digital engine can reduce external host processing workload through multiple IPs, reduce bus congestion and provide meta-data for final application in both time and frequency domains.
++STBIO1 is an Analog Front End Device with embedded processing capabilities. Within STBIO1, the digital engine can reduce external host processing workload through multiple IPs, reduce bus congestion and provide meta-data for final application in both time and frequency domains.
++
++<p>&nbsp;</p>
++
++The digital domain combines signal acquisition, digital sample control, FIFO and interrupt signaling, SPI host register access path, I2C host register access path, power, clock, and startup behavior and self-test and calibration as complementary subsystem responsibilities.
+ 
+ <p>&nbsp;</p>
+ 
+@@ -458,6 +462,10 @@
+ <p>&nbsp;</p>
+ 
+ Power and clock interaction: PMU provides power/clock status to Main Controller.
++
++<p>&nbsp;</p>
++
++common bus and shared resources arbitration policy to be clarified
+ 
+ | Source | Destination | Architectural exchange |
+ |---|---|---|
+@@ -490,10 +498,6 @@
+ | ISPU debug | ISPU | XBAR connection |
+ | ISPU debug | FIFO | XBAR connection |
+ | ISPU debug | ADSP | XBAR connection |
+-
+-<p>&nbsp;</p>
+-
+-
+ 
+ <p>&nbsp;</p>
+ 

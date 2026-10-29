@@ -1,5 +1,47 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-29 - Official SRS/DRS Approval, Publication and Local Checkpoint
+
+- Integrated the archived reusable fixes centrally across the current main
+  SRS/DRS/IPOS paths; retained deterministic local-only generation, document
+  planners, source scope, ownership and existing authority gates.
+- User approved SRS sections 3/5 introductory summaries and semantic overview
+  placement, then requested and approved the final SRS/DRS review versions.
+- The final bounded additions are SRS 3.6 power-domain/control prose, DRS 4.2
+  missing-arbitration note, and one complementary-domain paragraph in DRS 3.
+  Existing overview/inventory, final DRS 3.1, all normative content and tables
+  remain. No broad DRS structural migration was implemented.
+- Recovered ISPU processing capability from complete already-authorized evidence,
+  not the truncated frozen source or unusable inventory Function. The historical
+  PDF/OCR defect was reproduced; existing extraction continuity remains.
+- Exact approved Word and matching companions published without official
+  generation. Official SRS/LaTeX/DRS crosschecks and Stage 3/5 gates PASS.
+  Canonical database, approvals, snapshots, shared allocation ledger and
+  unrelated ARS/IPOS outputs unchanged.
+- 101 selected regressions PASS; six baseline failures independently reproduced.
+  Actual Word/Markdown source/meaning, duplication, 55 normative DRS entries,
+  Covers, source I/O and technical tables checked. DRS writing remains
+  UNRESOLVED (216), with no introduced findings; historical Main Controller
+  broader writing remains UNRESOLVED (522). Human approval is not readiness.
+- The user subsequently requested real GUI startup and S3-to-S6 rerun checks.
+  Startup/command receipt and exact isolated CLI range log preserve the outcome.
+  Restored the omitted local retrieval package in the test copy; no dependency
+  installation, gate bypass or official rerun was used to mask that copy issue.
+- Startup, retrieval preflight, S3/S4/S5 and S6 generation passed. S6 then exposed
+  an obsolete synthetic power-table fixture using a fake snapshot, no explicit
+  policy note and a whole Markdown document inside one Word paragraph. Aligned
+  only that fixture to the 4.2 obligation and real headings; no production
+  authority check was weakened. Resumed the failed step:166 tests PASS, S6 gate
+  PASS for302 requirements/8 blocks, final generation-input coherence PASS with
+  zero findings. Successful generation was not repeated. The original CLI
+  exit3 remains recorded alongside the successful targeted resume.
+- Actual regenerated SRS/DRS heading/paragraph/table events equal the approved
+  official outputs after normalizing only workspace path metadata.
+- Saved complete active source/evidence, rollback publication backup, hashes,
+  focused restart handoff and current memory. Local checkpoint uses the
+  established memory/archive commit boundary, preserving unrelated dirty work.
+- Proposed tag only: `srs-drs-official-approved-2026-10-29`. No tag or push.
+
 ## 2026-10-27 - Named Checkpoint Commit, Tag and Push Authorization
 
 - User explicitly requested local checkpoint

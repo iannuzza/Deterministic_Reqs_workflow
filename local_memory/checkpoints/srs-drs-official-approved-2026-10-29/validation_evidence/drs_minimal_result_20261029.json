@@ -1,0 +1,288 @@
+{
+  "created_at": "2026-10-29T10:49:46.833446+01:00",
+  "snapshot_id": "snap-8b3673edc9cf590589b8ab39",
+  "word": "C:\\Users\\iannuzza\\AppData\\Local\\Temp\\workflow_drs_repair_20261029\\artifacts\\stage5_drs\\digital_requirements_specification.docx",
+  "markdown": "C:\\Users\\iannuzza\\AppData\\Local\\Temp\\workflow_drs_repair_20261029\\artifacts\\stage5_drs\\digital_requirements_specification.md",
+  "official_overwritten": false,
+  "states": {
+    "generation": "PASS: Stage5.1 generation and crosscheck",
+    "DRS_artifact_contract": "PASS",
+    "Stage5_gate": "FAIL: upstream SRS gate is not pass",
+    "publication_eligibility": "NOT PROMOTED: upstream stage gate blocked; user review pending",
+    "writing_acceptance": "AWAITING USER REVIEW",
+    "readiness": "NOT ASSESSED / NOT CERTIFIED"
+  },
+  "preservation": {
+    ".md": {
+      "normative_requirements": 55,
+      "normative_and_Covers_unchanged": true,
+      "all_technical_tables_I_O_cells_and_order_unchanged": true,
+      "top_level_headings_unchanged": true,
+      "ISPU_function_independent_findings": [],
+      "ISPU_purpose_occurrences": 1
+    },
+    ".docx": {
+      "normative_requirements": 55,
+      "normative_and_Covers_unchanged": true,
+      "all_technical_tables_I_O_cells_and_order_unchanged": true,
+      "top_level_headings_unchanged": true,
+      "ISPU_function_independent_findings": [],
+      "ISPU_purpose_occurrences": 1
+    }
+  },
+  "residuals": [
+    {
+      "classification": "PREEXISTING_ARTIFACT_DEFECT",
+      "details": "DRS-REQ-015 Word loses two FRAME identifier underscores. Each artifact normative body exactly matches its pre-repair baseline; not changed or waived."
+    },
+    {
+      "classification": "UPSTREAM_SRS_GATE",
+      "details": "Existing Stage3 srs_power_explanation_missing keeps Stage5 gate non-PASS; not altered."
+    },
+    {
+      "classification": "FROZEN_INVENTORY_QUALITY",
+      "details": "unsupported compound functional description; original ISPU Function retained; descriptive obligation now supported by approved description."
+    },
+    {
+      "classification": "BROADER_DRS_WRITING",
+      "details": "218 independent findings remain; exact details in drs_minimal_independent_assessment_20261029.json."
+    }
+  ],
+  "source_meaning_section": {
+    "original_source_record_ids": [
+      "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca"
+    ],
+    "source_use_roles": [
+      "context"
+    ],
+    "source_spans": [
+      {
+        "record_id": "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca",
+        "start": 2609,
+        "end": 2776,
+        "text": "The advanced ISPU (32bit proprietary core) is an ultra-low-power, high-performance programmable core which can execute signal processing and AI algorithms in the edge."
+      }
+    ],
+    "typed_meanings": [
+      {
+        "relation": "responsibility",
+        "subject": "ISPU",
+        "predicate": "execute",
+        "objects": [
+          "signal processing and AI algorithms in the edge"
+        ],
+        "contexts": [],
+        "mode": "",
+        "modality": "can",
+        "negative": false,
+        "coordination": "and",
+        "qualifiers": [],
+        "results": [],
+        "effects": []
+      }
+    ],
+    "target_section": "3.1",
+    "text": "ISPU can execute signal processing and AI algorithms in the edge.",
+    "association_rule": "approved_description_function_fallback",
+    "inventory_source": "snapshot architecture profile:0b9f2b67360f480031d7482de1776326f602608327b2b5c17d1c84c074a0656d:ISPU",
+    "inventory_limitation": "unsupported compound functional description",
+    "authority_note": "User explicitly approved DRS context local-function placement in3.1; original frozen records, ownership and snapshot permissions unchanged."
+  },
+  "new_ISPU_Word_Markdown_parity": true,
+  "normative_Word_Markdown_mismatch_ids": [
+    "DRS-REQ-015"
+  ],
+  "traceability_allocation_and_ID_fields_unchanged": true,
+  "broader_writing_assessment": {
+    "status": "UNRESOLVED",
+    "findings": 218,
+    "by_obligation": {
+      "supported_function_coverage": 154,
+      "bounded_synthesis": 18,
+      "essential_qualifications": 22,
+      "section_roles": 2,
+      "semantic_fidelity": 20,
+      "nonduplication": 2
+    },
+    "scope_note": "Remaining approved-source interpretation, coverage, policy and writing gaps are not certified closed by artifact PASS."
+  },
+  "independent_ISPU_source_mappings": [
+    {
+      "source": "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca",
+      "spans": [
+        {
+          "record_id": "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca",
+          "start": 2609,
+          "end": 2776,
+          "text": "The advanced ISPU (32bit proprietary core) is an ultra-low-power, high-performance programmable core which can execute signal processing and AI algorithms in the edge."
+        }
+      ],
+      "role": "main_functions",
+      "proposition_id": "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca:clause:17:meaning:2",
+      "meaning": {
+        "relation": "responsibility",
+        "subject": "ISPU",
+        "predicate": "execute",
+        "objects": [
+          "signal processing and AI algorithms in the edge"
+        ],
+        "contexts": [],
+        "mode": "",
+        "modality": "can",
+        "negative": false,
+        "coordination": "and",
+        "qualifiers": [],
+        "results": [],
+        "effects": []
+      },
+      "section": "3.1",
+      "artifact": "digital_requirements_specification.md",
+      "actual_text": "ISPU can execute signal processing and AI algorithms in the edge."
+    },
+    {
+      "source": "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca",
+      "spans": [
+        {
+          "record_id": "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca",
+          "start": 2609,
+          "end": 2776,
+          "text": "The advanced ISPU (32bit proprietary core) is an ultra-low-power, high-performance programmable core which can execute signal processing and AI algorithms in the edge."
+        }
+      ],
+      "role": "main_functions",
+      "proposition_id": "source-context-a7ad7724ccfbcfa39ae99669::requested-4b47ea65a38db1ca:clause:17:meaning:2",
+      "meaning": {
+        "relation": "responsibility",
+        "subject": "ISPU",
+        "predicate": "execute",
+        "objects": [
+          "signal processing and AI algorithms in the edge"
+        ],
+        "contexts": [],
+        "mode": "",
+        "modality": "can",
+        "negative": false,
+        "coordination": "and",
+        "qualifiers": [],
+        "results": [],
+        "effects": []
+      },
+      "section": "3.1",
+      "artifact": "digital_requirements_specification.docx",
+      "actual_text": "ISPU can execute signal processing and AI algorithms in the edge."
+    }
+  ],
+  "obligation_implementation_independent_check": [
+    {
+      "obligation": "Recover functional explanation rather than remove fragment",
+      "implementation": "Shared processor interpretation + source-bound fallback in existing DRS composition",
+      "check": "Actual Word/Markdown ISPU block purpose checked against frozen source meanings; lost modality/owner/quantity mutations rejected",
+      "result": "PASS"
+    },
+    {
+      "obligation": "Preserve required purposes, sections, tables and indexes",
+      "implementation": "Existing 3/3.1 structure and per-concrete-owner purpose path retained",
+      "check": "Existing DRS artifact validators PASS; technical table cells/order and normative bodies compared to baseline",
+      "result": "PASS"
+    },
+    {
+      "obligation": "Respect source/destination and ownership",
+      "implementation": "Explicit approved supported_local_function_v1 placement; descriptions/requirements filtered by DRS scope and explicit actor",
+      "check": "Legacy policy without amendment cannot relocate context; foreign actor and conflict tests reject fallback; frozen records unchanged",
+      "result": "PASS"
+    },
+    {
+      "obligation": "Preserve source continuity",
+      "implementation": "Existing cross-page correction retained, not rewritten",
+      "check": "PDF/OCR boundary and historical exact-fragment reproduction; extraction boundary and overlap regressions",
+      "result": "PASS"
+    },
+    {
+      "obligation": "Stage publication gate",
+      "implementation": "Existing Stage5/SRS upstream gate untouched",
+      "check": "Stage5.1 PASS, Stage5.2 blocked only by existing SRS gate status",
+      "result": "BLOCKED_UPSTREAM"
+    },
+    {
+      "obligation": "Overall writing acceptance/readiness",
+      "implementation": "Broader independent assessment kept separate",
+      "check": "218 remaining independent writing findings; user review and readiness evaluation not asserted",
+      "result": "UNRESOLVED / PENDING"
+    }
+  ],
+  "protected_official_files": {
+    "checked": 120,
+    "changed": []
+  },
+  "exact_diff": "C:\\Users\\iannuzza\\.copilot\\session-state\\80ed3a87-cb6f-4383-a59e-6a579f2888b7\\files\\drs_minimal_exact_changes_20261029.patch",
+  "diff_stats": [
+    {
+      "file": "scripts\\workflow_routing.py",
+      "added": 94,
+      "removed": 7,
+      "before_sha256": "9d2f8870fb00d2d6a8a9a50b96a479415f9b998c4b9621401667dd7b6b52ea07",
+      "after_sha256": "bccd0927dbac4fdc49d3912e351f41b4b5e6ca520f1d85419be72c396205beb4",
+      "original_uniform_CRLF_preserved": true
+    },
+    {
+      "file": "scripts\\spec_document_contract.py",
+      "added": 33,
+      "removed": 6,
+      "before_sha256": "85eeb3c2f87d80bc2d8fd1dc2a94af6dd57a92d7223db7b1e59a66cdb79756c0",
+      "after_sha256": "d62ffa2789df89d2ae6cd9db6750d3155b6d3f7669e48d58173eea7204036b7a",
+      "original_uniform_CRLF_preserved": true
+    },
+    {
+      "file": "scripts\\run_drs_gen_spec_agent.py",
+      "added": 34,
+      "removed": 1,
+      "before_sha256": "0e8b3ba710f2c3642c6609d5eaeb45a42c5158aa9585522d317518ff8eade14f",
+      "after_sha256": "e5445719f7c4854d96ddf6cfa713b8facf6467623e3b79854c0be4222b0ac65e",
+      "original_uniform_CRLF_preserved": true
+    },
+    {
+      "file": "templates\\DRS_gen_AI_template_prompt.md",
+      "added": 12,
+      "removed": 0,
+      "before_sha256": "55750f9081e70adb29d3ec978e75d5fd8fc1334a11a1d0956f63c5771980fa5e",
+      "after_sha256": "eac302eef2af18122ffc9a1b50ef73005250ff2ad2ae70c3df45b04f9a604e96",
+      "original_uniform_CRLF_preserved": true
+    },
+    {
+      "file": ".github\\copilot-instructions.md",
+      "added": 2,
+      "removed": 2,
+      "before_sha256": "8e2ca2c7e59e2eb3f6995da9478b81e9a96c39c337338a13fab03ed868414848",
+      "after_sha256": "3780725d90b4616a72a3754a4200b9b8eb482c968767186d474c8df253a64be1",
+      "original_uniform_CRLF_preserved": true
+    },
+    {
+      "file": "README.md",
+      "added": 8,
+      "removed": 0,
+      "before_sha256": "8aced74d6803894cdb906242c4d2be2afb01b40c4abf40eac8baf30fe49a60dc",
+      "after_sha256": "fafd4febdf0211d6b1cee8287fbb660760f60f8dbd59e4a6a5d5be25a3c4e9d9",
+      "original_uniform_CRLF_preserved": true
+    },
+    {
+      "file": "tests\\test_drs_minimal_repair.py",
+      "added": 215,
+      "removed": 0,
+      "before_sha256": null,
+      "after_sha256": "8ce2b0db0eb0144d3969ef6352be84291c5fd9d67dfbd2bd4a461b27456a9b4b",
+      "original_uniform_CRLF_preserved": true
+    }
+  ],
+  "tests": {
+    "combined_regressions_passed": 324,
+    "final_targeted_passed": 50,
+    "source_formatting": "Original uniform CRLF restored where required; Python AST and all source text lines unchanged by formatting."
+  },
+  "exact_diff_note": "Unified patch uses normalized LF for Git-compatible text; raw before/after hashes and original newline preservation are recorded.",
+  "final_source_parity": "PASS",
+  "final_artifact_checks": {
+    "DRS_contract": [],
+    "DRS_descriptive": []
+  },
+  "review_report": "C:\\Users\\iannuzza\\.copilot\\session-state\\80ed3a87-cb6f-4383-a59e-6a579f2888b7\\files\\DRS_minimal_repair_report_20261029.md"
+}

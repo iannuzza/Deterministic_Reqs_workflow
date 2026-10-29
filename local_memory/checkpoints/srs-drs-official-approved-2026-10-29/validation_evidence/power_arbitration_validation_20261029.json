@@ -1,0 +1,161 @@
+{
+  "snapshot_id": "snap-8b3673edc9cf590589b8ab39",
+  "official_overwrite": false,
+  "documents": {
+    "SRS": {
+      "word_path": "C:\\Users\\iannuzza\\AppData\\Local\\Temp\\workflow_power_arbitration_20261029\\artifacts\\stage3_srs\\system_requirements_specification.docx",
+      "word_sha256": "c5cf18cfd12e154903710bb17ce27ddf19bed39041785aba5d75be41a0e5cc8b",
+      "preservation": {
+        ".md": {
+          "normative_count": 0,
+          "normative_exact_match": true,
+          "preserved_tables": 8
+        },
+        ".docx": {
+          "normative_count": 0,
+          "normative_exact_match": true,
+          "preserved_tables": 8
+        }
+      }
+    },
+    "DRS": {
+      "word_path": "C:\\Users\\iannuzza\\AppData\\Local\\Temp\\workflow_power_arbitration_20261029\\artifacts\\stage5_drs\\digital_requirements_specification.docx",
+      "word_sha256": "74cd1879d08fdb736e7079957ce4dc9b1321c4188c346e44517440792c59dc21",
+      "preservation": {
+        ".md": {
+          "normative_count": 55,
+          "normative_exact_match": true,
+          "preserved_tables": 43
+        },
+        ".docx": {
+          "normative_count": 55,
+          "normative_exact_match": true,
+          "preserved_tables": 43
+        }
+      }
+    }
+  },
+  "focused_tests": 30,
+  "baseline_tests_reproduced": 6,
+  "drs_31_markdown_exact_match": true,
+  "drs_complement": {
+    "text": "The digital domain combines signal acquisition, digital sample control, FIFO and interrupt signaling, SPI host register access path, I2C host register access path, power, clock, and startup behavior and self-test and calibration as complementary subsystem responsibilities.",
+    "source_record_ids": [
+      "architecture-function:1",
+      "architecture-function:2",
+      "architecture-function:3",
+      "architecture-function:4",
+      "architecture-function:5",
+      "architecture-function:6",
+      "architecture-function:7"
+    ],
+    "mapping": {
+      "section": "3",
+      "disposition": "synthesized",
+      "reason": "complementary_domain_responsibilities_from_approved_function_mapping",
+      "source_record_ids": [
+        "architecture-function:1",
+        "architecture-function:2",
+        "architecture-function:3",
+        "architecture-function:4",
+        "architecture-function:5",
+        "architecture-function:6",
+        "architecture-function:7"
+      ],
+      "meanings": [
+        {
+          "relation": "responsibility",
+          "subject": "The digital domain",
+          "predicate": "combine",
+          "objects": [
+            "signal acquisition, digital sample control, FIFO and interrupt signaling, SPI host register access path, I2C host register access path, power, clock, and startup behavior and self-test and calibration"
+          ],
+          "contexts": [],
+          "mode": "",
+          "modality": "",
+          "negative": false,
+          "coordination": "and",
+          "qualifiers": [
+            "as complementary subsystem responsibilities"
+          ],
+          "results": [],
+          "effects": []
+        }
+      ],
+      "rendered_summary": "The digital domain combines signal acquisition, digital sample control, FIFO and interrupt signaling, SPI host register access path, I2C host register access path, power, clock, and startup behavior and self-test and calibration as complementary subsystem responsibilities.",
+      "normative_covers_created": false
+    },
+    "single_occurrence_per_artifact": true,
+    "not_repeated_in_31": true,
+    "independent_meaning_check": "PASS",
+    "missing_contribution_mutation_rejected": true,
+    "wrong_domain_mutation_rejected": true,
+    "overview_and_inventory_preserved_except_requested_grammar": true
+  },
+  "arbitration_note": {
+    "text": "common bus and shared resources arbitration policy to be clarified",
+    "section": "4.2",
+    "present_in_both_artifacts": true,
+    "source_policy_still_unresolved": true
+  },
+  "traceability_exact_match": true,
+  "protected_official_files_unchanged": 120,
+  "srs_gate": "PASS",
+  "drs_gate": "PASS",
+  "global_precondition_residual": "Separate full coherence diagnostic encounters pre-existing old-snapshot SysML manifest with absolute official-workspace path; no manifest, snapshot or authority changed.",
+  "writing_assessment": {
+    "status": "UNRESOLVED",
+    "findings": 216,
+    "manual_acceptance": "pending",
+    "readiness": "not certified",
+    "new_findings_vs_prechange": 0,
+    "closed_findings": 2
+  },
+  "final_regression_tests": {
+    "run": 101,
+    "failures": 0,
+    "errors": 0,
+    "baseline_failures_separately_reproduced": [
+      "test_contract_driven_synthesis.ContractDrivenSynthesisTests.test_complete_proposed_srs_has_role_specific_sections_without_authorizing_them",
+      "test_contract_driven_synthesis.ContractDrivenSynthesisTests.test_shared_mode_context_is_expressed_once_with_all_dependencies",
+      "test_contract_driven_synthesis.ContractDrivenSynthesisTests.test_supported_purpose_is_proposed_without_forging_destination_authority",
+      "test_srs_integrity_policy.SrsIntegrityPolicyTests.test_block_owner_does_not_override_authoritative_srs_or_drs_target",
+      "test_srs_integrity_policy.SrsIntegrityPolicyTests.test_ledger_maps_canonical_snapshot_ids_to_source_ids",
+      "test_srs_integrity_policy.SrsIntegrityPolicyTests.test_srs_overview_full_renderer_has_unique_headings_and_audit"
+    ]
+  },
+  "source_diff_stats": {
+    "scripts/workflow_routing.py": {
+      "added": 66,
+      "removed": 12
+    },
+    "scripts/spec_document_contract.py": {
+      "added": 43,
+      "removed": 17
+    },
+    "scripts/run_srs_gen_spec_agent.py": {
+      "added": 3,
+      "removed": 1
+    },
+    "scripts/run_drs_gen_spec_agent.py": {
+      "added": 31,
+      "removed": 3
+    },
+    "templates/SRS_gen_AI_template_prompt.md": {
+      "added": 4,
+      "removed": 0
+    },
+    "templates/DRS_gen_AI_template_prompt.md": {
+      "added": 11,
+      "removed": 0
+    },
+    "tests/test_srs_integrity_policy.py": {
+      "added": 92,
+      "removed": 1
+    },
+    "tests/test_contract_driven_synthesis.py": {
+      "added": 110,
+      "removed": 3
+    }
+  }
+}

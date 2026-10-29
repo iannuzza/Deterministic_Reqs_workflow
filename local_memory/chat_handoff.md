@@ -1,6 +1,49 @@
 ﻿# Chat Handoff - Deterministic_Reqs_workflow
 
-## CURRENT HANDOFF - 2026-10-27 - Named Checkpoint and Git Publication
+## CURRENT HANDOFF - 2026-10-29 - Official SRS/DRS and GUI Rerun Check
+
+- Start with
+  `checkpoints/srs-drs-official-approved-2026-10-29/restart_handoff.md`,
+  its README, publication receipt and member manifest. Do not reload the chat.
+- The reusable fixes are now integrated in the live official runtime. The user
+  approved both SRS and DRS as official. Exact reviewed Word bytes and matching
+  Markdown/audit companions were published without regenerating official Word.
+- Official documents:
+  `artifacts/stage3_srs/system_requirements_specification.docx` and
+  `artifacts/stage5_drs/digital_requirements_specification.docx`.
+- Snapshot remains `snap-8b3673edc9cf590589b8ab39`. Official SRS/LaTeX/DRS
+  crosschecks and Stage 3/5 gates PASS. Database, approvals, frozen sources,
+  configuration, shared ledger and unrelated ARS/IPOS outputs remain unchanged.
+- SRS contains approved sections 3/5 introductions, semantic 3.1/3.5 placement,
+  and the new 3.6 domain-type/control preface before the unchanged table.
+- DRS recovers the complete authorized ISPU functional meaning in 3.1, adds the
+  short complementary-domain paragraph in 3, fixes the requested identity
+  grammar and visibly retains the missing-arbitration policy note in 4.2.
+  Final section 3.1 is unchanged by the overview addition.
+- The user's additional GUI request is checked using real Tk startup/command
+  construction and the exact `workflow_cli.py run --from-stage 3 --to-stage 6
+  --snapshot-id <approved-id> --prepare-snapshot-inputs` route in isolation.
+  Read the checkpoint GUI receipts/log for the measured outcome.
+- Final GUI check: startup PASS; S3/S4/S5 and S6 generation PASS; the only failure
+  was an obsolete synthetic DRS fixture in the S6 regression gate. Updated its
+  policy note and real Word headings without disabling checks. Targeted resume:
+  166 tests PASS, S6 gate PASS (302 requirements/8 blocks), final generation-input
+  coherence PASS with zero findings. Keep the recorded initial exit 3 distinct
+  from the successful resumed checks. Approved SRS/DRS rerun content is unchanged.
+- 101 relevant regressions PASS; six pre-existing failures are reproduced and
+  separated. DRS independent writing assessment remains UNRESOLVED at 216;
+  broader Main Controller historical assessment remains UNRESOLVED at 522.
+  Document approval, generation/gate success and implementation readiness differ.
+- Current source, tests, templates, approved artifacts and reproducibility inputs
+  are durably archived with hashes. Git checkpoint scope follows the existing
+  memory/archive convention; do not stage/reset unrelated dirty runtime changes.
+- Proposed tag only: `srs-drs-official-approved-2026-10-29`. No tag or push is
+  authorized by this save. The prior 2026-10-27 Main Controller tag is unchanged.
+- Next: await the user's next improvement. Do not auto-publish the deferred Main
+  Controller review, restructure DRS, change snapshots, approve sources or rerun
+  official generators merely to resume. Older sections below are history.
+
+## PREVIOUS HANDOFF - 2026-10-27 - Named Checkpoint and Git Publication
 
 - Current checkpoint and requested annotated Git tag:
   `main-controller-ipos-review-pass-2026-10-27`.
@@ -21,8 +64,16 @@
   normative requirements and the 198-record input remain the accepted baseline.
   The broader 522 writing findings and SRS baseline regression remain explicit.
   No new approval, snapshot selection/change or implementation-readiness claim.
-- Later main-workflow SRS/DRS/IPOS verification/integration and new features
-  remain separate; this Git publication does not perform them.
+- Next objective, clarified by the user after publication: export the saved
+  reusable fixes into the official main workflow, checking compatibility across
+  SRS, DRS and general digital/analog IPOS generation, not only Main Controller.
+  Read the named checkpoint's `NEXT_OBJECTIVE.md`; implement compatible central
+  source changes after comparison and validation, rather than only writing a
+  plan or regenerating the pilot. Preserve dirty work, SRS 3.6, approvals,
+  snapshots, destination permissions, normative content and existing gates.
+  Integration testing uses isolated outputs; official output overwrite is not
+  implied. New features follow integration. This closing session does not start
+  the integration or amend the published checkpoint/tag.
 
 ## PREVIOUS SESSION CLOSURE - 2026-10-27 - Main Controller IPOS Review PASS
 
