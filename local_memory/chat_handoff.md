@@ -1,7 +1,72 @@
 ﻿# Chat Handoff - Deterministic_Reqs_workflow
 
-## CURRENT HANDOFF - 2026-10-29 - Official SRS/DRS and GUI Rerun Check
+## CURRENT HANDOFF - 2026-10-29 - Official SRS/DRS Preserved; SysML GUI Readability Checkpoint
 
+### Latest continuation state - 2026-10-29 - Readability checkpoint publication authorized
+
+- After the earlier memory-only save and tag proposal, the user explicitly authorized a local checkpoint named `sysml-gui-readability-checkpoint-2026-10-29`, a same-named Git tag and push. The checkpoint saves verified current source/evidence using the repository's existing memory/archive convention.
+- Checkpoint directory: `local_memory/checkpoints/sysml-gui-readability-checkpoint-2026-10-29/`. Read its README, manifest, focused validation receipts and Git publication note. Commit only the new checkpoint and four current memory/index files; the archive preserves current Python runtime/tests and relevant SysML evidence without staging unrelated loose dirty runtime/database/artifact changes. Use local/remote Git refs as the exact commit/tag/push receipt; do not infer publication success from this authorization.
+- Checkpoint validation ran the combined 14 focused GUI/display/navigation/zoom and generator paragraph/fragment tests: all passed. Hash checks verified 45 protected document, model, canonical and mapping files unchanged. Exact selectors, output and hashes are preserved in the checkpoint; no generation or broad coherence run was repeated.
+- The published baseline remains commit `543f461c3e46c44754aff025568c025dbe113af1` and annotated tag `srs-drs-official-approved-2026-10-29` on `main`. Approved snapshot: `snap-8b3673edc9cf590589b8ab39`. Do not reset to that tag or restore its archive over current source. Official approved documents and canonical/review authority remain preserved.
+- The user still found Main Controller descriptions too dense in the GUI. A display-only formatter now runs in both SysML source panes and every source-opening path. It starts existing numbered subsection headings on separate lines, separates sentences with blank paragraphs, and starts existing enumeration items separately. This immediately supports old generated files after restarting the GUI; regeneration is not needed for this GUI-only presentation.
+- The view explicitly identifies readable spacing as leaving the file unchanged. Only whitespace inside existing governed descriptive comments is reformatted. Exact wording, fragment labels, normative/model code, file bytes, source scope, ownership, approvals, snapshot binding and readiness are unchanged.
+- Seven focused GUI/display/navigation/zoom tests passed. A check against the actual Main Controller file verified all 12 saved subsection headings start on separate lines, blank paragraph breaks increase from 5 to 170, complete normalized wording and exact non-descriptive code are preserved, and file bytes are unchanged. Display formatting is idempotent.
+- No generation, coherence/readiness rerun or authority-changing action was performed for this GUI fix. The 33-finding precheck block described below remains unresolved for any actual model regeneration. All current fixes remain local and uncommitted.
+- The proposed checkpoint also includes the already implemented word wrapping, shared lower-right text zoom, generic generator paragraph/fragment formatting and strict central fragment checks described below. Earlier post-tag clickable Final SysML nodes, exact inventory-owner binding and complete large-field CSV readers remain dirty and must be preserved. Seven focused generator-formatting/integrity tests passed separately; test selections overlap and must not be added together as a new full-suite result. Two additional existing descriptive-context tests also failed with the old single-line formatting and remain outside this repair.
+- A bounded checkpoint test run is permitted to preserve current evidence, but no generation, broad audit or readiness rerun is part of this save. The user authorized a normal non-force push of the checkpoint commit and annotated tag; any regeneration still requires resolving the existing precheck block without weakening gates. Preserve the earlier official tag and all unrelated dirty files.
+
+### Previous continuation state - 2026-10-29 - SysML readability and blocked regeneration
+
+- Local, uncommitted GUI changes enable word wrapping in both SysML source panes and shared source-text zoom in the lower-right Model Views pane (`+`, `-`, Reset and Ctrl+mouse wheel). Three focused GUI tests passed.
+- The SysML description formatter now preserves headings on separate lines, inserts blank paragraphs after at most two existing sentences, starts enumeration items separately, and emits ordered numbered documentation parts targeting seven content lines. Complete sentences and identifiers remain intact; normative requirements are unchanged. The central validator accepts legacy single comments or complete, correctly ordered fragments and rejects changed, missing, duplicate or malformed fragments. Seven focused formatting/integrity tests passed.
+- An in-memory check of the actual saved Main Controller descriptive model verified all 12 subsection headings, including `#### 1.4.6 BIA acquisition`, on their own lines, 80 documentation parts, and complete normalized wording preservation. This check wrote no generated files.
+- The user first requested formatter-only changes, then explicitly authorized the required coherence precheck, regeneration with `snap-8b3673edc9cf590589b8ab39`, and structural review, but no final readiness phase. The user allowed up to five additional minutes when the precheck exceeded four minutes.
+- The authorized precheck completed with exit code 1: `BLOCK_DOWNSTREAM`, `generation_allowed=false`, 33 hard findings. There are 32 Digital IPOS materialization-audit normalized-input fingerprint/record mismatches across ADSP, I2C/SPI/AHB, Main Controller, PAD MUX, PMU, REGMAP, Sensor-Hub and SMART FIFO (four findings per block), plus `SYSML_READINESS_ASSESSMENT_STALE`. These are observed mismatches, not proof that approved document content changed.
+- Generation and structural review were NOT started after this failure. Existing generated SysML still uses the old long-line layout; approved documents, snapshots and authority were not changed. Do not claim regeneration, whole-phase PASS or implementation readiness. Do not bypass the precondition or automatically rewrite audit bindings. The next necessary investigation is a bounded comparison of persisted IPOS audit inputs against the current approved-input normalization, plus the stale readiness binding.
+- Detailed precheck evidence is preserved in the current session `files/sysml_readability_precheck_20261029.json`.
+
+### Previous continuation state - 2026-10-29 14:28
+
+- Published Git checkpoint: commit `543f461c3e46c44754aff025568c025dbe113af1`,
+  annotated tag `srs-drs-official-approved-2026-10-29`; branch and tag pushed and
+  verified on origin. The checkpoint archive predates the following live fixes.
+  Preserve the current dirty worktree; do not check out/reset the tag or restore
+  its archived source over newer files.
+- After that tag, the GUI's Final SysML Generation box became clickable in both
+  diagrams through the existing `regenerate_sysml` menu action. Snapshot
+  selection/cancellation and gates are unchanged;9 targeted GUI tests PASS.
+- Two subsequent SysML runtime errors were repaired in the shared
+  `scripts/validate_downstream_coherence.py`: bind descriptive consumers to
+  `inventory["Block"]` (actual `Pad Mux` display versus approved `PAD MUX`), and
+  use `csv_artifact_reader` in both `_read_csv` and the cross-document reuse
+  audit reader. Review snapshot/owner integrity checks remain strict; no stale
+  review is promoted and no CSV field is truncated.
+-68 targeted tests PASS; one unrelated SRS test expecting3.4 instead of the
+  approved3.5 placement was reproduced on the previous runtime and kept separate.
+  The real PAD MUX consumer retains17 requirements; eight actual IPOS audits read
+  completely, including a249269-character field, restoring the prior CSV limit.
+- Isolated final SysML generation produced302 requirements,8 block models,
+  1028 ports and14 connections; structural review approved. The expensive final
+  readiness/coherence run was explicitly STOPPED after the user's delay
+  complaint. Do not claim whole-phase PASS or readiness, or restart that long
+  validation without asking. These latest fixes are local, not committed/pushed.
+- Official SRS/DRS/IPOS documents, canonical authority and review workbooks were
+  not changed by this repair. An unrelated `config/gui_state.json` change was
+  preserved. No official SysML success is inferred from isolated results.
+- Focused evidence remains in the previous session's `files` directory:
+  `sysml_consumer_csv_result_20261029.json`,
+  `sysml_consumer_csv_exact_changes_20261029.patch` and
+  `sysml_consumer_csv_test_results_20261029.json`.
+- No new objective has been assigned. Wait for the user's next improvement.
+
+### Standing working preference and accepted baseline
+
+- Mandatory user preference recorded at 14:25: be practical and bounded; no
+  unnecessary exploration, speculative loops or autonomous expansion into long
+  full-workflow/readiness runs. Fix the demonstrated cause, verify with targeted
+  checks, and stop. Ask before additional expensive end-to-end verification.
+  Do not repeat successful stages; state unverified results explicitly.
+  The persistent rule is in `.github/copilot-instructions.md`.
 - Start with
   `checkpoints/srs-drs-official-approved-2026-10-29/restart_handoff.md`,
   its README, publication receipt and member manifest. Do not reload the chat.

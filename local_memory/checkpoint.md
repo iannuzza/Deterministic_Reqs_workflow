@@ -1,6 +1,32 @@
 # Local Restore Checkpoint - Deterministic_Reqs_workflow
 
-## Latest checkpoint: srs-drs-official-approved-2026-10-29
+## Latest checkpoint: sysml-gui-readability-checkpoint-2026-10-29
+
+- Directory: `local_memory/checkpoints/sysml-gui-readability-checkpoint-2026-10-29/`.
+- The user authorized saving the checkpoint, a same-named annotated Git tag and
+  push to configured `origin`. Consult local/remote refs for the exact commit
+  and publication outcome; this metadata does not guess its own commit hash.
+- Current Python runtime/tests, related memory/docs, existing SysML artifacts and
+  focused evidence are archived with per-member hashes. Read `README.md`,
+  `checkpoint_manifest.json`, `GIT_PUBLICATION.md` and the validation receipts.
+- The combined checkpoint selection passed all 14 focused tests; hashes verified
+  45 protected document, model, canonical and mapping files remained unchanged.
+- Both GUI source panes wrap text and share source zoom. Display-only paragraph
+  spacing follows existing numbered subsections, sentences and enumerations,
+  without model regeneration or file/content/authority changes.
+- Future generator paragraphs/fragments and strict central integrity checks are
+  preserved, together with the earlier clickable nodes, exact inventory owner
+  binding and complete large-field CSV fixes.
+- Generation remains blocked: the authorized precheck reported 33 hard findings,
+  including 32 IPOS audit-input mismatches and stale SysML readiness. No generation,
+  new structural approval, whole-phase PASS or implementation readiness is claimed.
+- Snapshot remains `snap-8b3673edc9cf590589b8ab39`; approved documents, normative
+  content, source scope, ownership, reviews and canonical authority are preserved.
+- Follow the established archive-only Git scope: commit the new checkpoint and
+  current memory/index files, not unrelated loose dirty runtime/database/artifact
+  changes. Do not overwrite the live worktree from either checkpoint archive.
+
+## Previous checkpoint: srs-drs-official-approved-2026-10-29
 
 - Directory: `local_memory/checkpoints/srs-drs-official-approved-2026-10-29/`.
 - User-approved SRS and DRS published as exact reviewed Word files with matching

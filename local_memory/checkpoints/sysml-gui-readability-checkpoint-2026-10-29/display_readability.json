@@ -1,0 +1,12 @@
+{
+  "model": "artifacts/stage2_mirco_arc/sysml/blocks/main_controller.sysml",
+  "source_sha256": "eac4491f4091c49cf5e1029c66903297b96710fb68e0c68937e214aa17f24b6a",
+  "subsection_count": 12,
+  "all_subsections_start_separately": true,
+  "blank_breaks_before": 179,
+  "blank_breaks_after": 192,
+  "wording_preserved": true,
+  "non_descriptive_code_preserved": true,
+  "display_formatting_idempotent": true,
+  "generated_files_written": false
+}

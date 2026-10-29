@@ -1,5 +1,54 @@
 ﻿# Deterministic_Reqs_workflow - Project Activity, Lessons, Errors, and Fixes
 
+## 2026-10-29 - SysML GUI Readability Checkpoint Commit, Tag and Push Authorization
+
+- The user explicitly authorized saving `sysml-gui-readability-checkpoint-2026-10-29`
+  as a local checkpoint, creating its Git tag and pushing it.
+- Follow the established checkpoint archive convention because current source files
+  also contain substantial older dirty changes: preserve current Python scripts,
+  tests, relevant SysML evidence and memory in a verified source/evidence ZIP;
+  commit only the new checkpoint directory and four current memory/index files.
+  Leave unrelated loose runtime/database/artifact/checkpoint changes unstaged.
+- A bounded focused test run records current readability/fragment/navigation/zoom
+  evidence. The archive is verified against per-member SHA-256 values and the
+  earlier official baseline archive. No generation or broad precheck is repeated.
+- The combined checkpoint selection completed: all 14 focused tests passed, with
+  exact selectors/output saved. Hashes of 45 protected document, model, canonical
+  and mapping files were unchanged before/after validation.
+- The approved snapshot remains `snap-8b3673edc9cf590589b8ab39`. The existing
+  33-finding precheck block remains unresolved; no whole-phase PASS, new structural
+  approval or implementation readiness is implied.
+- The user authorized an annotated same-named tag and normal push of `main` and
+  the tag to configured `origin`. Local/remote refs are the exact publication
+  receipt; authorization is not itself a verified push. No force-push, reset,
+  rebase, amendment, authority change or archive overwrite is authorized.
+- Earlier proposal-only/no-commit/no-push entries below describe the preceding
+  memory save. See the new checkpoint README, manifest and `GIT_PUBLICATION.md`.
+
+## 2026-10-29 - SysML GUI Readability, Guarded Formatting and Local Memory Save
+
+- The user requested saving the latest fixes in local memory and proposing a checkpoint tag. Updated this activity log, `chat_handoff.md` and `sync_manifest.json`; no commit, tag, archive, push or generation is part of this save.
+- Proposed future annotated checkpoint tag: `sysml-gui-readability-checkpoint-2026-10-29`. It is not created. A scoped new commit must capture the intended dirty code, tests, documentation and memory before tagging; tagging the published baseline alone would omit these fixes.
+- Published Git authority remains commit `543f461c3e46c44754aff025568c025dbe113af1`, tag `srs-drs-official-approved-2026-10-29`, branch `main`; approved snapshot remains `snap-8b3673edc9cf590589b8ab39`. Preserve approved SRS/DRS/IPOS documents, normative content, sources, ownership, reviews, approvals and snapshots. Never restore the older archive over newer dirty source.
+
+### Implemented local fixes
+
+- `scripts/workflow_gui.py`: both SysML source panes use word wrapping. The lower-right Model Views pane provides `+`, `-`, Reset and Ctrl+mouse wheel source-text zoom, sharing font/percentage with the main source pane; graph and port zoom remain separate.
+- The GUI now formats only whitespace inside existing governed descriptive comments for display. Existing numbered subsection headings start separately, sentences have blank paragraph spacing, and existing enumeration items start new paragraphs. This works with old generated models and does not require regeneration. All source-opening paths share the formatter; the view explicitly states that files are unchanged.
+- `scripts/generate_architecture_sysml.py`: future generated descriptive comments preserve heading lines, use paragraphs of at most two existing sentences and ordered numbered documentation parts targeting seven content lines. Natural paragraphs, enumeration starts and full stops take precedence over rigid cuts; single long sentences and identifiers remain intact. Normative requirement rendering is unchanged.
+- `scripts/validate_downstream_coherence.py`: legacy single comments and correctly ordered complete fragments are checked against the same governed text. Missing, duplicate, reordered, malformed or altered fragments remain blocking. No authority or readiness gate was relaxed.
+- Related documentation and tests are updated. Earlier post-tag fixes remain uncommitted and must be retained: clickable Final SysML diagram nodes, exact approved inventory-owner binding, and complete large-field CSV reading with restoration of the previous field limit.
+
+### Verification and limitations
+
+- Latest focused GUI/display/navigation/zoom selection: seven tests passed. Separate generator paragraph/fragment integrity selection: seven tests passed. These are bounded selections, not full-suite or whole-phase completion claims; overlapping earlier test counts must not be summed.
+- The actual Main Controller display check verified all 12 saved subsection headings start on separate lines and blank paragraph breaks increase from 5 to 170. Complete normalized wording, exact non-descriptive code and model-file bytes are preserved; display formatting is idempotent.
+- An earlier in-memory generator check verified all 12 saved headings and complete wording preservation across 80 documentation parts, without writing model files. Two existing descriptive-context tests also failed with the previous single-line formatting and were not altered to obtain PASS.
+- The user authorized a same-snapshot regeneration attempt with the required precheck and structural review, but no final readiness phase. The precheck finished with exit code 1, `BLOCK_DOWNSTREAM`, `generation_allowed=false`, and 33 hard findings: 32 Digital IPOS materialization-audit normalized-input fingerprint/record mismatches across eight blocks, plus `SYSML_READINESS_ASSESSMENT_STALE`.
+- Affected blocks: ADSP, I2C/SPI/AHB, Main Controller, PAD MUX, PMU, REGMAP, Sensor-Hub and SMART FIFO. These findings do not establish that approved document text changed. Generation and structural review did not start after the failed precheck; existing generated models retain their prior file layout.
+- Detailed evidence: current session `files/sysml_readability_precheck_20261029.json`. Further regeneration requires a bounded investigation of persisted audit inputs versus approved-input normalization and the stale readiness binding. Do not silently rewrite audit bindings, infer approval, bypass the gate or rerun broad checks without agreement.
+- Restart the GUI to load the display-only readability and zoom changes. No model regeneration, full-phase PASS, publication approval or implementation readiness is implied by this checkpoint proposal.
+
 ## 2026-10-29 - SRS/DRS Checkpoint Commit, Tag and Push Authorization
 
 - After the verified local save at `104d8fe`, the user explicitly requested a new
